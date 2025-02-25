@@ -2,6 +2,7 @@
 .export/
 .import/
 .cache/
+.godot/
 
 # Mono/.NET specific ignores
 .mono/
