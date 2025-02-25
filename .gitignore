@@ -1,0 +1,52 @@
+# Godot-specific ignores
+.export/
+.import/
+.cache/
+
+# Mono/.NET specific ignores
+.mono/
+mono_crash.*
+*.csproj
+*.sln
+*.pidb
+*.suo
+*.user
+*.unityproj
+*.dotSettings
+*.db
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.bak
+obj/
+Temp/
+
+# Godot C# bindings
+ProjectSettings.cs
+GodotSharp/
+GodotSharpEditor/
+
+# Build artifacts
+bin/
+*.exe
+*.dll
+*.so
+*.dylib
+*.a
+*.lib
+*.exp
+*.iobj
+*.ipdb
+*.ilk
+*.pdb
+*.rsp
+*.obj
+*.log
+
+# JetBrains Rider / VSCode / VS
+.idea/
+.vscode/
+.vs/
+
