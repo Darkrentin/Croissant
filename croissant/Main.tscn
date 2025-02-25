@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=5 format=3 uid="uid://c2f4mqkrcs2ea"]
 
+[ext_resource type="Script" uid="uid://b0l5eeisahitx" path="res://scripts/ropeTest/Rope.cs" id="2_cm0pq"]
 [ext_resource type="Texture2D" uid="uid://btunlk4bxfsqc" path="res://icon.svg" id="2_r0du0"]
 [ext_resource type="PackedScene" uid="uid://1bxj5o0wgh7r" path="res://scenes/ropeTest/rope.tscn" id="2_uu6xs"]
 
@@ -12,6 +13,8 @@ size = Vector2(1152, 20)
 
 [node name="Rope" parent="." instance=ExtResource("2_uu6xs")]
 position = Vector2(-56, -80)
+script = ExtResource("2_cm0pq")
+Segments = 10
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
