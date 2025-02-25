@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://1bxj5o0wgh7r"]
+
+[ext_resource type="Script" uid="uid://b0l5eeisahitx" path="res://scripts/rope.cs" id="1_ghbyf"]
+[ext_resource type="PackedScene" uid="uid://b71ecm76dfp1i" path="res://scenes/anchor.tscn" id="2_ghbyf"]
+
+[node name="Rope" type="Node2D"]
+script = ExtResource("1_ghbyf")
+Segments = 20
+
+[node name="Anchor" parent="." instance=ExtResource("2_ghbyf")]

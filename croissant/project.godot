@@ -11,9 +11,14 @@ config_version=5
 [application]
 
 config/name="Croissant"
-config/features=PackedStringArray("4.4", "Forward Plus")
+run/main_scene="uid://c2f4mqkrcs2ea"
+config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [dotnet]
 
 project/assembly_name="Croissant"
+
+[physics]
+
+2d/physics_engine="GodotPhysics2D"

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnd1s85818elu"]
+
+[ext_resource type="Texture2D" uid="uid://btunlk4bxfsqc" path="res://icon.svg" id="1_u4y6a"]
+[ext_resource type="Script" uid="uid://brhydpw765ugr" path="res://scripts/ropeSegment.cs" id="1_w5qyg"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_w5qyg"]
+radius = 5.0
+height = 15.0
+
+[node name="RopeSegment" type="RigidBody2D" node_paths=PackedStringArray("PinJoint")]
+script = ExtResource("1_w5qyg")
+PinJoint = NodePath("PinJoint2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2.38419e-07, 8)
+scale = Vector2(0.0625, 0.125)
+texture = ExtResource("1_u4y6a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 8)
+shape = SubResource("CapsuleShape2D_w5qyg")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 16)
+node_a = NodePath("..")
+bias = 0.16
+softness = 1.5
