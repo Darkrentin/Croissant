@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Texture2D" uid="uid://btunlk4bxfsqc" path="res://icon.svg" id="2_r0du0"]
-[ext_resource type="PackedScene" uid="uid://1bxj5o0wgh7r" path="res://scenes/rope.tscn" id="2_uu6xs"]
-[ext_resource type="Texture2D" uid="uid://bgf0sn30q7f3o" path="res://nuage2.png" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://1bxj5o0wgh7r" path="res://scenes/ropeTest/rope.tscn" id="2_uu6xs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_glv2v"]
 size = Vector2(1152, 20)
@@ -24,7 +23,3 @@ shape = SubResource("RectangleShape2D_glv2v")
 position = Vector2(1.52588e-05, 2.38419e-07)
 scale = Vector2(9, 0.15625)
 texture = ExtResource("2_r0du0")
-
-[node name="Nuage2" type="Sprite2D" parent="."]
-position = Vector2(174, -43)
-texture = ExtResource("3_r0du0")

@@ -2,7 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class rope : Node2D
+public partial class Rope : Node2D
 {
 
     private int _segments = 10;
@@ -11,9 +11,12 @@ public partial class rope : Node2D
     PackedScene ropeSegmentScene;
 
     [Export] public StaticBody2D Anchor;
-    [Export] public int Segments {
+    [Export]
+    public int Segments
+    {
         get => _segments;
-        set {
+        set
+        {
             _segments = value;
             SegmentValueChanged(value);
         }
@@ -21,14 +24,14 @@ public partial class rope : Node2D
 
     public override void _Ready()
     {
-        ropeSegmentScene = GD.Load<PackedScene>("res://scenes/rope_segment.tscn");
+        ropeSegmentScene = GD.Load<PackedScene>("res://scenes/ropeTest/rope_segment.tscn");
 
         Segment.Add(GetNode<RigidBody2D>("Anchor"));
-        for(int i = 0; i<_segments; i++)
+        for (int i = 0; i < _segments; i++)
         {
             addSegment();
         }
-        
+
     }
 
     private void SegmentValueChanged(int value)
@@ -38,7 +41,7 @@ public partial class rope : Node2D
 
     public void addSegment()
     {
-        if(Segment.Count <= 0)
+        if (Segment.Count <= 0)
         {
             RigidBody2D segment = (RigidBody2D)ropeSegmentScene.Instantiate<RigidBody2D>();
             Segment.Add(segment);
