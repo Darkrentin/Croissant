@@ -8,8 +8,7 @@
 # Mono/.NET specific ignores
 .mono/
 mono_crash.*
-*.csproj
-*.sln
+
 *.pidb
 *.suo
 *.user
