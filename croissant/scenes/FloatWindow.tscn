@@ -1,0 +1,53 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxgckm6pw476b"]
+
+[ext_resource type="Texture2D" uid="uid://c1vt7phc1fh2q" path="res://icon.svg" id="1_53pq7"]
+[ext_resource type="Script" uid="uid://cg1kikme466uu" path="res://scripts/FloatWindow.cs" id="1_o82x1"]
+
+[node name="Window" type="Window"]
+position = Vector2i(0, 36)
+size = Vector2i(100, 130)
+script = ExtResource("1_o82x1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(50, 50.25)
+scale = Vector2(0.789062, 0.777344)
+texture = ExtResource("1_53pq7")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = -1
+anchor_left = -0.01
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 99.0
+offset_right = -1.0
+
+[node name="Button" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.05
+anchor_top = 0.1
+anchor_right = 0.24
+anchor_bottom = 0.875
+text = "B"
+
+[node name="Button2" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.39
+anchor_top = 0.1
+anchor_right = 0.57
+anchor_bottom = 0.875
+text = "T"
+
+[node name="Button3" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.73
+anchor_top = 0.1
+anchor_right = 0.92
+anchor_bottom = 0.875
+text = "R"
+
+[connection signal="pressed" from="Panel/Button" to="." method="_on_button_pressed_B"]
+[connection signal="pressed" from="Panel/Button2" to="." method="_on_button_pressed_T"]
+[connection signal="pressed" from="Panel/Button3" to="." method="_on_button_pressed_R"]
