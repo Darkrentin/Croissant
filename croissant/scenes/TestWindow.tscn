@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dq56e7uy6bd6f"]
+
+[ext_resource type="Script" uid="uid://ri5v8xoe72e" path="res://scripts/TestWindow.cs" id="1_5pke5"]
+[ext_resource type="Texture2D" uid="uid://c1vt7phc1fh2q" path="res://icon.svg" id="2_yd1xx"]
+
+[node name="Node" type="Node2D" node_paths=PackedStringArray("window")]
+script = ExtResource("1_5pke5")
+window = NodePath("Window")
+
+[node name="Window" type="Window" parent="."]
+transparent_bg = true
+size = Vector2i(128, 128)
+unresizable = true
+borderless = true
+transparent = true
+
+[node name="Sprite2D" type="Sprite2D" parent="Window"]
+position = Vector2(64, 64)
+texture = ExtResource("2_yd1xx")
