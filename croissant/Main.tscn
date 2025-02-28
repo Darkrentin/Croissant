@@ -1,10 +1,27 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=5 format=3 uid="uid://c2f4mqkrcs2ea"]
 
-[ext_resource type="Script" uid="uid://kscf7lkcejqs" path="res://GameManager.cs" id="1_uu6xs"]
-[ext_resource type="PackedScene" uid="uid://djidodbn15bpe" path="res://scenes/MainWindow.tscn" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://dnpbcsayws53p" path="res://GameManager.cs" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://ju4wjhewv2xm" path="res://scenes/TestLvl.tscn" id="2_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://de2wope8syttq" path="res://scenes/Charachter.tscn" id="3_r0du0"]
+[ext_resource type="Script" uid="uid://brruqtb1lunq1" path="res://w.cs" id="4_cm0pq"]
 
-[node name="Main" type="Node2D"]
+[node name="Main" type="Node2D" node_paths=PackedStringArray("Camera", "lvl")]
 script = ExtResource("1_uu6xs")
+Camera = NodePath("Camera2D")
+lvl = NodePath("TestLvl")
 
-[node name="MainWindow" parent="." instance=ExtResource("3_r0du0")]
-isMainWindow = true
+[node name="TestLvl" parent="." instance=ExtResource("2_uu6xs")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="TestLvl2" parent="." instance=ExtResource("2_uu6xs")]
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("3_r0du0")]
+position = Vector2(75, 73)
+
+[node name="Window" type="Window" parent="."]
+position = Vector2i(0, 36)
+script = ExtResource("4_cm0pq")
+
+[node name="Window2" type="Window" parent="."]
+position = Vector2i(1000, 36)

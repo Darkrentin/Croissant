@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://causecca6jesb"]
+
+[ext_resource type="Texture2D" uid="uid://c1vt7phc1fh2q" path="res://icon.svg" id="1_2gju5"]
+[ext_resource type="Script" uid="uid://cjedhj01deu3f" path="res://scripts/TestScene.cs" id="1_rlkm5"]
+
+[node name="Node2D" type="Node2D" node_paths=PackedStringArray("window", "cam")]
+script = ExtResource("1_rlkm5")
+window = NodePath("Window")
+cam = NodePath("Window/Camera2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2gju5")
+
+[node name="Window" type="Window" parent="."]
+position = Vector2i(0, 36)
+
+[node name="Camera2D" type="Camera2D" parent="Window"]

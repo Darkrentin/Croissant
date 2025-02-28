@@ -16,6 +16,7 @@ public partial class TestWindow : FloatWindow
     public override void _Process(double delta)
     {
         base._Process(delta);
+        /*
         Vector2 mouse_pos = GetViewport().GetMousePosition();
         if(Math.Abs(mouse_pos.X)>speed || Math.Abs(mouse_pos.Y)>speed)
         {
@@ -23,5 +24,6 @@ public partial class TestWindow : FloatWindow
             WindowPosition += velocity;
             GD.Print("Pos "+mouse_pos);
         }
+        */
     }
 }
