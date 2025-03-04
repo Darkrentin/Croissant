@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Numerics;
+using System.Text.RegularExpressions;
 
 public partial class FloatWindow : Window
 {
@@ -9,14 +11,19 @@ public partial class FloatWindow : Window
 		Custom,
 		Linear,
 		Quadratic,
-		Cubic,
 	}
 
 	[Export] public bool Draggable = true;
-	public Vector2I TargetPosition;
 
 	[Export] public TransitionMode transitionMode = TransitionMode.Custom;
-	[Export] public Curve curve;
+	[Export] public Curve curve = new Curve();
+
+	private Vector2I TargetPosition;
+	private Vector2I StartPosition;
+	private float TransitionTime = 0.5f;
+	private float elapsedTime = 0;
+	public bool IsTransitioning = false;
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,14 +32,19 @@ public partial class FloatWindow : Window
 		//Position = new Vector2I(500, 500);
 		Size = new Vector2I(400, 400);
 		TargetPosition = Position;
-
-		
+		LoadCurve();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		BlockDrag();
+		TransitionWindow(delta);
+		if(Input.IsMouseButtonPressed(MouseButton.Left))
+		{
+			StartTransition((Vector2I)GetMousePosition(),1);
+		}
+
 	}
 
 	private void BlockDrag()
@@ -42,6 +54,46 @@ public partial class FloatWindow : Window
 			if(HasFocus())
 			{
 				GameManager.FixWindow.GrabFocus();
+			}
+		}
+	}
+
+	public void StartTransition(Vector2I targetPosition, float transitionTime)
+	{
+		StartPosition = Position;
+		TargetPosition = targetPosition;
+		TransitionTime = transitionTime;
+		IsTransitioning = true;
+		elapsedTime = 0;
+	}
+
+	private void LoadCurve()
+	{
+		switch(transitionMode)
+		{
+			case TransitionMode.Linear:
+				curve = ResourceLoader.Load<Curve>("res://assests/curves/LinearCurve.tres");
+				break;
+			default:
+				curve = new Curve();
+				break;
+		}
+	}
+
+	public void TransitionWindow(double delta)
+	{
+		if(IsTransitioning)
+		{
+			if(elapsedTime<TransitionTime)
+			{
+				elapsedTime += (float)delta;
+				float t = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
+				float speedFactor = curve.Sample(t);
+				SetWindowPosition((Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, speedFactor));
+			}
+			else
+			{
+				IsTransitioning = false;
 			}
 		}
 	}

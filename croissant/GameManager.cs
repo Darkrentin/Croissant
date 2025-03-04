@@ -2,7 +2,6 @@ using Godot;
 using GodotPlugins.Game;
 using System;
 
-[Tool]
 public partial class GameManager : Node2D
 {
 
@@ -22,15 +21,6 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
-    }
-
-    [ExportToolButton("Hello world")]
-    public Callable HelloWorldButton => new Callable(this, nameof(HelloWorld));
-
-    private void HelloWorld()
-    {
-        GD.Print("Hello world");
-        AddFixWindow();
     }
 
     public void AddFixWindow()
