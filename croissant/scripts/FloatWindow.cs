@@ -5,6 +5,7 @@ public partial class FloatWindow : Window
 {
 	[Export] public bool Draggable = true;
 	[Export] public Vector2I TargetPosition;
+	[Export] public Curve Curve = new Curve();
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -13,7 +14,7 @@ public partial class FloatWindow : Window
 		Position = new Vector2I(500, 500);
 		Size = new Vector2I(400, 400);
 		TargetPosition = Position;
-		
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -24,9 +25,9 @@ public partial class FloatWindow : Window
 
 	private void BlockDrag()
 	{
-		if(!Draggable)
+		if (!Draggable)
 		{
-			if(HasFocus())
+			if (HasFocus())
 			{
 				GameManager.FixWindow.GrabFocus();
 			}
@@ -39,14 +40,14 @@ public partial class FloatWindow : Window
 		int y = Position.Y;
 		bool returnValue = true;
 
-		if(newPosition.X<0)
+		if (newPosition.X < 0)
 		{
 			x = 0;
 			returnValue = false;
 		}
-		else if(newPosition.X > GameManager.ScreenSize.X-Size.X)
+		else if (newPosition.X > GameManager.ScreenSize.X - Size.X)
 		{
-			x = GameManager.ScreenSize.X-Size.X;
+			x = GameManager.ScreenSize.X - Size.X;
 			returnValue = false;
 		}
 		else
@@ -54,14 +55,14 @@ public partial class FloatWindow : Window
 			x = newPosition.X;
 		}
 
-		if(newPosition.Y<0)
+		if (newPosition.Y < 0)
 		{
 			y = 0;
 			returnValue = false;
 		}
-		else if(newPosition.Y > GameManager.ScreenSize.Y-Size.Y)
+		else if (newPosition.Y > GameManager.ScreenSize.Y - Size.Y)
 		{
-			y = GameManager.ScreenSize.Y-Size.Y;
+			y = GameManager.ScreenSize.Y - Size.Y;
 			returnValue = false;
 		}
 		else
