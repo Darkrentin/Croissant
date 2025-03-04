@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
 
-[ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/FloatWindow.cs" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://dnpbcsayws53p" path="res://GameManager.cs" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://d2w4462h7ypyv" path="res://scripts/FloatWindow.cs" id="2_uu6xs"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
