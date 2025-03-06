@@ -2,21 +2,21 @@ using Godot;
 using System;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 public partial class FloatWindow : Window
 {
 
 	public enum TransitionMode
 	{
-		Custom,
 		Linear,
-		Quadratic,
+		Exponential
 	}
 
 	[Export] public bool Draggable = true;
 
-	[Export] public TransitionMode transitionMode = TransitionMode.Custom;
-	[Export] public Curve curve = new Curve();
+	[Export] public TransitionMode transitionMode = TransitionMode.Linear;
+	[Export] public float transitionSpeed = 10.0f; // Speed factor for exponential transition
 
 	private Vector2I TargetPosition;
 	private Vector2I StartPosition;
@@ -32,7 +32,8 @@ public partial class FloatWindow : Window
 		//Position = new Vector2I(500, 500);
 		Size = new Vector2I(400, 400);
 		TargetPosition = Position;
-		LoadCurve();
+		// Removed LoadCurve() call
+		DelayMethod();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -40,18 +41,25 @@ public partial class FloatWindow : Window
 	{
 		BlockDrag();
 		TransitionWindow(delta);
-		if(Input.IsMouseButtonPressed(MouseButton.Left))
-		{
-			StartTransition((Vector2I)GetMousePosition(),1);
-		}
-
+		//if (Input.IsMouseButtonPressed(MouseButton.Left) && !IsTransitioning)
+		//{
+		//	StartTransition((Vector2I)GetMousePosition(), 4);
+		//}
+	}
+	private async Task DelayMethod()
+	{
+		StartTransition(new Vector2I(500, 500), 2);
+		await Task.Delay(TimeSpan.FromMilliseconds(1000));
+		StartTransition(new Vector2I(1500, 500), 2);
+		await Task.Delay(TimeSpan.FromMilliseconds(1000));
+		DelayMethod();
 	}
 
 	private void BlockDrag()
 	{
-		if(!Draggable)
+		if (!Draggable)
 		{
-			if(HasFocus())
+			if (HasFocus())
 			{
 				GameManager.FixWindow.GrabFocus();
 			}
@@ -67,32 +75,54 @@ public partial class FloatWindow : Window
 		elapsedTime = 0;
 	}
 
-	private void LoadCurve()
-	{
-		switch(transitionMode)
-		{
-			case TransitionMode.Linear:
-				curve = ResourceLoader.Load<Curve>("res://assests/curves/LinearCurve.tres");
-				break;
-			default:
-				curve = new Curve();
-				break;
-		}
-	}
-
 	public void TransitionWindow(double delta)
 	{
-		if(IsTransitioning)
+		if (IsTransitioning)
 		{
-			if(elapsedTime<TransitionTime)
+			if (elapsedTime < TransitionTime)
 			{
 				elapsedTime += (float)delta;
-				float t = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
-				float speedFactor = curve.Sample(t);
-				SetWindowPosition((Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, speedFactor));
+				Vector2I newPosition;
+
+				switch (transitionMode)
+				{
+					case TransitionMode.Linear:
+						// Linear interpolation - moves at constant speed
+						float t = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
+						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, t);
+						break;
+
+					case TransitionMode.Exponential:
+						// Exponential smoothing
+						// position += (target - position) * (1 - exp(-dt * speed))
+						float dt = (float)delta;
+						Godot.Vector2 currentPos = Position;
+						Godot.Vector2 target = TargetPosition;
+						Godot.Vector2 difference = target - currentPos;
+
+						// Apply exponential smoothing formula
+						Godot.Vector2 movement = difference * (1 - Mathf.Exp(-dt * transitionSpeed));
+
+						// Scale the movement to ensure we complete in TransitionTime
+						// As time approaches TransitionTime, we force completion
+						float completionFactor = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 0.99f);
+						float boost = 1.0f / (1.0f - completionFactor);
+						movement *= boost;
+
+						newPosition = (Vector2I)(currentPos + movement);
+						break;
+
+					default:
+						newPosition = Position;
+						break;
+				}
+
+				SetWindowPosition(newPosition);
 			}
 			else
 			{
+				// Ensure we end exactly at the target position
+				SetWindowPosition(TargetPosition);
 				IsTransitioning = false;
 			}
 		}
@@ -104,14 +134,14 @@ public partial class FloatWindow : Window
 		int y = Position.Y;
 		bool returnValue = true;
 
-		if(newPosition.X<0)
+		if (newPosition.X < 0)
 		{
 			x = 0;
 			returnValue = false;
 		}
-		else if(newPosition.X > GameManager.ScreenSize.X-Size.X)
+		else if (newPosition.X > GameManager.ScreenSize.X - Size.X)
 		{
-			x = GameManager.ScreenSize.X-Size.X;
+			x = GameManager.ScreenSize.X - Size.X;
 			returnValue = false;
 		}
 		else
@@ -119,14 +149,14 @@ public partial class FloatWindow : Window
 			x = newPosition.X;
 		}
 
-		if(newPosition.Y<0)
+		if (newPosition.Y < 0)
 		{
 			y = 0;
 			returnValue = false;
 		}
-		else if(newPosition.Y > GameManager.ScreenSize.Y-Size.Y)
+		else if (newPosition.Y > GameManager.ScreenSize.Y - Size.Y)
 		{
-			y = GameManager.ScreenSize.Y-Size.Y;
+			y = GameManager.ScreenSize.Y - Size.Y;
 			returnValue = false;
 		}
 		else

@@ -16,7 +16,8 @@ public partial class GameManager : Node2D
         GetWindow().SetScript(ResourceLoader.Load("res://scripts/FloatWindow.cs") as Script);
         MainWindow = GetWindow() as FloatWindow;
         MainWindow.Draggable = false;
-        
+        MainWindow.transitionMode = FloatWindow.TransitionMode.Exponential;
+
     }
 
     public override void _Process(double delta)
