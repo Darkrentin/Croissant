@@ -16,7 +16,7 @@ public partial class FloatWindow : Window
 	[Export] public bool Draggable = true;
 
 	[Export] public TransitionMode transitionMode = TransitionMode.Linear;
-	[Export] public float transitionSpeed = 10.0f; // Speed factor for exponential transition
+	[Export] public float Smoothness = 5.0f;
 
 	private Vector2I TargetPosition;
 	private Vector2I StartPosition;
@@ -34,6 +34,7 @@ public partial class FloatWindow : Window
 		TargetPosition = Position;
 		// Removed LoadCurve() call
 		DelayMethod();
+		//StartTransition(new Vector2I(500, 500), 4);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -48,10 +49,10 @@ public partial class FloatWindow : Window
 	}
 	private async Task DelayMethod()
 	{
-		StartTransition(new Vector2I(500, 500), 2);
-		await Task.Delay(TimeSpan.FromMilliseconds(1000));
-		StartTransition(new Vector2I(1500, 500), 2);
-		await Task.Delay(TimeSpan.FromMilliseconds(1000));
+		StartTransition(new Vector2I(200, 500), 5);
+		await Task.Delay(TimeSpan.FromMilliseconds(5500));
+		StartTransition(new Vector2I(1000, 500), 0.5f);
+		await Task.Delay(TimeSpan.FromMilliseconds(3000));
 		DelayMethod();
 	}
 
@@ -66,13 +67,24 @@ public partial class FloatWindow : Window
 		}
 	}
 
-	public void StartTransition(Vector2I targetPosition, float transitionTime)
+	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f)
 	{
 		StartPosition = Position;
 		TargetPosition = targetPosition;
 		TransitionTime = transitionTime;
 		IsTransitioning = true;
 		elapsedTime = 0;
+		Smoothness = smoothness;
+	}
+	public void StartLinearTransition(Vector2I targetPosition, float transitionTime)
+	{
+		transitionMode = TransitionMode.Linear;
+		StartTransition(targetPosition, transitionTime);
+	}
+	public void StartExponentialTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f)
+	{
+		transitionMode = TransitionMode.Exponential;
+		StartTransition(targetPosition, transitionTime, smoothness);
 	}
 
 	public void TransitionWindow(double delta)
@@ -83,33 +95,34 @@ public partial class FloatWindow : Window
 			{
 				elapsedTime += (float)delta;
 				Vector2I newPosition;
+				
+				// Normalized progress from 0.0 to 1.0
+				float progress = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
 
 				switch (transitionMode)
 				{
 					case TransitionMode.Linear:
 						// Linear interpolation - moves at constant speed
-						float t = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
-						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, t);
+						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, progress);
 						break;
 
 					case TransitionMode.Exponential:
-						// Exponential smoothing
-						// position += (target - position) * (1 - exp(-dt * speed))
-						float dt = (float)delta;
-						Godot.Vector2 currentPos = Position;
-						Godot.Vector2 target = TargetPosition;
-						Godot.Vector2 difference = target - currentPos;
-
-						// Apply exponential smoothing formula
-						Godot.Vector2 movement = difference * (1 - Mathf.Exp(-dt * transitionSpeed));
-
-						// Scale the movement to ensure we complete in TransitionTime
-						// As time approaches TransitionTime, we force completion
-						float completionFactor = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 0.99f);
-						float boost = 1.0f / (1.0f - completionFactor);
-						movement *= boost;
-
-						newPosition = (Vector2I)(currentPos + movement);
+						// Exponential easing function that guarantees completion in TransitionTime
+						// Uses the formula 1 - exp(-t * k) / (1 - exp(-k)) where k controls the curve shape
+						float k = Smoothness; // Adjust the curve steepness
+						float expProgress;
+						
+						if (k > 0.01f)
+						{
+							expProgress = (1.0f - Mathf.Exp(-progress * k)) / (1.0f - Mathf.Exp(-k));
+						}
+						else
+						{
+							// Fallback to linear for very small speed values
+							expProgress = progress;
+						}
+						GD.Print($"Time: {elapsedTime} Progress: {progress} ExpProgress: {expProgress}");
+						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, expProgress);
 						break;
 
 					default:
