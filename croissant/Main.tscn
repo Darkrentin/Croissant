@@ -1,9 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
 
+<<<<<<< Updated upstream
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
+=======
+[ext_resource type="Script" uid="uid://dnpbcsayws53p" path="res://GameManager.cs" id="1_uu6xs"]
+[ext_resource type="Script" uid="uid://2h3gr67c3vjy" path="res://scripts/DebugWindow.cs" id="2_r0du0"]
+[ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/DialogueWindow.tscn" id="2_uu6xs"]
+>>>>>>> Stashed changes
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 
-[node name="Window" type="Window" parent="."]
-position = Vector2i(0, 36)
+[node name="Window" type="Window" parent="." node_paths=PackedStringArray("dialogueWindow")]
+position = Vector2i(225, 370)
+script = ExtResource("2_r0du0")
+dialogueWindow = NodePath("DialogueWindow")
+
+[node name="DialogueWindow" parent="Window" node_paths=PackedStringArray("Parent") instance=ExtResource("2_uu6xs")]
+force_native = false
+Parent = NodePath("..")
+Draggable = false

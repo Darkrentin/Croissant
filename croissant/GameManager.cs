@@ -7,7 +7,7 @@ public partial class GameManager : Node2D
 
     public static FloatWindow MainWindow;
     public static Window FixWindow;
-
+    
     public static Vector2I ScreenSize;
     public override void _Ready()
     {
@@ -35,4 +35,5 @@ public partial class GameManager : Node2D
 
         AddChild(FixWindow);
     }
+
 }

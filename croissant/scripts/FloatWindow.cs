@@ -28,6 +28,7 @@ public partial class FloatWindow : Window
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		/*
 		InitialPosition = WindowInitialPosition.CenterPrimaryScreen;
 		//Position = new Vector2I(500, 500);
 		Size = new Vector2I(400, 400);
@@ -35,6 +36,7 @@ public partial class FloatWindow : Window
 		// Removed LoadCurve() call
 		DelayMethod();
 		//StartTransition(new Vector2I(500, 500), 4);
+		*/
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

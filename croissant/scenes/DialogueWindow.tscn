@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://k8kqvfq14xtp"]
+
+[ext_resource type="Script" uid="uid://rc1ms6gq0y0g" path="res://scripts/DialogueWindow.cs" id="1_o82ew"]
+
+[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background")]
+transparent_bg = true
+visible = false
+borderless = true
+transparent = true
+force_native = true
+content_scale_mode = 1
+content_scale_aspect = 1
+script = ExtResource("1_o82ew")
+label = NodePath("Label")
+background = NodePath("ColorRect")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(0, 0, 0, 0.541176)
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "LoremIpsumAdatareLoreaListeamepormeus"
+autowrap_mode = 1
