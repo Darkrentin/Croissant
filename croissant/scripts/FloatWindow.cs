@@ -49,10 +49,11 @@ public partial class FloatWindow : Window
 	}
 	private async Task DelayMethod()
 	{
-		StartTransition(new Vector2I(200, 500), 5);
-		await Task.Delay(TimeSpan.FromMilliseconds(5500));
-		StartTransition(new Vector2I(1000, 500), 0.5f);
-		await Task.Delay(TimeSpan.FromMilliseconds(3000));
+		Random r = new Random();
+		StartTransition(new Vector2I(r.Next(1, 1500 * 2), r.Next(1, 500 * 2)), 1f);
+		await Task.Delay(TimeSpan.FromMilliseconds(1000));
+		StartTransition(new Vector2I(r.Next(1, 1500 * 2), r.Next(1, 500 * 2)), 1f);
+		await Task.Delay(TimeSpan.FromMilliseconds(1000));
 		DelayMethod();
 	}
 
@@ -95,7 +96,7 @@ public partial class FloatWindow : Window
 			{
 				elapsedTime += (float)delta;
 				Vector2I newPosition;
-				
+
 				// Normalized progress from 0.0 to 1.0
 				float progress = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
 
@@ -111,7 +112,7 @@ public partial class FloatWindow : Window
 						// Uses the formula 1 - exp(-t * k) / (1 - exp(-k)) where k controls the curve shape
 						float k = Smoothness; // Adjust the curve steepness
 						float expProgress;
-						
+
 						if (k > 0.01f)
 						{
 							expProgress = (1.0f - Mathf.Exp(-progress * k)) / (1.0f - Mathf.Exp(-k));
