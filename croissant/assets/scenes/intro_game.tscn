@@ -1,3 +1,16 @@
-[gd_scene format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=2 format=3 uid="uid://wm3w6j1qernu"]
+
+[ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/intro_player.tscn" id="1_ftl5e"]
 
 [node name="IntroGame" type="Node2D"]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(104, 26)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-248, -64, 248, -64, 248, 192, -248, 192)
+uv = PackedVector2Array(-248, -64, 248, -64, 248, 192, -248, 192)
+
+[node name="IntroPlayer" parent="." instance=ExtResource("1_ftl5e")]
+
+[node name="Camera2D" type="Camera2D" parent="IntroPlayer"]
+position_smoothing_enabled = true

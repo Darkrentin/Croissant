@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://rulw2wcwtdo"]
+
+[node name="IntroPlayer" type="Node2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(32, -23)
+polygon = PackedVector2Array(-56, 40, -32, 0, -7.99998, 40)
+uv = PackedVector2Array(-56, 40, -32, 0, -7.99998, 40)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(0, -1.06016)
+scale = Vector2(1, 1.0599)
+polygon = PackedVector2Array(0, -20.7, 24, 17.0396, -24, 17.0396)
