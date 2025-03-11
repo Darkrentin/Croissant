@@ -1,12 +1,13 @@
 using Godot;
 using System;
+using System.Numerics;
 
 public partial class DialogueWindow : FloatWindow
 {
 	// Called when the node enters the scene tree for the first time.
 
 	[Export] public RichTextLabel label;
-	[Export] public ColorRect background;
+	[Export] public NinePatchRect background;
 	[Export] public Timer timer;
 
 	[Export] public FloatWindow Parent;
@@ -30,7 +31,9 @@ public partial class DialogueWindow : FloatWindow
 	{
 		Size = new Vector2I(Parent.Size.X, y);
 		background.Size = Size;
-		label.Size = Size;
+		Godot.Vector2 off = new Godot.Vector2(50, 50);
+		label.Position = off/4;
+		label.Size = Size-(off/2);
 	}
 
 	public void SetDialogueBoxPosition()

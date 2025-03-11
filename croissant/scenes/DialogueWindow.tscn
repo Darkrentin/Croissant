@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://k8kqvfq14xtp"]
+[gd_scene load_steps=3 format=3 uid="uid://k8kqvfq14xtp"]
 
 [ext_resource type="Script" uid="uid://rc1ms6gq0y0g" path="res://scripts/DialogueWindow.cs" id="1_o82ew"]
+[ext_resource type="Texture2D" uid="uid://xhvigeab1hap" path="res://assets/Dialogue/dialogue_backgroung.png" id="2_8mcnb"]
 
 [node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer")]
 transparent_bg = true
+size = Vector2i(525, 255)
+visible = false
 unresizable = true
 borderless = true
 always_on_top = true
@@ -12,20 +15,32 @@ content_scale_mode = 1
 content_scale_aspect = 1
 script = ExtResource("1_o82ew")
 label = NodePath("RichTextLabel")
-background = NodePath("ColorRect")
+background = NodePath("NinePatchRect")
 timer = NodePath("Timer")
 Draggable = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-color = Color(0, 0, 0, 0.541176)
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+anchors_preset = -1
+anchor_right = 0.061
+anchor_bottom = 0.094
+offset_right = -0.0250015
+offset_bottom = 0.0299988
+texture = ExtResource("2_8mcnb")
+region_rect = Rect2(0, 0, 12, 12)
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = -1
+anchor_right = 0.061
+anchor_bottom = 0.094
+offset_right = -0.0250015
+offset_bottom = 0.0299988
 bbcode_enabled = true
 text = "test test test test"
+scroll_following = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.1
