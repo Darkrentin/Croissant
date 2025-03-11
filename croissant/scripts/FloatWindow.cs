@@ -18,13 +18,21 @@ public partial class FloatWindow : Window
 	[Export] public bool Minimizable = true;
 
 	[Export] public TransitionMode transitionMode = TransitionMode.Linear;
+	[Export] public TransitionMode resizeMode = TransitionMode.Linear;
 	[Export] public float Smoothness = 5.0f;
 
 	private Vector2I TargetPosition;
 	private Vector2I StartPosition;
+
+	private Vector2I TargetSize;
+	private Vector2I StartSize;
+
 	private float TransitionTime = 0.5f;
-	private float elapsedTime = 0;
+	private float ResizeTime = 0.5f;
+	private float elapsedTimeTransition = 0;
+	private float elapsedTimeResize = 0;
 	public bool IsTransitioning = false;
+	public bool IsResizing = false;
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -52,15 +60,6 @@ public partial class FloatWindow : Window
 		//	StartTransition((Vector2I)GetMousePosition(), 4);
 		//}
 	}
-	private async Task DelayMethod()
-	{
-		Random r = new Random();
-		StartTransition(new Vector2I(r.Next(1, 1500 * 2), r.Next(1, 500 * 2)), 1f);
-		await Task.Delay(TimeSpan.FromMilliseconds(1000));
-		StartTransition(new Vector2I(r.Next(1, 1500 * 2), r.Next(1, 500 * 2)), 1f);
-		await Task.Delay(TimeSpan.FromMilliseconds(1000));
-		DelayMethod();
-	}
 
 	private void BlockAction()
 	{
@@ -80,43 +79,78 @@ public partial class FloatWindow : Window
 		}
 	}
 
-	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f)
+	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
 		StartPosition = Position;
-		TargetPosition = targetPosition;
+		if(IsTransitioning && !reset)
+		{
+			TargetPosition+=targetPosition-StartPosition;
+		}
+		else
+		{
+			TargetPosition = targetPosition;
+		}
 		TransitionTime = transitionTime;
 		IsTransitioning = true;
-		elapsedTime = 0;
+		elapsedTimeTransition = 0;
 		Smoothness = smoothness;
 	}
-	public void StartLinearTransition(Vector2I targetPosition, float transitionTime)
+
+	public void StartResize(Vector2I targetSize, float resizeTime)
+	{
+		StartSize = Size;
+		TargetSize = targetSize;
+		ResizeTime = resizeTime;
+		IsResizing = true;
+		elapsedTimeResize = 0;
+
+		Vector2I deltaSize = TargetSize - StartSize;
+		Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
+		Vector2I newPosition = Position - deltaPosition;
+		transitionMode = resizeMode;
+		StartTransition(newPosition, resizeTime);
+		
+	}
+	public void StartLinearTransition(Vector2I targetPosition, float transitionTime, bool reset = false)
 	{
 		transitionMode = TransitionMode.Linear;
 		StartTransition(targetPosition, transitionTime);
 	}
-	public void StartExponentialTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f)
+	public void StartExponentialTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
 		transitionMode = TransitionMode.Exponential;
 		StartTransition(targetPosition, transitionTime, smoothness);
 	}
 
-	public void TransitionWindow(double delta)
+	public void StartLinearResize(Vector2I targetSize, float resizeTime)
+	{
+		resizeMode = TransitionMode.Linear;
+		StartResize(targetSize, resizeTime);
+	}
+	public void StartExponentialResize(Vector2I targetSize, float resizeTime)
+	{
+		resizeMode = TransitionMode.Exponential;
+		StartResize(targetSize, resizeTime);
+	}
+
+	private void TransitionWindow(double delta)
 	{
 		if (IsTransitioning)
 		{
-			if (elapsedTime < TransitionTime)
+			if (elapsedTimeTransition < TransitionTime)
 			{
-				elapsedTime += (float)delta;
+				elapsedTimeTransition += (float)delta;
 				Vector2I newPosition;
 
 				// Normalized progress from 0.0 to 1.0
-				float progress = Mathf.Clamp(elapsedTime / TransitionTime, 0f, 1f);
+				float progress = Mathf.Clamp(elapsedTimeTransition / TransitionTime, 0f, 1f);
 
 				switch (transitionMode)
 				{
 					case TransitionMode.Linear:
 						// Linear interpolation - moves at constant speed
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, progress);
+						GD.Print($"transition Time: {elapsedTimeTransition} Progress: {progress}");
 						break;
 
 					case TransitionMode.Exponential:
@@ -134,11 +168,12 @@ public partial class FloatWindow : Window
 							// Fallback to linear for very small speed values
 							expProgress = progress;
 						}
-						GD.Print($"Time: {elapsedTime} Progress: {progress} ExpProgress: {expProgress}");
+						GD.Print($"Transtition Time: {elapsedTimeTransition} Progress: {progress} ExpProgress: {expProgress}");
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, expProgress);
 						break;
 
 					default:
+					GD.PushWarning("Invalid transition mode");
 						newPosition = Position;
 						break;
 				}
@@ -152,9 +187,49 @@ public partial class FloatWindow : Window
 				IsTransitioning = false;
 			}
 		}
+		if(IsResizing)
+		{
+			if(elapsedTimeResize<ResizeTime)
+			{
+				elapsedTimeResize += (float)delta;
+				Vector2I newSize;
+				float progress = Mathf.Clamp(elapsedTimeResize / ResizeTime, 0f, 1f);
+				switch (resizeMode)
+				{
+					case TransitionMode.Linear:
+						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, progress);
+						GD.Print($"resize Time: {elapsedTimeResize} Progress: {progress}");
+						break;
+					case TransitionMode.Exponential:
+						float k = Smoothness;
+						float expProgress;
+						if (k > 0.01f)
+						{
+							expProgress = (1.0f - Mathf.Exp(-progress * k)) / (1.0f - Mathf.Exp(-k));
+						}
+						else
+						{
+							expProgress = progress;
+						}
+						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, expProgress);
+						GD.Print($"Resize Time: {elapsedTimeResize} Progress: {progress} ExpProgress: {expProgress}");
+						break;
+					default:
+						GD.PushWarning("Invalid resize mode");
+						newSize = Size;
+						break;
+				}
+				Size = newSize;
+			}
+			else
+			{
+				Size = TargetSize;
+				IsResizing = false;
+			}
+		}
 	}
 
-	private bool SetWindowPosition(Vector2I newPosition)
+	public bool SetWindowPosition(Vector2I newPosition)
 	{
 		int x = Position.X;
 		int y = Position.Y;
