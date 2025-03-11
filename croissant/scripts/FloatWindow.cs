@@ -81,21 +81,15 @@ public partial class FloatWindow : Window
 
 	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
-		// Store the real current position
 		StartPosition = Position;
-		
-		// Convert target position from virtual (1920x1080) to real screen coordinates
-		Vector2I scaledTargetPosition = (Vector2I)(targetPosition * GameManager.SizeRatio);
-		
 		if(IsTransitioning && !reset)
 		{
-			TargetPosition += scaledTargetPosition - StartPosition;
+			TargetPosition+=targetPosition-StartPosition;
 		}
 		else
 		{
-			TargetPosition = scaledTargetPosition;
+			TargetPosition = targetPosition;
 		}
-		
 		TransitionTime = transitionTime;
 		IsTransitioning = true;
 		elapsedTimeTransition = 0;
@@ -105,25 +99,18 @@ public partial class FloatWindow : Window
 	public void StartResize(Vector2I targetSize, float resizeTime)
 	{
 		StartSize = Size;
-		
-		// Convert target size from virtual (1920x1080) to real screen coordinates
-		TargetSize = (Vector2I)(targetSize * GameManager.SizeRatio);
-		
+		TargetSize = targetSize;
 		ResizeTime = resizeTime;
 		IsResizing = true;
 		elapsedTimeResize = 0;
 
-		// Calculate position adjustment to keep window centered during resize
 		Vector2I deltaSize = TargetSize - StartSize;
 		Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
 		Vector2I newPosition = Position - deltaPosition;
-		
 		transitionMode = resizeMode;
+		StartTransition(newPosition, resizeTime);
 		
-		// Use the already scaled position (no need to convert it)
-		StartTransition(newPosition, resizeTime, Smoothness, true);
 	}
-
 	public void StartLinearTransition(Vector2I targetPosition, float transitionTime, bool reset = false)
 	{
 		transitionMode = TransitionMode.Linear;
@@ -163,7 +150,7 @@ public partial class FloatWindow : Window
 					case TransitionMode.Linear:
 						// Linear interpolation - moves at constant speed
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, progress);
-						GD.Print($"transition Time: {elapsedTimeTransition} Progress: {progress}");
+						//GD.Print($"transition Time: {elapsedTimeTransition} Progress: {progress}");
 						break;
 
 					case TransitionMode.Exponential:
@@ -181,7 +168,7 @@ public partial class FloatWindow : Window
 							// Fallback to linear for very small speed values
 							expProgress = progress;
 						}
-						GD.Print($"Transtition Time: {elapsedTimeTransition} Progress: {progress} ExpProgress: {expProgress}");
+						//GD.Print($"Transtition Time: {elapsedTimeTransition} Progress: {progress} ExpProgress: {expProgress}");
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, expProgress);
 						break;
 
@@ -199,6 +186,7 @@ public partial class FloatWindow : Window
 				SetWindowPosition(TargetPosition);
 				IsTransitioning = false;
 			}
+			GD.Print("Position: " + Position + " Target: " + TargetPosition*GameManager.SizeRatio + "Size: " + Size + " TargetSize: " + TargetSize*GameManager.SizeRatio);
 		}
 		if(IsResizing)
 		{
@@ -211,7 +199,7 @@ public partial class FloatWindow : Window
 				{
 					case TransitionMode.Linear:
 						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, progress);
-						GD.Print($"resize Time: {elapsedTimeResize} Progress: {progress}");
+						//GD.Print($"resize Time: {elapsedTimeResize} Progress: {progress}");
 						break;
 					case TransitionMode.Exponential:
 						float k = Smoothness;
@@ -225,18 +213,18 @@ public partial class FloatWindow : Window
 							expProgress = progress;
 						}
 						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, expProgress);
-						GD.Print($"Resize Time: {elapsedTimeResize} Progress: {progress} ExpProgress: {expProgress}");
+						//GD.Print($"Resize Time: {elapsedTimeResize} Progress: {progress} ExpProgress: {expProgress}");
 						break;
 					default:
 						GD.PushWarning("Invalid resize mode");
 						newSize = Size;
 						break;
 				}
-				Size = newSize;
+				SetWindowSize(newSize);
 			}
 			else
 			{
-				Size = TargetSize;
+				SetWindowSize(TargetSize);
 				IsResizing = false;
 			}
 		}
@@ -244,6 +232,8 @@ public partial class FloatWindow : Window
 
 	public bool SetWindowPosition(Vector2I newPosition)
 	{
+		Godot.Vector2 temp = ((Godot.Vector2)newPosition*GameManager.SizeRatio);
+		newPosition = new Vector2I((int)Math.Round(temp.X), (int)Math.Round(temp.Y));
 		int x = Position.X;
 		int y = Position.Y;
 		bool returnValue = true;
@@ -278,9 +268,15 @@ public partial class FloatWindow : Window
 			y = newPosition.Y;
 		}
 
-		Position = new Vector2I(x, y);
+		Position = (Vector2I)(new Godot.Vector2(x, y));
 
 		return returnValue;
+	}
+
+	public bool SetWindowSize(Vector2I newSize)
+	{
+		Size = (Vector2I)(new Godot.Vector2(newSize.X, newSize.Y) * GameManager.SizeRatio);
+		return true;
 	}
 
 	protected virtual void OnClose()
