@@ -8,7 +8,7 @@
 script = ExtResource("1_uu6xs")
 
 [node name="Window" type="Window" parent="." node_paths=PackedStringArray("dialogueWindow")]
-position = Vector2i(500, 370)
+position = Vector2i(500, 326)
 script = ExtResource("2_r0du0")
 dialogueWindow = NodePath("DialogueWindow")
 Minimizable = false
