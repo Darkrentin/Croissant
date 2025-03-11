@@ -9,6 +9,8 @@ public partial class GameManager : Node2D
     public static Window FixWindow;
     
     public static Vector2I ScreenSize;
+
+    public static Vector2 SizeRatio;
     public override void _Ready()
     {
         AddFixWindow();
@@ -17,6 +19,10 @@ public partial class GameManager : Node2D
         MainWindow = GetWindow() as FloatWindow;
         MainWindow.Draggable = false;
         MainWindow.transitionMode = FloatWindow.TransitionMode.Exponential;
+        
+        Vector2 BaseResolution = new Vector2(1920, 1080);
+        SizeRatio = ScreenSize/ BaseResolution;
+        GD.Print("ScreenRatio: " + SizeRatio);
 
     }
 

@@ -81,15 +81,21 @@ public partial class FloatWindow : Window
 
 	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
+		// Store the real current position
 		StartPosition = Position;
+		
+		// Convert target position from virtual (1920x1080) to real screen coordinates
+		Vector2I scaledTargetPosition = (Vector2I)(targetPosition * GameManager.SizeRatio);
+		
 		if(IsTransitioning && !reset)
 		{
-			TargetPosition+=targetPosition-StartPosition;
+			TargetPosition += scaledTargetPosition - StartPosition;
 		}
 		else
 		{
-			TargetPosition = targetPosition;
+			TargetPosition = scaledTargetPosition;
 		}
+		
 		TransitionTime = transitionTime;
 		IsTransitioning = true;
 		elapsedTimeTransition = 0;
@@ -99,18 +105,25 @@ public partial class FloatWindow : Window
 	public void StartResize(Vector2I targetSize, float resizeTime)
 	{
 		StartSize = Size;
-		TargetSize = targetSize;
+		
+		// Convert target size from virtual (1920x1080) to real screen coordinates
+		TargetSize = (Vector2I)(targetSize * GameManager.SizeRatio);
+		
 		ResizeTime = resizeTime;
 		IsResizing = true;
 		elapsedTimeResize = 0;
 
+		// Calculate position adjustment to keep window centered during resize
 		Vector2I deltaSize = TargetSize - StartSize;
 		Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
 		Vector2I newPosition = Position - deltaPosition;
-		transitionMode = resizeMode;
-		StartTransition(newPosition, resizeTime);
 		
+		transitionMode = resizeMode;
+		
+		// Use the already scaled position (no need to convert it)
+		StartTransition(newPosition, resizeTime, Smoothness, true);
 	}
+
 	public void StartLinearTransition(Vector2I targetPosition, float transitionTime, bool reset = false)
 	{
 		transitionMode = TransitionMode.Linear;

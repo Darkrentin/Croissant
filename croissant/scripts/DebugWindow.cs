@@ -26,13 +26,13 @@ public partial class DebugWindow : FloatWindow
 				//dialogueWindow.label.Text = "[wave amplitude=20]Hello World! [b]Hello World![/b] Hello World!Hello World!Hello World![rainbow] Hello World! [/rainbow][/wave]";
 
 				StartExponentialResize(new Vector2I(457, 531), 0.5f);
-				//StartLinearTransition(new Vector2I(532, 509), 0.5f);
+				StartLinearTransition(new Vector2I(332, 509), 0.5f);
 				open = true;
 			}
 			else{
 				GD.Print("Closing");
 				StartExponentialResize(new Vector2I(199, 131), 0.5f);
-				//StartLinearTransition(new Vector2I(1041, 144), 0.5f);
+				StartLinearTransition(new Vector2I(1341, 444), 0.5f);
 				open = false;
 			}
 		}
