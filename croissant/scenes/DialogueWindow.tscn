@@ -2,25 +2,32 @@
 
 [ext_resource type="Script" uid="uid://rc1ms6gq0y0g" path="res://scripts/DialogueWindow.cs" id="1_o82ew"]
 
-[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background")]
+[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer")]
 transparent_bg = true
-visible = false
+unresizable = true
 borderless = true
+always_on_top = true
 transparent = true
-force_native = true
 content_scale_mode = 1
 content_scale_aspect = 1
 script = ExtResource("1_o82ew")
-label = NodePath("Label")
+label = NodePath("RichTextLabel")
 background = NodePath("ColorRect")
+timer = NodePath("Timer")
+Draggable = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 color = Color(0, 0, 0, 0.541176)
 
-[node name="Label" type="Label" parent="."]
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
 offset_right = 40.0
-offset_bottom = 23.0
-text = "LoremIpsumAdatareLoreaListeamepormeus"
-autowrap_mode = 1
+offset_bottom = 40.0
+bbcode_enabled = true
+text = "test test test test"
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

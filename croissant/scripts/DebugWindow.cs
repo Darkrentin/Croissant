@@ -7,11 +7,17 @@ public partial class DebugWindow : FloatWindow
 	[Export] public DialogueWindow dialogueWindow;
 	public override void _Ready()
 	{
-		dialogueWindow.ShowDialogueBox();
+		base._Ready();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
+		if(Input.IsKeyPressed(Key.Enter))
+		{
+			dialogueWindow.ShowDialogueBox();
+			dialogueWindow.label.Text = "[wave amplitude=20]Hello World! [b]Hello World![/b] Hello World!Hello World!Hello World![rainbow] Hello World! [/rainbow][/wave]";
+		}
 	}
 }

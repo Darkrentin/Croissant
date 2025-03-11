@@ -5,13 +5,15 @@ public partial class DialogueWindow : FloatWindow
 {
 	// Called when the node enters the scene tree for the first time.
 
-	[Export] public Label label;
+	[Export] public RichTextLabel label;
 	[Export] public ColorRect background;
+	[Export] public Timer timer;
 
 	[Export] public FloatWindow Parent;
 
 	public override void _Ready()
 	{
+		base._Ready();
 		if(Parent == null)
 		{
 			Parent = GetParent() as FloatWindow;
@@ -21,6 +23,7 @@ public partial class DialogueWindow : FloatWindow
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		base._Process(delta);
 	}
 
 	public void SetDialogueBoxSize(int y)
@@ -44,5 +47,20 @@ public partial class DialogueWindow : FloatWindow
 		Visible = true;
 		SetDialogueBoxSize(50);
 		SetDialogueBoxPosition();
+		label.VisibleCharacters = 0;
+		timer.Start();
+	}
+
+	public void _on_timer_timeout()
+	{
+		if(label.VisibleCharacters < label.GetTotalCharacterCount())
+		{
+			label.VisibleCharacters += 1;
+			timer.Start();
+		}
+		else
+		{
+			timer.Stop();
+		}
 	}
 }

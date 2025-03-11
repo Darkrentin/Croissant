@@ -3,6 +3,7 @@ using System;
 using System.Numerics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Xml;
 
 public partial class FloatWindow : Window
 {
@@ -14,6 +15,7 @@ public partial class FloatWindow : Window
 	}
 
 	[Export] public bool Draggable = true;
+	[Export] public bool Minimizable = true;
 
 	[Export] public TransitionMode transitionMode = TransitionMode.Linear;
 	[Export] public float Smoothness = 5.0f;
@@ -28,6 +30,7 @@ public partial class FloatWindow : Window
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		CloseRequested += OnClose;
 		/*
 		InitialPosition = WindowInitialPosition.CenterPrimaryScreen;
 		//Position = new Vector2I(500, 500);
@@ -42,7 +45,7 @@ public partial class FloatWindow : Window
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		BlockDrag();
+		BlockAction();
 		TransitionWindow(delta);
 		//if (Input.IsMouseButtonPressed(MouseButton.Left) && !IsTransitioning)
 		//{
@@ -59,13 +62,20 @@ public partial class FloatWindow : Window
 		DelayMethod();
 	}
 
-	private void BlockDrag()
+	private void BlockAction()
 	{
 		if (!Draggable)
 		{
 			if (HasFocus())
 			{
 				GameManager.FixWindow.GrabFocus();
+			}
+		}
+		if(!Minimizable)
+		{
+			if(Mode==ModeEnum.Minimized)
+			{
+				Mode = ModeEnum.Windowed;
 			}
 		}
 	}
@@ -183,5 +193,10 @@ public partial class FloatWindow : Window
 		Position = new Vector2I(x, y);
 
 		return returnValue;
+	}
+
+	protected virtual void OnClose()
+	{
+		GD.Print("Window Closed");
 	}
 }
