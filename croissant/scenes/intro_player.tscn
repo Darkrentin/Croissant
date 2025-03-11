@@ -1,15 +1,15 @@
-[gd_scene format=3 uid="uid://rulw2wcwtdo"]
+[gd_scene load_steps=2 format=3 uid="uid://rulw2wcwtdo"]
 
-[node name="IntroPlayer" type="Node2D"]
+[ext_resource type="Script" uid="uid://djy0o7b4ko7dy" path="res://scripts/IntroPlayer.cs" id="1_fnv7h"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="IntroPlayer" type="StaticBody2D"]
+script = ExtResource("1_fnv7h")
 
-[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
-position = Vector2(32, -23)
-polygon = PackedVector2Array(-56, 40, -32, 0, -7.99998, 40)
-uv = PackedVector2Array(-56, 40, -32, 0, -7.99998, 40)
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(48, -16)
+polygon = PackedVector2Array(-56, 0, -24, 16, -56, 32)
+uv = PackedVector2Array(-56, 0, -8, 0, -40, 32)
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
-position = Vector2(0, -1.06016)
-scale = Vector2(1, 1.0599)
-polygon = PackedVector2Array(0, -20.7, 24, 17.0396, -24, 17.0396)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+position = Vector2(9.4, 22.6)
+polygon = PackedVector2Array(-17.4, -38.6, -17.4, -6.6, 14.6, -22.6)

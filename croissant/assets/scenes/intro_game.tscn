@@ -1,16 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=3 format=3 uid="uid://wm3w6j1qernu"]
 
+[ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/IntroGameManager.cs" id="1_e2doc"]
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/intro_player.tscn" id="1_ftl5e"]
 
 [node name="IntroGame" type="Node2D"]
+script = ExtResource("1_e2doc")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
-position = Vector2(104, 26)
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -37869.0
+offset_top = -38174.0
+offset_right = 39810.0
+offset_bottom = 39505.0
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-248, -64, 248, -64, 248, 192, -248, 192)
-uv = PackedVector2Array(-248, -64, 248, -64, 248, 192, -248, 192)
 
 [node name="IntroPlayer" parent="." instance=ExtResource("1_ftl5e")]
 
-[node name="Camera2D" type="Camera2D" parent="IntroPlayer"]
-position_smoothing_enabled = true
+[node name="Camera2D" type="Camera2D" parent="."]
