@@ -4,13 +4,11 @@ using System;
 
 public partial class GameManager : Node2D
 {
-
     public static FloatWindow MainWindow;
     public static Window FixWindow;
     
     public static Vector2I ScreenSize;
 
-    public static Vector2 SizeRatio;
     public override void _Ready()
     {
         AddFixWindow();
@@ -19,11 +17,6 @@ public partial class GameManager : Node2D
         MainWindow = GetWindow() as FloatWindow;
         MainWindow.Draggable = false;
         MainWindow.transitionMode = FloatWindow.TransitionMode.Exponential;
-        
-        Vector2 BaseResolution = new Vector2(1920, 1080);
-        SizeRatio = ScreenSize/ BaseResolution;
-        GD.Print("ScreenRatio: " + SizeRatio);
-
     }
 
     public override void _Process(double delta)
@@ -41,5 +34,22 @@ public partial class GameManager : Node2D
 
         AddChild(FixWindow);
     }
+    
+    // Convertit des coordonnées relatives (0.0-1.0) en position d'écran absolue
+    public static Vector2I GetScreenPosition(float relativeX, float relativeY)
+    {
+        return new Vector2I(
+            (int)(ScreenSize.X * relativeX),
+            (int)(ScreenSize.Y * relativeY)
+        );
+    }
 
+    // Convertit une taille relative (0.0-1.0) en taille d'écran absolue
+    public static Vector2I GetScreenSize(float relativeWidth, float relativeHeight)
+    {
+        return new Vector2I(
+            (int)(ScreenSize.X * relativeWidth),
+            (int)(ScreenSize.Y * relativeHeight)
+        );
+    }
 }

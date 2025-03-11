@@ -114,12 +114,12 @@ public partial class FloatWindow : Window
 	public void StartLinearTransition(Vector2I targetPosition, float transitionTime, bool reset = false)
 	{
 		transitionMode = TransitionMode.Linear;
-		StartTransition(targetPosition, transitionTime);
+		StartTransition(targetPosition, transitionTime,Smoothness, reset);
 	}
 	public void StartExponentialTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
 		transitionMode = TransitionMode.Exponential;
-		StartTransition(targetPosition, transitionTime, smoothness);
+		StartTransition(targetPosition, transitionTime, smoothness,reset);
 	}
 
 	public void StartLinearResize(Vector2I targetSize, float resizeTime)
@@ -173,7 +173,7 @@ public partial class FloatWindow : Window
 						break;
 
 					default:
-					GD.PushWarning("Invalid transition mode");
+						GD.PushWarning("Invalid transition mode");
 						newPosition = Position;
 						break;
 				}
@@ -186,7 +186,6 @@ public partial class FloatWindow : Window
 				SetWindowPosition(TargetPosition);
 				IsTransitioning = false;
 			}
-			GD.Print("Position: " + Position + " Target: " + TargetPosition*GameManager.SizeRatio + "Size: " + Size + " TargetSize: " + TargetSize*GameManager.SizeRatio);
 		}
 		if(IsResizing)
 		{
@@ -220,11 +219,11 @@ public partial class FloatWindow : Window
 						newSize = Size;
 						break;
 				}
-				SetWindowSize(newSize);
+				Size = newSize;
 			}
 			else
 			{
-				SetWindowSize(TargetSize);
+				Size = TargetSize;
 				IsResizing = false;
 			}
 		}
@@ -232,8 +231,6 @@ public partial class FloatWindow : Window
 
 	public bool SetWindowPosition(Vector2I newPosition)
 	{
-		Godot.Vector2 temp = ((Godot.Vector2)newPosition*GameManager.SizeRatio);
-		newPosition = new Vector2I((int)Math.Round(temp.X), (int)Math.Round(temp.Y));
 		int x = Position.X;
 		int y = Position.Y;
 		bool returnValue = true;
@@ -268,15 +265,9 @@ public partial class FloatWindow : Window
 			y = newPosition.Y;
 		}
 
-		Position = (Vector2I)(new Godot.Vector2(x, y));
+		Position = new Vector2I(x, y);
 
 		return returnValue;
-	}
-
-	public bool SetWindowSize(Vector2I newSize)
-	{
-		Size = (Vector2I)(new Godot.Vector2(newSize.X, newSize.Y) * GameManager.SizeRatio);
-		return true;
 	}
 
 	protected virtual void OnClose()
