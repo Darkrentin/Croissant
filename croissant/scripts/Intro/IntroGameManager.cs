@@ -12,9 +12,9 @@ public partial class IntroGameManager : Node2D
 		//Window.World2D = Camera.GetWorld2D();
 
 		Vector2I screenSize = DisplayServer.ScreenGetSize();
-		GetWindow().Size = screenSize / 2;
+		GetWindow().Size = screenSize;
 		Vector2I windowSize = GetWindow().Size;
-		GetWindow().Position = (screenSize - windowSize) / 2;
+
 
 		Player = GetNode<Player>("Player");
 		Player.Position = windowSize / 2;

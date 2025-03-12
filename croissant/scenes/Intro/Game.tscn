@@ -6,12 +6,20 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
 shader = ExtResource("2_5k0rj")
-shader_parameter/r_displacement = Vector2(-2, -2)
+shader_parameter/r_displacement = Vector2(-3, -3)
 shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(2, 2)
+shader_parameter/b_displacement = Vector2(3, 3)
 
 [node name="GameWindow" type="Window"]
+transparent_bg = true
+title = "Game"
+position = Vector2i(0, 1)
 size = Vector2i(960, 540)
+unresizable = true
+borderless = true
+always_on_top = true
+transparent = true
+content_scale_mode = 1
 
 [node name="Game" type="Node2D" parent="."]
 script = ExtResource("1_8rhfo")
@@ -23,13 +31,6 @@ offset_left = -4096.0
 offset_top = -4096.0
 offset_right = 4096.0
 offset_bottom = 4096.0
-
-[node name="Background" type="ColorRect" parent="Game"]
-offset_left = -4096.0
-offset_top = -4096.0
-offset_right = 4096.0
-offset_bottom = 4096.0
-color = Color(0.0748453, 0.0748453, 0.0748453, 1)
 
 [node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 

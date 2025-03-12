@@ -2,7 +2,7 @@
 
 [node name="Explosion" type="CPUParticles2D"]
 emitting = false
-amount = 16
+amount = 20
 lifetime = 1.08
 one_shot = true
 explosiveness = 1.0

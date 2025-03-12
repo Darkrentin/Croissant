@@ -7,9 +7,9 @@ script = ExtResource("1_fnv7h")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(48, -16)
-polygon = PackedVector2Array(-56, 0, -24, 16, -56, 32)
+polygon = PackedVector2Array(-72, -8, -16, 16, -72, 40)
 uv = PackedVector2Array(-56, 0, -8, 0, -40, 32)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(9.4, 22.6)
-polygon = PackedVector2Array(-17.4, -38.6, -17.4, -6.6, 14.6, -22.6)
+polygon = PackedVector2Array(-33.4, -46.6, -33.4, 1.4, 22.6, -22.6)
