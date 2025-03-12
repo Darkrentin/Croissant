@@ -9,8 +9,8 @@ public partial class MainWindow : FloatWindow
         base._Ready();
         GD.Print("MainWindow is ready!");
         //Set the main window properties
-        Draggable = false;
-        transitionMode = FloatWindow.TransitionMode.Exponential;
+        Position = new Vector2I(0, 0);
+        Size = DisplayServer.ScreenGetUsableRect().Size;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
