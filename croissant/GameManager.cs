@@ -6,8 +6,9 @@ using System.Dynamic;
 
 public partial class GameManager : Node2D
 {
-    public static FloatWindow MainWindow;
+    public static MainWindow MainWindow;
     public static Window FixWindow;
+    public static MenuWindow MenuWindow;
 
     public static List<Window> Windows = new List<Window>(); // list of all windows
     
@@ -17,6 +18,11 @@ public partial class GameManager : Node2D
     {
         AddFixWindow();
         InitMainWindow();
+
+        PackedScene menuScene = ResourceLoader.Load("res://scenes/MenuWindow.tscn") as PackedScene;
+        MenuWindow = menuScene.Instantiate<MenuWindow>();
+        AddChild(MenuWindow);
+
         GD.Print($"ScreenSize: {ScreenSize}");
 
     }
@@ -47,7 +53,7 @@ public partial class GameManager : Node2D
     {
         //Load the FloatWindow script to the main window
         GetWindow().SetScript(ResourceLoader.Load("res://scripts/MainWindow.cs") as Script);
-        MainWindow = GetWindow() as FloatWindow;
+        MainWindow = GetWindow() as MainWindow;
     }
     
     //Get a Position on the screen based on a relative position

@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://x2361ko5kfdy"]
+
+[ext_resource type="Script" uid="uid://f54nplh2adoc" path="res://scripts/MenuWindow.cs" id="1_xxe6h"]
+
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu")]
+transparent_bg = true
+unresizable = true
+always_on_top = true
+transparent = true
+popup_window = true
+script = ExtResource("1_xxe6h")
+Menu = NodePath("Control")
+Draggable = false
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.1
+anchor_right = 0.9
+anchor_bottom = 0.4
+offset_bottom = -6.0
+text = "Quit"
+
+[connection signal="pressed" from="Control/Button" to="." method="_on_quit_button_pressed"]
