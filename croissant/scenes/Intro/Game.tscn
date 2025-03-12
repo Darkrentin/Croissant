@@ -6,14 +6,17 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
 shader = ExtResource("2_5k0rj")
-shader_parameter/r_displacement = Vector2(-3, -3)
+shader_parameter/r_displacement = Vector2(-2, -2)
 shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(3, 3)
+shader_parameter/b_displacement = Vector2(2, 2)
 
-[node name="Game" type="Node2D"]
+[node name="GameWindow" type="Window"]
+size = Vector2i(960, 540)
+
+[node name="Game" type="Node2D" parent="."]
 script = ExtResource("1_8rhfo")
 
-[node name="Shader effects" type="ColorRect" parent="."]
+[node name="Shader effects" type="ColorRect" parent="Game"]
 top_level = true
 material = SubResource("ShaderMaterial_g0ua5")
 offset_left = -4096.0
@@ -21,14 +24,14 @@ offset_top = -4096.0
 offset_right = 4096.0
 offset_bottom = 4096.0
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="Game"]
 offset_left = -4096.0
 offset_top = -4096.0
 offset_right = 4096.0
 offset_bottom = 4096.0
 color = Color(0.0748453, 0.0748453, 0.0748453, 1)
 
-[node name="Player" parent="." instance=ExtResource("3_g36va")]
+[node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="Game"]
 anchor_mode = 0

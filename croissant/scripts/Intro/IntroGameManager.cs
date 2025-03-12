@@ -3,15 +3,21 @@ using System;
 
 public partial class IntroGameManager : Node2D
 {
+	[Export] private Camera2D Camera;
 	PackedScene BulletScene = ResourceLoader.Load<PackedScene>("res://scenes/Intro/Bullet.tscn");
+	Player Player;
 
 	public override void _Ready()
 	{
+		//Window.World2D = Camera.GetWorld2D();
+
 		Vector2I screenSize = DisplayServer.ScreenGetSize();
 		GetWindow().Size = screenSize / 2;
 		Vector2I windowSize = GetWindow().Size;
 		GetWindow().Position = (screenSize - windowSize) / 2;
 
+		Player = GetNode<Player>("Player");
+		Player.Position = windowSize / 2;
 	}
 
 	public override void _Process(double delta)
@@ -19,7 +25,7 @@ public partial class IntroGameManager : Node2D
 		if (Input.IsActionJustPressed("Shoot"))
 		{
 			Bullet Bullet = BulletScene.Instantiate<Bullet>();
-			Bullet.Position = GetNode<Player>("Player").Position;
+			Bullet.Position = Player.Position;
 			Bullet.Rotation = Bullet.Position.AngleToPoint(GetGlobalMousePosition());
 			AddChild(Bullet);
 		}

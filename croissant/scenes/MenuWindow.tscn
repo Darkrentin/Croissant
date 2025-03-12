@@ -1,6 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://x2361ko5kfdy"]
+[gd_scene load_steps=2 format=3 uid="uid://810np22fqce"]
 
-[ext_resource type="Script" uid="uid://f54nplh2adoc" path="res://scripts/MenuWindow.cs" id="1_xxe6h"]
+[ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/MenuWindow.cs" id="1_xxe6h"]
 
 [node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu")]
 transparent_bg = true
@@ -17,6 +17,8 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 1

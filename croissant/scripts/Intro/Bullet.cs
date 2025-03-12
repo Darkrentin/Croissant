@@ -10,7 +10,7 @@ public partial class Bullet : StaticBody2D
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Velocity = -(GetParent().GetNode<Player>("Player").GlobalPosition - GetGlobalMousePosition()).Normalized() * 400;
+		Velocity = -(GetParent().GetNode<Player>("Player").GlobalPosition - GetGlobalMousePosition()).Normalized() * 800;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
