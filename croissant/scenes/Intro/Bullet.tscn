@@ -1,15 +1,15 @@
 [gd_scene load_steps=3 format=3 uid="uid://1jqgd3hgljd8"]
 
-[ext_resource type="Script" uid="uid://d4bitcpch6jw2" path="res://scripts/IntroBullet.cs" id="1_h6n08"]
+[ext_resource type="Script" uid="uid://d4bitcpch6jw2" path="res://scripts/Intro/Bullet.cs" id="1_cpucv"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_2h32r"]
 radius = 5.0
 height = 10.0
 
-[node name="Intro Bullet" type="StaticBody2D"]
-script = ExtResource("1_h6n08")
+[node name="Bullet" type="StaticBody2D"]
+script = ExtResource("1_cpucv")
 
-[node name="Polygon2D" type="Polygon2D" parent="."]
+[node name="PolygonShape" type="Polygon2D" parent="."]
 position = Vector2(32, 40)
 polygon = PackedVector2Array(-40, -40, -40, -40, -32, -48, -24, -40, -24, -40, -32, -32)
 uv = PackedVector2Array(-40, -24, -40, -56, -32, -64, -24, -56, -24, -24, -32, -16)
