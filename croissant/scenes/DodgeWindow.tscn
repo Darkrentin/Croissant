@@ -1,0 +1,4 @@
+[gd_scene format=3 uid="uid://cdcpehwcb167t"]
+
+[node name="DodgeWindow" type="Window"]
+position = Vector2i(0, 36)

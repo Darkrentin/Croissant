@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://ce1xhbt2knpmv"]
+
+[ext_resource type="Script" uid="uid://ixghvkng688w" path="res://scripts/TimerWindow.cs" id="1_e3hie"]
+
+[node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
+position = Vector2i(0, 36)
+script = ExtResource("1_e3hie")
+timer = NodePath("Timer")
+progressBar = NodePath("ProgressBar")
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 104.0
+offset_bottom = 100.0
+step = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.723
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

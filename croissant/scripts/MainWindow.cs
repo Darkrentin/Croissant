@@ -19,7 +19,7 @@ public partial class MainWindow : FloatWindow
         base._Process(delta);
     }
 
-    protected override void OnClose()
+    public override void OnClose()
     {
         GD.Print("MainWindow is closing!");
         GetTree().Quit();

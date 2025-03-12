@@ -11,13 +11,13 @@ public partial class GameManager : Node2D
 
     public static List<Window> Windows = new List<Window>(); // list of all windows
     
-    public static Vector2I ScreenSize;
+    public static Vector2I ScreenSize {get => DisplayServer.ScreenGetSize();}
 
     public override void _Ready()
     {
         AddFixWindow();
         InitMainWindow();
-        ScreenSize = DisplayServer.ScreenGetSize();
+        GD.Print($"ScreenSize: {ScreenSize}");
 
     }
 

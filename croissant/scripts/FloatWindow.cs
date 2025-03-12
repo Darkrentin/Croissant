@@ -205,6 +205,8 @@ public partial class FloatWindow : Window
 				// Ensure we end exactly at the target position
 				SetWindowPosition(TargetPosition);
 				IsTransitioning = false;
+				TransitionFinished();
+
 			}
 		}
 		if(IsResizing)
@@ -305,8 +307,13 @@ public partial class FloatWindow : Window
 	}
 
 	// Called when the window is closed
-	protected virtual void OnClose()
+	public virtual void OnClose()
 	{
 		GD.Print("Window Closed");
+	}
+
+	public virtual void TransitionFinished()
+	{
+		GD.Print("Transition Finished");
 	}
 }

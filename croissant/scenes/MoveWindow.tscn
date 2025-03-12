@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb1neywi8udoc"]
+
+[ext_resource type="Script" uid="uid://bita67lgntryn" path="res://scripts/MoveWindow.cs" id="1_rjorf"]
+
+[node name="MoveWindow" type="Window"]
+position = Vector2i(0, 36)
+script = ExtResource("1_rjorf")

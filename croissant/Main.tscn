@@ -1,17 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
 
-[ext_resource type="Script" uid="uid://dnpbcsayws53p" path="res://GameManager.cs" id="1_uu6xs"]
-[ext_resource type="Script" uid="uid://2h3gr67c3vjy" path="res://scripts/DebugWindow.cs" id="2_r0du0"]
-[ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/DialogueWindow.tscn" id="2_uu6xs"]
+[ext_resource type="Script" uid="uid://befv2juoqcay6" path="res://GameManager.cs" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cppwo1k4kuwg2" path="res://scenes/level1.tscn" id="4_cm0pq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 
-[node name="Window" type="Window" parent="." node_paths=PackedStringArray("dialogueWindow")]
-position = Vector2i(500, 326)
-script = ExtResource("2_r0du0")
-dialogueWindow = NodePath("DialogueWindow")
-Minimizable = false
-
-[node name="DialogueWindow" parent="Window" node_paths=PackedStringArray("Parent") instance=ExtResource("2_uu6xs")]
-Parent = NodePath("..")
+[node name="Level1" parent="." instance=ExtResource("4_cm0pq")]
+scale = Vector2(0.982047, 0.977492)
