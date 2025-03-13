@@ -1,9 +1,13 @@
-[gd_scene load_steps=3 format=3 uid="uid://1jqgd3hgljd8"]
+[gd_scene load_steps=4 format=3 uid="uid://1jqgd3hgljd8"]
 
 [ext_resource type="Script" uid="uid://d4bitcpch6jw2" path="res://scripts/Intro/Bullet.cs" id="1_cpucv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpucv"]
 size = Vector2(24, 14)
+
+[sub_resource type="Curve" id="Curve_cpucv"]
+_data = [Vector2(0, 0.502886), 0.0, 0.0, 0, 0, Vector2(0.740113, 0.499759), 0.0, 0.0, 0, 0, Vector2(0.864407, 0.781145), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [node name="Bullet" type="StaticBody2D"]
 script = ExtResource("1_cpucv")
@@ -17,18 +21,52 @@ uv = PackedVector2Array(-40, -32, -56, -40, -40, -48, -24, -40)
 shape = SubResource("RectangleShape2D_cpucv")
 
 [node name="Trail" type="CPUParticles2D" parent="."]
-amount = 10
-lifetime = 0.5
+lifetime = 0.6
+randomness = 0.5
 lifetime_randomness = 0.5
 direction = Vector2(-1, 0)
 gravity = Vector2(0, 0)
-initial_velocity_min = 10.0
-initial_velocity_max = 181.72
-angular_velocity_min = 360.0
-angular_velocity_max = 360.0
-linear_accel_max = 10.0
-damping_max = 4.195
+initial_velocity_min = 16.0
+initial_velocity_max = 256.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angle_min = -720.0
 angle_max = 720.0
-scale_amount_min = 5.0
-scale_amount_max = 5.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_cpucv")
 color = Color(0, 1, 1, 1)
+
+[node name="Trail2" type="CPUParticles2D" parent="."]
+lifetime = 0.6
+randomness = 0.5
+lifetime_randomness = 0.5
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 256.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_cpucv")
+color = Color(1, 0, 1, 1)
+
+[node name="Trail3" type="CPUParticles2D" parent="."]
+lifetime = 0.6
+randomness = 0.5
+lifetime_randomness = 0.5
+direction = Vector2(-1, 0)
+gravity = Vector2(0, 0)
+initial_velocity_min = 16.0
+initial_velocity_max = 256.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_cpucv")
+color = Color(1, 1, 0, 1)

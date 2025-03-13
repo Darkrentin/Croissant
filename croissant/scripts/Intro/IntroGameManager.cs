@@ -9,13 +9,11 @@ public partial class IntroGameManager : Node2D
 
 	public override void _Ready()
 	{
-		//Window.World2D = Camera.GetWorld2D();
-
 		Vector2I screenSize = DisplayServer.ScreenGetSize();
 		GetWindow().Size = screenSize;
 		Vector2I windowSize = GetWindow().Size;
 
-
+		Camera = GetNode<Camera2D>("Camera");
 		Player = GetNode<Player>("Player");
 		Player.Position = windowSize / 2;
 	}
@@ -24,11 +22,21 @@ public partial class IntroGameManager : Node2D
 	{
 		if (Input.IsActionJustPressed("Shoot"))
 		{
-			Bullet Bullet = BulletScene.Instantiate<Bullet>();
-			Bullet.Position = Player.Position;
-			Bullet.Rotation = Bullet.Position.AngleToPoint(GetGlobalMousePosition());
-			AddChild(Bullet);
+			Shoot();
+			CameraShake(10);
 		}
+	}
 
+	private void Shoot()
+	{
+		Bullet Bullet = BulletScene.Instantiate<Bullet>();
+		Bullet.Position = Player.Position;
+		Bullet.Rotation = Bullet.Position.AngleToPoint(GetGlobalMousePosition());
+		AddChild(Bullet);
+	}
+
+	private void CameraShake(float intensity)
+	{
+		float shakeAmount = intensity;
 	}
 }

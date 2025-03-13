@@ -3,7 +3,6 @@
 .import/
 .cache/
 .godot/
-*.uid
 
 # Mono/.NET specific ignores
 .mono/

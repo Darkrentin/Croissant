@@ -34,5 +34,5 @@ offset_bottom = 4096.0
 
 [node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 
-[node name="Camera2D" type="Camera2D" parent="Game"]
+[node name="Camera" type="Camera2D" parent="Game"]
 anchor_mode = 0
