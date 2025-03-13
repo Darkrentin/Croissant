@@ -24,18 +24,13 @@ public partial class DodgeWindow : PopUpWindow
 	private bool IsMouseOnCloseButton()
 	{
 		
-		Vector2 localMousePos = GetViewport().GetMousePosition() - Position;
-		
+		Vector2 localMousePos = Lib.GetCursorPosition() - Position;
 		
 		float buttonLeftX = Size.X - 35;  
 		float buttonRightX = Size.X;    
-		float buttonTopY = 0;            
-		float buttonBottomY = 35;        
+		float buttonTopY = -35;            
+		float buttonBottomY = 0;        
 		
-		GD.Print($"Local mouse pos: {localMousePos}");
-		GD.Print($"Button area (local): X({buttonLeftX}-{buttonRightX}), Y({buttonTopY}-{buttonBottomY})");
-		
-	
 		return localMousePos.X >= buttonLeftX && 
 			localMousePos.X <= buttonRightX &&
 			localMousePos.Y >= buttonTopY && 
@@ -48,18 +43,18 @@ public partial class DodgeWindow : PopUpWindow
 		base._Process(delta);
         //GD.Print($"Mouse on close: {IsMouseOnCloseButton()}, shouldDodge: {shouldDodge}");
         
-        if (IsMouseOnCloseButton() && !shouldDodge)
+        if (IsMouseOnCloseButton())
         {
-            shouldDodge = true;
+            //shouldDodge = true;
             StartNewMovement();
         }
 	}
 
-    public override void TransitionFinished()
+    /*public override void TransitionFinished()
     {
         base.TransitionFinished();
         shouldDodge = false;
-    }
+    }*/
 
 	    private float CalculateMovementSpeed()
     {

@@ -93,24 +93,8 @@ public partial class Level1 : Node2D
 		}
 		else if (i == 3)
         {
-            try
-            {
-                var instance = DodgeWindowScene.Instantiate();
-                if (instance is DodgeWindow window)
-                {
-                    AddChild(window);
-                }
-                else
-                {
-                    GD.PrintErr($"Expected DodgeWindow, got {instance.GetType()}");
-                    return;
-                }
-            }
-            catch (Exception e)
-            {
-                GD.PrintErr($"Failed to instantiate DodgeWindow: {e.Message}");
-                return;
-            }
+			DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
+			AddChild(window);
         }
         else if (i == 4)
 		{
