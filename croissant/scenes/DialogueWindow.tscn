@@ -1,12 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://k8kqvfq14xtp"]
 
-[ext_resource type="Script" uid="uid://rc1ms6gq0y0g" path="res://scripts/DialogueWindow.cs" id="1_o82ew"]
+[ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/DialogueWindow.cs" id="1_o82ew"]
 [ext_resource type="Texture2D" uid="uid://xhvigeab1hap" path="res://assets/Dialogue/dialogue_backgroung.png" id="2_8mcnb"]
 
-[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer")]
+[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer", "SkipButton")]
 transparent_bg = true
 size = Vector2i(525, 255)
-visible = false
 unresizable = true
 borderless = true
 always_on_top = true
@@ -17,6 +16,7 @@ script = ExtResource("1_o82ew")
 label = NodePath("RichTextLabel")
 background = NodePath("NinePatchRect")
 timer = NodePath("Timer")
+SkipButton = NodePath("Button")
 Draggable = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
@@ -39,10 +39,18 @@ anchor_bottom = 0.094
 offset_right = -0.0250015
 offset_bottom = 0.0299988
 bbcode_enabled = true
-text = "test test test test"
+text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum diam eget dui interdum, ac porta mauris molestie. Ut cursus malesuada tristique. Aliquam iaculis auctor massa ut tempus. Donec dictum lacus semper felis rutrum, sed luctus arcu auctor. Praesent suscipit, diam scelerisque sodales dignissim, nisi quam elementum turpis, at vehicula ante justo vel lorem. Nullam eleifend dui vitae pretium venenatis. In erat enim, dictum fringilla diam eu, tempor tristique eros. Morbi scelerisque dui sit amet dictum dignissim. Duis tincidunt tincidunt ex, quis consectetur nisl efficitur id. Praesent rutrum, lorem et suscipit dapibus, erat dui consectetur lectus, et convallis sapien metus id dolor. Donec auctor suscipit enim id fringilla. Cras eget arcu a ipsum congue pharetra a sit amet felis. Duis et eleifend eros. Vivamus commodo ipsum et dui efficitur tristique."
 scroll_following = true
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.1
+wait_time = 0.01
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = -1
+anchor_right = 0.078
+anchor_bottom = 0.122
+offset_right = -32.95
+offset_bottom = -23.11
+text = "Skip"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

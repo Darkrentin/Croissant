@@ -10,7 +10,9 @@ public partial class DialogueWindow : FloatWindow
     [Export] public NinePatchRect background;
     [Export] public Timer timer;
 
-    [Export] public FloatWindow Parent;
+    [Export] public Window Parent;
+
+    [Export] public Button SkipButton;
 
     public override void _Ready()
     {
@@ -19,17 +21,30 @@ public partial class DialogueWindow : FloatWindow
         {
             Parent = GetParent() as FloatWindow;
         }
+
+        label.Theme = new Theme();
+        label.Theme.DefaultFontSize = Lib.GetScreenSize(0.01f,0).X;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);
+        if(Input.IsActionJustPressed("debug"))
+        {
+            ShowDialogueBox();
+        }
+        
     }
 
-    public void SetDialogueBoxSize(int y)
+    public void SetDialogueBoxSize()
     {
-    
+        Size = Lib.GetScreenSize(0.2f,0.1f);
+        background.Size = Size;
+        label.Size = new Vector2I((int)(Size.X*0.96f),(int)(Size.Y*0.7f));
+        label.Position = ((Godot.Vector2)Size)*0.02f;
+        Size = Lib.GetScreenSize(0.2f,0.12f);
+        SkipButton.Size = Size*new Godot.Vector2(0.3f,0.2f);
     }
 
     public void SetDialogueBoxPosition()
@@ -45,13 +60,14 @@ public partial class DialogueWindow : FloatWindow
         y = Mathf.Clamp(y, 0, GameManager.ScreenSize.Y - Size.Y);
         
         Position = new Vector2I(x, y);
+        SkipButton.Position = Size*new Godot.Vector2(0.6f,0.7f);
     }
 
     public void ShowDialogueBox()
     {
         Visible = true;
-        
-        SetDialogueBoxSize((int)(GameManager.ScreenSize.Y * 0.046f));
+        GrabFocus();
+        SetDialogueBoxSize();
         SetDialogueBoxPosition();
         label.VisibleCharacters = 0;
         timer.Start();
