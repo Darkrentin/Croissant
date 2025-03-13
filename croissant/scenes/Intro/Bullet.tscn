@@ -12,7 +12,7 @@ point_count = 4
 [node name="Bullet" type="StaticBody2D"]
 script = ExtResource("1_cpucv")
 
-[node name="PolygonShape" type="Polygon2D" parent="."]
+[node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(40, 40)
 polygon = PackedVector2Array(-40, -32, -56, -40, -40, -48, -24, -40)
 uv = PackedVector2Array(-40, -32, -56, -40, -40, -48, -24, -40)
