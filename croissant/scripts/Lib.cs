@@ -18,4 +18,23 @@ public static class Lib
         return (float)rand.NextDouble()* (max-min) + min;
     }
 
+    public static Vector2I GetScreenPosition(float relativeX, float relativeY)
+    {
+        return new Vector2I(
+            (int)(GameManager.ScreenSize.X * relativeX),
+            (int)(GameManager.ScreenSize.Y * relativeY)
+        );
+    }
+
+    //Get a Size on the screen based on a relative size
+    //relativeWidth and relativeHeight are values between 0.0 and 1.0
+    //this function allows you to work with relative sizes and not absolute sizes to make the game resolution independent
+    public static Vector2I GetScreenSize(float relativeWidth, float relativeHeight)
+    {
+        return new Vector2I(
+            (int)(GameManager.ScreenSize.X * relativeWidth),
+            (int)(GameManager.ScreenSize.Y * relativeHeight)
+        );
+    }
+
 }

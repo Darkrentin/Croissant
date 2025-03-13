@@ -10,7 +10,7 @@ public partial class DebugWindow : FloatWindow
     {
         base._Ready();
         Size = new Vector2I(1, 1);
-        Position = GameManager.GetScreenPosition(0.26f, 0.46f);
+        Position = Lib.GetScreenPosition(0.26f, 0.46f);
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,14 +25,14 @@ public partial class DebugWindow : FloatWindow
                	//dialogueWindow.ShowDialogueBox();
                 //dialogueWindow.label.Text = "[wave amplitude=20]Hello World! [b]Hello World![/b] Hello World!Hello World!Hello World![rainbow] Hello World! [/rainbow][/wave]";
 
-                StartExponentialResize(GameManager.GetScreenSize(0.24f, 0.49f), 0.5f);
-                StartExponentialTransition(GameManager.GetScreenPosition(0.17f, 0.47f), 5f,Smoothness, true);
+                StartExponentialResize(Lib.GetScreenSize(0.24f, 0.49f), 0.5f);
+                StartExponentialTransition(Lib.GetScreenPosition(0.17f, 0.47f), 5f,Smoothness, true);
                 open = true;
             }
             else{
                 GD.Print("Closing");
-                StartExponentialResize(GameManager.GetScreenSize(0.10f, 0.12f), 0.5f);
-                StartExponentialTransition(GameManager.GetScreenPosition(0.70f, 0.41f), 5f,Smoothness,true);
+                StartExponentialResize(Lib.GetScreenSize(0.10f, 0.12f), 0.5f);
+                StartExponentialTransition(Lib.GetScreenPosition(0.70f, 0.41f), 5f,Smoothness,true);
                 open = false;
             }
         }

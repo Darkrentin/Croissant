@@ -30,19 +30,6 @@ public partial class DialogueWindow : FloatWindow
     public void SetDialogueBoxSize(int y)
     {
     
-        float relativeHeight = y / (float)GameManager.ScreenSize.Y;
-        
-        Size = new Vector2I(Parent.Size.X, (int)(GameManager.ScreenSize.Y * relativeHeight));
-        background.Size = Size;
-
-        float marginRatio = 0.046f; // ~50px on 1080p
-        Godot.Vector2 off = new Godot.Vector2(
-            GameManager.ScreenSize.X * marginRatio, 
-            GameManager.ScreenSize.Y * marginRatio
-        );
-        
-        label.Position = off/4;
-        label.Size = Size-(off/2);
     }
 
     public void SetDialogueBoxPosition()

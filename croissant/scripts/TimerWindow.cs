@@ -17,7 +17,7 @@ public partial class TimerWindow: PopUpWindow
 		Parent = GetParent<Level1>();
 		Parent.WindowCount++;
 		Size = new Vector2I(250,180);
-		SetWindowPosition(GameManager.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f)));
+		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f)));
 		progressBar.Size = Size;
 		timer.Start();
 	}

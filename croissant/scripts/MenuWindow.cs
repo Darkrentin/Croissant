@@ -8,8 +8,8 @@ public partial class MenuWindow : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
-		Size = GameManager.GetScreenSize(0.1f,0.2f);
-		Position = GameManager.GetScreenPosition(0.5f,0.5f) - Size/2;
+		Size = Lib.GetScreenSize(0.1f,0.2f);
+		Position = Lib.GetScreenPosition(0.5f,0.5f) - Size/2;
 		Visible = false;
 		Menu.Size = Size;
 

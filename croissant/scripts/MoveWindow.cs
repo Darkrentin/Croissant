@@ -10,7 +10,7 @@ public partial class MoveWindow : PopUpWindow
 		Parent = GetParent<Level1>();
 		Parent.WindowCount++;
 		Size = new Vector2I(180,70);
-		SetWindowPosition(GameManager.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f)));
+		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f)));
 		StartNewMovement();
 	}
 
@@ -42,7 +42,7 @@ public partial class MoveWindow : PopUpWindow
 
 	public void StartNewMovement()
 	{
-		Vector2I target = GameManager.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f));
+		Vector2I target = Lib.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f));
 		StartExponentialTransition(target, Lib.rand.Next(5,50)/10f);
 	}
 
