@@ -21,4 +21,15 @@ public partial class Enemy : StaticBody2D
 		Position += velocity * (float)delta;
 		Rotation += RotationSpeed * (float)delta;
 	}
+
+	public void OnBodyEntered(Node body)
+	{
+		if (body is Bullet bullet && bullet.Alive)
+		{
+			IntroGameManager.CameraShake(6, 0.3f);
+			bullet.BulletCollide();
+			bullet.EnemyExplosion.Emitting = true;
+			QueueFree();
+		}
+	}
 }

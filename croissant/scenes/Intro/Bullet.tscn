@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://1jqgd3hgljd8"]
+[gd_scene load_steps=7 format=3 uid="uid://1jqgd3hgljd8"]
 
 [ext_resource type="Script" uid="uid://d4bitcpch6jw2" path="res://scripts/Intro/Bullet.cs" id="1_cpucv"]
 
@@ -9,8 +9,29 @@ size = Vector2(24, 14)
 _data = [Vector2(0, 0.502886), 0.0, 0.0, 0, 0, Vector2(0.740113, 0.499759), 0.0, 0.0, 0, 0, Vector2(0.864407, 0.781145), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
 
-[node name="Bullet" type="StaticBody2D"]
+[sub_resource type="Curve" id="Curve_iw5u2"]
+_data = [Vector2(0, 0.590428), 0.0, 0.0, 0, 0, Vector2(0.581921, 0.587302), 0.0, 0.0, 0, 0, Vector2(0.740113, 0.899952), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_iixcw"]
+_data = [Vector2(0, 0.590428), 0.0, 0.0, 0, 0, Vector2(0.581921, 0.587302), 0.0, 0.0, 0, 0, Vector2(0.740113, 0.899952), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="Curve" id="Curve_7pt3h"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="Bullet" type="StaticBody2D" node_paths=PackedStringArray("Polygon2D", "CollisionShape", "Timer", "Trail1", "Trail2", "Trail3", "WallExplosion", "EnemyExplosion")]
 script = ExtResource("1_cpucv")
+Polygon2D = NodePath("Polygon2D")
+CollisionShape = NodePath("CollisionShape2D")
+Timer = NodePath("Timer")
+Trail1 = NodePath("Trail1")
+Trail2 = NodePath("Trail2")
+Trail3 = NodePath("Trail3")
+WallExplosion = NodePath("WallExplosion")
+EnemyExplosion = NodePath("EnemyExplosion")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 position = Vector2(40, 40)
@@ -20,7 +41,7 @@ uv = PackedVector2Array(-40, -32, -56, -40, -40, -48, -24, -40)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cpucv")
 
-[node name="Trail" type="CPUParticles2D" parent="."]
+[node name="Trail1" type="CPUParticles2D" parent="."]
 lifetime = 0.6
 randomness = 0.5
 lifetime_randomness = 0.5
@@ -70,3 +91,48 @@ scale_amount_min = 8.0
 scale_amount_max = 8.0
 scale_amount_curve = SubResource("Curve_cpucv")
 color = Color(1, 1, 0, 1)
+
+[node name="WallExplosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 20
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+initial_velocity_min = 96.0
+initial_velocity_max = 256.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+damping_max = 50.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 10.0
+scale_amount_max = 10.0
+scale_amount_curve = SubResource("Curve_iw5u2")
+
+[node name="EnemyExplosion" type="CPUParticles2D" parent="."]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 1.0
+spread = 180.0
+initial_velocity_min = 200.0
+initial_velocity_max = 400.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+damping_max = 50.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_iixcw")
+hue_variation_min = -0.2
+hue_variation_max = 0.2
+hue_variation_curve = SubResource("Curve_7pt3h")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

@@ -9,6 +9,7 @@ public partial class IntroGameManager : Node2D
 	Player Player;
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 	Vector2I windowSize;
+	private Random random = new Random();
 	public override void _Ready()
 	{
 
@@ -20,27 +21,40 @@ public partial class IntroGameManager : Node2D
 		Player.Position = windowSize / 2;
 	}
 
+	private Timer enemySpawnTimer;
+
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("Shoot"))
 		{
 			Shoot();
-			CameraShake(3, 0.1f);
 		}
 
-		if (Lib.rand.Next(0, 120) == 8)
+		//Creates an enemy every 0.5 to 1 seconds
+		if (enemySpawnTimer == null)
 		{
-			SpawnEnemy();
+			enemySpawnTimer = new Timer();
+			enemySpawnTimer.WaitTime = (float)Lib.GetRandomNormal(0.5f, 1.0f);
+			enemySpawnTimer.OneShot = false;
+			enemySpawnTimer.Timeout += SpawnEnemy;
+			AddChild(enemySpawnTimer);
+			enemySpawnTimer.Start();
 		}
 	}
 
 	private void SpawnEnemy()
 	{
 		Enemy Enemy = EnemyScene.Instantiate<Enemy>();
-		Vector2I spawnPosition = new Vector2I(
-			(int)Lib.GetRandomNormal(0, screenSize.X),
-			(int)Lib.GetRandomNormal(0, screenSize.Y));
-		Enemy.Position = spawnPosition;
+		//Initialize the position outside of the screen
+		int Border = random.Next(0, 4);
+		if (Border == 0)
+			Enemy.Position = new Vector2((float)Lib.GetRandomNormal(-100, screenSize.X + 100), -100);
+		else if (Border == 1)
+			Enemy.Position = new Vector2((float)Lib.GetRandomNormal(-100, screenSize.X + 100), screenSize.Y + 100);
+		else if (Border == 2)
+			Enemy.Position = new Vector2(-100, (float)Lib.GetRandomNormal(-100, screenSize.Y + 100));
+		else
+			Enemy.Position = new Vector2(screenSize.X + 100, (float)Lib.GetRandomNormal(-100, screenSize.Y + 100));
 		AddChild(Enemy);
 	}
 
