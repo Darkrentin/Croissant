@@ -25,8 +25,7 @@ public partial class Level1 : Node2D
     public override void _Ready()
     {
         WindowKillCount = 0;
-        WindowCount = 5;
-
+        WindowCount = 0;
 		spawnTimer = new Timer();
         AddChild(spawnTimer);
         spawnTimer.WaitTime = 1.5f;
@@ -42,12 +41,9 @@ public partial class Level1 : Node2D
 
 	private void OnSpawnTimerTimeout()
     {
-        if (WindowCount < 15 && WindowCount > 0)
+        if (WindowCount < 12)
         {
-            AddNewWindow();
-            WindowCount++;
-			
-			
+            AddNewWindow();		
         }
     }
 
@@ -82,5 +78,6 @@ public partial class Level1 : Node2D
 		    	StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
 				AddChild(window);
 			}
+        WindowCount++;
     }
 }
