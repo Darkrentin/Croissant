@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dojmcfkfdnwsu"]
 
-[ext_resource type="Script" uid="uid://c5rsu3bom5la4" path="res://scripts/StaticWindow.cs" id="1_m7r3k"]
+[ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/StaticWindow.cs" id="1_m7r3k"]
 
 [node name="StaticWindow" type="Window"]
 position = Vector2i(0, 36)

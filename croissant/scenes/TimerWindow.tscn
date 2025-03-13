@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://ce1xhbt2knpmv"]
 
-[ext_resource type="Script" uid="uid://ixghvkng688w" path="res://scripts/TimerWindow.cs" id="1_e3hie"]
+[ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/TimerWindow.cs" id="1_e3hie"]
 
 [node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
 position = Vector2i(0, 36)

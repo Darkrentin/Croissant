@@ -6,9 +6,10 @@ using System.Security.Cryptography.X509Certificates;
 public partial class Level1 : Node2D
 {
     private PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/StaticWindow.tscn");
-    private PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/TimerWindow.tscn");
+    public PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/TimerWindow.tscn");
 	private PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/MoveWindow.tscn");
     // Called when the node enters the scene tree for the first time.
+	private Timer spawnTimer;
 	public int WindowKillCount{
         get => _windowKillCount;
         set {
@@ -25,6 +26,12 @@ public partial class Level1 : Node2D
     {
         WindowKillCount = 0;
         WindowCount = 5;
+
+		spawnTimer = new Timer();
+        AddChild(spawnTimer);
+        spawnTimer.WaitTime = 1.5f;
+        spawnTimer.Timeout += OnSpawnTimerTimeout;
+        spawnTimer.Start();
         
         for (int i = 0; i < 5; i++)
         {
@@ -33,14 +40,27 @@ public partial class Level1 : Node2D
 		
     }
 
+	private void OnSpawnTimerTimeout()
+    {
+        if (WindowCount < 15 && WindowCount > 0)
+        {
+            AddNewWindow();
+            WindowCount++;
+			
+			
+        }
+    }
+
+
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-		if (WindowCount<15)
+		/*if (WindowCount<15)
 		{
 			AddNewWindow();
 			WindowCount++;
-		}
+		}*/
+		GD.Print($"WindowCount: {WindowCount}");
     }
 
 
