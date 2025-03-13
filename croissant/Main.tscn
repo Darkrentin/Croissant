@@ -1,17 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="2_uu6xs"]
-[ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/DialogueWindow.tscn" id="3_r0du0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 
 [node name="Game" parent="." instance=ExtResource("2_uu6xs")]
 visible = false
-
-[node name="Window" type="Window" parent="."]
-position = Vector2i(500, 500)
-
-[node name="DialogueWindow" parent="Window" node_paths=PackedStringArray("Parent") instance=ExtResource("3_r0du0")]
-Parent = NodePath("..")

@@ -18,6 +18,12 @@ public partial class FloatWindow : Window
 	[Export] public bool Draggable = true;
 	[Export] public bool Minimizable = true;
 
+	[Export] public bool Shaking = false;
+	[Export] public Timer ShakeTimer;
+
+	public int ShakeIntensity = 0;
+	public Vector2I BasePosition;
+
 
 	//transition properties
 	[Export] public TransitionMode transitionMode = TransitionMode.Linear;
@@ -43,6 +49,11 @@ public partial class FloatWindow : Window
 	{
 		GetTree().AutoAcceptQuit = false; // Prevent the game from closing when the window is closed
 		CloseRequested += OnClose; // Connect the close event to the OnClose function to catch the close event
+		ShakeTimer = new Timer();
+		AddChild(ShakeTimer);
+		ShakeTimer.Timeout+=()=>{StopShake();};
+		GameManager.Windows.Add(this);
+		Title = "Window Added";
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -50,7 +61,7 @@ public partial class FloatWindow : Window
 	{
 		BlockAction(); // Block action made by the player depending on the window properties
 		TransitionWindow(delta); //Compute the transition of the window
-
+		ProcessShake();
 		// Example of how to start a transition on mouse click
 		//if (Input.IsMouseButtonPressed(MouseButton.Left) && !IsTransitioning)
 		//{
@@ -315,5 +326,41 @@ public partial class FloatWindow : Window
 	public virtual void TransitionFinished()
 	{
 		GD.Print("Transition Finished");
+	}
+
+	public void ProcessShake()
+	{
+		if(Shaking)
+		{
+			if(IsTransitioning)
+			{
+				BasePosition = Position;
+				return;
+			}
+
+			int offsetX = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
+			int offsetY = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
+
+			Vector2I ShakePosition = BasePosition + new Vector2I(offsetX,offsetY);
+
+			SetWindowPosition(ShakePosition);
+		}
+	}
+
+	public void StartShake(float duration, int intensity)
+	{
+		BasePosition = Position;
+		ShakeIntensity = intensity;
+		if(duration!=0)
+		{
+			ShakeTimer.Start(duration);
+		}
+		Shaking = true;
+	}
+
+	public void StopShake()
+	{
+		Shaking = false;
+		SetWindowPosition(BasePosition);
 	}
 }

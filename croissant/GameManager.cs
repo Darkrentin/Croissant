@@ -2,6 +2,7 @@ using Godot;
 using GodotPlugins.Game;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Dynamic;
 
 public partial class GameManager : Node2D
@@ -10,18 +11,28 @@ public partial class GameManager : Node2D
     public static Window FixWindow;
     public static MenuWindow MenuWindow;
 
-    public static List<Window> Windows = new List<Window>(); // list of all windows
+    public static List<FloatWindow> Windows = new List<FloatWindow>(); // list of all windows
     
     public static Vector2I ScreenSize {get => DisplayServer.ScreenGetSize();}
+
+    public static bool ShakeAllWindows = false;
+    public static Timer ShakeTimer;
+    public static int ShakeIntensity = 0;
 
     public override void _Ready()
     {
         AddFixWindow();
         InitMainWindow();
+        //Windows.Add(MainWindow);
+        //Windows.Add(FixWindow);
 
         PackedScene menuScene = ResourceLoader.Load("res://scenes/MenuWindow.tscn") as PackedScene;
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
+
+        ShakeTimer = new Timer();
+        ShakeTimer.Timeout+=()=>{StopShakeAllWindows();};
+        AddChild(ShakeTimer);
 
         GD.Print($"ScreenSize: {ScreenSize}");
 
@@ -29,6 +40,7 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
+        ProcessShake();
     }
 
     //Create the FixWindow
@@ -55,8 +67,42 @@ public partial class GameManager : Node2D
         GetWindow().SetScript(ResourceLoader.Load("res://scripts/MainWindow.cs") as Script);
         MainWindow = GetWindow() as MainWindow;
     }
-    
-    //Get a Position on the screen based on a relative position
-    //relativeX and relativeY are values between 0.0 and 1.0
-    //this function allows you to work with relative positions and not absolute positions to make the game resolution independent
+
+    public void ProcessShake()
+    {
+        if(ShakeAllWindows)
+        {
+			int offsetX = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
+			int offsetY = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
+
+            foreach(FloatWindow w in Windows)
+            {
+                Vector2I ShakePosition = w.BasePosition + new Vector2I(offsetX,offsetY);
+                w.SetWindowPosition(ShakePosition);
+            }
+        }
+    }
+
+    public static void StartShakeAllWindows(float duration,int intensity)
+    {
+        foreach(FloatWindow w in Windows)
+        {
+            w.BasePosition = w.Position;
+        }
+        ShakeAllWindows = true;
+        ShakeIntensity = intensity;
+        if(duration!=0)
+        {
+            ShakeTimer.Start(duration);
+        }
+    }
+
+    public static void StopShakeAllWindows()
+    {
+        ShakeAllWindows = false;
+        foreach(FloatWindow w in Windows)
+        {
+            w.Position = w.BasePosition;
+        }
+    }
 }

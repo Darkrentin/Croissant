@@ -18,6 +18,9 @@ public static class Lib
         return (float)rand.NextDouble()* (max-min) + min;
     }
 
+    //Get a Position on the screen based on a relative position
+    //relativeX and relativeY are values between 0.0 and 1.0
+    //this function allows you to work with relative positions and not absolute positions to make the game resolution independent
     public static Vector2I GetScreenPosition(float relativeX, float relativeY)
     {
         return new Vector2I(
