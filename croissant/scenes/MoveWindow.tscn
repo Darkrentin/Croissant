@@ -4,4 +4,8 @@
 
 [node name="MoveWindow" type="Window"]
 position = Vector2i(0, 36)
+unresizable = true
+always_on_top = true
 script = ExtResource("1_rjorf")
+Draggable = false
+Minimizable = false

@@ -4,9 +4,13 @@
 
 [node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
 position = Vector2i(0, 36)
+unresizable = true
+always_on_top = true
 script = ExtResource("1_e3hie")
 timer = NodePath("Timer")
 progressBar = NodePath("ProgressBar")
+Draggable = false
+Minimizable = false
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
 offset_right = 104.0

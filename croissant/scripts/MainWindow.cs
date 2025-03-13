@@ -22,6 +22,6 @@ public partial class MainWindow : FloatWindow
     public override void OnClose()
     {
         GD.Print("MainWindow is closing!");
-        GetTree().Quit();
+        GameManager.MenuWindow.Open();
     }
 }

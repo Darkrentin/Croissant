@@ -42,13 +42,13 @@ public partial class MenuWindow : FloatWindow
 		}
 	}
 
-	private void Close()
+	public void Close()
 	{
 		Visible = false;
 		GetTree().Paused = false;
 	}
 
-	private void Open()
+	public void Open()
 	{
 		Visible = true;
 		ProcessMode = ProcessModeEnum.Always;

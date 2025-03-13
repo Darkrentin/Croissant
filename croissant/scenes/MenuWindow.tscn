@@ -3,10 +3,8 @@
 [ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/MenuWindow.cs" id="1_xxe6h"]
 
 [node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu")]
-transparent_bg = true
 unresizable = true
 always_on_top = true
-transparent = true
 popup_window = true
 script = ExtResource("1_xxe6h")
 Menu = NodePath("Control")

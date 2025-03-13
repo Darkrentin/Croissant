@@ -18,6 +18,7 @@ background = NodePath("NinePatchRect")
 timer = NodePath("Timer")
 SkipButton = NodePath("Button")
 Draggable = false
+Minimizable = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchors_preset = -1
