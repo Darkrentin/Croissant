@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="2_uu6xs"]
-[ext_resource type="PackedScene" uid="uid://cppwo1k4kuwg2" path="res://scenes/level1.tscn" id="3_r0du0"]
+[ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/DialogueWindow.tscn" id="3_r0du0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
@@ -10,4 +10,8 @@ script = ExtResource("1_uu6xs")
 [node name="Game" parent="." instance=ExtResource("2_uu6xs")]
 visible = false
 
-[node name="Level1" parent="." instance=ExtResource("3_r0du0")]
+[node name="Window" type="Window" parent="."]
+position = Vector2i(500, 500)
+
+[node name="DialogueWindow" parent="Window" node_paths=PackedStringArray("Parent") instance=ExtResource("3_r0du0")]
+Parent = NodePath("..")

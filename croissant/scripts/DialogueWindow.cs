@@ -1,6 +1,11 @@
 using Godot;
+using Godot.Collections;
 using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Numerics;
+using System.Text.Json;
+using FileAccess = Godot.FileAccess;
 
 public partial class DialogueWindow : FloatWindow
 {
@@ -14,6 +19,8 @@ public partial class DialogueWindow : FloatWindow
 
     [Export] public Button SkipButton;
 
+    public Dictionary Dialogue;
+
     public override void _Ready()
     {
         base._Ready();
@@ -24,6 +31,10 @@ public partial class DialogueWindow : FloatWindow
 
         label.Theme = new Theme();
         label.Theme.DefaultFontSize = Lib.GetScreenSize(0.01f,0).X;
+
+        const string dialoguePath = "res://assets/Dialogue/Dialogue.json";
+        LoadJson(dialoguePath);
+        
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -32,44 +43,52 @@ public partial class DialogueWindow : FloatWindow
         base._Process(delta);
         if(Input.IsActionJustPressed("debug"))
         {
-            ShowDialogueBox();
+            ShowDialogueBox("Virus",1);
         }
         
     }
 
-    public void SetDialogueBoxSize()
+    public void LoadJson(string path)
     {
-        Size = Lib.GetScreenSize(0.2f,0.1f);
-        background.Size = Size;
-        label.Size = new Vector2I((int)(Size.X*0.96f),(int)(Size.Y*0.7f));
-        label.Position = ((Godot.Vector2)Size)*0.02f;
-        Size = Lib.GetScreenSize(0.2f,0.12f);
-        SkipButton.Size = Size*new Godot.Vector2(0.3f,0.2f);
+        Json json = new Json();
+        var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+        var json_string = Json.ParseString(file.GetAsText());
+        file.Close();
+
+        Dialogue = (Dictionary)json_string;
     }
 
-    public void SetDialogueBoxPosition()
+    public void InitDialogeBox()
     {
+        Vector2I DialogueBoxSize = Lib.GetScreenSize(0.2f,0.1f);
+        Size = Lib.GetScreenSize(0.2f,0.12f);
+
+        background.Size = DialogueBoxSize;
+
+        label.Size = new Vector2I((int)(DialogueBoxSize.X*0.96f),(int)(DialogueBoxSize.Y*0.7f));
+        label.Position = ((Godot.Vector2)DialogueBoxSize)*0.02f;
+        
+        SkipButton.Size = Size*new Godot.Vector2(0.3f,0.2f);
+        SkipButton.Position = Size*new Godot.Vector2(0.6f,0.7f);
+
         int x, y;
-        
-        
+
         x = (int)(Parent.Position.X - (Size.X/4));
         y = (int)(Parent.Position.Y + Parent.Size.Y - (Size.Y/2));
-        
-       
+
         x = Mathf.Clamp(x, 0, GameManager.ScreenSize.X - Size.X);
         y = Mathf.Clamp(y, 0, GameManager.ScreenSize.Y - Size.Y);
         
         Position = new Vector2I(x, y);
-        SkipButton.Position = Size*new Godot.Vector2(0.6f,0.7f);
     }
 
-    public void ShowDialogueBox()
+    public void ShowDialogueBox(string character, int id)
     {
+        InitDialogeBox();
         Visible = true;
         GrabFocus();
-        SetDialogueBoxSize();
-        SetDialogueBoxPosition();
         label.VisibleCharacters = 0;
+        label.Text = (string)((Dictionary)Dialogue[character])[$"{id}"];
         timer.Start();
     }
 
@@ -83,6 +102,11 @@ public partial class DialogueWindow : FloatWindow
         else
         {
             timer.Stop();
+            LineFinished();
         }
+    }
+
+    private void LineFinished()
+    {
     }
 }
