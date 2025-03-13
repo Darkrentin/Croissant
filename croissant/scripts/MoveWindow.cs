@@ -8,7 +8,6 @@ public partial class MoveWindow : PopUpWindow
 	{
 		base._Ready();
 		Parent = GetParent<Level1>();
-		Parent.WindowCount++;
 		Size = new Vector2I(180,70);
 		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f)));
 		StartNewMovement();
@@ -18,7 +17,6 @@ public partial class MoveWindow : PopUpWindow
 	{
 		Parent.WindowKillCount++;
 		Parent.WindowCount--;
-		GD.Print("cc");
 		QueueFree();
 		
 	}
@@ -40,10 +38,26 @@ public partial class MoveWindow : PopUpWindow
 		StartNewMovement();
     }
 
-	public void StartNewMovement()
-	{
-		Vector2I target = Lib.GetScreenPosition(Lib.GetRandomNormal(0.1f,0.9f),Lib.GetRandomNormal(0.1f,0.9f));
-		StartExponentialTransition(target, Lib.rand.Next(5,50)/10f);
-	}
+	    private float CalculateMovementSpeed()
+    {
+        if (Parent.WindowCount >= 10)
+        {
+            return Lib.rand.Next(80, 150) / 10f; 
+        }
+        else if (Parent.WindowCount >= 5)
+        {
+            return Lib.rand.Next(30, 50) / 10f; 
+        }
+        else
+        {
+            return Lib.rand.Next(15, 30) / 10f;
+		}
+    } 
 
+    public void StartNewMovement()
+    {
+        Vector2I target = Lib.GetScreenPosition(Lib.GetRandomNormal(0.1f, 0.9f), Lib.GetRandomNormal(0.1f, 0.9f));
+        float speed = CalculateMovementSpeed();
+        StartExponentialTransition(target, speed);
+    }
 }

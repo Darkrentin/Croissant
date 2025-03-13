@@ -17,9 +17,7 @@ public partial class StaticWindow : PopUpWindow
 	{
 		Parent.WindowKillCount++;
 		Parent.WindowCount--;
-		GD.Print("cc");
-		QueueFree();
-		
+		QueueFree();	
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

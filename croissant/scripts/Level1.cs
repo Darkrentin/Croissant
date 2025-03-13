@@ -39,14 +39,30 @@ public partial class Level1 : Node2D
 		
     }
 
-	private void OnSpawnTimerTimeout()
+	public void OnSpawnTimerTimeout()
     {
-        if (WindowCount < 12)
+        if (WindowCount < 15 && WindowCount > 0)
         {
-            AddNewWindow();		
+            AddNewWindow();
+            UpdateSpawnTimer();
         }
     }
 
+    private void UpdateSpawnTimer()
+    {
+        if (WindowCount >= 10)
+        {
+            spawnTimer.WaitTime = 5f;
+        }
+        else if (WindowCount >= 5)
+        {
+            spawnTimer.WaitTime = 2.2f;
+        }
+        else
+        {
+            spawnTimer.WaitTime = 1.5f;
+        }
+    }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
@@ -56,28 +72,29 @@ public partial class Level1 : Node2D
 			AddNewWindow();
 			WindowCount++;
 		}*/
-		GD.Print($"WindowCount: {WindowCount}");
+		GD.Print($"timer: {spawnTimer.WaitTime}");
+        GD.Print($"window: {WindowCount}");
     }
 
 
 	public void AddNewWindow()
 	{
-		int i = Lib.rand.Next(1,4);
-			if (i%3 == 0)
-			{
-				MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
-				AddChild(window);
-			}
-			if (i%2 == 0)
-			{
-				TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
-				AddChild(window);
-			}
-			else
-			{
-		    	StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
-				AddChild(window);
-			}
+        int i = Lib.rand.Next(1,4);
+		if (i%3 == 0)
+		{
+			MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
+			AddChild(window);
+		}
+		else if (i%2 == 0)
+		{
+			TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
+			AddChild(window);
+		}
+		else
+		{
+			StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
+			AddChild(window);
+		}
         WindowCount++;
     }
 }
