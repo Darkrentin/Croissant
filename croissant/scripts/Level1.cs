@@ -8,6 +8,7 @@ public partial class Level1 : Node2D
     private PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/StaticWindow.tscn");
     public PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/TimerWindow.tscn");
 	private PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/MoveWindow.tscn");
+    private PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/DodgeWindow.tscn");
     // Called when the node enters the scene tree for the first time.
 	private Timer spawnTimer;
 	public int WindowKillCount{
@@ -79,18 +80,39 @@ public partial class Level1 : Node2D
 
 	public void AddNewWindow()
 	{
-        int i = Lib.rand.Next(1,4);
-		if (i%3 == 0)
+        int i = Lib.rand.Next(1,5);
+		if (i == 1)
 		{
 			MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
 			AddChild(window);
 		}
-		else if (i%2 == 0)
+		else if (i == 2)
 		{
 			TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
 			AddChild(window);
 		}
-		else
+		else if (i == 3)
+        {
+            try
+            {
+                var instance = DodgeWindowScene.Instantiate();
+                if (instance is DodgeWindow window)
+                {
+                    AddChild(window);
+                }
+                else
+                {
+                    GD.PrintErr($"Expected DodgeWindow, got {instance.GetType()}");
+                    return;
+                }
+            }
+            catch (Exception e)
+            {
+                GD.PrintErr($"Failed to instantiate DodgeWindow: {e.Message}");
+                return;
+            }
+        }
+        else if (i == 4)
 		{
 			StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
 			AddChild(window);

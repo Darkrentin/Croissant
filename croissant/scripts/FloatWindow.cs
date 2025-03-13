@@ -320,12 +320,12 @@ public partial class FloatWindow : Window
 	// Called when the window is closed
 	public virtual void OnClose()
 	{
-		GD.Print("Window Closed");
+		//GD.Print("Window Closed");
 	}
 
 	public virtual void TransitionFinished()
 	{
-		GD.Print("Transition Finished");
+		//GD.Print("Transition Finished");
 	}
 
 	public void ProcessShake()
