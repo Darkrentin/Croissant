@@ -3,7 +3,7 @@ using System;
 
 public partial class Bullet : StaticBody2D
 {
-	[Export] Vector2 Velocity = new Vector2(100.0f, 100.0f);
+	[Export] Vector2 Velocity;
 	[Export] Polygon2D Polygon2D;
 	[Export] CollisionShape2D CollisionShape;
 	[Export] Timer Timer = new Timer();

@@ -19,7 +19,9 @@ unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
+content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
+content_scale_aspect = 4
 
 [node name="Game" type="Node2D" parent="."]
 script = ExtResource("1_8rhfo")

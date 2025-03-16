@@ -14,7 +14,7 @@ public partial class IntroGameManager : Node2D
 	{
 
 		GetWindow().Size = screenSize;
-		Vector2I windowSize = GetWindow().Size;
+		Vector2I windowSize = new Vector2I(1920, 1080);
 
 		Camera = GetNode<Camera2D>("Camera");
 		Player = GetNode<Player>("Player");
@@ -34,7 +34,7 @@ public partial class IntroGameManager : Node2D
 		if (enemySpawnTimer == null)
 		{
 			enemySpawnTimer = new Timer();
-			enemySpawnTimer.WaitTime = (float)Lib.GetRandomNormal(0.5f, 1.0f);
+			enemySpawnTimer.WaitTime = (float)Lib.GetRandomNormal(1f, 2.0f);
 			enemySpawnTimer.OneShot = false;
 			enemySpawnTimer.Timeout += SpawnEnemy;
 			AddChild(enemySpawnTimer);
