@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cb1neywi8udoc"]
 
-[ext_resource type="Script" uid="uid://brxoeijijfprq" path="res://scripts/MoveWindow.cs" id="1_rjorf"]
+[ext_resource type="Script" uid="uid://brxoeijijfprq" path="res://scripts/PopUpWindow/MoveWindow.cs" id="1_o0mg8"]
 
 [node name="MoveWindow" type="Window"]
 position = Vector2i(0, 36)
 unresizable = true
 always_on_top = true
-script = ExtResource("1_rjorf")
+script = ExtResource("1_o0mg8")
 Draggable = false
 Minimizable = false

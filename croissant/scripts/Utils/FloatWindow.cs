@@ -62,11 +62,25 @@ public partial class FloatWindow : Window
 		BlockAction(); // Block action made by the player depending on the window properties
 		TransitionWindow(delta); //Compute the transition of the window
 		ProcessShake();
-		// Example of how to start a transition on mouse click
-		//if (Input.IsMouseButtonPressed(MouseButton.Left) && !IsTransitioning)
-		//{
-		//	StartTransition((Vector2I)GetMousePosition(), 4);
-		//}
+		// Example
+		/*
+		if(Input.IsActionJustPressed("U"))
+		{
+			StartResizeUp(1000, 0.1f);
+		}
+		if(Input.IsActionJustPressed("D"))
+		{
+			StartResizeDown(1000, 0.1f);
+		}
+		if(Input.IsActionJustPressed("L"))
+		{
+			StartResizeLeft(1000, 0.1f);
+		}
+		if(Input.IsActionJustPressed("R"))
+		{
+			StartResizeRight(1000, 0.1f);
+		}
+		*/
 	}
 
 	// Block action made by the player depending on the window properties
@@ -111,7 +125,7 @@ public partial class FloatWindow : Window
 
 	// Start a resize to a target size with a given resize time
 	// The resize mode can be set to linear or exponential
-	public void StartResize(Vector2I targetSize, float resizeTime)
+	public void StartResize(Vector2I targetSize, float resizeTime, bool KeepCenter = true)
 	{
 		StartSize = Size;
 		TargetSize = targetSize;
@@ -119,11 +133,14 @@ public partial class FloatWindow : Window
 		IsResizing = true;
 		elapsedTimeResize = 0;
 
-		Vector2I deltaSize = TargetSize - StartSize;
-		Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
-		Vector2I newPosition = Position - deltaPosition;
-		transitionMode = resizeMode;
-		StartTransition(newPosition, resizeTime);
+		if(KeepCenter)
+		{
+			Vector2I deltaSize = TargetSize - StartSize;
+			Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
+			Vector2I newPosition = Position - deltaPosition;
+			transitionMode = resizeMode;
+			StartTransition(newPosition, resizeTime);
+		}
 		
 	}
 
@@ -156,6 +173,30 @@ public partial class FloatWindow : Window
 		resizeMode = TransitionMode.Exponential;
 		StartResize(targetSize, resizeTime);
 	}
+
+	public void StartResizeDown(int nsize, float resizeTime)
+	{
+		StartResize(new Vector2I(Size.X, Size.Y + nsize), resizeTime, false);
+	}
+
+	public void StartResizeUp(int nsize, float resizeTime)
+	{
+		StartResize(new Vector2I(Size.X, Size.Y + nsize), resizeTime, false);
+		StartTransition(new Vector2I(Position.X, Position.Y - nsize), resizeTime);
+	}
+
+	public void StartResizeRight(int nsize, float resizeTime)
+	{
+		StartResize(new Vector2I(Size.X + nsize, Size.Y), resizeTime, false);
+	}
+
+	public void StartResizeLeft(int nsize, float resizeTime)
+	{
+		StartResize(new Vector2I(Size.X + nsize, Size.Y), resizeTime, false);
+		StartTransition(new Vector2I(Position.X - nsize, Position.Y), resizeTime);
+	}
+
+
 
 
 	// Compute the transition of the window
@@ -209,12 +250,12 @@ public partial class FloatWindow : Window
 						break;
 				}
 
-				SetWindowPosition(newPosition);
+				SetWindowPosition(newPosition,true);
 			}
 			else
 			{
 				// Ensure we end exactly at the target position
-				SetWindowPosition(TargetPosition);
+				SetWindowPosition(TargetPosition,true);
 				IsTransitioning = false;
 				TransitionFinished();
 
@@ -276,8 +317,13 @@ public partial class FloatWindow : Window
 	//Set the window position and garranty that the window stay in the screen
 	//return false if the window is out of the screen but the position is set to the nearest position
 	//return true if the window is in the screen
-	public bool SetWindowPosition(Vector2I newPosition)
+	public bool SetWindowPosition(Vector2I newPosition, bool SkipVerification = false)
 	{
+		if(SkipVerification)
+		{
+			Position = newPosition;
+			return true;
+		}
 		int x = Position.X;
 		int y = Position.Y;
 		bool returnValue = true;

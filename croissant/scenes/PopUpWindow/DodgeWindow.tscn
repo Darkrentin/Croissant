@@ -1,11 +1,11 @@
 [gd_scene load_steps=2 format=3 uid="uid://cdcpehwcb167t"]
 
-[ext_resource type="Script" uid="uid://5obqqwi6yips" path="res://scripts/DodgeWindow.cs" id="1_731sx"]
+[ext_resource type="Script" uid="uid://5obqqwi6yips" path="res://scripts/PopUpWindow/DodgeWindow.cs" id="1_ai85r"]
 
 [node name="DodgeWindow" type="Window"]
 position = Vector2i(0, 36)
 unresizable = true
 always_on_top = true
-script = ExtResource("1_731sx")
+script = ExtResource("1_ai85r")
 Draggable = false
 Minimizable = false

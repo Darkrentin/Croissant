@@ -1,12 +1,12 @@
 [gd_scene load_steps=2 format=3 uid="uid://ce1xhbt2knpmv"]
 
-[ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/TimerWindow.cs" id="1_e3hie"]
+[ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/PopUpWindow/TimerWindow.cs" id="1_gkcfg"]
 
 [node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
 position = Vector2i(0, 36)
 unresizable = true
 always_on_top = true
-script = ExtResource("1_e3hie")
+script = ExtResource("1_gkcfg")
 timer = NodePath("Timer")
 progressBar = NodePath("ProgressBar")
 Draggable = false

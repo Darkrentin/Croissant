@@ -13,7 +13,6 @@ shader_parameter/b_displacement = Vector2(3, 3)
 [node name="GameWindow" type="Window"]
 transparent_bg = true
 title = "Game"
-position = Vector2i(0, 1)
 size = Vector2i(960, 540)
 unresizable = true
 borderless = true

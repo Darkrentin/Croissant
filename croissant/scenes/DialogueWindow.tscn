@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://k8kqvfq14xtp"]
 
-[ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/DialogueWindow.cs" id="1_o82ew"]
+[ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/Utils/DialogueWindow.cs" id="1_o82ew"]
 [ext_resource type="Texture2D" uid="uid://xhvigeab1hap" path="res://assets/Dialogue/dialogue_backgroung.png" id="2_8mcnb"]
 
 [node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer", "SkipButton")]

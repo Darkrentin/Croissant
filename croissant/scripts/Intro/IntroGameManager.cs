@@ -5,8 +5,8 @@ public partial class IntroGameManager : Node2D
 {
 	private static Camera2D Camera;
 	private static Vector2I screenSize;
-	PackedScene BulletScene = ResourceLoader.Load<PackedScene>("res://scenes/Intro/Bullet.tscn");
-	PackedScene EnemyScene = ResourceLoader.Load<PackedScene>("res://scenes/Intro/Enemy.tscn");
+	PackedScene BulletScene = ResourceLoader.Load<PackedScene>("uid://1jqgd3hgljd8");
+	PackedScene EnemyScene = ResourceLoader.Load<PackedScene>("uid://37mav66th0um");
 	Player Player;
 	Vector2I windowSize;
 	private Random random = new Random();

@@ -10,7 +10,7 @@ public partial class GameManager : Node2D
 {
 
     public static Node2D GameRoot;
-    private static int _state = 0;
+    private static int _state = -1; //0 for normal state, -1 for debug state
 
     public static int State
     {
@@ -21,6 +21,12 @@ public partial class GameManager : Node2D
             GD.Print($"State: {_state}");
             StateChange(_state);
         }
+    }
+
+    [Export] public int ExporteState
+    {
+        get => _state;
+        set => _state = value;
     }
 
     public static MainWindow MainWindow;
@@ -43,7 +49,7 @@ public partial class GameManager : Node2D
         //Windows.Add(MainWindow);
         //Windows.Add(FixWindow);
 
-        PackedScene menuScene = ResourceLoader.Load("res://scenes/MenuWindow.tscn") as PackedScene;
+        PackedScene menuScene = ResourceLoader.Load("uid://810np22fqce") as PackedScene;
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
 
@@ -63,6 +69,9 @@ public partial class GameManager : Node2D
         {
             case 0:
                 State0.Process();
+                break;
+            case -1:
+                //debug State
                 break;
             default:
                 GD.PushError("Invalid State");

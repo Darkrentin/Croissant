@@ -5,10 +5,10 @@ using System.Security.Cryptography.X509Certificates;
 
 public partial class Level1 : Node2D
 {
-    private PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/StaticWindow.tscn");
-    public PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/TimerWindow.tscn");
-	private PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/MoveWindow.tscn");
-    private PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("res://scenes/DodgeWindow.tscn");
+    private PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("uid://dojmcfkfdnwsu");
+    public PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("uid://ce1xhbt2knpmv");
+	private PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("uid://cb1neywi8udoc");
+    private PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("uid://cdcpehwcb167t");
     // Called when the node enters the scene tree for the first time.
 	private Timer spawnTimer;
 	public int WindowKillCount{
