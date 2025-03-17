@@ -1,14 +1,14 @@
 [gd_scene load_steps=2 format=3 uid="uid://810np22fqce"]
 
-[ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/MenuWindow.cs" id="1_xxe6h"]
+[ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/Windows/MenuWindow.cs" id="1_ak1ko"]
 
 [node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu")]
+position = Vector2i(0, 36)
 unresizable = true
 always_on_top = true
 popup_window = true
-script = ExtResource("1_xxe6h")
+script = ExtResource("1_ak1ko")
 Menu = NodePath("Control")
-Draggable = false
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3

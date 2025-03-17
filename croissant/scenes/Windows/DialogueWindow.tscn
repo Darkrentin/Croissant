@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/Utils/DialogueWindow.cs" id="1_o82ew"]
 [ext_resource type="Texture2D" uid="uid://xhvigeab1hap" path="res://assets/Dialogue/dialogue_backgroung.png" id="2_8mcnb"]
 
-[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer", "SkipButton")]
+[node name="DialogueWindow" type="Window"]
 transparent_bg = true
 size = Vector2i(525, 255)
 unresizable = true
@@ -13,12 +13,6 @@ transparent = true
 content_scale_mode = 1
 content_scale_aspect = 1
 script = ExtResource("1_o82ew")
-label = NodePath("RichTextLabel")
-background = NodePath("NinePatchRect")
-timer = NodePath("Timer")
-SkipButton = NodePath("Button")
-Draggable = false
-Minimizable = false
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 anchors_preset = -1

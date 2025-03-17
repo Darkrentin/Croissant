@@ -10,7 +10,8 @@ public partial class MainWindow : FloatWindow
         GD.Print("MainWindow is ready!");
         //Set the main window properties
         Position = new Vector2I(0, 0);
-        Size = DisplayServer.ScreenGetUsableRect().Size;
+        //Size = DisplayServer.ScreenGetUsableRect().Size;
+        Size = GameManager.ScreenSize;
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

@@ -68,10 +68,11 @@ public partial class GameManager : Node2D
         switch(State)
         {
             case 0:
-                State0.Process();
+                States.State0();
                 break;
             case -1:
                 //debug State
+                States.StateDebug();
                 break;
             default:
                 GD.PushError("Invalid State");
@@ -100,7 +101,7 @@ public partial class GameManager : Node2D
     public void InitMainWindow()
     {
         //Load the FloatWindow script to the main window
-        GetWindow().SetScript(ResourceLoader.Load("res://scripts/MainWindow.cs") as Script);
+        GetWindow().SetScript(ResourceLoader.Load("uid://ipb8ki64ej0u") as Script);
         MainWindow = GetWindow() as MainWindow;
     }
 
