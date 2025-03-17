@@ -19,29 +19,29 @@ public partial class Enemy : StaticBody2D
 
 	private readonly Vector2[] squareShape =
 	{
-		new Vector2(-42, -42),
-		new Vector2(42, -42),
-		new Vector2(42, 42),
-		new Vector2(-42, 42)
+		new Vector2(-45, -45),
+		new Vector2(45, -45),
+		new Vector2(45, 45),
+		new Vector2(-45, 45)
 	};
 
 	private readonly Vector2[] pentagonShape =
 	{
-		new Vector2(0, -48),
-		new Vector2(45, -15),
-		new Vector2(28, 40),
-		new Vector2(-28, 40),
-		new Vector2(-45, -15)
+		new Vector2(0, -50),
+		new Vector2(48, -15),
+		new Vector2(30, 40),
+		new Vector2(-30, 40),
+		new Vector2(-48, -15)
 	};
 
 	private readonly Vector2[] hexagonShape =
 	{
-		new Vector2(0, -45),
-		new Vector2(39, -23),
-		new Vector2(39, 23),
-		new Vector2(0, 45),
-		new Vector2(-39, 23),
-		new Vector2(-39, -23)
+		new Vector2(0, -48),
+		new Vector2(42, -24),
+		new Vector2(42, 24),
+		new Vector2(0, 48),
+		new Vector2(-42, 24),
+		new Vector2(-42, -24)
 	};
 
 	public override void _Ready()
@@ -71,6 +71,12 @@ public partial class Enemy : StaticBody2D
 		};
 
 		Polygon.Polygon = points;
+
+		CallDeferred(nameof(UpdateCollisionPolygon), points);
+	}
+
+	private void UpdateCollisionPolygon(Vector2[] points)
+	{
 		CollisionPolygon.Polygon = points;
 	}
 
@@ -91,10 +97,11 @@ public partial class Enemy : StaticBody2D
 				shape--;
 				SetShape(shape);
 
-				float shakeIntensity = 3 + (3 - shape);
-				float shakeDuration = 0.2f + (0.05f * (3 - shape));
+				//Sreen shake when shape decreases
+				//float shakeIntensity = 3 + (3 - shape);
+				//float shakeDuration = 0.2f + (0.05f * (3 - shape));
+				//IntroGameManager.CameraShake(shakeIntensity, shakeDuration);
 
-				IntroGameManager.CameraShake(shakeIntensity, shakeDuration);
 				bullet.EnemyExplosion.Emitting = true;
 			}
 			else if (shape == 0)

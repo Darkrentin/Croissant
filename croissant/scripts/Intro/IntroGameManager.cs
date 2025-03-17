@@ -4,15 +4,16 @@ using System;
 public partial class IntroGameManager : Node2D
 {
 	private static Camera2D Camera;
+	private static Vector2I screenSize;
 	PackedScene BulletScene = ResourceLoader.Load<PackedScene>("res://scenes/Intro/Bullet.tscn");
 	PackedScene EnemyScene = ResourceLoader.Load<PackedScene>("res://scenes/Intro/Enemy.tscn");
 	Player Player;
-	Vector2I screenSize = DisplayServer.ScreenGetSize();
 	Vector2I windowSize;
 	private Random random = new Random();
+
 	public override void _Ready()
 	{
-
+		screenSize = DisplayServer.ScreenGetSize();
 		GetWindow().Size = screenSize;
 		Vector2I windowSize = new Vector2I(1920, 1080);
 
@@ -69,21 +70,22 @@ public partial class IntroGameManager : Node2D
 
 	public static void CameraShake(float intensity, float duration)
 	{
+		float screenFactor = screenSize.Y / 3072f;
+		float scaledIntensity = intensity * screenFactor;
+
 		var tween = Camera.CreateTween();
 		Vector2 startPosition = Camera.Offset;
 
 		for (int i = 0; i < 10; i++)
 		{
-			// Apply random offset
 			tween.TweenProperty(Camera, "offset", startPosition + new Vector2(
-				(float)Lib.GetRandomNormal(-intensity, intensity),
-				(float)Lib.GetRandomNormal(-intensity, intensity)),
+				(float)Lib.GetRandomNormal(-scaledIntensity, scaledIntensity),
+				(float)Lib.GetRandomNormal(-scaledIntensity, scaledIntensity)),
 				duration / 20);
 
-			// Move back half of the distance with the center
 			tween.TweenProperty(Camera, "offset", startPosition + new Vector2(
-				(float)Lib.GetRandomNormal(-intensity / 2, intensity / 2),
-				(float)Lib.GetRandomNormal(-intensity / 2, intensity / 2)),
+				(float)Lib.GetRandomNormal(-scaledIntensity / 2, scaledIntensity / 2),
+				(float)Lib.GetRandomNormal(-scaledIntensity / 2, scaledIntensity / 2)),
 				duration / 20);
 		}
 
