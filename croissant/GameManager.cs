@@ -2,11 +2,27 @@ using Godot;
 using GodotPlugins.Game;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Dynamic;
 
 public partial class GameManager : Node2D
 {
+
+    public static Node2D GameRoot;
+    private static int _state = 0;
+
+    public static int State
+    {
+        get => _state;
+        set
+        {
+            _state = value;
+            GD.Print($"State: {_state}");
+            StateChange(_state);
+        }
+    }
+
     public static MainWindow MainWindow;
     public static Window FixWindow;
     public static MenuWindow MenuWindow;
@@ -21,6 +37,7 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
+        GameRoot = this;
         AddFixWindow();
         InitMainWindow();
         //Windows.Add(MainWindow);
@@ -41,6 +58,16 @@ public partial class GameManager : Node2D
     public override void _Process(double delta)
     {
         ProcessShake();
+
+        switch(State)
+        {
+            case 0:
+                State0.Process();
+                break;
+            default:
+                GD.PushError("Invalid State");
+                break;
+        }
     }
 
     //Create the FixWindow
@@ -104,5 +131,9 @@ public partial class GameManager : Node2D
         {
             w.Position = w.BasePosition;
         }
+    }
+
+    public static void StateChange(int state)
+    {
     }
 }
