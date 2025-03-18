@@ -11,9 +11,12 @@ public static class States
     }
     public static void State0()
     {
-        GameManager.GameRoot.AddChild(IntroGameScene.Instantiate<Window>());
+        Window IntroGame = IntroGameScene.Instantiate<Window>();
+        IntroGame.Position = new Vector2I(1, 0);
+        GameManager.GameRoot.AddChild(IntroGame);
+
 
         //Change State condition
-        GameManager.State=-1;
+        GameManager.State = -1;
     }
 }

@@ -1,21 +1,46 @@
-[gd_scene load_steps=2 format=3 uid="uid://37mav66th0um"]
+[gd_scene load_steps=8 format=3 uid="uid://37mav66th0um"]
 
 [ext_resource type="Script" uid="uid://l8b0b3aiky2v" path="res://scripts/Intro/Enemy.cs" id="1_fm0q0"]
+[ext_resource type="Texture2D" uid="uid://sv2rs5w7mq2s" path="res://assets/sprites/hexagon.png" id="2_n1hot"]
+[ext_resource type="Texture2D" uid="uid://da5i0d0h47amb" path="res://assets/sprites/pentagon.png" id="3_t3wft"]
+[ext_resource type="Texture2D" uid="uid://bl6juy6yo51wo" path="res://assets/sprites/square.png" id="4_ioq1s"]
+[ext_resource type="Texture2D" uid="uid://2lxtwa4m3jne" path="res://assets/sprites/triangle.png" id="5_lednf"]
 
-[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("Polygon", "CollisionPolygon")]
+[sub_resource type="SpriteFrames" id="SpriteFrames_h5027"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_n1hot")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_t3wft")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ioq1s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lednf")
+}],
+"loop": true,
+"name": &"default",
+"speed": 0.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_stb6e"]
+radius = 473.083
+
+[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("EnemySprite", "CollisionShape")]
+scale = Vector2(0.1, 0.1)
 script = ExtResource("1_fm0q0")
-Polygon = NodePath("Polygon")
-CollisionPolygon = NodePath("Area2D/Collision")
+EnemySprite = NodePath("AnimatedSprite")
+CollisionShape = NodePath("Area2D/CollisionShape")
 
-[node name="Polygon" type="Polygon2D" parent="."]
-position = Vector2(64, 16)
-polygon = PackedVector2Array(-104, -56, -24, -56, -24, 24, -104, 24)
-uv = PackedVector2Array(-96, -48, -64, -48, -64, -16, -96, -16)
+[node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_h5027")
 
 [node name="Area2D" type="Area2D" parent="."]
 
-[node name="Collision" type="CollisionPolygon2D" parent="Area2D"]
-visible = false
-polygon = PackedVector2Array(-40, 40, -40, -40, 40, -40, 40, 40)
+[node name="CollisionShape" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_stb6e")
 
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]
