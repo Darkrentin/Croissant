@@ -1,7 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
+[ext_resource type="PackedScene" uid="uid://cppwo1k4kuwg2" path="res://scenes/Lvl/level1.tscn" id="2_uu6xs"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
-ExporteState = 0
+
+[node name="Level1" parent="." instance=ExtResource("2_uu6xs")]

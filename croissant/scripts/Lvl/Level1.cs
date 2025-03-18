@@ -11,6 +11,7 @@ public partial class Level1 : Node2D
     private PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("uid://cdcpehwcb167t");
     // Called when the node enters the scene tree for the first time.
 	private Timer spawnTimer;
+    private Timer totalTimer;
 	public int WindowKillCount{
         get => _windowKillCount;
         set {
@@ -21,19 +22,28 @@ public partial class Level1 : Node2D
     private int _windowKillCount = 0;
 
 	public int WindowCount;
+
+    public int TimerTic = 2;
 	public List<FloatWindow> Windows = new List<FloatWindow>();
 
     public override void _Ready()
     {
         WindowKillCount = 0;
         WindowCount = 0;
+
 		spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1.5f;
+        spawnTimer.WaitTime = 1.1f;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
         spawnTimer.Start();
+
+        totalTimer = new Timer();
+        AddChild(totalTimer);
+        totalTimer.WaitTime = 2f;
+        totalTimer.Timeout += TotalSpawnerTimeout;
+        totalTimer.Start();
         
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 7; i++)
         {
 			AddNewWindow();
         }
@@ -45,25 +55,39 @@ public partial class Level1 : Node2D
         if (WindowCount < 15 && WindowCount > 0)
         {
             AddNewWindow();
-            UpdateSpawnTimer();
+            //UpdateSpawnTimer();
         }
     }
 
-    private void UpdateSpawnTimer()
+
+    public void TotalSpawnerTimeout()
     {
-        if (WindowCount >= 10)
+        if (TimerTic < 16)
         {
-            spawnTimer.WaitTime = 5f;
-        }
-        else if (WindowCount >= 5)
-        {
-            spawnTimer.WaitTime = 2.2f;
+            TimerTic++;
+            GD.Print($"TimerTic increased to: {TimerTic}"); // Debug output
         }
         else
         {
-            spawnTimer.WaitTime = 1.5f;
+            spawnTimer.WaitTime = 5f;
         }
     }
+
+    /*private void UpdateSpawnTimer()
+    {
+        if (WindowCount >= 12)
+        {
+            spawnTimer.WaitTime = 3f;
+        }
+        else if (WindowCount >= 6)
+        {
+            spawnTimer.WaitTime = 1.5f;
+        }
+        else
+        {
+            spawnTimer.WaitTime = 1.3f;
+        }
+    }*/
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
@@ -73,32 +97,33 @@ public partial class Level1 : Node2D
 			AddNewWindow();
 			WindowCount++;
 		}*/
-		GD.Print($"timer: {spawnTimer.WaitTime}");
-        GD.Print($"window: {WindowCount}");
+		//GD.Print($"timertic: {TimerTic}");
+        //GD.Print($"window: {WindowCount}");
     }
 
 
 	public void AddNewWindow()
 	{
-        int i = Lib.rand.Next(1,5);
+        int i = Lib.rand.Next(1,TimerTic);
 		if (i == 1)
+		{
+            StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
+			AddChild(window);
+		}
+		else if (i >= 2 &&  i <= 5)
 		{
 			MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
 			AddChild(window);
 		}
-		else if (i == 2)
-		{
-			TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
-			AddChild(window);
-		}
-		else if (i == 3)
+		else if (i >= 6 && i <= 10)
         {
-			DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
+            TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
 			AddChild(window);
+
         }
-        else if (i == 4)
+        else if (i >= 11 && i <= 16)
 		{
-			StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
+            DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
 			AddChild(window);
 		}
         WindowCount++;
