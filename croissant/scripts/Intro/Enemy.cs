@@ -9,24 +9,26 @@ public partial class Enemy : StaticBody2D
 	[Export] float Speed = 110.0f;
 	Player Player;
 	float RotationSpeed;
-	// 0: triangle, 1: square, 2: pentagon, 3: hexagon
+	Vector2 velocity;
 
 	int SpriteFrames = 4;
 
 	public override void _Ready()
 	{
+		// 0: triangle, 1: square, 2: pentagon, 3: hexagon
 		EnemySprite.Frame = Lib.rand.Next(0, SpriteFrames);
 
 		Player = GetParent().GetNode<Player>("Player");
 		Rotation = (float)Lib.GetRandomNormal(0, 360);
 		RotationSpeed = (float)Lib.GetRandomNormal(-2f, 2f);
+
+		Vector2 direction = (Player.GlobalPosition - GlobalPosition).Normalized();
+		velocity = direction * Speed;
 	}
 
 
 	public override void _Process(double delta)
 	{
-		Vector2 direction = (Player.GlobalPosition - GlobalPosition).Normalized();
-		Vector2 velocity = direction * Speed;
 		Position += velocity * (float)delta;
 		Rotation += RotationSpeed * (float)delta;
 	}
@@ -48,6 +50,11 @@ public partial class Enemy : StaticBody2D
 			}
 
 			bullet.BulletCollide();
+		}
+		else if (body is Player player)
+		{
+			IntroGameManager.CameraShake(8, 0.35f);
+			velocity = -velocity;
 		}
 	}
 }

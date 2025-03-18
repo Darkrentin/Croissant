@@ -3,11 +3,13 @@ using System;
 
 public partial class IntroGameManager : Node2D
 {
+	[Export] Player Player;
+	[Export] PackedScene BulletScene;
+	[Export] PackedScene EnemyScene;
+	[Export] PackedScene VirusScene;
 	private static Camera2D Camera;
 	private static Vector2I screenSize;
-	PackedScene BulletScene = ResourceLoader.Load<PackedScene>("uid://1jqgd3hgljd8");
-	PackedScene EnemyScene = ResourceLoader.Load<PackedScene>("uid://37mav66th0um");
-	Player Player;
+
 	Vector2I windowSize;
 	private Random random = new Random();
 
@@ -18,8 +20,11 @@ public partial class IntroGameManager : Node2D
 		Vector2I windowSize = new Vector2I(1920, 1080);
 
 		Camera = GetNode<Camera2D>("Camera");
-		Player = GetNode<Player>("Player");
 		Player.Position = windowSize / 2;
+
+
+		Virus Virus = VirusScene.Instantiate<Virus>();
+		AddChild(Virus);
 	}
 
 	private Timer enemySpawnTimer;
@@ -35,27 +40,27 @@ public partial class IntroGameManager : Node2D
 		if (enemySpawnTimer == null)
 		{
 			enemySpawnTimer = new Timer();
-			enemySpawnTimer.WaitTime = (float)Lib.GetRandomNormal(1f, 2.0f);
+			enemySpawnTimer.WaitTime = (float)Lib.GetRandomNormal(0.8f, 1.5f);
 			enemySpawnTimer.OneShot = false;
 			enemySpawnTimer.Timeout += SpawnEnemy;
 			AddChild(enemySpawnTimer);
 			enemySpawnTimer.Start();
 		}
+
+
 	}
 
 	private void SpawnEnemy()
 	{
 		Enemy Enemy = EnemyScene.Instantiate<Enemy>();
+
 		//Initialize the position outside of the screen
-		int Border = random.Next(0, 4);
-		if (Border == 0)
-			Enemy.Position = new Vector2((float)Lib.GetRandomNormal(-100, screenSize.X + 100), -100);
-		else if (Border == 1)
-			Enemy.Position = new Vector2((float)Lib.GetRandomNormal(-100, screenSize.X + 100), screenSize.Y + 100);
-		else if (Border == 2)
-			Enemy.Position = new Vector2(-100, (float)Lib.GetRandomNormal(-100, screenSize.Y + 100));
-		else
-			Enemy.Position = new Vector2(screenSize.X + 100, (float)Lib.GetRandomNormal(-100, screenSize.Y + 100));
+		float randAngleRad = (float)(random.Next(0, 360) * Math.PI / 180.0);
+		float spawnDistance = Math.Max(screenSize.X, screenSize.Y) * 0.5f;
+		Enemy.Position = new Vector2(
+			Player.Position.X + (float)Math.Cos(randAngleRad) * spawnDistance,
+			Player.Position.Y + (float)Math.Sin(randAngleRad) * spawnDistance);
+
 		AddChild(Enemy);
 	}
 

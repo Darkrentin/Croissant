@@ -1,8 +1,11 @@
-[gd_scene load_steps=5 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=8 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="Shader" uid="uid://dkm0skyltgs1j" path="res://assets/shaders/ChromaticAberration.gdshader" id="2_5k0rj"]
+[ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="3_g36va"]
+[ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
+[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="4_id677"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
 shader = ExtResource("2_5k0rj")
@@ -22,8 +25,12 @@ content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
 content_scale_aspect = 4
 
-[node name="Game" type="Node2D" parent="."]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
 script = ExtResource("1_8rhfo")
+Player = NodePath("Player")
+BulletScene = ExtResource("2_g36va")
+EnemyScene = ExtResource("3_id677")
+VirusScene = ExtResource("4_id677")
 
 [node name="Shader effects" type="ColorRect" parent="Game"]
 top_level = true
