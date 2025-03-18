@@ -43,6 +43,8 @@ public partial class FloatWindow : Window
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
 
+	[Export] private PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
+
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -408,5 +410,9 @@ public partial class FloatWindow : Window
 	{
 		Shaking = false;
 		SetWindowPosition(BasePosition);
+		ShakeTimer.Stop();
+		CpuParticles2D explosion = ExplosionScene.Instantiate<CpuParticles2D>();
+		explosion.Position = Position + Size/2;
+		GameManager.GameRoot.AddChild(explosion);
 	}
 }

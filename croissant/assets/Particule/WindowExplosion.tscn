@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://q2tedokw1ckw"]
+
+[ext_resource type="Script" uid="uid://br0xq3ijke7o3" path="res://assets/Particule/WindowExplosion.cs" id="1_w2eg3"]
+
+[sub_resource type="Curve" id="Curve_iixcw"]
+_data = [Vector2(0, 0.590428), 0.0, 0.0, 0, 0, Vector2(0.581921, 0.587302), 0.0, 0.0, 0, 0, Vector2(0.740113, 0.899952), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[node name="WindowExplosion" type="CPUParticles2D" node_paths=PackedStringArray("timer")]
+emitting = false
+amount = 32
+one_shot = true
+explosiveness = 1.0
+randomness = 0.45
+lifetime_randomness = 1.0
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 600.0
+angular_velocity_min = -180.0
+angular_velocity_max = 180.0
+damping_max = 50.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 10.0
+scale_amount_max = 20.0
+scale_amount_curve = SubResource("Curve_iixcw")
+script = ExtResource("1_w2eg3")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]

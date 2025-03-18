@@ -18,7 +18,7 @@ public partial class CursorWindow : FloatWindow
 
 		if(Input.IsActionJustPressed("LeftClick"))
 		{
-			StartExponentialTransition(Lib.GetCursorPosition()-Size/2, 1f);
+			StartLinearTransition(Lib.GetCursorPosition()-Size/2, 1f);
 		}	
 	}
 
