@@ -7,8 +7,8 @@ public partial class MoveWindow : PopUpWindow
     public override void _Ready()
     {
         base._Ready();
-        Parent = GetParent<Level1>();
-        Size = new Vector2I(324, 204);
+        Parent = GetParent<Level1>();;
+        Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(384, 264)));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         StartNewMovement();
 

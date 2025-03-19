@@ -29,6 +29,14 @@ public static class Lib
         );
     }
 
+    public static Vector2I GetScreenPosition(Vector2 relativePosition)
+    {
+        return new Vector2I(
+            (int)(GameManager.ScreenSize.X * relativePosition.X),
+            (int)(GameManager.ScreenSize.Y * relativePosition.Y)
+        );
+    }
+
     //Get a Size on the screen based on a relative size
     //relativeWidth and relativeHeight are values between 0.0 and 1.0
     //this function allows you to work with relative sizes and not absolute sizes to make the game resolution independent
@@ -37,6 +45,14 @@ public static class Lib
         return new Vector2I(
             (int)(GameManager.ScreenSize.X * relativeWidth),
             (int)(GameManager.ScreenSize.Y * relativeHeight)
+        );
+    }
+
+    public static Vector2I GetScreenSize(Vector2 relativeSize)
+    {
+        return new Vector2I(
+            (int)(GameManager.ScreenSize.X * relativeSize.X),
+            (int)(GameManager.ScreenSize.Y * relativeSize.Y)
         );
     }
 
@@ -74,5 +90,10 @@ public static class Lib
         }
 
         return position;
+    }
+
+    public static Vector2 GetPercentage(Vector2I vec)
+    {
+        return new Vector2(vec.X / 1920f, vec.Y / 1080f);
     }
 }

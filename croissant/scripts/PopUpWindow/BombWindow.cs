@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Numerics;
 
 public partial class BombWindow : PopUpWindow
 {
@@ -15,7 +16,7 @@ public partial class BombWindow : PopUpWindow
 		time = Lib.rand.Next(8, 10);
 		progressBar.MaxValue = time * 100f;
 		timer.WaitTime = time;
-		Size = new Vector2I(320, 256);
+		Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(320, 256)));
 		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
 		progressBar.Size = Size;
 		timer.Start();
