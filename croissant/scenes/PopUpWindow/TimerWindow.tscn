@@ -13,11 +13,6 @@ progressBar = NodePath("ProgressBar")
 Draggable = false
 Minimizable = false
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-offset_right = 104.0
-offset_bottom = 100.0
-step = 1.0
-
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.723
 
@@ -29,5 +24,10 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_6061h")
 expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 100.0
+offset_bottom = 100.0
+step = 1.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

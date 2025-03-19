@@ -58,7 +58,7 @@ public partial class TimerWindow: PopUpWindow
 		Parent.WindowCount--;
         for (int i = 0; i < 2; i++)
         {
-			Parent.OnSpawnTimerTimeout();
+			Parent.AddNewWindow();
         }
 		QueueFree();
     }

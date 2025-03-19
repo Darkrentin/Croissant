@@ -1,22 +1,34 @@
 using Godot;
 using System;
 
-public partial class BombWindow : PopUpWindow
+public partial class BombWindow: PopUpWindow
 {
-	// Called when the node enters the scene tree for the first time.
+	[Export] public Timer timer;
+	[Export] public ProgressBar progressBar;
+
+
+	private float time;
 	public override void _Ready()
 	{
-		base._Ready();
-		Parent = GetParent<Level1>();
-		Size = new Vector2I(320,256);
-		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f,0.90f),Lib.GetRandomNormal(0f,0.90f)));
+        base._Ready();
+        Parent = GetParent<Level1>();
+        time = Lib.rand.Next(9, 11); 
+        progressBar.MaxValue = time * 100f;
+        timer.WaitTime = time;
+        Size = new Vector2I(320,256);
+        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f,0.90f),Lib.GetRandomNormal(0f,0.90f)));
+        progressBar.Size = Size;
+        timer.Start();
 	}
 
 	public override void OnClose()
 	{
-		Parent.WindowKillCount++;
 		Parent.WindowCount--;
-		QueueFree();	
+        for (int i = 0; i < 3; i++)
+        {
+			Parent.AddNewWindow();
+        }
+		QueueFree();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -25,5 +37,12 @@ public partial class BombWindow : PopUpWindow
 		base._Process(delta);
 	}
 
+
+   public void _on_timer_timeout()
+    {
+		Parent.WindowKillCount++;
+		Parent.WindowCount--;
+		QueueFree();       
+    }
 
 }

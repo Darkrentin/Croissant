@@ -110,36 +110,35 @@ public partial class Level1 : Node2D
 	public void AddNewWindow()
 	{
         int i = Lib.rand.Next(1,TimerTic);
-        /*
-        if (i >= 0 &&  i <= 100)
-		{
-            BombWindow window = BombWindowScene.Instantiate<BombWindow>();
-			AddChild(window);
-		}*/
 		if (i == 1)
 		{
             StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
 			AddChild(window);
 		}
-		else if (i >= 2 &&  i <= 4)
+		else if (i >= 2 &&  i <= 5)
 		{
 			MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
 			AddChild(window);
 		}
-		else if (i >= 5 && i <= 7)
+		else if (i >= 6 && i <= 8)
         {
             TankWindow window = TankWindowScene.Instantiate<TankWindow>();
 			AddChild(window);
 
         }
-        else if (i >= 8 && i <= 13)
+        else if (i >= 9 && i <= 12)
 		{
             TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
 			AddChild(window);
 		}
-        else if (i >= 14 && i <= 20)
+        else if (i >= 13 && i <= 16)
 		{
             DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
+			AddChild(window);
+		}
+        if (i >= 17 &&  i <= 20)
+		{
+            BombWindow window = BombWindowScene.Instantiate<BombWindow>();
 			AddChild(window);
 		}
         WindowCount++;

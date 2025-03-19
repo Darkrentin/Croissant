@@ -3,11 +3,13 @@
 [ext_resource type="Script" uid="uid://cj5nrfmlgyn3m" path="res://scripts/PopUpWindow/BombWindow.cs" id="1_av7et"]
 [ext_resource type="Texture2D" uid="uid://bkp2xwohv1wcf" path="res://assets/popup/popup6.png" id="2_3k8nd"]
 
-[node name="BombWindow" type="Window"]
+[node name="BombWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
 position = Vector2i(0, 36)
 unresizable = true
 always_on_top = true
 script = ExtResource("1_av7et")
+timer = NodePath("Timer")
+progressBar = NodePath("ProgressBar")
 Draggable = false
 Minimizable = false
 
@@ -19,3 +21,11 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_3k8nd")
 expand_mode = 1
+
+[node name="ProgressBar" type="ProgressBar" parent="."]
+offset_right = 100.0
+offset_bottom = 100.0
+step = 1.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.973
