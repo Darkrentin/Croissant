@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://cjcfsjb8cgs3k"]
+
+[ext_resource type="Script" uid="uid://cj5nrfmlgyn3m" path="res://scripts/PopUpWindow/BombWindow.cs" id="1_av7et"]
+[ext_resource type="Texture2D" uid="uid://bkp2xwohv1wcf" path="res://assets/popup/popup6.png" id="2_3k8nd"]
+
+[node name="BombWindow" type="Window"]
+position = Vector2i(0, 36)
+unresizable = true
+always_on_top = true
+script = ExtResource("1_av7et")
+Draggable = false
+Minimizable = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_3k8nd")
+expand_mode = 1
