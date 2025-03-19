@@ -1,6 +1,18 @@
-[gd_scene load_steps=2 format=3 uid="uid://cppwo1k4kuwg2"]
+[gd_scene load_steps=8 format=3 uid="uid://cppwo1k4kuwg2"]
 
 [ext_resource type="Script" uid="uid://m8l3ab6rhsu4" path="res://scripts/Lvl/Level1.cs" id="1_g2h75"]
+[ext_resource type="PackedScene" uid="uid://dojmcfkfdnwsu" path="res://scenes/PopUpWindow/StaticWindow.tscn" id="2_bro2t"]
+[ext_resource type="PackedScene" uid="uid://ce1xhbt2knpmv" path="res://scenes/PopUpWindow/TimerWindow.tscn" id="2_qsjnk"]
+[ext_resource type="PackedScene" uid="uid://cb1neywi8udoc" path="res://scenes/PopUpWindow/MoveWindow.tscn" id="4_d3uc2"]
+[ext_resource type="PackedScene" uid="uid://cdcpehwcb167t" path="res://scenes/PopUpWindow/DodgeWindow.tscn" id="5_1ai0t"]
+[ext_resource type="PackedScene" uid="uid://dsmobrvf3clby" path="res://scenes/PopUpWindow/TankWindow.tscn" id="6_tsxet"]
+[ext_resource type="PackedScene" uid="uid://cjcfsjb8cgs3k" path="res://scenes/PopUpWindow/BombWindow.tscn" id="7_mg7kg"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_g2h75")
+StaticWindowScene = ExtResource("2_bro2t")
+TimerWindowScene = ExtResource("2_qsjnk")
+MoveWindowScene = ExtResource("4_d3uc2")
+DodgeWindowScene = ExtResource("5_1ai0t")
+TankWindowScene = ExtResource("6_tsxet")
+BombWindowScene = ExtResource("7_mg7kg")

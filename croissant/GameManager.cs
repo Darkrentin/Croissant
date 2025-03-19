@@ -8,6 +8,7 @@ using System.Dynamic;
 
 public partial class GameManager : Node2D
 {
+    [Export] PackedScene menuScene;
     public enum GameState
     {
         Debug,
@@ -57,7 +58,6 @@ public partial class GameManager : Node2D
         //Windows.Add(MainWindow);
         //Windows.Add(FixWindow);
 
-        PackedScene menuScene = ResourceLoader.Load("uid://810np22fqce") as PackedScene;
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
 
@@ -125,7 +125,7 @@ public partial class GameManager : Node2D
         // Create a new list to store valid windows
         List<FloatWindow> validWindows = new List<FloatWindow>();
         List<FloatWindow> invalidWindows = new List<FloatWindow>();
-        
+
         // Check each window in the list
         foreach (FloatWindow window in Windows)
         {
@@ -135,7 +135,7 @@ public partial class GameManager : Node2D
                 invalidWindows.Add(window);
                 continue;
             }
-            
+
             // Safely check if the window is valid
             try
             {
@@ -163,7 +163,7 @@ public partial class GameManager : Node2D
                 invalidWindows.Add(window);
             }
         }
-        
+
         // Replace the Windows list with only the valid windows
         if (invalidWindows.Count > 0)
         {

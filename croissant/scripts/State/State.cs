@@ -4,9 +4,9 @@ using System;
 public static class States
 {
 
-    private static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
-    private static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
-    private static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
+    [Export] private static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
+    [Export] private static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
+    [Export] private static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
 
     public static void StateDebug()
     {
@@ -22,7 +22,7 @@ public static class States
         GameManager.State = GameManager.GameState.Debug;
     }
 
-    public  static void Level1()
+    public static void Level1()
     {
         Node2D Level1 = Level1Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level1);
