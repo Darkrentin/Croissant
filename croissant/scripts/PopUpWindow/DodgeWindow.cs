@@ -11,11 +11,11 @@ public partial class DodgeWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = new Vector2I(200,200);
+        Size = new Vector2I(200,300);
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f,0.90f),Lib.GetRandomNormal(0f,0.90f)));
         cooldownTimer = new Timer();
         AddChild(cooldownTimer);
-        cooldownTimer.WaitTime = 0.7f;
+        cooldownTimer.WaitTime = 0.5f;
         cooldownTimer.OneShot = true;
         cooldownTimer.Timeout += OnCooldownTimerTimeout;
         
@@ -89,7 +89,7 @@ public partial class DodgeWindow : PopUpWindow
     {
         Vector2I target = Lib.GetScreenPosition(Lib.GetRandomNormal(0.2f, 0.80f), Lib.GetRandomNormal(0.2f,0.80f));
         float speed = CalculateMovementSpeed();
-        StartExponentialTransition(target, speed);
+        StartExponentialTransition(target, speed, reset: true);
     }
 
     protected override void Update()

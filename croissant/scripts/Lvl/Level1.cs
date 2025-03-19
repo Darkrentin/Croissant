@@ -24,6 +24,8 @@ public partial class Level1 : Node2D
 
 	public int WindowCount;
 
+    public int InitialWindowCount = 0;
+
     public int TimerTic = 2;
 	public List<FloatWindow> Windows = new List<FloatWindow>();
 
@@ -34,21 +36,16 @@ public partial class Level1 : Node2D
 
 		spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1.5f;
+        spawnTimer.WaitTime = 1.1f;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
         spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 3f;
+        totalTimer.WaitTime = 2.2f;
         totalTimer.Timeout += TotalSpawnerTimeout;
         totalTimer.Start();
         
-        for (int i = 0; i < 50; i++)
-        {
-			AddNewWindow();
-        }
-		
     }
 
 	public void OnSpawnTimerTimeout()
@@ -63,7 +60,7 @@ public partial class Level1 : Node2D
 
     public void TotalSpawnerTimeout()
     {
-        if (TimerTic < 23)
+        if (TimerTic < 22)
         {
             TimerTic++;
             //GD.Print($"TimerTic increased to: {TimerTic}"); // Debug output
@@ -99,7 +96,12 @@ public partial class Level1 : Node2D
 			WindowCount++;
 		}*/
 		//GD.Print($"timertic: {TimerTic}");
-        //GD.Print($"window: {WindowCount}");
+        GD.Print($"window: {WindowCount}");
+        if (InitialWindowCount < 15)
+        {
+            AddNewWindow();
+            InitialWindowCount++;
+        }
     }
 
 
@@ -116,18 +118,18 @@ public partial class Level1 : Node2D
 			MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
 			AddChild(window);
 		}
-		else if (i >= 5 && i <= 9)
+		else if (i >= 5 && i <= 7)
         {
             TankWindow window = TankWindowScene.Instantiate<TankWindow>();
 			AddChild(window);
 
         }
-        else if (i >= 10 && i <= 15)
+        else if (i >= 8 && i <= 13)
 		{
             TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
 			AddChild(window);
 		}
-        else if (i >= 16 && i <= 22)
+        else if (i >= 14 && i <= 20)
 		{
             DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
 			AddChild(window);

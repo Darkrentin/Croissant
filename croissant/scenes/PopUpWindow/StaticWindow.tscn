@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://dojmcfkfdnwsu"]
+[gd_scene load_steps=3 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/PopUpWindow/StaticWindow.cs" id="1_m77lp"]
+[ext_resource type="Texture2D" uid="uid://dtq6la0ovxkq1" path="res://assets/popup/popup4.png" id="2_j1845"]
 
 [node name="StaticWindow" type="Window"]
 position = Vector2i(0, 36)
@@ -9,3 +10,12 @@ always_on_top = true
 script = ExtResource("1_m77lp")
 Draggable = false
 Minimizable = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_j1845")
+expand_mode = 1

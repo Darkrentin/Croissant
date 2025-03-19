@@ -252,7 +252,7 @@ public partial class FloatWindow : Window
 						break;
 				}
 
-				SetWindowPosition(newPosition,true);
+				SetWindowPosition(newPosition);
 			}
 			else
 			{

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ce1xhbt2knpmv"]
+[gd_scene load_steps=3 format=3 uid="uid://ce1xhbt2knpmv"]
 
 [ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/PopUpWindow/TimerWindow.cs" id="1_gkcfg"]
+[ext_resource type="Texture2D" uid="uid://b12awpnqfs3mp" path="res://assets/popup/popup2.png" id="2_6061h"]
 
 [node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
 position = Vector2i(0, 36)
@@ -19,5 +20,14 @@ step = 1.0
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.723
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_6061h")
+expand_mode = 1
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
