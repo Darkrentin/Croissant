@@ -1,17 +1,22 @@
 [gd_scene load_steps=8 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
-[ext_resource type="Shader" uid="uid://dkm0skyltgs1j" path="res://assets/shaders/ChromaticAberration.gdshader" id="2_5k0rj"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="3_g36va"]
 [ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
 [ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="4_id677"]
+[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
-shader = ExtResource("2_5k0rj")
+shader = ExtResource("5_id677")
 shader_parameter/r_displacement = Vector2(-3, -3)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(3, 3)
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 0.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [node name="GameWindow" type="Window"]
 transparent_bg = true

@@ -1,34 +1,33 @@
-[gd_scene load_steps=5 format=3 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=4 format=3 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Intro/Virus.cs" id="1_hbnjr"]
-[ext_resource type="Texture2D" uid="uid://c1vt7phc1fh2q" path="res://icon.svg" id="1_nnqxy"]
+[ext_resource type="PackedScene" uid="uid://84tkt08i5dcr" path="res://scenes/Windows/Computer.tscn" id="2_hbnjr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnqxy"]
-albedo_texture = ExtResource("1_nnqxy")
+[sub_resource type="Environment" id="Environment_hbnjr"]
+ambient_light_source = 3
+ambient_light_color = Color(1, 0.523333, 0.45, 1)
+ambient_light_energy = 0.16
 
-[sub_resource type="SphereMesh" id="SphereMesh_hbnjr"]
-lightmap_size_hint = Vector2i(17, 9)
-material = SubResource("StandardMaterial3D_nnqxy")
-
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Mesh")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer")]
 transparent_bg = true
 position = Vector2i(0, 36)
-size = Vector2i(400, 400)
+size = Vector2i(800, 800)
 unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
 script = ExtResource("1_hbnjr")
 Camera = NodePath("Camera3D")
-Mesh = NodePath("MeshInstance3D")
+Computer = NodePath("Computer")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, -0.504712)
-mesh = SubResource("SphereMesh_hbnjr")
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hbnjr")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2.69862)
+[node name="Computer" parent="." instance=ExtResource("2_hbnjr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 43.2717)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.88626)
-projection = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199219, 65.8785, 180.935)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989463, 0.144788, 0, -0.144788, 0.989463, 0, 147.337, 261.243)
