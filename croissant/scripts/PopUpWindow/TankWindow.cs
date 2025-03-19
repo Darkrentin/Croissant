@@ -30,7 +30,7 @@ public partial class TankWindow : PopUpWindow
         {
             clickcount++;
         }
-        GD.Print($"Clickcount: {clickcount}");
+        //GD.Print($"Clickcount: {clickcount}");
         StartShake(0.2f, 10);
     }
 
