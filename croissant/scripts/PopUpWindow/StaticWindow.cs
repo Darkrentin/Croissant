@@ -8,7 +8,7 @@ public partial class StaticWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(439, 342)));
+        Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(400, 300)));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
 
         Title = "StaticWindow";
