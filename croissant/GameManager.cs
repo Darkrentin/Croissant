@@ -8,11 +8,18 @@ using System.Dynamic;
 
 public partial class GameManager : Node2D
 {
+    public enum GameState
+    {
+        Debug,
+        Intro,
+        Level1,
+        Level2
+    }
 
     public static Node2D GameRoot;
-    private static int _state = -1; //0 for normal state, -1 for debug state
+    private static GameState _state = GameState.Intro; //0 for normal state, -1 for debug state
 
-    public static int State
+    public static GameState State
     {
         get => _state;
         set
@@ -24,7 +31,7 @@ public partial class GameManager : Node2D
     }
 
     [Export]
-    public int ExporteState
+    public GameState ExporteState
     {
         get => _state;
         set => _state = value;
@@ -69,10 +76,16 @@ public partial class GameManager : Node2D
 
         switch (State)
         {
-            case 0:
-                States.State0();
+            case GameState.Intro:
+                States.Intro();
                 break;
-            case -1:
+            case GameState.Level1:
+                States.Level1();
+                break;
+            case GameState.Level2:
+                States.Level2();
+                break;
+            case GameState.Debug:
                 //debug State
                 States.StateDebug();
                 break;
@@ -197,7 +210,7 @@ public partial class GameManager : Node2D
         }
     }
 
-    public static void StateChange(int state)
+    public static void StateChange(GameState state)
     {
     }
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm71aya0fw2pt"]
+[gd_scene load_steps=3 format=3 uid="uid://dsmobrvf3clby"]
 
 [ext_resource type="Script" uid="uid://mklnil0yygtu" path="res://scripts/PopUpWindow/TankWindow.cs" id="1_jrr7c"]
 [ext_resource type="Texture2D" uid="uid://b82u2s8m7htw2" path="res://assets/popup/popup1.png" id="2_y575u"]
