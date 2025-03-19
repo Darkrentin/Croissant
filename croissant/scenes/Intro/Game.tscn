@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="3_g36va"]
 [ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
 [ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="4_id677"]
-[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
+[ext_resource type="Shader" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
 shader = ExtResource("5_id677")

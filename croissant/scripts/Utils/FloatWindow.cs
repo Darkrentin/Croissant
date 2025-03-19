@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Numerics;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -42,6 +43,10 @@ public partial class FloatWindow : Window
 	private float elapsedTimeResize = 0;
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
+
+	public bool CollisionDisabled = false;
+
+	public List<FloatWindow> CollidedWindows = new List<FloatWindow>();
 
 	[Export] private PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
 
@@ -428,14 +433,50 @@ public partial class FloatWindow : Window
 		ShakeFinished();
 	}
 
-	public bool IsCollided(FloatWindow window)
+	public bool IsCollided(FloatWindow other)
 	{
-		// Check if this window collides with another window
-		Rect2I thisRect = new Rect2I(Position, Size);
-		Rect2I otherRect = new Rect2I(window.Position, window.Size);
+		// Safety checks to prevent exceptions
+		if (other == null || this == null || IsQueuedForDeletion() || other.IsQueuedForDeletion())
+			return false;
+		
+		try
+		{
+			// Safely access positions and sizes, catching any exceptions
+			Vector2I thisPos, otherPos;
+			Vector2I thisSize, otherSize;
+			
+			try { thisPos = Position; } catch { return false; }
+			try { otherPos = other.Position; } catch { return false; }
+			try { thisSize = Size; } catch { return false; }
+			try { otherSize = other.Size; } catch { return false; }
+			
+			// Check if windows are overlapping using rectangle intersection
+			bool intersectX = thisPos.X < otherPos.X + otherSize.X && 
+							 thisPos.X + thisSize.X > otherPos.X;
+							 
+			bool intersectY = thisPos.Y < otherPos.Y + otherSize.Y &&
+							 thisPos.Y + thisSize.Y > otherPos.Y;
+							 
+			return intersectX && intersectY;
+		}
+		catch (Exception ex)
+		{
+			// If any unexpected exception occurs, assume no collision and log error
+			GD.PushError($"Error in IsCollided: {ex.Message}");
+			return false;
+		}
+	}
 
-		// Collision occurs if rectangles overlap
-		return thisRect.Intersects(otherRect);
+	
+
+	public virtual void WindowCollided(FloatWindow window)
+	{
+		//GD.Print("Window Collided");
+	}
+
+	public virtual void WindowNotCollided(FloatWindow window)
+	{
+		//GD.Print("Window Not Collided");
 	}
 
 }

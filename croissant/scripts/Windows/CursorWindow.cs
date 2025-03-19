@@ -45,7 +45,6 @@ public partial class CursorWindow : FloatWindow
 		if(!Shaking)
 		{
 			StartShake(0.2f, 10);
-			GameManager.MenuWindow.Open();
 		}
 	}
 }

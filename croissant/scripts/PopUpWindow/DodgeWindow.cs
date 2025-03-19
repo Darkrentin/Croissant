@@ -94,6 +94,6 @@ public partial class DodgeWindow : PopUpWindow
 
     protected override void Update()
     {
-        throw new NotImplementedException();
+        
     }
 }

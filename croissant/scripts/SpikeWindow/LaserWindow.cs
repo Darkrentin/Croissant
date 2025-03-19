@@ -44,11 +44,9 @@ public partial class LaserWindow : FloatWindow
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		if(Attacking && IsCollided(Parent.CursorWindow))
+		if(Attacking && !Shaking && IsCollided(Parent.CursorWindow))
 		{
-			GD.Print("Collided");
 			Parent.CursorWindow.TakeDamage();
-
 		}
 	}
 
@@ -133,6 +131,15 @@ public partial class LaserWindow : FloatWindow
 		Start();
 	}
 
+	//NOT WORKING
+    public override void WindowCollided(FloatWindow window)
+    {
+        if(window is CursorWindow w && Attacking && !w.Shaking)
+		{
+			GD.Print("Collided");
+			w.TakeDamage();
+		}
+    }
 
 
 }
