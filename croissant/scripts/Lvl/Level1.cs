@@ -9,6 +9,7 @@ public partial class Level1 : Node2D
     public PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("uid://ce1xhbt2knpmv");
 	private PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("uid://cb1neywi8udoc");
     private PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("uid://cdcpehwcb167t");
+    private PackedScene TankWindowScene = ResourceLoader.Load<PackedScene>("uid://bm71aya0fw2pt");
     // Called when the node enters the scene tree for the first time.
 	private Timer spawnTimer;
     private Timer totalTimer;
@@ -16,7 +17,7 @@ public partial class Level1 : Node2D
         get => _windowKillCount;
         set {
             _windowKillCount = value;
-            GD.Print($"WindowKillCount: {_windowKillCount}");
+            //GD.Print($"WindowKillCount: {_windowKillCount}");
         }
     }
     private int _windowKillCount = 0;
@@ -33,17 +34,17 @@ public partial class Level1 : Node2D
 
 		spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1.1f;
+        spawnTimer.WaitTime = 1.5f;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
         spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 2f;
+        totalTimer.WaitTime = 3f;
         totalTimer.Timeout += TotalSpawnerTimeout;
         totalTimer.Start();
         
-        for (int i = 0; i < 7; i++)
+        for (int i = 0; i < 50; i++)
         {
 			AddNewWindow();
         }
@@ -52,7 +53,7 @@ public partial class Level1 : Node2D
 
 	public void OnSpawnTimerTimeout()
     {
-        if (WindowCount < 15 && WindowCount > 0)
+        if (WindowCount < 20 && WindowCount > 0)
         {
             AddNewWindow();
             //UpdateSpawnTimer();
@@ -62,10 +63,10 @@ public partial class Level1 : Node2D
 
     public void TotalSpawnerTimeout()
     {
-        if (TimerTic < 16)
+        if (TimerTic < 23)
         {
             TimerTic++;
-            GD.Print($"TimerTic increased to: {TimerTic}"); // Debug output
+            //GD.Print($"TimerTic increased to: {TimerTic}"); // Debug output
         }
         else
         {
@@ -110,18 +111,23 @@ public partial class Level1 : Node2D
             StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
 			AddChild(window);
 		}
-		else if (i >= 2 &&  i <= 5)
+		else if (i >= 2 &&  i <= 4)
 		{
 			MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
 			AddChild(window);
 		}
-		else if (i >= 6 && i <= 10)
+		else if (i >= 5 && i <= 9)
         {
-            TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
+            TankWindow window = TankWindowScene.Instantiate<TankWindow>();
 			AddChild(window);
 
         }
-        else if (i >= 11 && i <= 16)
+        else if (i >= 10 && i <= 15)
+		{
+            TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
+			AddChild(window);
+		}
+        else if (i >= 16 && i <= 22)
 		{
             DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
 			AddChild(window);

@@ -9,8 +9,7 @@ public partial class StaticWindow : PopUpWindow
 		base._Ready();
 		Parent = GetParent<Level1>();
 		Size = new Vector2I(200,100);
-		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f,0.95f),Lib.GetRandomNormal(0f,0.95f)));
-		
+		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f,0.90f),Lib.GetRandomNormal(0f,0.90f)));
 	}
 
 	public override void OnClose()
