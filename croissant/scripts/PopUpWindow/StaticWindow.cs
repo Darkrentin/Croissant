@@ -42,9 +42,4 @@ public partial class StaticWindow : PopUpWindow
         base._Process(delta);
     }
 
-    protected override void Update()
-    {
-        // Implementation of the abstract method with empty body
-        // No special behavior needed for StaticWindow
-    }
 }

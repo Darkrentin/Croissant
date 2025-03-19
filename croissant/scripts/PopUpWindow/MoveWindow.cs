@@ -27,11 +27,6 @@ public partial class MoveWindow : PopUpWindow
 		base._Process(delta);
 	}
 
-    protected override void Update()
-    {
-        
-    }
-
     public override void TransitionFinished()
     {
         base.TransitionFinished();

@@ -45,11 +45,6 @@ public partial class TankWindow: PopUpWindow
 
 	}
 
-    protected override void Update()
-    {
-        
-    }
-
 
 
 

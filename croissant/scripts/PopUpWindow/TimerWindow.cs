@@ -50,13 +50,8 @@ public partial class TimerWindow: PopUpWindow
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		Update();
 	}
 
-    protected override void Update()
-    {
-		progressBar.Value = timer.TimeLeft*100f;	
-    }
 
    public void _on_timer_timeout()
     {       

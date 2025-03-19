@@ -92,8 +92,4 @@ public partial class DodgeWindow : PopUpWindow
         StartExponentialTransition(target, speed, reset: true);
     }
 
-    protected override void Update()
-    {
-        
-    }
 }

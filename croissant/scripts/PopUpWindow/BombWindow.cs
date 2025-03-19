@@ -25,9 +25,5 @@ public partial class BombWindow : PopUpWindow
 		base._Process(delta);
 	}
 
-    protected override void Update()
-    {
-        throw new NotImplementedException();
-    }
 
 }

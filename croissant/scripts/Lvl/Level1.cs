@@ -110,12 +110,13 @@ public partial class Level1 : Node2D
 	public void AddNewWindow()
 	{
         int i = Lib.rand.Next(1,TimerTic);
+        /*
         if (i >= 0 &&  i <= 100)
 		{
             BombWindow window = BombWindowScene.Instantiate<BombWindow>();
 			AddChild(window);
-		}
-		else if (i == 1)
+		}*/
+		if (i == 1)
 		{
             StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
 			AddChild(window);
