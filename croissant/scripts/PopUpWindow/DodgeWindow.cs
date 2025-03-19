@@ -11,7 +11,7 @@ public partial class DodgeWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = new Vector2I(337, 420);
+        Size = new Vector2I(390, 450);
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         cooldownTimer = new Timer();
         AddChild(cooldownTimer);

@@ -100,7 +100,7 @@ public partial class Level1 : Node2D
 			WindowCount++;
 		}*/
         //GD.Print($"timertic: {TimerTic}");
-        GD.Print($"window: {WindowCount}");
+        //GD.Print($"window: {WindowCount}");
         if (InitialWindowCount < 15)
         {
             AddNewWindow();
