@@ -5,8 +5,9 @@
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3
-ambient_light_color = Color(1, 0.523333, 0.45, 1)
-ambient_light_energy = 0.16
+ambient_light_color = Color(1, 0.763106, 0.633046, 1)
+ambient_light_energy = 0.5
+tonemap_exposure = 0.8
 
 [node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer")]
 transparent_bg = true
@@ -23,11 +24,12 @@ Computer = NodePath("Computer")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hbnjr")
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.989463, 0.144788, 0, -0.144788, 0.989463, 0, 147.337, 261.243)
+light_angular_distance = 21.82
+
 [node name="Computer" parent="." instance=ExtResource("2_hbnjr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 43.2717)
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199219, 65.8785, 180.935)
-
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.989463, 0.144788, 0, -0.144788, 0.989463, 0, 147.337, 261.243)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199219, 65.8785, 156.755)

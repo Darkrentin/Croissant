@@ -19,18 +19,18 @@ float random(float seed)
 void fragment()
 {
     float enable_shift = float(random(trunc(TIME * shake_speed)) < shake_rate);
-    
+
     vec2 base_uv = SCREEN_UV;
     base_uv.x += (random((trunc(SCREEN_UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
-    
+
     float r = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement), 0.0).r;
     float g = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * g_displacement), 0.0).g;
     float b = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * b_displacement), 0.0).b;
-    
+
     float a_r = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement), 0.0).a;
     float a_g = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * g_displacement), 0.0).a;
     float a_b = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * b_displacement), 0.0).a;
-    
+
     float final_alpha = max(max(a_r * r, a_g * g), a_b * b);
 
     if (enable_shift > 0.5) {
@@ -39,7 +39,7 @@ void fragment()
             texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement) + vec2(shake_color_rate, 0.0), 0.0).r,
             enable_shift
         );
-        
+
         b = mix(b, texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * b_displacement) + vec2(-shake_color_rate, 0.0), 0.0).b,enable_shift);
     }
 
