@@ -13,6 +13,7 @@ transparent = true
 script = ExtResource("1_x0xi8")
 Draggable = false
 Minimizable = false
+CollisionDisabled = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(96, 53.5)

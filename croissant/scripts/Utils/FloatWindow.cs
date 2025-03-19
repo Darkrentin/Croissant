@@ -41,7 +41,7 @@ public partial class FloatWindow : Window
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
 
-	public bool CollisionDisabled = false;
+	[Export] public bool CollisionDisabled = true;
 
 	public List<FloatWindow> CollidedWindows = new List<FloatWindow>();
 
@@ -66,6 +66,7 @@ public partial class FloatWindow : Window
 		BlockAction(); // Block action made by the player depending on the window properties
 		TransitionWindow(delta); //Compute the transition of the window
 		ProcessShake();
+		CheckCollision();
 		// Example
 		/*
 		if(Input.IsActionJustPressed("U"))
@@ -436,39 +437,41 @@ public partial class FloatWindow : Window
 
 	public bool IsCollided(FloatWindow other)
 	{
-		// Safety checks to prevent exceptions
-		if (other == null || this == null || IsQueuedForDeletion() || other.IsQueuedForDeletion())
-			return false;
+		Rect2I thisRect = new Rect2I(Position, Size);
+		Rect2I otherRect = new Rect2I(other.Position, other.Size);
 
-		try
-		{
-			// Safely access positions and sizes, catching any exceptions
-			Vector2I thisPos, otherPos;
-			Vector2I thisSize, otherSize;
-
-			try { thisPos = Position; } catch { return false; }
-			try { otherPos = other.Position; } catch { return false; }
-			try { thisSize = Size; } catch { return false; }
-			try { otherSize = other.Size; } catch { return false; }
-
-			// Check if windows are overlapping using rectangle intersection
-			bool intersectX = thisPos.X < otherPos.X + otherSize.X &&
-							 thisPos.X + thisSize.X > otherPos.X;
-
-			bool intersectY = thisPos.Y < otherPos.Y + otherSize.Y &&
-							 thisPos.Y + thisSize.Y > otherPos.Y;
-
-			return intersectX && intersectY;
-		}
-		catch (Exception ex)
-		{
-			// If any unexpected exception occurs, assume no collision and log error
-			GD.PushError($"Error in IsCollided: {ex.Message}");
-			return false;
-		}
+		return thisRect.Intersects(otherRect);
 	}
 
-
+	public void CheckCollision()
+	{
+		if (CollisionDisabled)
+		{
+			return;
+		}
+		foreach (FloatWindow window in GameManager.Windows)
+		{
+			if (window != this)
+			{
+				if (IsCollided(window))
+				{
+					if (!CollidedWindows.Contains(window))
+					{
+						CollidedWindows.Add(window);
+						WindowCollided(window);
+					}
+				}
+				else
+				{
+					if (CollidedWindows.Contains(window))
+					{
+						CollidedWindows.Remove(window);
+						WindowNotCollided(window);
+					}
+				}
+			}
+		}
+	}
 
 	public virtual void WindowCollided(FloatWindow window)
 	{

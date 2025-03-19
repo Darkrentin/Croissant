@@ -6,20 +6,45 @@ public partial class Virus : FloatWindow
 	[Export] Camera3D Camera;
 	[Export] Node3D Computer;
 
+	[Export] Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
+	[Export] float RotationSmoothing = 5;
+	public Vector3 targetRotation;
+
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Position = Lib.GetScreenPosition(0.25f, 0.25f);
+		Size = Lib.GetScreenSize(0.5f, 0.5f);
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		Computer.RotateY(1 * (float)delta);
+		UpdateModelRotation(delta);
 
 		//Movement Fiesta
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
+	}
+
+	private void UpdateModelRotation(double delta)
+	{
+		Vector2I cursorPosition = Lib.GetCursorPosition();
+		Vector2I centerPosition = Position + Size / 2;
+		Vector2I relativePosition = centerPosition - cursorPosition;
+
+		float normalizedX = relativePosition.X / (GameManager.ScreenSize.X / 2.0f);
+        float normalizedY = relativePosition.Y / (GameManager.ScreenSize.Y / 2.0f);
+
+		normalizedX = Mathf.Clamp(normalizedX, -1.0f, 1.0f);
+        normalizedY = Mathf.Clamp(normalizedY, -1.0f, 1.0f);
+
+		float rotationY = -normalizedX * MaxRotation.Y; // Negative because right is positive X but negative Y rotation
+        float rotationX = -normalizedY * MaxRotation.X;   // Negative because down is positive Y but negative X rotation
+
+		targetRotation = new Vector3(rotationX, rotationY, Computer.Rotation.Z);
+
+		Computer.Rotation = Computer.Rotation.Lerp(targetRotation, (float)delta * RotationSmoothing);
 	}
 }

@@ -65,6 +65,7 @@ public partial class GameManager : Node2D
     public override void _Process(double delta)
     {
         ProcessShake();
+        CleanupWindowsList();
 
         switch (State)
         {
@@ -104,6 +105,58 @@ public partial class GameManager : Node2D
         //Load the FloatWindow script to the main window
         GetWindow().SetScript(ResourceLoader.Load("uid://ipb8ki64ej0u") as Script);
         MainWindow = GetWindow() as MainWindow;
+    }
+
+    public static void CleanupWindowsList()
+    {
+        // Create a new list to store valid windows
+        List<FloatWindow> validWindows = new List<FloatWindow>();
+        List<FloatWindow> invalidWindows = new List<FloatWindow>();
+        
+        // Check each window in the list
+        foreach (FloatWindow window in Windows)
+        {
+            // Skip null references
+            if (window == null)
+            {
+                invalidWindows.Add(window);
+                continue;
+            }
+            
+            // Safely check if the window is valid
+            try
+            {
+                // Try to access a property that won't change the state
+                // but will throw if the object is disposed
+                bool isValid = window.IsInsideTree() && !window.IsQueuedForDeletion();
+                if (isValid)
+                {
+                    validWindows.Add(window);
+                }
+                else
+                {
+                    invalidWindows.Add(window);
+                }
+            }
+            catch (ObjectDisposedException)
+            {
+                // Window is already disposed, add it to invalid windows
+                invalidWindows.Add(window);
+            }
+            catch (Exception e)
+            {
+                // Some other exception occurred
+                GD.PushWarning($"Exception when checking window validity: {e.Message}");
+                invalidWindows.Add(window);
+            }
+        }
+        
+        // Replace the Windows list with only the valid windows
+        if (invalidWindows.Count > 0)
+        {
+            GD.Print($"[GameManager.cs][157] CleanupWindowsList: {invalidWindows.Count} windows removed");
+            Windows = validWindows;
+        }
     }
 
     public void ProcessShake()
