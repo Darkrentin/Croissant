@@ -19,6 +19,7 @@ public partial class LaserWindow : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
+		Unresizable = true;
 
 		Parent = GetParent<Level2>();
 		//Position = Lib.GetRandomPositionOutsideScreen(side);

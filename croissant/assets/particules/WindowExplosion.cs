@@ -4,18 +4,17 @@ using System;
 public partial class WindowExplosion : CpuParticles2D
 {
 	[Export] private Timer timer;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
-		this.Emitting = true;
-		timer.Timeout+=()=>
+		Emitting = true;
+		timer.Timeout += () =>
 		{
 			GetParent().RemoveChild(this);
 			QueueFree();
 		};
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}

@@ -1,10 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Numerics;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Xml;
+
 
 public partial class FloatWindow : Window
 {
@@ -429,7 +426,11 @@ public partial class FloatWindow : Window
 		ShakeTimer.Stop();
 		CpuParticles2D explosion = ExplosionScene.Instantiate<CpuParticles2D>();
 		explosion.Position = Position + Size / 2;
+
 		GameManager.GameRoot.AddChild(explosion);
+		GD.Print("EXPLOSION POSITION : " + explosion.Position);
+		GD.Print("POSITION : " + Position + Size / 2);
+
 		ShakeFinished();
 	}
 
