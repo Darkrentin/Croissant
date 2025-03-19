@@ -22,7 +22,7 @@ public partial class LaserWindow : FloatWindow
 
 		Parent = GetParent<Level2>();
 		//Position = Lib.GetRandomPositionOutsideScreen(side);
-		
+
 		windowSize = Size;
 		Start();
 
@@ -31,11 +31,11 @@ public partial class LaserWindow : FloatWindow
 	public void Start()
 	{
 		Timer.WaitTime = 0.5f;
-		Timer.Timeout+=StartAttack;
+		Timer.Timeout += StartAttack;
 		Timer.Start();
 
 		side = Lib.rand.Next(0, 4);
-		Vector2I TargetPosition = GetTargetPosition(side) - Size/2;
+		Vector2I TargetPosition = GetTargetPosition(side) - Size / 2;
 		StartTransition(TargetPosition, 0.5f);
 		windowPosition = TargetPosition;
 	}
@@ -44,7 +44,7 @@ public partial class LaserWindow : FloatWindow
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		if(Attacking && !Shaking && IsCollided(Parent.CursorWindow))
+		if (Attacking && !Shaking && IsCollided(Parent.CursorWindow))
 		{
 			Parent.CursorWindow.TakeDamage();
 		}
@@ -54,37 +54,37 @@ public partial class LaserWindow : FloatWindow
 	{
 		const int margin = 150;
 		GD.Print(side);
-		switch(side)
+		switch (side)
 		{
-			case(3):
+			case (3):
 				return new Vector2I(Lib.rand.Next(0, Parent.CursorWindow.CenterPosition.X - margin), Parent.CursorWindow.CenterPosition.Y);
-			case(0):
+			case (0):
 				return new Vector2I(Parent.CursorWindow.CenterPosition.X, Lib.rand.Next(Parent.CursorWindow.CenterPosition.Y + margin, GameManager.ScreenSize.Y));
-			case(1):
+			case (1):
 				return new Vector2I(Lib.rand.Next(Parent.CursorWindow.CenterPosition.X + margin, GameManager.ScreenSize.X), Parent.CursorWindow.CenterPosition.Y);
-			case(2):
+			case (2):
 				return new Vector2I(Parent.CursorWindow.CenterPosition.X, Lib.rand.Next(0, Parent.CursorWindow.CenterPosition.Y - margin));
 			default:
 				GD.PushError("Invalid side");
-				return new Vector2I(0,0);
-				
+				return new Vector2I(0, 0);
+
 		}
 	}
 
 	private void CallResize(int nsize, float time)
 	{
-		switch(side)
+		switch (side)
 		{
-			case(0):
+			case (0):
 				StartResizeUp(nsize, time);
 				break;
-			case(1):
+			case (1):
 				StartResizeLeft(nsize, time);
 				break;
-			case(2):
+			case (2):
 				StartResizeDown(nsize, time);
 				break;
-			case(3):
+			case (3):
 				StartResizeRight(nsize, time);
 				break;
 			default:
@@ -97,8 +97,8 @@ public partial class LaserWindow : FloatWindow
 	{
 		StartShake(0.3f, 5);
 		Timer.WaitTime = 0.3f;
-		Timer.Timeout-=StartAttack;
-		Timer.Timeout+=ShakeEnd;
+		Timer.Timeout -= StartAttack;
+		Timer.Timeout += ShakeEnd;
 		Timer.Start();
 
 	}
@@ -108,38 +108,38 @@ public partial class LaserWindow : FloatWindow
 		Attacking = false;
 		resizeMode = TransitionMode.Exponential;
 		StartResize(windowSize, 1f);
-		StartTransition(windowPosition,1f,reset:true);
+		StartTransition(windowPosition, 1f, reset: true);
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f);
-		Timer.Timeout-=TimeoutResize;
-		Timer.Timeout+=ReStart;
+		Timer.Timeout -= TimeoutResize;
+		Timer.Timeout += ReStart;
 		Timer.Start();
-;
+		;
 	}
 
-    public void ShakeEnd()
-    {
+	public void ShakeEnd()
+	{
 		CallResize(1000, 0.2f);
 		Attacking = true;
 		Timer.WaitTime = 0.5f;
-		Timer.Timeout-=ShakeEnd;
-		Timer.Timeout+=TimeoutResize;
-    }
+		Timer.Timeout -= ShakeEnd;
+		Timer.Timeout += TimeoutResize;
+	}
 
 	public void ReStart()
 	{
-		Timer.Timeout-=ReStart;
+		Timer.Timeout -= ReStart;
 		Start();
 	}
 
 	//NOT WORKING
-    public override void WindowCollided(FloatWindow window)
-    {
-        if(window is CursorWindow w && Attacking && !w.Shaking)
+	public override void WindowCollided(FloatWindow window)
+	{
+		if (window is CursorWindow w && Attacking && !w.Shaking)
 		{
 			GD.Print("Collided");
 			w.TakeDamage();
 		}
-    }
+	}
 
 
 }

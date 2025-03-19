@@ -15,7 +15,7 @@ public static class Lib
 
     public static float GetRandomNormal(float min = 0, float max = 1)
     {
-        return (float)rand.NextDouble()* (max-min) + min;
+        return (float)rand.NextDouble() * (max - min) + min;
     }
 
     //Get a Position on the screen based on a relative position
@@ -40,7 +40,7 @@ public static class Lib
         );
     }
 
-    
+
     /// <summary>
     /// Returns a random position outside but close to the screen boundaries
     /// </summary>
@@ -50,9 +50,9 @@ public static class Lib
     {
         Vector2I screenSize = GameManager.ScreenSize;
         Vector2I position = new Vector2I();
-        
+
         // Decide which side of the screen to place the position (0=top, 1=right, 2=bottom, 3=left)
-        
+
         switch (side)
         {
             case 0: // Top
@@ -72,7 +72,7 @@ public static class Lib
                 position.Y = rand.Next(-margin, screenSize.Y + margin);
                 break;
         }
-        
+
         return position;
     }
 }

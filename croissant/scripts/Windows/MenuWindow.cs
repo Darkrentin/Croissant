@@ -8,8 +8,8 @@ public partial class MenuWindow : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
-		Size = Lib.GetScreenSize(0.1f,0.2f);
-		Position = Lib.GetScreenPosition(0.5f,0.5f) - Size/2;
+		Size = Lib.GetScreenSize(0.1f, 0.2f);
+		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2;
 		Visible = false;
 		Menu.Size = Size;
 
@@ -21,9 +21,9 @@ public partial class MenuWindow : FloatWindow
 		base._Process(delta);
 
 
-		if(Input.IsActionJustPressed("Exit"))
+		if (Input.IsActionJustPressed("Exit"))
 		{
-			if(Visible)
+			if (Visible)
 			{
 				Close();
 				GD.Print("Close");
@@ -34,7 +34,7 @@ public partial class MenuWindow : FloatWindow
 			}
 		}
 
-		if(Mode is ModeEnum.Minimized)
+		if (Mode is ModeEnum.Minimized)
 		{
 			Mode = ModeEnum.Windowed;
 			GD.Print("Close Minimized");

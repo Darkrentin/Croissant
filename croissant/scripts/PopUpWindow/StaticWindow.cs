@@ -8,8 +8,8 @@ public partial class StaticWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = new Vector2I(400,200);
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f,0.90f),Lib.GetRandomNormal(0f,0.90f)));
+        Size = new Vector2I(400, 200);
+        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
     }
 
     public override void OnClose()
@@ -19,7 +19,7 @@ public partial class StaticWindow : PopUpWindow
         {
             GameManager.Windows.Remove(this);
         }
-        
+
         // Also remove from any window's CollisionWindows list
         foreach (FloatWindow window in GameManager.Windows)
         {
@@ -28,12 +28,12 @@ public partial class StaticWindow : PopUpWindow
                 window.CollidedWindows.Remove(this);
             }
         }
-        
+
         // Update parent counters
         Parent.WindowKillCount++;
         Parent.WindowCount--;
-        
-        QueueFree();    
+
+        QueueFree();
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

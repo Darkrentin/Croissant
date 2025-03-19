@@ -58,7 +58,7 @@ public partial class FloatWindow : Window
 		CloseRequested += OnClose; // Connect the close event to the OnClose function to catch the close event
 		ShakeTimer = new Timer();
 		AddChild(ShakeTimer);
-		ShakeTimer.Timeout+=()=>{StopShake();};
+		ShakeTimer.Timeout += () => { StopShake(); };
 		GameManager.Windows.Add(this);
 		Title = "Window Added";
 	}
@@ -102,9 +102,9 @@ public partial class FloatWindow : Window
 			}
 		}
 		//if the window is minimized, we change the mode to windowed to cancel the minimization
-		if(!Minimizable)
+		if (!Minimizable)
 		{
-			if(Mode==ModeEnum.Minimized)
+			if (Mode == ModeEnum.Minimized)
 			{
 				Mode = ModeEnum.Windowed;
 			}
@@ -116,9 +116,9 @@ public partial class FloatWindow : Window
 	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
 		StartPosition = Position;
-		if(IsTransitioning && !reset)
+		if (IsTransitioning && !reset)
 		{
-			TargetPosition+=targetPosition-StartPosition;
+			TargetPosition += targetPosition - StartPosition;
 		}
 		else
 		{
@@ -140,7 +140,7 @@ public partial class FloatWindow : Window
 		IsResizing = true;
 		elapsedTimeResize = 0;
 
-		if(KeepCenter)
+		if (KeepCenter)
 		{
 			Vector2I deltaSize = TargetSize - StartSize;
 			Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
@@ -148,21 +148,21 @@ public partial class FloatWindow : Window
 			transitionMode = resizeMode;
 			StartTransition(newPosition, resizeTime);
 		}
-		
+
 	}
 
 	// Start a linear transition to a target position
 	public void StartLinearTransition(Vector2I targetPosition, float transitionTime, bool reset = false)
 	{
 		transitionMode = TransitionMode.Linear;
-		StartTransition(targetPosition, transitionTime,Smoothness, reset);
+		StartTransition(targetPosition, transitionTime, Smoothness, reset);
 	}
 
 	// Start an exponential transition to a target position
 	public void StartExponentialTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
 		transitionMode = TransitionMode.Exponential;
-		StartTransition(targetPosition, transitionTime, smoothness,reset);
+		StartTransition(targetPosition, transitionTime, smoothness, reset);
 	}
 
 
@@ -262,16 +262,16 @@ public partial class FloatWindow : Window
 			else
 			{
 				// Ensure we end exactly at the target position
-				SetWindowPosition(TargetPosition,true);
+				SetWindowPosition(TargetPosition, true);
 				IsTransitioning = false;
 				TransitionFinished();
 
 			}
 		}
-		if(IsResizing)
+		if (IsResizing)
 		{
 			// Check if the resize is still in progress
-			if(elapsedTimeResize<ResizeTime)
+			if (elapsedTimeResize < ResizeTime)
 			{
 				// Increment the elapsed time
 				elapsedTimeResize += (float)delta;
@@ -327,7 +327,7 @@ public partial class FloatWindow : Window
 	//return true if the window is in the screen
 	public bool SetWindowPosition(Vector2I newPosition, bool SkipVerification = false)
 	{
-		if(SkipVerification)
+		if (SkipVerification)
 		{
 			Position = newPosition;
 			return true;
@@ -394,18 +394,18 @@ public partial class FloatWindow : Window
 
 	public void ProcessShake()
 	{
-		if(Shaking)
+		if (Shaking)
 		{
-			if(IsTransitioning)
+			if (IsTransitioning)
 			{
 				BasePosition = Position;
 				return;
 			}
 
-			int offsetX = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
-			int offsetY = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
+			int offsetX = (int)Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+			int offsetY = (int)Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
 
-			Vector2I ShakePosition = BasePosition + new Vector2I(offsetX,offsetY);
+			Vector2I ShakePosition = BasePosition + new Vector2I(offsetX, offsetY);
 
 			SetWindowPosition(ShakePosition);
 		}
@@ -415,7 +415,7 @@ public partial class FloatWindow : Window
 	{
 		BasePosition = Position;
 		ShakeIntensity = intensity;
-		if(duration!=0)
+		if (duration != 0)
 		{
 			ShakeTimer.Start(duration);
 		}
@@ -428,7 +428,7 @@ public partial class FloatWindow : Window
 		SetWindowPosition(BasePosition);
 		ShakeTimer.Stop();
 		CpuParticles2D explosion = ExplosionScene.Instantiate<CpuParticles2D>();
-		explosion.Position = Position + Size/2;
+		explosion.Position = Position + Size / 2;
 		GameManager.GameRoot.AddChild(explosion);
 		ShakeFinished();
 	}
@@ -438,25 +438,25 @@ public partial class FloatWindow : Window
 		// Safety checks to prevent exceptions
 		if (other == null || this == null || IsQueuedForDeletion() || other.IsQueuedForDeletion())
 			return false;
-		
+
 		try
 		{
 			// Safely access positions and sizes, catching any exceptions
 			Vector2I thisPos, otherPos;
 			Vector2I thisSize, otherSize;
-			
+
 			try { thisPos = Position; } catch { return false; }
 			try { otherPos = other.Position; } catch { return false; }
 			try { thisSize = Size; } catch { return false; }
 			try { otherSize = other.Size; } catch { return false; }
-			
+
 			// Check if windows are overlapping using rectangle intersection
-			bool intersectX = thisPos.X < otherPos.X + otherSize.X && 
+			bool intersectX = thisPos.X < otherPos.X + otherSize.X &&
 							 thisPos.X + thisSize.X > otherPos.X;
-							 
+
 			bool intersectY = thisPos.Y < otherPos.Y + otherSize.Y &&
 							 thisPos.Y + thisSize.Y > otherPos.Y;
-							 
+
 			return intersectX && intersectY;
 		}
 		catch (Exception ex)
@@ -467,7 +467,7 @@ public partial class FloatWindow : Window
 		}
 	}
 
-	
+
 
 	public virtual void WindowCollided(FloatWindow window)
 	{

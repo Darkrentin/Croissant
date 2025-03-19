@@ -23,7 +23,8 @@ public partial class GameManager : Node2D
         }
     }
 
-    [Export] public int ExporteState
+    [Export]
+    public int ExporteState
     {
         get => _state;
         set => _state = value;
@@ -34,8 +35,8 @@ public partial class GameManager : Node2D
     public static MenuWindow MenuWindow;
 
     public static List<FloatWindow> Windows = new List<FloatWindow>(); // list of all windows
-    
-    public static Vector2I ScreenSize {get => DisplayServer.ScreenGetSize();}
+
+    public static Vector2I ScreenSize { get => DisplayServer.ScreenGetSize(); }
 
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
@@ -54,7 +55,7 @@ public partial class GameManager : Node2D
         AddChild(MenuWindow);
 
         ShakeTimer = new Timer();
-        ShakeTimer.Timeout+=()=>{StopShakeAllWindows();};
+        ShakeTimer.Timeout += () => { StopShakeAllWindows(); };
         AddChild(ShakeTimer);
 
         GD.Print($"ScreenSize: {ScreenSize}");
@@ -65,7 +66,7 @@ public partial class GameManager : Node2D
     {
         ProcessShake();
 
-        switch(State)
+        switch (State)
         {
             case 0:
                 States.State0();
@@ -107,28 +108,28 @@ public partial class GameManager : Node2D
 
     public void ProcessShake()
     {
-        if(ShakeAllWindows)
+        if (ShakeAllWindows)
         {
-			int offsetX = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
-			int offsetY = (int)Lib.rand.Next(-ShakeIntensity,ShakeIntensity+1);
+            int offsetX = (int)Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+            int offsetY = (int)Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
 
-            foreach(FloatWindow w in Windows)
+            foreach (FloatWindow w in Windows)
             {
-                Vector2I ShakePosition = w.BasePosition + new Vector2I(offsetX,offsetY);
+                Vector2I ShakePosition = w.BasePosition + new Vector2I(offsetX, offsetY);
                 w.SetWindowPosition(ShakePosition);
             }
         }
     }
 
-    public static void StartShakeAllWindows(float duration,int intensity)
+    public static void StartShakeAllWindows(float duration, int intensity)
     {
-        foreach(FloatWindow w in Windows)
+        foreach (FloatWindow w in Windows)
         {
             w.BasePosition = w.Position;
         }
         ShakeAllWindows = true;
         ShakeIntensity = intensity;
-        if(duration!=0)
+        if (duration != 0)
         {
             ShakeTimer.Start(duration);
         }
@@ -137,7 +138,7 @@ public partial class GameManager : Node2D
     public static void StopShakeAllWindows()
     {
         ShakeAllWindows = false;
-        foreach(FloatWindow w in Windows)
+        foreach (FloatWindow w in Windows)
         {
             w.Position = w.BasePosition;
         }

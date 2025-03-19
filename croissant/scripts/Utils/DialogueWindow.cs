@@ -24,28 +24,28 @@ public partial class DialogueWindow : FloatWindow
     public override void _Ready()
     {
         base._Ready();
-        if(Parent == null)
+        if (Parent == null)
         {
             Parent = GetParent() as FloatWindow;
         }
 
         label.Theme = new Theme();
-        label.Theme.DefaultFontSize = Lib.GetScreenSize(0.01f,0).X;
+        label.Theme.DefaultFontSize = Lib.GetScreenSize(0.01f, 0).X;
 
         const string dialoguePath = "res://assets/Dialogue/Dialogue.json";
         LoadJson(dialoguePath);
-        
+
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if(Input.IsActionJustPressed("debug"))
+        if (Input.IsActionJustPressed("debug"))
         {
-            ShowDialogueBox("Virus",1);
+            ShowDialogueBox("Virus", 1);
         }
-        
+
     }
 
     public void LoadJson(string path)
@@ -60,25 +60,25 @@ public partial class DialogueWindow : FloatWindow
 
     public void InitDialogeBox()
     {
-        Vector2I DialogueBoxSize = Lib.GetScreenSize(0.2f,0.1f);
-        Size = Lib.GetScreenSize(0.2f,0.12f);
+        Vector2I DialogueBoxSize = Lib.GetScreenSize(0.2f, 0.1f);
+        Size = Lib.GetScreenSize(0.2f, 0.12f);
 
         background.Size = DialogueBoxSize;
 
-        label.Size = new Vector2I((int)(DialogueBoxSize.X*0.96f),(int)(DialogueBoxSize.Y*0.7f));
-        label.Position = ((Godot.Vector2)DialogueBoxSize)*0.02f;
-        
-        SkipButton.Size = Size*new Godot.Vector2(0.3f,0.2f);
-        SkipButton.Position = Size*new Godot.Vector2(0.6f,0.7f);
+        label.Size = new Vector2I((int)(DialogueBoxSize.X * 0.96f), (int)(DialogueBoxSize.Y * 0.7f));
+        label.Position = ((Godot.Vector2)DialogueBoxSize) * 0.02f;
+
+        SkipButton.Size = Size * new Godot.Vector2(0.3f, 0.2f);
+        SkipButton.Position = Size * new Godot.Vector2(0.6f, 0.7f);
 
         int x, y;
 
-        x = (int)(Parent.Position.X - (Size.X/4));
-        y = (int)(Parent.Position.Y + Parent.Size.Y - (Size.Y/2));
+        x = (int)(Parent.Position.X - (Size.X / 4));
+        y = (int)(Parent.Position.Y + Parent.Size.Y - (Size.Y / 2));
 
         x = Mathf.Clamp(x, 0, GameManager.ScreenSize.X - Size.X);
         y = Mathf.Clamp(y, 0, GameManager.ScreenSize.Y - Size.Y);
-        
+
         Position = new Vector2I(x, y);
     }
 
@@ -94,7 +94,7 @@ public partial class DialogueWindow : FloatWindow
 
     public void _on_timer_timeout()
     {
-        if(label.VisibleCharacters < label.GetTotalCharacterCount())
+        if (label.VisibleCharacters < label.GetTotalCharacterCount())
         {
             label.VisibleCharacters += 1;
             timer.Start();
