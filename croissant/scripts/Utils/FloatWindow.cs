@@ -312,6 +312,7 @@ public partial class FloatWindow : Window
 			{
 				Size = TargetSize;
 				IsResizing = false;
+				ResizeFinished();
 			}
 		}
 	}
@@ -376,6 +377,16 @@ public partial class FloatWindow : Window
 		//GD.Print("Transition Finished");
 	}
 
+	public virtual void ShakeFinished()
+	{
+		//GD.Print("Shake Finished");
+	}
+
+	public virtual void ResizeFinished()
+	{
+		//GD.Print("Resize Finished");
+	}
+
 	public void ProcessShake()
 	{
 		if(Shaking)
@@ -414,5 +425,17 @@ public partial class FloatWindow : Window
 		CpuParticles2D explosion = ExplosionScene.Instantiate<CpuParticles2D>();
 		explosion.Position = Position + Size/2;
 		GameManager.GameRoot.AddChild(explosion);
+		ShakeFinished();
 	}
+
+	public bool IsCollided(FloatWindow window)
+	{
+		// Check if this window collides with another window
+		Rect2I thisRect = new Rect2I(Position, Size);
+		Rect2I otherRect = new Rect2I(window.Position, window.Size);
+
+		// Collision occurs if rectangles overlap
+		return thisRect.Intersects(otherRect);
+	}
+
 }

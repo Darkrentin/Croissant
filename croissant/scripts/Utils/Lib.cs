@@ -40,4 +40,39 @@ public static class Lib
         );
     }
 
+    
+    /// <summary>
+    /// Returns a random position outside but close to the screen boundaries
+    /// </summary>
+    /// <param name="margin">How far outside the screen the position should be (default: 50 pixels)</param>
+    /// <returns>A Vector2I position outside the screen</returns>
+    public static Vector2I GetRandomPositionOutsideScreen(int side = 0, int margin = 50)
+    {
+        Vector2I screenSize = GameManager.ScreenSize;
+        Vector2I position = new Vector2I();
+        
+        // Decide which side of the screen to place the position (0=top, 1=right, 2=bottom, 3=left)
+        
+        switch (side)
+        {
+            case 0: // Top
+                position.X = rand.Next(-margin, screenSize.X + margin);
+                position.Y = -margin;
+                break;
+            case 1: // Right
+                position.X = screenSize.X + margin;
+                position.Y = rand.Next(-margin, screenSize.Y + margin);
+                break;
+            case 2: // Bottom
+                position.X = rand.Next(-margin, screenSize.X + margin);
+                position.Y = screenSize.Y + margin;
+                break;
+            case 3: // Left
+                position.X = -margin;
+                position.Y = rand.Next(-margin, screenSize.Y + margin);
+                break;
+        }
+        
+        return position;
+    }
 }
