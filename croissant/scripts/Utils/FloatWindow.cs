@@ -225,7 +225,7 @@ public partial class FloatWindow : Window
 					case TransitionMode.Linear:
 						// Linear interpolation - moves at constant speed
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, progress);
-						//GD.Print($"transition Time: {elapsedTimeTransition} Progress: {progress}");
+						//Lib.Print($"transition Time: {elapsedTimeTransition} Progress: {progress}");
 						break;
 
 					case TransitionMode.Exponential:
@@ -243,7 +243,7 @@ public partial class FloatWindow : Window
 							// Fallback to linear for very small speed values
 							expProgress = progress;
 						}
-						//GD.Print($"Transtition Time: {elapsedTimeTransition} Progress: {progress} ExpProgress: {expProgress}");
+						//Lib.Print($"Transtition Time: {elapsedTimeTransition} Progress: {progress} ExpProgress: {expProgress}");
 
 						// Compute the new position based on the exponential easing function
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, expProgress);
@@ -284,7 +284,7 @@ public partial class FloatWindow : Window
 					case TransitionMode.Linear:
 						// Linear interpolation - resizes at constant speed
 						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, progress);
-						//GD.Print($"resize Time: {elapsedTimeResize} Progress: {progress}");
+						//Lib.Print($"resize Time: {elapsedTimeResize} Progress: {progress}");
 						break;
 					case TransitionMode.Exponential:
 						// Exponential easing function that guarantees completion in ResizeTime
@@ -302,7 +302,7 @@ public partial class FloatWindow : Window
 
 						// Compute the new size based on the exponential easing function
 						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, expProgress);
-						//GD.Print($"Resize Time: {elapsedTimeResize} Progress: {progress} ExpProgress: {expProgress}");
+						//Lib.Print($"Resize Time: {elapsedTimeResize} Progress: {progress} ExpProgress: {expProgress}");
 						break;
 					default:
 						GD.PushWarning("Invalid resize mode");
@@ -372,22 +372,22 @@ public partial class FloatWindow : Window
 	// Called when the window is closed
 	public virtual void OnClose()
 	{
-		//GD.Print("Window Closed");
+		//Lib.Print("Window Closed");
 	}
 
 	public virtual void TransitionFinished()
 	{
-		//GD.Print("Transition Finished");
+		//Lib.Print("Transition Finished");
 	}
 
 	public virtual void ShakeFinished()
 	{
-		//GD.Print("Shake Finished");
+		//Lib.Print("Shake Finished");
 	}
 
 	public virtual void ResizeFinished()
 	{
-		//GD.Print("Resize Finished");
+		//Lib.Print("Resize Finished");
 	}
 
 	public void ProcessShake()
@@ -429,8 +429,8 @@ public partial class FloatWindow : Window
 		explosion.Position = Position + Size / 2;
 
 		GameManager.GameRoot.AddChild(explosion);
-		GD.Print("EXPLOSION POSITION : " + explosion.Position);
-		GD.Print("POSITION : " + Position + Size / 2);
+		Lib.Print("EXPLOSION POSITION : " + explosion.Position);
+		Lib.Print("POSITION : " + Position + Size / 2);
 
 		ShakeFinished();
 	}
@@ -475,12 +475,12 @@ public partial class FloatWindow : Window
 
 	public virtual void WindowCollided(FloatWindow window)
 	{
-		//GD.Print("Window Collided");
+		//Lib.Print("Window Collided");
 	}
 
 	public virtual void WindowNotCollided(FloatWindow window)
 	{
-		//GD.Print("Window Not Collided");
+		//Lib.Print("Window Not Collided");
 	}
 
 }

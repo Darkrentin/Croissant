@@ -26,7 +26,7 @@ public partial class MenuWindow : FloatWindow
 			if (Visible)
 			{
 				Close();
-				GD.Print("Close");
+				Lib.Print("Close");
 			}
 			else
 			{
@@ -37,7 +37,7 @@ public partial class MenuWindow : FloatWindow
 		if (Mode is ModeEnum.Minimized)
 		{
 			Mode = ModeEnum.Windowed;
-			GD.Print("Close Minimized");
+			Lib.Print("Close Minimized");
 			Close();
 		}
 	}
@@ -62,7 +62,7 @@ public partial class MenuWindow : FloatWindow
 
 	public override void OnClose()
 	{
-		GD.Print("OnClose MenuWindow");
+		Lib.Print("OnClose MenuWindow");
 		Close();
 	}
 }

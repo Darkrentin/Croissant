@@ -7,7 +7,7 @@ public partial class MainWindow : FloatWindow
     public override void _Ready()
     {
         base._Ready();
-        GD.Print("MainWindow is ready!");
+        Lib.Print("MainWindow is ready!");
         //Set the main window properties
         Position = new Vector2I(0, 0);
         //Size = DisplayServer.ScreenGetUsableRect().Size;
@@ -22,7 +22,7 @@ public partial class MainWindow : FloatWindow
 
     public override void OnClose()
     {
-        GD.Print("MainWindow is closing!");
+        Lib.Print("MainWindow is closing!");
         GameManager.MenuWindow.Open();
     }
 }

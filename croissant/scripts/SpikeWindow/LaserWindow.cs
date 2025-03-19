@@ -54,7 +54,7 @@ public partial class LaserWindow : FloatWindow
 	private Vector2I GetTargetPosition(int side)
 	{
 		const int margin = 150;
-		GD.Print(side);
+		Lib.Print($"Side: {side}");
 		switch (side)
 		{
 			case (3):
@@ -137,7 +137,7 @@ public partial class LaserWindow : FloatWindow
 	{
 		if (window is CursorWindow w && Attacking && !w.Shaking)
 		{
-			GD.Print("Collided");
+			Lib.Print("Collided");
 			w.TakeDamage();
 		}
 	}

@@ -21,7 +21,7 @@ public partial class DebugWindow : FloatWindow
         {
             if (!open)
             {
-                GD.Print("Opening");
+                Lib.Print("Opening");
                 //dialogueWindow.ShowDialogueBox();
                 //dialogueWindow.label.Text = "[wave amplitude=20]Hello World! [b]Hello World![/b] Hello World!Hello World!Hello World![rainbow] Hello World! [/rainbow][/wave]";
 
@@ -31,7 +31,7 @@ public partial class DebugWindow : FloatWindow
             }
             else
             {
-                GD.Print("Closing");
+                Lib.Print("Closing");
                 StartExponentialResize(Lib.GetScreenSize(0.10f, 0.12f), 0.5f);
                 StartExponentialTransition(Lib.GetScreenPosition(0.70f, 0.41f), 5f, Smoothness, true);
                 open = false;
@@ -39,7 +39,7 @@ public partial class DebugWindow : FloatWindow
         }
         if (Input.IsActionJustPressed("debug2"))
         {
-            GD.Print(Lib.GetCursorPosition() / GameManager.ScreenSize);
+            Lib.Print($"{Lib.GetCursorPosition() / GameManager.ScreenSize}");
         }
     }
 }

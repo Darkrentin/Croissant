@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Runtime.CompilerServices;
 
 public static class Lib
 {
@@ -95,5 +96,11 @@ public static class Lib
     public static Vector2 GetPercentage(Vector2I vec)
     {
         return new Vector2(vec.X / 1920f, vec.Y / 1080f);
+    }
+
+    public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")
+    {
+        string fileName = System.IO.Path.GetFileName(filePath);
+        GD.Print($"[{fileName}][{methodName}] {msg}");
     }
 }

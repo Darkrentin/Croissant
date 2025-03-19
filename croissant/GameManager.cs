@@ -25,7 +25,7 @@ public partial class GameManager : Node2D
         set
         {
             _state = value;
-            GD.Print($"State: {_state}");
+            Lib.Print($"State: {_state}");
             StateChange(_state);
         }
     }
@@ -65,7 +65,7 @@ public partial class GameManager : Node2D
         ShakeTimer.Timeout += () => { StopShakeAllWindows(); };
         AddChild(ShakeTimer);
 
-        GD.Print($"ScreenSize: {ScreenSize}");
+        Lib.Print($"ScreenSize: {ScreenSize}");
 
     }
 
@@ -167,7 +167,7 @@ public partial class GameManager : Node2D
         // Replace the Windows list with only the valid windows
         if (invalidWindows.Count > 0)
         {
-            GD.Print($"[GameManager.cs][157] CleanupWindowsList: {invalidWindows.Count} windows removed");
+            Lib.Print($"CleanupWindowsList: {invalidWindows.Count} windows removed");
             Windows = validWindows;
         }
     }

@@ -21,7 +21,7 @@ public partial class Level1 : Node2D
         set
         {
             _windowKillCount = value;
-            //GD.Print($"WindowKillCount: {_windowKillCount}");
+            //Lib.Print($"WindowKillCount: {_windowKillCount}");
         }
     }
     private int _windowKillCount = 0;
@@ -67,7 +67,7 @@ public partial class Level1 : Node2D
         if (TimerTic < 21)
         {
             TimerTic++;
-            //GD.Print($"TimerTic increased to: {TimerTic}"); // Debug output
+            //Lib.Print($"TimerTic increased to: {TimerTic}"); // Debug output
         }
         else
         {
@@ -99,8 +99,8 @@ public partial class Level1 : Node2D
 			AddNewWindow();
 			WindowCount++;
 		}*/
-        //GD.Print($"timertic: {TimerTic}");
-        //GD.Print($"window: {WindowCount}");
+        //Lib.Print($"timertic: {TimerTic}");
+        //Lib.Print($"window: {WindowCount}");
         if (InitialWindowCount < 15)
         {
             AddNewWindow();
