@@ -8,9 +8,11 @@ public partial class MoveWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = new Vector2I(360, 220);
+        Size = new Vector2I(324, 204);
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         StartNewMovement();
+
+        Title = "MoveWindow";
     }
 
     public override void OnClose()
@@ -18,7 +20,6 @@ public partial class MoveWindow : PopUpWindow
         Parent.WindowKillCount++;
         Parent.WindowCount--;
         QueueFree();
-
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.

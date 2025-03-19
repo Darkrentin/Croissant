@@ -8,31 +8,16 @@ public partial class StaticWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = new Vector2I(400, 200);
+        Size = new Vector2I(439, 342);
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
+
+        Title = "StaticWindow";
     }
 
     public override void OnClose()
     {
-        // Make sure this window is removed from GameManager.Windows list
-        if (GameManager.Windows.Contains(this))
-        {
-            GameManager.Windows.Remove(this);
-        }
-
-        // Also remove from any window's CollisionWindows list
-        foreach (FloatWindow window in GameManager.Windows)
-        {
-            if (window != null && window.CollidedWindows.Contains(this))
-            {
-                window.CollidedWindows.Remove(this);
-            }
-        }
-
-        // Update parent counters
         Parent.WindowKillCount++;
         Parent.WindowCount--;
-
         QueueFree();
     }
 

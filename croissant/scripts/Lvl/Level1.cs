@@ -40,13 +40,13 @@ public partial class Level1 : Node2D
 
         spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1.1f;
+        spawnTimer.WaitTime = 1f;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
         spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 2.2f;
+        totalTimer.WaitTime = 1.8f;
         totalTimer.Timeout += TotalSpawnerTimeout;
         totalTimer.Start();
 
@@ -117,30 +117,29 @@ public partial class Level1 : Node2D
             StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
             AddChild(window);
         }
-        else if (i >= 2 && i <= 5)
+        else if (i >= 2 && i <= 4)
         {
             MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
             AddChild(window);
         }
-        else if (i >= 6 && i <= 8)
+        else if (i >= 5 && i <= 8)
         {
-            TankWindow window = TankWindowScene.Instantiate<TankWindow>();
+            BombWindow window = BombWindowScene.Instantiate<BombWindow>();
             AddChild(window);
-
         }
         else if (i >= 9 && i <= 12)
         {
-            TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
+            TankWindow window = TankWindowScene.Instantiate<TankWindow>();
             AddChild(window);
         }
         else if (i >= 13 && i <= 16)
         {
-            DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
+            TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
             AddChild(window);
         }
-        if (i >= 17 && i <= 20)
+        else if (i >= 17 && i <= 20)
         {
-            BombWindow window = BombWindowScene.Instantiate<BombWindow>();
+            DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
             AddChild(window);
         }
         WindowCount++;
