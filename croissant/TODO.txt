@@ -1,0 +1,43 @@
+Intro :
+- Ajouter du mouvement au ScoreLabel
+- Calibrer la montée des glitches (exponentielle inversée ? (en tout cas réduire la puissance, la durée))
+- Faire en sorte qu'au bout de 30 en score le virus tombe en bas de l'écran, en train de dormir avec des ZzZzz qui sortent de sa tête et un logo de curseur sur son écran, le jeu derrière continue
+- Quand on clique sur le virus, il se réveille et commence un dialogue (mettre un placeholder)
+- Quand le virus apparait, le fait glitché en 3D pendant 1 seconde (Adrien)
+- Quand on met le jeu INTRO en pause, on ne peut pas faire de ALT TAB et cliquer sur autre chose, à régler
+- Ajouter des particules quand le virus tombe en bas (ne pas réutiliser d'autres particules)
+- Faire la transition du lvl 1 au virus : il s'énerve après le dialogue et balance toutes les popups
+- Faire en sorte que la fenetre du virus grab le focus quand on clique dessus (sinon pendant l'intro si on clique en dehors de la fenetre du virus pendant qu'il est sur l'écran il reste derrière à l'infini)
+- Ajouter un bruit de glitch quand le jeu glitch
+
+Level 1 :
+- Ajouter des sprites pour les windows (mettre des refs à la france, croissant etc)
+- BombWindow : faire en sorte qu'on voit mieux le timer
+- BombWindow : régler le problème de fenêtre buggée quand c'est un TextureRect et pas un AnimationSprite2D
+- Particules quand on ferme la fenetre
+- Faire tester à des gens pour calibrer la difficulté
+- Faire varier aléatoirement le temps minimum entre l'apparition de deux fenetres (parce que là si on en ferme plusieures rapidement elles repopent très linéairement)
+- Faire apparaitre plus vite tous les types differents de fenetres, mais un peu moins de fenetre simultanées
+- Les SlideWindows ne se déplacent peut-etre un poil pas assez vite
+- Faire en sorte que pendant le level 1, le virus reste à nous observer dans un coin et à nous balancer des dialogues en mode "don't close my windows!!"
+
+Level 2 :
+- Se concentrer sur les autres domaines avant
+
+Virus :
+- Quand on met le jeu en pause, juste avant, affiche une image du logo pause sur l'écran du virus qui disparait dès qu'on est plus en pause
+- A chaque début de phrase de dialogue, le virus saute
+- Si on clique sur le bouton ON du PC, ça met le jeu en pause
+
+Autres :
+- Quand le jeu se lance, trouver une animation stylée a faire comme mettre le logo du projet un croissant, ou alors un effet de pop du milieu de l'écran à l'exterieur
+- Ajouter un logo au jeu (réfléchir)
+- Faire un framework de gestion de sons et de musiques
+- Ajouter des sons dans tous les niveaux
+- Ajouter une musique
+- Changer la texture des dialogues
+- Finaliser les yeux globuleux
+- Améliorer le menu pause, le rendre plus beau, mettre un message d'attention c'est plus le jeu, ajouter un slider de volume et un slider de volume de musique
+- Régler le bug de scale des fenêtres qui n'est plus la bonne, elle doit conserver l'aspect ration de la fenetre mais l'étendre le plus possible dans le sens avec le plus petit factor difference avec 1920*1080 dans la largeur ou la longueur (c'est pas du tout clair)
+- Régler la position des particules qui n'est pas bonne (PC Adrien) (sur le level 1 comme sur le level 2)
+- Bien commenter toutes les parties de code pour que le code soit clair, recoder certaines parties mieux si c'est nécéssaire pour que ça soit plus clair
