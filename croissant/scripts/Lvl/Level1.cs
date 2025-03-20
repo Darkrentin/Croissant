@@ -61,7 +61,10 @@ public partial class Level1 : Node2D
     {
         if (TimerTic < 21)
         {
-            TimerTic++;
+            if (_windowKillCount >= TimerTic*1.5)
+            {
+                TimerTic++;
+            }
             //Lib.Print($"TimerTic increased to: {TimerTic}"); // Debug output
         }
         else

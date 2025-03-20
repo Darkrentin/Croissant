@@ -11,7 +11,7 @@ public partial class TankWindow : PopUpWindow
     {
         base._Ready();
         Parent = GetParent<Level1>();
-        Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(537, 626)));
+        Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(437, 526)));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         maxClicks = Lib.rand.Next(1, 4);
     }
