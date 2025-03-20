@@ -95,12 +95,25 @@ public static class Lib
 
     public static Vector2 GetPercentage(Vector2I vec)
     {
-        return new Vector2(vec.X / 1920f, vec.Y / 1080f);
+        float fact = Math.Max(vec.X / 1920f, vec.Y / 1080f);
+        return new Vector2(fact, fact);
     }
 
     public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")
     {
         string fileName = System.IO.Path.GetFileName(filePath);
         GD.Print($"[{fileName}][{methodName}] {msg}");
+    }
+
+    public static string GetCursedString()
+    {
+        string s = "";
+        int rand = Lib.rand.Next(0, 13);
+        for (int i = 0; i < rand; i++)
+        {
+            s += (char)Lib.rand.Next(33, 592);
+        }
+        return s;
+
     }
 }

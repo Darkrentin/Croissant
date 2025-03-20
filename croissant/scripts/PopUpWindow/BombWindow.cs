@@ -13,6 +13,7 @@ public partial class BombWindow : PopUpWindow
 	private float time;
 	public override void _Ready()
 	{
+		base._Ready();
 		int randNum = Lib.rand.Next(0, 4);
 		switch (randNum)
 		{
@@ -33,7 +34,6 @@ public partial class BombWindow : PopUpWindow
 				Sprite.Play();
 				break;
 		}
-		base._Ready();
 		Parent = GetParent<Level1>();
 		time = 8f;
 		progressBar.MaxValue = time * 100f;

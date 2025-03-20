@@ -590,6 +590,7 @@ transparent = true
 script = ExtResource("1_hbnjr")
 Camera = NodePath("Camera3D")
 Computer = NodePath("Computer")
+MaxRotation = Vector2(0.3, 0.3)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hbnjr")

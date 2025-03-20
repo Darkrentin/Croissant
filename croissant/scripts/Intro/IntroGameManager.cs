@@ -3,25 +3,20 @@ using System;
 
 public partial class IntroGameManager : Node2D
 {
-	[Export] Player Player;
-	[Export] PackedScene BulletScene;
-	[Export] PackedScene EnemyScene;
-	[Export] PackedScene VirusScene;
+	[Export] private Player Player;
+	[Export] private PackedScene BulletScene;
+	[Export] private PackedScene EnemyScene;
+	[Export] private PackedScene VirusScene;
 	private static Camera2D Camera;
 	private static Vector2I screenSize;
-
-	Vector2I windowSize;
-	private Random random = new Random();
+	private Vector2I windowSize = new Vector2I(1920, 1080);
 
 	public override void _Ready()
 	{
-		screenSize = DisplayServer.ScreenGetSize();
-		GetWindow().Size = screenSize;
-		Vector2I windowSize = new Vector2I(1920, 1080);
+		GetWindow().Size = GameManager.ScreenSize;
 
 		Camera = GetNode<Camera2D>("Camera");
 		Player.Position = windowSize / 2;
-
 
 		Virus Virus = VirusScene.Instantiate<Virus>();
 		AddChild(Virus);
@@ -35,12 +30,11 @@ public partial class IntroGameManager : Node2D
 		{
 			Shoot();
 		}
-
-		//Creates an enemy every 0.5 to 1 seconds
+		// Creates an enemy every 0.8 to 1.5 seconds
 		if (enemySpawnTimer == null)
 		{
 			enemySpawnTimer = new Timer();
-			enemySpawnTimer.WaitTime = (float)Lib.GetRandomNormal(0.8f, 1.5f);
+			enemySpawnTimer.WaitTime = Lib.GetRandomNormal(0.8f, 1.5f);
 			enemySpawnTimer.OneShot = false;
 			enemySpawnTimer.Timeout += SpawnEnemy;
 			AddChild(enemySpawnTimer);
@@ -52,20 +46,18 @@ public partial class IntroGameManager : Node2D
 
 	private void SpawnEnemy()
 	{
+		// Initializes the position of the enemies outside of the screen
 		Enemy Enemy = EnemyScene.Instantiate<Enemy>();
-
-		//Initialize the position outside of the screen
-		float randAngleRad = (float)(random.Next(0, 360) * Math.PI / 180.0);
-		float spawnDistance = Math.Max(screenSize.X, screenSize.Y) * 0.5f;
+		float randAngle = Mathf.DegToRad(GD.RandRange(0, 360));
 		Enemy.Position = new Vector2(
-			Player.Position.X + (float)Math.Cos(randAngleRad) * spawnDistance,
-			Player.Position.Y + (float)Math.Sin(randAngleRad) * spawnDistance);
-
+			Player.Position.X + (float)Math.Cos(randAngle) * windowSize.X,
+			Player.Position.Y + (float)Math.Sin(randAngle) * windowSize.Y);
 		AddChild(Enemy);
 	}
 
 	private void Shoot()
 	{
+		// Shoots a bullet in direction of the mouse cursor
 		Bullet Bullet = BulletScene.Instantiate<Bullet>();
 		Node2D BulletPosition = Player.GetNode<Node2D>("BulletPosition");
 		Bullet.Position = BulletPosition.GlobalPosition;
@@ -75,7 +67,7 @@ public partial class IntroGameManager : Node2D
 
 	public static void CameraShake(float intensity, float duration)
 	{
-		float screenFactor = screenSize.Y / 3072f;
+		float screenFactor = GameManager.ScreenSize.Y / 3072f;
 		float scaledIntensity = intensity * screenFactor;
 
 		var tween = Camera.CreateTween();

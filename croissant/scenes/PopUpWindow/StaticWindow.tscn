@@ -1,23 +1,46 @@
-[gd_scene load_steps=6 format=3 uid="uid://dojmcfkfdnwsu"]
+[gd_scene load_steps=8 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/PopUpWindow/StaticWindow.cs" id="1_m77lp"]
 [ext_resource type="Texture2D" uid="uid://mj6oatgq6gpd" path="res://assets/popup/static1_1.png" id="2_e7e18"]
 [ext_resource type="Texture2D" uid="uid://dtq6la0ovxkq1" path="res://assets/popup/popup4.png" id="2_j1845"]
 [ext_resource type="Texture2D" uid="uid://d1umpqfmjgex1" path="res://assets/popup/static1_2.png" id="3_go0mc"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_wurfh"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_e7e18")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_go0mc")
-}],
-"loop": true,
-"name": &"alternate",
-"speed": 5.0
-}]
+[sub_resource type="Animation" id="Animation_64bj3"]
+resource_name = "static0"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_e7e18"), ExtResource("3_go0mc")]
+}
+
+[sub_resource type="Animation" id="Animation_e7e18"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_j1845")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_go0mc"]
+_data = {
+&"RESET": SubResource("Animation_e7e18"),
+&"static0": SubResource("Animation_64bj3")
+}
 
 [node name="StaticWindow" type="Window"]
 position = Vector2i(0, 36)
@@ -30,21 +53,13 @@ script = ExtResource("1_m77lp")
 Draggable = false
 Minimizable = false
 
-[node name="Panel" type="Panel" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Panel"]
-sprite_frames = SubResource("SpriteFrames_wurfh")
-animation = &"alternate"
-autoplay = "alternate"
-centered = false
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_go0mc")
+}
+autoplay = "static0"
 
 [node name="TextureRect" type="TextureRect" parent="."]
-visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

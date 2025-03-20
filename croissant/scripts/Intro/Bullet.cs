@@ -3,38 +3,38 @@ using System;
 
 public partial class Bullet : StaticBody2D
 {
-	[Export] Vector2 Velocity;
-	[Export] Polygon2D Polygon2D;
-	[Export] CollisionShape2D CollisionShape;
-	[Export] Timer Timer = new Timer();
-	[Export] CpuParticles2D Trail1;
-	[Export] CpuParticles2D Trail2;
-	[Export] CpuParticles2D Trail3;
-	[Export] CpuParticles2D WallExplosion;
+	[Export] private Vector2 Velocity;
+	[Export] private Polygon2D Polygon2D;
+	[Export] private CollisionShape2D CollisionShape;
+	[Export] private Timer Timer = new Timer();
+	[Export] private CpuParticles2D Trail1;
+	[Export] private CpuParticles2D Trail2;
+	[Export] private CpuParticles2D Trail3;
+	[Export] private CpuParticles2D WallExplosion;
 	[Export] public CpuParticles2D EnemyExplosion;
 	public bool Alive = true;
 
 	public override void _Ready()
 	{
+		//Get the velocity base on the mouse position
 		Velocity = -(GetParent().GetNode<Player>("Player").GlobalPosition - GetGlobalMousePosition()).Normalized() * 1000;
 	}
 
 	public override void _Process(double delta)
 	{
+		//Move the bullet
 		Position += Velocity * (float)delta;
 
 		//Free the bullet and creates an explosion when it goes out of the window
 		Vector2 windowSize = GetViewport().GetVisibleRect().Size;
-		if (Position.X < 0 ||
-			Position.X > windowSize.X ||
-			Position.Y < 0 ||
-			Position.Y > windowSize.Y)
+		if (Position.X < 0 || Position.X > windowSize.X || Position.Y < 0 || Position.Y > windowSize.Y)
 		{
 			BulletCollide();
 			WallExplosion.Emitting = true;
 		}
 	}
 
+	//On bullet collision, launches a bullet
 	public void BulletCollide()
 	{
 		Alive = false;
@@ -46,6 +46,8 @@ public partial class Bullet : StaticBody2D
 		Timer.WaitTime = 2.0;
 		Timer.Start();
 	}
+
+	//On timer timeout, activated throught signals
 	public void OnTimerTimeout()
 	{
 		QueueFree();
