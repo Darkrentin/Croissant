@@ -49,7 +49,9 @@ public partial class IntroGameManager : Node2D
 
 	private void UpdateShaders()
 	{
-
+		(Material as ShaderMaterial).SetShaderParameter("shake_power", (float)score * 0.001f);
+		(Material as ShaderMaterial).SetShaderParameter("shake_rate", (float)score * 0.01f);
+		(Material as ShaderMaterial).SetShaderParameter("shake_speed", (float)score * 0.05f);
 	}
 
 	private void SpawnEnemy()

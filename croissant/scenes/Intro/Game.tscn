@@ -43,10 +43,8 @@ ScoreLabel = NodePath("ScoreLabel")
 [node name="Shader effects" type="ColorRect" parent="Game"]
 top_level = true
 material = SubResource("ShaderMaterial_g0ua5")
-offset_left = -4096.0
-offset_top = -4096.0
-offset_right = 4096.0
-offset_bottom = 4096.0
+offset_right = 3840.0
+offset_bottom = 2160.0
 
 [node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 
@@ -54,8 +52,8 @@ offset_bottom = 4096.0
 anchor_mode = 0
 
 [node name="ScoreLabel" type="Label" parent="Game"]
-offset_right = 1294.0
-offset_bottom = 322.0
+offset_right = 1512.0
+offset_bottom = 508.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_k45nk")
 theme_override_font_sizes/font_size = 54
