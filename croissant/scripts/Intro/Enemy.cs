@@ -48,6 +48,8 @@ public partial class Enemy : StaticBody2D
 			}
 			else
 			{
+				IntroGameManager.score++;
+
 				// Explodes when it is in the triangle shape
 				IntroGameManager.CameraShake(8, 0.35f);
 				bullet.EnemyExplosion.Emitting = true;

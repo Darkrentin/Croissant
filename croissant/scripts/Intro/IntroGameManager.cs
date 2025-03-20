@@ -7,9 +7,11 @@ public partial class IntroGameManager : Node2D
 	[Export] private PackedScene BulletScene;
 	[Export] private PackedScene EnemyScene;
 	[Export] private PackedScene VirusScene;
+	[Export] private ColorRect ShaderRect;
+	[Export] private Label ScoreLabel;
 	private static Camera2D Camera;
-	private static Vector2I screenSize;
 	private Vector2I windowSize = new Vector2I(1920, 1080);
+	public static int score = 0;
 
 	public override void _Ready()
 	{
@@ -30,17 +32,23 @@ public partial class IntroGameManager : Node2D
 		{
 			Shoot();
 		}
-		// Creates an enemy every 0.8 to 1.5 seconds
+		// Creates an enemy every 0.8 to 1.2 seconds
 		if (enemySpawnTimer == null)
 		{
 			enemySpawnTimer = new Timer();
-			enemySpawnTimer.WaitTime = Lib.GetRandomNormal(0.8f, 1.5f);
+			enemySpawnTimer.WaitTime = Lib.GetRandomNormal(0.8f, 1.2f);
 			enemySpawnTimer.OneShot = false;
 			enemySpawnTimer.Timeout += SpawnEnemy;
 			AddChild(enemySpawnTimer);
 			enemySpawnTimer.Start();
 		}
 
+		ScoreLabel.Text = "Score : " + score;
+		UpdateShaders();
+	}
+
+	private void UpdateShaders()
+	{
 
 	}
 

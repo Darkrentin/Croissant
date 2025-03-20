@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=9 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
 [ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="4_id677"]
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
+[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
 shader = ExtResource("5_id677")
@@ -30,12 +31,14 @@ content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
 content_scale_aspect = 4
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ShaderRect", "ScoreLabel")]
 script = ExtResource("1_8rhfo")
 Player = NodePath("Player")
 BulletScene = ExtResource("2_g36va")
 EnemyScene = ExtResource("3_id677")
 VirusScene = ExtResource("4_id677")
+ShaderRect = NodePath("Shader effects")
+ScoreLabel = NodePath("ScoreLabel")
 
 [node name="Shader effects" type="ColorRect" parent="Game"]
 top_level = true
@@ -49,3 +52,10 @@ offset_bottom = 4096.0
 
 [node name="Camera" type="Camera2D" parent="Game"]
 anchor_mode = 0
+
+[node name="ScoreLabel" type="Label" parent="Game"]
+offset_right = 1294.0
+offset_bottom = 322.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_k45nk")
+theme_override_font_sizes/font_size = 54

@@ -6,12 +6,12 @@ public partial class Virus : FloatWindow
 	[Export] private Camera3D Camera;
 	[Export] private Node3D Computer;
 	[Export] private Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
-	[Export] private float RotationSmoothing = 5;
+	[Export] private float RotationSmoothing = 5f;
 
 	public override void _Ready()
 	{
 		base._Ready();
-		Position = Lib.GetScreenPosition(0.25f, 0.25f);
+		Position = Lib.GetScreenPosition(0f, 0f);
 		Size = Lib.GetScreenSize(0.5f, 0.5f);
 	}
 
