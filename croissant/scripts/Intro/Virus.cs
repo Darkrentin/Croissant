@@ -20,8 +20,8 @@ public partial class Virus : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
-		Position = Lib.GetScreenPosition(0.25f, 0.25f);
 		Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(370,420)));
+		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size/2;
 	}
 
 	public override void _Process(double delta)

@@ -8,7 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/3D/computer/textures/PCKD854n.001_baseColor.png" id="6_c3fl0"]
 [ext_resource type="Texture2D" uid="uid://ctoq3ipwk71v7" path="res://assets/3D/computer/textures/PCKD854n.001_metallicRoughness.png" id="7_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/PC/textures/wall.jpg" id="8_kbwjh"]
-[ext_resource type="Texture2D" uid="uid://c1vt7phc1fh2q" path="res://icon.svg" id="8_yhxpa"]
+[ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Other/Eye.tscn" id="10_c3fl0"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3
@@ -686,13 +686,13 @@ expand_mode = 1
 [node name="eye" type="Node2D" parent="SubViewport"]
 position = Vector2(300, 240)
 
-[node name="L" type="Sprite2D" parent="SubViewport/eye"]
+[node name="L" parent="SubViewport/eye" instance=ExtResource("10_c3fl0")]
 position = Vector2(-150, 0)
-texture = ExtResource("8_yhxpa")
+scale = Vector2(0.21, 0.21)
 
-[node name="R" type="Sprite2D" parent="SubViewport/eye"]
+[node name="R" parent="SubViewport/eye" instance=ExtResource("10_c3fl0")]
 position = Vector2(150, 0)
-texture = ExtResource("8_yhxpa")
+scale = Vector2(0.21, 0.21)
 
 [node name="Color" type="ColorRect" parent="SubViewport"]
 visible = false
