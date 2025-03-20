@@ -3,6 +3,7 @@ using System;
 
 public partial class DodgeWindow : PopUpWindow
 {
+    private Timer TitleTimer = new Timer();
     private bool isMoving = false;
     private Timer cooldownTimer;
 
@@ -10,6 +11,11 @@ public partial class DodgeWindow : PopUpWindow
     public override void _Ready()
     {
         base._Ready();
+
+        AddChild(TitleTimer);
+        TitleTimer.Timeout += ChangeTitle;
+        ChangeTitle();
+
         Parent = GetParent<Level1>();
         Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(390, 450)));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
@@ -18,8 +24,6 @@ public partial class DodgeWindow : PopUpWindow
         cooldownTimer.WaitTime = 0.45f;
         cooldownTimer.OneShot = true;
         cooldownTimer.Timeout += OnCooldownTimerTimeout;
-
-        Title = "DodgeWindow";
     }
 
     private void CheckInitialMousePosition()
@@ -92,4 +96,10 @@ public partial class DodgeWindow : PopUpWindow
         StartExponentialTransition(target, speed, reset: true);
     }
 
+    public void ChangeTitle()
+    {
+        Title = Lib.GetCursedString();
+        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
+        TitleTimer.Start();
+    }
 }

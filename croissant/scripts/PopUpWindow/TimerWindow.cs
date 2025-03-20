@@ -5,7 +5,7 @@ public partial class TimerWindow : PopUpWindow
 {
     [Export] public Timer timer;
     [Export] public ProgressBar progressBar;
-
+    private Timer TitleTimer = new Timer();
 
     // more there is windows easier is it to close them
     private float CalculateTimerDuration()
@@ -25,10 +25,15 @@ public partial class TimerWindow : PopUpWindow
     }
 
     private float time;
-    // Called when the node enters the scene tree for the first time.
+
     public override void _Ready()
     {
         base._Ready();
+
+        AddChild(TitleTimer);
+        TitleTimer.Timeout += ChangeTitle;
+        ChangeTitle();
+
         Parent = GetParent<Level1>();
         time = CalculateTimerDuration();
         progressBar.MaxValue = time * 100f;
@@ -37,8 +42,6 @@ public partial class TimerWindow : PopUpWindow
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         progressBar.Size = Size;
         timer.Start();
-
-        Title = "TimerWindow";
     }
 
     public override void OnClose()
@@ -48,13 +51,11 @@ public partial class TimerWindow : PopUpWindow
         QueueFree();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);
-        progressBar.Value = timer.TimeLeft*100f;
+        progressBar.Value = timer.TimeLeft * 100f;
     }
-
 
     public void _on_timer_timeout()
     {
@@ -66,4 +67,10 @@ public partial class TimerWindow : PopUpWindow
         QueueFree();
     }
 
+    public void ChangeTitle()
+    {
+        Title = Lib.GetCursedString();
+        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
+        TitleTimer.Start();
+    }
 }

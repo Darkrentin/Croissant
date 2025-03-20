@@ -3,13 +3,13 @@ using System;
 
 public partial class StaticWindow : PopUpWindow
 {
-    private Timer Timer = new Timer();
+    private Timer TitleTimer = new Timer();
     public override void _Ready()
     {
         base._Ready();
 
-        AddChild(Timer);
-        Timer.Timeout += ChangeTitle;
+        AddChild(TitleTimer);
+        TitleTimer.Timeout += ChangeTitle;
         ChangeTitle();
 
         Parent = GetParent<Level1>();
@@ -24,7 +24,6 @@ public partial class StaticWindow : PopUpWindow
         QueueFree();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);
@@ -33,8 +32,7 @@ public partial class StaticWindow : PopUpWindow
     public void ChangeTitle()
     {
         Title = Lib.GetCursedString();
-        Timer.WaitTime = Lib.GetRandomNormal(0, 2);
-        Timer.Start();
+        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
+        TitleTimer.Start();
     }
-
 }

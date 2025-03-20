@@ -3,16 +3,19 @@ using System;
 
 public partial class MoveWindow : PopUpWindow
 {
-    // Called when the node enters the scene tree for the first time.
+    private Timer TitleTimer = new Timer();
     public override void _Ready()
     {
         base._Ready();
-        Parent = GetParent<Level1>();;
+
+        AddChild(TitleTimer);
+        TitleTimer.Timeout += ChangeTitle;
+        ChangeTitle();
+
+        Parent = GetParent<Level1>(); ;
         Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(384, 264)));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         StartNewMovement();
-
-        Title = "MoveWindow";
     }
 
     public override void OnClose()
@@ -22,7 +25,6 @@ public partial class MoveWindow : PopUpWindow
         QueueFree();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);
@@ -55,5 +57,12 @@ public partial class MoveWindow : PopUpWindow
         Vector2I target = Lib.GetScreenPosition(Lib.GetRandomNormal(0.2f, 0.80f), Lib.GetRandomNormal(0.2f, 0.80f));
         float speed = CalculateMovementSpeed();
         StartExponentialTransition(target, speed, reset: true);
+    }
+
+    public void ChangeTitle()
+    {
+        Title = Lib.GetCursedString();
+        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
+        TitleTimer.Start();
     }
 }

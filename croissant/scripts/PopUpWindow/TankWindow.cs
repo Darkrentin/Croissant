@@ -4,7 +4,6 @@ using System.Reflection.PortableExecutable;
 
 public partial class TankWindow : PopUpWindow
 {
-
     [Export] public ProgressBar progressBar;
     private int clickcount = 0;
     private int maxClicks;
@@ -19,7 +18,6 @@ public partial class TankWindow : PopUpWindow
 
     public override void OnClose()
     {
-
         if (clickcount >= maxClicks)
         {
             Parent.WindowKillCount++;
@@ -42,11 +40,5 @@ public partial class TankWindow : PopUpWindow
         {
             Title += "▯";
         }
-
     }
-
-
-
-
-
 }

@@ -4,16 +4,20 @@ using System.Numerics;
 
 public partial class BombWindow : PopUpWindow
 {
-	[Export] public Timer timer;
-	[Export] public ProgressBar progressBar;
-	[Export] AnimatedSprite2D Sprite;
-	[Export] TextureRect Texture;
-
-
+	[Export] private Timer timer;
+	[Export] private ProgressBar progressBar;
+	[Export] private AnimatedSprite2D Sprite;
+	[Export] private TextureRect Texture;
+	private Timer TitleTimer = new Timer();
 	private float time;
 	public override void _Ready()
 	{
 		base._Ready();
+
+		AddChild(TitleTimer);
+		TitleTimer.Timeout += ChangeTitle;
+		ChangeTitle();
+
 		int randNum = Lib.rand.Next(0, 4);
 		switch (randNum)
 		{
@@ -42,8 +46,6 @@ public partial class BombWindow : PopUpWindow
 		SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
 		progressBar.SetDeferred("size", Size);
 		timer.Start();
-
-		Title = "💣";
 	}
 
 	public override void OnClose()
@@ -69,4 +71,10 @@ public partial class BombWindow : PopUpWindow
 		QueueFree();
 	}
 
+	public void ChangeTitle()
+	{
+		Title = Lib.GetCursedString();
+		TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
+		TitleTimer.Start();
+	}
 }

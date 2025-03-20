@@ -108,7 +108,7 @@ public static class Lib
     public static string GetCursedString()
     {
         string s = "";
-        int rand = Lib.rand.Next(0, 13);
+        int rand = Lib.rand.Next(0, 30);
         for (int i = 0; i < rand; i++)
         {
             s += (char)Lib.rand.Next(33, 592);
