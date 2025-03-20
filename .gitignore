@@ -1,6 +1,5 @@
 # Godot-specific ignores
 .export/
-.import/
 .cache/
 .godot/
 
