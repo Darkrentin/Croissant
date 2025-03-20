@@ -5,6 +5,21 @@
 [ext_resource type="Texture2D" uid="uid://dtq6la0ovxkq1" path="res://assets/popup/popup4.png" id="2_j1845"]
 [ext_resource type="Texture2D" uid="uid://d1umpqfmjgex1" path="res://assets/popup/static1_2.png" id="3_go0mc"]
 
+[sub_resource type="Animation" id="Animation_e7e18"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_j1845")]
+}
+
 [sub_resource type="Animation" id="Animation_64bj3"]
 resource_name = "static0"
 loop_mode = 1
@@ -19,21 +34,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [ExtResource("2_e7e18"), ExtResource("3_go0mc")]
-}
-
-[sub_resource type="Animation" id="Animation_e7e18"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_j1845")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_go0mc"]
