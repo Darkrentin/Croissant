@@ -3,16 +3,25 @@ using System;
 
 public partial class Virus : FloatWindow
 {
-	[Export] private Camera3D Camera;
-	[Export] private Node3D Computer;
-	[Export] private Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
-	[Export] private float RotationSmoothing = 5f;
+	[Export] Camera3D Camera;
+	[Export] Node3D Computer;
+
+	[Export] AnimationPlayer AnimationPlayer;
+	[Export] Node2D Eye;
+	public Vector2I CenterOfScreen = new Vector2I(600/2,480/2);
+
+	[Export] Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
+	[Export] Vector2 MaxEyeDistance = new Vector2(0.1f, 0.1f);
+	[Export] float RotationSmoothing = 5;
+	public Vector3 targetRotation;
+
+	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public override void _Ready()
 	{
 		base._Ready();
-		Position = Lib.GetScreenPosition(0f, 0f);
-		Size = Lib.GetScreenSize(0.5f, 0.5f);
+		Position = Lib.GetScreenPosition(0.25f, 0.25f);
+		Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(370,420)));
 	}
 
 	public override void _Process(double delta)
@@ -40,8 +49,19 @@ public partial class Virus : FloatWindow
 		float rotationY = -normalizedX * MaxRotation.Y; // Negative because right is positive X but negative Y rotation
 		float rotationX = -normalizedY * MaxRotation.X;   // Negative because down is positive Y but negative X rotation
 
-		Vector3 targetRotation = new Vector3(rotationX, rotationY, Computer.Rotation.Z);
+
+		float positionX = -normalizedX * MaxEyeDistance.X;
+		float positionY = -normalizedY * MaxEyeDistance.Y;
+
+		Eye.Position = CenterOfScreen + new Vector2(positionX, positionY);
+
+		targetRotation = new Vector3(rotationX, rotationY, Computer.Rotation.Z);
 
 		Computer.Rotation = Computer.Rotation.Lerp(targetRotation, (float)delta * RotationSmoothing);
+	}
+
+	public void _on_button_pressed()
+	{
+		AnimationPlayer.Play("Hop");
 	}
 }

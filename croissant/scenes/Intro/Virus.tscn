@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=4 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=48 format=4 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Intro/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/3D/computer/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bx3xixfeuwwap" path="res://assets/3D/computer/textures/PC9801UX.001_normal.png" id="4_kbwjh"]
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/3D/computer/textures/PCKD854n.001_baseColor.png" id="6_c3fl0"]
 [ext_resource type="Texture2D" uid="uid://ctoq3ipwk71v7" path="res://assets/3D/computer/textures/PCKD854n.001_metallicRoughness.png" id="7_k1eiq"]
+[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/PC/textures/wall.jpg" id="8_kbwjh"]
 [ext_resource type="Texture2D" uid="uid://c1vt7phc1fh2q" path="res://icon.svg" id="8_yhxpa"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
@@ -375,19 +376,11 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_odjq3")
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_odjq3"]
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_hqxcu"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6lf77"]
 resource_name = "Lamp.001"
 cull_mode = 2
 albedo_color = Color(0, 0, 0, 1)
-albedo_texture = SubResource("CompressedTexture2D_odjq3")
-metallic_texture = SubResource("CompressedTexture2D_hqxcu")
-metallic_texture_channel = 2
 roughness = 0.804041
-roughness_texture = SubResource("CompressedTexture2D_hqxcu")
 roughness_texture_channel = 1
 emission_enabled = true
 emission = Color(0.171982, 1, 0, 1)
@@ -425,7 +418,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_hqxcu")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_yhxpa"]
-viewport_path = NodePath("Computer/SubViewport")
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c78y7"]
 resource_local_to_scene = true
@@ -518,69 +511,69 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rihhl")
 
-[sub_resource type="Animation" id="Animation_kbwjh"]
-length = 0.001
+[sub_resource type="Animation" id="Animation_c3fl0"]
+resource_name = "PowerOn"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/eye:position")
+tracks/0/path = NodePath("../SubViewport/Color:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(300, 240)]
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/eye:rotation")
+tracks/1/path = NodePath("Screen/MonitorLED:mesh:surface_0/material:emission")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"times": PackedFloat32Array(0, 0.433333, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(0.171982, 1, 0, 1), Color(0.171982, 1, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_yhxpa"]
-resource_name = "Test"
-length = 2.0
-loop_mode = 1
+[sub_resource type="Animation" id="Animation_k1eiq"]
+resource_name = "Hop"
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/eye:position")
+tracks/0/path = NodePath("Screen:position")
 tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.27, 0.49, 0.7, 0.933333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.15, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(300, 240), Vector2(232, 368), Vector2(368, 376), Vector2(304, 112), Vector2(300, 240)]
+"values": [Vector3(-0.0769917, 79.194, -33.893), Vector3(-0.0769917, 86.5492, -33.893), Vector3(-0.0769917, 88.4392, -33.893), Vector3(-0.0769917, 79.194, -33.893)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/eye:rotation")
-tracks/1/interp = 1
+tracks/1/path = NodePath("Screen:scale")
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.93, 1.12, 1.3, 1.54),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 0.0, 0.748746, 2.39459, 6.28319]
+"values": [Vector3(100, 100, 100), Vector3(102.81, 102.81, 102.81), Vector3(100, 100, 100)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
-&"RESET": SubResource("Animation_kbwjh"),
-&"Test": SubResource("Animation_yhxpa")
+&"Hop": SubResource("Animation_k1eiq"),
+&"PowerOn": SubResource("Animation_c3fl0")
 }
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -590,7 +583,13 @@ transparent = true
 script = ExtResource("1_hbnjr")
 Camera = NodePath("Camera3D")
 Computer = NodePath("Computer")
+<<<<<<< Updated upstream
 MaxRotation = Vector2(0.3, 0.3)
+=======
+AnimationPlayer = NodePath("Computer/AnimationPlayer")
+Eye = NodePath("SubViewport/eye")
+MaxEyeDistance = Vector2(25, 25)
+>>>>>>> Stashed changes
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hbnjr")
@@ -600,7 +599,7 @@ transform = Transform3D(1, 0, 0, 0, 0.989463, 0.144788, 0, -0.144788, 0.989463, 
 light_angular_distance = 21.82
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199219, 65.8785, 187.809)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.199219, 75.0636, 120.846)
 
 [node name="Computer" type="Node3D" parent="."]
 
@@ -656,7 +655,7 @@ mesh = SubResource("ArrayMesh_k125d")
 skeleton = NodePath("")
 
 [node name="Screen" type="Node3D" parent="Computer"]
-transform = Transform3D(100, -2.11328e-17, -9.68545e-16, 9.68545e-16, -1.62921e-05, 100, -2.1133e-17, -100, -1.62921e-05, -0.0769917, 75.9962, -33.893)
+transform = Transform3D(100, -2.11328e-17, -9.23746e-25, 0, -4.37114e-06, 100, -2.11328e-17, -100, -4.37114e-06, -0.0769917, 79.194, -33.893)
 
 [node name="Screen" type="MeshInstance3D" parent="Computer/Screen"]
 transform = Transform3D(1.42, -2.04925e-07, 1.23777e-07, -1.99543e-07, -1.41875, -0.0596615, 1.32278e-07, 0.0596615, -1.41875, 0.00426092, -0.429173, 0.118454)
@@ -675,27 +674,46 @@ skeleton = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_kbwjh")
 }
-autoplay = "Test"
+autoplay = "PowerOn"
 
-[node name="SubViewport" type="SubViewport" parent="Computer"]
+[node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
 size = Vector2i(600, 480)
 render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="Computer/SubViewport"]
+[node name="TextureRect" type="TextureRect" parent="SubViewport"]
+offset_right = 600.0
+offset_bottom = 480.0
+texture = ExtResource("8_kbwjh")
+expand_mode = 1
+
+[node name="eye" type="Node2D" parent="SubViewport"]
+position = Vector2(300, 240)
+
+[node name="L" type="Sprite2D" parent="SubViewport/eye"]
+position = Vector2(-150, 0)
+texture = ExtResource("8_yhxpa")
+
+[node name="R" type="Sprite2D" parent="SubViewport/eye"]
+position = Vector2(150, 0)
+texture = ExtResource("8_yhxpa")
+
+[node name="Color" type="ColorRect" parent="SubViewport"]
+offset_right = 600.0
+offset_bottom = 480.0
+color = Color(0, 0, 0, 1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="."]
+modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="eye" type="Node2D" parent="Computer/SubViewport"]
-position = Vector2(300, 240)
-
-[node name="L" type="Sprite2D" parent="Computer/SubViewport/eye"]
-position = Vector2(-150, 0)
-texture = ExtResource("8_yhxpa")
-
-[node name="R" type="Sprite2D" parent="Computer/SubViewport/eye"]
-position = Vector2(150, 0)
-texture = ExtResource("8_yhxpa")
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
