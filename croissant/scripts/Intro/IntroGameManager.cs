@@ -49,9 +49,13 @@ public partial class IntroGameManager : Node2D
 
 	private void UpdateShaders()
 	{
-		(Material as ShaderMaterial).SetShaderParameter("shake_power", (float)score * 0.001f);
-		(Material as ShaderMaterial).SetShaderParameter("shake_rate", (float)score * 0.01f);
-		(Material as ShaderMaterial).SetShaderParameter("shake_speed", (float)score * 0.05f);
+		// Glitches the screen based on the score
+		if (ShaderRect != null && ShaderRect.Material is ShaderMaterial SM)
+		{
+			SM.SetShaderParameter("shake_power", score * 0.002f);
+			SM.SetShaderParameter("shake_rate", score * 0.012f);
+			SM.SetShaderParameter("shake_speed", score * 0.03f);
+		}
 	}
 
 	private void SpawnEnemy()
