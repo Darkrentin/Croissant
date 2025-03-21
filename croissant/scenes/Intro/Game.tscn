@@ -8,6 +8,21 @@
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
 
+[sub_resource type="Animation" id="Animation_b7rdj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNum:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_k45nk"]
 resource_name = "ScoreUp"
 length = 0.3
@@ -22,21 +37,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1.48, 1.48), Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_b7rdj"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ScoreNum:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fwmwi"]

@@ -57,19 +57,12 @@ public static class Lib
         );
     }
 
-
-    /// <summary>
-    /// Returns a random position outside but close to the screen boundaries
-    /// </summary>
-    /// <param name="margin">How far outside the screen the position should be (default: 50 pixels)</param>
-    /// <returns>A Vector2I position outside the screen</returns>
     public static Vector2I GetRandomPositionOutsideScreen(int side = 0, int margin = 50)
     {
         Vector2I screenSize = GameManager.ScreenSize;
         Vector2I position = new Vector2I();
 
         // Decide which side of the screen to place the position (0=top, 1=right, 2=bottom, 3=left)
-
         switch (side)
         {
             case 0: // Top
@@ -93,10 +86,12 @@ public static class Lib
         return position;
     }
 
-    public static Vector2 GetPercentage(Vector2I vec)
+    public static Vector2 GetAspectFactor(Vector2I originalSize)
     {
-        float fact = Math.Max(vec.X / 1920f, vec.Y / 1080f);
-        return new Vector2(fact, fact);
+        Vector2 reference = new Vector2(1920, 1080);
+        Vector2 scale = new Vector2(GameManager.ScreenSize.X / reference.X, GameManager.ScreenSize.Y / reference.Y);
+        float scaleFactor = Mathf.Min(scale.X, scale.Y);
+        return new Vector2(originalSize.X, originalSize.Y) * scaleFactor;
     }
 
     public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")
