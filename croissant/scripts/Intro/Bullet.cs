@@ -5,7 +5,6 @@ public partial class Bullet : StaticBody2D
 {
 	[Export] private Vector2 Velocity;
 	[Export] private Polygon2D Polygon2D;
-	[Export] private CollisionShape2D CollisionShape;
 	[Export] private Timer Timer = new Timer();
 	[Export] private CpuParticles2D Trail1;
 	[Export] private CpuParticles2D Trail2;
@@ -27,7 +26,7 @@ public partial class Bullet : StaticBody2D
 
 		//Free the bullet and creates an explosion when it goes out of the window
 		Vector2 windowSize = GetViewport().GetVisibleRect().Size;
-		if (Position.X < 0 || Position.X > windowSize.X || Position.Y < 0 || Position.Y > windowSize.Y)
+		if (Alive && (Position.X < 0 || Position.X > windowSize.X || Position.Y < 0 || Position.Y > windowSize.Y))
 		{
 			BulletCollide();
 			WallExplosion.Emitting = true;
@@ -37,6 +36,7 @@ public partial class Bullet : StaticBody2D
 	//On bullet collision, launches a bullet
 	public void BulletCollide()
 	{
+		//Lib.Print("bullet collide");
 		Alive = false;
 		Polygon2D.Visible = false;
 		Velocity = Vector2.Zero;

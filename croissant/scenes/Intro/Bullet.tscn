@@ -22,10 +22,9 @@ _limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[node name="Bullet" type="StaticBody2D" node_paths=PackedStringArray("Polygon2D", "CollisionShape", "Timer", "Trail1", "Trail2", "Trail3", "WallExplosion", "EnemyExplosion")]
+[node name="Bullet" type="StaticBody2D" node_paths=PackedStringArray("Polygon2D", "Timer", "Trail1", "Trail2", "Trail3", "WallExplosion", "EnemyExplosion")]
 script = ExtResource("1_cpucv")
 Polygon2D = NodePath("Polygon2D")
-CollisionShape = NodePath("CollisionShape2D")
 Timer = NodePath("Timer")
 Trail1 = NodePath("Trail1")
 Trail2 = NodePath("Trail2")
@@ -134,5 +133,6 @@ hue_variation_max = 0.2
 hue_variation_curve = SubResource("Curve_7pt3h")
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="timeout" from="Timer" to="." method="OnTimerTimeout"]

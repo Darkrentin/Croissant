@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=12 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
@@ -7,6 +7,43 @@
 [ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="4_id677"]
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
+
+[sub_resource type="Animation" id="Animation_k45nk"]
+resource_name = "ScoreUp"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNum:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.48, 1.48), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_b7rdj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ScoreNum:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fwmwi"]
+_data = {
+&"RESET": SubResource("Animation_b7rdj"),
+&"ScoreUp": SubResource("Animation_k45nk")
+}
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
 shader = ExtResource("5_id677")
@@ -31,29 +68,57 @@ content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
 content_scale_aspect = 4
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ShaderRect", "ScoreLabel")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ShaderRect", "ExportScoreLabel", "ExportAnimationPlayer")]
 script = ExtResource("1_8rhfo")
 Player = NodePath("Player")
 BulletScene = ExtResource("2_g36va")
 EnemyScene = ExtResource("3_id677")
 VirusScene = ExtResource("4_id677")
-ShaderRect = NodePath("Shader effects")
-ScoreLabel = NodePath("ScoreLabel")
-
-[node name="Shader effects" type="ColorRect" parent="Game"]
-top_level = true
-material = SubResource("ShaderMaterial_g0ua5")
-offset_right = 3840.0
-offset_bottom = 2160.0
+ShaderRect = NodePath("../Shader effects")
+ExportScoreLabel = NodePath("../UI/ScoreNum")
+ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
 
 [node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 
 [node name="Camera" type="Camera2D" parent="Game"]
 anchor_mode = 0
 
-[node name="ScoreLabel" type="Label" parent="Game"]
-offset_right = 1512.0
-offset_bottom = 508.0
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.267
+anchor_bottom = 0.119
+offset_right = -0.640015
+offset_bottom = -0.520004
+
+[node name="ScoreLabel" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.625
+anchor_bottom = 1.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_k45nk")
 theme_override_font_sizes/font_size = 54
+text = "Score:"
+
+[node name="ScoreNum" type="Label" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.625
+anchor_bottom = 1.0
+offset_left = 160.0
+offset_right = -123.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_k45nk")
+theme_override_font_sizes/font_size = 54
+text = "0"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
+libraries = {
+&"": SubResource("AnimationLibrary_fwmwi")
+}
+
+[node name="Shader effects" type="ColorRect" parent="."]
+top_level = true
+material = SubResource("ShaderMaterial_g0ua5")
+offset_right = 3840.0
+offset_bottom = 2160.0

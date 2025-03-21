@@ -9,6 +9,7 @@ Intro :
 - Faire la transition du lvl 1 au virus : il s'énerve après le dialogue et balance toutes les popups
 - Faire en sorte que la fenetre du virus grab le focus quand on clique dessus (sinon pendant l'intro si on clique en dehors de la fenetre du virus pendant qu'il est sur l'écran il reste derrière à l'infini)
 - Ajouter un bruit de glitch quand le jeu glitch
+- Ajuster la position du triangle
 
 Level 1 :
 - Ajouter des sprites pour les windows (mettre des refs à la france, croissant etc)

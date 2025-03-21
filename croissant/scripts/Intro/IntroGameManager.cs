@@ -8,7 +8,10 @@ public partial class IntroGameManager : Node2D
 	[Export] private PackedScene EnemyScene;
 	[Export] private PackedScene VirusScene;
 	[Export] private ColorRect ShaderRect;
-	[Export] private Label ScoreLabel;
+	private static Label ScoreLabel;
+	[Export] public Label ExportScoreLabel {get => ScoreLabel; set => ScoreLabel = value;}	
+	private static AnimationPlayer AnimationPlayer;
+	[Export] public AnimationPlayer ExportAnimationPlayer {get => AnimationPlayer; set => AnimationPlayer = value;}
 	private static Camera2D Camera;
 	private Vector2I windowSize = new Vector2I(1920, 1080);
 	public static int score = 0;
@@ -20,8 +23,6 @@ public partial class IntroGameManager : Node2D
 		Camera = GetNode<Camera2D>("Camera");
 		Player.Position = windowSize / 2;
 
-		Virus Virus = VirusScene.Instantiate<Virus>();
-		AddChild(Virus);
 	}
 
 	private Timer enemySpawnTimer;
@@ -42,9 +43,14 @@ public partial class IntroGameManager : Node2D
 			AddChild(enemySpawnTimer);
 			enemySpawnTimer.Start();
 		}
-
-		ScoreLabel.Text = "Score : " + score;
 		UpdateShaders();
+	}
+
+	public static void AddScore()
+	{
+		score++;
+		ScoreLabel.Text = score.ToString();
+		AnimationPlayer.Play("ScoreUp");
 	}
 
 	private void UpdateShaders()
