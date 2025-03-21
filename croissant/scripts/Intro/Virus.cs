@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.ComponentModel;
+using System.Linq.Expressions;
 
 public partial class Virus : FloatWindow
 {
@@ -15,12 +17,15 @@ public partial class Virus : FloatWindow
 	[Export] float RotationSmoothing = 5;
 	public Vector3 targetRotation;
 
+	[Export] public Dialogue dialogue;
+
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public override void _Ready()
 	{
 		base._Ready();
-		Size = Lib.GetScreenSize(Lib.GetPercentage(new Vector2I(370,420)));
+		Size = new Vector2I(300, 400);
+		Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
 		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size/2;
 	}
 
@@ -63,5 +68,6 @@ public partial class Virus : FloatWindow
 	public void _on_button_pressed()
 	{
 		AnimationPlayer.Play("Hop");
+		dialogue.NextLine();
 	}
 }

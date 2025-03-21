@@ -1,5 +1,5 @@
 Intro :
-- Ajouter du mouvement au ScoreLabel
+- Ajouter du mouvement au ScoreLabel @done
 - Calibrer la montée des glitches (exponentielle inversée ? (en tout cas réduire la puissance, la durée))
 - Faire en sorte qu'au bout de 30 en score le virus tombe en bas de l'écran, en train de dormir avec des ZzZzz qui sortent de sa tête et un logo de curseur sur son écran, le jeu derrière continue
 - Quand on clique sur le virus, il se réveille et commence un dialogue (mettre un placeholder)

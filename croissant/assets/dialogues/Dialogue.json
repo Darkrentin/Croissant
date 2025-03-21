@@ -1,6 +1,10 @@
 {
     "Virus": {
-        "1": "Hello, I am Virus. I am here to help you with your computer problems.",
-        "2": "END"
+        "1": {
+            "0": "Hello!",
+            "1": "I am a virus!",
+            "2": "I am here to infect your pc!",
+            "3": ""
+        }
     }
 }
