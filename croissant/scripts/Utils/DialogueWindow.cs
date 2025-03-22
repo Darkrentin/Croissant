@@ -30,15 +30,15 @@ public partial class DialogueWindow : FloatWindow
 	public Dictionary DialogueData;
 	public Dictionary ActualDialogue;
 
-    public string ActualDialogueName;
+	public string ActualDialogueName;
 
-    public Action<string> OnDialogueFinished;
+	public Action<string> OnDialogueFinished;
 	public int index = 0;
 	public bool isDialogue = false;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		const string dialoguePath = "res://assets/dialogues/Dialogue.json";
+		const string dialoguePath = "res://assets/texts/dialogues/Dialogue.json";
 		LoadJson(dialoguePath);
 
 		timer.Timeout += ShowNextCharacter;
@@ -47,7 +47,7 @@ public partial class DialogueWindow : FloatWindow
 		cursorTimer.Timeout += ProcessCursor;
 		cursorTimer.Start();
 
-        OnDialogueFinished += DialogueFinished;
+		OnDialogueFinished += DialogueFinished;
 
 		//StartDialogue("Virus", "sleep");
 	}
@@ -67,7 +67,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isTyping = true;
 			label.VisibleCharacters++;
-			timer.WaitTime = Lib.rand.NextDouble()/4f;
+			timer.WaitTime = Lib.rand.NextDouble() / 4f;
 			timer.Start();
 		}
 		else
@@ -135,10 +135,10 @@ public partial class DialogueWindow : FloatWindow
 	public void StartDialogue(string character, string id)
 	{
 		ActualDialogue = GetDialogue(character, id);
-        ActualDialogueName = id;
+		ActualDialogueName = id;
 		index = 0;
-        label.Text = "";
-        label.VisibleCharacters = 0;
+		label.Text = "";
+		label.VisibleCharacters = 0;
 		PlaceDialogueWindow();
 		isDialogue = true;
 		NextLine();

@@ -1,12 +1,13 @@
-[gd_scene load_steps=12 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=13 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="3_g36va"]
 [ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
-[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="4_id677"]
+[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Virus/Virus.tscn" id="4_id677"]
+[ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="5_b7rdj"]
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
-[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
+[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
 
 [sub_resource type="Animation" id="Animation_b7rdj"]
 length = 0.001
@@ -68,12 +69,14 @@ content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
 content_scale_aspect = 4
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportScoreLabel", "ExportAnimationPlayer")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer")]
 script = ExtResource("1_8rhfo")
 Player = NodePath("Player")
 BulletScene = ExtResource("2_g36va")
 EnemyScene = ExtResource("3_id677")
 VirusScene = ExtResource("4_id677")
+ExportShaderRect = NodePath("../Shader effects")
+ExportGameExplosion = ExtResource("5_b7rdj")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
 

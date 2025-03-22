@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsmobrvf3clby"]
+
+[ext_resource type="Script" uid="uid://mklnil0yygtu" path="res://scripts/Level1/TankWindow.cs" id="1_jrr7c"]
+[ext_resource type="Texture2D" uid="uid://b82u2s8m7htw2" path="res://assets/popups/popup1.png" id="2_y575u"]
+
+
+[node name="TankWindow" type="Window"]
+position = Vector2i(0, 36)
+unresizable = true
+always_on_top = true
+script = ExtResource("1_jrr7c")
+Draggable = false
+Minimizable = false
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_y575u")
+expand_mode = 1

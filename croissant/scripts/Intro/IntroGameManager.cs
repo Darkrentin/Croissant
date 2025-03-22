@@ -101,7 +101,7 @@ public partial class IntroGameManager : Node2D
 			SM.SetShaderParameter("shake_rate", 0.2f);
 			SM.SetShaderParameter("shake_speed", 5f);
 		}
-		CameraShake(80f, 0.5f);
+		CameraShake(50f, 0.5f);
 		CpuParticles2D GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
 		GameExplosion.Position = GameManager.ScreenSize / 3;
 		GameManager.GameRoot.AddChild(GameExplosion);

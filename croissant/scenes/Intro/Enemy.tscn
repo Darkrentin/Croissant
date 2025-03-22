@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://37mav66th0um"]
 
 [ext_resource type="Script" uid="uid://l8b0b3aiky2v" path="res://scripts/Intro/Enemy.cs" id="1_fm0q0"]
-[ext_resource type="Texture2D" uid="uid://sv2rs5w7mq2s" path="res://assets/sprites/introShapes/hexagon.png" id="2_n1hot"]
-[ext_resource type="Texture2D" uid="uid://da5i0d0h47amb" path="res://assets/sprites/introShapes/pentagon.png" id="3_t3wft"]
-[ext_resource type="Texture2D" uid="uid://bl6juy6yo51wo" path="res://assets/sprites/introShapes/square.png" id="4_ioq1s"]
-[ext_resource type="Texture2D" uid="uid://2lxtwa4m3jne" path="res://assets/sprites/introShapes/triangle.png" id="5_lednf"]
+[ext_resource type="Texture2D" uid="uid://sv2rs5w7mq2s" path="res://assets/sprites/shapes/hexagon.png" id="2_n1hot"]
+[ext_resource type="Texture2D" uid="uid://da5i0d0h47amb" path="res://assets/sprites/shapes/pentagon.png" id="3_t3wft"]
+[ext_resource type="Texture2D" uid="uid://bl6juy6yo51wo" path="res://assets/sprites/shapes/square.png" id="4_ioq1s"]
+[ext_resource type="Texture2D" uid="uid://2lxtwa4m3jne" path="res://assets/sprites/shapes/triangle.png" id="5_lednf"]
 
 [sub_resource type="Animation" id="Animation_n1hot"]
 resource_name = "Depop"

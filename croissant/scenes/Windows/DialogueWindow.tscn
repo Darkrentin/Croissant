@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=3 uid="uid://k8kqvfq14xtp"]
 
 [ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/Utils/DialogueWindow.cs" id="1_o82ew"]
-[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="2_0i2b1"]
+[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="2_0i2b1"]
+
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1l1uo"]
 blend_mode = 3
