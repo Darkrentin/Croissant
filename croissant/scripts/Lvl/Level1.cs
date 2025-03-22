@@ -25,7 +25,7 @@ public partial class Level1 : Node2D
     private int _windowKillCount = 0;
     public int WindowCount;
     public int InitialWindowCount = 0;
-    public float TimerLimit = 0f;
+    public float TimerLimit = 0.025f;
     public int TimerTic = 2;
 
     public List<FloatWindow> Windows = new List<FloatWindow>();
@@ -43,7 +43,7 @@ public partial class Level1 : Node2D
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 1.8f;
+        totalTimer.WaitTime = 10f;
         totalTimer.Timeout += TotalSpawnerTimeout;
         totalTimer.Start();
 
@@ -54,8 +54,7 @@ public partial class Level1 : Node2D
         if (WindowCount < 20 && WindowCount > 0)
         {
             AddNewWindow();
-            spawnTimer.WaitTime = Lib.rand.NextDouble() * 0.6f + 0.2f + TimerLimit;
-            TimerLimit += 0.05f;
+            spawnTimer.WaitTime = Lib.rand.NextDouble() * 0.6f + 0.4f + TimerLimit;
             //UpdateSpawnTimer();
         }
     }
@@ -63,18 +62,15 @@ public partial class Level1 : Node2D
 
     public void TotalSpawnerTimeout()
     {
-        if (TimerTic < 21)
+        if (TimerTic < 20)
         {
-            if (_windowKillCount >= TimerTic * 1.5)
-            {
-                TimerTic++;
-            }
-            //Lib.Print($"TimerTic increased to: {TimerTic}"); // Debug output
+            TimerTic++;
         }
         else
         {
             //spawnTimer.WaitTime = 5f;
         }
+        TimerLimit *= 1.15f;
     }
 
     /*private void UpdateSpawnTimer()
@@ -103,9 +99,14 @@ public partial class Level1 : Node2D
 		}*/
         //Lib.Print($"timertic: {TimerTic}");
         //Lib.Print($"window: {WindowCount}");
-        if (InitialWindowCount < 20)
+        if (InitialWindowCount < 22)
         {
             AddNewWindow();
+            InitialWindowCount++;
+        }
+        else if (InitialWindowCount == 22)
+        {
+            totalTimer.WaitTime = 1.5f;
             InitialWindowCount++;
         }
     }
@@ -126,25 +127,25 @@ public partial class Level1 : Node2D
             AddChild(window);
             Windows.Add(window);
         }
-        else if (i >= 6 && i <= 8)
+        else if (i >= 6 && i <= 7)
         {
             BombWindow window = BombWindowScene.Instantiate<BombWindow>();
             AddChild(window);
             Windows.Add(window);
         }
-        else if (i >= 9 && i <= 12)
+        else if (i >= 8 && i <= 11)
         {
             TankWindow window = TankWindowScene.Instantiate<TankWindow>();
             AddChild(window);
             Windows.Add(window);
         }
-        else if (i >= 13 && i <= 16)
+        else if (i >= 12 && i <= 15)
         {
             TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
             AddChild(window);
             Windows.Add(window);
         }
-        else if (i >= 17 && i <= 20)
+        else if (i >= 16 && i <= 19)
         {
             DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
             AddChild(window);

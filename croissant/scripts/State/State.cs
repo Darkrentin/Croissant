@@ -59,7 +59,8 @@ public static class States
         GameManager.GameRoot.AddChild(explosion);
 
         //change state condition
-        GameManager.State = GameManager.GameState.Void;
+        GameManager.State = GameManager.GameState.VirusDialogue1Buffer;
+
 
     }
 

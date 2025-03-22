@@ -27,6 +27,7 @@ public partial class GameManager : Node2D
         //Buffer
         Debug,
         IntroVirusBuffer,
+        VirusDialogue1Buffer,
         Void
     }
 

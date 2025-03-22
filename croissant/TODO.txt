@@ -17,9 +17,9 @@ Level 1 :
 - BombWindow : régler le problème de fenêtre buggée quand c'est un TextureRect et pas un AnimationSprite2D
 - Particules quand on ferme la fenetre
 - Faire tester à des gens pour calibrer la difficulté
-- Faire varier aléatoirement le temps minimum entre l'apparition de deux fenetres (parce que là si on en ferme plusieures rapidement elles repopent très linéairement)
-- Faire apparaitre plus vite tous les types differents de fenetres, mais un peu moins de fenetre simultanées
-- Les SlideWindows ne se déplacent peut-etre un poil pas assez vite
+- Faire varier aléatoirement le temps minimum entre l'apparition de deux fenetres (parce que là si on en ferme plusieures rapidement elles repopent très linéairement) @done
+- Faire apparaitre plus vite tous les types differents de fenetres, mais un peu moins de fenetre simultanées @done
+- Les SlideWindows ne se déplacent peut-etre un poil pas assez vite @done
 - Faire en sorte que pendant le level 1, le virus reste à nous observer dans un coin et à nous balancer des dialogues en mode "don't close my windows!!"
 
 Level 2 :

@@ -49,7 +49,7 @@ public partial class Virus : FloatWindow
 		}
 		else if (name == "1")
 		{
-			GameManager.State = GameManager.GameState.Debug;
+			GameManager.State = GameManager.GameState.Level1;
 		}
 	}
 
