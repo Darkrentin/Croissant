@@ -127,7 +127,7 @@ hue_variation_max = 0.1
 hue_variation_curve = SubResource("Curve_qdpbp")
 
 [node name="EnemyExplosion" type="CPUParticles2D" parent="."]
-position = Vector2(50, 0)
+position = Vector2(25, 0)
 emitting = false
 amount = 60
 one_shot = true

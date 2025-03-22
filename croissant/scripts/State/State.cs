@@ -50,7 +50,7 @@ public static class States
     {
         //Freeze the game
         IntroGameManager.Instance.ProcessMode = IntroGameManager.ProcessModeEnum.Disabled;
-		IntroGameManager.Instance.GetParent<Window>().Unfocusable = true;
+        IntroGameManager.Instance.GetParent<Window>().Unfocusable = true;
 
         Lib.Print("First Virus Dialogue");
         GameManager.virus.dialogue.StartDialogue("Virus", "sleep");
@@ -84,8 +84,10 @@ public static class States
     public static void IntroGameProcess(double delta)
     {
         //Change State condition
-        if(IntroGameManager.score>=IntroGameManager.Instance.MaxScore)
+        if (IntroGameManager.score >= IntroGameManager.Instance.MaxScore)
         {
+            IntroGameManager.EndActions();
+
             GameManager.State = GameManager.GameState.IntroVirus;
         }
     }

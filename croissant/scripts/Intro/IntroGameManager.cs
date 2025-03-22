@@ -8,7 +8,10 @@ public partial class IntroGameManager : Node2D
 	[Export] private PackedScene BulletScene;
 	[Export] private PackedScene EnemyScene;
 	[Export] private PackedScene VirusScene;
-	[Export] private ColorRect ShaderRect;
+	private static ColorRect ShaderRect;
+	[Export] private ColorRect ExportShaderRect { get => ShaderRect; set => ShaderRect = value; }
+	private static PackedScene GameExplosionScene;
+	[Export] private PackedScene ExportGameExplosion { get => GameExplosionScene; set => GameExplosionScene = value; }
 	private static Label ScoreLabel;
 	[Export] private Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
 	private static AnimationPlayer AnimationPlayer;
@@ -66,7 +69,6 @@ public partial class IntroGameManager : Node2D
 		{
 			UpdateShaders();
 		}
-
 	}
 
 	public static void AddScore()
@@ -82,12 +84,28 @@ public partial class IntroGameManager : Node2D
 		if (ShaderRect != null && ShaderRect.Material is ShaderMaterial SM)
 		{
 			float t = Mathf.Min((score - 10) / 20.0f, 1.0f);
-			float intensityFactor = 0.8f - Mathf.Exp(-5.0f * t);
+			float intensityFactor = 1f - Mathf.Exp(-5.0f * t);
 
-			SM.SetShaderParameter("shake_power", 0.03f * intensityFactor);
-			SM.SetShaderParameter("shake_rate", 0.2f * intensityFactor);
-			SM.SetShaderParameter("shake_speed", 5f * intensityFactor);
+			SM.SetShaderParameter("shake_power", 0.025f * intensityFactor);
+			SM.SetShaderParameter("shake_rate", 0.15f * intensityFactor);
+			SM.SetShaderParameter("shake_speed", 4f * intensityFactor);
 		}
+	}
+
+	public static void EndActions()
+	{
+		// Glitches the screen based on the score
+		if (ShaderRect != null && ShaderRect.Material is ShaderMaterial SM)
+		{
+			SM.SetShaderParameter("shake_power", 0.1f);
+			SM.SetShaderParameter("shake_rate", 0.2f);
+			SM.SetShaderParameter("shake_speed", 5f);
+		}
+		CameraShake(80f, 0.5f);
+		CpuParticles2D GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
+		GameExplosion.Position = GameManager.ScreenSize / 3;
+		GameManager.GameRoot.AddChild(GameExplosion);
+		GameExplosion.Emitting = true;
 	}
 
 	private void SpawnEnemy()
