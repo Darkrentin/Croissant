@@ -9,18 +9,21 @@ using FileAccess = Godot.FileAccess;
 
 public partial class DialogueWindow : FloatWindow
 {
-    [Export] public FloatWindow ParentWindow;
+	[Export] public FloatWindow ParentWindow;
 	[Export] public RichTextLabel label;
 	[Export] public Timer timer;
 	[Export] public Timer cursorTimer;
 
-    private Vector2I _margin = Vector2I.Zero;
-    [Export] public Vector2I Margin{
-        get => _margin;
-        set{
-            _margin = (Vector2I)Lib.GetAspectFactor(value);
-        }
-    }
+	private Vector2I _margin = new Vector2I(0, 0);
+	[Export]
+	public Vector2I Margin
+	{
+		get => _margin;
+		set
+		{
+			_margin = (Vector2I)Lib.GetScreenRatio() * value;
+		}
+	}
 	public bool cursorVisible = false;
 	public bool isTyping = false;
 
@@ -39,16 +42,16 @@ public partial class DialogueWindow : FloatWindow
 		label.Text = "";
 		cursorTimer.Timeout += ProcessCursor;
 		cursorTimer.Start();
-		
-        StartDialogue("Virus", "1");
+
+		StartDialogue("Virus", "1");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(Input.IsActionJustPressed("debug"))
+		if (Input.IsActionJustPressed("debug"))
 		{
-			if(isDialogue)
+			if (isDialogue)
 			{
 				NextLine();
 			}
@@ -57,10 +60,10 @@ public partial class DialogueWindow : FloatWindow
 
 	public void ShowNextCharacter()
 	{
-		if(label.GetTotalCharacterCount()-1 > label.GetVisibleCharacters())
+		if (label.GetTotalCharacterCount() - 1 > label.GetVisibleCharacters())
 		{
 			isTyping = true;
-			label.VisibleCharacters ++;
+			label.VisibleCharacters++;
 			timer.WaitTime = Lib.GetRandomNormal(0.02f, 0.05f);
 			timer.Start();
 		}
@@ -72,13 +75,13 @@ public partial class DialogueWindow : FloatWindow
 	}
 	public void ProcessCursor()
 	{
-		if(isTyping)
+		if (isTyping)
 		{
 			cursorTimer.Start();
 			return;
 		}
 
-		if(cursorVisible)
+		if (cursorVisible)
 		{
 			label.VisibleCharacters--;
 			cursorVisible = false;
@@ -93,12 +96,12 @@ public partial class DialogueWindow : FloatWindow
 
 	public void NextLine()
 	{
-        PlaceDialogueWindow();
+		PlaceDialogueWindow();
 		string dialogue = (string)ActualDialogue[$"{index}"];
 		label.Text += "\n> ";
 		label.Text += dialogue;
 		label.Text += "|";
-		if(dialogue == "")
+		if (dialogue == "")
 		{
 			isDialogue = false;
 			label.Text = "";
@@ -107,18 +110,18 @@ public partial class DialogueWindow : FloatWindow
 		}
 		index++;
 		ShowNextCharacter();
-		
+
 	}
 
 	public void LoadJson(string path)
-    {
-        Json json = new Json();
-        var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
-        var json_string = Json.ParseString(file.GetAsText());
-        file.Close();
+	{
+		Json json = new Json();
+		var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
+		var json_string = Json.ParseString(file.GetAsText());
+		file.Close();
 
-        DialogueData = (Dictionary)json_string;
-    }
+		DialogueData = (Dictionary)json_string;
+	}
 
 	public Dictionary GetDialogue(string character, string id)
 	{
@@ -129,7 +132,7 @@ public partial class DialogueWindow : FloatWindow
 	{
 		ActualDialogue = GetDialogue(character, id);
 		index = 0;
-        PlaceDialogueWindow();
+		PlaceDialogueWindow();
 		isDialogue = true;
 		NextLine();
 	}
@@ -139,9 +142,10 @@ public partial class DialogueWindow : FloatWindow
 		Lib.Print("Dialogue Finished");
 	}
 
-    public void PlaceDialogueWindow()
-    {
-        Size = (Vector2I)Lib.GetAspectFactor(Size);
-        Position = new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2 , ParentWindow.Position.Y - Size.Y/2) + Margin;
-    }
+	public void PlaceDialogueWindow()
+	{
+		Size = (Vector2I)Lib.GetScreenRatio() * Size;
+		Position = new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin;
+		Lib.Print(Margin.ToString());
+	}
 }

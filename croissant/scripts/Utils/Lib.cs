@@ -94,6 +94,11 @@ public static class Lib
         return new Vector2(originalSize.X, originalSize.Y) * scaleFactor;
     }
 
+    public static Vector2 GetScreenRatio()
+    {
+        return new Vector2(GameManager.ScreenSize.X / 1920, GameManager.ScreenSize.Y / 1080);
+    }
+
     public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")
     {
         string fileName = System.IO.Path.GetFileName(filePath);
