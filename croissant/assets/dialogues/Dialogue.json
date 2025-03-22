@@ -1,15 +1,15 @@
 {
-    "Virus": {
-        "sleep":
-        {
-            "0": "[shake rate=7.0 connected=1]Zzz...[/shake]",
-            "1": ""
-        },
-        "1": {
-            "0": "Hello!",
-            "1": "I am a virus!",
-            "2": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]",
-            "3": ""
-        }
-    }
+	"Virus": {
+		"sleep":
+		{
+			"0": "[shake rate=7.0 connected=1]Zzz...[/shake]",
+			"1": ""
+		},
+		"1": {
+			"0": "Hello!",
+			"1": "I am a virus!",
+			"2": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]",
+			"3": ""
+		}
+	}
 }

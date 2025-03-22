@@ -13,7 +13,7 @@ public partial class Level1 : Node2D
     // Called when the node enters the scene tree for the first time.
     private Timer spawnTimer;
     private Timer totalTimer;
-    public int WindowKillCount
+    public static int WindowKillCount
     {
         get => _windowKillCount;
         set
@@ -22,16 +22,19 @@ public partial class Level1 : Node2D
             //Lib.Print($"WindowKillCount: {_windowKillCount}");
         }
     }
-    private int _windowKillCount = 0;
-    public int WindowCount;
+    private static int _windowKillCount = 0;
+    public static int WindowCount;
     public int InitialWindowCount = 0;
     public float TimerLimit = 0.025f;
     public int TimerTic = 2;
+
+    public static Level1 Instance;
 
     public List<FloatWindow> Windows = new List<FloatWindow>();
 
     public override void _Ready()
     {
+        Instance = this;
         WindowKillCount = 0;
         WindowCount = 0;
 
@@ -112,45 +115,51 @@ public partial class Level1 : Node2D
     }
 
 
-    public void AddNewWindow()
+    public static void AddNewWindow()
     {
-        int i = Lib.rand.Next(1, TimerTic);
+        int i = Lib.rand.Next(1, Instance.TimerTic);
         if (i == 1)
         {
-            StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
-            AddChild(window);
-            Windows.Add(window);
+            StaticWindow window = Instance.StaticWindowScene.Instantiate<StaticWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
         }
         else if (i >= 2 && i <= 5)
         {
-            MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
-            AddChild(window);
-            Windows.Add(window);
+            MoveWindow window = Instance.MoveWindowScene.Instantiate<MoveWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
         }
         else if (i >= 6 && i <= 7)
         {
-            BombWindow window = BombWindowScene.Instantiate<BombWindow>();
-            AddChild(window);
-            Windows.Add(window);
+            BombWindow window = Instance.BombWindowScene.Instantiate<BombWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
         }
         else if (i >= 8 && i <= 11)
         {
-            TankWindow window = TankWindowScene.Instantiate<TankWindow>();
-            AddChild(window);
-            Windows.Add(window);
+            TankWindow window = Instance.TankWindowScene.Instantiate<TankWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
         }
         else if (i >= 12 && i <= 15)
         {
-            TimerWindow window = TimerWindowScene.Instantiate<TimerWindow>();
-            AddChild(window);
-            Windows.Add(window);
+            TimerWindow window = Instance.TimerWindowScene.Instantiate<TimerWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
         }
         else if (i >= 16 && i <= 19)
         {
-            DodgeWindow window = DodgeWindowScene.Instantiate<DodgeWindow>();
-            AddChild(window);
-            Windows.Add(window);
+            DodgeWindow window = Instance.DodgeWindowScene.Instantiate<DodgeWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
         }
         WindowCount++;
+    }
+
+    public static void WindowKill()
+    {
+        WindowKillCount++;
+        WindowCount--;
     }
 }

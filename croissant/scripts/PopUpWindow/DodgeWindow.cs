@@ -12,7 +12,6 @@ public partial class DodgeWindow : PopUpWindow
         HasChangingTitle = true;
         base._Ready();
 
-        Parent = GetParent<Level1>();
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(390, 450));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         cooldownTimer = new Timer();
@@ -32,8 +31,7 @@ public partial class DodgeWindow : PopUpWindow
 
     public override void OnClose()
     {
-        Parent.WindowKillCount++;
-        Parent.WindowCount--;
+        Level1.WindowKill();
         QueueFree();
     }
 
@@ -71,11 +69,11 @@ public partial class DodgeWindow : PopUpWindow
 
     private float CalculateMovementSpeed()
     {
-        if (Parent.WindowCount >= 10)
+        if (Level1.WindowCount >= 10)
         {
             return Lib.rand.Next(50, 80) / 10f;
         }
-        else if (Parent.WindowCount >= 5)
+        else if (Level1.WindowCount >= 5)
         {
             return Lib.rand.Next(30, 50) / 10f;
         }

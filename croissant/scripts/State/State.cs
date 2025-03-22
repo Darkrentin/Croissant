@@ -64,6 +64,11 @@ public static class States
 
     }
 
+    public static void VirusTuto()
+    {
+        
+    }
+
     public static void Level1()
     {
         Node2D Level1 = Level1Scene.Instantiate<Node2D>();

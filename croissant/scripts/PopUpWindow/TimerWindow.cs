@@ -13,7 +13,6 @@ public partial class TimerWindow : PopUpWindow
         HasChangingTitle = true;
         base._Ready();
 
-        Parent = GetParent<Level1>();
         time = CalculateTimerDuration();
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
@@ -26,11 +25,11 @@ public partial class TimerWindow : PopUpWindow
         // more there is windows easier is it to close them
     private float CalculateTimerDuration()
     {
-        if (Parent.WindowCount >= 10)
+        if (Level1.WindowCount >= 10)
         {
             return Lib.rand.Next(9, 11);
         }
-        else if (Parent.WindowCount >= 5)
+        else if (Level1.WindowCount >= 5)
         {
             return Lib.rand.Next(5, 7);
         }
@@ -42,8 +41,7 @@ public partial class TimerWindow : PopUpWindow
 
     public override void OnClose()
     {
-        Parent.WindowKillCount++;
-        Parent.WindowCount--;
+        Level1.WindowKill();
         QueueFree();
     }
 
@@ -55,10 +53,10 @@ public partial class TimerWindow : PopUpWindow
 
     public void _on_timer_timeout()
     {
-        Parent.WindowCount--;
+        Level1.WindowCount--;
         for (int i = 0; i < 2; i++)
         {
-            Parent.AddNewWindow();
+            Level1.AddNewWindow();
         }
         QueueFree();
     }

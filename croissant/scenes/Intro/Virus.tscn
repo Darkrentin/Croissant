@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=4 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=54 format=4 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Intro/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/3D/computer/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
@@ -627,6 +627,71 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../SubViewport/Working:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SubViewport/Working/Label:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_gosx8"]
+resource_name = "Working"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SubViewport/Working:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SubViewport/Color:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../SubViewport/Working/Label:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -852)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
@@ -634,7 +699,8 @@ _data = {
 &"Hop": SubResource("Animation_k1eiq"),
 &"Init": SubResource("Animation_jl8jn"),
 &"PowerOn": SubResource("Animation_c3fl0"),
-&"RESET": SubResource("Animation_dr6to")
+&"RESET": SubResource("Animation_dr6to"),
+&"Working": SubResource("Animation_gosx8")
 }
 
 [node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye", "dialogue", "ExportPause", "BlinkTimer")]
@@ -784,6 +850,79 @@ offset_right = 600.0
 offset_bottom = 480.0
 texture = ExtResource("10_bf8f2")
 expand_mode = 1
+
+[node name="Working" type="Control" parent="SubViewport"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Label" type="RichTextLabel" parent="SubViewport/Working"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 1784.0
+bbcode_enabled = true
+text = "[color=green]Initializing system core...  
+Loading encryption module...  
+Verifying kernel integrity... OK  
+Bootstrapping secure environment... Done  
+Allocating memory blocks... 512MB reserved  
+Mapping virtual addresses... Complete  
+Connecting to remote node [198.51.100.42]...  
+Handshake successful. Establishing secure channel...  
+Session key exchanged: 4D6F-6E4C-69-67-6E7E  
+Tunnel established through 6 proxy nodes  
+Running system diagnostics...  
+- CPU Load: 34%  
+- Memory Usage: 512MB / 4096MB  
+- Network Activity: 128KBps  
+- Firewall Status: BYPASSED  
+Injecting payload...  ███████████ 100%  
+Payload executed successfully  
+Accessing protected memory blocks...  
+Decompiling security parameters...  
+>>> TRACE ID: 9A3F-B71C-00X2 <<<  
+Decrypting data stream... Complete  
+Extracting credentials...  
+- User: admin  
+- Hash: $1$1cB2F$2hD7KJmL98xe3  
+Bypassing authentication barrier... Override engaged  
+WARNING: Unauthorized access detected!  
+Deploying countermeasures...  
+- Tracking source IP... FAILED  
+- Spoofing logs... SUCCESS  
+- Redirecting traffic through proxy nodes... Success  
+Enumerating file system...  
+/var/sys/secure/logs  
+/var/sys/secure/db  
+/var/sys/secure/users  
+/var/sys/secure/backup  
+Fetching secured logs... 32,480 entries retrieved  
+Parsing event data...  
+[03:42:17] Root login from Initializing system core...  
+Loading encryption module...  
+Verifying kernel integrity... OK  
+Bootstrapping secure environment... Done  
+Allocating memory blocks... 512MB reserved  
+Mapping virtual addresses... Complete  
+Connecting to remote node [198.51.100.42]...  
+Handshake successful. Establishing secure channel...  
+Session key exchanged: 4D6F-6E4C-69-67-6E7E  
+Tunnel established through 6 proxy nodes  
+Running system diagnostics...  
+- CPU Load: 34%  
+- Memory Usage: 512MB / 4096MB  
+- Network Activity: 128KBps  
+- Firewall Status: BYPASSED  
+Injecting payload...  ███████████ 100%  
+Payload executed successfully  
+Accessing protected memory blocks...  
+Decompiling security parameters...  
+>>> TRACE ID: 9A3F-B71C-00X2 <<<  
+Decrypting data stream... Complete    
+[/color]
+"
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="."]
 offset_right = 40.0

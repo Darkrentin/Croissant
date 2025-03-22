@@ -11,7 +11,6 @@ public partial class TankWindow : PopUpWindow
     {
         HasChangingTitle = false;
         base._Ready();
-        Parent = GetParent<Level1>();
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(437, 526));
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         maxClicks = Lib.rand.Next(1, 4);
@@ -21,8 +20,7 @@ public partial class TankWindow : PopUpWindow
     {
         if (clickcount >= maxClicks)
         {
-            Parent.WindowKillCount++;
-            Parent.WindowCount--;
+            Level1.WindowKill();
             QueueFree();
         }
         else

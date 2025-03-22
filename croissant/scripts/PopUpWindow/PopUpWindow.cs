@@ -3,7 +3,6 @@ using System;
 
 public partial class PopUpWindow : FloatWindow
 {
-    public Level1 Parent;
     protected bool HasChangingTitle = false;
     protected Timer TitleTimer;
 

@@ -35,7 +35,6 @@ public partial class BombWindow : PopUpWindow
                 Sprite.Play();
                 break;
         }
-        Parent = GetParent<Level1>();
         time = 8f;
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
@@ -47,10 +46,10 @@ public partial class BombWindow : PopUpWindow
 
     public override void OnClose()
     {
-        Parent.WindowCount--;
+        Level1.WindowCount--;
         for (int i = 0; i < 3; i++)
         {
-            Parent.AddNewWindow();
+            Level1.AddNewWindow();
         }
         QueueFree();
     }
@@ -64,7 +63,7 @@ public partial class BombWindow : PopUpWindow
 
     public void _on_timer_timeout()
     {
-        Parent.WindowCount--;
+        Level1.WindowCount--;
         QueueFree();
     }
 }
