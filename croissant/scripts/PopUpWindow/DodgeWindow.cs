@@ -17,7 +17,7 @@ public partial class DodgeWindow : PopUpWindow
         SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         cooldownTimer = new Timer();
         AddChild(cooldownTimer);
-        cooldownTimer.WaitTime = 0.45f;
+        cooldownTimer.WaitTime = 0.39f;
         cooldownTimer.OneShot = true;
         cooldownTimer.Timeout += OnCooldownTimerTimeout;
     }
