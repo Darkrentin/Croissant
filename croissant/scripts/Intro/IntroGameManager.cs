@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class IntroGameManager : Node2D
 {
@@ -9,9 +10,9 @@ public partial class IntroGameManager : Node2D
 	[Export] private PackedScene VirusScene;
 	[Export] private ColorRect ShaderRect;
 	private static Label ScoreLabel;
-	[Export] public Label ExportScoreLabel {get => ScoreLabel; set => ScoreLabel = value;}	
+	[Export] private Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
 	private static AnimationPlayer AnimationPlayer;
-	[Export] public AnimationPlayer ExportAnimationPlayer {get => AnimationPlayer; set => AnimationPlayer = value;}
+	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
 	private static Camera2D Camera;
 	private Vector2I windowSize = new Vector2I(1920, 1080);
 	public static int score = 0;
@@ -23,6 +24,7 @@ public partial class IntroGameManager : Node2D
 		Camera = GetNode<Camera2D>("Camera");
 		Player.Position = windowSize / 2;
 
+		SpawnEnemy();
 	}
 
 	private Timer enemySpawnTimer;
@@ -33,17 +35,29 @@ public partial class IntroGameManager : Node2D
 		{
 			Shoot();
 		}
-		// Creates an enemy every 0.8 to 1.2 seconds
+		// Creates an enemy every 0.8 to 1 seconds
 		if (enemySpawnTimer == null)
 		{
 			enemySpawnTimer = new Timer();
-			enemySpawnTimer.WaitTime = Lib.GetRandomNormal(0.8f, 1.2f);
+			enemySpawnTimer.WaitTime = Lib.GetRandomNormal(0.8f, 1f);
 			enemySpawnTimer.OneShot = false;
 			enemySpawnTimer.Timeout += SpawnEnemy;
 			AddChild(enemySpawnTimer);
 			enemySpawnTimer.Start();
 		}
-		UpdateShaders();
+
+		if (score >= 10)
+		{
+			UpdateShaders();
+		}
+
+		if (score == 30)
+		{
+			GameManager.State = GameManager.GameState.IntroAnimation;
+			ProcessMode = ProcessModeEnum.Disabled;
+			GetParent<Window>().Unfocusable = true;
+			//GetParent().QueueFree();
+		}
 	}
 
 	public static void AddScore()
@@ -58,9 +72,12 @@ public partial class IntroGameManager : Node2D
 		// Glitches the screen based on the score
 		if (ShaderRect != null && ShaderRect.Material is ShaderMaterial SM)
 		{
-			SM.SetShaderParameter("shake_power", score * 0.002f);
-			SM.SetShaderParameter("shake_rate", score * 0.012f);
-			SM.SetShaderParameter("shake_speed", score * 0.03f);
+			float t = Mathf.Min((score - 10) / 20.0f, 1.0f);
+			float intensityFactor = 1.0f - Mathf.Exp(-5.0f * t);
+
+			SM.SetShaderParameter("shake_power", 0.03f * intensityFactor);
+			SM.SetShaderParameter("shake_rate", 0.2f * intensityFactor);
+			SM.SetShaderParameter("shake_speed", 5f * intensityFactor);
 		}
 	}
 

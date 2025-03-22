@@ -9,7 +9,7 @@ public partial class Bullet : StaticBody2D
 	[Export] private CpuParticles2D Trail1;
 	[Export] private CpuParticles2D Trail2;
 	[Export] private CpuParticles2D Trail3;
-	[Export] private CpuParticles2D WallExplosion;
+	[Export] public CpuParticles2D WallExplosion;
 	[Export] public CpuParticles2D EnemyExplosion;
 	public bool Alive = true;
 

@@ -61,7 +61,7 @@ public partial class Level1 : Node2D
     {
         if (TimerTic < 21)
         {
-            if (_windowKillCount >= TimerTic*1.5)
+            if (_windowKillCount >= TimerTic * 1.5)
             {
                 TimerTic++;
             }

@@ -15,9 +15,9 @@ public static class States
         Virus virus = VirusScene.Instantiate<Virus>();
         GameManager.virus = virus;
         GameManager.GameRoot.AddChild(virus);
-        virus.Position = Lib.GetScreenPosition(0.5f, -0.5f)- virus.Size/2;
+        virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - virus.Size / 2;
         Lib.Print(virus.Position.ToString());
-        virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f)-new Vector2I(virus.Size.X/2,virus.Size.Y),2f);
+        virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(virus.Size.X / 2, virus.Size.Y), 2f);
 
         //change state condition
         GameManager.State = GameManager.GameState.IntroBuffer;

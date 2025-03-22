@@ -29,11 +29,12 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_stb6e"]
 radius = 473.083
 
-[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("EnemySprite", "CollisionShape")]
-scale = Vector2(0.1, 0.1)
+[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("EnemySprite", "Collision")]
+scale = Vector2(0.13, 0.13)
 script = ExtResource("1_fm0q0")
 EnemySprite = NodePath("AnimatedSprite")
-CollisionShape = NodePath("Area2D/CollisionShape")
+Collision = NodePath("Area2D/CollisionShape")
+Speed = 120.0
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h5027")

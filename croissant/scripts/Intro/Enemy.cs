@@ -4,7 +4,7 @@ using System;
 public partial class Enemy : StaticBody2D
 {
 	[Export] private AnimatedSprite2D EnemySprite;
-	[Export] private CollisionShape2D CollisionShape;
+	[Export] private CollisionShape2D Collision;
 	[Export] private float Speed = 110.0f;
 	private Player Player;
 	private float RotationSpeed;
@@ -18,6 +18,11 @@ public partial class Enemy : StaticBody2D
 		// 1 : Square
 		// 0 : Triangle
 		EnemySprite.Frame = Lib.rand.Next(0, SpriteFrames);
+
+		if (EnemySprite.Frame == 3)
+		{
+			Collision.Position += new Vector2(0, 60);
+		}
 
 		Player = GetParent().GetNode<Player>("Player");
 		Rotation = Lib.GetRandomNormal(0f, 360f);
@@ -44,7 +49,7 @@ public partial class Enemy : StaticBody2D
 			{
 				// Decreases the shape on collision with the bullet
 				EnemySprite.Frame++;
-				bullet.EnemyExplosion.Emitting = true;
+				bullet.WallExplosion.Emitting = true;
 			}
 			else
 			{
@@ -56,13 +61,24 @@ public partial class Enemy : StaticBody2D
 				QueueFree();
 			}
 
+			if (EnemySprite.Frame == 3)
+			{
+				Collision.Position += new Vector2(0, 60);
+			}
+
 			bullet.BulletCollide();
 		}
 		else if (body is Player player)
 		{
 			// Bounces back on collision with the player
 			IntroGameManager.CameraShake(8, 0.35f);
-			velocity = -velocity;
+			velocity = -velocity * 2f;
+			int rand = Lib.rand.Next(0, 2);
+			if (rand == 0)
+				EnemySprite.Modulate = new Color(1, 0, 0);
+			else
+				EnemySprite.Modulate = new Color(0, 0, 1);
+
 		}
 	}
 }

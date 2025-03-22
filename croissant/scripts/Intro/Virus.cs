@@ -10,7 +10,7 @@ public partial class Virus : FloatWindow
 
 	[Export] AnimationPlayer AnimationPlayer;
 	[Export] Node2D Eye;
-	public Vector2I CenterOfScreen = new Vector2I(600/2,480/2);
+	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 
 	[Export] Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
 	[Export] Vector2 MaxEyeDistance = new Vector2(0.1f, 0.1f);
@@ -18,7 +18,7 @@ public partial class Virus : FloatWindow
 	public Vector3 targetRotation;
 	[Export] public DialogueWindow dialogue;
 	public static Control Pause;
-	[Export] public Control ExportPause {get => Pause; set => Pause = value;}
+	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public bool On = false;
@@ -36,22 +36,22 @@ public partial class Virus : FloatWindow
 	public void DialogueFinished(string name)
 	{
 		Lib.Print(name);
-		if(name == "sleep")
+		if (name == "sleep")
 		{
 			AnimationPlayer.Play("PowerOn");
 			On = true;
 			dialogue.StartDialogue("Virus", "1");
 		}
-		else if(name=="1")
+		else if (name == "1")
 		{
-			GameManager.State = GameManager.GameState.Intro;
+			GameManager.State = GameManager.GameState.Debug;
 		}
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		if(On)
+		if (On)
 		{
 			UpdateModelRotation(delta);
 		}
@@ -90,7 +90,7 @@ public partial class Virus : FloatWindow
 	public void _on_button_pressed()
 	{
 		AnimationPlayer.Play("Hop");
-		if(dialogue.isDialogue)
+		if (dialogue.isDialogue)
 		{
 			dialogue.NextLine();
 		}
@@ -101,12 +101,13 @@ public partial class Virus : FloatWindow
 		Pause.Visible = Visible;
 	}
 
-    public override void TransitionFinished()
-    {
+	public override void TransitionFinished()
+	{
 		Lib.Print("Transition Finished");
-        if(GameManager.State == GameManager.GameState.IntroBuffer)
+		if (GameManager.State == GameManager.GameState.IntroBuffer)
 		{
 			GameManager.State = GameManager.GameState.FirstVirusDialogue;
+			GrabFocus();
 		}
-    }
+	}
 }
