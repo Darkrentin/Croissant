@@ -3,14 +3,10 @@ using System;
 
 public partial class MoveWindow : PopUpWindow
 {
-    private Timer TitleTimer = new Timer();
     public override void _Ready()
     {
+        HasChangingTitle = true;
         base._Ready();
-
-        AddChild(TitleTimer);
-        TitleTimer.Timeout += ChangeTitle;
-        ChangeTitle();
 
         Parent = GetParent<Level1>(); ;
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(384, 264));
@@ -59,10 +55,4 @@ public partial class MoveWindow : PopUpWindow
         StartExponentialTransition(target, speed, reset: true);
     }
 
-    public void ChangeTitle()
-    {
-        Title = Lib.GetCursedString();
-        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
-        TitleTimer.Start();
-    }
 }

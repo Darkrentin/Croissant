@@ -5,9 +5,25 @@ public partial class TimerWindow : PopUpWindow
 {
     [Export] public Timer timer;
     [Export] public ProgressBar progressBar;
-    private Timer TitleTimer = new Timer();
 
-    // more there is windows easier is it to close them
+    private float time;
+
+    public override void _Ready()
+    {
+        HasChangingTitle = true;
+        base._Ready();
+
+        Parent = GetParent<Level1>();
+        time = CalculateTimerDuration();
+        progressBar.MaxValue = time * 100f;
+        timer.WaitTime = time;
+        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 600));
+        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
+        progressBar.Size = Size;
+        timer.Start();
+    }
+
+        // more there is windows easier is it to close them
     private float CalculateTimerDuration()
     {
         if (Parent.WindowCount >= 10)
@@ -22,26 +38,6 @@ public partial class TimerWindow : PopUpWindow
         {
             return Lib.rand.Next(3, 5);
         }
-    }
-
-    private float time;
-
-    public override void _Ready()
-    {
-        base._Ready();
-
-        AddChild(TitleTimer);
-        TitleTimer.Timeout += ChangeTitle;
-        ChangeTitle();
-
-        Parent = GetParent<Level1>();
-        time = CalculateTimerDuration();
-        progressBar.MaxValue = time * 100f;
-        timer.WaitTime = time;
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 600));
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
-        progressBar.Size = Size;
-        timer.Start();
     }
 
     public override void OnClose()
@@ -67,10 +63,4 @@ public partial class TimerWindow : PopUpWindow
         QueueFree();
     }
 
-    public void ChangeTitle()
-    {
-        Title = Lib.GetCursedString();
-        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
-        TitleTimer.Start();
-    }
 }

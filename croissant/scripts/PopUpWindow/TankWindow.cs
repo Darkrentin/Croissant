@@ -9,6 +9,7 @@ public partial class TankWindow : PopUpWindow
     private int maxClicks;
     public override void _Ready()
     {
+        HasChangingTitle = false;
         base._Ready();
         Parent = GetParent<Level1>();
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(437, 526));

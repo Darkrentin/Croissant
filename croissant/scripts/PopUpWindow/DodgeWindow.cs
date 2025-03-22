@@ -3,18 +3,14 @@ using System;
 
 public partial class DodgeWindow : PopUpWindow
 {
-    private Timer TitleTimer = new Timer();
     private bool isMoving = false;
     private Timer cooldownTimer;
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
+        HasChangingTitle = true;
         base._Ready();
-
-        AddChild(TitleTimer);
-        TitleTimer.Timeout += ChangeTitle;
-        ChangeTitle();
 
         Parent = GetParent<Level1>();
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(390, 450));
@@ -96,10 +92,4 @@ public partial class DodgeWindow : PopUpWindow
         StartExponentialTransition(target, speed, reset: true);
     }
 
-    public void ChangeTitle()
-    {
-        Title = Lib.GetCursedString();
-        TitleTimer.WaitTime = Lib.GetRandomNormal(0f, 0.5f);
-        TitleTimer.Start();
-    }
 }

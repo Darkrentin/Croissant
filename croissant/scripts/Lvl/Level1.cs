@@ -115,12 +115,12 @@ public partial class Level1 : Node2D
             StaticWindow window = StaticWindowScene.Instantiate<StaticWindow>();
             AddChild(window);
         }
-        else if (i >= 2 && i <= 4)
+        else if (i >= 2 && i <= 5)
         {
             MoveWindow window = MoveWindowScene.Instantiate<MoveWindow>();
             AddChild(window);
         }
-        else if (i >= 5 && i <= 8)
+        else if (i >= 6 && i <= 8)
         {
             BombWindow window = BombWindowScene.Instantiate<BombWindow>();
             AddChild(window);
