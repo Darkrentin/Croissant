@@ -3,6 +3,7 @@ using System;
 
 public partial class Enemy : StaticBody2D
 {
+	[Export] private AnimationPlayer AnimationPlayer;
 	[Export] private AnimatedSprite2D EnemySprite;
 	[Export] private CollisionShape2D Collision;
 	[Export] private float Speed = 110.0f;
@@ -10,6 +11,7 @@ public partial class Enemy : StaticBody2D
 	private float RotationSpeed;
 	private Vector2 velocity;
 	private int SpriteFrames = 4;
+	private bool Alive = true;
 
 	public override void _Ready()
 	{
@@ -41,15 +43,20 @@ public partial class Enemy : StaticBody2D
 		Rotation += RotationSpeed * (float)delta;
 	}
 
+	public void OnAnimationFinished(string anim_name)
+	{
+		QueueFree();
+	}
+
 	public void OnBodyEntered(Node body)
 	{
-		if (body is Bullet bullet && bullet.Alive)
+		if (body is Bullet bullet && bullet.Alive && Alive)
 		{
 			if (EnemySprite.Frame < SpriteFrames - 1)
 			{
 				// Decreases the shape on collision with the bullet
 				EnemySprite.Frame++;
-				bullet.WallExplosion.Emitting = true;
+				bullet.EnemyHit.Emitting = true;
 			}
 			else
 			{
@@ -58,7 +65,10 @@ public partial class Enemy : StaticBody2D
 				// Explodes when it is in the triangle shape
 				IntroGameManager.CameraShake(8, 0.35f);
 				bullet.EnemyExplosion.Emitting = true;
-				QueueFree();
+				Collision.Visible = false;
+				velocity = Vector2.Zero;
+				Alive = false;
+				AnimationPlayer.Play("Depop");
 			}
 
 			if (EnemySprite.Frame == 3)
@@ -73,9 +83,12 @@ public partial class Enemy : StaticBody2D
 			// Bounces back on collision with the player
 			IntroGameManager.CameraShake(8, 0.35f);
 			velocity = -velocity * 2f;
-			int rand = Lib.rand.Next(0, 2);
+			int rand = Lib.rand.Next(0, 3);
+
 			if (rand == 0)
 				EnemySprite.Modulate = new Color(1, 0, 0);
+			else if (rand == 1)
+				EnemySprite.Modulate = new Color(0, 1, 0);
 			else
 				EnemySprite.Modulate = new Color(0, 0, 1);
 

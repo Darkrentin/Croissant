@@ -13,12 +13,14 @@ public partial class IntroGameManager : Node2D
 	[Export] private Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
 	private static AnimationPlayer AnimationPlayer;
 	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
+	[Export] public int MaxScore = 30;
 	private static Camera2D Camera;
 	private Vector2I windowSize = new Vector2I(1920, 1080);
 	public static int score = 0;
 	public static IntroGameManager Instance;
+	private Timer ShootTimer = new Timer();
+	private bool CanShoot = true;
 
-	[Export] public int MaxScore = 30;
 	public override void _Ready()
 	{
 		GetWindow().Size = GameManager.ScreenSize;
@@ -27,16 +29,27 @@ public partial class IntroGameManager : Node2D
 		Camera = GetNode<Camera2D>("Camera");
 		Player.Position = windowSize / 2;
 
+		ShootTimer.Timeout += () => CanShoot = true;
+		ShootTimer.WaitTime = 0.15f;
+		ShootTimer.OneShot = true;
+		AddChild(ShootTimer);
+
 		SpawnEnemy();
+
 	}
 
 	private Timer enemySpawnTimer;
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionJustPressed("Shoot"))
+		if (Input.IsActionPressed("Shoot"))
 		{
-			Shoot();
+			if (CanShoot)
+			{
+				CanShoot = false;
+				Shoot();
+				ShootTimer.Start();
+			}
 		}
 		// Creates an enemy every 0.8 to 1 seconds
 		if (enemySpawnTimer == null)
@@ -69,7 +82,7 @@ public partial class IntroGameManager : Node2D
 		if (ShaderRect != null && ShaderRect.Material is ShaderMaterial SM)
 		{
 			float t = Mathf.Min((score - 10) / 20.0f, 1.0f);
-			float intensityFactor = 1.0f - Mathf.Exp(-5.0f * t);
+			float intensityFactor = 0.8f - Mathf.Exp(-5.0f * t);
 
 			SM.SetShaderParameter("shake_power", 0.03f * intensityFactor);
 			SM.SetShaderParameter("shake_rate", 0.2f * intensityFactor);

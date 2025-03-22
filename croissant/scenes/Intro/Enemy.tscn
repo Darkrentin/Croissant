@@ -1,10 +1,46 @@
-[gd_scene load_steps=8 format=3 uid="uid://37mav66th0um"]
+[gd_scene load_steps=11 format=3 uid="uid://37mav66th0um"]
 
 [ext_resource type="Script" uid="uid://l8b0b3aiky2v" path="res://scripts/Intro/Enemy.cs" id="1_fm0q0"]
 [ext_resource type="Texture2D" uid="uid://sv2rs5w7mq2s" path="res://assets/sprites/introShapes/hexagon.png" id="2_n1hot"]
 [ext_resource type="Texture2D" uid="uid://da5i0d0h47amb" path="res://assets/sprites/introShapes/pentagon.png" id="3_t3wft"]
 [ext_resource type="Texture2D" uid="uid://bl6juy6yo51wo" path="res://assets/sprites/introShapes/square.png" id="4_ioq1s"]
 [ext_resource type="Texture2D" uid="uid://2lxtwa4m3jne" path="res://assets/sprites/introShapes/triangle.png" id="5_lednf"]
+
+[sub_resource type="Animation" id="Animation_n1hot"]
+resource_name = "Depop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.4, 1.4), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t3wft"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ioq1s"]
+_data = {
+&"Depop": SubResource("Animation_n1hot"),
+&"RESET": SubResource("Animation_t3wft")
+}
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_h5027"]
 animations = [{
@@ -29,12 +65,18 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_stb6e"]
 radius = 473.083
 
-[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("EnemySprite", "Collision")]
-scale = Vector2(0.13, 0.13)
+[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("AnimationPlayer", "EnemySprite", "Collision")]
+scale = Vector2(0.14, 0.14)
 script = ExtResource("1_fm0q0")
+AnimationPlayer = NodePath("AnimationPlayer")
 EnemySprite = NodePath("AnimatedSprite")
 Collision = NodePath("Area2D/CollisionShape")
 Speed = 120.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ioq1s")
+}
 
 [node name="AnimatedSprite" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_h5027")
@@ -44,4 +86,5 @@ sprite_frames = SubResource("SpriteFrames_h5027")
 [node name="CollisionShape" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_stb6e")
 
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

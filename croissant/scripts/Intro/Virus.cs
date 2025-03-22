@@ -32,7 +32,7 @@ public partial class Virus : FloatWindow
 		Size = (Vector2I)Lib.GetAspectFactor(Size);
 		dialogue.PlaceDialogueWindow();
 		dialogue.OnDialogueFinished += DialogueFinished;
-		
+
 		BlinkTimer.Timeout += Blink;
 		BlinkTimer.WaitTime = 5f;
 		BlinkTimer.Start();
@@ -103,7 +103,8 @@ public partial class Virus : FloatWindow
 
 	public static void SetPause(bool Visible)
 	{
-		Pause.Visible = Visible;
+		if (Pause != null)
+			Pause.Visible = Visible;
 	}
 
 	public override void TransitionFinished()
