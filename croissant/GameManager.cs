@@ -11,17 +11,27 @@ public partial class GameManager : Node2D
     [Export] PackedScene menuScene;
     public enum GameState
     {
-        IntroAnimation,
-        FirstVirusDialogue,
-        IntroBuffer,
-        Debug,
-        Intro,
+        //Solo Object
+        Virus,
+
+        //GameState
+        IntroGame,
+        IntroVirus,
+        VirusDialogue1,
         Level1,
-        Level2
+        Level2,
+
+        //Process State
+        IntroGameProcess,
+
+        //Buffer
+        Debug,
+        IntroVirusBuffer,
+        Void
     }
 
     public static Node2D GameRoot;
-    private static GameState _state = GameState.Intro; //0 for normal state, -1 for debug state
+    private static GameState _state = GameState.IntroGame; //0 for normal state, -1 for debug state
 
     public static GameState State
     {
@@ -80,14 +90,20 @@ public partial class GameManager : Node2D
 
         switch (State)
         {
-            case GameState.IntroAnimation:
-                States.IntroAnimation();
+            //Solo Object
+            case GameState.Virus:
+                States.Virus();
                 break;
-            case GameState.FirstVirusDialogue:
-                States.FirstVirusDialogue();
+
+            //GameState
+            case GameState.IntroGame:
+                States.IntroGame();
                 break;
-            case GameState.Intro:
-                States.Intro();
+            case GameState.IntroVirus:
+                States.IntroVirus();
+                break;
+            case GameState.VirusDialogue1:
+                States.VirusDialogue1();
                 break;
             case GameState.Level1:
                 States.Level1();
@@ -95,9 +111,15 @@ public partial class GameManager : Node2D
             case GameState.Level2:
                 States.Level2();
                 break;
+
+            //Process State
+            case GameState.IntroGameProcess:
+                States.IntroGameProcess(delta);
+                break;
+
+            //Buffer
             case GameState.Debug:
-                //debug State
-                States.StateDebug();
+                States.Debug();
                 break;
             default:
                 break;

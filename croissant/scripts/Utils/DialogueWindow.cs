@@ -67,7 +67,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isTyping = true;
 			label.VisibleCharacters++;
-			timer.WaitTime = Lib.GetRandomNormal(0.05f, 0.1f);
+			timer.WaitTime = Lib.rand.NextDouble()/4f;
 			timer.Start();
 		}
 		else
@@ -86,12 +86,12 @@ public partial class DialogueWindow : FloatWindow
 
 		if (cursorVisible)
 		{
-			label.VisibleCharacters--;
+			label.VisibleCharacters = label.GetTotalCharacterCount() - 1;
 			cursorVisible = false;
 		}
 		else
 		{
-			label.VisibleCharacters++;
+			label.VisibleCharacters = label.GetTotalCharacterCount();
 			cursorVisible = true;
 		}
 		cursorTimer.Start();
@@ -101,6 +101,7 @@ public partial class DialogueWindow : FloatWindow
 	{
 		PlaceDialogueWindow();
 		string dialogue = (string)ActualDialogue[$"{index}"];
+		label.Text.Replace("|", "");
 		label.Text += "\n> ";
 		label.Text += dialogue;
 		label.Text += "|";

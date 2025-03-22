@@ -613,9 +613,8 @@ tracks/1/keys = {
 }
 
 [sub_resource type="Animation" id="Animation_bf8f2"]
-resource_name = "blnk"
+resource_name = "Blink"
 length = 0.2
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -631,14 +630,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
+&"Blink": SubResource("Animation_bf8f2"),
 &"Hop": SubResource("Animation_k1eiq"),
 &"Init": SubResource("Animation_jl8jn"),
 &"PowerOn": SubResource("Animation_c3fl0"),
-&"RESET": SubResource("Animation_dr6to"),
-&"blnk": SubResource("Animation_bf8f2")
+&"RESET": SubResource("Animation_dr6to")
 }
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye", "dialogue", "ExportPause")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye", "dialogue", "ExportPause", "BlinkTimer")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -653,6 +652,7 @@ Eye = NodePath("SubViewport/eye")
 MaxEyeDistance = Vector2(25, 25)
 dialogue = NodePath("DialogueWindow")
 ExportPause = NodePath("SubViewport/Pause")
+BlinkTimer = NodePath("BlinkTimer")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hbnjr")
@@ -800,5 +800,8 @@ grow_vertical = 2
 [node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("10_k1eiq")]
 ParentWindow = NodePath("..")
 Margin = Vector2i(0, 0)
+
+[node name="BlinkTimer" type="Timer" parent="."]
+one_shot = true
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

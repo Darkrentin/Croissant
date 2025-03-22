@@ -77,6 +77,7 @@ VirusScene = ExtResource("4_id677")
 ShaderRect = NodePath("../Shader effects")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
+MaxScore = 3
 
 [node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 

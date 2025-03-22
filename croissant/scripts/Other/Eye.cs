@@ -1,91 +1,32 @@
 using Godot;
 
-[Tool]
 public partial class Eye : Node2D
 {
-    private Vector2 previousPosition = Vector2.Zero;
 
-	private Vector2 InitialPosition = Vector2.Zero;
-    private Vector2 velocity = Vector2.Zero;
-    private float distanceThreshold = 0.0f;
+public Virus virus;
 
-    [Export(PropertyHint.Range, "0.1, 2048.0")] private float eyeRadius = 936.0f;
-    [Export(PropertyHint.Range, "0.1, 2048.0")] private float irisRadius = 572.0f;
-    [Export(PropertyHint.Range, "0.01, 0.5")] private float irisEdgeMargin = 0.05f;
-
-    [Export(PropertyHint.Range, "0.0, 10.0")] private float velocityDamping = 1.0f;
-    [Export(PropertyHint.Range, "0.0, 10.0")] private float irisFriction = 0.2f;
-    [Export] private Vector2 gravity = new Vector2(0, 1000);
-
+    [Export] public Vector2 MaxEyeDistance = new Vector2(100f, 100f);
+    [Export] public Node2D black;
     public override void _Ready()
     {
-        UpdateThreshold();
-		InitialPosition = GlobalPosition;
-    }
-
-    private void SetEyeRadius(float value)
-    {
-        eyeRadius = value;
-        if (eyeRadius < irisRadius)
-            irisRadius = eyeRadius;
-        
-        if (!Engine.IsEditorHint())
-        {
-            AwaitReady();
-        }
-        GetNode<Node2D>("white").Scale = Vector2.One * (eyeRadius / 936.0f);
-        GetNode<Node2D>("gloss").Scale = GetNode<Node2D>("white").Scale;
-        UpdateThreshold();
-    }
-
-    private void SetIrisRadius(float value)
-    {
-        irisRadius = Mathf.Min(value, eyeRadius);
-        if (!Engine.IsEditorHint())
-        {
-            AwaitReady();
-        }
-        GetNode<Node2D>("black").Scale = Vector2.One * (irisRadius / 572.0f);
-        UpdateThreshold();
-    }
-
-    private void SetIrisMargin(float value)
-    {
-        irisEdgeMargin = value;
-        UpdateThreshold();
-    }
-
-    private void SetGravity(Vector2 value)
-    {
-        gravity = value;
-    }
-
-    private void UpdateThreshold()
-    {
-        previousPosition = GlobalPosition;
-        distanceThreshold = -(irisRadius - eyeRadius) * (0.5f - irisEdgeMargin);
+        virus = GameManager.virus;
     }
 
     public override void _Process(double d)
     {
-		float delta = (float)d;
-        velocity -= (previousPosition - GlobalPosition) * irisFriction;
-        GetNode<Node2D>("black").Position += (previousPosition - GlobalPosition);
-        GetNode<Node2D>("black").Position += velocity * delta;
+		Vector2I cursorPosition = Lib.GetCursorPosition();
+		Vector2I centerPosition = virus.Position + virus.Size / 2;
+		Vector2I relativePosition = centerPosition - cursorPosition;
 
-        if (GetNode<Node2D>("black").Position.Length() > distanceThreshold)
-        {
-            velocity -= ((GetNode<Node2D>("black").Position.Length() - distanceThreshold) *
-                         GetNode<Node2D>("black").Position.Normalized()) / delta;
-            GetNode<Node2D>("black").Position = distanceThreshold * GetNode<Node2D>("black").Position.Normalized();
-        }
+		float normalizedX = relativePosition.X / (GameManager.ScreenSize.X / 2.0f);
+		float normalizedY = relativePosition.Y / (GameManager.ScreenSize.Y / 2.0f);
 
-        velocity -= velocity * velocityDamping * delta;
-        previousPosition = GlobalPosition;
-    }
+		normalizedX = Mathf.Clamp(normalizedX, -1.0f, 1.0f);
+		normalizedY = Mathf.Clamp(normalizedY, -1.0f, 1.0f);
 
-    private async void AwaitReady()
-    {
-        await ToSignal(this, "ready");
+		float positionX = -normalizedX * MaxEyeDistance.X;
+		float positionY = -normalizedY * MaxEyeDistance.Y;
+
+		black.Position = new Vector2(positionX, positionY);
     }
 }

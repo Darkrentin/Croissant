@@ -8,7 +8,7 @@ public partial class Virus : FloatWindow
 	[Export] Camera3D Camera;
 	[Export] Node3D Computer;
 
-	[Export] AnimationPlayer AnimationPlayer;
+	[Export] public AnimationPlayer AnimationPlayer;
 	[Export] Node2D Eye;
 	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 
@@ -19,6 +19,7 @@ public partial class Virus : FloatWindow
 	[Export] public DialogueWindow dialogue;
 	public static Control Pause;
 	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
+	[Export] public Timer BlinkTimer;
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public bool On = false;
@@ -31,6 +32,10 @@ public partial class Virus : FloatWindow
 		Size = (Vector2I)Lib.GetAspectFactor(Size);
 		dialogue.PlaceDialogueWindow();
 		dialogue.OnDialogueFinished += DialogueFinished;
+		
+		BlinkTimer.Timeout += Blink;
+		BlinkTimer.WaitTime = 5f;
+		BlinkTimer.Start();
 	}
 
 	public void DialogueFinished(string name)
@@ -104,10 +109,17 @@ public partial class Virus : FloatWindow
 	public override void TransitionFinished()
 	{
 		Lib.Print("Transition Finished");
-		if (GameManager.State == GameManager.GameState.IntroBuffer)
+		if (GameManager.State == GameManager.GameState.IntroVirusBuffer)
 		{
-			GameManager.State = GameManager.GameState.FirstVirusDialogue;
+			GameManager.State = GameManager.GameState.VirusDialogue1;
 			GrabFocus();
 		}
+	}
+
+	public void Blink()
+	{
+		AnimationPlayer.Play("Blink");
+		BlinkTimer.WaitTime = Lib.GetRandomNormal(3f, 6f);
+		BlinkTimer.Start();
 	}
 }

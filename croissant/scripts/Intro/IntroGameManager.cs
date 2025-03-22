@@ -16,10 +16,13 @@ public partial class IntroGameManager : Node2D
 	private static Camera2D Camera;
 	private Vector2I windowSize = new Vector2I(1920, 1080);
 	public static int score = 0;
+	public static IntroGameManager Instance;
 
+	[Export] public int MaxScore = 30;
 	public override void _Ready()
 	{
 		GetWindow().Size = GameManager.ScreenSize;
+		Instance = this;
 
 		Camera = GetNode<Camera2D>("Camera");
 		Player.Position = windowSize / 2;
@@ -51,13 +54,6 @@ public partial class IntroGameManager : Node2D
 			UpdateShaders();
 		}
 
-		if (score == 30)
-		{
-			GameManager.State = GameManager.GameState.IntroAnimation;
-			ProcessMode = ProcessModeEnum.Disabled;
-			GetParent<Window>().Unfocusable = true;
-			//GetParent().QueueFree();
-		}
 	}
 
 	public static void AddScore()
