@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=4 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=53 format=4 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Intro/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/3D/computer/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/3D/computer/textures/PCKD854n.001_baseColor.png" id="6_c3fl0"]
 [ext_resource type="Texture2D" uid="uid://ctoq3ipwk71v7" path="res://assets/3D/computer/textures/PCKD854n.001_metallicRoughness.png" id="7_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/PC/textures/wall.jpg" id="8_kbwjh"]
+[ext_resource type="Texture2D" uid="uid://cofcs48nnvt7k" path="res://assets/PC/textures/pause.svg" id="10_bf8f2"]
 [ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Other/Eye.tscn" id="10_c3fl0"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 
@@ -384,7 +385,7 @@ albedo_color = Color(0, 0, 0, 1)
 roughness = 0.804041
 roughness_texture_channel = 1
 emission_enabled = true
-emission = Color(0.171982, 1, 0, 1)
+emission = Color(1, 0, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hqxcu"]
 _surfaces = [{
@@ -582,6 +583,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SubViewport/Color:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_bf8f2"]
 resource_name = "blnk"
@@ -600,15 +613,32 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1e-05), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_jl8jn"]
+resource_name = "Init"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SubViewport/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
 &"Hop": SubResource("Animation_k1eiq"),
+&"Init": SubResource("Animation_jl8jn"),
 &"PowerOn": SubResource("Animation_c3fl0"),
 &"RESET": SubResource("Animation_dr6to"),
 &"blnk": SubResource("Animation_bf8f2")
 }
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye", "dialogue")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye", "dialogue", "ExportPause")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -622,6 +652,7 @@ AnimationPlayer = NodePath("Computer/AnimationPlayer")
 Eye = NodePath("SubViewport/eye")
 MaxEyeDistance = Vector2(25, 25)
 dialogue = NodePath("DialogueWindow")
+ExportPause = NodePath("SubViewport/Pause")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hbnjr")
@@ -706,11 +737,7 @@ skeleton = NodePath("")
 libraries = {
 &"": SubResource("AnimationLibrary_kbwjh")
 }
-autoplay = "PowerOn"
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+autoplay = "Init"
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -737,7 +764,30 @@ scale = Vector2(0.21, 0.21)
 [node name="Color" type="ColorRect" parent="SubViewport"]
 offset_right = 600.0
 offset_bottom = 480.0
-color = Color(0, 0, 0, 1)
+color = Color(0, 0, 0, 0)
+
+[node name="Pause" type="Control" parent="SubViewport"]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorRect" type="ColorRect" parent="SubViewport/Pause"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 480.0
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewport/Pause"]
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 480.0
+texture = ExtResource("10_bf8f2")
+expand_mode = 1
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="."]
 modulate = Color(1, 1, 1, 0)

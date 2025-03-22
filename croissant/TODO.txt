@@ -26,9 +26,8 @@ Level 2 :
 - Se concentrer sur les autres domaines avant
 
 Virus :
-- Quand on met le jeu en pause, juste avant, affiche une image du logo pause sur l'écran du virus qui disparait dès qu'on est plus en pause
-- A chaque début de phrase de dialogue, le virus saute
-- Si on clique sur le bouton ON du PC, ça met le jeu en pause
+- Quand on met le jeu en pause, juste avant, affiche une image du logo pause sur l'écran du virus qui disparait dès qu'on est plus en pause @done
+- A chaque début de phrase de dialogue, le virus saute @done
 
 Autres :
 - Quand le jeu se lance, trouver une animation stylée a faire comme mettre le logo du projet un croissant, ou alors un effet de pop du milieu de l'écran à l'exterieur

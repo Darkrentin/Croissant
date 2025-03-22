@@ -45,6 +45,7 @@ public partial class MenuWindow : FloatWindow
 	public void Close()
 	{
 		Visible = false;
+		Virus.SetPause(false);
 		GetTree().Paused = false;
 	}
 
@@ -52,6 +53,7 @@ public partial class MenuWindow : FloatWindow
 	{
 		Visible = true;
 		ProcessMode = ProcessModeEnum.Always;
+		Virus.SetPause(true);
 		GetTree().Paused = true;
 	}
 

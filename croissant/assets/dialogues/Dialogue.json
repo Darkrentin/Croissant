@@ -1,5 +1,10 @@
 {
     "Virus": {
+        "sleep":
+        {
+            "0": "[shake rate=7.0 connected=1]Zzz...[/shake]",
+            "1": ""
+        },
         "1": {
             "0": "Hello!",
             "1": "I am a virus!",

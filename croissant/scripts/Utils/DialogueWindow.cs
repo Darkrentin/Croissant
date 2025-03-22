@@ -9,7 +9,7 @@ using FileAccess = Godot.FileAccess;
 
 public partial class DialogueWindow : FloatWindow
 {
-	[Export] public FloatWindow ParentWindow;
+	[Export] public Virus ParentWindow;
 	[Export] public RichTextLabel label;
 	[Export] public Timer timer;
 	[Export] public Timer cursorTimer;
@@ -29,6 +29,10 @@ public partial class DialogueWindow : FloatWindow
 
 	public Dictionary DialogueData;
 	public Dictionary ActualDialogue;
+
+    public string ActualDialogueName;
+
+    public Action<string> OnDialogueFinished;
 	public int index = 0;
 	public bool isDialogue = false;
 	// Called when the node enters the scene tree for the first time.
@@ -43,7 +47,9 @@ public partial class DialogueWindow : FloatWindow
 		cursorTimer.Timeout += ProcessCursor;
 		cursorTimer.Start();
 
-		StartDialogue("Virus", "1");
+        OnDialogueFinished += DialogueFinished;
+
+		//StartDialogue("Virus", "sleep");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,10 +57,7 @@ public partial class DialogueWindow : FloatWindow
 	{
 		if (Input.IsActionJustPressed("debug"))
 		{
-			if (isDialogue)
-			{
-				NextLine();
-			}
+			ParentWindow._on_button_pressed();
 		}
 	}
 
@@ -64,7 +67,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isTyping = true;
 			label.VisibleCharacters++;
-			timer.WaitTime = Lib.GetRandomNormal(0.02f, 0.05f);
+			timer.WaitTime = Lib.GetRandomNormal(0.05f, 0.1f);
 			timer.Start();
 		}
 		else
@@ -105,7 +108,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isDialogue = false;
 			label.Text = "";
-			DialogueFinished();
+			OnDialogueFinished(ActualDialogueName);
 			return;
 		}
 		index++;
@@ -131,13 +134,16 @@ public partial class DialogueWindow : FloatWindow
 	public void StartDialogue(string character, string id)
 	{
 		ActualDialogue = GetDialogue(character, id);
+        ActualDialogueName = id;
 		index = 0;
+        label.Text = "";
+        label.VisibleCharacters = 0;
 		PlaceDialogueWindow();
 		isDialogue = true;
 		NextLine();
 	}
 
-	public static void DialogueFinished()
+	public static void DialogueFinished(string id)
 	{
 		Lib.Print("Dialogue Finished");
 	}

@@ -9,7 +9,8 @@ public partial class FloatWindow : Window
 	public enum TransitionMode
 	{
 		Linear,
-		Exponential
+		Exponential,
+		InverseExponential
 	}
 
 	//additionnal properties
@@ -45,7 +46,7 @@ public partial class FloatWindow : Window
 
 	public List<FloatWindow> CollidedWindows = new List<FloatWindow>();
 
-	[Export] private PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
+	[Export] public PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
 
 
 	// Called when the node enters the scene tree for the first time.
@@ -163,6 +164,13 @@ public partial class FloatWindow : Window
 		StartTransition(targetPosition, transitionTime, smoothness, reset);
 	}
 
+	public void StartInverseExponentialTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
+    {
+        transitionMode = TransitionMode.InverseExponential;
+        StartTransition(targetPosition, transitionTime, smoothness, reset);
+    }
+
+
 
 
 	// Start a linear resize to a target size
@@ -178,6 +186,13 @@ public partial class FloatWindow : Window
 		resizeMode = TransitionMode.Exponential;
 		StartResize(targetSize, resizeTime);
 	}
+
+	// Start an inverse exponential resize to a target size
+    public void StartInverseExponentialResize(Vector2I targetSize, float resizeTime)
+    {
+        resizeMode = TransitionMode.InverseExponential;
+        StartResize(targetSize, resizeTime);
+    }
 
 	public void StartResizeDown(int nsize, float resizeTime)
 	{
@@ -248,6 +263,25 @@ public partial class FloatWindow : Window
 						// Compute the new position based on the exponential easing function
 						newPosition = (Vector2I)((Godot.Vector2)StartPosition).Lerp(TargetPosition, expProgress);
 						break;
+					
+					case TransitionMode.InverseExponential:
+                        // Inverse exponential easing - starts fast and slows down
+                        float ik = Smoothness;
+                        float invExpProgress;
+                        
+                        if (ik > 0.01f)
+                        {
+                            // Use 1-(1-t)^2 for inverse exponential effect
+                            invExpProgress = 1.0f - (Mathf.Exp((progress - 1.0f) * ik) - Mathf.Exp(-ik)) / (1.0f - Mathf.Exp(-ik));
+                        }
+                        else
+                        {
+                            // Fallback to linear for very small values
+                            invExpProgress = progress;
+                        }
+                        
+                        newPosition = (Vector2I)((Godot.Vector2)TargetPosition).Lerp(StartPosition,invExpProgress);
+                        break;
 
 					default:
 						GD.PushWarning("Invalid transition mode");
@@ -255,7 +289,7 @@ public partial class FloatWindow : Window
 						break;
 				}
 
-				SetWindowPosition(newPosition);
+				SetWindowPosition(newPosition, true);
 			}
 			else
 			{
@@ -304,6 +338,26 @@ public partial class FloatWindow : Window
 						newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, expProgress);
 						//Lib.Print($"Resize Time: {elapsedTimeResize} Progress: {progress} ExpProgress: {expProgress}");
 						break;
+					
+					case TransitionMode.InverseExponential:
+                        // Inverse exponential easing - starts fast and slows down
+                        float ik = Smoothness;
+                        float invExpProgress;
+                        
+                        if (ik > 0.01f)
+                        {
+                            // Use inverse exponential curve
+                            invExpProgress = 1.0f - (Mathf.Exp((progress - 1.0f) * ik) - Mathf.Exp(-ik)) / (1.0f - Mathf.Exp(-ik));
+                        }
+                        else
+                        {
+                            // Fallback to linear for very small values
+                            invExpProgress = progress;
+                        }
+                        
+                        newSize = (Vector2I)((Godot.Vector2)StartSize).Lerp(TargetSize, invExpProgress);
+                        break;
+
 					default:
 						GD.PushWarning("Invalid resize mode");
 						newSize = Size;
@@ -425,12 +479,14 @@ public partial class FloatWindow : Window
 		Shaking = false;
 		SetWindowPosition(BasePosition);
 		ShakeTimer.Stop();
+		/*
 		CpuParticles2D explosion = ExplosionScene.Instantiate<CpuParticles2D>();
 		explosion.Position = Position + Size / 2;
 
 		GameManager.GameRoot.AddChild(explosion);
 		Lib.Print("EXPLOSION POSITION : " + explosion.Position);
 		Lib.Print("POSITION : " + Position + Size / 2);
+		*/
 
 		ShakeFinished();
 	}

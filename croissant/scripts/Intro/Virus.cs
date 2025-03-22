@@ -17,7 +17,11 @@ public partial class Virus : FloatWindow
 	[Export] float RotationSmoothing = 5;
 	public Vector3 targetRotation;
 	[Export] public DialogueWindow dialogue;
+	public static Control Pause;
+	[Export] public Control ExportPause {get => Pause; set => Pause = value;}
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
+
+	public bool On = false;
 
 	public override void _Ready()
 	{
@@ -25,14 +29,32 @@ public partial class Virus : FloatWindow
 		Size = new Vector2I(300, 400);
 		//Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
 		Size = (Vector2I)Lib.GetAspectFactor(Size);
-		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size/2;
 		dialogue.PlaceDialogueWindow();
+		dialogue.OnDialogueFinished += DialogueFinished;
+	}
+
+	public void DialogueFinished(string name)
+	{
+		Lib.Print(name);
+		if(name == "sleep")
+		{
+			AnimationPlayer.Play("PowerOn");
+			On = true;
+			dialogue.StartDialogue("Virus", "1");
+		}
+		else if(name=="1")
+		{
+			GameManager.State = GameManager.GameState.Intro;
+		}
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		UpdateModelRotation(delta);
+		if(On)
+		{
+			UpdateModelRotation(delta);
+		}
 
 		// Movement Fiesta test
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
@@ -68,6 +90,23 @@ public partial class Virus : FloatWindow
 	public void _on_button_pressed()
 	{
 		AnimationPlayer.Play("Hop");
-		dialogue.NextLine();
+		if(dialogue.isDialogue)
+		{
+			dialogue.NextLine();
+		}
 	}
+
+	public static void SetPause(bool Visible)
+	{
+		Pause.Visible = Visible;
+	}
+
+    public override void TransitionFinished()
+    {
+		Lib.Print("Transition Finished");
+        if(GameManager.State == GameManager.GameState.IntroBuffer)
+		{
+			GameManager.State = GameManager.GameState.FirstVirusDialogue;
+		}
+    }
 }

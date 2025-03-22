@@ -11,6 +11,9 @@ public partial class GameManager : Node2D
     [Export] PackedScene menuScene;
     public enum GameState
     {
+        IntroAnimation,
+        FirstVirusDialogue,
+        IntroBuffer,
         Debug,
         Intro,
         Level1,
@@ -41,6 +44,7 @@ public partial class GameManager : Node2D
     public static MainWindow MainWindow;
     public static Window FixWindow;
     public static MenuWindow MenuWindow;
+    public static Virus virus;
 
     public static List<FloatWindow> Windows = new List<FloatWindow>(); // list of all windows
 
@@ -76,6 +80,12 @@ public partial class GameManager : Node2D
 
         switch (State)
         {
+            case GameState.IntroAnimation:
+                States.IntroAnimation();
+                break;
+            case GameState.FirstVirusDialogue:
+                States.FirstVirusDialogue();
+                break;
             case GameState.Intro:
                 States.Intro();
                 break;
@@ -90,7 +100,6 @@ public partial class GameManager : Node2D
                 States.StateDebug();
                 break;
             default:
-                GD.PushError("Invalid State");
                 break;
         }
     }

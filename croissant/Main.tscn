@@ -1,11 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://810np22fqce" path="res://scenes/Windows/MenuWindow.tscn" id="2_uu6xs"]
-[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Intro/Virus.tscn" id="3_r0du0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_uu6xs")
-
-[node name="Virus" parent="." instance=ExtResource("3_r0du0")]
+ExporteState = 0
