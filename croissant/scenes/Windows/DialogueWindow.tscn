@@ -1,11 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://k8kqvfq14xtp"]
+[gd_scene load_steps=6 format=3 uid="uid://k8kqvfq14xtp"]
 
 [ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/Utils/DialogueWindow.cs" id="1_o82ew"]
-[ext_resource type="Texture2D" uid="uid://xhvigeab1hap" path="res://assets/dialogues/dialogue_backgroung.png" id="2_8mcnb"]
+[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="2_0i2b1"]
 
-[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "background", "timer", "SkipButton")]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1l1uo"]
+blend_mode = 3
+
+[sub_resource type="Gradient" id="Gradient_kbwjh"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.125, 0.666667)
+colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tt50u"]
+gradient = SubResource("Gradient_kbwjh")
+fill_to = Vector2(0, 1)
+
+[node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "timer", "cursorTimer")]
 transparent_bg = true
-size = Vector2i(525, 255)
+size = Vector2i(500, 70)
 unresizable = true
 borderless = true
 always_on_top = true
@@ -13,43 +25,48 @@ transparent = true
 content_scale_mode = 1
 content_scale_aspect = 1
 script = ExtResource("1_o82ew")
-label = NodePath("RichTextLabel")
-background = NodePath("NinePatchRect")
+label = NodePath("Control/Label")
 timer = NodePath("Timer")
-SkipButton = NodePath("Button")
+cursorTimer = NodePath("CursorTimer")
+Margin = Vector2i(100, 0)
+Draggable = false
+Minimizable = false
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
-anchors_preset = -1
-anchor_right = 0.061
-anchor_bottom = 0.094
-offset_right = -0.0250015
-offset_bottom = 0.0299988
-texture = ExtResource("2_8mcnb")
-region_rect = Rect2(0, 0, 12, 12)
-patch_margin_left = 5
-patch_margin_top = 5
-patch_margin_right = 5
-patch_margin_bottom = 5
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
 
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
+[node name="Label" type="RichTextLabel" parent="Control"]
+layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.061
-anchor_bottom = 0.094
-offset_right = -0.0250015
-offset_bottom = 0.0299988
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_fonts/normal_font = ExtResource("2_0i2b1")
+theme_override_font_sizes/normal_font_size = 25
 bbcode_enabled = true
-text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla dictum diam eget dui interdum, ac porta mauris molestie. Ut cursus malesuada tristique. Aliquam iaculis auctor massa ut tempus. Donec dictum lacus semper felis rutrum, sed luctus arcu auctor. Praesent suscipit, diam scelerisque sodales dignissim, nisi quam elementum turpis, at vehicula ante justo vel lorem. Nullam eleifend dui vitae pretium venenatis. In erat enim, dictum fringilla diam eu, tempor tristique eros. Morbi scelerisque dui sit amet dictum dignissim. Duis tincidunt tincidunt ex, quis consectetur nisl efficitur id. Praesent rutrum, lorem et suscipit dapibus, erat dui consectetur lectus, et convallis sapien metus id dolor. Donec auctor suscipit enim id fringilla. Cras eget arcu a ipsum congue pharetra a sit amet felis. Duis et eleifend eros. Vivamus commodo ipsum et dui efficitur tristique."
+text = "> test
+> test2
+> test3"
+scroll_active = false
 scroll_following = true
+vertical_alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+material = SubResource("CanvasItemMaterial_1l1uo")
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = SubResource("GradientTexture2D_tt50u")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.01
+one_shot = true
 
-[node name="Button" type="Button" parent="."]
-anchors_preset = -1
-anchor_right = 0.078
-anchor_bottom = 0.122
-offset_right = -32.95
-offset_bottom = -23.11
-text = "Skip"
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[node name="CursorTimer" type="Timer" parent="."]
+wait_time = 0.4
+one_shot = true

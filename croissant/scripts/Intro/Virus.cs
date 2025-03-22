@@ -16,17 +16,17 @@ public partial class Virus : FloatWindow
 	[Export] Vector2 MaxEyeDistance = new Vector2(0.1f, 0.1f);
 	[Export] float RotationSmoothing = 5;
 	public Vector3 targetRotation;
-
-	[Export] public Dialogue dialogue;
-
+	[Export] public DialogueWindow dialogue;
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Size = new Vector2I(300, 400);
-		Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
+		//Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
+		Size = (Vector2I)Lib.GetAspectFactor(Size);
 		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size/2;
+		dialogue.PlaceDialogueWindow();
 	}
 
 	public override void _Process(double delta)

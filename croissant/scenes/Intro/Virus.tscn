@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=51 format=4 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Intro/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/3D/computer/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
@@ -9,8 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://ctoq3ipwk71v7" path="res://assets/3D/computer/textures/PCKD854n.001_metallicRoughness.png" id="7_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/PC/textures/wall.jpg" id="8_kbwjh"]
 [ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Other/Eye.tscn" id="10_c3fl0"]
-[ext_resource type="Script" uid="uid://db43b5ajbv166" path="res://scripts/Other/Dialogue.cs" id="10_k1eiq"]
-[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/fonts/NovaSquare-Regular.ttf" id="11_k1eiq"]
+[ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3
@@ -569,6 +568,21 @@ tracks/1/keys = {
 "values": [Color(1, 0, 0, 1), Color(0.171982, 1, 0, 1), Color(0.171982, 1, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_dr6to"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../SubViewport/eye:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_bf8f2"]
 resource_name = "blnk"
 length = 0.2
@@ -586,21 +600,6 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1, 1e-05), Vector2(1, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_dr6to"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../SubViewport/eye:scale")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
 &"Hop": SubResource("Animation_k1eiq"),
@@ -608,18 +607,6 @@ _data = {
 &"RESET": SubResource("Animation_dr6to"),
 &"blnk": SubResource("Animation_bf8f2")
 }
-
-[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_kbwjh"]
-blend_mode = 3
-
-[sub_resource type="Gradient" id="Gradient_kbwjh"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.767857)
-colors = PackedColorArray(0, 0, 0, 0, 1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_c3fl0"]
-gradient = SubResource("Gradient_kbwjh")
-fill_to = Vector2(0, 1)
 
 [node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationPlayer", "Eye", "dialogue")]
 transparent_bg = true
@@ -634,7 +621,7 @@ Computer = NodePath("Computer")
 AnimationPlayer = NodePath("Computer/AnimationPlayer")
 Eye = NodePath("SubViewport/eye")
 MaxEyeDistance = Vector2(25, 25)
-dialogue = NodePath("Dialogue")
+dialogue = NodePath("DialogueWindow")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_hbnjr")
@@ -760,48 +747,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Dialogue" type="Control" parent="." node_paths=PackedStringArray("label", "timer", "cursorTimer")]
-layout_mode = 3
-anchor_right = 0.987
-anchor_bottom = 0.16
-offset_right = -0.100006
-script = ExtResource("10_k1eiq")
-label = NodePath("Label")
-timer = NodePath("Timer")
-cursorTimer = NodePath("CursorTimer")
-
-[node name="Label" type="RichTextLabel" parent="Dialogue"]
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 0.812
-offset_bottom = 4.03201
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_constants/outline_size = 10
-theme_override_fonts/normal_font = ExtResource("11_k1eiq")
-theme_override_font_sizes/normal_font_size = 25
-bbcode_enabled = true
-text = "> test
-> Lorem Ipsum"
-scroll_active = false
-scroll_following = true
-vertical_alignment = 2
-
-[node name="TextureRect" type="TextureRect" parent="Dialogue"]
-material = SubResource("CanvasItemMaterial_kbwjh")
-layout_mode = 1
-anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
-texture = SubResource("GradientTexture2D_c3fl0")
-
-[node name="Timer" type="Timer" parent="Dialogue"]
-one_shot = true
-
-[node name="CursorTimer" type="Timer" parent="Dialogue"]
-wait_time = 0.4
-one_shot = true
+[node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("10_k1eiq")]
+ParentWindow = NodePath("..")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

@@ -9,104 +9,139 @@ using FileAccess = Godot.FileAccess;
 
 public partial class DialogueWindow : FloatWindow
 {
-    // Called when the node enters the scene tree for the first time.
+    [Export] public FloatWindow ParentWindow;
+	[Export] public RichTextLabel label;
+	[Export] public Timer timer;
+	[Export] public Timer cursorTimer;
 
-    [Export] public RichTextLabel label;
-    [Export] public NinePatchRect background;
-    [Export] public Timer timer;
-
-    [Export] public Window Parent;
-
-    [Export] public Button SkipButton;
-
-    public Dictionary Dialogue;
-
-    public override void _Ready()
-    {
-        base._Ready();
-        if (Parent == null)
-        {
-            Parent = GetParent() as FloatWindow;
+    private Vector2I _margin = Vector2I.Zero;
+    [Export] public Vector2I Margin{
+        get => _margin;
+        set{
+            _margin = (Vector2I)Lib.GetAspectFactor(value);
         }
-
-        label.Theme = new Theme();
-        label.Theme.DefaultFontSize = Lib.GetScreenSize(0.01f, 0).X;
-
-        const string dialoguePath = "res://assets/Dialogue/Dialogue.json";
-        LoadJson(dialoguePath);
-
     }
+	public bool cursorVisible = false;
+	public bool isTyping = false;
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-        if (Input.IsActionJustPressed("debug"))
-        {
-            ShowDialogueBox("Virus", 1);
-        }
+	public Dictionary DialogueData;
+	public Dictionary ActualDialogue;
+	public int index = 0;
+	public bool isDialogue = false;
+	// Called when the node enters the scene tree for the first time.
+	public override void _Ready()
+	{
+		const string dialoguePath = "res://assets/dialogues/Dialogue.json";
+		LoadJson(dialoguePath);
 
-    }
+		timer.Timeout += ShowNextCharacter;
+		ShowNextCharacter();
+		label.Text = "";
+		cursorTimer.Timeout += ProcessCursor;
+		cursorTimer.Start();
+		
+        StartDialogue("Virus", "1");
+	}
 
-    public void LoadJson(string path)
+	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	public override void _Process(double delta)
+	{
+		if(Input.IsActionJustPressed("debug"))
+		{
+			if(isDialogue)
+			{
+				NextLine();
+			}
+		}
+	}
+
+	public void ShowNextCharacter()
+	{
+		if(label.GetTotalCharacterCount()-1 > label.GetVisibleCharacters())
+		{
+			isTyping = true;
+			label.VisibleCharacters ++;
+			timer.WaitTime = Lib.GetRandomNormal(0.02f, 0.05f);
+			timer.Start();
+		}
+		else
+		{
+			isTyping = false;
+		}
+
+	}
+	public void ProcessCursor()
+	{
+		if(isTyping)
+		{
+			cursorTimer.Start();
+			return;
+		}
+
+		if(cursorVisible)
+		{
+			label.VisibleCharacters--;
+			cursorVisible = false;
+		}
+		else
+		{
+			label.VisibleCharacters++;
+			cursorVisible = true;
+		}
+		cursorTimer.Start();
+	}
+
+	public void NextLine()
+	{
+        PlaceDialogueWindow();
+		string dialogue = (string)ActualDialogue[$"{index}"];
+		label.Text += "\n> ";
+		label.Text += dialogue;
+		label.Text += "|";
+		if(dialogue == "")
+		{
+			isDialogue = false;
+			label.Text = "";
+			DialogueFinished();
+			return;
+		}
+		index++;
+		ShowNextCharacter();
+		
+	}
+
+	public void LoadJson(string path)
     {
         Json json = new Json();
         var file = FileAccess.Open(path, FileAccess.ModeFlags.Read);
         var json_string = Json.ParseString(file.GetAsText());
         file.Close();
 
-        Dialogue = (Dictionary)json_string;
+        DialogueData = (Dictionary)json_string;
     }
 
-    public void InitDialogeBox()
+	public Dictionary GetDialogue(string character, string id)
+	{
+		return (Dictionary)((Dictionary)DialogueData[character])[id];
+	}
+
+	public void StartDialogue(string character, string id)
+	{
+		ActualDialogue = GetDialogue(character, id);
+		index = 0;
+        PlaceDialogueWindow();
+		isDialogue = true;
+		NextLine();
+	}
+
+	public static void DialogueFinished()
+	{
+		Lib.Print("Dialogue Finished");
+	}
+
+    public void PlaceDialogueWindow()
     {
-        Vector2I DialogueBoxSize = Lib.GetScreenSize(0.2f, 0.1f);
-        Size = Lib.GetScreenSize(0.2f, 0.12f);
-
-        background.Size = DialogueBoxSize;
-
-        label.Size = new Vector2I((int)(DialogueBoxSize.X * 0.96f), (int)(DialogueBoxSize.Y * 0.7f));
-        label.Position = ((Godot.Vector2)DialogueBoxSize) * 0.02f;
-
-        SkipButton.Size = Size * new Godot.Vector2(0.3f, 0.2f);
-        SkipButton.Position = Size * new Godot.Vector2(0.6f, 0.7f);
-
-        int x, y;
-
-        x = (int)(Parent.Position.X - (Size.X / 4));
-        y = (int)(Parent.Position.Y + Parent.Size.Y - (Size.Y / 2));
-
-        x = Mathf.Clamp(x, 0, GameManager.ScreenSize.X - Size.X);
-        y = Mathf.Clamp(y, 0, GameManager.ScreenSize.Y - Size.Y);
-
-        Position = new Vector2I(x, y);
-    }
-
-    public void ShowDialogueBox(string character, int id)
-    {
-        InitDialogeBox();
-        Visible = true;
-        GrabFocus();
-        label.VisibleCharacters = 0;
-        label.Text = (string)((Dictionary)Dialogue[character])[$"{id}"];
-        timer.Start();
-    }
-
-    public void _on_timer_timeout()
-    {
-        if (label.VisibleCharacters < label.GetTotalCharacterCount())
-        {
-            label.VisibleCharacters += 1;
-            timer.Start();
-        }
-        else
-        {
-            timer.Stop();
-            LineFinished();
-        }
-    }
-
-    private void LineFinished()
-    {
+        Size = (Vector2I)Lib.GetAspectFactor(Size);
+        Position = new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2 , ParentWindow.Position.Y - Size.Y/2) + Margin;
     }
 }

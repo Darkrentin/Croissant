@@ -3,7 +3,7 @@
         "1": {
             "0": "Hello!",
             "1": "I am a virus!",
-            "2": "I am here to infect your pc!",
+            "2": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]",
             "3": ""
         }
     }
