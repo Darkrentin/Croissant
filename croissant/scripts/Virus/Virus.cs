@@ -12,6 +12,7 @@ public partial class Virus : FloatWindow
 	[Export] public AnimationTree AnimationTree;
 	public AnimationNodeStateMachinePlayback AnimationScreen;
 	[Export] Node2D Eye;
+	[Export] Node2D EyeBrow;
 	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 
 	[Export] Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
@@ -88,6 +89,16 @@ public partial class Virus : FloatWindow
 		{
 			UpdateModelRotation(delta);
 		}
+		if(Input.IsActionJustPressed("debug"))
+		{
+			AnimationScreen.Travel("Working");
+			Lib.Print("Working");
+		}
+		if(Input.IsActionJustReleased("Shoot"))
+		{
+			AnimationScreen.Travel("Idle");
+			Lib.Print("Idle");
+		}
 
 		// Movement Fiesta test
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
@@ -114,6 +125,7 @@ public partial class Virus : FloatWindow
 		float positionY = -normalizedY * MaxEyeDistance.Y;
 
 		Eye.Position = CenterOfScreen + new Vector2(positionX, positionY);
+		EyeBrow.Position = CenterOfScreen + new Vector2(positionX, positionY) - new Vector2(0, 140);
 
 		targetRotation = new Vector3(rotationX, rotationY, Computer.Rotation.Z);
 

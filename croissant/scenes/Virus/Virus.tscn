@@ -1,4 +1,4 @@
-[gd_scene load_steps=83 format=4 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=86 format=4 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Virus/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
@@ -11,6 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://cofcs48nnvt7k" path="res://assets/sprites/virus/pause.svg" id="10_bf8f2"]
 [ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Virus/Eye.tscn" id="10_c3fl0"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
+[ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3
@@ -570,42 +571,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../SubViewport/Color:color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("../SubViewport/Working:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("../SubViewport/Working/Label:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
@@ -724,6 +689,30 @@ tracks/2/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_oq100"]
 resource_name = "Working"
@@ -760,10 +749,10 @@ tracks/2/path = NodePath("SubViewport/Working/Label:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [true]
+"values": [true, true]
 }
 
 [sub_resource type="Animation" id="Animation_g3po4"]
@@ -840,14 +829,43 @@ tracks/2/path = NodePath("SubViewport/Working/Label:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.45, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, true, true]
+}
+
+[sub_resource type="Animation" id="Animation_cebil"]
+resource_name = "Angry"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.436332]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.436332]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oq100"]
 _data = {
+&"Angry": SubResource("Animation_cebil"),
 &"Idle": SubResource("Animation_igvld"),
 &"Off": SubResource("Animation_7qgky"),
 &"PowerOn": SubResource("Animation_6qkuw"),
@@ -857,8 +875,15 @@ _data = {
 &"WorkingOn": SubResource("Animation_hlkw5")
 }
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cebil"]
+animation = &"Angry"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_igvld"]
 animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xl0md"]
+animation = &"Angry"
+play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7qgky"]
 animation = &"Off"
@@ -882,26 +907,11 @@ animation = &"WorkingOn"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g3po4"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7qgky"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6qkuw"]
 break_loop_at_end = true
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cebil"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xl0md"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_26nw7"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0sk7e"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38h0a"]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g1gol"]
@@ -909,15 +919,7 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ctv3p"]
 switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lffwj"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wiym5"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0porm"]
-switch_mode = 2
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s3vw3"]
 
@@ -925,27 +927,50 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_aaoaw"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oq100"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hlkw5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6l2n"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_igvld"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7qgky"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cebil"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xl0md"]
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6qkuw"]
+states/Angry/node = SubResource("AnimationNodeAnimation_cebil")
+states/Angry/position = Vector2(1016, 218)
 states/End/position = Vector2(1222, 100)
 states/Idle/node = SubResource("AnimationNodeAnimation_igvld")
-states/Idle/position = Vector2(850, 179)
+states/Idle/position = Vector2(850, 100)
+"states/Not Angry/node" = SubResource("AnimationNodeAnimation_xl0md")
+"states/Not Angry/position" = Vector2(1016, 304)
 states/Off/node = SubResource("AnimationNodeAnimation_7qgky")
-states/Off/position = Vector2(328.5, 100)
+states/Off/position = Vector2(327.5, 100)
 states/PowerOff/node = SubResource("AnimationNodeAnimation_v6l2n")
-states/PowerOff/position = Vector2(850, 322)
+states/PowerOff/position = Vector2(474.5, 304)
 states/PowerOn/node = SubResource("AnimationNodeAnimation_g3po4")
 states/PowerOn/position = Vector2(474.5, 100)
 states/Start/position = Vector2(208, 100)
 states/Working/node = SubResource("AnimationNodeAnimation_6qkuw")
-states/Working/position = Vector2(850, -7)
+states/Working/position = Vector2(850, -149)
 states/WorkingOff/node = SubResource("AnimationNodeAnimation_oq100")
-states/WorkingOff/position = Vector2(1016, 100)
+states/WorkingOff/position = Vector2(1016, -42)
 states/WorkingOn/node = SubResource("AnimationNodeAnimation_hlkw5")
-states/WorkingOn/position = Vector2(676, 100)
-transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "WorkingOff", "End", SubResource("AnimationNodeStateMachineTransition_7qgky"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "PowerOn", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_cebil"), "WorkingOff", "PowerOff", SubResource("AnimationNodeStateMachineTransition_xl0md"), "PowerOn", "PowerOff", SubResource("AnimationNodeStateMachineTransition_26nw7"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "PowerOff", "PowerOn", SubResource("AnimationNodeStateMachineTransition_38h0a"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_lffwj"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_wiym5"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_0porm"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Off", SubResource("AnimationNodeStateMachineTransition_aaoaw")]
-graph_offset = Vector2(78.5, -78)
+states/WorkingOn/position = Vector2(676, -42)
+transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Off", SubResource("AnimationNodeStateMachineTransition_aaoaw"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_oq100"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_hlkw5"), "Idle", "Angry", SubResource("AnimationNodeStateMachineTransition_v6l2n"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_igvld"), "PowerOff", "Off", SubResource("AnimationNodeStateMachineTransition_7qgky"), "Angry", "Not Angry", SubResource("AnimationNodeStateMachineTransition_cebil"), "Not Angry", "Idle", SubResource("AnimationNodeStateMachineTransition_xl0md")]
+graph_offset = Vector2(118.126, -111)
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "Eye", "dialogue", "ExportPause", "BlinkTimer")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationScale", "AnimationTree", "Eye", "EyeBrow", "dialogue", "ExportPause", "BlinkTimer")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -955,7 +980,10 @@ transparent = true
 script = ExtResource("1_hbnjr")
 Camera = NodePath("Camera3D")
 Computer = NodePath("Computer")
+AnimationScale = NodePath("AnimationScale")
+AnimationTree = NodePath("AnimationTree")
 Eye = NodePath("SubViewport/eye")
+EyeBrow = NodePath("SubViewport/eyebrow")
 MaxEyeDistance = Vector2(25, 25)
 dialogue = NodePath("DialogueWindow")
 ExportPause = NodePath("SubViewport/Pause")
@@ -1062,6 +1090,19 @@ scale = Vector2(0.21, 0.21)
 position = Vector2(150, 0)
 scale = Vector2(0.21, 0.21)
 
+[node name="eyebrow" type="Node2D" parent="SubViewport"]
+position = Vector2(300, 100)
+
+[node name="L" type="Sprite2D" parent="SubViewport/eyebrow"]
+position = Vector2(-148, 13)
+scale = Vector2(1, 0.23)
+texture = ExtResource("10_oq100")
+
+[node name="R" type="Sprite2D" parent="SubViewport/eyebrow"]
+position = Vector2(148, 13)
+scale = Vector2(1, 0.23)
+texture = ExtResource("10_oq100")
+
 [node name="Color" type="ColorRect" parent="SubViewport"]
 offset_right = 600.0
 offset_bottom = 480.0
@@ -1088,7 +1129,6 @@ texture = ExtResource("10_bf8f2")
 expand_mode = 1
 
 [node name="Working" type="Control" parent="SubViewport"]
-visible = false
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
@@ -1166,6 +1206,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0

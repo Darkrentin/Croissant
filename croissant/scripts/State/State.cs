@@ -25,7 +25,7 @@ public static class States
         GameManager.virus = virus;
         GameManager.GameRoot.AddChild(virus);
         virus.Position = Lib.GetScreenPosition(0.5f, 0.5f) - virus.Size / 2;
-        virus.AnimationScale.Play("PowerOn");
+        virus.AnimationScreen.Travel("PowerOn");
         virus.On = true;
 
         //change state condition
