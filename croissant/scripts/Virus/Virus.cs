@@ -8,7 +8,9 @@ public partial class Virus : FloatWindow
 	[Export] Camera3D Camera;
 	[Export] Node3D Computer;
 
-	[Export] public AnimationPlayer AnimationPlayer;
+	[Export] public AnimationPlayer AnimationScale;
+	[Export] public AnimationTree AnimationTree;
+	public AnimationNodeStateMachinePlayback AnimationScreen;
 	[Export] Node2D Eye;
 	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 
@@ -27,6 +29,8 @@ public partial class Virus : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
+		AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
+		AnimationScreen.Travel("Off");
 		Size = new Vector2I(300, 400);
 		//Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
 		Size = (Vector2I)Lib.GetAspectFactor(Size);
@@ -48,7 +52,7 @@ public partial class Virus : FloatWindow
 				StartExponentialTransition(GameManager.ScreenSize-Size, 1f);
 				break;
 			case "sleep":
-				AnimationPlayer.Play("PowerOn");
+				AnimationScreen.Travel("Idle");
 				On = true;
 				dialogue.StartDialogue("Virus", "1");
 				break;
@@ -118,7 +122,7 @@ public partial class Virus : FloatWindow
 
 	public void _on_button_pressed()
 	{
-		AnimationPlayer.Play("Hop");
+		AnimationScale.Play("Hop");
 		if (dialogue.isDialogue)
 		{
 			dialogue.NextLine();
@@ -148,7 +152,7 @@ public partial class Virus : FloatWindow
 
 	public void Blink()
 	{
-		AnimationPlayer.Play("Blink");
+		AnimationScale.Play("Blink");
 		BlinkTimer.WaitTime = Lib.GetRandomNormal(3f, 6f);
 		BlinkTimer.Start();
 	}
