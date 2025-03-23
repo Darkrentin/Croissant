@@ -79,6 +79,7 @@ ExportShaderRect = NodePath("../Shader effects")
 ExportGameExplosion = ExtResource("5_b7rdj")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
+MaxScore = 2
 
 [node name="Player" parent="Game" instance=ExtResource("3_g36va")]
 

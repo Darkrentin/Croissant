@@ -10,6 +10,34 @@
 			"1": "I am a virus!",
 			"2": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]",
 			"3": ""
+		},
+		"tuto1":{
+			"0": "Tuto1",
+			"1": ""
+		},
+		"tuto2":{
+			"0": "Tuto2",
+			"1": ""
+		},
+		"tuto3":{
+			"0": "Tuto3",
+			"1": ""
+		},
+		"tuto4":{
+			"0": "Tuto4",
+			"1": ""
+		},
+		"tuto5":{
+			"0": "Tuto5",
+			"1": ""
+		},
+		"tuto6":{
+			"0": "Tuto6",
+			"1": ""
+		},
+		"tutoEnd":{
+			"0": "TutoEnd",
+			"1": ""
 		}
 	}
 }

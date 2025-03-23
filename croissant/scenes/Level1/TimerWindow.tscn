@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/Level1/TimerWindow.cs" id="1_gkcfg"]
 [ext_resource type="Texture2D" uid="uid://b12awpnqfs3mp" path="res://assets/popups/popup2.png" id="2_6061h"]
 
-
 [node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
 position = Vector2i(0, 36)
 unresizable = true
@@ -30,5 +29,3 @@ expand_mode = 1
 offset_right = 100.0
 offset_bottom = 100.0
 step = 1.0
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -41,16 +41,40 @@ public partial class Virus : FloatWindow
 	public void DialogueFinished(string name)
 	{
 		Lib.Print(name);
-		if (name == "sleep")
+		switch(name)
 		{
-			AnimationPlayer.Play("PowerOn");
-			On = true;
-			dialogue.StartDialogue("Virus", "1");
+			case "1":
+				GameManager.State = GameManager.GameState.TutoBuffer;
+				StartExponentialTransition(GameManager.ScreenSize-Size, 1f);
+				break;
+			case "sleep":
+				AnimationPlayer.Play("PowerOn");
+				On = true;
+				dialogue.StartDialogue("Virus", "1");
+				break;
+			case "tuto1":
+				VirusTuto.tuto1();
+				break;
+			case "tuto2":
+				VirusTuto.tuto2();
+				break;
+			case "tuto3":
+				VirusTuto.tuto3();
+				break;
+			case "tuto4":
+				VirusTuto.tuto4();
+				break;
+			case "tuto5":
+				VirusTuto.tuto5();
+				break;
+			case "tuto6":
+				VirusTuto.tuto6();
+				break;
+			case "tutoEnd":
+				GameManager.State = GameManager.GameState.Level1;
+				break;
 		}
-		else if (name == "1")
-		{
-			GameManager.State = GameManager.GameState.Level1;
-		}
+		
 	}
 
 	public override void _Process(double delta)
@@ -113,6 +137,11 @@ public partial class Virus : FloatWindow
 		if (GameManager.State == GameManager.GameState.IntroVirusBuffer)
 		{
 			GameManager.State = GameManager.GameState.VirusDialogue1;
+			GrabFocus();
+		}
+		if(GameManager.State == GameManager.GameState.TutoBuffer)
+		{
+			GameManager.State = GameManager.GameState.VirusTuto;
 			GrabFocus();
 		}
 	}

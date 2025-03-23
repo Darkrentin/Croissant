@@ -1114,7 +1114,7 @@ expand_mode = 1
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 visible = false
 sprite_frames = SubResource("SpriteFrames_gtpyl")
-animation = &"banana"
+animation = &"spin"
 centered = false
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
@@ -1129,5 +1129,3 @@ fill_mode = 1
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.973
-
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

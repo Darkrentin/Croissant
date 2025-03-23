@@ -5,8 +5,8 @@ using System.Reflection.PortableExecutable;
 public partial class TankWindow : PopUpWindow
 {
     [Export] public ProgressBar progressBar;
-    private int clickcount = 0;
-    private int maxClicks;
+    public int clickcount = 0;
+    public int maxClicks;
     public override void _Ready()
     {
         HasChangingTitle = false;

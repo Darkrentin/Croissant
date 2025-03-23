@@ -18,6 +18,7 @@ public partial class GameManager : Node2D
         IntroGame,
         IntroVirus,
         VirusDialogue1,
+        VirusTuto,
         Level1,
         Level2,
 
@@ -28,6 +29,7 @@ public partial class GameManager : Node2D
         Debug,
         IntroVirusBuffer,
         VirusDialogue1Buffer,
+        TutoBuffer,
         Void
     }
 
@@ -105,6 +107,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.VirusDialogue1:
                 States.VirusDialogue1();
+                break;
+            case GameState.VirusTuto:
+                States.VirusTuto();
                 break;
             case GameState.Level1:
                 States.Level1();

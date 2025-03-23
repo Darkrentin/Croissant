@@ -153,6 +153,5 @@ public partial class DialogueWindow : FloatWindow
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
 		Position = new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin;
-		Lib.Print(Margin.ToString());
 	}
 }

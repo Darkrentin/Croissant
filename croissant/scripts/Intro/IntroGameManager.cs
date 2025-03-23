@@ -103,7 +103,7 @@ public partial class IntroGameManager : Node2D
 		}
 		CameraShake(50f, 0.5f);
 		CpuParticles2D GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
-		GameExplosion.Position = GameManager.ScreenSize / 3;
+		GameExplosion.Position = Lib.GetScreenPosition(0.5f, 0.5f);
 		GameManager.GameRoot.AddChild(GameExplosion);
 		GameExplosion.Emitting = true;
 	}

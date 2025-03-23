@@ -4,7 +4,7 @@ using System.Numerics;
 
 public partial class BombWindow : PopUpWindow
 {
-    [Export] private Timer timer;
+    [Export] public Timer timer;
     [Export] private ProgressBar progressBar;
     [Export] private AnimatedSprite2D Sprite;
     [Export] private TextureRect Texture;
@@ -14,15 +14,16 @@ public partial class BombWindow : PopUpWindow
     {
         HasChangingTitle = true;
         base._Ready();
+        timer.Timeout += _on_timer_timeout;
 
         int randNum = Lib.rand.Next(0, 4);
         switch (randNum)
         {
             case 0:
-                Texture.Texture = ResourceLoader.Load<Godot.Texture2D>("res://assets/popup/bomb1.png");
+                Texture.Texture = ResourceLoader.Load<Godot.Texture2D>("res://assets/popups/bomb1.png");
                 break;
             case 1:
-                Texture.Texture = ResourceLoader.Load<Godot.Texture2D>("res://assets/popup/bomb2.png");
+                Texture.Texture = ResourceLoader.Load<Godot.Texture2D>("res://assets/popups/bomb2.png");
                 break;
             case 2:
                 Sprite.Visible = true;

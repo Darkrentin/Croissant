@@ -10,6 +10,9 @@ public partial class MainWindow : FloatWindow
         Lib.Print("MainWindow is ready!");
         //Set the main window properties
         Position = new Vector2I(0, 0);
+        ContentScaleSize = new Vector2I(1920, 1080);
+        ContentScaleMode = ContentScaleModeEnum.CanvasItems;
+        ContentScaleAspect = ContentScaleAspectEnum.Expand;
         //Size = DisplayServer.ScreenGetUsableRect().Size;
         Size = GameManager.ScreenSize;
     }
