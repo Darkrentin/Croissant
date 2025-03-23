@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/Windows/MenuWindow.cs" id="1_ak1ko"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu")]
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton")]
 position = Vector2i(0, 36)
 unresizable = true
 always_on_top = true
 popup_window = true
 script = ExtResource("1_ak1ko")
 Menu = NodePath("Control")
+FakeDesktopButton = NodePath("Control/FakeDesktop")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -27,5 +28,14 @@ anchor_right = 0.9
 anchor_bottom = 0.4
 offset_bottom = -6.0
 text = "Quit"
+
+[node name="FakeDesktop" type="CheckButton" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.46
+anchor_right = 1.0
+anchor_bottom = 0.77
+text = "Fake Desktop"
+clip_text = true
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_quit_button_pressed"]

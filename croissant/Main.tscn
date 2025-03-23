@@ -1,9 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://810np22fqce" path="res://scenes/Windows/MenuWindow.tscn" id="2_uu6xs"]
+[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="3_r0du0"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_uu6xs")
 ExporteState = 0
+
+[node name="FakeDesktop" type="TextureRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_r0du0")
+expand_mode = 1

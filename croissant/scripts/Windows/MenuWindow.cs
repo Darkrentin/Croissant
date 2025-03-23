@@ -4,6 +4,8 @@ using System;
 public partial class MenuWindow : FloatWindow
 {
 	[Export] private Control Menu;
+	[Export] public CheckButton FakeDesktopButton;
+	public bool FakeDesktop;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -15,6 +17,7 @@ public partial class MenuWindow : FloatWindow
 
 		SetDeferred("custom_minimum_size", windowSize);
 		Menu.SetDeferred("size", windowSize);
+		FakeDesktopButton.Toggled+=FakeDesktopButtonToggled;
 	}
 
 	public override void _Process(double delta)
@@ -66,5 +69,11 @@ public partial class MenuWindow : FloatWindow
 	{
 		Lib.Print("OnClose MenuWindow");
 		Close();
+	}
+
+	public void FakeDesktopButtonToggled(bool toggled)
+	{
+		FakeDesktop = toggled;
+		MainWindow.FakeBackground.Visible = FakeDesktop;
 	}
 }
