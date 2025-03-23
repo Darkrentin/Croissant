@@ -13,6 +13,7 @@ public partial class DialogueWindow : FloatWindow
 	[Export] public RichTextLabel label;
 	[Export] public Timer timer;
 	[Export] public Timer cursorTimer;
+	[Export] public bool CanSkip = false;
 
 	private Vector2I _margin = new Vector2I(0, 0);
 	[Export]
@@ -98,20 +99,27 @@ public partial class DialogueWindow : FloatWindow
 	}
 
 	public void NextLine()
-	{
+	{	
+		if(isTyping && !CanSkip)
+		{
+			return;
+		}
 		PlaceDialogueWindow();
-		string dialogue = (string)ActualDialogue[$"{index}"];
+		Dictionary dialogue = ((Dictionary)ActualDialogue[$"{index}"]);
+		string text = (String)dialogue["text"];
+		string anim = (String)dialogue["anim"];
 		label.Text.Replace("|", "");
 		label.Text += "\n> ";
-		label.Text += dialogue;
+		label.Text += text;
 		label.Text += "|";
-		if (dialogue == "")
+		if (text == "")
 		{
 			isDialogue = false;
 			label.Text = "";
 			OnDialogueFinished(ActualDialogueName);
 			return;
 		}
+		GameManager.virus.AnimationScreen.Travel(anim);
 		index++;
 		ShowNextCharacter();
 

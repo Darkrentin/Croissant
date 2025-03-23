@@ -2,42 +2,42 @@
 	"Virus": {
 		"sleep":
 		{
-			"0": "[shake rate=7.0 connected=1]Zzz...[/shake]",
-			"1": ""
+			"0": {"text":"[shake rate=7.0 connected=1]Zzz...[/shake]", "anim": "Off"},
+			"1": {"text":"", "anim": ""}
 		},
 		"1": {
-			"0": "Hello!",
-			"1": "I am a virus!",
-			"2": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]",
-			"3": ""
+			"0": {"text": "Hello!", "anim": "Idle"},
+			"1": {"text": "I am a virus!", "anim": "Idle"},
+			"2": {"text": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]", "anim": "Idle"},
+			"3": {"text": "", "anim": ""}
 		},
 		"tuto1":{
-			"0": "Tuto1",
-			"1": ""
+			"0": {"text": "Tuto1", "anim": "Working"},
+			"1": {"text": "", "anim": ""}
 		},
 		"tuto2":{
-			"0": "Tuto2",
-			"1": ""
+			"0": {"text": "Tuto2", "anim": "Angry"},
+			"1": {"text": "", "anim": ""}
 		},
 		"tuto3":{
-			"0": "Tuto3",
-			"1": ""
+			"0": {"text": "Tuto3", "anim": "Sad"},
+			"1": {"text": "", "anim": ""}
 		},
 		"tuto4":{
-			"0": "Tuto4",
-			"1": ""
+			"0": {"text": "Tuto4", "anim": "Surprise"},
+			"1": {"text": "", "anim": ""}
 		},
 		"tuto5":{
-			"0": "Tuto5",
-			"1": ""
+			"0": {"text": "Tuto5", "anim": "Off"},
+			"1": {"text": "", "anim": ""}
 		},
 		"tuto6":{
-			"0": "Tuto6",
-			"1": ""
+			"0": {"text": "Tuto6", "anim": "Idle"},
+			"1": {"text": "", "anim": ""}
 		},
 		"tutoEnd":{
-			"0": "TutoEnd",
-			"1": ""
+			"0": {"text": "TutoEnd", "anim": "Idle"},
+			"1": {"text": "", "anim": ""}
 		}
 	}
 }

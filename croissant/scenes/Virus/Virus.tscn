@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=4 uid="uid://cbd8iklbee2ig"]
+[gd_scene load_steps=116 format=4 uid="uid://cbd8iklbee2ig"]
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Virus/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
@@ -7,11 +7,14 @@
 [ext_resource type="Texture2D" uid="uid://bx3xixfeuwwap" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_normal.png" id="4_kbwjh"]
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/sprites/virus/computer3D/textures/PCKD854n.001_baseColor.png" id="6_c3fl0"]
 [ext_resource type="Texture2D" uid="uid://ctoq3ipwk71v7" path="res://assets/sprites/virus/computer3D/textures/PCKD854n.001_metallicRoughness.png" id="7_k1eiq"]
+[ext_resource type="Texture2D" uid="uid://ctfp0j1fib8gf" path="res://assets/sprites/virus/eye/tear.png" id="8_hlkw5"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="8_kbwjh"]
 [ext_resource type="Texture2D" uid="uid://cofcs48nnvt7k" path="res://assets/sprites/virus/pause.svg" id="10_bf8f2"]
 [ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Virus/Eye.tscn" id="10_c3fl0"]
+[ext_resource type="Texture2D" uid="uid://c1s4mspfyfp22" path="res://assets/sprites/virus/eye/Exp.png" id="10_g3po4"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
+[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3
@@ -513,6 +516,36 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_rihhl")
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_igvld"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("13_hlkw5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_hlkw5"]
+material = SubResource("StandardMaterial3D_igvld")
+size = Vector2(30, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7qgky"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("8_hlkw5")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_v6l2n"]
+material = SubResource("StandardMaterial3D_7qgky")
+size = Vector2(20, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cebil"]
+transparency = 2
+alpha_scissor_threshold = 0.5
+alpha_antialiasing_mode = 0
+albedo_texture = ExtResource("10_g3po4")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_g3po4"]
+material = SubResource("StandardMaterial3D_cebil")
+size = Vector2(20, 40)
+
 [sub_resource type="Animation" id="Animation_bf8f2"]
 resource_name = "Blink"
 length = 0.2
@@ -579,37 +612,9 @@ _data = {
 &"RESET": SubResource("Animation_dr6to")
 }
 
-[sub_resource type="Animation" id="Animation_cebil"]
-resource_name = "Angry"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/eyebrow/L:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.436332]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/eyebrow/R:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, -0.436332]
-}
-
 [sub_resource type="Animation" id="Animation_igvld"]
 resource_name = "Idle"
-length = 0.1
+length = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -777,57 +782,89 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(148, 13)]
 }
-
-[sub_resource type="Animation" id="Animation_xl0md"]
-resource_name = "Sad"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/eyebrow/L:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Computer/Angry:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0, -0.436332]
+"values": [Vector3(1.5708, 0, 3.14159)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/eyebrow/R:rotation")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Computer/Angry:scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0, 0.436332]
+"values": [Vector3(1.255, 1.255, 1.255)]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SubViewport/eyebrow/L:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Computer/Sad:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(-148, 13), Vector2(-180, 13)]
+"values": [Vector3(1.5708, 0, 3.14159)]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("SubViewport/eyebrow/R:position")
-tracks/3/interp = 2
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Computer/Sad:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(148, 13), Vector2(180, 13)]
+"values": [Vector3(1, 1, 1)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("SubViewport/eyebrow:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 100)]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Computer/Exp:rotation")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 3.14159)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Computer/Exp:scale")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.255, 1.255, 1.255)]
 }
 
 [sub_resource type="Animation" id="Animation_oq100"]
@@ -975,32 +1012,410 @@ tracks/3/keys = {
 "values": [Vector2(1, 1), Vector2(1, 0.1)]
 }
 
+[sub_resource type="Animation" id="Animation_cebil"]
+resource_name = "AngryOn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.436332]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.436332]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Computer/Angry:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.099, 0.101),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(1.5708, 0, 3.14159), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_26nw7"]
+resource_name = "Angry"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow/L:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-148, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.436332]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/eyebrow/R:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(148, 13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.436332]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Computer/Angry:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Computer/Angry:scale")
+tracks/5/interp = 2
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.255, 1.255, 1.255), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xl0md"]
+resource_name = "SadOn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.436332]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.436332]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/eyebrow/L:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-148, 13), Vector2(-180, 13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/eyebrow/R:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(148, 13), Vector2(180, 13)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Computer/Sad:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.099, 0.101),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 3.14159), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_0sk7e"]
+resource_name = "Sad"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow/L:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-180, 13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.436332]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/eyebrow/R:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(180, 13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.436332]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Computer/Sad:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Computer/Sad:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.225, 1.225, 1.225), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_38h0a"]
+resource_name = "SurpriseOn"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(300, 100), Vector2(300, 60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -0.261799]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.261799]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Computer/Exp:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.099, 0.101),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 3.14159), Vector3(1.5708, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_g1gol"]
+resource_name = "Surprise"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/eyebrow:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(300, 60)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/eyebrow/L:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.261799]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/eyebrow/R:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.261799]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Computer/Exp:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1.5708, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Computer/Exp:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.255, 1.255, 1.255), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oq100"]
 _data = {
-&"Angry": SubResource("Animation_cebil"),
+&"Angry": SubResource("Animation_26nw7"),
+&"AngryOn": SubResource("Animation_cebil"),
 &"Idle": SubResource("Animation_igvld"),
 &"Off": SubResource("Animation_7qgky"),
 &"PowerOn": SubResource("Animation_6qkuw"),
 &"RESET": SubResource("Animation_v6l2n"),
-&"Sad": SubResource("Animation_xl0md"),
+&"Sad": SubResource("Animation_0sk7e"),
+&"SadOn": SubResource("Animation_xl0md"),
+&"Surprise": SubResource("Animation_g1gol"),
+&"SurpriseOn": SubResource("Animation_38h0a"),
 &"Working": SubResource("Animation_oq100"),
 &"WorkingOff": SubResource("Animation_g3po4"),
 &"WorkingOn": SubResource("Animation_hlkw5")
 }
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cebil"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_38h0a"]
 animation = &"Angry"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xl0md"]
+animation = &"AngryOn"
 play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_cebil"]
+animation = &"AngryOn"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_igvld"]
 animation = &"Idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xl0md"]
-animation = &"Angry"
-play_mode = 1
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_26nw7"]
-animation = &"Sad"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7qgky"]
 animation = &"Off"
@@ -1012,8 +1427,25 @@ play_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g3po4"]
 animation = &"PowerOn"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0sk7e"]
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g1gol"]
 animation = &"Sad"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_26nw7"]
+animation = &"SadOn"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0sk7e"]
+animation = &"SadOn"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wiym5"]
+animation = &"Surprise"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ctv3p"]
+animation = &"SurpriseOn"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lffwj"]
+animation = &"SurpriseOn"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6qkuw"]
 animation = &"Working"
@@ -1042,6 +1474,7 @@ switch_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_s3vw3"]
+advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qtk15"]
 
@@ -1060,50 +1493,82 @@ switch_mode = 2
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_cebil"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xl0md"]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_38h0a"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lffwj"]
-switch_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wiym5"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0porm"]
+reset = false
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xsmmv"]
+break_loop_at_end = true
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lffwj"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_t2glt"]
+break_loop_at_end = true
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5bq7i"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6budr"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_rhxnc"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_d4u37"]
+break_loop_at_end = true
+switch_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6qkuw"]
-states/Angry/node = SubResource("AnimationNodeAnimation_cebil")
-states/Angry/position = Vector2(768, 304)
+states/Angry/node = SubResource("AnimationNodeAnimation_38h0a")
+states/Angry/position = Vector2(574.126, 381)
+states/AngryOff/node = SubResource("AnimationNodeAnimation_xl0md")
+states/AngryOff/position = Vector2(519, 304)
+states/AngryOn/node = SubResource("AnimationNodeAnimation_cebil")
+states/AngryOn/position = Vector2(630, 304)
 states/End/position = Vector2(1222, 100)
 states/Idle/node = SubResource("AnimationNodeAnimation_igvld")
 states/Idle/position = Vector2(850, 100)
-"states/Not Angry/node" = SubResource("AnimationNodeAnimation_xl0md")
-"states/Not Angry/position" = Vector2(657, 304)
-states/NotSad/node = SubResource("AnimationNodeAnimation_26nw7")
-states/NotSad/position = Vector2(871.126, 304)
 states/Off/node = SubResource("AnimationNodeAnimation_7qgky")
 states/Off/position = Vector2(327.5, 100)
 states/PowerOff/node = SubResource("AnimationNodeAnimation_v6l2n")
-states/PowerOff/position = Vector2(474.5, 304)
+states/PowerOff/position = Vector2(474.5, 175)
 states/PowerOn/node = SubResource("AnimationNodeAnimation_g3po4")
 states/PowerOn/position = Vector2(474.5, 100)
-states/Sad/node = SubResource("AnimationNodeAnimation_0sk7e")
-states/Sad/position = Vector2(962.126, 304)
+states/Sad/node = SubResource("AnimationNodeAnimation_g1gol")
+states/Sad/position = Vector2(850, 381)
+states/SadOff/node = SubResource("AnimationNodeAnimation_26nw7")
+states/SadOff/position = Vector2(788.126, 304)
+states/SadOn/node = SubResource("AnimationNodeAnimation_0sk7e")
+states/SadOn/position = Vector2(905.126, 304)
 states/Start/position = Vector2(208, 100)
+states/Surprise/node = SubResource("AnimationNodeAnimation_wiym5")
+states/Surprise/position = Vector2(1092.13, 381)
+states/SurpriseOff/node = SubResource("AnimationNodeAnimation_ctv3p")
+states/SurpriseOff/position = Vector2(1025.13, 304)
+states/SurpriseOn/node = SubResource("AnimationNodeAnimation_lffwj")
+states/SurpriseOn/position = Vector2(1161.13, 304)
 states/Working/node = SubResource("AnimationNodeAnimation_6qkuw")
 states/Working/position = Vector2(850, -149)
 states/WorkingOff/node = SubResource("AnimationNodeAnimation_oq100")
 states/WorkingOff/position = Vector2(1016, -42)
 states/WorkingOn/node = SubResource("AnimationNodeAnimation_hlkw5")
 states/WorkingOn/position = Vector2(676, -42)
-transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Off", SubResource("AnimationNodeStateMachineTransition_aaoaw"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_oq100"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_hlkw5"), "Idle", "Angry", SubResource("AnimationNodeStateMachineTransition_v6l2n"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_igvld"), "PowerOff", "Off", SubResource("AnimationNodeStateMachineTransition_7qgky"), "Angry", "Not Angry", SubResource("AnimationNodeStateMachineTransition_cebil"), "Not Angry", "Idle", SubResource("AnimationNodeStateMachineTransition_xl0md"), "Idle", "Sad", SubResource("AnimationNodeStateMachineTransition_38h0a"), "Sad", "NotSad", SubResource("AnimationNodeStateMachineTransition_lffwj"), "NotSad", "Idle", SubResource("AnimationNodeStateMachineTransition_wiym5")]
-graph_offset = Vector2(417.126, -55)
+transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Off", SubResource("AnimationNodeStateMachineTransition_aaoaw"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_oq100"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_hlkw5"), "Idle", "AngryOn", SubResource("AnimationNodeStateMachineTransition_v6l2n"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_igvld"), "PowerOff", "Off", SubResource("AnimationNodeStateMachineTransition_7qgky"), "AngryOff", "Idle", SubResource("AnimationNodeStateMachineTransition_xl0md"), "Idle", "SadOn", SubResource("AnimationNodeStateMachineTransition_38h0a"), "SadOff", "Idle", SubResource("AnimationNodeStateMachineTransition_wiym5"), "AngryOn", "Angry", SubResource("AnimationNodeStateMachineTransition_0porm"), "Angry", "AngryOff", SubResource("AnimationNodeStateMachineTransition_xsmmv"), "SadOn", "Sad", SubResource("AnimationNodeStateMachineTransition_lffwj"), "Sad", "SadOff", SubResource("AnimationNodeStateMachineTransition_t2glt"), "Idle", "SurpriseOn", SubResource("AnimationNodeStateMachineTransition_5bq7i"), "SurpriseOff", "Idle", SubResource("AnimationNodeStateMachineTransition_6budr"), "SurpriseOn", "Surprise", SubResource("AnimationNodeStateMachineTransition_rhxnc"), "Surprise", "SurpriseOff", SubResource("AnimationNodeStateMachineTransition_d4u37")]
+graph_offset = Vector2(196.126, -174)
 
 [node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationScale", "AnimationTree", "Eye", "EyeBrow", "dialogue", "ExportPause", "BlinkTimer")]
 transparent_bg = true
+position = Vector2i(0, 36)
 size = Vector2i(800, 800)
 unresizable = true
 borderless = true
@@ -1199,6 +1664,18 @@ skeleton = NodePath("")
 [node name="MonitorLED" type="MeshInstance3D" parent="Computer/Screen"]
 mesh = SubResource("ArrayMesh_xjxg2")
 skeleton = NodePath("")
+
+[node name="Angry" type="MeshInstance3D" parent="Computer"]
+transform = Transform3D(-1.255, 1.09716e-07, 0, 4.79582e-15, 5.48578e-08, -1.255, -1.09716e-07, -1.255, -5.48578e-08, 39, 120.923, 12.812)
+mesh = SubResource("PlaneMesh_hlkw5")
+
+[node name="Sad" type="MeshInstance3D" parent="Computer"]
+transform = Transform3D(-1, 8.74228e-08, 0, 3.82137e-15, 4.37114e-08, -1, -8.74228e-08, -1, -4.37114e-08, 39, 120.923, 12.812)
+mesh = SubResource("PlaneMesh_v6l2n")
+
+[node name="Exp" type="MeshInstance3D" parent="Computer"]
+transform = Transform3D(-1.255, 1.09716e-07, 0, 4.79582e-15, 5.48578e-08, -1.255, -1.09716e-07, -1.255, -5.48578e-08, 39, 120.923, 12.812)
+mesh = SubResource("PlaneMesh_g3po4")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 handle_input_locally = false
@@ -1338,7 +1815,6 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="Button" type="Button" parent="."]
-visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = 15
 anchor_right = 1.0

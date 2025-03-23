@@ -32,7 +32,7 @@ public partial class Virus : FloatWindow
 		base._Ready();
 		AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
 		AnimationScreen.Travel("Off");
-		Size = new Vector2I(300, 400);
+		Size = new Vector2I(335, 400);
 		//Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
 		Size = (Vector2I)Lib.GetAspectFactor(Size);
 		dialogue.PlaceDialogueWindow();
@@ -88,16 +88,6 @@ public partial class Virus : FloatWindow
 		if (On)
 		{
 			UpdateModelRotation(delta);
-		}
-		if(Input.IsActionJustPressed("debug"))
-		{
-			AnimationScreen.Travel("Working");
-			Lib.Print("Working");
-		}
-		if(Input.IsActionJustReleased("Shoot"))
-		{
-			AnimationScreen.Travel("Idle");
-			Lib.Print("Idle");
 		}
 
 		// Movement Fiesta test
