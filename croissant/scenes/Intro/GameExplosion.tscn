@@ -11,23 +11,22 @@ point_count = 2
 
 [node name="GameExplosion" type="CPUParticles2D"]
 emitting = false
-amount = 10000
-lifetime = 2.2
+amount = 8888
+lifetime = 1.8
 one_shot = true
 explosiveness = 1.0
 randomness = 1.0
 lifetime_randomness = 1.0
 spread = 180.0
 gravity = Vector2(0, 0)
-initial_velocity_max = 1000.0
+initial_velocity_max = 888.0
 angular_velocity_min = -180.0
 angular_velocity_max = 180.0
-orbit_velocity_max = 0.6
 damping_max = 50.0
 angle_min = -720.0
 angle_max = 720.0
 scale_amount_min = 10.0
-scale_amount_max = 20.0
+scale_amount_max = 60.0
 scale_amount_curve = SubResource("Curve_iixcw")
 color = Color(0, 1, 1, 1)
 hue_variation_min = -0.1

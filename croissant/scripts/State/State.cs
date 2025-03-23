@@ -5,17 +5,17 @@ using System.Drawing;
 public static class States
 {
 
-    [Export] private static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
-    [Export] private static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
-    [Export] private static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
-    [Export] private static PackedScene VirusScene = ResourceLoader.Load<PackedScene>("uid://cbd8iklbee2ig");
-
+    public static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
+    public static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
+    public static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
+    public static PackedScene VirusScene = ResourceLoader.Load<PackedScene>("uid://cbd8iklbee2ig");
     public static PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("uid://dojmcfkfdnwsu");
     public static PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("uid://ce1xhbt2knpmv");
     public static PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("uid://cb1neywi8udoc");
     public static PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("uid://cdcpehwcb167t");
     public static PackedScene TankWindowScene = ResourceLoader.Load<PackedScene>("uid://dsmobrvf3clby");
     public static PackedScene BombWindowScene = ResourceLoader.Load<PackedScene>("uid://cjcfsjb8cgs3k");
+    public static PackedScene VirusSplashScene = ResourceLoader.Load<PackedScene>("uid://b5ce1wjnvbedm");
 
     public static int LevelOfTuto = 0;
 
@@ -57,15 +57,20 @@ public static class States
 
     public static void VirusDialogue1()
     {
+
         //Freeze the game
-        IntroGameManager.Instance.ProcessMode = IntroGameManager.ProcessModeEnum.Disabled;
-        IntroGameManager.Instance.GetParent<Window>().Unfocusable = true;
+        IntroGameManager.Instance.GetParent().QueueFree();
 
         Lib.Print("First Virus Dialogue");
         GameManager.virus.dialogue.StartDialogue("Virus", "sleep");
-        Node2D explosion = GameManager.virus.ExplosionScene.Instantiate<Node2D>();
-        explosion.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y);
-        GameManager.GameRoot.AddChild(explosion);
+
+        Node2D VirusSplash = VirusSplashScene.Instantiate<Node2D>();
+        VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
+        GameManager.GameRoot.AddChild(VirusSplash);
+        VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
+        VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
+
+        GameManager.virus.StartShake(0.5f, 10);
 
         //change state condition
         GameManager.State = GameManager.GameState.VirusDialogue1Buffer;
@@ -75,33 +80,33 @@ public static class States
 
     public static void VirusTuto()
     {
-        switch(LevelOfTuto)
+        switch (LevelOfTuto)
         {
-            case(0):
+            case (0):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto1");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case(1):
+            case (1):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto2");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case(2):
+            case (2):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto3");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case(3):
+            case (3):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto4");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case(4):
+            case (4):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto5");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case(5):
+            case (5):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto6");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case(6):
+            case (6):
                 GameManager.virus.dialogue.StartDialogue("Virus", "tutoEnd");
                 GameManager.State = GameManager.GameState.Void;
                 break;

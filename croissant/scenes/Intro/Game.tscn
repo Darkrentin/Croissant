@@ -60,7 +60,7 @@ shader_parameter/shake_color_rate = 0.01
 [node name="GameWindow" type="Window"]
 transparent_bg = true
 title = "Game"
-size = Vector2i(960, 540)
+size = Vector2i(1920, 1080)
 unresizable = true
 borderless = true
 always_on_top = true

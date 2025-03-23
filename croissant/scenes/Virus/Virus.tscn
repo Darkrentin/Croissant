@@ -614,6 +614,50 @@ _data = {
 &"RESET": SubResource("Animation_dr6to")
 }
 
+[sub_resource type="Animation" id="Animation_igvld"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/Working/Label:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_7qgky"]
+resource_name = "Off"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_6qkuw"]
 resource_name = "PowerOn"
 length = 1.5
@@ -640,6 +684,45 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [Color(1, 0, 0, 1), Color(0.171982, 1, 0, 1), Color(0.171982, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v6l2n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SubViewport/Color:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SubViewport/Working/Label:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/Working/Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_oq100"]
@@ -683,85 +766,6 @@ tracks/2/keys = {
 "values": [true]
 }
 
-[sub_resource type="Animation" id="Animation_hlkw5"]
-resource_name = "WorkingOn"
-length = 1.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/Working/Label:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.55, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 500), Vector2(0, 500), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SubViewport/Working/Label:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.45),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_v6l2n"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/Working/Label:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SubViewport/Working/Label:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
 [sub_resource type="Animation" id="Animation_g3po4"]
 resource_name = "WorkingOff"
 length = 1.5
@@ -802,9 +806,9 @@ tracks/2/keys = {
 "values": [Vector2(0, -852), Vector2(0, -1330)]
 }
 
-[sub_resource type="Animation" id="Animation_igvld"]
-resource_name = "Idle"
-length = 0.1
+[sub_resource type="Animation" id="Animation_hlkw5"]
+resource_name = "WorkingOn"
+length = 1.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -812,38 +816,34 @@ tracks/0/path = NodePath("SubViewport/Color:color")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 0)]
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("SubViewport/Working/Label:visible")
+tracks/1/path = NodePath("SubViewport/Working/Label:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-
-[sub_resource type="Animation" id="Animation_7qgky"]
-resource_name = "Off"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("SubViewport/Color:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.55, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(0, 0, 0, 1)]
+"values": [Vector2(0, 500), Vector2(0, 500), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SubViewport/Working/Label:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oq100"]
@@ -945,7 +945,7 @@ states/WorkingOn/position = Vector2(676, 100)
 transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "WorkingOff", "End", SubResource("AnimationNodeStateMachineTransition_7qgky"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "PowerOn", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_cebil"), "WorkingOff", "PowerOff", SubResource("AnimationNodeStateMachineTransition_xl0md"), "PowerOn", "PowerOff", SubResource("AnimationNodeStateMachineTransition_26nw7"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "PowerOff", "PowerOn", SubResource("AnimationNodeStateMachineTransition_38h0a"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_lffwj"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_wiym5"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_0porm"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Off", SubResource("AnimationNodeStateMachineTransition_aaoaw")]
 graph_offset = Vector2(78.5, -78)
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationScale", "AnimationTree", "Eye", "dialogue", "ExportPause", "BlinkTimer")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "Eye", "dialogue", "ExportPause", "BlinkTimer")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -955,8 +955,6 @@ transparent = true
 script = ExtResource("1_hbnjr")
 Camera = NodePath("Camera3D")
 Computer = NodePath("Computer")
-AnimationScale = NodePath("AnimationScale")
-AnimationTree = NodePath("AnimationTree")
 Eye = NodePath("SubViewport/eye")
 MaxEyeDistance = Vector2(25, 25)
 dialogue = NodePath("DialogueWindow")

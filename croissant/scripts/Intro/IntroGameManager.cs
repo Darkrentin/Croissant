@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Diagnostics;
 
 public partial class IntroGameManager : Node2D
@@ -101,10 +102,10 @@ public partial class IntroGameManager : Node2D
 			SM.SetShaderParameter("shake_rate", 0.2f);
 			SM.SetShaderParameter("shake_speed", 5f);
 		}
-		CameraShake(50f, 0.5f);
+		CameraShake(20.0f, 0.5f);
 		CpuParticles2D GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
-		GameExplosion.Position = Lib.GetScreenPosition(0.5f, 0.5f);
-		GameManager.GameRoot.AddChild(GameExplosion);
+		GameExplosion.Position = new Vector2(1920 / 2, 1080 / 2);
+		IntroGameManager.Instance.AddChild(GameExplosion);
 		GameExplosion.Emitting = true;
 	}
 
