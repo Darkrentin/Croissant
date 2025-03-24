@@ -18,7 +18,7 @@ public partial class FloatWindow : Window
 	[Export] public bool Minimizable = true;
 
 	[Export] public bool Shaking = false;
-	[Export] public Timer ShakeTimer;
+	public Timer ShakeTimer;
 
 	public int ShakeIntensity = 0;
 	public Vector2I BasePosition;

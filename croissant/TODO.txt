@@ -5,7 +5,7 @@ Intro :
 - Quand on clique sur le virus, il se réveille et commence un dialogue (mettre un placeholder) @done
 - Quand le virus apparait, le fait glitché en 3D pendant 1 seconde (Adrien)
 - Quand on met le jeu INTRO en pause, on ne peut pas faire de ALT TAB et cliquer sur autre chose, à régler
-- Ajouter des particules quand le virus tombe en bas (ne pas réutiliser d'autres particules)
+- Ajouter des particules quand le virus tombe en bas (ne pas réutiliser d'autres particules) @done
 - Faire la transition du lvl 1 au virus : il s'énerve après le dialogue et balance toutes les popups
 - Faire en sorte que la fenetre du virus grab le focus quand on clique dessus (sinon pendant l'intro si on clique en dehors de la fenetre du virus pendant qu'il est sur l'écran il reste derrière à l'infini)
 - Ajouter un bruit de glitch quand le jeu glitch
@@ -16,12 +16,12 @@ Level 1 :
 - BombWindow : faire en sorte qu'on voit mieux le timer
 - BombWindow : régler le problème de fenêtre buggée quand c'est un TextureRect et pas un AnimationSprite2D
 - Particules quand on ferme la fenetre
-- Faire tester à des gens pour calibrer la difficulté
+- Faire tester à des gens pour calibrer la difficulté @done
 - Faire varier aléatoirement le temps minimum entre l'apparition de deux fenetres (parce que là si on en ferme plusieures rapidement elles repopent très linéairement) @done
 - Faire apparaitre plus vite tous les types differents de fenetres, mais un peu moins de fenetre simultanées @done
 - Les SlideWindows ne se déplacent peut-etre un poil pas assez vite @done
 - Faire en sorte que pendant le level 1, le virus reste à nous observer dans un coin et à nous balancer des dialogues en mode "don't close my windows!!"
-- Faire le tuto stylé des windows idée de génie Corentin
+- Faire le tuto stylé des windows idée de génie Corentin @done
 
 Level 2 :
 - Se concentrer sur les autres domaines avant
