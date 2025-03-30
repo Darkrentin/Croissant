@@ -9,7 +9,6 @@ public partial class MoveWindow : PopUpWindow
         base._Ready();
 
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(384, 264));
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         StartNewMovement();
     }
 

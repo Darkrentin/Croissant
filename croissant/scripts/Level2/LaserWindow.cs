@@ -1,30 +1,17 @@
 using Godot;
 using System;
 
-public partial class LaserWindow : FloatWindow
+public partial class LaserWindow : AttackWindow
 {
+	protected int side;
 
-	private Level2 Parent;
-	public Vector2I windowSize;
-	public Vector2I windowPosition;
-	[Export] public Timer Timer;
+	public Vector2I TargetPosition;
+	private int nsize = 0;
 
-	public CollisionShape2D collision;
-	public RigidBody2D body;
-
-	public bool Attacking = false;
-
-	private int side;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		base._Ready();
-		Unresizable = true;
-
-		Parent = GetParent<Level2>();
-		//Position = Lib.GetRandomPositionOutsideScreen(side);
-
-		windowSize = Size;
 		Start();
 
 	}
@@ -36,7 +23,7 @@ public partial class LaserWindow : FloatWindow
 		Timer.Start();
 
 		side = Lib.rand.Next(0, 4);
-		Vector2I TargetPosition = GetTargetPosition(side) - Size / 2;
+		TargetPosition = GetTargetPosition(side) - Size / 2;
 		StartTransition(TargetPosition, 0.5f);
 		windowPosition = TargetPosition;
 	}
@@ -45,10 +32,6 @@ public partial class LaserWindow : FloatWindow
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		if (Attacking && !Shaking && IsCollided(Parent.CursorWindow))
-		{
-			Parent.CursorWindow.TakeDamage();
-		}
 	}
 
 	private Vector2I GetTargetPosition(int side)
@@ -94,10 +77,55 @@ public partial class LaserWindow : FloatWindow
 		}
 	}
 
+	private (Vector2I,Vector2I) GetTargetSizeAndPosition(int nsize)
+	{
+		switch (side)
+		{
+			case (0):
+				return (new Vector2I(Size.X, Size.Y + nsize), new Vector2I(TargetPosition.X, TargetPosition.Y - nsize));
+			case (1):
+				return (new Vector2I(Size.X + nsize, Size.Y), new Vector2I(TargetPosition.X - nsize, TargetPosition.Y));
+			case (2):
+				return (new Vector2I(Size.X, Size.Y + nsize), new Vector2I(TargetPosition.X, TargetPosition.Y));
+			case (3):
+				return (new Vector2I(Size.X + nsize, Size.Y), new Vector2I(TargetPosition.X, TargetPosition.Y));
+			default:
+				GD.PushError("Invalid side");
+				return (new Vector2I(0, 0), new Vector2I(142, 142));
+
+		}
+	}
+
+	private int GetDistance()
+	{
+		switch (side)
+		{
+			case (0):
+			Lib.Print($"Distance: {Parent.CursorWindow.Position.Y - Position.Y}");
+				return  Position.Y - Parent.CursorWindow.Position.Y;
+			case (1):
+				Lib.Print($"Distance: {Position.X - Parent.CursorWindow.Position.X}");
+				return Position.X - Parent.CursorWindow.Position.X;
+			case (2):
+				Lib.Print($"Distance: {Position.Y - Parent.CursorWindow.Position.Y}");
+				return Parent.CursorWindow.Position.Y - Position.Y;
+			case (3):
+				Lib.Print($"Distance: {Position.X - Parent.CursorWindow.Position.X}");
+				return Parent.CursorWindow.Position.X - Position.X;
+			default:
+				GD.PushError("Invalid side");
+				return 0;
+
+		}
+	}
+
 	public void StartAttack()
 	{
-		StartShake(0.3f, 5);
-		Timer.WaitTime = 0.3f;
+		const float ShakeTime = 1f;
+		StartShake(ShakeTime, 5);
+		(Vector2I targetSize, Vector2I targetPosition) = GetTargetSizeAndPosition(nsize);
+		ShowVisualCollision(targetSize, targetPosition);
+		Timer.WaitTime = ShakeTime;
 		Timer.Timeout -= StartAttack;
 		Timer.Timeout += ShakeEnd;
 		Timer.Start();
@@ -114,12 +142,13 @@ public partial class LaserWindow : FloatWindow
 		Timer.Timeout -= TimeoutResize;
 		Timer.Timeout += ReStart;
 		Timer.Start();
-		;
 	}
 
 	public void ShakeEnd()
 	{
-		CallResize(1000, 0.2f);
+		nsize = GetDistance();
+		CallResize(nsize, 0.2f);
+		HideVisualCollision();
 		Attacking = true;
 		Timer.WaitTime = 0.5f;
 		Timer.Timeout -= ShakeEnd;

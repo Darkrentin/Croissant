@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
 
 
 public partial class FloatWindow : Window
@@ -194,26 +195,35 @@ public partial class FloatWindow : Window
         StartResize(targetSize, resizeTime);
     }
 
-	public void StartResizeDown(int nsize, float resizeTime)
+
+	public Vector2I StartResizeDown(int nsize, float resizeTime)
 	{
-		StartResize(new Vector2I(Size.X, Size.Y + nsize), resizeTime, false);
+		Vector2I newSize = new Vector2I(Size.X, Size.Y + nsize);
+		StartResize(newSize, resizeTime, false);
+		return newSize;
 	}
 
-	public void StartResizeUp(int nsize, float resizeTime)
+	public Vector2I StartResizeUp(int nsize, float resizeTime)
 	{
-		StartResize(new Vector2I(Size.X, Size.Y + nsize), resizeTime, false);
+		Vector2I newSize = new Vector2I(Size.X, Size.Y + nsize);
+		StartResize(newSize, resizeTime, false);
 		StartTransition(new Vector2I(Position.X, Position.Y - nsize), resizeTime);
+		return newSize;
 	}
 
-	public void StartResizeRight(int nsize, float resizeTime)
+	public Vector2I StartResizeRight(int nsize, float resizeTime)
 	{
-		StartResize(new Vector2I(Size.X + nsize, Size.Y), resizeTime, false);
+		Vector2I newSize = new Vector2I(Size.X + nsize, Size.Y);
+		StartResize(newSize, resizeTime, false);
+		return newSize;
 	}
 
-	public void StartResizeLeft(int nsize, float resizeTime)
+	public Vector2I StartResizeLeft(int nsize, float resizeTime)
 	{
-		StartResize(new Vector2I(Size.X + nsize, Size.Y), resizeTime, false);
+		Vector2I newSize = new Vector2I(Size.X + nsize, Size.Y);
+		StartResize(newSize, resizeTime, false);
 		StartTransition(new Vector2I(Position.X - nsize, Position.Y), resizeTime);
+		return newSize;
 	}
 
 

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://chuegp025s2xl"]
+
+[ext_resource type="Script" uid="uid://cb1q4xtqraqkh" path="res://scripts/Level2/VisualCollision.cs" id="1_t1cuy"]
+
+[node name="VisualCollision" type="ColorRect"]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_t1cuy")

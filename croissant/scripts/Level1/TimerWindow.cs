@@ -18,7 +18,6 @@ public partial class TimerWindow : PopUpWindow
         timer.WaitTime = time;
         timer.Timeout += _on_timer_timeout;
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 600));
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         progressBar.Size = Size;
         timer.Start();
     }

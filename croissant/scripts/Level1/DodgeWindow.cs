@@ -13,7 +13,6 @@ public partial class DodgeWindow : PopUpWindow
         base._Ready();
 
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(390, 450));
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         cooldownTimer = new Timer();
         AddChild(cooldownTimer);
         cooldownTimer.WaitTime = 0.39f;

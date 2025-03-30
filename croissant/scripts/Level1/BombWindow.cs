@@ -40,7 +40,6 @@ public partial class BombWindow : PopUpWindow
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(250, 250));
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.90f), Lib.GetRandomNormal(0f, 0.90f)));
         progressBar.SetDeferred("size", Size);
         timer.Start();
     }

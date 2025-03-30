@@ -4,7 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://byd00eniliv1s" path="res://scenes/Windows/CursorWindow.tscn" id="2_5gxfl"]
 [ext_resource type="PackedScene" uid="uid://bh5bvmpmfbmfs" path="res://scenes/Level2/LaserWindow.tscn" id="4_wja00"]
 
-
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("CursorWindow")]
 script = ExtResource("1_u87iq")
 CursorWindow = NodePath("CursorWindow")
@@ -12,12 +11,3 @@ CursorWindow = NodePath("CursorWindow")
 [node name="CursorWindow" parent="." instance=ExtResource("2_5gxfl")]
 
 [node name="LaserWindow" parent="." instance=ExtResource("4_wja00")]
-
-[node name="LaserWindow2" parent="." instance=ExtResource("4_wja00")]
-auto_translate_mode = 1
-
-[node name="LaserWindow3" parent="." instance=ExtResource("4_wja00")]
-auto_translate_mode = 1
-
-[node name="LaserWindow4" parent="." instance=ExtResource("4_wja00")]
-auto_translate_mode = 1
