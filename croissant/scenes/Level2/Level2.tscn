@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
 [ext_resource type="PackedScene" uid="uid://byd00eniliv1s" path="res://scenes/Windows/CursorWindow.tscn" id="2_5gxfl"]
-[ext_resource type="PackedScene" uid="uid://bh5bvmpmfbmfs" path="res://scenes/Level2/LaserWindow.tscn" id="4_wja00"]
+[ext_resource type="PackedScene" uid="uid://wmn0s55jslit" path="res://scenes/Level2/ExtendWindow.tscn" id="3_315dx"]
 
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("CursorWindow")]
 script = ExtResource("1_u87iq")
@@ -10,4 +10,4 @@ CursorWindow = NodePath("CursorWindow")
 
 [node name="CursorWindow" parent="." instance=ExtResource("2_5gxfl")]
 
-[node name="LaserWindow" parent="." instance=ExtResource("4_wja00")]
+[node name="ExtendWindow" parent="." instance=ExtResource("3_315dx")]

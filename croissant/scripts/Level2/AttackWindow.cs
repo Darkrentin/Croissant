@@ -43,7 +43,9 @@ public partial class AttackWindow : FloatWindow
         VisualCollision.Visible = false;
         GameManager.GameRoot.AddChild(VisualCollision);
 
-        Start();
+        Timer.WaitTime = Lib.GetRandomNormal(0.1f,2.0f);
+        Timer.Timeout += Start;
+        Timer.Start();
     }
 
     public void ShowVisualCollision(Vector2I size, Vector2 position)
@@ -71,6 +73,7 @@ public partial class AttackWindow : FloatWindow
 
     public virtual void Start()
     {
+        Timer.Timeout -= Start;
         Timer.Timeout += Move;
         Move();
     }
@@ -95,6 +98,7 @@ public partial class AttackWindow : FloatWindow
 
     public virtual void Attack()
     {
+        CollisionDisabled = false;
         Timer.Timeout -= Attack;
         Timer.Timeout += Reload;
 
@@ -104,10 +108,20 @@ public partial class AttackWindow : FloatWindow
 
     public virtual void Reload()
     {
+        CollisionDisabled = true;
         Timer.Timeout -= Reload;
         Timer.Timeout += Move;
 
         CurrentPhase = Phase.Reload;
         Timer.Start();
     }
+
+    public override void WindowCollided(FloatWindow window)
+	{
+		if (window is CursorWindow w && CurrentPhase == Phase.Attack && !w.Shaking)
+		{
+			Lib.Print("Collided");
+			w.TakeDamage();
+		}
+	}
 }

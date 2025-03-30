@@ -6,6 +6,7 @@ public partial class LaserWindow : AttackWindow
 	protected int side;
 
 	public Vector2I TargetPosition;
+	public Vector2I CursorPosition;
 	private int nsize = 0;
 
 	// Called when the node enters the scene tree for the first time.
@@ -43,44 +44,21 @@ public partial class LaserWindow : AttackWindow
 		}
 	}
 
-	private void CallResize(int nsize, float time)
+	private (Vector2I newSize, Vector2I newPosition) CallResize(int nsize, float time)
 	{
 		switch (side)
 		{
 			case (0):
-				StartResizeUp(nsize, time);
-				break;
+				return StartResizeUp(nsize, time);
 			case (1):
-				StartResizeLeft(nsize, time);
-				break;
+				return StartResizeLeft(nsize, time);
 			case (2):
-				StartResizeDown(nsize, time);
-				break;
+				return StartResizeDown(nsize, time);
 			case (3):
-				StartResizeRight(nsize, time);
-				break;
+				return StartResizeRight(nsize, time);
 			default:
 				GD.PushError("Invalid side");
-				break;
-		}
-	}
-
-	private (Vector2I,Vector2I) GetTargetSizeAndPosition(int nsize)
-	{
-		switch (side)
-		{
-			case (0):
-				return (new Vector2I(Size.X, Size.Y + nsize), new Vector2I(TargetPosition.X, TargetPosition.Y - nsize));
-			case (1):
-				return (new Vector2I(Size.X + nsize, Size.Y), new Vector2I(TargetPosition.X - nsize, TargetPosition.Y));
-			case (2):
-				return (new Vector2I(Size.X, Size.Y + nsize), new Vector2I(TargetPosition.X, TargetPosition.Y));
-			case (3):
-				return (new Vector2I(Size.X + nsize, Size.Y), new Vector2I(TargetPosition.X, TargetPosition.Y));
-			default:
-				GD.PushError("Invalid side");
-				return (new Vector2I(0, 0), new Vector2I(142, 142));
-
+				return (new Vector2I(200, 200), new Vector2I(0,0));
 		}
 	}
 
@@ -89,13 +67,13 @@ public partial class LaserWindow : AttackWindow
 		switch (side)
 		{
 			case (0):
-				return  Position.Y - Parent.CursorWindow.Position.Y;
+				return  Position.Y - CursorPosition.Y;
 			case (1):
-				return Position.X - Parent.CursorWindow.Position.X;
+				return Position.X - CursorPosition.X;
 			case (2):
-				return Parent.CursorWindow.Position.Y - Position.Y;
+				return CursorPosition.Y - Position.Y;
 			case (3):
-				return Parent.CursorWindow.Position.X - Position.X;
+				return CursorPosition.X - Position.X;
 			default:
 				GD.PushError("Invalid side");
 				return 0;
@@ -118,6 +96,7 @@ public partial class LaserWindow : AttackWindow
 		TargetPosition = GetTargetPosition(side) - Size / 2;
 		StartTransition(TargetPosition, MoveTime-margin); // to be sure that the transition is done before the next move
 		windowPosition = TargetPosition;
+		CursorPosition = Parent.CursorWindow.CenterPosition;
 
 		Timer.WaitTime = MoveTime;
 		base.Move();
@@ -127,7 +106,9 @@ public partial class LaserWindow : AttackWindow
 	{
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5);
-		(Vector2I targetSize, Vector2I targetPosition) = GetTargetSizeAndPosition(nsize);
+		nsize = (int)(GetDistance() * 1.2f); // distance to the cursor window
+		(Vector2I targetSize, Vector2I targetPosition) = CallResize(nsize,0f); // use CallResize just to get the target size and position
+		IsResizing = false; //because we juste use CallResize to get the target size and position, we have to cancel the resizing
 		ShowVisualCollision(targetSize, targetPosition);
 		
 		Timer.WaitTime = ShakeTime;
@@ -138,7 +119,6 @@ public partial class LaserWindow : AttackWindow
 	{
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
-		nsize = 1000;//GetDistance();
 		CallResize(nsize, ResizeTime);
 		HideVisualCollision();
 		
@@ -155,16 +135,6 @@ public partial class LaserWindow : AttackWindow
 		
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();
-	}
-
-	//NOT WORKING
-	public override void WindowCollided(FloatWindow window)
-	{
-		if (window is CursorWindow w && CurrentPhase == Phase.Attack && !w.Shaking)
-		{
-			Lib.Print("Collided");
-			w.TakeDamage();
-		}
 	}
 
 

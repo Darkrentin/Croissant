@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://wmn0s55jslit"]
+
+[ext_resource type="Script" uid="uid://ct5vvq21h0ypf" path="res://scripts/Level2/ExtendWindow.cs" id="1_31ov5"]
+
+[node name="ExtendWindow" type="Window"]
+sharp_corners = true
+script = ExtResource("1_31ov5")

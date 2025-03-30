@@ -5,15 +5,6 @@ public partial class CursorWindow : FloatWindow
 {
 	// Called when the node enters the scene tree for the first time.
 
-	public Vector2I CenterPosition
-	{
-		set { Position = value; }
-		get
-		{
-			return Position + Size / 2;
-		}
-	}
-
 	public CollisionShape2D collision;
 	public Area2D area;
 	public override void _Ready()
@@ -43,9 +34,11 @@ public partial class CursorWindow : FloatWindow
 
 	public void TakeDamage()
 	{
+		IsTransitioning = false;
 		if (!Shaking)
 		{
 			StartShake(0.2f, 10);
 		}
+		GameManager.MenuWindow.Open();
 	}
 }

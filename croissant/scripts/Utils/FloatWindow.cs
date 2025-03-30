@@ -43,6 +43,11 @@ public partial class FloatWindow : Window
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
 
+	public Vector2I CenterPosition {
+		set { SetWindowPosition(value-Size / 2); }
+		get { return Position + Size / 2; }
+	}
+
 	[Export] public bool CollisionDisabled = true;
 
 	public List<FloatWindow> CollidedWindows = new List<FloatWindow>();
@@ -132,7 +137,7 @@ public partial class FloatWindow : Window
 
 	// Start a resize to a target size with a given resize time
 	// The resize mode can be set to linear or exponential
-	public void StartResize(Vector2I targetSize, float resizeTime, bool KeepCenter = true)
+	public Vector2I StartResize(Vector2I targetSize, float resizeTime, bool KeepCenter = true)
 	{
 		StartSize = Size;
 		TargetSize = targetSize;
@@ -147,7 +152,9 @@ public partial class FloatWindow : Window
 			Vector2I newPosition = Position - deltaPosition;
 			transitionMode = resizeMode;
 			StartTransition(newPosition, resizeTime);
+			return newPosition;
 		}
+		return Position;
 
 	}
 
@@ -196,34 +203,36 @@ public partial class FloatWindow : Window
     }
 
 
-	public Vector2I StartResizeDown(int nsize, float resizeTime)
+	public (Vector2I newSize, Vector2I newPosition) StartResizeDown(int nsize, float resizeTime)
 	{
 		Vector2I newSize = new Vector2I(Size.X, Size.Y + nsize);
 		StartResize(newSize, resizeTime, false);
-		return newSize;
+		return (newSize, Position);
 	}
 
-	public Vector2I StartResizeUp(int nsize, float resizeTime)
+	public (Vector2I newSize, Vector2I newPosition) StartResizeUp(int nsize, float resizeTime)
 	{
 		Vector2I newSize = new Vector2I(Size.X, Size.Y + nsize);
+		Vector2I newPosition = new Vector2I(Position.X, Position.Y - nsize);
 		StartResize(newSize, resizeTime, false);
-		StartTransition(new Vector2I(Position.X, Position.Y - nsize), resizeTime);
-		return newSize;
+		StartTransition(newPosition, resizeTime);
+		return (newSize, newPosition);
 	}
 
-	public Vector2I StartResizeRight(int nsize, float resizeTime)
+	public (Vector2I newSize, Vector2I newPosition) StartResizeRight(int nsize, float resizeTime)
 	{
 		Vector2I newSize = new Vector2I(Size.X + nsize, Size.Y);
 		StartResize(newSize, resizeTime, false);
-		return newSize;
+		return (newSize, Position);
 	}
 
-	public Vector2I StartResizeLeft(int nsize, float resizeTime)
+	public (Vector2I newSize, Vector2I newPosition) StartResizeLeft(int nsize, float resizeTime)
 	{
 		Vector2I newSize = new Vector2I(Size.X + nsize, Size.Y);
+		Vector2I newPosition = new Vector2I(Position.X - nsize, Position.Y);
 		StartResize(newSize, resizeTime, false);
-		StartTransition(new Vector2I(Position.X - nsize, Position.Y), resizeTime);
-		return newSize;
+		StartTransition(newPosition, resizeTime);
+		return (newSize, newPosition);
 	}
 
 
