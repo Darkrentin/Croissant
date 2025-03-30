@@ -9,7 +9,7 @@ public partial class StaticWindow : PopUpWindow
         base._Ready();
 
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 300));
-        
+        int rand = Lib.rand.Next(0, 3);
     }
 
     public override void OnClose()
