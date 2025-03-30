@@ -12,21 +12,9 @@ public partial class LaserWindow : AttackWindow
 	public override void _Ready()
 	{
 		base._Ready();
-		Start();
 
 	}
 
-	public void Start()
-	{
-		Timer.WaitTime = 0.5f;
-		Timer.Timeout += StartAttack;
-		Timer.Start();
-
-		side = Lib.rand.Next(0, 4);
-		TargetPosition = GetTargetPosition(side) - Size / 2;
-		StartTransition(TargetPosition, 0.5f);
-		windowPosition = TargetPosition;
-	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
@@ -101,16 +89,12 @@ public partial class LaserWindow : AttackWindow
 		switch (side)
 		{
 			case (0):
-			Lib.Print($"Distance: {Parent.CursorWindow.Position.Y - Position.Y}");
 				return  Position.Y - Parent.CursorWindow.Position.Y;
 			case (1):
-				Lib.Print($"Distance: {Position.X - Parent.CursorWindow.Position.X}");
 				return Position.X - Parent.CursorWindow.Position.X;
 			case (2):
-				Lib.Print($"Distance: {Position.Y - Parent.CursorWindow.Position.Y}");
 				return Parent.CursorWindow.Position.Y - Position.Y;
 			case (3):
-				Lib.Print($"Distance: {Position.X - Parent.CursorWindow.Position.X}");
 				return Parent.CursorWindow.Position.X - Position.X;
 			default:
 				GD.PushError("Invalid side");
@@ -119,52 +103,64 @@ public partial class LaserWindow : AttackWindow
 		}
 	}
 
-	public void StartAttack()
+
+	public override void Start()
+	{
+		base.Start();
+	}
+
+	public override void Move()
+	{
+		const float MoveTime = 0.5f;
+		const float margin = 0.1f;
+
+		side = Lib.rand.Next(0, 4);
+		TargetPosition = GetTargetPosition(side) - Size / 2;
+		StartTransition(TargetPosition, MoveTime-margin); // to be sure that the transition is done before the next move
+		windowPosition = TargetPosition;
+
+		Timer.WaitTime = MoveTime;
+		base.Move();
+	}
+
+	public override void Prevent()
 	{
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5);
 		(Vector2I targetSize, Vector2I targetPosition) = GetTargetSizeAndPosition(nsize);
 		ShowVisualCollision(targetSize, targetPosition);
+		
 		Timer.WaitTime = ShakeTime;
-		Timer.Timeout -= StartAttack;
-		Timer.Timeout += ShakeEnd;
-		Timer.Start();
-
+		base.Prevent();
 	}
 
-	public void TimeoutResize()
+	public override void Attack()
 	{
-		Attacking = false;
-		resizeMode = TransitionMode.Exponential;
-		StartResize(windowSize, 1f);
-		StartTransition(windowPosition, 1f, reset: true);
-		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f);
-		Timer.Timeout -= TimeoutResize;
-		Timer.Timeout += ReStart;
-		Timer.Start();
-	}
-
-	public void ShakeEnd()
-	{
-		nsize = GetDistance();
-		CallResize(nsize, 0.2f);
+		const float ResizeTime = 0.2f;
+		const float AttackDuration = 0.3f;
+		nsize = 1000;//GetDistance();
+		CallResize(nsize, ResizeTime);
 		HideVisualCollision();
-		Attacking = true;
-		Timer.WaitTime = 0.5f;
-		Timer.Timeout -= ShakeEnd;
-		Timer.Timeout += TimeoutResize;
+		
+		Timer.WaitTime = ResizeTime + AttackDuration;
+		base.Attack();
 	}
 
-	public void ReStart()
+	public override void Reload()
 	{
-		Timer.Timeout -= ReStart;
-		Start();
+		const float ResetTime = 1f;
+		resizeMode = TransitionMode.Exponential;
+		StartResize(windowSize, ResetTime);
+		StartTransition(windowPosition, ResetTime, reset: true);
+		
+		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
+		base.Reload();
 	}
 
 	//NOT WORKING
 	public override void WindowCollided(FloatWindow window)
 	{
-		if (window is CursorWindow w && Attacking && !w.Shaking)
+		if (window is CursorWindow w && CurrentPhase == Phase.Attack && !w.Shaking)
 		{
 			Lib.Print("Collided");
 			w.TakeDamage();

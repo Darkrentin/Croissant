@@ -2,11 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b5up5ncwii07n" path="res://scripts/Level2/LaserWindow.cs" id="1_a1amo"]
 
-
-[node name="LaserWindow" type="Window" node_paths=PackedStringArray("Timer")]
+[node name="LaserWindow" type="Window"]
 position = Vector2i(0, 36)
 script = ExtResource("1_a1amo")
-Timer = NodePath("Timer")
 CollisionDisabled = false
-
-[node name="Timer" type="Timer" parent="."]
