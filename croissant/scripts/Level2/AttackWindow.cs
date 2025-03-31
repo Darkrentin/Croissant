@@ -22,6 +22,27 @@ public partial class AttackWindow : FloatWindow
 
     private Phase _phase = Phase.Move; 
 
+    public Vector2I CursorPosition
+    {
+        get
+        {
+            if(Random)
+            {
+                return new Vector2I(Lib.rand.Next(0, GameManager.ScreenSize.X - Size.X), Lib.rand.Next(0, GameManager.ScreenSize.Y - Size.Y));
+            }
+            else
+            {
+                return Parent.CursorWindow.Position + Parent.CursorWindow.Size / 2;
+            }
+        }
+        set
+        {
+            Parent.CursorWindow.Position = value;
+        }
+    }   
+
+    [Export] public bool Random = false;
+
     [Export] public bool Disable = false;
     public Phase CurrentPhase {
         get => _phase;
@@ -34,17 +55,12 @@ public partial class AttackWindow : FloatWindow
     {
         SharpCorners = true;
         base._Ready();
+
+        const int WindowSizeX = 120;
+        Size = new Vector2I(WindowSizeX, WindowSizeX - titleBarHeight);
         Timer = new Timer();
         Timer.OneShot = true;
         AddChild(Timer);
-        if(!Disable)
-        {
-            Parent = GetParent<Level2>();
-        }
-        else
-        {
-            Parent = null;
-        }
 
         windowSize = Size;
 
@@ -55,16 +71,23 @@ public partial class AttackWindow : FloatWindow
 
         Timer.WaitTime = Lib.GetRandomNormal(0.1f,2.0f);
         Timer.Timeout += Start;
+
         if(!Disable)
         {
+            Parent = GetParent<Level2>();
             Timer.Start();
+        }
+        else
+        {
+            GD.Print("Disabled");
+            QueueFree();
         }
     }
 
     public void ShowVisualCollision(Vector2I size, Vector2 position)
     {
-        VisualCollision.Position = position;
-        VisualCollision.Size = size;
+        VisualCollision.Position = position - titleBarSize;
+        VisualCollision.Size = size + titleBarSize;
         VisualCollision.Visible = true;
     }
 

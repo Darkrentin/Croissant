@@ -2,6 +2,7 @@ using Godot;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 
 
 public partial class FloatWindow : Window
@@ -48,11 +49,32 @@ public partial class FloatWindow : Window
 		get { return Position + Size / 2; }
 	}
 
+	public Vector2I SizeWithDecoration
+	{
+		get { return DisplayServer.WindowGetSizeWithDecorations(WindowId); }
+	}
+
 	[Export] public bool CollisionDisabled = true;
 
 	public List<FloatWindow> CollidedWindows = new List<FloatWindow>();
 
 	[Export] public PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
+
+	public int WindowId
+	{
+		get { return GetWindowId(); }
+	}
+
+	public int titleBarHeight
+	{
+		get { return (DisplayServer.WindowGetSizeWithDecorations(WindowId) - DisplayServer.WindowGetSize(WindowId)).Y;}
+	}
+
+	public Vector2I titleBarSize
+	{
+		get { return new Vector2I(0,titleBarHeight);}
+
+	}
 
 
 	// Called when the node enters the scene tree for the first time.

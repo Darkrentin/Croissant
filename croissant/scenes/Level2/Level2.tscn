@@ -1,10 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://d13xxxigq3m7y"]
+[gd_scene load_steps=4 format=3 uid="uid://d13xxxigq3m7y"]
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
 [ext_resource type="PackedScene" uid="uid://byd00eniliv1s" path="res://scenes/Windows/CursorWindow.tscn" id="2_5gxfl"]
-[ext_resource type="PackedScene" uid="uid://qiac3wawneng" path="res://scenes/Level2/CompressWindow.tscn" id="3_315dx"]
 [ext_resource type="PackedScene" uid="uid://bh5bvmpmfbmfs" path="res://scenes/Level2/LaserWindow.tscn" id="4_8crk8"]
-[ext_resource type="PackedScene" uid="uid://wmn0s55jslit" path="res://scenes/Level2/ExtendWindow.tscn" id="5_s1ih2"]
 
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("CursorWindow")]
 script = ExtResource("1_u87iq")
@@ -12,34 +10,5 @@ CursorWindow = NodePath("CursorWindow")
 
 [node name="CursorWindow" parent="." instance=ExtResource("2_5gxfl")]
 
-[node name="CompressWindow" parent="." instance=ExtResource("3_315dx")]
-
-[node name="CompressWindow2" parent="." instance=ExtResource("3_315dx")]
-
 [node name="LaserWindow" parent="." instance=ExtResource("4_8crk8")]
-
-[node name="ExtendWindow" parent="." instance=ExtResource("5_s1ih2")]
-
-[node name="CompressWindow3" parent="." instance=ExtResource("3_315dx")]
-auto_translate_mode = 1
-
-[node name="CompressWindow4" parent="." instance=ExtResource("3_315dx")]
-auto_translate_mode = 1
-
-[node name="LaserWindow2" parent="." instance=ExtResource("4_8crk8")]
-auto_translate_mode = 1
-
-[node name="ExtendWindow2" parent="." instance=ExtResource("5_s1ih2")]
-auto_translate_mode = 1
-
-[node name="CompressWindow5" parent="." instance=ExtResource("3_315dx")]
-auto_translate_mode = 1
-
-[node name="CompressWindow6" parent="." instance=ExtResource("3_315dx")]
-auto_translate_mode = 1
-
-[node name="LaserWindow3" parent="." instance=ExtResource("4_8crk8")]
-auto_translate_mode = 1
-
-[node name="ExtendWindow3" parent="." instance=ExtResource("5_s1ih2")]
-auto_translate_mode = 1
+Random = true

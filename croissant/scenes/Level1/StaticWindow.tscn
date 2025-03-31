@@ -1,23 +1,33 @@
-[gd_scene load_steps=8 format=3 uid="uid://dojmcfkfdnwsu"]
+[gd_scene load_steps=6 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/Level1/StaticWindow.cs" id="1_m77lp"]
-[ext_resource type="Texture2D" uid="uid://mj6oatgq6gpd" path="res://assets/popups/static1_1.png" id="2_e7e18"]
-[ext_resource type="Texture2D" uid="uid://dtq6la0ovxkq1" path="res://assets/popups/popup4.png" id="2_j1845"]
-[ext_resource type="Texture2D" uid="uid://d1umpqfmjgex1" path="res://assets/popups/static1_2.png" id="3_go0mc"]
+[ext_resource type="Texture2D" uid="uid://u0wyy3c3p62f" path="res://assets/popups/static3_1.png" id="2_hm8he"]
 
 [sub_resource type="Animation" id="Animation_e7e18"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/path = NodePath(".:SetText1")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_j1845")]
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:SetText2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_64bj3"]
@@ -26,14 +36,26 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:texture")
+tracks/0/path = NodePath(".:SetText1")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("2_e7e18"), ExtResource("3_go0mc")]
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:SetText2")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_go0mc"]
@@ -42,14 +64,15 @@ _data = {
 &"static0": SubResource("Animation_64bj3")
 }
 
-[node name="StaticWindow" type="Window"]
+[node name="StaticWindow" type="Window" node_paths=PackedStringArray("textureRect")]
 position = Vector2i(0, 36)
-size = Vector2i(400, 300)
+size = Vector2i(0, 0)
 unresizable = true
 always_on_top = true
 content_scale_size = Vector2i(400, 300)
 content_scale_mode = 2
 script = ExtResource("1_m77lp")
+textureRect = NodePath("TextureRect")
 Draggable = false
 Minimizable = false
 
@@ -65,5 +88,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_j1845")
+texture = ExtResource("2_hm8he")
 expand_mode = 1

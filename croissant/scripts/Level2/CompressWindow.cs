@@ -28,27 +28,27 @@ public partial class CompressWindow : AttackWindow
 		side = Lib.rand.Next(0, 2);
 		const float MoveTime = 0.5f;
 		const float MarginTime = 0.1f;
+
+		Vector2I targetPosition;
+		Vector2I OtherTargetPosition;
+
 		if(side==0)
 		{
-			int targetX = Parent.CursorWindow.Position.X;
-			Vector2I targetPosition = new Vector2I(targetX, 0);
-			Vector2I OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
-
-			StartTransition(targetPosition, MoveTime - MarginTime);
-			ConnectedWindow.StartTransition(OtherTargetPosition, MoveTime - MarginTime);
-			windowPosition = targetPosition;
-			ConnectedWindowPosition = OtherTargetPosition;
+			int targetX = CursorPosition.X;
+		 	targetPosition = new Vector2I(targetX, 0);
+			OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
 		}
 		else
 		{
-			int targetY = Parent.CursorWindow.Position.Y;
-			Vector2I targetPosition = new Vector2I(0, targetY);
-			Vector2I OtherTargetPosition = new Vector2I(GameManager.ScreenSize.X - ConnectedWindow.Size.X, targetY);
-			StartTransition(targetPosition, MoveTime - MarginTime);
-			ConnectedWindow.StartTransition(OtherTargetPosition, MoveTime - MarginTime);
-			windowPosition = targetPosition;
-			ConnectedWindowPosition = OtherTargetPosition;
+			int targetY = CursorPosition.Y;
+			targetPosition = new Vector2I(0, targetY);
+			OtherTargetPosition = new Vector2I(GameManager.ScreenSize.X - ConnectedWindow.Size.X, targetY);
 		}
+		
+		StartTransition(targetPosition, MoveTime - MarginTime);
+		ConnectedWindow.StartTransition(OtherTargetPosition, MoveTime - MarginTime);
+		windowPosition = targetPosition;
+		ConnectedWindowPosition = OtherTargetPosition;
 
 		Timer.WaitTime = MoveTime;
         base.Move();
@@ -61,28 +61,30 @@ public partial class CompressWindow : AttackWindow
 		StartShake(ShakeTime, 5);
 		ConnectedWindow.StartShake(ShakeTime, 5);
 
+		Vector2I targetSize;
+		Vector2I targetPosition;
+		
+		Vector2I targetSize2;
+		Vector2I targetPosition2;
+		
 		if(side==0)
 		{
 			nsize = GameManager.ScreenSize.Y/2 - Size.Y;
-			(Vector2I targetSize, Vector2I targetPosition) = StartResizeDown(nsize, 0);
-			IsResizing = false;
-			(Vector2I targetSize2, Vector2I targetPosition2) = ConnectedWindow.StartResizeUp(nsize, 0);
-			ConnectedWindow.IsResizing = false;
-
-			ShowVisualCollision(targetSize, targetPosition);
-			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
+			(targetSize, targetPosition) = StartResizeDown(nsize, 0);
+			(targetSize2, targetPosition2) = ConnectedWindow.StartResizeUp(nsize, 0);
 		}
 		else
 		{
 			nsize = GameManager.ScreenSize.X/2 - Size.X;
-			(Vector2I targetSize, Vector2I targetPosition) = StartResizeRight(nsize, 0);
-			IsResizing = false;
-			(Vector2I targetSize2, Vector2I targetPosition2) = ConnectedWindow.StartResizeLeft(nsize, 0);
-			ConnectedWindow.IsResizing = false;
-
-			ShowVisualCollision(targetSize, targetPosition);
-			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
+			(targetSize, targetPosition) = StartResizeRight(nsize, 0);
+			(targetSize2, targetPosition2) = ConnectedWindow.StartResizeLeft(nsize, 0);
 		}
+
+		IsResizing = false;
+		ConnectedWindow.IsResizing = false;
+
+		ShowVisualCollision(targetSize, targetPosition);
+		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
