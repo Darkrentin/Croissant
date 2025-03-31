@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://qiac3wawneng"]
+
+[ext_resource type="Script" uid="uid://dk62vn1atnd43" path="res://scripts/Level2/CompressWindow.cs" id="1_bpm5o"]
+[ext_resource type="Script" uid="uid://6mob1yhk5kfe" path="res://scripts/Level2/AttackWindow.cs" id="2_b7jvd"]
+
+[node name="CompressWindow" type="Window" node_paths=PackedStringArray("ConnectedWindow")]
+script = ExtResource("1_bpm5o")
+ConnectedWindow = NodePath("SubWindow")
+
+[node name="SubWindow" type="Window" parent="."]
+script = ExtResource("2_b7jvd")
+Disable = true

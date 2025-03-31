@@ -21,6 +21,8 @@ public partial class AttackWindow : FloatWindow
     public ColorRect VisualCollision;
 
     private Phase _phase = Phase.Move; 
+
+    [Export] public bool Disable = false;
     public Phase CurrentPhase {
         get => _phase;
         set {
@@ -30,11 +32,19 @@ public partial class AttackWindow : FloatWindow
     }
     public override void _Ready()
     {
+        SharpCorners = true;
         base._Ready();
         Timer = new Timer();
         Timer.OneShot = true;
         AddChild(Timer);
-        Parent = GetParent<Level2>();
+        if(!Disable)
+        {
+            Parent = GetParent<Level2>();
+        }
+        else
+        {
+            Parent = null;
+        }
 
         windowSize = Size;
 
@@ -45,7 +55,10 @@ public partial class AttackWindow : FloatWindow
 
         Timer.WaitTime = Lib.GetRandomNormal(0.1f,2.0f);
         Timer.Timeout += Start;
-        Timer.Start();
+        if(!Disable)
+        {
+            Timer.Start();
+        }
     }
 
     public void ShowVisualCollision(Vector2I size, Vector2 position)

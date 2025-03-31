@@ -3,5 +3,6 @@
 [ext_resource type="Script" uid="uid://ct5vvq21h0ypf" path="res://scripts/Level2/ExtendWindow.cs" id="1_31ov5"]
 
 [node name="ExtendWindow" type="Window"]
+position = Vector2i(0, 36)
 sharp_corners = true
 script = ExtResource("1_31ov5")

@@ -7,7 +7,7 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_uu6xs")
-ExporteState = 5
+ExporteState = 6
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
 visible = false
