@@ -4,11 +4,8 @@ using System.Runtime.CompilerServices;
 
 public static class Lib
 {
-
     public static Random rand = new Random();
-    //Get the mouse position relative to the screen size
-    //this function work with the FixWindow to get the right mouse position
-    //because the GetMousePosition() function only give the mouse position relative to the window that called it
+
     public static Vector2I GetCursorPosition()
     {
         return (Vector2I)GameManager.FixWindow.GetMousePosition();
@@ -19,9 +16,6 @@ public static class Lib
         return (float)rand.NextDouble() * (max - min) + min;
     }
 
-    //Get a Position on the screen based on a relative position
-    //relativeX and relativeY are values between 0.0 and 1.0
-    //this function allows you to work with relative positions and not absolute positions to make the game resolution independent
     public static Vector2I GetScreenPosition(float relativeX, float relativeY)
     {
         return new Vector2I(
@@ -38,9 +32,6 @@ public static class Lib
         );
     }
 
-    //Get a Size on the screen based on a relative size
-    //relativeWidth and relativeHeight are values between 0.0 and 1.0
-    //this function allows you to work with relative sizes and not absolute sizes to make the game resolution independent
     public static Vector2I GetScreenSize(float relativeWidth, float relativeHeight)
     {
         return new Vector2I(
@@ -60,43 +51,39 @@ public static class Lib
     public static Vector2I GetRandomPositionOutsideScreen(int side = 0, int margin = 50)
     {
         Vector2I screenSize = GameManager.ScreenSize;
-        Vector2I position = new Vector2I();
 
-        // Decide which side of the screen to place the position (0=top, 1=right, 2=bottom, 3=left)
-        switch (side)
+        return side switch
         {
-            case 0: // Top
-                position.X = rand.Next(-margin, screenSize.X + margin);
-                position.Y = -margin;
-                break;
-            case 1: // Right
-                position.X = screenSize.X + margin;
-                position.Y = rand.Next(-margin, screenSize.Y + margin);
-                break;
-            case 2: // Bottom
-                position.X = rand.Next(-margin, screenSize.X + margin);
-                position.Y = screenSize.Y + margin;
-                break;
-            case 3: // Left
-                position.X = -margin;
-                position.Y = rand.Next(-margin, screenSize.Y + margin);
-                break;
-        }
-
-        return position;
+            0 => new Vector2I(rand.Next(-margin, screenSize.X + margin), -margin), // Top
+            1 => new Vector2I(screenSize.X + margin, rand.Next(-margin, screenSize.Y + margin)), // Right
+            2 => new Vector2I(rand.Next(-margin, screenSize.X + margin), screenSize.Y + margin), // Bottom
+            3 => new Vector2I(-margin, rand.Next(-margin, screenSize.Y + margin)), // Left
+            _ => Vector2I.Zero
+        };
     }
 
-    public static Vector2 GetAspectFactor(Vector2I originalSize)
+    public static Vector2I GetAspectFactor(Vector2I originalSize)
     {
-        Vector2 reference = new Vector2(1920, 1080);
-        Vector2 scale = new Vector2(GameManager.ScreenSize.X / reference.X, GameManager.ScreenSize.Y / reference.Y);
-        float scaleFactor = Mathf.Min(scale.X, scale.Y);
-        return new Vector2(originalSize.X, originalSize.Y) * scaleFactor;
+        const float referenceWidth = 1920f;
+        const float referenceHeight = 1080f;
+
+        float scaleFactor = Mathf.Min(
+            GameManager.ScreenSize.X / referenceWidth,
+            GameManager.ScreenSize.Y / referenceHeight
+        );
+
+        return (Vector2I)((Vector2)originalSize * scaleFactor);
     }
 
     public static Vector2 GetScreenRatio()
     {
-        return new Vector2(GameManager.ScreenSize.X / 1920, GameManager.ScreenSize.Y / 1080);
+        const float referenceWidth = 1920f;
+        const float referenceHeight = 1080f;
+
+        return new Vector2(
+            GameManager.ScreenSize.X / referenceWidth,
+            GameManager.ScreenSize.Y / referenceHeight
+        );
     }
 
     public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")
@@ -107,13 +94,14 @@ public static class Lib
 
     public static string GetCursedString()
     {
-        string s = "";
-        int rand = Lib.rand.Next(0, 30);
-        for (int i = 0; i < rand; i++)
-        {
-            s += (char)Lib.rand.Next(33, 592);
-        }
-        return s;
+        int randLength = rand.Next(0, 30);
+        char[] chars = new char[randLength];
 
+        for (int i = 0; i < randLength; i++)
+        {
+            chars[i] = (char)rand.Next(33, 592);
+        }
+
+        return new string(chars);
     }
 }

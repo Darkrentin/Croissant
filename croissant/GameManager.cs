@@ -1,41 +1,32 @@
 using Godot;
-using GodotPlugins.Game;
 using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
-using System.Dynamic;
 
 public partial class GameManager : Node2D
 {
     [Export] PackedScene menuScene;
+    // Enum for the game states
     public enum GameState
     {
-        //Solo Object
         Virus,
-
-        //GameState
+        // Game state
         IntroGame,
         IntroVirus,
         VirusDialogue1,
         VirusTuto,
         Level1,
         Level2,
-
-        //Process State
+        // Process state
         IntroGameProcess,
-
-        //Buffer
+        // Buffer state
         Debug,
         IntroVirusBuffer,
         VirusDialogue1Buffer,
         TutoBuffer,
         Void
     }
-
     public static Node2D GameRoot;
-    private static GameState _state = GameState.IntroGame; //0 for normal state, -1 for debug state
-
+    private static GameState _state = GameState.IntroGame; // 0 : normal, -1 : debug
     public static GameState State
     {
         get => _state;
@@ -46,23 +37,18 @@ public partial class GameManager : Node2D
             StateChange(_state);
         }
     }
-
     [Export]
-    public GameState ExporteState
+    public GameState ExportState
     {
         get => _state;
         set => _state = value;
     }
-
     public static MainWindow MainWindow;
     public static Window FixWindow;
     public static MenuWindow MenuWindow;
     public static Virus virus;
-
-    public static List<FloatWindow> Windows = new List<FloatWindow>(); // list of all windows
-
-    public static Vector2I ScreenSize { get => DisplayServer.ScreenGetSize(); }
-
+    public static List<FloatWindow> Windows = new List<FloatWindow>();
+    public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
@@ -72,18 +58,15 @@ public partial class GameManager : Node2D
         GameRoot = this;
         AddFixWindow();
         InitMainWindow();
-        //Windows.Add(MainWindow);
-        //Windows.Add(FixWindow);
 
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
 
         ShakeTimer = new Timer();
-        ShakeTimer.Timeout += () => { StopShakeAllWindows(); };
+        ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
 
         Lib.Print($"ScreenSize: {ScreenSize}");
-
     }
 
     public override void _Process(double delta)
@@ -93,12 +76,11 @@ public partial class GameManager : Node2D
 
         switch (State)
         {
-            //Solo Object
             case GameState.Virus:
                 States.Virus();
                 break;
 
-            //GameState
+            // Game state
             case GameState.IntroGame:
                 States.IntroGame();
                 break;
@@ -118,121 +100,80 @@ public partial class GameManager : Node2D
                 States.Level2();
                 break;
 
-            //Process State
+            // Process State
             case GameState.IntroGameProcess:
                 States.IntroGameProcess(delta);
                 break;
 
-            //Buffer
+            // Buffer state
             case GameState.Debug:
                 States.Debug();
                 break;
+
             default:
                 break;
         }
     }
 
-    //Create the FixWindow
-    //This window is used to fix the focus, get the right mouse position and other things
+    // Create FixWindoW, to get the focus, the right mouse position, and particles
     public void AddFixWindow()
     {
-        //set the FixWindow properties to be transparent and borderless
-        FixWindow = new Window();
-        FixWindow.Transparent = true;
-        FixWindow.TransparentBg = true;
-        FixWindow.AlwaysOnTop = true;
-        FixWindow.Size = new Vector2I(40, 40); //min size
-        FixWindow.Borderless = true;
-
+        FixWindow = new Window
+        {
+            Transparent = true,
+            TransparentBg = true,
+            AlwaysOnTop = true,
+            Size = new Vector2I(40, 40),
+            Borderless = true
+        };
         AddChild(FixWindow);
     }
 
-    //because we can't acces the main window before the execution of the _Ready function
-    //we need to call this function to initialize the main window
-    //this allow us to use the main window like any other window
     public void InitMainWindow()
     {
-        //Load the FloatWindow script to the main window
+        // Load the FloatWindow script to the main window
         GetWindow().SetScript(ResourceLoader.Load("uid://ipb8ki64ej0u") as Script);
         MainWindow = GetWindow() as MainWindow;
     }
 
+    // Remove invalid windows from the list
     public static void CleanupWindowsList()
     {
-        // Create a new list to store valid windows
-        List<FloatWindow> validWindows = new List<FloatWindow>();
-        List<FloatWindow> invalidWindows = new List<FloatWindow>();
+        int initialCount = Windows.Count;
+        Windows.RemoveAll(window => window == null || !window.IsInsideTree() || window.IsQueuedForDeletion());
 
-        // Check each window in the list
-        foreach (FloatWindow window in Windows)
-        {
-            // Skip null references
-            if (window == null)
-            {
-                invalidWindows.Add(window);
-                continue;
-            }
-
-            // Safely check if the window is valid
-            try
-            {
-                // Try to access a property that won't change the state
-                // but will throw if the object is disposed
-                bool isValid = window.IsInsideTree() && !window.IsQueuedForDeletion();
-                if (isValid)
-                {
-                    validWindows.Add(window);
-                }
-                else
-                {
-                    invalidWindows.Add(window);
-                }
-            }
-            catch (ObjectDisposedException)
-            {
-                // Window is already disposed, add it to invalid windows
-                invalidWindows.Add(window);
-            }
-            catch (Exception e)
-            {
-                // Some other exception occurred
-                GD.PushWarning($"Exception when checking window validity: {e.Message}");
-                invalidWindows.Add(window);
-            }
-        }
-
-        // Replace the Windows list with only the valid windows
-        if (invalidWindows.Count > 0)
-        {
-            Lib.Print($"CleanupWindowsList: {invalidWindows.Count} windows removed");
-            Windows = validWindows;
-        }
+        //int removedCount = initialCount - Windows.Count;
+        //if (removedCount > 0)
+        //{
+        //    Lib.Print($"CleanupWindowsList: {removedCount} windows removed");
+        //}
     }
 
     public void ProcessShake()
     {
-        if (ShakeAllWindows)
-        {
-            int offsetX = (int)Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
-            int offsetY = (int)Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+        if (!ShakeAllWindows) return;
 
-            foreach (FloatWindow w in Windows)
-            {
-                Vector2I ShakePosition = w.BasePosition + new Vector2I(offsetX, offsetY);
-                w.SetWindowPosition(ShakePosition);
-            }
+        int offsetX = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+        int offsetY = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+
+        foreach (FloatWindow window in Windows)
+        {
+            Vector2I shakePosition = window.BasePosition + new Vector2I(offsetX, offsetY);
+            window.SetWindowPosition(shakePosition);
         }
     }
 
     public static void StartShakeAllWindows(float duration, int intensity)
     {
-        foreach (FloatWindow w in Windows)
+        foreach (FloatWindow window in Windows)
         {
-            w.BasePosition = w.Position;
+            window.BasePosition = window.Position;
         }
+
         ShakeAllWindows = true;
         ShakeIntensity = intensity;
-        if (duration != 0)
+
+        if (duration > 0)
         {
             ShakeTimer.Start(duration);
         }
@@ -241,13 +182,11 @@ public partial class GameManager : Node2D
     public static void StopShakeAllWindows()
     {
         ShakeAllWindows = false;
-        foreach (FloatWindow w in Windows)
+
+        foreach (FloatWindow window in Windows)
         {
-            w.Position = w.BasePosition;
+            window.Position = window.BasePosition;
         }
     }
-
-    public static void StateChange(GameState state)
-    {
-    }
+    public static void StateChange(GameState state) { }
 }

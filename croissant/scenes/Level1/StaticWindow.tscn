@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://dojmcfkfdnwsu"]
+[gd_scene load_steps=5 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/Level1/StaticWindow.cs" id="1_m77lp"]
-[ext_resource type="Texture2D" uid="uid://dc255kvmnn62i" path="res://assets/popups/placeholder.png" id="2_n7kot"]
 
 [sub_resource type="Animation" id="Animation_e7e18"]
 length = 0.001
@@ -88,5 +87,4 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_n7kot")
 expand_mode = 1
