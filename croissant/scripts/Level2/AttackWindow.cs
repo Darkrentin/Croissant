@@ -16,7 +16,7 @@ public partial class AttackWindow : FloatWindow
     public Vector2I windowPosition;
     public static PackedScene VisualCollisionScene;
     [Export] private PackedScene ExportVisualCollisionScene { get => VisualCollisionScene; set => VisualCollisionScene = value; }
-    public ColorRect VisualCollision;
+    public VisualCollision VisualCollision;
     private Phase _phase = Phase.Move;
     public Vector2I CursorPosition
     {
@@ -60,7 +60,7 @@ public partial class AttackWindow : FloatWindow
 
         windowSize = Size;
 
-        VisualCollision = VisualCollisionScene.Instantiate<ColorRect>();
+        VisualCollision = VisualCollisionScene.Instantiate<VisualCollision>();
         VisualCollision.Size = Size;
         VisualCollision.Visible = false;
         GameManager.GameRoot.AddChild(VisualCollision);
@@ -80,8 +80,10 @@ public partial class AttackWindow : FloatWindow
         }
     }
 
-    public void ShowVisualCollision(Vector2I size, Vector2 position)
+    public void ShowVisualCollision(Vector2I size, Vector2 position, float duration = 0.5f)
     {
+        VisualCollision.duration = duration;
+        VisualCollision.elapsedTime = 0f;
         VisualCollision.Position = position - TitleBarSize;
         VisualCollision.Size = size + TitleBarSize;
         VisualCollision.Visible = true;

@@ -49,8 +49,6 @@ public partial class FloatWindow : Window
 	{
 		get
 		{
-			Lib.Print($"Window inside: {DisplayServer.WindowGetSize(WindowId)}");
-			Lib.Print($"Window bar: {DisplayServer.WindowGetSizeWithDecorations(WindowId)}");
 			return DisplayServer.WindowGetSizeWithDecorations(WindowId).Y - DisplayServer.WindowGetSize(WindowId).Y;
 		}
 	}

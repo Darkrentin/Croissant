@@ -105,7 +105,7 @@ public partial class LaserWindow : AttackWindow
 			nsize = Math.Min(GameManager.ScreenSize.X, GameManager.ScreenSize.Y);
 		(Vector2I targetSize, Vector2I targetPosition) = CallResize(nsize, 0f);
 		IsResizing = false;
-		ShowVisualCollision(targetSize, targetPosition);
+		ShowVisualCollision(targetSize, targetPosition, ShakeTime);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
