@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://bh5bvmpmfbmfs"]
+[gd_scene load_steps=3 format=3 uid="uid://bh5bvmpmfbmfs"]
 
 [ext_resource type="Script" uid="uid://b5up5ncwii07n" path="res://scripts/Level2/LaserWindow.cs" id="1_a1amo"]
+[ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_vm0ge"]
 
 [node name="LaserWindow" type="Window"]
 position = Vector2i(0, 36)
 script = ExtResource("1_a1amo")
+ExportVisualCollisionScene = ExtResource("2_vm0ge")
 CollisionDisabled = false

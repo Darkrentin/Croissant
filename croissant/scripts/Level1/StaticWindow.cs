@@ -7,10 +7,10 @@ public partial class StaticWindow : PopUpWindow
 
     [Export] public CompressedTexture2D Texture1;
     [Export] public CompressedTexture2D Texture2;
-
     [Export] public TextureRect textureRect;
-
-    [Export] public bool SetText1{
+    [Export]
+    public bool SetText1
+    {
         get
         {
             return false;
@@ -23,7 +23,8 @@ public partial class StaticWindow : PopUpWindow
             }
         }
     }
-    [Export] public bool SetText2
+    [Export]
+    public bool SetText2
     {
         get
         {
@@ -44,7 +45,10 @@ public partial class StaticWindow : PopUpWindow
         base._Ready();
 
         Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 300));
-        int rand = Lib.rand.Next(0, 3);
+        int rand = Lib.rand.Next(1, 5);
+        Texture1 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/popups/static{rand}_1.png");
+        Texture2 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/popups/static{rand}_2.png");
+        SetTexture1();
     }
     public void SetTexture1()
     {
@@ -68,5 +72,4 @@ public partial class StaticWindow : PopUpWindow
     {
         base._Process(delta);
     }
-
 }

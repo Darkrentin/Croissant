@@ -20,10 +20,10 @@ public partial class BombWindow : PopUpWindow
         switch (randNum)
         {
             case 0:
-                Texture.Texture = ResourceLoader.Load<Godot.Texture2D>("res://assets/popups/bomb1.png");
+                Texture.Texture = ResourceLoader.Load<Texture2D>("res://assets/popups/bomb1.png");
                 break;
             case 1:
-                Texture.Texture = ResourceLoader.Load<Godot.Texture2D>("res://assets/popups/bomb2.png");
+                Texture.Texture = ResourceLoader.Load<Texture2D>("res://assets/popups/bomb2.png");
                 break;
             case 2:
                 Sprite.Visible = true;

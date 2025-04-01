@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/Level1/StaticWindow.cs" id="1_m77lp"]
-[ext_resource type="Texture2D" uid="uid://u0wyy3c3p62f" path="res://assets/popups/static3_1.png" id="2_hm8he"]
+[ext_resource type="Texture2D" uid="uid://dc255kvmnn62i" path="res://assets/popups/placeholder.png" id="2_n7kot"]
 
 [sub_resource type="Animation" id="Animation_e7e18"]
 length = 0.001
@@ -66,7 +66,7 @@ _data = {
 
 [node name="StaticWindow" type="Window" node_paths=PackedStringArray("textureRect")]
 position = Vector2i(0, 36)
-size = Vector2i(0, 0)
+size = Vector2i(400, 300)
 unresizable = true
 always_on_top = true
 content_scale_size = Vector2i(400, 300)
@@ -88,5 +88,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_hm8he")
+texture = ExtResource("2_n7kot")
 expand_mode = 1

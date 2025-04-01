@@ -3,7 +3,6 @@ using System;
 
 public partial class AttackWindow : FloatWindow
 {
-
     public enum Phase
     {
         Move,
@@ -13,20 +12,17 @@ public partial class AttackWindow : FloatWindow
     }
     protected Level2 Parent;
     public Timer Timer;
-
     public Vector2I windowSize;
-	public Vector2I windowPosition;
-
-    public static PackedScene VisualCollisionScene = GD.Load<PackedScene>("uid://chuegp025s2xl");
+    public Vector2I windowPosition;
+    public static PackedScene VisualCollisionScene;
+    [Export] private PackedScene ExportVisualCollisionScene { get => VisualCollisionScene; set => VisualCollisionScene = value; }
     public ColorRect VisualCollision;
-
-    private Phase _phase = Phase.Move; 
-
+    private Phase _phase = Phase.Move;
     public Vector2I CursorPosition
     {
         get
         {
-            if(Random)
+            if (Random)
             {
                 return new Vector2I(Lib.rand.Next(0, GameManager.ScreenSize.X - Size.X), Lib.rand.Next(0, GameManager.ScreenSize.Y - Size.Y));
             }
@@ -39,18 +35,19 @@ public partial class AttackWindow : FloatWindow
         {
             Parent.CursorWindow.Position = value;
         }
-    }   
-
+    }
     [Export] public bool Random = false;
-
     [Export] public bool Disable = false;
-    public Phase CurrentPhase {
+    public Phase CurrentPhase
+    {
         get => _phase;
-        set {
+        set
+        {
             _phase = value;
             Lib.Print($"Current phase: {value}");
         }
     }
+
     public override void _Ready()
     {
         SharpCorners = true;
@@ -69,10 +66,10 @@ public partial class AttackWindow : FloatWindow
         VisualCollision.Visible = false;
         GameManager.GameRoot.AddChild(VisualCollision);
 
-        Timer.WaitTime = Lib.GetRandomNormal(0.1f,2.0f);
+        Timer.WaitTime = Lib.GetRandomNormal(0.1f, 2.0f);
         Timer.Timeout += Start;
 
-        if(!Disable)
+        if (!Disable)
         {
             Parent = GetParent<Level2>();
             Timer.Start();
@@ -116,8 +113,8 @@ public partial class AttackWindow : FloatWindow
 
     public virtual void Move()
     {
-        Timer.Timeout-=Move;
-        Timer.Timeout+=Prevent;
+        Timer.Timeout -= Move;
+        Timer.Timeout += Prevent;
 
         CurrentPhase = Phase.Move;
         Timer.Start();
@@ -153,11 +150,11 @@ public partial class AttackWindow : FloatWindow
     }
 
     public override void WindowCollided(FloatWindow window)
-	{
-		if (window is CursorWindow w && CurrentPhase == Phase.Attack && !w.Shaking)
-		{
-			Lib.Print("Collided");
-			w.TakeDamage();
-		}
-	}
+    {
+        if (window is CursorWindow w && CurrentPhase == Phase.Attack && !w.Shaking)
+        {
+            Lib.Print("Collided");
+            w.TakeDamage();
+        }
+    }
 }
