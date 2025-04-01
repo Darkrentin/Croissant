@@ -2,14 +2,16 @@
 
 [ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/Windows/MenuWindow.cs" id="1_ak1ko"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton")]
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton")]
 position = Vector2i(0, 36)
+size = Vector2i(200, 300)
 unresizable = true
 always_on_top = true
 popup_window = true
 script = ExtResource("1_ak1ko")
 Menu = NodePath("Control")
 FakeDesktopButton = NodePath("Control/FakeDesktop")
+DebugButton = NodePath("Control/DebugMode")
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
@@ -22,20 +24,33 @@ grow_vertical = 2
 [node name="Button" type="Button" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.1
-anchor_right = 0.9
-anchor_bottom = 0.4
-offset_bottom = -6.0
+anchor_left = 0.08
+anchor_top = 0.04
+anchor_right = 0.92
+anchor_bottom = 0.32
 text = "Quit"
 
 [node name="FakeDesktop" type="CheckButton" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.46
-anchor_right = 1.0
-anchor_bottom = 0.77
+anchor_left = 0.04
+anchor_top = 0.36
+anchor_right = 0.96
+anchor_bottom = 0.463
+offset_bottom = 0.0999908
 text = "Fake Desktop"
+clip_text = true
+
+[node name="DebugMode" type="CheckButton" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.493
+anchor_right = 0.96
+anchor_bottom = 0.597
+offset_top = 0.0999908
+offset_bottom = -0.100006
+text = "Debug Mode"
 clip_text = true
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_quit_button_pressed"]

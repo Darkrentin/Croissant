@@ -54,8 +54,7 @@ public partial class FloatWindow : Window
 	}
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }
 
-	private bool _wasMoved = false;
-	private Rect2I _cachedRect;
+	public Rect2I WindowRect;
 
 	public override void _Ready()
 	{
@@ -64,19 +63,17 @@ public partial class FloatWindow : Window
 		ShakeTimer = new Timer();
 		AddChild(ShakeTimer);
 		ShakeTimer.Timeout += StopShake;
-		GameManager.Windows.Add(this);
 		Title = "Window Added";
+		WindowRect = new Rect2I(Position, Size);
 	}
 
 	public override void _Process(double delta)
 	{
 		// Check if the window moved
-		if (Position != _cachedRect.Position || Size != _cachedRect.Size)
+		if(WindowRect.Position!=Position || WindowRect.Size!=Size)
 		{
-			_wasMoved = true;
-			_cachedRect = new Rect2I(Position, Size);
+			WindowRect = new Rect2I(Position, Size);
 		}
-
 		// Only run necessary operations
 		if (Draggable == false && HasFocus())
 			GameManager.FixWindow.GrabFocus();
@@ -92,12 +89,6 @@ public partial class FloatWindow : Window
 		if (Shaking)
 			ProcessShake();
 
-		// Only check collisions if necessary
-		if (!CollisionDisabled && _wasMoved)
-		{
-			CheckCollision();
-			_wasMoved = false;
-		}
 	}
 
 	// Start a transition to a target position with a given transition time
@@ -338,39 +329,6 @@ public partial class FloatWindow : Window
 
 	public bool IsCollided(FloatWindow other)
 	{
-		Rect2I thisRect = new Rect2I(Position, Size);
-		Rect2I otherRect = new Rect2I(other.Position, other.Size);
-
-		return thisRect.Intersects(otherRect);
+		return WindowRect.Intersects(other.WindowRect);
 	}
-
-	public void CheckCollision()
-	{
-		if (CollisionDisabled)
-			return;
-
-		foreach (FloatWindow window in GameManager.Windows)
-		{
-			if (window == this)
-				continue;
-
-			bool isCurrentlyColliding = IsCollided(window);
-			bool wasCollidingBefore = CollidedWindows.Contains(window);
-
-			if (isCurrentlyColliding && !wasCollidingBefore)
-			{
-				CollidedWindows.Add(window);
-				WindowCollided(window);
-			}
-			else if (!isCurrentlyColliding && wasCollidingBefore)
-			{
-				CollidedWindows.Remove(window);
-				WindowNotCollided(window);
-			}
-		}
-	}
-
-	public virtual void WindowCollided(FloatWindow window) { }
-
-	public virtual void WindowNotCollided(FloatWindow window) { }
 }

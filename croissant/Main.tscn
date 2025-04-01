@@ -15,3 +15,27 @@ offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_r0du0")
 expand_mode = 1
+
+[node name="DebugInfo" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="ColorRect" type="ColorRect" parent="DebugInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.033
+anchor_bottom = 0.059
+offset_right = 0.639999
+offset_bottom = 0.279995
+color = Color(0, 0, 0, 0.329412)
+
+[node name="DebugLabel" type="Label" parent="DebugInfo"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.267
+anchor_bottom = 0.415
+offset_right = -0.640015
+offset_bottom = -0.200012
+text = "Test"

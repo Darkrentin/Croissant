@@ -8,7 +8,8 @@ public partial class AttackWindow : FloatWindow
         Move,
         Prevent,
         Attack,
-        Reload
+        Reload,
+        Dammage
     }
     protected Level2 Parent;
     public Timer Timer;
@@ -103,6 +104,15 @@ public partial class AttackWindow : FloatWindow
 			Parent.CursorWindow.TakeDamage();
 		}
         */
+        if(CurrentPhase == Phase.Attack && !Shaking && IsCollided(Parent.CursorWindow))
+        {
+            Parent.CursorWindow.TakeDamage();
+            CurrentPhase = Phase.Dammage;
+        }
+        if(CurrentPhase == Phase.Dammage && !IsCollided(Parent.CursorWindow))
+        {
+            CurrentPhase = Phase.Attack;
+        }
     }
 
     public virtual void Start()
@@ -148,14 +158,5 @@ public partial class AttackWindow : FloatWindow
 
         CurrentPhase = Phase.Reload;
         Timer.Start();
-    }
-
-    public override void WindowCollided(FloatWindow window)
-    {
-        if (window is CursorWindow w && CurrentPhase == Phase.Attack && !w.Shaking)
-        {
-            Lib.Print("Collided");
-            w.TakeDamage();
-        }
     }
 }
