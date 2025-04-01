@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public partial class GameManager : Node2D
 {
     [Export] PackedScene menuScene;
-    // Enum for the game states
     public enum GameState
     {
         Virus,
@@ -100,7 +99,7 @@ public partial class GameManager : Node2D
                 States.Level2();
                 break;
 
-            // Process State
+            // Process state
             case GameState.IntroGameProcess:
                 States.IntroGameProcess(delta);
                 break;
@@ -115,7 +114,7 @@ public partial class GameManager : Node2D
         }
     }
 
-    // Create FixWindoW, to get the focus, the right mouse position, and particles
+    // Create FixWindow, to get the focus, the right mouse position, and particles
     public void AddFixWindow()
     {
         FixWindow = new Window
@@ -139,26 +138,42 @@ public partial class GameManager : Node2D
     // Remove invalid windows from the list
     public static void CleanupWindowsList()
     {
-        int initialCount = Windows.Count;
-        Windows.RemoveAll(window => window == null || !window.IsInsideTree() || window.IsQueuedForDeletion());
-
-        //int removedCount = initialCount - Windows.Count;
-        //if (removedCount > 0)
-        //{
-        //    Lib.Print($"CleanupWindowsList: {removedCount} windows removed");
-        //}
+        List<FloatWindow> validWindows = new List<FloatWindow>();
+        foreach (FloatWindow window in Windows)
+        {
+            if (window == null)
+                continue;
+            try
+            {
+                if (window.IsInsideTree() && !window.IsQueuedForDeletion())
+                    validWindows.Add(window);
+            }
+            catch (ObjectDisposedException)
+            {
+                Lib.Print("A window was already disposed and removed from the list.");
+            }
+            catch (Exception e)
+            {
+                GD.PushWarning($"Unexpected exception when checking window validity: {e.Message}");
+            }
+        }
+        Windows = validWindows;
     }
 
     public void ProcessShake()
     {
-        if (!ShakeAllWindows) return;
+        if (!ShakeAllWindows)
+            return;
 
         int offsetX = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
         int offsetY = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+        Vector2I offset = new Vector2I(offsetX, offsetY);
 
         foreach (FloatWindow window in Windows)
         {
-            Vector2I shakePosition = window.BasePosition + new Vector2I(offsetX, offsetY);
+            if (window.IsTransitioning)
+                continue;
+            Vector2I shakePosition = window.BasePosition + offset;
             window.SetWindowPosition(shakePosition);
         }
     }
@@ -166,17 +181,13 @@ public partial class GameManager : Node2D
     public static void StartShakeAllWindows(float duration, int intensity)
     {
         foreach (FloatWindow window in Windows)
-        {
             window.BasePosition = window.Position;
-        }
 
         ShakeAllWindows = true;
         ShakeIntensity = intensity;
 
         if (duration > 0)
-        {
             ShakeTimer.Start(duration);
-        }
     }
 
     public static void StopShakeAllWindows()
@@ -184,9 +195,8 @@ public partial class GameManager : Node2D
         ShakeAllWindows = false;
 
         foreach (FloatWindow window in Windows)
-        {
             window.Position = window.BasePosition;
-        }
     }
+
     public static void StateChange(GameState state) { }
 }

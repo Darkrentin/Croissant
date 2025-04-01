@@ -23,13 +23,9 @@ public partial class AttackWindow : FloatWindow
         get
         {
             if (Random)
-            {
                 return new Vector2I(Lib.rand.Next(0, GameManager.ScreenSize.X - Size.X), Lib.rand.Next(0, GameManager.ScreenSize.Y - Size.Y));
-            }
             else
-            {
                 return Parent.CursorWindow.Position + Parent.CursorWindow.Size / 2;
-            }
         }
         set
         {
@@ -54,7 +50,10 @@ public partial class AttackWindow : FloatWindow
         base._Ready();
 
         const int WindowSizeX = 120;
-        Size = new Vector2I(WindowSizeX, WindowSizeX - titleBarHeight);
+        Size = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX));
+
+        Lib.Print(TitleBarHeight.ToString());
+
         Timer = new Timer();
         Timer.OneShot = true;
         AddChild(Timer);
@@ -83,8 +82,8 @@ public partial class AttackWindow : FloatWindow
 
     public void ShowVisualCollision(Vector2I size, Vector2 position)
     {
-        VisualCollision.Position = position - titleBarSize;
-        VisualCollision.Size = size + titleBarSize;
+        VisualCollision.Position = position - TitleBarSize;
+        VisualCollision.Size = size + TitleBarSize;
         VisualCollision.Visible = true;
     }
 

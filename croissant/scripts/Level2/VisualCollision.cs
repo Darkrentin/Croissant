@@ -10,14 +10,14 @@ public partial class VisualCollision : ColorRect
 	private float targetAlpha = 0.2f;
 	public override void _Ready()
 	{
-		Color = new Color(1, 1, 1, 1f); 	
+		Color = new Color(1, 1, 1, 1f);
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		elapsedTime += (float)delta;
-		if(elapsedTime >= duration)
+		if (elapsedTime >= duration)
 		{
 			elapsedTime = 0f;
 			Color = new Color(1, 1, 1, targetAlpha);

@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://dojmcfkfdnwsu"]
+[gd_scene load_steps=7 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/Level1/StaticWindow.cs" id="1_m77lp"]
+[ext_resource type="Texture2D" uid="uid://de00l0qir2jjj" path="res://assets/popups/static4_1.png" id="2_rhr6w"]
+[ext_resource type="Texture2D" uid="uid://bm6rdcitjb5c6" path="res://assets/popups/static4_2.png" id="3_hm8he"]
 
 [sub_resource type="Animation" id="Animation_e7e18"]
 length = 0.001
@@ -64,13 +66,16 @@ _data = {
 }
 
 [node name="StaticWindow" type="Window" node_paths=PackedStringArray("textureRect")]
-position = Vector2i(0, 36)
-size = Vector2i(400, 300)
+title = "ĿCūĐǓĞÅȒƀÂ"
+position = Vector2i(178, 1223)
+size = Vector2i(640, 480)
 unresizable = true
 always_on_top = true
 content_scale_size = Vector2i(400, 300)
 content_scale_mode = 2
 script = ExtResource("1_m77lp")
+Texture1 = ExtResource("2_rhr6w")
+Texture2 = ExtResource("3_hm8he")
 textureRect = NodePath("TextureRect")
 Draggable = false
 Minimizable = false
@@ -87,4 +92,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("2_rhr6w")
 expand_mode = 1

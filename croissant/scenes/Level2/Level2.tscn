@@ -8,8 +8,6 @@
 script = ExtResource("1_u87iq")
 CursorWindow = NodePath("CursorWindow")
 
-[node name="LaserWindow2" parent="." instance=ExtResource("4_8crk8")]
-
 [node name="CursorWindow" parent="." instance=ExtResource("2_5gxfl")]
 
 [node name="LaserWindow" parent="." instance=ExtResource("4_8crk8")]
