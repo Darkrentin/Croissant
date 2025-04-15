@@ -1,43 +1,37 @@
 using Godot;
 using System;
-using System.Reflection.PortableExecutable;
 
 public partial class TankWindow : PopUpWindow
 {
     [Export] public ProgressBar progressBar;
-    public int clickcount = 0;
-    public int maxClicks;
+    public int clicks = 0;
+    public int HPs = 3;
     public override void _Ready()
     {
         HasChangingTitle = false;
         base._Ready();
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(437, 526));
-        
-        maxClicks = Lib.rand.Next(1, 4);
+        Size = Lib.GetAspectFactor(new Vector2I(437, 526));
+        Title = "❤︎❤︎❤︎";
     }
 
     public override void OnClose()
     {
-        if (clickcount >= maxClicks)
+        if (clicks == 0)
+            Title = "❤︎❤︎";
+        else if (clicks == 1)
+            Title = "❤︎";
+        else
         {
             Level1.WindowKill();
             QueueFree();
         }
-        else
-        {
-            clickcount++;
-        }
+        clicks++;
         //Lib.Print($"Clickcount: {clickcount}");
-        StartShake(0.2f, 10);
+        StartShake(0.15f, 10);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        Title = "";
-        for (int i = 0; i <= maxClicks - clickcount; i++)
-        {
-            Title += "▯";
-        }
     }
 }

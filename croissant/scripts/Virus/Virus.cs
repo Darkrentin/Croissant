@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.ComponentModel;
-using System.Linq.Expressions;
 
 public partial class Virus : FloatWindow
 {
@@ -46,11 +44,10 @@ public partial class Virus : FloatWindow
 	public void DialogueFinished(string name)
 	{
 		Lib.Print(name);
-		switch(name)
+		switch (name)
 		{
 			case "1":
 				GameManager.State = GameManager.GameState.TutoBuffer;
-				StartExponentialTransition(GameManager.ScreenSize-Size, 1f);
 				break;
 			case "sleep":
 				AnimationScreen.Travel("Idle");
@@ -58,37 +55,36 @@ public partial class Virus : FloatWindow
 				dialogue.StartDialogue("Virus", "1");
 				break;
 			case "tuto1":
-				VirusTuto.tuto1();
+				VirusTuto.Tuto1();
+				StartExponentialTransition(GameManager.ScreenSize - Size, 1f);
 				break;
 			case "tuto2":
-				VirusTuto.tuto2();
+				VirusTuto.Tuto2();
 				break;
 			case "tuto3":
-				VirusTuto.tuto3();
+				VirusTuto.Tuto3();
 				break;
 			case "tuto4":
-				VirusTuto.tuto4();
+				VirusTuto.Tuto4();
 				break;
 			case "tuto5":
-				VirusTuto.tuto5();
+				VirusTuto.Tuto5();
 				break;
 			case "tuto6":
-				VirusTuto.tuto6();
+				VirusTuto.Tuto6();
 				break;
 			case "tutoEnd":
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 		}
-		
+
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 		if (On)
-		{
 			UpdateModelRotation(delta);
-		}
 
 		// Movement Fiesta test
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
@@ -126,9 +122,7 @@ public partial class Virus : FloatWindow
 	{
 		AnimationScale.Play("Hop");
 		if (dialogue.isDialogue)
-		{
 			dialogue.NextLine();
-		}
 	}
 
 	public static void SetPause(bool Visible)
@@ -145,7 +139,7 @@ public partial class Virus : FloatWindow
 			GameManager.State = GameManager.GameState.VirusDialogue1;
 			GrabFocus();
 		}
-		if(GameManager.State == GameManager.GameState.TutoBuffer)
+		if (GameManager.State == GameManager.GameState.TutoBuffer)
 		{
 			GameManager.State = GameManager.GameState.VirusTuto;
 			GrabFocus();

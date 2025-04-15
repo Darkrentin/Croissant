@@ -1,43 +1,114 @@
 {
 	"Virus": {
-		"sleep":
-		{
-			"0": {"text":"[shake rate=7.0 connected=1]Zzz...[/shake]", "anim": "Off"},
-			"1": {"text":"", "anim": ""}
+		"sleep": {
+			"0": {
+				"text": "[shake rate=7.0 connected=1]ZzZzzZzz...[/shake]",
+				"anim": "Off"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		},
 		"1": {
-			"0": {"text": "Hello!", "anim": "Idle"},
-			"1": {"text": "I am a virus!", "anim": "Idle"},
-			"2": {"text": "I am here to [wave amp=50.0][color=RED]infect[/color] your pc![/wave]", "anim": "Idle"},
-			"3": {"text": "", "anim": ""}
+			"0": {
+				"text": "Huh?",
+				"anim": "Surprise"
+			},
+			"1": {
+				"text": "Hey you! You was [shake rate=20.0 level=5 connected=0][color=red]NOT[/color][/shake] supposed to play this game!",
+				"anim": "Angry"
+			},
+			"2": {
+				"text": "Yes I know I wasn't supposed to sleep but I'm a French virus, jetlag is real",
+				"anim": "Idle"
+			},
+			"3": {
+				"text": "Anyways what am I supposed to do? Oh yes hack you!",
+				"anim": "Angry"
+			},
+			"4": {
+				"text": "BAM!",
+				"anim": "Idle"
+			},
+			"5": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tuto1":{
-			"0": {"text": "Tuto1", "anim": "Working"},
-			"1": {"text": "", "anim": ""}
+		"tuto1": {
+			"0": {
+				"text": "The program is telling me not to say to you that...",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "\"Static windows do not move\"",
+				"anim": "Idle"
+			},
+			"2": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tuto2":{
-			"0": {"text": "Tuto2", "anim": "Angry"},
-			"1": {"text": "", "anim": ""}
+		"tuto2": {
+			"0": {
+				"text": "\"Tank windows need to be closed 3 times\"",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tuto3":{
-			"0": {"text": "Tuto3", "anim": "Sad"},
-			"1": {"text": "", "anim": ""}
+		"tuto3": {
+			"0": {
+				"text": "\"Timer windows must be closed before the end\"",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tuto4":{
-			"0": {"text": "Tuto4", "anim": "Surprise"},
-			"1": {"text": "", "anim": ""}
+		"tuto4": {
+			"0": {
+				"text": "\"Bomb windows are so cute they can't be closed\"",
+				"anim": "Sad"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tuto5":{
-			"0": {"text": "Tuto5", "anim": "Off"},
-			"1": {"text": "", "anim": ""}
+		"tuto5": {
+			"0": {
+				"text": "\"Move windows move linearly\"",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tuto6":{
-			"0": {"text": "Tuto6", "anim": "Idle"},
-			"1": {"text": "", "anim": ""}
+		"tuto6": {
+			"0": {
+				"text": "\"Dodge windows dodge the cursor\"",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		},
-		"tutoEnd":{
-			"0": {"text": "TutoEnd", "anim": "Idle"},
-			"1": {"text": "", "anim": ""}
+		"tutoEnd": {
+			"0": {
+				"text": "TutoEnd",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "",
+				"anim": ""
+			}
 		}
 	}
 }

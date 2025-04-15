@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dr5upte6mx345" path="res://scripts/Utils/DialogueWindow.cs" id="1_o82ew"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="2_0i2b1"]
 
-
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1l1uo"]
 blend_mode = 3
 
@@ -72,5 +71,5 @@ texture = SubResource("GradientTexture2D_tt50u")
 one_shot = true
 
 [node name="CursorTimer" type="Timer" parent="."]
-wait_time = 0.4
+wait_time = 0.2
 one_shot = true

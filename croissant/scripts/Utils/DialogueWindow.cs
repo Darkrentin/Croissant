@@ -1,10 +1,6 @@
 using Godot;
 using Godot.Collections;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Numerics;
-using System.Text.Json;
 using FileAccess = Godot.FileAccess;
 
 public partial class DialogueWindow : FloatWindow
@@ -36,7 +32,7 @@ public partial class DialogueWindow : FloatWindow
 	public Action<string> OnDialogueFinished;
 	public int index = 0;
 	public bool isDialogue = false;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		const string dialoguePath = "res://assets/texts/dialogues/Dialogue.json";
@@ -53,13 +49,10 @@ public partial class DialogueWindow : FloatWindow
 		//StartDialogue("Virus", "sleep");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("debug"))
-		{
 			ParentWindow._on_button_pressed();
-		}
 	}
 
 	public void ShowNextCharacter()
@@ -72,9 +65,7 @@ public partial class DialogueWindow : FloatWindow
 			timer.Start();
 		}
 		else
-		{
 			isTyping = false;
-		}
 
 	}
 	public void ProcessCursor()
@@ -99,11 +90,9 @@ public partial class DialogueWindow : FloatWindow
 	}
 
 	public void NextLine()
-	{	
-		if(isTyping && !CanSkip)
-		{
+	{
+		if (isTyping && !CanSkip)
 			return;
-		}
 		PlaceDialogueWindow();
 		Dictionary dialogue = ((Dictionary)ActualDialogue[$"{index}"]);
 		string text = (String)dialogue["text"];
