@@ -116,6 +116,11 @@ public partial class FloatWindow : Window
 	// The resize mode can be set to linear or exponential
 	public Vector2I StartResize(Vector2I targetSize, float resizeTime, bool KeepCenter = true)
 	{
+
+		StartSize = Size;
+		TargetSize = targetSize;
+		ResizeTime = resizeTime;
+
 		Vector2I newPosition = Position;
 		if(KeepCenter)
 		{
@@ -130,9 +135,6 @@ public partial class FloatWindow : Window
 			return newPosition;
 		}
 
-		StartSize = Size;
-		TargetSize = targetSize;
-		ResizeTime = resizeTime;
 		IsResizing = true;
 		elapsedTimeResize = 0;
 

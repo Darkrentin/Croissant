@@ -1,6 +1,8 @@
 using Godot;
+using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public partial class GameManager : Node2D
 {
@@ -51,6 +53,7 @@ public partial class GameManager : Node2D
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
+
 
     public override void _Ready()
     {

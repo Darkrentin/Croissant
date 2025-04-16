@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://qiac3wawneng"]
+[gd_scene load_steps=4 format=3 uid="uid://qiac3wawneng"]
 
 [ext_resource type="Script" uid="uid://dk62vn1atnd43" path="res://scripts/Level2/CompressWindow.cs" id="1_bpm5o"]
 [ext_resource type="Script" uid="uid://6mob1yhk5kfe" path="res://scripts/Level2/AttackWindow.cs" id="2_b7jvd"]
+[ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_ure8x"]
 
 [node name="CompressWindow" type="Window" node_paths=PackedStringArray("ConnectedWindow")]
 script = ExtResource("1_bpm5o")
 ConnectedWindow = NodePath("SubWindow")
+ExportVisualCollisionScene = ExtResource("2_ure8x")
 
 [node name="SubWindow" type="Window" parent="."]
 script = ExtResource("2_b7jvd")
+ExportVisualCollisionScene = ExtResource("2_ure8x")
 Disable = true

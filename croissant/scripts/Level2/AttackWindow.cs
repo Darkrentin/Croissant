@@ -19,6 +19,8 @@ public partial class AttackWindow : FloatWindow
     [Export] private PackedScene ExportVisualCollisionScene { get => VisualCollisionScene; set => VisualCollisionScene = value; }
     public VisualCollision VisualCollision;
     private Phase _phase = Phase.Move;
+
+    public int Lives = 3;
     public Vector2I CursorPosition
     {
         get
@@ -77,7 +79,7 @@ public partial class AttackWindow : FloatWindow
         else
         {
             GD.Print("Disabled");
-            QueueFree();
+            Timer.Stop();
         }
     }
 
@@ -153,7 +155,13 @@ public partial class AttackWindow : FloatWindow
     public virtual void Reload()
     {
         CollisionDisabled = true;
+        Lives--;
         Timer.Timeout -= Reload;
+        if(Lives <= 0)
+        {
+            QueueFree();
+            return;
+        }
         Timer.Timeout += Move;
 
         CurrentPhase = Phase.Reload;

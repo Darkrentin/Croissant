@@ -1,8 +1,10 @@
-[gd_scene load_steps=2 format=3 uid="uid://wmn0s55jslit"]
+[gd_scene load_steps=3 format=3 uid="uid://wmn0s55jslit"]
 
 [ext_resource type="Script" uid="uid://ct5vvq21h0ypf" path="res://scripts/Level2/ExtendWindow.cs" id="1_31ov5"]
+[ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_yhh70"]
 
 [node name="ExtendWindow" type="Window"]
 position = Vector2i(0, 36)
 sharp_corners = true
 script = ExtResource("1_31ov5")
+ExportVisualCollisionScene = ExtResource("2_yhh70")

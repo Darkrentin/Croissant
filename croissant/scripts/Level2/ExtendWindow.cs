@@ -38,7 +38,8 @@ public partial class ExtendWindow : AttackWindow
 		StartShake(ShakeTime, 5);
 
 		TargetSize = Size + Lib.GetScreenSize(0.2f, 0.2f);
-		ShowVisualCollision(TargetSize, StartResize(TargetSize,0));
+		//Vector2I targetPosition = Position + (Size / 2) - (TargetSize / 2);
+		ShowVisualCollision(TargetSize, StartResize(TargetSize,-1f), ShakeTime);
 		IsResizing = false;
 
 		Timer.WaitTime = ShakeTime;
@@ -49,7 +50,7 @@ public partial class ExtendWindow : AttackWindow
 	{
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
-		StartResize(TargetSize, ResizeTime);
+		StartResize(TargetSize, ResizeTime, KeepCenter: true);
 		HideVisualCollision();
 
 		Timer.WaitTime = ResizeTime + AttackDuration;

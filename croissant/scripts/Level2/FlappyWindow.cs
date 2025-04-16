@@ -1,14 +1,10 @@
 using Godot;
 using System;
-using System.Runtime.InteropServices;
 
-public partial class CompressWindow : AttackWindow
+public partial class FlappyWindow : AttackWindow
 {
-
-	[Export] public AttackWindow ConnectedWindow;
+	[Export] AttackWindow ConnectedWindow;
 	public Vector2I ConnectedWindowPosition;
-
-	public int side;
 	public int nsize = 0;
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,26 +21,20 @@ public partial class CompressWindow : AttackWindow
 
     public override void Move()
     {
-		side = Lib.rand.Next(0, 2);
 		const float MoveTime = 0.5f;
 		const float MarginTime = 0.1f;
 
 		Vector2I targetPosition;
 		Vector2I OtherTargetPosition;
 
-		if(side==0)
+		int targetX = 0;
+		if(Lib.rand.Next(0,2)==0)
 		{
-			int targetX = CursorPosition.X;
-		 	targetPosition = new Vector2I(targetX, 0);
-			OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
+			targetX = GameManager.ScreenSize.X - Size.X;
 		}
-		else
-		{
-			int targetY = CursorPosition.Y;
-			targetPosition = new Vector2I(0, targetY);
-			OtherTargetPosition = new Vector2I(GameManager.ScreenSize.X - ConnectedWindow.Size.X, targetY);
-		}
-		
+		targetPosition = new Vector2I(targetX, 0);
+		OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
+
 		StartTransition(targetPosition, MoveTime - MarginTime);
 		ConnectedWindow.StartTransition(OtherTargetPosition, MoveTime - MarginTime);
 		windowPosition = targetPosition;
@@ -52,7 +42,6 @@ public partial class CompressWindow : AttackWindow
 
 		Timer.WaitTime = MoveTime;
         base.Move();
-   
     }
 
 	public override void Prevent()
@@ -66,23 +55,16 @@ public partial class CompressWindow : AttackWindow
 		
 		Vector2I targetSize2;
 		Vector2I targetPosition2;
-		
-		if(side==0)
-		{
-			nsize = GameManager.ScreenSize.Y/2 - Size.Y;
-			(targetSize, targetPosition) = StartResizeDown(nsize, -1f);
-			(targetSize2, targetPosition2) = ConnectedWindow.StartResizeUp(nsize, -1f);
-		}
-		else
-		{
-			nsize = GameManager.ScreenSize.X/2 - Size.X;
-			(targetSize, targetPosition) = StartResizeRight(nsize, -1f);
-			(targetSize2, targetPosition2) = ConnectedWindow.StartResizeLeft(nsize, -1f);
-		}
 
-		IsResizing = false;
-		ConnectedWindow.IsResizing = false;
+		nsize = GameManager.ScreenSize.Y/2 - Size.Y - Parent.CursorWindow.Size.Y;
+		(targetSize, targetPosition) = StartResizeDown(nsize, ShakeTime);
+		(targetSize2, targetPosition2) = ConnectedWindow.StartResizeUp(nsize, ShakeTime);
 
+		targetSize = new Vector2I(GameManager.ScreenSize.X, targetSize.Y);
+		targetPosition = Vector2I.Zero;
+
+		targetSize2 = new Vector2I(GameManager.ScreenSize.X, targetSize2.Y);
+		targetPosition2 = new Vector2I(0, GameManager.ScreenSize.Y - targetSize2.Y);
 		ShowVisualCollision(targetSize, targetPosition, ShakeTime);
 		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, ShakeTime);
 
@@ -92,23 +74,18 @@ public partial class CompressWindow : AttackWindow
 
 	public override void Attack()
 	{
-		const float ResizeTime = 0.2f;
+		const float MoveTime = 0.3f;
 		const float AttackDuration = 0.3f;
-
-		if (side == 0)
+		int TargetX = 0;
+		if(Position.X - Parent.CursorWindow.Position.X < 0)
 		{
-			StartResizeDown(nsize,ResizeTime);
-			ConnectedWindow.StartResizeUp(nsize,ResizeTime);
+			TargetX = GameManager.ScreenSize.X - Size.X;
 		}
-		else
-		{
-			StartResizeRight(nsize,ResizeTime);
-			ConnectedWindow.StartResizeLeft(nsize,ResizeTime);
-		}
-
+		StartLinearTransition(new Vector2I(TargetX, 0), MoveTime);
+		ConnectedWindow.StartLinearTransition(new Vector2I(TargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
 		HideVisualCollision();
 		ConnectedWindow.HideVisualCollision();
-		Timer.WaitTime = ResizeTime + AttackDuration;
+		Timer.WaitTime = MoveTime + AttackDuration;
 		base.Attack();
 	}
 
@@ -117,11 +94,11 @@ public partial class CompressWindow : AttackWindow
 		const float ResetTime = 1f;
 		resizeMode = TransitionMode.Exponential;
 		StartResize(windowSize, ResetTime);
-		StartTransition(windowPosition, ResetTime, reset: true);
+		//StartTransition(windowPosition, ResetTime, reset: true);
 		
 		ConnectedWindow.resizeMode = TransitionMode.Exponential;
 		ConnectedWindow.StartResize(ConnectedWindow.windowSize, ResetTime);
-		ConnectedWindow.StartTransition(ConnectedWindowPosition, ResetTime, reset: true);
+		//ConnectedWindow.StartTransition(ConnectedWindowPosition, ResetTime, reset: true);
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();

@@ -4,7 +4,6 @@ using System;
 public partial class TankWindow : PopUpWindow
 {
     [Export] public ProgressBar progressBar;
-    public int clicks = 0;
     public int HPs = 3;
     public override void _Ready()
     {

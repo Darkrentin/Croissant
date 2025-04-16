@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c5djekulorxqs"]
+
+[ext_resource type="Script" uid="uid://bnsc6lqg0jlm4" path="res://scripts/Level2/FlappyWindow.cs" id="1_xkf1h"]
+[ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_viawa"]
+[ext_resource type="Script" uid="uid://6mob1yhk5kfe" path="res://scripts/Level2/AttackWindow.cs" id="2_xkf1h"]
+
+[node name="FlappyWindow" type="Window" node_paths=PackedStringArray("ConnectedWindow")]
+script = ExtResource("1_xkf1h")
+ConnectedWindow = NodePath("SubWindow")
+ExportVisualCollisionScene = ExtResource("2_viawa")
+
+[node name="SubWindow" type="Window" parent="."]
+script = ExtResource("2_xkf1h")
+ExportVisualCollisionScene = ExtResource("2_viawa")
+Disable = true
