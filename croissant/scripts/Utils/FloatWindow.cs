@@ -95,6 +95,12 @@ public partial class FloatWindow : Window
 	// The transition mode can be set to linear or exponential
 	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
+		if(transitionTime<=0)
+		{
+			return;
+		}
+		Lib.Print("Transition Start !");
+		GD.Print("Target Position : " + targetPosition);
 		StartPosition = Position;
 		if (IsTransitioning && !reset)
 			TargetPosition += targetPosition - StartPosition;
@@ -110,6 +116,20 @@ public partial class FloatWindow : Window
 	// The resize mode can be set to linear or exponential
 	public Vector2I StartResize(Vector2I targetSize, float resizeTime, bool KeepCenter = true)
 	{
+		Vector2I newPosition = Position;
+		if(KeepCenter)
+		{
+			Vector2I deltaSize = TargetSize - StartSize;
+			Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
+			newPosition = Position - deltaPosition;
+			transitionMode = resizeMode;
+		}
+
+		if(resizeTime<=0)
+		{
+			return newPosition;
+		}
+
 		StartSize = Size;
 		TargetSize = targetSize;
 		ResizeTime = resizeTime;
@@ -118,14 +138,9 @@ public partial class FloatWindow : Window
 
 		if (KeepCenter)
 		{
-			Vector2I deltaSize = TargetSize - StartSize;
-			Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
-			Vector2I newPosition = Position - deltaPosition;
-			transitionMode = resizeMode;
 			StartTransition(newPosition, resizeTime);
-			return newPosition;
 		}
-		return Position;
+		return newPosition;
 	}
 
 	public void StartLinearTransition(Vector2I targetPosition, float transitionTime, bool reset = false)
@@ -248,7 +263,7 @@ public partial class FloatWindow : Window
 
 			case TransitionMode.InverseExponential:
 				if (Smoothness > 0.01f)
-					return 1.0f - (Mathf.Exp((progress - 1.0f) * Smoothness) - Mathf.Exp(-Smoothness)) / (1.0f - Mathf.Exp(-Smoothness));
+					return (Mathf.Exp((progress - 1.0f) * Smoothness) - Mathf.Exp(-Smoothness)) / (1.0f - Mathf.Exp(-Smoothness));
 				return progress;
 
 			default:
@@ -321,8 +336,8 @@ public partial class FloatWindow : Window
 		explosion.Position = Position + Size / 2;
 
 		GameManager.GameRoot.AddChild(explosion);
-		Lib.Print("EXPLOSION POSITION : " + explosion.Position);
-		Lib.Print("POSITION : " + Position + Size / 2);
+		//Lib.Print("EXPLOSION POSITION : " + explosion.Position);
+		//Lib.Print("POSITION : " + Position + Size / 2);
 		*/
 		ShakeFinished();
 	}

@@ -21,14 +21,14 @@ public partial class DebugWindow : FloatWindow
         {
             if (!open)
             {
-                Lib.Print("Opening");
+                //Lib.Print("Opening");
                 StartExponentialResize(Lib.GetScreenSize(0.24f, 0.49f), 0.5f);
                 StartExponentialTransition(Lib.GetScreenPosition(0.17f, 0.47f), 5f, Smoothness, true);
                 open = true;
             }
             else
             {
-                Lib.Print("Closing");
+                //Lib.Print("Closing");
                 StartExponentialResize(Lib.GetScreenSize(0.10f, 0.12f), 0.5f);
                 StartExponentialTransition(Lib.GetScreenPosition(0.70f, 0.41f), 5f, Smoothness, true);
                 open = false;

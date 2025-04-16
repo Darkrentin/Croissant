@@ -19,7 +19,7 @@ public partial class Level1 : Node2D
         set
         {
             _windowKillCount = value;
-            //Lib.Print($"WindowKillCount: {_windowKillCount}");
+            ////Lib.Print($"WindowKillCount: {_windowKillCount}");
         }
     }
     private static int _windowKillCount = 0;
@@ -100,8 +100,8 @@ public partial class Level1 : Node2D
 			AddNewWindow();
 			WindowCount++;
 		}*/
-        //Lib.Print($"timertic: {TimerTic}");
-        //Lib.Print($"window: {WindowCount}");
+        ////Lib.Print($"timertic: {TimerTic}");
+        ////Lib.Print($"window: {WindowCount}");
         if (InitialWindowCount < 22)
         {
             AddNewWindow();

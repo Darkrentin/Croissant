@@ -52,13 +52,13 @@ public partial class StaticWindow : PopUpWindow
     }
     public void SetTexture1()
     {
-        Lib.Print("SetTexture1");
+        //Lib.Print("SetTexture1");
         textureRect.Texture = Texture1;
     }
 
     public void SetTexture2()
     {
-        Lib.Print("SetTexture2");
+        //Lib.Print("SetTexture2");
         textureRect.Texture = Texture2;
     }
 

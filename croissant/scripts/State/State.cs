@@ -48,7 +48,7 @@ public static class States
         GameManager.virus = virus;
         GameManager.GameRoot.AddChild(virus);
         virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - virus.Size / 2;
-        Lib.Print(virus.Position.ToString());
+        //Lib.Print(virus.Position.ToString());
         virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(virus.Size.X / 2, virus.Size.Y), 2f);
 
         //change state condition
@@ -61,7 +61,7 @@ public static class States
         //Freeze the game
         IntroGameManager.Instance.GetParent().QueueFree();
 
-        Lib.Print("First Virus Dialogue");
+        //Lib.Print("First Virus Dialogue");
         GameManager.virus.dialogue.StartDialogue("Virus", "sleep");
 
         Node2D VirusSplash = VirusSplashScene.Instantiate<Node2D>();

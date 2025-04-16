@@ -11,6 +11,7 @@ public partial class CursorWindow : FloatWindow
 	{
 		base._Ready();
 		Size = Lib.GetScreenSize(0.1f, 0.1f);
+		Size = Lib.GetAspectFactor(new Vector2I(150,150)) - TitleBarSize; 
 		SetWindowPosition(Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2);
 
 	}

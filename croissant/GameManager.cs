@@ -32,7 +32,7 @@ public partial class GameManager : Node2D
         set
         {
             _state = value;
-            Lib.Print($"State: {_state}");
+            //Lib.Print($"State: {_state}");
             StateChange(_state);
         }
     }
@@ -65,7 +65,7 @@ public partial class GameManager : Node2D
         ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
 
-        Lib.Print($"ScreenSize: {ScreenSize}");
+        //Lib.Print($"ScreenSize: {ScreenSize}");
     }
 
     public override void _Process(double delta)
@@ -150,7 +150,7 @@ public partial class GameManager : Node2D
             }
             catch (ObjectDisposedException)
             {
-                Lib.Print("A window was already disposed and removed from the list.");
+                //Lib.Print("A window was already disposed and removed from the list.");
             }
             catch (Exception e)
             {

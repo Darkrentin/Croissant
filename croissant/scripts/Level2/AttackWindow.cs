@@ -50,10 +50,10 @@ public partial class AttackWindow : FloatWindow
         SharpCorners = true;
         base._Ready();
 
-        const int WindowSizeX = 120;
-        Size = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX));
+        const int WindowSizeX = 130;
+        Size = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX)) - TitleBarSize;
 
-        Lib.Print(TitleBarHeight.ToString());
+        //Lib.Print(TitleBarHeight.ToString());
 
         Timer = new Timer();
         Timer.OneShot = true;

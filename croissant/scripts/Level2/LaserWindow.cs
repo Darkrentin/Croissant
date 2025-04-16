@@ -19,11 +19,11 @@ public partial class LaserWindow : AttackWindow
 
 	private Vector2I GetTargetPosition(int side)
 	{
-		int margin = 0;
+		int margin = Math.Max(Size.X, Size.Y);
 		if (!Random)
 			margin = Math.Max(Parent.CursorWindow.Size.X, Parent.CursorWindow.Size.Y);
 
-		Lib.Print($"Side: {side}");
+		//Lib.Print($"Side: {side}");
 		switch (side)
 		{
 			case 3:
@@ -103,7 +103,7 @@ public partial class LaserWindow : AttackWindow
 			nsize = (int)(GetDistance() * 1.2f); // distance to the cursor window
 		else
 			nsize = Math.Min(GameManager.ScreenSize.X, GameManager.ScreenSize.Y);
-		(Vector2I targetSize, Vector2I targetPosition) = CallResize(nsize, 0f);
+		(Vector2I targetSize, Vector2I targetPosition) = CallResize(nsize, -1f);
 		IsResizing = false;
 		ShowVisualCollision(targetSize, targetPosition, ShakeTime);
 
