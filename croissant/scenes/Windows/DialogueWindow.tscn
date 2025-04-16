@@ -17,7 +17,7 @@ fill_to = Vector2(0, 1)
 
 [node name="DialogueWindow" type="Window" node_paths=PackedStringArray("label", "timer", "cursorTimer")]
 transparent_bg = true
-size = Vector2i(500, 70)
+size = Vector2i(500, 100)
 unresizable = true
 borderless = true
 always_on_top = true
@@ -71,5 +71,5 @@ texture = SubResource("GradientTexture2D_tt50u")
 one_shot = true
 
 [node name="CursorTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.4
 one_shot = true

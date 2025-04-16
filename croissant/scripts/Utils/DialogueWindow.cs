@@ -61,7 +61,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isTyping = true;
 			label.VisibleCharacters++;
-			timer.WaitTime = Lib.rand.NextDouble() / 4f;
+			timer.WaitTime = Lib.rand.NextDouble() / 8f;
 			timer.Start();
 		}
 		else
@@ -149,6 +149,6 @@ public partial class DialogueWindow : FloatWindow
 	public void PlaceDialogueWindow()
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
-		Position = new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin;
+		SetWindowPosition(new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin);
 	}
 }

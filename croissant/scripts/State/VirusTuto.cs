@@ -30,14 +30,16 @@ public static class VirusTuto
         popup2.CloseRequested -= popup2.OnClose;
         popup2.CloseRequested += () =>
         {
-            if (popup2.clicks >= popup2.HPs)
+            popup2.HPs--;
+            if(popup2.HPs<=0)
             {
                 GameManager.State = GameManager.GameState.VirusTuto;
                 States.LevelOfTuto++;
                 popup2.QueueFree();
             }
-            else
-                popup2.clicks++;
+            else{
+                popup2.CheckHp();
+            }
             popup2.StartShake(0.2f, 10);
         };
     }

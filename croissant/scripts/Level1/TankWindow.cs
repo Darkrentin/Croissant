@@ -11,27 +11,35 @@ public partial class TankWindow : PopUpWindow
         HasChangingTitle = false;
         base._Ready();
         Size = Lib.GetAspectFactor(new Vector2I(437, 526));
-        Title = "❤︎❤︎❤︎";
+        Title = "---";
+        CheckHp();
     }
 
     public override void OnClose()
     {
-        if (clicks == 0)
-            Title = "❤︎❤︎";
-        else if (clicks == 1)
-            Title = "❤︎";
-        else
+        HPs--;
+        if(HPs<=0)
         {
             Level1.WindowKill();
             QueueFree();
         }
-        clicks++;
-        //Lib.Print($"Clickcount: {clickcount}");
+        else{
+            CheckHp();
+        }
         StartShake(0.15f, 10);
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
+    }
+
+    public void CheckHp()
+    {
+        Title = "";
+        for(int i = 0; i < HPs; i++)
+        {
+            Title += "❤︎";
+        }
     }
 }

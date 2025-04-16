@@ -48,6 +48,7 @@ public partial class Virus : FloatWindow
 		{
 			case "1":
 				GameManager.State = GameManager.GameState.TutoBuffer;
+				StartExponentialTransition(GameManager.ScreenSize - Size, 1f);
 				break;
 			case "sleep":
 				AnimationScreen.Travel("Idle");
@@ -56,7 +57,6 @@ public partial class Virus : FloatWindow
 				break;
 			case "tuto1":
 				VirusTuto.Tuto1();
-				StartExponentialTransition(GameManager.ScreenSize - Size, 1f);
 				break;
 			case "tuto2":
 				VirusTuto.Tuto2();
@@ -85,7 +85,8 @@ public partial class Virus : FloatWindow
 		base._Process(delta);
 		if (On)
 			UpdateModelRotation(delta);
-
+		if(Input.IsActionJustPressed("LeftClick"))
+			_on_button_pressed();
 		// Movement Fiesta test
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
 	}
@@ -120,6 +121,7 @@ public partial class Virus : FloatWindow
 
 	public void _on_button_pressed()
 	{
+		Lib.Print("Virus Clicked");
 		AnimationScale.Play("Hop");
 		if (dialogue.isDialogue)
 			dialogue.NextLine();
