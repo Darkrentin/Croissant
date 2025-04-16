@@ -1,10 +1,8 @@
 using Godot;
 using System;
-using System.Drawing;
 
 public static class States
 {
-
     public static PackedScene Difficultycene = ResourceLoader.Load<PackedScene>("uid://cgj1ul5xki8ym");
     public static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
     public static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
@@ -84,35 +82,41 @@ public static class States
 
     }
 
-    public static void VirusTuto()
+    public static void VirusTutoSelection()
     {
         switch (LevelOfTuto)
         {
-            case (0):
+            case 0:
+                VirusTuto.Tuto1();
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto1");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case (1):
+            case 1:
+                VirusTuto.Tuto2();
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto2");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case (2):
+            case 2:
+                VirusTuto.Tuto3();
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto3");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case (3):
+            case 3:
+                VirusTuto.Tuto4();
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto4");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case (4):
+            case 4:
+                VirusTuto.Tuto5();
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto5");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case (5):
+            case 5:
+                VirusTuto.Tuto6();
                 GameManager.virus.dialogue.StartDialogue("Virus", "tuto6");
                 GameManager.State = GameManager.GameState.Void;
                 break;
-            case (6):
+            case 6:
                 GameManager.virus.dialogue.StartDialogue("Virus", "tutoEnd");
                 GameManager.State = GameManager.GameState.Void;
                 break;
@@ -145,7 +149,6 @@ public static class States
         if (IntroGameManager.score >= IntroGameManager.Instance.MaxScore)
         {
             IntroGameManager.EndActions();
-
             GameManager.State = GameManager.GameState.IntroVirus;
         }
     }

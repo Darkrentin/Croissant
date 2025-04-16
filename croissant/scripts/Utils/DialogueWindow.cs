@@ -61,7 +61,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isTyping = true;
 			label.VisibleCharacters++;
-			timer.WaitTime = Lib.rand.NextDouble() / 8f;
+			timer.WaitTime = Lib.rand.NextDouble() / 16f;
 			timer.Start();
 		}
 		else
@@ -97,21 +97,22 @@ public partial class DialogueWindow : FloatWindow
 		Dictionary dialogue = ((Dictionary)ActualDialogue[$"{index}"]);
 		string text = (String)dialogue["text"];
 		string anim = (String)dialogue["anim"];
-		label.Text.Replace("|", "");
-		label.Text += "\n> ";
-		label.Text += text;
-		label.Text += "|";
 		if (text == "")
 		{
 			isDialogue = false;
-			label.Text = "";
 			OnDialogueFinished(ActualDialogueName);
+			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
+			if (anim != "")
+				GameManager.virus.AnimationScreen.Travel(anim);
 			return;
 		}
+		label.Text = label.Text.Replace(" |", "");
+		label.Text += "\n> ";
+		label.Text += text;
+		label.Text += " |";
 		GameManager.virus.AnimationScreen.Travel(anim);
 		index++;
 		ShowNextCharacter();
-
 	}
 
 	public void LoadJson(string path)

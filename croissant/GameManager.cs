@@ -132,7 +132,7 @@ public partial class GameManager : Node2D
                 States.VirusDialogue1();
                 break;
             case GameState.VirusTuto:
-                States.VirusTuto();
+                States.VirusTutoSelection();
                 break;
             case GameState.Level1:
                 States.Level1();

@@ -2,7 +2,7 @@
 	"Virus": {
 		"sleep": {
 			"0": {
-				"text": "[shake rate=7.0 connected=1]ZzZzzZzz...[/shake]",
+				"text": "[wave amp=20 freq=1.5][color=#6b6b6b]Z[color=#8b8b8b]z[color=#ababab]Z[color=#8b8b8b]z[color=#6b6b6b]z[color=#8b8b8b]Z[color=#ababab]z[color=#6b6b6b]z...",
 				"anim": "Off"
 			},
 			"1": {
@@ -13,23 +13,23 @@
 		"1": {
 			"0": {
 				"text": "Huh?",
-				"anim": "Surprise"
+				"anim": "Idle"
 			},
 			"1": {
-				"text": "Hey you! You was [shake rate=20.0 level=5 connected=0][color=red]NOT[/color][/shake] supposed to play this game!",
+				"text": "[color=#ff5555][b]Hey YOU![/b][/color] You were [color=#ff5555][wave amp=15 freq=5][b]NOT[/b][/wave][/color] supposed to play this!",
 				"anim": "Angry"
 			},
 			"2": {
-				"text": "Yes I know I wasn't supposed to sleep but I'm a French virus, jetlag is real",
-				"anim": "Idle"
+				"text": "I was not supposed to sleep but I'm a [color=#2f3ec4][wave amp=10 freq=1]F[/wave][wave amp=10 freq=2]r[/wave][/color][color=#FFFFFF][wave amp=10 freq=3]e[/wave][wave amp=10 freq=4]n[/wave][/color][color=#E1000F][wave amp=10 freq=5]c[/wave][wave amp=10 freq=6]h[/wave][/color] virus, jetlag is [pulse freq=2.0 color=##ffd9d9][b]HUGE[/b][/pulse]",
+				"anim": "Surprise"
 			},
 			"3": {
-				"text": "Anyways what am I supposed to do? Oh yes hack you!",
-				"anim": "Angry"
+				"text": "[tornado radius=3.0 freq=2.0]Anyways.[/tornado] [color=#6b6b6b][i]what am I supposed to do now?[/i][/color]",
+				"anim": "Surprise"
 			},
 			"4": {
-				"text": "BAM!",
-				"anim": "Idle"
+				"text": "Oh yes, [wave amp=20 freq=3][rainbow freq=0.5 sat=0.8 val=1.0]hack you[/rainbow][/wave]! Let me just...",
+				"anim": "Angry"
 			},
 			"5": {
 				"text": "",
@@ -38,22 +38,18 @@
 		},
 		"tuto1": {
 			"0": {
-				"text": "The program is telling me not to say to you that...",
-				"anim": "Idle"
+				"text": "[wave amp=25 freq=2.0][color=#00ff00]01000010 01001001 01010100[/color][/wave]",
+				"anim": "Working"
 			},
 			"1": {
-				"text": "\"Static windows do not move\"",
-				"anim": "Idle"
-			},
-			"2": {
 				"text": "",
 				"anim": ""
 			}
 		},
 		"tuto2": {
 			"0": {
-				"text": "\"Tank windows need to be closed 3 times\"",
-				"anim": "Idle"
+				"text": "That's not enough?! [shake rate=18 level=4][color=#ff0000][b]Have THIS one![/b][/color][/shake]",
+				"anim": "Angry"
 			},
 			"1": {
 				"text": "",
@@ -62,8 +58,8 @@
 		},
 		"tuto3": {
 			"0": {
-				"text": "\"Timer windows must be closed before the end\"",
-				"anim": "Idle"
+				"text": "You got [tornado radius=2.0 freq=2.0][color=#ffcc00]too much time[/color][/tornado]! Let's make things [pulse freq=3.0 color=#ff3333][b]HARDER[/b][/pulse]",
+				"anim": "Angry"
 			},
 			"1": {
 				"text": "",
@@ -72,7 +68,7 @@
 		},
 		"tuto4": {
 			"0": {
-				"text": "\"Bomb windows are so cute they can't be closed\"",
+				"text": "Ohh a [wave amp=10 freq=2.0][color=#ffaacc]cute little cat[/color][/wave], don't touch it!",
 				"anim": "Sad"
 			},
 			"1": {
@@ -82,8 +78,8 @@
 		},
 		"tuto5": {
 			"0": {
-				"text": "\"Move windows move linearly\"",
-				"anim": "Idle"
+				"text": "[shake rate=20 level=6][color=#ff3333]HA![/color] IT [rainbow freq=2.0 sat=1.0 val=1.0]MOVES[/rainbow] NOW![/shake]",
+				"anim": "Angry"
 			},
 			"1": {
 				"text": "",
@@ -92,8 +88,8 @@
 		},
 		"tuto6": {
 			"0": {
-				"text": "\"Dodge windows dodge the cursor\"",
-				"anim": "Idle"
+				"text": "[shake rate=20 level=6][color=#ff3333]YOU CAN'T DEFEAT ME![/color][/shake]",
+				"anim": "Angry"
 			},
 			"1": {
 				"text": "",
@@ -102,12 +98,12 @@
 		},
 		"tutoEnd": {
 			"0": {
-				"text": "TutoEnd",
+				"text": "[tornado radius=3.0 freq=0.5][color=#aaaaaa]Fine[/color][/tornado], [pulse freq=1.0 color=#ff0000]I'll make you stop.[/pulse]",
 				"anim": "Idle"
 			},
 			"1": {
 				"text": "",
-				"anim": ""
+				"anim": "Working"
 			}
 		}
 	}

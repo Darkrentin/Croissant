@@ -31,15 +31,14 @@ public static class VirusTuto
         popup2.CloseRequested += () =>
         {
             popup2.HPs--;
-            if(popup2.HPs<=0)
+            if (popup2.HPs <= 0)
             {
                 GameManager.State = GameManager.GameState.VirusTuto;
                 States.LevelOfTuto++;
                 popup2.QueueFree();
             }
-            else{
+            else
                 popup2.CheckHp();
-            }
             popup2.StartShake(0.2f, 10);
         };
     }

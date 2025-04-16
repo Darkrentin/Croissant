@@ -17,14 +17,13 @@ public partial class TankWindow : PopUpWindow
     public override void OnClose()
     {
         HPs--;
-        if(HPs<=0)
+        if (HPs <= 0)
         {
             Level1.WindowKill();
             QueueFree();
         }
-        else{
+        else
             CheckHp();
-        }
         StartShake(0.15f, 10);
     }
 
@@ -36,9 +35,7 @@ public partial class TankWindow : PopUpWindow
     public void CheckHp()
     {
         Title = "";
-        for(int i = 0; i < HPs; i++)
-        {
+        for (int i = 0; i < HPs; i++)
             Title += "❤︎";
-        }
     }
 }
