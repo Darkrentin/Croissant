@@ -4,13 +4,45 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
+public enum DifficultyLevel
+{
+    Easy,
+    Medium,
+    Hard
+}
+
 public partial class GameManager : Node2D
 {
+    [Export] public float difficulty {get =>_difficulty; set => _difficulty = value; }
+    private static float _difficulty = 1f;
+    public static float Difficulty
+    {
+        get => _difficulty;
+        private set => _difficulty = value;
+    }
+
+    public static void SetDifficulty(DifficultyLevel level)
+    {
+        switch (level)
+        {
+            case DifficultyLevel.Easy:
+                Difficulty = 0.75f;
+                break;
+            case DifficultyLevel.Medium:
+                Difficulty = 1f;
+                break;
+            case DifficultyLevel.Hard:
+                Difficulty = 1.5f;
+                break;
+        }
+    }
+
     [Export] PackedScene menuScene;
     public enum GameState
     {
         Virus,
         // Game state
+        Difficulty,
         IntroGame,
         IntroVirus,
         VirusDialogue1,
@@ -27,7 +59,7 @@ public partial class GameManager : Node2D
         Void
     }
     public static Node2D GameRoot;
-    private static GameState _state = GameState.IntroGame; // 0 : normal, -1 : debug
+    private static GameState _state = GameState.Difficulty; // 0 : normal, -1 : debug
     public static GameState State
     {
         get => _state;
@@ -60,15 +92,19 @@ public partial class GameManager : Node2D
         GameRoot = this;
         AddFixWindow();
         InitMainWindow();
-
+        // Le reste du code _Ready existant
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
 
         ShakeTimer = new Timer();
         ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
+    }
 
-        //Lib.Print($"ScreenSize: {ScreenSize}");
+    private void InitializeGame()
+    {
+        // Initialisation du jeu après la sélection de la difficulté
+        State = GameState.IntroGame;
     }
 
     public override void _Process(double delta)
@@ -83,6 +119,9 @@ public partial class GameManager : Node2D
                 break;
 
             // Game state
+            case GameState.Difficulty:
+                States.ChooseDifficulty();
+                break;
             case GameState.IntroGame:
                 States.IntroGame();
                 break;

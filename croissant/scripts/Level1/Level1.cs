@@ -1,9 +1,12 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+
 
 public partial class Level1 : Node2D
 {
+
     [Export] private PackedScene StaticWindowScene;
     [Export] private PackedScene TimerWindowScene;
     [Export] private PackedScene MoveWindowScene;
@@ -40,32 +43,32 @@ public partial class Level1 : Node2D
 
         spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1f;
+        spawnTimer.WaitTime = 1f / GameManager.Difficulty;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
         spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 10f;
+        totalTimer.WaitTime = 3f* GameManager.Difficulty;
         totalTimer.Timeout += TotalSpawnerTimeout;
         totalTimer.Start();
 
     }
 
+
     public void OnSpawnTimerTimeout()
     {
-        if (WindowCount < 20 && WindowCount > 0)
+        if (WindowCount < 20*GameManager.Difficulty && WindowCount > 0)
         {
             AddNewWindow();
-            spawnTimer.WaitTime = Lib.rand.NextDouble() * 0.6f + 0.4f + TimerLimit;
+            spawnTimer.WaitTime = (Lib.rand.NextDouble() * 0.4f + 0.6f + TimerLimit) / GameManager.Difficulty;
             //UpdateSpawnTimer();
         }
     }
 
-
     public void TotalSpawnerTimeout()
     {
-        if (TimerTic < 20)
+        if (TimerTic < 19)
         {
             TimerTic++;
         }
@@ -102,18 +105,17 @@ public partial class Level1 : Node2D
 		}*/
         ////Lib.Print($"timertic: {TimerTic}");
         ////Lib.Print($"window: {WindowCount}");
-        if (InitialWindowCount < 22)
+        if (InitialWindowCount < 22 * GameManager.Difficulty)
         {
             AddNewWindow();
             InitialWindowCount++;
         }
-        else if (InitialWindowCount == 22)
+        else if (InitialWindowCount == 22 * GameManager.Difficulty)
         {
             totalTimer.WaitTime = 1.5f;
             InitialWindowCount++;
         }
     }
-
 
     public static void AddNewWindow()
     {
@@ -124,31 +126,31 @@ public partial class Level1 : Node2D
             Instance.AddChild(window);
             Instance.Windows.Add(window);
         }
-        else if (i >= 2 && i <= 5)
+        else if (i == 2 || i == 4 || i == 8 || i == 11)
         {
             MoveWindow window = Instance.MoveWindowScene.Instantiate<MoveWindow>();
             Instance.AddChild(window);
             Instance.Windows.Add(window);
         }
-        else if (i >= 6 && i <= 7)
+        else if (i == 3 || i == 6)
         {
             BombWindow window = Instance.BombWindowScene.Instantiate<BombWindow>();
             Instance.AddChild(window);
             Instance.Windows.Add(window);
         }
-        else if (i >= 8 && i <= 11)
+        else if (i == 5 || i == 10 || i == 16)
         {
             TankWindow window = Instance.TankWindowScene.Instantiate<TankWindow>();
             Instance.AddChild(window);
             Instance.Windows.Add(window);
         }
-        else if (i >= 12 && i <= 15)
+        else if (i == 7 || i == 8 || i == 13 || i == 17)
         {
             TimerWindow window = Instance.TimerWindowScene.Instantiate<TimerWindow>();
             Instance.AddChild(window);
             Instance.Windows.Add(window);
         }
-        else if (i >= 16 && i <= 19)
+        else if (i == 9 || i == 14 || i == 15 || i == 18)
         {
             DodgeWindow window = Instance.DodgeWindowScene.Instantiate<DodgeWindow>();
             Instance.AddChild(window);

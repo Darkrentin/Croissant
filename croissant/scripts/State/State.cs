@@ -5,6 +5,7 @@ using System.Drawing;
 public static class States
 {
 
+    public static PackedScene Difficultycene = ResourceLoader.Load<PackedScene>("uid://cgj1ul5xki8ym");
     public static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
     public static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
     public static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
@@ -29,6 +30,11 @@ public static class States
         virus.On = true;
 
         //change state condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+    public static void ChooseDifficulty()
+    {
+        GameManager.GameRoot.AddChild(Difficultycene.Instantiate<Window>());
         GameManager.State = GameManager.GameState.Void;
     }
     public static void IntroGame()
