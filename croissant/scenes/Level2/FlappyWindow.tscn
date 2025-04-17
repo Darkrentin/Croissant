@@ -13,3 +13,4 @@ ExportVisualCollisionScene = ExtResource("2_viawa")
 script = ExtResource("2_xkf1h")
 ExportVisualCollisionScene = ExtResource("2_viawa")
 Disable = true
+CollisionDisabled = false

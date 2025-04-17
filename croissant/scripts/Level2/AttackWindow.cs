@@ -159,12 +159,24 @@ public partial class AttackWindow : FloatWindow
         Timer.Timeout -= Reload;
         if(Lives <= 0)
         {
-            QueueFree();
+            Delete();
             return;
         }
         Timer.Timeout += Move;
 
         CurrentPhase = Phase.Reload;
         Timer.Start();
+    }
+
+    public void Delete()
+    {
+        GameManager.GameRoot.RemoveChild(VisualCollision);
+        GameManager.Windows.Remove(this);
+        VisualCollision.QueueFree();
+        GrabFocus();
+        GetParent().RemoveChild(this);
+        QueueFree();
+        //GameManager.MainWindow.GrabFocus();
+
     }
 }

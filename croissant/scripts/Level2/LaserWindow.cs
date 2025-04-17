@@ -27,13 +27,13 @@ public partial class LaserWindow : AttackWindow
 		switch (side)
 		{
 			case 3:
-				return new Vector2I(Lib.rand.Next(0, (CursorPosition.X - margin) % GameManager.ScreenSize.X), CursorPosition.Y);
+				return new Vector2I(Lib.rand.Next(0, Math.Max(0,CursorPosition.X - margin)), CursorPosition.Y);
 			case 0:
-				return new Vector2I(CursorPosition.X, Lib.rand.Next((CursorPosition.X + margin) % GameManager.ScreenSize.Y, GameManager.ScreenSize.Y));
+				return new Vector2I(CursorPosition.X, Lib.rand.Next(Math.Min(GameManager.ScreenSize.Y,CursorPosition.Y + margin), GameManager.ScreenSize.Y));
 			case 1:
-				return new Vector2I(Lib.rand.Next((CursorPosition.X + margin) % GameManager.ScreenSize.X, GameManager.ScreenSize.X), CursorPosition.Y);
+				return new Vector2I(Lib.rand.Next(Math.Min(CursorPosition.X + margin, GameManager.ScreenSize.X), GameManager.ScreenSize.X), CursorPosition.Y);
 			case 2:
-				return new Vector2I(CursorPosition.X, Lib.rand.Next(0, (CursorPosition.X - margin) % GameManager.ScreenSize.Y));
+				return new Vector2I(CursorPosition.X, Lib.rand.Next(0, Math.Max(0,CursorPosition.Y - margin)));
 			default:
 				GD.PushError("Invalid side");
 				return new Vector2I(0, 0);
