@@ -10,10 +10,11 @@ config_version=5
 
 [application]
 
-config/name="Croissant"
+config/name="Shape Glitch"
 run/main_scene="uid://c2f4mqkrcs2ea"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/low_processor_mode_sleep_usec=0
+boot_splash/show_image=false
 config/icon="res://icon.svg"
 
 [display]
@@ -28,6 +29,7 @@ window/size/no_focus=true
 window/size/sharp_corners=true
 window/subwindows/embed_subwindows=false
 window/per_pixel_transparency/allowed=true
+window/vsync/vsync_mode=0
 window/size/width=1920
 window/size/height=1080
 
@@ -109,14 +111,14 @@ LeftClick={
 
 [physics]
 
+2d/run_on_separate_thread=true
+3d/run_on_separate_thread=true
 common/physics_jitter_fix=0.0
 2d/physics_engine="GodotPhysics2D"
 
 [rendering]
 
-textures/canvas_textures/default_texture_filter=0
 gl_compatibility/fallback_to_angle=false
 renderer/rendering_method="gl_compatibility"
-environment/ssao/adaptive_target=1.0
 environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 0)
 viewport/transparent_background=true
