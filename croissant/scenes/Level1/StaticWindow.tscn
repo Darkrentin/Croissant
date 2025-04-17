@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/Level1/StaticWindow.cs" id="1_m77lp"]
-[ext_resource type="Texture2D" uid="uid://de00l0qir2jjj" path="res://assets/popups/static4_1.png" id="2_rhr6w"]
-[ext_resource type="Texture2D" uid="uid://bm6rdcitjb5c6" path="res://assets/popups/static4_2.png" id="3_hm8he"]
+[ext_resource type="Texture2D" uid="uid://cc0hewjmaqfmv" path="res://assets/popups/static2_1.png" id="2_rhr6w"]
+[ext_resource type="Texture2D" uid="uid://dbglwur25loim" path="res://assets/popups/static2_2.png" id="3_hm8he"]
 
 [sub_resource type="Animation" id="Animation_e7e18"]
 length = 0.001
@@ -66,8 +66,8 @@ _data = {
 }
 
 [node name="StaticWindow" type="Window" node_paths=PackedStringArray("textureRect")]
-title = "ţİî>½ƞƝ"
-position = Vector2i(144, 536)
+title = "Ĉ=ĂǀƿǱSȞȮƚƳūĵƧĔŨǰÌ"
+position = Vector2i(959, 893)
 size = Vector2i(400, 300)
 unresizable = true
 always_on_top = true
