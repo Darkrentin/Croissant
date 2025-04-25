@@ -43,7 +43,7 @@ public partial class AttackWindow : FloatWindow
         set
         {
             _phase = value;
-            Lib.Print($"Current phase: {value}");
+            //Lib.Print($"Current phase: {value}");
         }
     }
 
@@ -59,7 +59,7 @@ public partial class AttackWindow : FloatWindow
         const int WindowSizeX = 130;
         Size = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX)) - TitleBarSize;
 
-        //Lib.Print(TitleBarHeight.ToString());
+        ////Lib.Print(TitleBarHeight.ToString());
 
         Timer = new Timer();
         Timer.OneShot = true;

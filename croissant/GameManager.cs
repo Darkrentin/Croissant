@@ -48,6 +48,7 @@ public partial class GameManager : Node2D
         VirusDialogue1,
         VirusTuto,
         Level1,
+        BlueScreen,
         Level2,
         // _Process state
         IntroGame_Process,
@@ -66,7 +67,7 @@ public partial class GameManager : Node2D
         set
         {
             _state = value;
-            //Lib.Print($"State: {_state}");
+            ////Lib.Print($"State: {_state}");
             StateChange(_state);
         }
     }
@@ -137,6 +138,9 @@ public partial class GameManager : Node2D
             case GameState.Level1:
                 States.Level1();
                 break;
+            case GameState.BlueScreen:
+                States.BlueScreen();
+                break;
             case GameState.Level2:
                 States.Level2();
                 break;
@@ -192,7 +196,7 @@ public partial class GameManager : Node2D
             }
             catch (ObjectDisposedException)
             {
-                //Lib.Print("A window was already disposed and removed from the list.");
+                ////Lib.Print("A window was already disposed and removed from the list.");
             }
             catch (Exception e)
             {

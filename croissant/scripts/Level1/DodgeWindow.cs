@@ -10,9 +10,10 @@ public partial class DodgeWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = true;
+        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(390, 450));
         base._Ready();
 
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(390, 450));
+        
         cooldownTimer = new Timer();
         AddChild(cooldownTimer);
         cooldownTimer.WaitTime = 0.39f;

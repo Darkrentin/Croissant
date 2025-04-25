@@ -11,13 +11,14 @@ public partial class TimerWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = true;
+        Size = Lib.GetAspectFactor(new Vector2I(400, 600));
         base._Ready();
 
         time = CalculateTimerDuration();
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
         timer.Timeout += _on_timer_timeout;
-        Size = Lib.GetAspectFactor(new Vector2I(400, 600));
+        
         progressBar.Size = Size;
         timer.Start();
     }

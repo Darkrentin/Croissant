@@ -8,8 +8,8 @@ public partial class TankWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = false;
-        base._Ready();
         Size = Lib.GetAspectFactor(new Vector2I(437, 526));
+        base._Ready();
         Title = "---";
         CheckHp();
     }

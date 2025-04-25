@@ -37,7 +37,7 @@ public partial class Bullet : StaticBody2D
 	//On bullet collision, launches a bullet
 	public void BulletCollide()
 	{
-		////Lib.Print("bullet collide");
+		//////Lib.Print("bullet collide");
 		Alive = false;
 		Polygon2D.Visible = false;
 		Velocity = Vector2.Zero;

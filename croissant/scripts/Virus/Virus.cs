@@ -1,8 +1,14 @@
 using Godot;
 using System;
+using System.Drawing;
+using System.Linq.Expressions;
 
 public partial class Virus : FloatWindow
 {
+	public Vector2I LeftUp = Vector2I.Zero;
+	public Vector2I LeftDown;
+	public Vector2I RightUp;
+	public Vector2I RightDown;
 	[Export] Camera3D Camera;
 	[Export] Node3D Computer;
 
@@ -21,6 +27,7 @@ public partial class Virus : FloatWindow
 	public static Control Pause;
 	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
 	[Export] public Timer BlinkTimer;
+	public bool ForceDialoguePlacement = false;
 	Vector2I screenSize = DisplayServer.ScreenGetSize();
 
 	public bool On = false;
@@ -34,22 +41,28 @@ public partial class Virus : FloatWindow
 		//Size *= GameManager.ScreenSize/ new Vector2I(1920, 1080);
 		Size = (Vector2I)Lib.GetAspectFactor(Size);
 		dialogue.PlaceDialogueWindow();
+		ForceDialoguePlacement = false;
 		dialogue.OnDialogueFinished += DialogueFinished;
 
 		BlinkTimer.Timeout += Blink;
 		BlinkTimer.WaitTime = 5f;
 		BlinkTimer.Start();
+
+		LeftDown = new Vector2I(0, GameManager.ScreenSize.Y - Size.Y);
+		RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);
+		RightDown = new Vector2I(GameManager.ScreenSize.X - Size.X, GameManager.ScreenSize.Y - Size.Y);
 	}
 
 	public void DialogueFinished(string name)
 	{
-		Lib.Print(name);
+		//Lib.Print(name);
 		switch (name)
 		{
 			case "1":
 				GameManager.State = GameManager.GameState.TutoBuffer;
 				StartExponentialTransition(GameManager.ScreenSize - Size, 1f);
-				dialogue.PlaceDialogueWindow();
+				ForceDialoguePlacement = false;
+				dialogue.Visible = false;
 				break;
 			case "sleep":
 				AnimationScreen.Travel("Idle");
@@ -57,7 +70,11 @@ public partial class Virus : FloatWindow
 				dialogue.StartDialogue("Virus", "1");
 				break;
 			case "tutoEnd":
+				HideVirus(3);
 				GameManager.State = GameManager.GameState.Level1;
+				break;
+			case "EndLevel1":
+				GameManager.State = GameManager.GameState.BlueScreen;
 				break;
 		}
 
@@ -104,7 +121,7 @@ public partial class Virus : FloatWindow
 
 	public void _on_button_pressed()
 	{
-		Lib.Print("Virus Clicked");
+		//Lib.Print("Virus Clicked");
 		AnimationScale.Play("Hop");
 		if (dialogue.isDialogue)
 			dialogue.NextLine();
@@ -118,7 +135,7 @@ public partial class Virus : FloatWindow
 
 	public override void TransitionFinished()
 	{
-		Lib.Print("Transition Finished");
+		//Lib.Print("Transition Finished");
 		if (GameManager.State == GameManager.GameState.IntroVirusBuffer)
 		{
 			GameManager.State = GameManager.GameState.VirusDialogue1;
@@ -129,6 +146,7 @@ public partial class Virus : FloatWindow
 			GameManager.State = GameManager.GameState.VirusTuto;
 			GrabFocus();
 		}
+		dialogue.PlaceDialogueWindow(ForceDialoguePlacement);
 	}
 
 	public void Blink()
@@ -136,5 +154,20 @@ public partial class Virus : FloatWindow
 		AnimationScale.Play("Blink");
 		BlinkTimer.WaitTime = Lib.GetRandomNormal(3f, 6f);
 		BlinkTimer.Start();
+	}
+
+	public void HideVirus(int side = -1)
+	{
+		Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side,Math.Max(Size.X, Size.Y)*2);
+		ForceDialoguePlacement = true;
+		StartTransition(HidePosition, 0.5f,reset:true);
+		dialogue.Visible = false;
+	}
+
+	public void Show(Vector2I Position)
+	{
+		ForceDialoguePlacement = false;
+		StartTransition(Position, 0.1f,reset:true);
+		GrabFocus();
 	}
 }

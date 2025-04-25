@@ -99,7 +99,7 @@ public partial class FloatWindow : Window
 		{
 			return;
 		}
-		Lib.Print("Transition Start !");
+		//Lib.Print("Transition Start !");
 		GD.Print("Target Position : " + targetPosition);
 		StartPosition = Position;
 		if (IsTransitioning && !reset)
@@ -338,8 +338,8 @@ public partial class FloatWindow : Window
 		explosion.Position = Position + Size / 2;
 
 		GameManager.GameRoot.AddChild(explosion);
-		//Lib.Print("EXPLOSION POSITION : " + explosion.Position);
-		//Lib.Print("POSITION : " + Position + Size / 2);
+		////Lib.Print("EXPLOSION POSITION : " + explosion.Position);
+		////Lib.Print("POSITION : " + Position + Size / 2);
 		*/
 		ShakeFinished();
 	}

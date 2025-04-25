@@ -1,7 +1,6 @@
 using Godot;
 using System;
 
-[Tool]
 public partial class StaticWindow : PopUpWindow
 {
 
@@ -42,9 +41,10 @@ public partial class StaticWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = true;
+        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 300));
         base._Ready();
 
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 300));
+        
         int rand = Lib.rand.Next(1, 5);
         Texture1 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/popups/static{rand}_1.png");
         Texture2 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/popups/static{rand}_2.png");
@@ -52,13 +52,13 @@ public partial class StaticWindow : PopUpWindow
     }
     public void SetTexture1()
     {
-        //Lib.Print("SetTexture1");
+        ////Lib.Print("SetTexture1");
         textureRect.Texture = Texture1;
     }
 
     public void SetTexture2()
     {
-        //Lib.Print("SetTexture2");
+        ////Lib.Print("SetTexture2");
         textureRect.Texture = Texture2;
     }
 

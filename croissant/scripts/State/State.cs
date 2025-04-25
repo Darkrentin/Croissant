@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public static class States
 {
@@ -15,6 +17,12 @@ public static class States
     public static PackedScene TankWindowScene = ResourceLoader.Load<PackedScene>("uid://dsmobrvf3clby");
     public static PackedScene BombWindowScene = ResourceLoader.Load<PackedScene>("uid://cjcfsjb8cgs3k");
     public static PackedScene VirusSplashScene = ResourceLoader.Load<PackedScene>("uid://b5ce1wjnvbedm");
+    public static PackedScene BodsSene = ResourceLoader.Load<PackedScene>("uid://dogpe8p1am58j");
+    public static Window Bods;
+    public static Window IntroLvl;
+    public static Node Lvl1;
+    public static Node Lvl2;
+
 
     public static int LevelOfTuto = 0;
 
@@ -37,10 +45,9 @@ public static class States
     }
     public static void IntroGame()
     {
-        Window IntroGame = IntroGameScene.Instantiate<Window>();
-        IntroGame.Position = new Vector2I(1, 0);
-        GameManager.GameRoot.AddChild(IntroGame);
-
+        IntroLvl = IntroGameScene.Instantiate<Window>();
+        IntroLvl.Position = new Vector2I(1, 0);
+        GameManager.GameRoot.AddChild(IntroLvl);
 
         //Change State condition
         GameManager.State = GameManager.GameState.IntroGame_Process;
@@ -52,7 +59,7 @@ public static class States
         GameManager.virus = virus;
         GameManager.GameRoot.AddChild(virus);
         virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - virus.Size / 2;
-        //Lib.Print(virus.Position.ToString());
+        ////Lib.Print(virus.Position.ToString());
         virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(virus.Size.X / 2, virus.Size.Y), 2f);
 
         //change state condition
@@ -65,7 +72,7 @@ public static class States
         //Freeze the game
         IntroGameManager.Instance.GetParent().QueueFree();
 
-        //Lib.Print("First Virus Dialogue");
+        ////Lib.Print("First Virus Dialogue");
         GameManager.virus.dialogue.StartDialogue("Virus", "sleep");
 
         Node2D VirusSplash = VirusSplashScene.Instantiate<Node2D>();
@@ -128,14 +135,20 @@ public static class States
 
     public static void Level1()
     {
-        Node2D Level1 = Level1Scene.Instantiate<Node2D>();
-        GameManager.GameRoot.AddChild(Level1);
+        Lvl1 = Level1Scene.Instantiate<Node2D>();
+        GameManager.GameRoot.AddChild(Lvl1);
 
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
+
+    public static void BlueScreen()
+    {
+        BlueScreenManage.ManageBlueScreen();
+    }
     public static void Level2()
     {
+        Bods.QueueFree();
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
 

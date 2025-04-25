@@ -37,7 +37,7 @@ public partial class WaveManager : Node
 			CurrentWaveMaxEnemy = 1 + CurrentWave * 2;
 			CurrentWaveEnemy = CurrentWaveMaxEnemy;
 			CurrentWavePoints = 0;
-			Lib.Print($"Starting wave {CurrentWave} with {CurrentWaveMaxEnemy} enemies");
+			//Lib.Print($"Starting wave {CurrentWave} with {CurrentWaveMaxEnemy} enemies");
 			WaveResetTimer.WaitTime = Lib.rand.Next(1, 5);
 			WaveResetTimer.Start();
 		}
@@ -61,7 +61,7 @@ public partial class WaveManager : Node
 			}
 			else
 			{
-				Lib.Print($"Enemy weight {enemyWeight} is too high for current wave {CurrentWave}");
+				//Lib.Print($"Enemy weight {enemyWeight} is too high for current wave {CurrentWave}");
 			}
 		}
 	}

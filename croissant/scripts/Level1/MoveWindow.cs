@@ -6,9 +6,10 @@ public partial class MoveWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = true;
+        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(384, 264));
         base._Ready();
 
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(384, 264));
+        
         StartNewMovement();
     }
 

@@ -22,7 +22,7 @@ public partial class Level1 : Node2D
         set
         {
             _windowKillCount = value;
-            ////Lib.Print($"WindowKillCount: {_windowKillCount}");
+            //////Lib.Print($"WindowKillCount: {_windowKillCount}");
         }
     }
     private static int _windowKillCount = 0;
@@ -45,13 +45,25 @@ public partial class Level1 : Node2D
         AddChild(spawnTimer);
         spawnTimer.WaitTime = 1f / GameManager.Difficulty;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
-        spawnTimer.Start();
+        //spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
         totalTimer.WaitTime = 3f* GameManager.Difficulty;
         totalTimer.Timeout += TotalSpawnerTimeout;
-        totalTimer.Start();
+        //totalTimer.Start();
+
+        //Debug
+        Timer debug = new Timer();
+        AddChild(debug);
+        debug.WaitTime = 5f;
+        debug.Timeout += () =>
+        {
+            GameManager.virus.dialogue.StartDialogue("Virus", "EndLevel1");
+            GameManager.virus.Show(GameManager.virus.RightDown);
+            debug.Stop();
+        };
+        debug.Start();
 
     }
 
@@ -103,8 +115,9 @@ public partial class Level1 : Node2D
 			AddNewWindow();
 			WindowCount++;
 		}*/
-        ////Lib.Print($"timertic: {TimerTic}");
-        ////Lib.Print($"window: {WindowCount}");
+        //////Lib.Print($"timertic: {TimerTic}");
+        //////Lib.Print($"window: {WindowCount}");
+        /*
         if (InitialWindowCount < 22 * GameManager.Difficulty)
         {
             AddNewWindow();
@@ -115,6 +128,11 @@ public partial class Level1 : Node2D
             totalTimer.WaitTime = 1.5f;
             InitialWindowCount++;
         }
+
+        if(WindowCount == 0)
+        {
+        }
+        */
     }
 
     public static void AddNewWindow()

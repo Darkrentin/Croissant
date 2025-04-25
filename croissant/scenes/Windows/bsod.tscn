@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://dogpe8p1am58j"]
+
+[ext_resource type="Texture2D" uid="uid://sjvy5uesh2nh" path="res://assets/sprites/virus/bsodmaker.png" id="1_bnpok"]
+[ext_resource type="Script" uid="uid://b0bbu7vmyekjj" path="res://scripts/Windows/Bsod.cs" id="1_jl6an"]
+
+[node name="Bsod" type="Window" node_paths=PackedStringArray("RestartButton")]
+mode = 3
+size = Vector2i(1920, 1080)
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+script = ExtResource("1_jl6an")
+RestartButton = NodePath("Button")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_bnpok")
+
+[node name="Button" type="Button" parent="."]
+anchors_preset = -1
+anchor_left = 0.346
+anchor_top = 0.704
+anchor_right = 0.38
+anchor_bottom = 0.732
+offset_left = -0.320007
+offset_top = -0.320068
+offset_right = -0.600037
+offset_bottom = 0.439941
+text = "Restart
+"
