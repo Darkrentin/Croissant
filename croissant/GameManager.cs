@@ -49,8 +49,8 @@ public partial class GameManager : Node2D
         VirusTuto,
         Level1,
         Level2,
-        // Process state
-        IntroGameProcess,
+        // _Process state
+        IntroGame_Process,
         // Buffer state
         Debug,
         IntroVirusBuffer,
@@ -109,7 +109,7 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
-        ProcessShake();
+        _ProcessShake();
         CleanupWindowsList();
 
         switch (State)
@@ -141,9 +141,9 @@ public partial class GameManager : Node2D
                 States.Level2();
                 break;
 
-            // Process state
-            case GameState.IntroGameProcess:
-                States.IntroGameProcess(delta);
+            // _Process state
+            case GameState.IntroGame_Process:
+                States.IntroGame_Process(delta);
                 break;
 
             // Buffer state
@@ -202,7 +202,7 @@ public partial class GameManager : Node2D
         Windows = validWindows;
     }
 
-    public void ProcessShake()
+    public void _ProcessShake()
     {
         if (!ShakeAllWindows)
             return;

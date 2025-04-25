@@ -49,7 +49,11 @@ public partial class AttackWindow : FloatWindow
 
     public override void _Ready()
     {
+        Position = Lib.GetRandomPositionOutsideScreen(-1, 150);
         SharpCorners = true;
+        Unresizable = true;
+        Draggable = false;
+        Minimizable = false;
         base._Ready();
 
         const int WindowSizeX = 130;
@@ -170,12 +174,21 @@ public partial class AttackWindow : FloatWindow
 
     public void Delete()
     {
+        Parent.WaveManager.EnemyDefeated();
         GameManager.GameRoot.RemoveChild(VisualCollision);
-        GameManager.Windows.Remove(this);
+        //GameManager.Windows.Remove(this);
         VisualCollision.QueueFree();
         GrabFocus();
-        GetParent().RemoveChild(this);
-        QueueFree();
+        //GetParent().RemoveChild(this);
+        Parent.CursorWindow.GrabFocus();
+        
+        Timer death = new Timer();
+        AddChild(death);
+        death.Timeout += QueueFree;
+        Timer.WaitTime = 0.1f;
+        Timer.OneShot = true;
+        Hide();
+        death.Start();
         //GameManager.MainWindow.GrabFocus();
 
     }

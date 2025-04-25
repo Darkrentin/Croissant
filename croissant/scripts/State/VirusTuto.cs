@@ -3,7 +3,7 @@ using System;
 
 public static class VirusTuto
 {
-    public static void process()
+    public static void _Process()
     {
 
     }

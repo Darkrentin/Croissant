@@ -41,7 +41,7 @@ public partial class DialogueWindow : FloatWindow
 		timer.Timeout += ShowNextCharacter;
 		ShowNextCharacter();
 		label.Text = "";
-		cursorTimer.Timeout += ProcessCursor;
+		cursorTimer.Timeout += _ProcessCursor;
 		cursorTimer.Start();
 
 		OnDialogueFinished += DialogueFinished;
@@ -68,7 +68,7 @@ public partial class DialogueWindow : FloatWindow
 			isTyping = false;
 
 	}
-	public void ProcessCursor()
+	public void _ProcessCursor()
 	{
 		if (isTyping)
 		{

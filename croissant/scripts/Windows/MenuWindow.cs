@@ -10,6 +10,7 @@ public partial class MenuWindow : FloatWindow
 	public bool DebugMode;
 	public override void _Ready()
 	{
+		ProcessMode = ProcessModeEnum.Always;
 		base._Ready();
 
 		Vector2I windowSize = Lib.GetScreenSize(0.1f, 0.2f);

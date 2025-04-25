@@ -43,7 +43,7 @@ public static class States
 
 
         //Change State condition
-        GameManager.State = GameManager.GameState.IntroGameProcess;
+        GameManager.State = GameManager.GameState.IntroGame_Process;
     }
 
     public static void IntroVirus()
@@ -143,7 +143,7 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void IntroGameProcess(double delta)
+    public static void IntroGame_Process(double delta)
     {
         //Change State condition
         if (IntroGameManager.score >= IntroGameManager.Instance.MaxScore)

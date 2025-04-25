@@ -8,6 +8,7 @@
 script = ExtResource("1_xkf1h")
 ConnectedWindow = NodePath("SubWindow")
 ExportVisualCollisionScene = ExtResource("2_viawa")
+CollisionDisabled = false
 
 [node name="SubWindow" type="Window" parent="."]
 script = ExtResource("2_xkf1h")

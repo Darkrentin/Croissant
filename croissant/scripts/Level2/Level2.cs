@@ -1,9 +1,11 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Level2 : Node2D
 {
 	[Export] public CursorWindow CursorWindow;
+	[Export] public WaveManager WaveManager;
 
 	public static Level2 Instance;
 

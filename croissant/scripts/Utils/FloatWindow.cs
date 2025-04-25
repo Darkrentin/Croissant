@@ -12,8 +12,8 @@ public partial class FloatWindow : Window
 	}
 	public Vector2I BasePosition;
 	[Export] public bool Shaking = false;
-	[Export] private bool Draggable = true;
-	[Export] private bool Minimizable = true;
+	[Export] public bool Draggable = true;
+	[Export] public bool Minimizable = true;
 	private Timer ShakeTimer;
 	private int ShakeIntensity = 0;
 	[Export] private TransitionMode transitionMode = TransitionMode.Linear;
@@ -81,13 +81,13 @@ public partial class FloatWindow : Window
 		if (!Minimizable && Mode == ModeEnum.Minimized)
 			Mode = ModeEnum.Windowed;
 
-		// Only process transitions when active
+		// Only _Process transitions when active
 		if (IsTransitioning || IsResizing)
 			TransitionWindow(delta);
 
-		// Only process shaking when active
+		// Only _Process shaking when active
 		if (Shaking)
-			ProcessShake();
+			_ProcessShake();
 
 	}
 
@@ -301,7 +301,7 @@ public partial class FloatWindow : Window
 
 	public virtual void ResizeFinished() { }
 
-	public void ProcessShake()
+	public void _ProcessShake()
 	{
 		if (Shaking)
 		{
