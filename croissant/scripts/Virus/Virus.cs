@@ -162,6 +162,7 @@ public partial class Virus : FloatWindow
 		ForceDialoguePlacement = true;
 		StartTransition(HidePosition, 0.5f,reset:true);
 		dialogue.Visible = false;
+		dialogue.label.Text = "";
 	}
 
 	public void Show(Vector2I Position)

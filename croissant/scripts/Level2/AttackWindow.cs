@@ -78,6 +78,7 @@ public partial class AttackWindow : FloatWindow
         if (!Disable)
         {
             Parent = GetParent<Level2>();
+            Lives = Parent.WaveManager.CurrentWave;
             Timer.Start();
         }
         else
@@ -85,6 +86,7 @@ public partial class AttackWindow : FloatWindow
             GD.Print("Disabled");
             Timer.Stop();
         }
+
     }
 
     public void ShowVisualCollision(Vector2I size, Vector2 position, float duration = 0.5f)

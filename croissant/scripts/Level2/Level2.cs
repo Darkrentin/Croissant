@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 public partial class Level2 : Node2D
 {
@@ -18,5 +19,11 @@ public partial class Level2 : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		const int MaxWave = 10;
+		if (WaveManager.CurrentWave > MaxWave)
+		{
+			GameManager.State = GameManager.GameState.Void;
+			QueueFree();
+		}
 	}
 }

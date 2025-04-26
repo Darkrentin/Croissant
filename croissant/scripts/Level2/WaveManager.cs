@@ -9,7 +9,7 @@ public partial class WaveManager : Node
 	[Export] int NumberOfEnemy;
 	[Export] Node SpawnNode;
 
-	public int CurrentWave = 0;
+	public int CurrentWave = 1;
 	public int CurrentWaveEnemy = -1;
 	public int CurrentWaveMaxEnemy = 6;
 	public int CurrentWavePoints = 0;

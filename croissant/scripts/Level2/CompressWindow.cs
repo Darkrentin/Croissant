@@ -50,6 +50,7 @@ public partial class CompressWindow : AttackWindow
 		windowPosition = targetPosition;
 		ConnectedWindowPosition = OtherTargetPosition;
 
+
 		Timer.WaitTime = MoveTime;
         base.Move();
    
@@ -57,6 +58,10 @@ public partial class CompressWindow : AttackWindow
 
 	public override void Prevent()
 	{
+
+		Position = windowPosition;
+		ConnectedWindow.Position = ConnectedWindowPosition;
+
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5);
 		ConnectedWindow.StartShake(ShakeTime, 5);
@@ -69,7 +74,7 @@ public partial class CompressWindow : AttackWindow
 		
 		if(side==0)
 		{
-			nsize = GameManager.ScreenSize.Y/2 - Size.Y;
+			nsize = GameManager.ScreenSize.Y/2 - (Size.Y + (TitleBarHeight/2));	
 			(targetSize, targetPosition) = StartResizeDown(nsize, -1f);
 			(targetSize2, targetPosition2) = ConnectedWindow.StartResizeUp(nsize, -1f);
 		}
