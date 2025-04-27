@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpf7olkqhqx8t"]
+
+[ext_resource type="Script" uid="uid://bkpyojrnc4bno" path="res://scripts/Level3/Killzone.cs" id="1_guhck"]
+
+[node name="Killzone" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_guhck")
+
+[node name="Timer" type="Timer" parent="."]
