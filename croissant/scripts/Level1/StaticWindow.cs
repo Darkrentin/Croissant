@@ -4,40 +4,11 @@ using System;
 [Tool]
 public partial class StaticWindow : PopUpWindow
 {
-
     [Export] public CompressedTexture2D Texture1;
     [Export] public CompressedTexture2D Texture2;
     [Export] public TextureRect textureRect;
-    [Export]
-    public bool SetText1
-    {
-        get
-        {
-            return false;
-        }
-        set
-        {
-            if (value)
-            {
-                SetTexture1();
-            }
-        }
-    }
-    [Export]
-    public bool SetText2
-    {
-        get
-        {
-            return false;
-        }
-        set
-        {
-            if (value)
-            {
-                SetTexture2();
-            }
-        }
-    }
+    [Export] public bool SetText1 { get { return false; } set { if (value) SetTexture1(); } }
+    [Export] public bool SetText2 { get { return false; } set { if (value) SetTexture2(); } }
 
     public override void _Ready()
     {
@@ -52,13 +23,11 @@ public partial class StaticWindow : PopUpWindow
     }
     public void SetTexture1()
     {
-        //Lib.Print("SetTexture1");
         textureRect.Texture = Texture1;
     }
 
     public void SetTexture2()
     {
-        //Lib.Print("SetTexture2");
         textureRect.Texture = Texture2;
     }
 

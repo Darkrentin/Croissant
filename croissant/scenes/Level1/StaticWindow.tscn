@@ -66,8 +66,7 @@ _data = {
 }
 
 [node name="StaticWindow" type="Window" node_paths=PackedStringArray("textureRect")]
-title = "Ĉ=ĂǀƿǱSȞȮƚƳūĵƧĔŨǰÌ"
-position = Vector2i(959, 893)
+position = Vector2i(909, 61)
 size = Vector2i(400, 300)
 unresizable = true
 always_on_top = true
