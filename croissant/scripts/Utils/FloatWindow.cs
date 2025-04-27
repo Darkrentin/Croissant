@@ -1,24 +1,18 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class FloatWindow : Window
 {
-	public enum TransitionMode
-	{
-		Linear,
-		Exponential,
-		InverseExponential
-	}
-	public Vector2I BasePosition;
 	[Export] public bool Shaking = false;
 	[Export] public bool Draggable = true;
 	[Export] public bool Minimizable = true;
-	private Timer ShakeTimer;
-	private int ShakeIntensity = 0;
 	[Export] private TransitionMode transitionMode = TransitionMode.Linear;
 	[Export] public TransitionMode resizeMode = TransitionMode.Linear;
 	[Export] public float Smoothness = 5.0f;
+	[Export] public bool CollisionDisabled = true;
+	[Export] private PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
+	private int ShakeIntensity = 0;
+	private Timer ShakeTimer;
 	private Vector2I TargetPosition;
 	private Vector2I StartPosition;
 	private Vector2I TargetSize;
@@ -27,33 +21,15 @@ public partial class FloatWindow : Window
 	private float ResizeTime = 0.5f;
 	private float elapsedTimeTransition = 0;
 	private float elapsedTimeResize = 0;
+	private Vector2I SizeWithDecoration { get { return DisplayServer.WindowGetSizeWithDecorations(WindowId); } }
+	private int WindowId { get { return GetWindowId(); } }
+	public enum TransitionMode { Linear, Exponential, InverseExponential }
+	public Vector2I BasePosition;
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
-	public Vector2I CenterPosition
-	{
-		set { SetWindowPosition(value - Size / 2); }
-		get { return Position + Size / 2; }
-	}
-	private Vector2I SizeWithDecoration
-	{
-		get { return DisplayServer.WindowGetSizeWithDecorations(WindowId); }
-	}
-	[Export] public bool CollisionDisabled = true;
-	private List<FloatWindow> CollidedWindows = new List<FloatWindow>();
-	[Export] private PackedScene ExplosionScene = ResourceLoader.Load<PackedScene>("uid://q2tedokw1ckw");
-	private int WindowId
-	{
-		get { return GetWindowId(); }
-	}
-	public int TitleBarHeight
-	{
-		get
-		{
-			return DisplayServer.WindowGetSizeWithDecorations(WindowId).Y - DisplayServer.WindowGetSize(WindowId).Y;
-		}
-	}
+	public Vector2I CenterPosition { set { SetWindowPosition(value - Size / 2); } get { return Position + Size / 2; } }
+	public int TitleBarHeight { get { return DisplayServer.WindowGetSizeWithDecorations(WindowId).Y - DisplayServer.WindowGetSize(WindowId).Y; } }
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }
-
 	public Rect2I WindowRect;
 
 	public override void _Ready()
@@ -70,7 +46,7 @@ public partial class FloatWindow : Window
 	public override void _Process(double delta)
 	{
 		// Check if the window moved
-		if(WindowRect.Position!=Position || WindowRect.Size!=Size)
+		if (WindowRect.Position != Position || WindowRect.Size != Size)
 		{
 			WindowRect = new Rect2I(Position, Size);
 		}
@@ -88,14 +64,13 @@ public partial class FloatWindow : Window
 		// Only _Process shaking when active
 		if (Shaking)
 			_ProcessShake();
-
 	}
 
 	// Start a transition to a target position with a given transition time
 	// The transition mode can be set to linear or exponential
 	public void StartTransition(Vector2I targetPosition, float transitionTime, float smoothness = 5.0f, bool reset = false)
 	{
-		if(transitionTime<=0)
+		if (transitionTime <= 0)
 		{
 			return;
 		}
@@ -116,13 +91,12 @@ public partial class FloatWindow : Window
 	// The resize mode can be set to linear or exponential
 	public Vector2I StartResize(Vector2I targetSize, float resizeTime, bool KeepCenter = true)
 	{
-
 		StartSize = Size;
 		TargetSize = targetSize;
 		ResizeTime = resizeTime;
 
 		Vector2I newPosition = Position;
-		if(KeepCenter)
+		if (KeepCenter)
 		{
 			Vector2I deltaSize = TargetSize - StartSize;
 			Vector2I deltaPosition = new Vector2I(deltaSize.X / 2, deltaSize.Y / 2);
@@ -130,18 +104,14 @@ public partial class FloatWindow : Window
 			transitionMode = resizeMode;
 		}
 
-		if(resizeTime<=0)
-		{
+		if (resizeTime <= 0)
 			return newPosition;
-		}
 
 		IsResizing = true;
 		elapsedTimeResize = 0;
 
 		if (KeepCenter)
-		{
 			StartTransition(newPosition, resizeTime);
-		}
 		return newPosition;
 	}
 

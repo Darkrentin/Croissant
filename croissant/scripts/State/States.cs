@@ -1,10 +1,8 @@
 using Godot;
-using System;
 
 public static class States
 {
     public static SceneLoader SceneLoader = ResourceLoader.Load<PackedScene>("res://scenes/Other/SceneLoader.tscn").Instantiate<SceneLoader>();
-
     public static PackedScene DifficultyScene = SceneLoader.DifficultyScene;
     public static PackedScene IntroGameScene = SceneLoader.IntroGameScene;
     public static PackedScene Level1Scene = SceneLoader.Level1Scene;
@@ -19,13 +17,10 @@ public static class States
     public static PackedScene BombWindowScene = SceneLoader.BombWindowScene;
     public static PackedScene VirusSplashScene = SceneLoader.VirusSplashScene;
     public static PackedScene BsodScene = SceneLoader.BsodScene;
-
     public static Window Bsod;
     public static Window IntroLvl;
     public static Node Lvl1;
     public static Node Lvl2;
-
-
     public static int LevelOfTuto = 0;
 
     public static void Virus()
@@ -98,8 +93,6 @@ public static class States
 
         //change state condition
         GameManager.State = GameManager.GameState.VirusDialogue1Buffer;
-
-
     }
 
     public static void VirusTutoSelection()
@@ -157,7 +150,7 @@ public static class States
 
     public static void BlueScreen()
     {
-        BlueScreenManage.ManageBlueScreen();
+        BlueScreenManager.ManageBlueScreen();
     }
 
     public static void IntroHelper()

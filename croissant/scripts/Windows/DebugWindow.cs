@@ -1,9 +1,7 @@
 using Godot;
-using System;
 
 public partial class DebugWindow : FloatWindow
 {
-    // Called when the node enters the scene tree for the first time.
     [Export] public DialogueWindow dialogueWindow;
     public bool open = false;
     public override void _Ready()
@@ -13,7 +11,6 @@ public partial class DebugWindow : FloatWindow
         Position = Lib.GetScreenPosition(0.26f, 0.46f);
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);

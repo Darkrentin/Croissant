@@ -1,11 +1,9 @@
 using Godot;
-using System;
 
 public partial class TimerWindow : PopUpWindow
 {
     [Export] public Timer timer;
     [Export] public ProgressBar progressBar;
-
     private float time;
 
     public override void _Ready()
@@ -18,7 +16,7 @@ public partial class TimerWindow : PopUpWindow
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
         timer.Timeout += _on_timer_timeout;
-        
+
         progressBar.Size = Size;
         timer.Start();
     }
@@ -53,5 +51,4 @@ public partial class TimerWindow : PopUpWindow
             Level1.AddNewWindow();
         QueueFree();
     }
-
 }

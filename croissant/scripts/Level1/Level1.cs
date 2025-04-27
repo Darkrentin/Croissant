@@ -1,38 +1,23 @@
 using Godot;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-
 
 public partial class Level1 : Node2D
 {
-
     [Export] private PackedScene StaticWindowScene;
     [Export] private PackedScene TimerWindowScene;
     [Export] private PackedScene MoveWindowScene;
     [Export] private PackedScene DodgeWindowScene;
     [Export] private PackedScene TankWindowScene;
     [Export] private PackedScene BombWindowScene;
-    // Called when the node enters the scene tree for the first time.
     private Timer spawnTimer;
     private Timer totalTimer;
-    public static int WindowKillCount
-    {
-        get => _windowKillCount;
-        set
-        {
-            _windowKillCount = value;
-            //////Lib.Print($"WindowKillCount: {_windowKillCount}");
-        }
-    }
+    public static int WindowKillCount { get => _windowKillCount; set { _windowKillCount = value; } }
     private static int _windowKillCount = 0;
     public static int WindowCount;
     public int InitialWindowCount = 0;
     public float TimerLimit = 0.025f;
     public int TimerTic = 2;
-
     public static Level1 Instance;
-
     public List<FloatWindow> Windows = new List<FloatWindow>();
 
     public override void _Ready()
@@ -49,7 +34,7 @@ public partial class Level1 : Node2D
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 3f* GameManager.Difficulty;
+        totalTimer.WaitTime = 3f * GameManager.Difficulty;
         totalTimer.Timeout += TotalSpawnerTimeout;
         //totalTimer.Start();
 
@@ -69,7 +54,7 @@ public partial class Level1 : Node2D
 
     public void OnSpawnTimerTimeout()
     {
-        if (WindowCount < 20*GameManager.Difficulty && WindowCount > 0)
+        if (WindowCount < 20 * GameManager.Difficulty && WindowCount > 0)
         {
             AddNewWindow();
             spawnTimer.WaitTime = (Lib.rand.NextDouble() * 0.4f + 0.6f + TimerLimit) / GameManager.Difficulty;
@@ -80,9 +65,7 @@ public partial class Level1 : Node2D
     public void TotalSpawnerTimeout()
     {
         if (TimerTic < 19)
-        {
             TimerTic++;
-        }
         else
         {
             //spawnTimer.WaitTime = 5f;
@@ -106,7 +89,6 @@ public partial class Level1 : Node2D
         }
     }*/
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         /*if (WindowCount<15)

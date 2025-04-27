@@ -1,16 +1,17 @@
 using Godot;
-using System;
 
 public partial class MoveWindow : PopUpWindow
 {
-    [Export] private TextureRect Jet;
+    [Export] private Sprite2D Jet;
+    [Export] private Sprite2D Trail;
+    double JitterTimer;
 
     public override void _Ready()
     {
         HasChangingTitle = true;
         base._Ready();
 
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 400));
+        Size = Lib.GetAspectFactor(new Vector2I(400, 400));
         StartNewMovement();
     }
 
@@ -23,6 +24,14 @@ public partial class MoveWindow : PopUpWindow
     public override void _Process(double delta)
     {
         base._Process(delta);
+
+        JitterTimer += delta;
+        if (JitterTimer >= 0.1)
+        {
+            Jet.Position = Jet.Position + new Vector2I(Lib.rand.Next(-1, 2), Lib.rand.Next(-1, 2));
+            Trail.Position = Trail.Position + new Vector2I(Lib.rand.Next(-1, 2), Lib.rand.Next(-1, 2));
+            JitterTimer = 0;
+        }
     }
 
     public override void TransitionFinished()
@@ -47,11 +56,9 @@ public partial class MoveWindow : PopUpWindow
         float speed = CalculateMovementSpeed();
         StartExponentialTransition(target, speed, reset: true);
 
-
         Vector2I direction = target - Position;
         float angle = Mathf.RadToDeg(Mathf.Atan2(direction.Y, direction.X));
         Jet.RotationDegrees = angle + 90;
-
+        Trail.RotationDegrees = angle + 90;
     }
-
 }

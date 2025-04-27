@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Enemy : StaticBody2D
 {
@@ -22,9 +21,7 @@ public partial class Enemy : StaticBody2D
 		EnemySprite.Frame = Lib.rand.Next(0, SpriteFrames);
 
 		if (EnemySprite.Frame == 3)
-		{
 			Collision.Position += new Vector2(0, 60);
-		}
 
 		Player = GetParent().GetNode<Player>("Player");
 		Rotation = Lib.GetRandomNormal(0f, 360f);
@@ -72,9 +69,7 @@ public partial class Enemy : StaticBody2D
 			}
 
 			if (EnemySprite.Frame == 3)
-			{
 				Collision.Position += new Vector2(0, 60);
-			}
 
 			bullet.BulletCollide();
 		}

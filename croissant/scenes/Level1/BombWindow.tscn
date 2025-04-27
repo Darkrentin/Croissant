@@ -1088,7 +1088,7 @@ animations = [{
 "speed": 20.0
 }]
 
-[node name="BombWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar", "Sprite", "Texture")]
+[node name="BombWindow" type="Window" node_paths=PackedStringArray("progressBar", "Sprite", "Texture", "timer")]
 position = Vector2i(0, 36)
 size = Vector2i(250, 250)
 unresizable = true
@@ -1096,10 +1096,10 @@ always_on_top = true
 content_scale_size = Vector2i(250, 250)
 content_scale_mode = 2
 script = ExtResource("1_av7et")
-timer = NodePath("Timer")
 progressBar = NodePath("ProgressBar")
 Sprite = NodePath("Sprite")
 Texture = NodePath("TextureRect")
+timer = NodePath("Timer")
 Draggable = false
 Minimizable = false
 

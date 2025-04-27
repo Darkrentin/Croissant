@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class MenuWindow : FloatWindow
 {
@@ -8,6 +7,7 @@ public partial class MenuWindow : FloatWindow
 	[Export] public CheckButton DebugButton;
 	public bool FakeDesktop;
 	public bool DebugMode;
+
 	public override void _Ready()
 	{
 		ProcessMode = ProcessModeEnum.Always;
@@ -21,8 +21,8 @@ public partial class MenuWindow : FloatWindow
 		SetDeferred("custom_minimum_size", windowSize);
 		Menu.SetDeferred("size", windowSize);
 
-		FakeDesktopButton.Toggled+=FakeDesktopButtonToggled;
-		DebugButton.Toggled+=DebugButtonToggled;
+		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
+		DebugButton.Toggled += DebugButtonToggled;
 	}
 
 	public override void _Process(double delta)
@@ -32,14 +32,9 @@ public partial class MenuWindow : FloatWindow
 		if (Input.IsActionJustPressed("Exit"))
 		{
 			if (Visible)
-			{
 				Close();
-				////Lib.Print("Close");
-			}
 			else
-			{
 				Open();
-			}
 		}
 
 		if (Mode is ModeEnum.Minimized)

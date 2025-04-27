@@ -1,10 +1,7 @@
 using Godot;
-using System;
 
 public partial class CursorWindow : FloatWindow
 {
-	// Called when the node enters the scene tree for the first time.
-
 	public CollisionShape2D collision;
 	public Area2D area;
 	public bool Freeze = false;
@@ -15,24 +12,20 @@ public partial class CursorWindow : FloatWindow
 		Transparent = false;
 		base._Ready();
 		Size = Lib.GetScreenSize(0.1f, 0.1f);
-		Size = Lib.GetAspectFactor(new Vector2I(150,150)) - TitleBarSize; 
+		Size = Lib.GetAspectFactor(new Vector2I(150, 150)) - TitleBarSize;
 		SetWindowPosition(Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2);
 		FreezeTimer = new Timer();
 		FreezeTimer.OneShot = true;
 		FreezeTimer.Timeout += FreezFrameStop;
 		AddChild(FreezeTimer);
-
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 
 		if (!Freeze && Input.IsActionJustPressed("LeftClick"))
-		{
 			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 1f, reset: true);
-		}
 	}
 
 	public override void OnClose()
@@ -48,7 +41,6 @@ public partial class CursorWindow : FloatWindow
 
 	public void FreezFrameStart()
 	{
-
 		ProcessMode = ProcessModeEnum.Always;
 		IsTransitioning = false;
 		Freeze = true;

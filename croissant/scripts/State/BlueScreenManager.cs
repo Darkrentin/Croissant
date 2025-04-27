@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using Godot;
 
-public static class BlueScreenManage
+public static class BlueScreenManager
 {
     public static List<Window> CrashWindows = new List<Window>();
     public const int MaxWindows = 25;

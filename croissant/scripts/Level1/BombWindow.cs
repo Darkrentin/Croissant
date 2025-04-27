@@ -1,18 +1,17 @@
 using Godot;
-using System;
 
 public partial class BombWindow : PopUpWindow
 {
-    [Export] public Timer timer;
     [Export] private ProgressBar progressBar;
     [Export] private AnimatedSprite2D Sprite;
     [Export] private TextureRect Texture;
+    [Export] public Timer timer;
     private float time;
 
     public override void _Ready()
     {
         HasChangingTitle = true;
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(250, 250));
+        Size = Lib.GetAspectFactor(new Vector2I(250, 250));
         base._Ready();
         timer.Timeout += _on_timer_timeout;
 
@@ -48,13 +47,10 @@ public partial class BombWindow : PopUpWindow
     {
         Level1.WindowCount--;
         for (int i = 0; i < 3; i++)
-        {
             Level1.AddNewWindow();
-        }
         QueueFree();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
         base._Process(delta);

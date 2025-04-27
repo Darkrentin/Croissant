@@ -1,37 +1,31 @@
 using Godot;
-using System;
 
 public partial class WaveManager : Node
 {
-	// Called when the node enters the scene tree for the first time.
 	[Export] public PackedScene[] EnemyWindows;
 	[Export] public int[] EnimyWindowsWeights;
 	[Export] int NumberOfEnemy;
 	[Export] Node SpawnNode;
-
+	private Timer WaveResetTimer;
 	public int CurrentWave = 1;
 	public int CurrentWaveEnemy = -1;
 	public int CurrentWaveMaxEnemy = 6;
 	public int CurrentWavePoints = 0;
 	public int CurrentWaveMaxPoints = 5;
 
-	Timer WaveResetTimer;
-
-
 	public override void _Ready()
 	{
 		WaveResetTimer = new Timer();
 		WaveResetTimer.WaitTime = 3;
 		WaveResetTimer.OneShot = true;
-		WaveResetTimer.Timeout+=StartWave;
+		WaveResetTimer.Timeout += StartWave;
 		AddChild(WaveResetTimer);
 		WaveResetTimer.Start();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if(CurrentWaveEnemy==0)
+		if (CurrentWaveEnemy == 0)
 		{
 			CurrentWaveMaxPoints = 10 + 1;
 			CurrentWaveMaxEnemy = 1 + CurrentWave * 2;
@@ -47,17 +41,16 @@ public partial class WaveManager : Node
 	{
 		CurrentWave++;
 		CurrentWaveEnemy = 0;
-		while(CurrentWavePoints < CurrentWaveMaxPoints)
+		while (CurrentWavePoints < CurrentWaveMaxPoints)
 		{
 			int enemyIndex = Lib.rand.Next(0, EnemyWindows.Length);
 			int enemyWeight = EnimyWindowsWeights[enemyIndex];
-			if(CurrentWaveEnemy<CurrentWaveMaxEnemy)
+			if (CurrentWaveEnemy < CurrentWaveMaxEnemy)
 			{
 				CurrentWavePoints += enemyWeight;
 				CurrentWaveEnemy++;
 				Window enemyWindow = EnemyWindows[enemyIndex].Instantiate<Window>();
 				SpawnNode.AddChild(enemyWindow);
-				
 			}
 			else
 			{

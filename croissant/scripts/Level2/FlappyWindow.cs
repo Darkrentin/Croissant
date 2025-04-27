@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class FlappyWindow : AttackWindow
 {
@@ -7,13 +6,13 @@ public partial class FlappyWindow : AttackWindow
 	public Vector2I ConnectedWindowPosition;
 	public int nsizeA = 0;
 	public int nsizeB = 0;
-	// Called when the node enters the scene tree for the first time.
+
 	public override void _Ready()
 	{
 		base._Ready();
 		ConnectedWindow.Timer.Stop();
-		int r = Lib.rand.Next(0,3);
-		switch(r)
+		int r = Lib.rand.Next(0, 3);
+		switch (r)
 		{
 			case 0:
 				ConnectedWindow.Visible = false;
@@ -26,14 +25,13 @@ public partial class FlappyWindow : AttackWindow
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
 	}
 
-    public override void Move()
-    {
+	public override void Move()
+	{
 		const float MoveTime = 0.5f;
 		const float MarginTime = 0.1f;
 
@@ -41,17 +39,15 @@ public partial class FlappyWindow : AttackWindow
 		Vector2I OtherTargetPosition;
 
 		int targetX = 0;
-		if(Lib.rand.Next(0,2)==0)
-		{
+		if (Lib.rand.Next(0, 2) == 0)
 			targetX = GameManager.ScreenSize.X - Size.X;
-		}
-		if(Visible)
+		if (Visible)
 		{
 			targetPosition = new Vector2I(targetX, 0);
 			StartTransition(targetPosition, MoveTime - MarginTime);
 			windowPosition = targetPosition;
 		}
-		if(ConnectedWindow.Visible)
+		if (ConnectedWindow.Visible)
 		{
 			OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
 			ConnectedWindow.StartTransition(OtherTargetPosition, MoveTime - MarginTime);
@@ -59,8 +55,8 @@ public partial class FlappyWindow : AttackWindow
 		}
 
 		Timer.WaitTime = MoveTime;
-        base.Move();
-    }
+		base.Move();
+	}
 
 	public override void Prevent()
 	{
@@ -70,15 +66,15 @@ public partial class FlappyWindow : AttackWindow
 
 		Vector2I targetSize;
 		Vector2I targetPosition;
-		
+
 		Vector2I targetSize2;
 		Vector2I targetPosition2;
 
 		int targetY = Lib.rand.Next(Size.Y + Margin, GameManager.ScreenSize.Y - Size.Y - Margin);
-		nsizeA = targetY - Parent.CursorWindow.Size.Y - (int)(Size.Y*SizeMargin);
-		nsizeB = GameManager.ScreenSize.Y - targetY - Parent.CursorWindow.Size.Y - (int)(ConnectedWindow.Size.Y*SizeMargin);
+		nsizeA = targetY - Parent.CursorWindow.Size.Y - (int)(Size.Y * SizeMargin);
+		nsizeB = GameManager.ScreenSize.Y - targetY - Parent.CursorWindow.Size.Y - (int)(ConnectedWindow.Size.Y * SizeMargin);
 
-		if(Visible)
+		if (Visible)
 		{
 			StartShake(ShakeTime, 5);
 			(targetSize, targetPosition) = StartResizeDown(nsizeA, ShakeTime);
@@ -89,7 +85,7 @@ public partial class FlappyWindow : AttackWindow
 			ShowVisualCollision(targetSize, targetPosition, ShakeTime);
 		}
 
-		if(ConnectedWindow.Visible)
+		if (ConnectedWindow.Visible)
 		{
 			ConnectedWindow.StartShake(ShakeTime, 5);
 			(targetSize2, targetPosition2) = ConnectedWindow.StartResizeUp(nsizeB, ShakeTime);
@@ -99,7 +95,7 @@ public partial class FlappyWindow : AttackWindow
 
 			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, ShakeTime);
 		}
-		
+
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
 	}
@@ -110,21 +106,17 @@ public partial class FlappyWindow : AttackWindow
 		const float AttackDuration = 0.3f;
 		int TargetX = 0;
 		int ConnectedWindowTargetX = 0;
-		if(Position.X - Parent.CursorWindow.Position.X < 0)
-		{
+		if (Position.X - Parent.CursorWindow.Position.X < 0)
 			TargetX = GameManager.ScreenSize.X - Size.X;
-		}
-		if(ConnectedWindow.Position.X - Parent.CursorWindow.Position.X < 0)
-		{
+		if (ConnectedWindow.Position.X - Parent.CursorWindow.Position.X < 0)
 			ConnectedWindowTargetX = GameManager.ScreenSize.X - ConnectedWindow.Size.X;
-		}
-		if(Visible)
+		if (Visible)
 		{
 			StartLinearTransition(new Vector2I(TargetX, 0), MoveTime);
 			HideVisualCollision();
 		}
 
-		if(ConnectedWindow.Visible)
+		if (ConnectedWindow.Visible)
 		{
 			ConnectedWindow.StartLinearTransition(new Vector2I(ConnectedWindowTargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
 			ConnectedWindow.HideVisualCollision();
@@ -137,14 +129,14 @@ public partial class FlappyWindow : AttackWindow
 	public override void Reload()
 	{
 		const float ResetTime = 1f;
-		if(Visible)
+		if (Visible)
 		{
 			resizeMode = TransitionMode.Exponential;
 			StartResize(windowSize, ResetTime);
-			StartTransition(new Vector2I(Position.X,0), ResetTime, reset: true);
+			StartTransition(new Vector2I(Position.X, 0), ResetTime, reset: true);
 		}
-		
-		if(ConnectedWindow.Visible)
+
+		if (ConnectedWindow.Visible)
 		{
 			ConnectedWindow.resizeMode = TransitionMode.Exponential;
 			ConnectedWindow.StartResize(ConnectedWindow.windowSize, ResetTime);
@@ -152,11 +144,8 @@ public partial class FlappyWindow : AttackWindow
 		}
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
-		if(Lives<=0)
-		{
+		if (Lives <= 0)
 			ConnectedWindow.Delete();
-		}
 		base.Reload();
 	}
-
 }

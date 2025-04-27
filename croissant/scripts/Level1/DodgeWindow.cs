@@ -1,19 +1,16 @@
 using Godot;
-using System;
 
 public partial class DodgeWindow : PopUpWindow
 {
     private bool isMoving = false;
     private Timer cooldownTimer;
 
-    // Called when the node enters the scene tree for the first time.
     public override void _Ready()
     {
         HasChangingTitle = true;
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(390, 450));
+        Size = Lib.GetAspectFactor(new Vector2I(390, 450));
         base._Ready();
 
-        
         cooldownTimer = new Timer();
         AddChild(cooldownTimer);
         cooldownTimer.WaitTime = 0.39f;
@@ -24,9 +21,7 @@ public partial class DodgeWindow : PopUpWindow
     private void CheckInitialMousePosition()
     {
         if (IsMouseOnCloseButton())
-        {
             StartNewMovement();
-        }
     }
 
     public override void OnClose()
@@ -70,17 +65,11 @@ public partial class DodgeWindow : PopUpWindow
     private float CalculateMovementSpeed()
     {
         if (Level1.WindowCount >= 10)
-        {
             return Lib.rand.Next(50, 80) / 10f;
-        }
         else if (Level1.WindowCount >= 5)
-        {
             return Lib.rand.Next(30, 50) / 10f;
-        }
         else
-        {
             return Lib.rand.Next(15, 30) / 10f;
-        }
     }
 
     public void StartNewMovement()
@@ -89,5 +78,4 @@ public partial class DodgeWindow : PopUpWindow
         float speed = CalculateMovementSpeed();
         StartExponentialTransition(target, speed, reset: true);
     }
-
 }

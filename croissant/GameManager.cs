@@ -1,26 +1,29 @@
 using Godot;
-using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 
-public enum DifficultyLevel
-{
-    Easy,
-    Medium,
-    Hard
-}
+public enum DifficultyLevel { Easy, Normal, Hard }
 
 public partial class GameManager : Node2D
 {
-    [Export] public float difficulty {get =>_difficulty; set => _difficulty = value; }
+    [Export] PackedScene menuScene;
+    [Export] public float difficulty { get => _difficulty; set => _difficulty = value; }
+    [Export] public GameState ExportState { get => _state; set => _state = value; }
     private static float _difficulty = 1f;
-    public static float Difficulty
-    {
-        get => _difficulty;
-        private set => _difficulty = value;
-    }
-
+    private static GameState _state = GameState.Difficulty; // 0 : normal, -1 : debug
+    public static float Difficulty { get => _difficulty; private set => _difficulty = value; }
+    public static Node2D GameRoot;
+    public static GameState State { get => _state; set { _state = value; StateChange(_state); } }
+    public static MainWindow MainWindow;
+    public static Window FixWindow;
+    public static MenuWindow MenuWindow;
+    public static Virus virus;
+    public static Helper helper;
+    public static List<FloatWindow> Windows = new List<FloatWindow>();
+    public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
+    public static bool ShakeAllWindows = false;
+    public static Timer ShakeTimer;
+    public static int ShakeIntensity = 0;
     public static void SetDifficulty(DifficultyLevel level)
     {
         switch (level)
@@ -28,7 +31,7 @@ public partial class GameManager : Node2D
             case DifficultyLevel.Easy:
                 Difficulty = 0.75f;
                 break;
-            case DifficultyLevel.Medium:
+            case DifficultyLevel.Normal:
                 Difficulty = 1f;
                 break;
             case DifficultyLevel.Hard:
@@ -36,8 +39,6 @@ public partial class GameManager : Node2D
                 break;
         }
     }
-
-    [Export] PackedScene menuScene;
     public enum GameState
     {
         Virus,
@@ -62,39 +63,11 @@ public partial class GameManager : Node2D
         TutoBuffer,
         Void
     }
-    public static Node2D GameRoot;
-    private static GameState _state = GameState.Difficulty; // 0 : normal, -1 : debug
-    public static GameState State
-    {
-        get => _state;
-        set
-        {
-            _state = value;
-            ////Lib.Print($"State: {_state}");
-            StateChange(_state);
-        }
-    }
-    [Export]
-    public GameState ExportState
-    {
-        get => _state;
-        set => _state = value;
-    }
-    public static MainWindow MainWindow;
-    public static Window FixWindow;
-    public static MenuWindow MenuWindow;
-    public static Virus virus;
-    public static Helper helper;  
-    public static List<FloatWindow> Windows = new List<FloatWindow>();
-    public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
-    public static bool ShakeAllWindows = false;
-    public static Timer ShakeTimer;
-    public static int ShakeIntensity = 0;
-
 
     public override void _Ready()
     {
         GameRoot = this;
+        SetDifficulty(DifficultyLevel.Normal);
         AddFixWindow();
         InitMainWindow();
         // Le reste du code _Ready existant

@@ -2,18 +2,17 @@ using Godot;
 
 public partial class Eye : Node2D
 {
+	[Export] public Vector2 MaxEyeDistance = new Vector2(100f, 100f);
+	[Export] public Node2D black;
+	public Virus virus;
 
-public Virus virus;
+	public override void _Ready()
+	{
+		virus = GameManager.virus;
+	}
 
-    [Export] public Vector2 MaxEyeDistance = new Vector2(100f, 100f);
-    [Export] public Node2D black;
-    public override void _Ready()
-    {
-        virus = GameManager.virus;
-    }
-
-    public override void _Process(double d)
-    {
+	public override void _Process(double d)
+	{
 		Vector2I cursorPosition = Lib.GetCursorPosition();
 		Vector2I centerPosition = virus.Position + virus.Size / 2;
 		Vector2I relativePosition = centerPosition - cursorPosition;
@@ -28,5 +27,5 @@ public Virus virus;
 		float positionY = -normalizedY * MaxEyeDistance.Y;
 
 		black.Position = new Vector2(positionX, positionY);
-    }
+	}
 }

@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public static class VirusTuto
 {
     public static void _Process()

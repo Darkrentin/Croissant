@@ -1,7 +1,5 @@
 using Godot;
 using System;
-using System.Collections;
-using System.Diagnostics;
 
 public partial class IntroGameManager : Node2D
 {
@@ -9,21 +7,22 @@ public partial class IntroGameManager : Node2D
 	[Export] private PackedScene BulletScene;
 	[Export] private PackedScene EnemyScene;
 	[Export] private PackedScene VirusScene;
-	private static ColorRect ShaderRect;
 	[Export] private ColorRect ExportShaderRect { get => ShaderRect; set => ShaderRect = value; }
-	private static PackedScene GameExplosionScene;
 	[Export] private PackedScene ExportGameExplosion { get => GameExplosionScene; set => GameExplosionScene = value; }
-	private static Label ScoreLabel;
 	[Export] private Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
-	private static AnimationPlayer AnimationPlayer;
 	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
 	[Export] public int MaxScore = 30;
+	private static ColorRect ShaderRect;
+	private static PackedScene GameExplosionScene;
+	private static Label ScoreLabel;
+	private static AnimationPlayer AnimationPlayer;
 	private static Camera2D Camera;
 	private Vector2I windowSize = new Vector2I(1920, 1080);
-	public static int score = 0;
-	public static IntroGameManager Instance;
 	private Timer ShootTimer = new Timer();
 	private bool CanShoot = true;
+	private Timer enemySpawnTimer;
+	public static int score = 0;
+	public static IntroGameManager Instance;
 
 	public override void _Ready()
 	{
@@ -39,10 +38,7 @@ public partial class IntroGameManager : Node2D
 		AddChild(ShootTimer);
 
 		SpawnEnemy();
-
 	}
-
-	private Timer enemySpawnTimer;
 
 	public override void _Process(double delta)
 	{
@@ -67,9 +63,7 @@ public partial class IntroGameManager : Node2D
 		}
 
 		if (score >= 10)
-		{
 			UpdateShaders();
-		}
 	}
 
 	public static void AddScore()
@@ -105,7 +99,7 @@ public partial class IntroGameManager : Node2D
 		CameraShake(20.0f, 0.5f);
 		CpuParticles2D GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
 		GameExplosion.Position = new Vector2(1920 / 2, 1080 / 2);
-		IntroGameManager.Instance.AddChild(GameExplosion);
+		Instance.AddChild(GameExplosion);
 		GameExplosion.Emitting = true;
 	}
 

@@ -10,25 +10,13 @@ public partial class DialogueWindow : FloatWindow
 	[Export] public Timer timer;
 	[Export] public Timer cursorTimer;
 	[Export] public bool CanSkip = false;
-
+	[Export] public Vector2I Margin { get => _margin; set { _margin = (Vector2I)Lib.GetScreenRatio() * value; } }
 	private Vector2I _margin = new Vector2I(0, 0);
-	[Export]
-	public Vector2I Margin
-	{
-		get => _margin;
-		set
-		{
-			_margin = (Vector2I)Lib.GetScreenRatio() * value;
-		}
-	}
 	public bool cursorVisible = false;
 	public bool isTyping = false;
-
 	public Dictionary DialogueData;
 	public Dictionary ActualDialogue;
-
 	public string ActualDialogueName;
-
 	public Action<string> OnDialogueFinished;
 	public int index = 0;
 	public bool isDialogue = false;
@@ -66,8 +54,8 @@ public partial class DialogueWindow : FloatWindow
 		}
 		else
 			isTyping = false;
-
 	}
+
 	public void _ProcessCursor()
 	{
 		if (isTyping)

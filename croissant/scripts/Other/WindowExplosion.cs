@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class WindowExplosion : CpuParticles2D
 {
@@ -17,5 +16,6 @@ public partial class WindowExplosion : CpuParticles2D
 
 	public override void _Process(double delta)
 	{
+
 	}
 }

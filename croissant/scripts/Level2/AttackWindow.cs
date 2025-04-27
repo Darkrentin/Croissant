@@ -1,26 +1,20 @@
 using Godot;
-using System;
 
 public partial class AttackWindow : FloatWindow
 {
-    public enum Phase
-    {
-        Move,
-        Prevent,
-        Attack,
-        Reload,
-        Dammage
-    }
+    [Export] private PackedScene ExportVisualCollisionScene { get => VisualCollisionScene; set => VisualCollisionScene = value; }
+    [Export] public bool Random = false;
+    [Export] public bool Disable = false;
+    private Phase _phase = Phase.Move;
     protected Level2 Parent;
+    public enum Phase { Move, Prevent, Attack, Reload, Dammage }
     public Timer Timer;
     public Vector2I windowSize;
     public Vector2I windowPosition;
     public static PackedScene VisualCollisionScene;
-    [Export] private PackedScene ExportVisualCollisionScene { get => VisualCollisionScene; set => VisualCollisionScene = value; }
     public VisualCollision VisualCollision;
-    private Phase _phase = Phase.Move;
-
     public int Lives = 3;
+    public Phase CurrentPhase { get => _phase; set { _phase = value; } }
     public Vector2I CursorPosition
     {
         get
@@ -30,21 +24,7 @@ public partial class AttackWindow : FloatWindow
             else
                 return Parent.CursorWindow.Position + Parent.CursorWindow.Size / 2;
         }
-        set
-        {
-            Parent.CursorWindow.Position = value;
-        }
-    }
-    [Export] public bool Random = false;
-    [Export] public bool Disable = false;
-    public Phase CurrentPhase
-    {
-        get => _phase;
-        set
-        {
-            _phase = value;
-            //Lib.Print($"Current phase: {value}");
-        }
+        set { Parent.CursorWindow.Position = value; }
     }
 
     public override void _Ready()
@@ -86,7 +66,6 @@ public partial class AttackWindow : FloatWindow
             GD.Print("Disabled");
             Timer.Stop();
         }
-
     }
 
     public void ShowVisualCollision(Vector2I size, Vector2 position, float duration = 0.5f)
@@ -112,15 +91,13 @@ public partial class AttackWindow : FloatWindow
 			Parent.CursorWindow.TakeDamage();
 		}
         */
-        if(CurrentPhase == Phase.Attack && !Shaking && IsCollided(Parent.CursorWindow))
+        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Parent.CursorWindow))
         {
             Parent.CursorWindow.TakeDamage();
             CurrentPhase = Phase.Dammage;
         }
-        if(CurrentPhase == Phase.Dammage && !IsCollided(Parent.CursorWindow))
-        {
+        if (CurrentPhase == Phase.Dammage && !IsCollided(Parent.CursorWindow))
             CurrentPhase = Phase.Attack;
-        }
     }
 
     public virtual void Start()
@@ -163,7 +140,7 @@ public partial class AttackWindow : FloatWindow
         CollisionDisabled = true;
         Lives--;
         Timer.Timeout -= Reload;
-        if(Lives <= 0)
+        if (Lives <= 0)
         {
             Delete();
             return;
@@ -183,7 +160,7 @@ public partial class AttackWindow : FloatWindow
         GrabFocus();
         //GetParent().RemoveChild(this);
         Parent.CursorWindow.GrabFocus();
-        
+
         Timer death = new Timer();
         AddChild(death);
         death.Timeout += QueueFree;
@@ -192,6 +169,5 @@ public partial class AttackWindow : FloatWindow
         Hide();
         death.Start();
         //GameManager.MainWindow.GrabFocus();
-
     }
 }

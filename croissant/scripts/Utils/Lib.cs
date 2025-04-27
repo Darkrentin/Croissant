@@ -18,39 +18,27 @@ public static class Lib
 
     public static Vector2I GetScreenPosition(float relativeX, float relativeY)
     {
-        return new Vector2I(
-            (int)(GameManager.ScreenSize.X * relativeX),
-            (int)(GameManager.ScreenSize.Y * relativeY)
-        );
+        return new Vector2I((int)(GameManager.ScreenSize.X * relativeX), (int)(GameManager.ScreenSize.Y * relativeY));
     }
 
     public static Vector2I GetScreenPosition(Vector2 relativePosition)
     {
-        return new Vector2I(
-            (int)(GameManager.ScreenSize.X * relativePosition.X),
-            (int)(GameManager.ScreenSize.Y * relativePosition.Y)
-        );
+        return new Vector2I((int)(GameManager.ScreenSize.X * relativePosition.X), (int)(GameManager.ScreenSize.Y * relativePosition.Y));
     }
 
     public static Vector2I GetScreenSize(float relativeWidth, float relativeHeight)
     {
-        return new Vector2I(
-            (int)(GameManager.ScreenSize.X * relativeWidth),
-            (int)(GameManager.ScreenSize.Y * relativeHeight)
-        );
+        return new Vector2I((int)(GameManager.ScreenSize.X * relativeWidth), (int)(GameManager.ScreenSize.Y * relativeHeight));
     }
 
     public static Vector2I GetScreenSize(Vector2 relativeSize)
     {
-        return new Vector2I(
-            (int)(GameManager.ScreenSize.X * relativeSize.X),
-            (int)(GameManager.ScreenSize.Y * relativeSize.Y)
-        );
+        return new Vector2I((int)(GameManager.ScreenSize.X * relativeSize.X), (int)(GameManager.ScreenSize.Y * relativeSize.Y));
     }
 
     public static Vector2I GetRandomPositionOutsideScreen(int side = 0, int margin = 50)
     {
-        if(side==-1)
+        if (side == -1)
             side = rand.Next(0, 4);
         Vector2I screenSize = GameManager.ScreenSize;
 
@@ -69,10 +57,7 @@ public static class Lib
         const float referenceWidth = 1920f;
         const float referenceHeight = 1080f;
 
-        float scaleFactor = Mathf.Min(
-            GameManager.ScreenSize.X / referenceWidth,
-            GameManager.ScreenSize.Y / referenceHeight
-        );
+        float scaleFactor = Mathf.Min(GameManager.ScreenSize.X / referenceWidth, GameManager.ScreenSize.Y / referenceHeight);
 
         return (Vector2I)((Vector2)originalSize * scaleFactor);
     }
@@ -82,10 +67,7 @@ public static class Lib
         const float referenceWidth = 1920f;
         const float referenceHeight = 1080f;
 
-        return new Vector2(
-            GameManager.ScreenSize.X / referenceWidth,
-            GameManager.ScreenSize.Y / referenceHeight
-        );
+        return new Vector2(GameManager.ScreenSize.X / referenceWidth, GameManager.ScreenSize.Y / referenceHeight);
     }
 
     public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")

@@ -1,7 +1,4 @@
 using Godot;
-using System;
-using System.Drawing;
-using System.Linq.Expressions;
 
 public partial class Virus : Npc
 {
@@ -9,27 +6,23 @@ public partial class Virus : Npc
 	[Export] Node3D Computer;
 	[Export] Node2D Eye;
 	[Export] Node2D EyeBrow;
-	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
-
 	[Export] Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
 	[Export] Vector2 MaxEyeDistance = new Vector2(0.1f, 0.1f);
 	[Export] float RotationSmoothing = 5;
-	public Vector3 targetRotation;
-
-	public static Control Pause;
 	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
 	[Export] public Timer BlinkTimer;
-
 	[Export] public AnimationPlayer AnimationScale;
-
+	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
+	public Vector3 targetRotation;
+	public static Control Pause;
 	public bool On = false;
 
 	public override void _Ready()
 	{
 		Size = new Vector2I(335, 400);
-		Size = (Vector2I)Lib.GetAspectFactor(Size);
+		Size = Lib.GetAspectFactor(Size);
 		base._Ready();
-		
+
 		BlinkTimer.Timeout += Blink;
 		BlinkTimer.WaitTime = 5f;
 		BlinkTimer.Start();
@@ -58,7 +51,6 @@ public partial class Virus : Npc
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 		}
-
 	}
 
 	public override void _Process(double delta)
@@ -126,6 +118,4 @@ public partial class Virus : Npc
 		BlinkTimer.WaitTime = Lib.GetRandomNormal(3f, 6f);
 		BlinkTimer.Start();
 	}
-
-	
 }
