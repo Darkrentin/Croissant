@@ -16,8 +16,8 @@ public partial class StaticWindow : PopUpWindow
 
         Size = Lib.GetAspectFactor(new Vector2I(400, 300));
         int rand = Lib.rand.Next(1, 5);
-        Texture1 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/popups/static{rand}_1.png");
-        Texture2 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/popups/static{rand}_2.png");
+        Texture1 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/sprites/popups/static{rand}_1.png");
+        Texture2 = ResourceLoader.Load<CompressedTexture2D>($"res://assets/sprites/popups/static{rand}_2.png");
         SetTexture1();
     }
     public void SetTexture1()

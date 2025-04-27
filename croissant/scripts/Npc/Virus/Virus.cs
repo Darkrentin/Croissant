@@ -51,6 +51,7 @@ public partial class Virus : Npc
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 		}
+		Lib.Print("Virus");
 	}
 
 	public override void _Process(double delta)

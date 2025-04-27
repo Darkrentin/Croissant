@@ -1,9 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://cb1neywi8udoc"]
 
 [ext_resource type="Script" uid="uid://brxoeijijfprq" path="res://scripts/Level1/MoveWindow.cs" id="1_o0mg8"]
-[ext_resource type="Texture2D" uid="uid://ca7aj22k2i5v1" path="res://assets/popups/jet_bg.png" id="2_83mil"]
-[ext_resource type="Texture2D" uid="uid://bvatdt45i2rql" path="res://assets/popups/jet.png" id="3_4tysl"]
-[ext_resource type="Texture2D" uid="uid://wxnrs8pye670" path="res://assets/popups/trail.png" id="4_4tysl"]
+[ext_resource type="Texture2D" uid="uid://ca7aj22k2i5v1" path="res://assets/sprites/popups/jet_bg.png" id="2_83mil"]
+[ext_resource type="Texture2D" uid="uid://bvatdt45i2rql" path="res://assets/sprites/popups/jet.png" id="3_4tysl"]
+[ext_resource type="Texture2D" uid="uid://wxnrs8pye670" path="res://assets/sprites/popups/trail.png" id="4_4tysl"]
 
 [node name="MoveWindow" type="Window" node_paths=PackedStringArray("Jet", "Trail")]
 position = Vector2i(0, 36)

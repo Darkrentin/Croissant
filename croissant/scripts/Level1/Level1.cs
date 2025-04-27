@@ -11,8 +11,8 @@ public partial class Level1 : Node2D
     [Export] private PackedScene BombWindowScene;
     private Timer spawnTimer;
     private Timer totalTimer;
-    public static int WindowKillCount { get => _windowKillCount; set { _windowKillCount = value; } }
     private static int _windowKillCount = 0;
+    public static int WindowKillCount { get => _windowKillCount; set { _windowKillCount = value; } }
     public static int WindowCount;
     public int InitialWindowCount = 0;
     public float TimerLimit = 0.025f;
@@ -50,7 +50,6 @@ public partial class Level1 : Node2D
         debug.Start();
 
     }
-
 
     public void OnSpawnTimerTimeout()
     {

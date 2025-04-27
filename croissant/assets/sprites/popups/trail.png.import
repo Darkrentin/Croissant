@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bvatdt45i2rql"
-path="res://.godot/imported/jet.png-12d22e72f006bb7fc8f15ce67f75fa65.ctex"
+uid="uid://wxnrs8pye670"
+path="res://.godot/imported/trail.png-bf231671e13f82acbf76f41442e944e7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/popups/jet.png"
-dest_files=["res://.godot/imported/jet.png-12d22e72f006bb7fc8f15ce67f75fa65.ctex"]
+source_file="res://assets/sprites/popups/trail.png"
+dest_files=["res://.godot/imported/trail.png-bf231671e13f82acbf76f41442e944e7.ctex"]
 
 [params]
 
