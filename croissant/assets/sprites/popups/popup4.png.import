@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ca7aj22k2i5v1"
-path="res://.godot/imported/jet_bg.png-0347a9e5c8b8ad9e7f7ad5ff208b22ca.ctex"
+uid="uid://dtq6la0ovxkq1"
+path="res://.godot/imported/popup4.png-9ad232a1bb61be2d17c5151ead5e55c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/popups/jet_bg.png"
-dest_files=["res://.godot/imported/jet_bg.png-0347a9e5c8b8ad9e7f7ad5ff208b22ca.ctex"]
+source_file="res://assets/sprites/popups/popup4.png"
+dest_files=["res://.godot/imported/popup4.png-9ad232a1bb61be2d17c5151ead5e55c3.ctex"]
 
 [params]
 

@@ -67,7 +67,6 @@ public partial class GameManager : Node2D
     public override void _Ready()
     {
         GameRoot = this;
-        SetDifficulty(DifficultyLevel.Normal);
         AddFixWindow();
         InitMainWindow();
         // Le reste du code _Ready existant
