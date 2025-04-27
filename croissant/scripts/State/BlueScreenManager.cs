@@ -12,16 +12,16 @@ public static class BlueScreenManager
     {
         if (state == 0)
         {
+            if (NbOfFakeWindow > MaxWindows)
+            {
+                state = 1;
+                return;
+            }
             Window window = States.StaticWindowScene.Instantiate<Window>();
             window.AlwaysOnTop = false;
             GameManager.GameRoot.AddChild(window);
             CrashWindows.Add(window);
             NbOfFakeWindow++;
-            if (NbOfFakeWindow >= MaxWindows)
-            {
-                state = 1;
-                return;
-            }
         }
         if (state == 1)
         {

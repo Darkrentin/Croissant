@@ -47,7 +47,7 @@ public partial class Virus : Npc
 				Dialogue.StartDialogue(NpcName, "1");
 				break;
 			case "tutoEnd":
-				HideNpc(3);
+				HideNpc(1);
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 		}

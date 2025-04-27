@@ -30,10 +30,10 @@ public abstract partial class Npc : FloatWindow
 
     public virtual void InitNpc()
     {
+        Lib.Print($"Npc : {NpcName} initialized DialogueId :{DialogueWindow.Dialogueid}");
         AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
         Dialogue.PlaceDialogueWindow();
         ForceDialoguePlacement = false;
-        Dialogue.OnDialogueFinished += DialogueFinished;
 
         LeftDown = new Vector2I(0, GameManager.ScreenSize.Y - Size.Y);
         RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);
@@ -51,7 +51,7 @@ public abstract partial class Npc : FloatWindow
     {
         Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side, Math.Max(Size.X, Size.Y) * 2);
         ForceDialoguePlacement = true;
-        StartTransition(HidePosition, 0.5f, reset: true);
+        StartLinearTransition(HidePosition, 0.5f, reset: true);
         Dialogue.Visible = false;
         Dialogue.label.Text = "";
     }
@@ -59,7 +59,7 @@ public abstract partial class Npc : FloatWindow
     public void ShowNpc(Vector2I Position)
     {
         ForceDialoguePlacement = false;
-        StartTransition(Position, 0.1f, reset: true);
+        StartLinearTransition(Position, 0.1f, reset: true);
         GrabFocus();
     }
 
@@ -68,7 +68,7 @@ public abstract partial class Npc : FloatWindow
         base.TransitionFinished();
         if (DialogueToPlayAfterTransition != "")
         {
-            GameManager.virus.Dialogue.StartDialogue(NpcName, DialogueToPlayAfterTransition);
+            Dialogue.StartDialogue(NpcName, DialogueToPlayAfterTransition);
             DialogueToPlayAfterTransition = "";
         }
     }

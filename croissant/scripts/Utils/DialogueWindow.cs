@@ -21,6 +21,9 @@ public partial class DialogueWindow : FloatWindow
 	public int index = 0;
 	public bool isDialogue = false;
 
+	public static int DialogueCount = 0;
+	public static int Dialogueid = 0;
+
 	public override void _Ready()
 	{
 		const string dialoguePath = "res://assets/texts/dialogues/Dialogue.json";
@@ -32,7 +35,11 @@ public partial class DialogueWindow : FloatWindow
 		cursorTimer.Timeout += _ProcessCursor;
 		cursorTimer.Start();
 
-		OnDialogueFinished += DialogueFinished;
+		OnDialogueFinished += ParentWindow.DialogueFinished;
+		DialogueCount++;
+		Lib.Print($"Dialogue count: {DialogueCount}");
+		Dialogueid = DialogueCount;
+		Lib.Print("Dialogue id: " + Dialogueid + "has the parent: " + ParentWindow.NpcName);
 
 		//StartDialogue("Virus", "sleep");
 	}
@@ -79,6 +86,7 @@ public partial class DialogueWindow : FloatWindow
 
 	public void NextLine()
 	{
+		Lib.Print($"Next line: {index} id: {Dialogueid}");
 		if (isTyping && !CanSkip)
 			return;
 		Dictionary dialogue = ((Dictionary)ActualDialogue[$"{index}"]);
@@ -87,6 +95,7 @@ public partial class DialogueWindow : FloatWindow
 		if (text == "")
 		{
 			isDialogue = false;
+			Lib.Print($"Dialogue finished: {ActualDialogueName} id: {Dialogueid} Parent: {ParentWindow.NpcName}");
 			OnDialogueFinished(ActualDialogueName);
 			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
 			if (anim != "")
@@ -128,19 +137,16 @@ public partial class DialogueWindow : FloatWindow
 		isDialogue = true;
 		isTyping = false;
 		cursorVisible = false;
-
+		Lib.Print($"Start dialogue: {character} id: {id} Parent: {ParentWindow.NpcName}");
 		NextLine();
 	}
 
-	public static void DialogueFinished(string id)
-	{
-		//Lib.Print("Dialogue Finished");
-	}
 
 	public void PlaceDialogueWindow(bool force = false)
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
 		SetWindowPosition(new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
 		Visible = true;
+		Lib.Print($"Place dialogue window: {ParentWindow.Position} id: {Dialogueid}");
 	}
 }
