@@ -5,7 +5,7 @@ using FileAccess = Godot.FileAccess;
 
 public partial class DialogueWindow : FloatWindow
 {
-	[Export] public Virus ParentWindow;
+	[Export] public Npc ParentWindow;
 	[Export] public RichTextLabel label;
 	[Export] public Timer timer;
 	[Export] public Timer cursorTimer;
@@ -52,7 +52,7 @@ public partial class DialogueWindow : FloatWindow
 	public override void _Process(double delta)
 	{
 		if (Input.IsActionJustPressed("debug"))
-			ParentWindow._on_button_pressed();
+			ParentWindow.Skip();
 	}
 
 	public void ShowNextCharacter()
@@ -93,7 +93,6 @@ public partial class DialogueWindow : FloatWindow
 	{
 		if (isTyping && !CanSkip)
 			return;
-		PlaceDialogueWindow();
 		Dictionary dialogue = ((Dictionary)ActualDialogue[$"{index}"]);
 		string text = (String)dialogue["text"];
 		string anim = (String)dialogue["anim"];
@@ -103,16 +102,17 @@ public partial class DialogueWindow : FloatWindow
 			OnDialogueFinished(ActualDialogueName);
 			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
 			if (anim != "")
-				GameManager.virus.AnimationScreen.Travel(anim);
+				ParentWindow.AnimationScreen.Travel(anim);
 			return;
 		}
-		label.Text = label.Text.Replace(" |", "");
+		label.Text = label.Text.Replace("|", "");
 		label.Text += "\n> ";
 		label.Text += text;
 		label.Text += " |";
-		GameManager.virus.AnimationScreen.Travel(anim);
+		ParentWindow.AnimationScreen.Travel(anim);
 		index++;
 		ShowNextCharacter();
+		PlaceDialogueWindow();
 	}
 
 	public void LoadJson(string path)
@@ -137,8 +137,10 @@ public partial class DialogueWindow : FloatWindow
 		index = 0;
 		label.Text = "";
 		label.VisibleCharacters = 0;
-		PlaceDialogueWindow();
 		isDialogue = true;
+		isTyping = false;
+		cursorVisible = false;
+
 		NextLine();
 	}
 

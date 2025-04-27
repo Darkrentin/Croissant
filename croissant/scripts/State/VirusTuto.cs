@@ -10,7 +10,7 @@ public static class VirusTuto
 
     public static void Tuto1()
     {
-        GameManager.virus.dialogue.PlaceDialogueWindow();
+        GameManager.virus.Dialogue.PlaceDialogueWindow();
         StaticWindow popup = States.StaticWindowScene.Instantiate<StaticWindow>();
         GameManager.GameRoot.AddChild(popup);
         popup.Position = Lib.GetScreenPosition(0.5f, 0.5f) - popup.Size / 2;

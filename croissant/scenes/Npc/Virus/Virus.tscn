@@ -1,6 +1,6 @@
 [gd_scene load_steps=117 format=4 uid="uid://cbd8iklbee2ig"]
 
-[ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Virus/Virus.cs" id="1_hbnjr"]
+[ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Npc/Virus/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
 [ext_resource type="Shader" uid="uid://c7ny7bh0v6chr" path="res://assets/shaders/VHSEffect.gdshader" id="3_pgs5n"]
 [ext_resource type="Texture2D" uid="uid://bd12vap3lhkxj" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_metallicRoughness.png" id="3_yhxpa"]
@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://ctfp0j1fib8gf" path="res://assets/sprites/virus/eye/tear.png" id="8_hlkw5"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="8_kbwjh"]
 [ext_resource type="Texture2D" uid="uid://cofcs48nnvt7k" path="res://assets/sprites/virus/pause.svg" id="10_bf8f2"]
-[ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Virus/Eye.tscn" id="10_c3fl0"]
+[ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Npc/Virus/Eye.tscn" id="10_c3fl0"]
 [ext_resource type="Texture2D" uid="uid://c1s4mspfyfp22" path="res://assets/sprites/virus/eye/Exp.png" id="10_g3po4"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
@@ -1585,7 +1585,7 @@ states/WorkingOn/position = Vector2(676, -42)
 transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_oq100"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_hlkw5"), "Idle", "AngryOn", SubResource("AnimationNodeStateMachineTransition_v6l2n"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_igvld"), "PowerOff", "Off", SubResource("AnimationNodeStateMachineTransition_7qgky"), "AngryOff", "Idle", SubResource("AnimationNodeStateMachineTransition_xl0md"), "Idle", "SadOn", SubResource("AnimationNodeStateMachineTransition_38h0a"), "SadOff", "Idle", SubResource("AnimationNodeStateMachineTransition_wiym5"), "AngryOn", "Angry", SubResource("AnimationNodeStateMachineTransition_0porm"), "Angry", "AngryOff", SubResource("AnimationNodeStateMachineTransition_xsmmv"), "SadOn", "Sad", SubResource("AnimationNodeStateMachineTransition_lffwj"), "Sad", "SadOff", SubResource("AnimationNodeStateMachineTransition_t2glt"), "Idle", "SurpriseOn", SubResource("AnimationNodeStateMachineTransition_5bq7i"), "SurpriseOff", "Idle", SubResource("AnimationNodeStateMachineTransition_6budr"), "SurpriseOn", "Surprise", SubResource("AnimationNodeStateMachineTransition_rhxnc"), "Surprise", "SurpriseOff", SubResource("AnimationNodeStateMachineTransition_d4u37"), "PowerOn", "PowerOff", SubResource("AnimationNodeStateMachineTransition_cebil")]
 graph_offset = Vector2(193.126, -134)
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "AnimationScale", "AnimationTree", "Eye", "EyeBrow", "dialogue", "ExportPause", "BlinkTimer")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "Eye", "EyeBrow", "ExportPause", "BlinkTimer", "AnimationScale", "AnimationTree", "Dialogue")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -1595,14 +1595,15 @@ transparent = true
 script = ExtResource("1_hbnjr")
 Camera = NodePath("Camera3D")
 Computer = NodePath("Computer")
-AnimationScale = NodePath("AnimationScale")
-AnimationTree = NodePath("AnimationTree")
 Eye = NodePath("SubViewport/eye")
 EyeBrow = NodePath("SubViewport/eyebrow")
 MaxEyeDistance = Vector2(25, 25)
-dialogue = NodePath("DialogueWindow")
 ExportPause = NodePath("SubViewport/Pause")
 BlinkTimer = NodePath("BlinkTimer")
+AnimationScale = NodePath("AnimationScale")
+NpcName = "Virus"
+AnimationTree = NodePath("AnimationTree")
+Dialogue = NodePath("DialogueWindow")
 Draggable = false
 Minimizable = false
 

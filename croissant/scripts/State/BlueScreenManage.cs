@@ -29,7 +29,7 @@ public static class BlueScreenManage
             States.Bods.Position = new Vector2I(0, 0);
             GameManager.GameRoot.AddChild(States.Bods);
             States.Bods.GrabFocus();
-            GameManager.virus.HideVirus();
+            GameManager.virus.HideNpc();
             state = 2;
             return;
         }

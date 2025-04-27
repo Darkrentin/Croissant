@@ -59,8 +59,7 @@ public partial class Level1 : Node2D
         debug.WaitTime = 5f;
         debug.Timeout += () =>
         {
-            GameManager.virus.dialogue.StartDialogue("Virus", "EndLevel1");
-            GameManager.virus.Show(GameManager.virus.RightDown);
+            GameManager.State = GameManager.GameState.BlueScreen;
             debug.Stop();
         };
         debug.Start();

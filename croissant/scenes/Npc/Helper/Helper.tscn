@@ -1,0 +1,67 @@
+[gd_scene load_steps=9 format=3 uid="uid://dy032f0nfm2vk"]
+
+[ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
+[ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
+
+[sub_resource type="Animation" id="Animation_8cb3g"]
+resource_name = "Idle"
+length = 0.1
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4ql8l"]
+_data = {
+&"Idle": SubResource("Animation_8cb3g")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8cb3g"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4ql8l"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_58gsr"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_4jimj"]
+states/Idle/node = SubResource("AnimationNodeAnimation_8cb3g")
+states/Idle/position = Vector2(538, 100)
+transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4ql8l"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_58gsr")]
+
+[node name="Helper" type="Window" node_paths=PackedStringArray("AnimationTree", "Dialogue")]
+size = Vector2i(300, 300)
+borderless = true
+script = ExtResource("1_8cb3g")
+NpcName = "Helper"
+AnimationTree = NodePath("AnimationTree")
+Dialogue = NodePath("DialogueWindow")
+Draggable = false
+Minimizable = false
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Helper.tscn
+Npc
+\\\\"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_4ql8l")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_4jimj")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("2_4ql8l")]
+ParentWindow = NodePath("..")
+Margin = Vector2i(30, -50)

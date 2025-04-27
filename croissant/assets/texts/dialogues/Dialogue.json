@@ -105,13 +105,25 @@
 				"text": "",
 				"anim": "Working"
 			}
-		},
-		"EndLevel1":{
+		}
+		
+	},
+	"Helper":
+	{
+		"Restart": {
 			"0": {
-				"text": "EndLevel1",
+				"text": "Hello !",
 				"anim": "Idle"
 			},
 			"1": {
+				"text": "le pc a crash",
+				"anim": "Idle"
+			},
+			"2": {
+				"text": "Test dialogue",
+				"anim": "Idle"
+			},
+			"3": {
 				"text": "",
 				"anim": "Idle"
 			}

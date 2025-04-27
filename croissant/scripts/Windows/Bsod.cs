@@ -9,7 +9,7 @@ public partial class Bsod : Window
 	{
 		RestartButton.Pressed += () =>
 		{
-			GameManager.State = GameManager.GameState.Level2;
+			GameManager.State = GameManager.GameState.IntroHelper;
 		};
 	}
 

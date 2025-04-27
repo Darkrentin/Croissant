@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="3_g36va"]
 [ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
-[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Virus/Virus.tscn" id="4_id677"]
+[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Npc/Virus/Virus.tscn" id="4_id677"]
 [ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="5_b7rdj"]
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]

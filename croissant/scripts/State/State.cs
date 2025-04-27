@@ -10,6 +10,7 @@ public static class States
     public static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
     public static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
     public static PackedScene VirusScene = ResourceLoader.Load<PackedScene>("uid://cbd8iklbee2ig");
+    public static PackedScene HelperScene = ResourceLoader.Load<PackedScene>("uid://dy032f0nfm2vk");
     public static PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("uid://dojmcfkfdnwsu");
     public static PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("uid://ce1xhbt2knpmv");
     public static PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("uid://cb1neywi8udoc");
@@ -36,6 +37,17 @@ public static class States
         virus.On = true;
 
         //change state condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+    
+    public static void Helper()
+    {
+        Helper helper = HelperScene.Instantiate<Helper>();
+        GameManager.helper = helper;
+        helper.Position = Lib.GetScreenPosition(0.5f, 0.5f) - helper.Size / 2;
+        GameManager.GameRoot.AddChild(helper);
+
+        //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
     public static void ChooseDifficulty()
@@ -73,7 +85,7 @@ public static class States
         IntroGameManager.Instance.GetParent().QueueFree();
 
         ////Lib.Print("First Virus Dialogue");
-        GameManager.virus.dialogue.StartDialogue("Virus", "sleep");
+        GameManager.virus.Dialogue.StartDialogue("Virus", "sleep");
 
         Node2D VirusSplash = VirusSplashScene.Instantiate<Node2D>();
         VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
@@ -95,36 +107,36 @@ public static class States
         {
             case 0:
                 VirusTuto.Tuto1();
-                GameManager.virus.dialogue.StartDialogue("Virus", "tuto1");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tuto1");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 1:
                 VirusTuto.Tuto2();
-                GameManager.virus.dialogue.StartDialogue("Virus", "tuto2");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tuto2");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 2:
                 VirusTuto.Tuto3();
-                GameManager.virus.dialogue.StartDialogue("Virus", "tuto3");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tuto3");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 3:
                 VirusTuto.Tuto4();
-                GameManager.virus.dialogue.StartDialogue("Virus", "tuto4");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tuto4");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 4:
                 VirusTuto.Tuto5();
-                GameManager.virus.dialogue.StartDialogue("Virus", "tuto5");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tuto5");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 5:
                 VirusTuto.Tuto6();
-                GameManager.virus.dialogue.StartDialogue("Virus", "tuto6");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tuto6");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 6:
-                GameManager.virus.dialogue.StartDialogue("Virus", "tutoEnd");
+                GameManager.virus.Dialogue.StartDialogue("Virus", "tutoEnd");
                 GameManager.State = GameManager.GameState.Void;
                 break;
             default:
@@ -146,9 +158,22 @@ public static class States
     {
         BlueScreenManage.ManageBlueScreen();
     }
-    public static void Level2()
+
+    public static void IntroHelper()
     {
         Bods.QueueFree();
+        Helper helper = HelperScene.Instantiate<Helper>();
+        GameManager.helper = helper;
+        GameManager.GameRoot.AddChild(helper);
+        helper.Position = Lib.GetScreenPosition(2f, 0.5f);
+        helper.StartInverseExponentialTransition(helper.RightDown, 2f);
+        helper.DialogueToPlayAfterTransition = "Restart";
+
+        //Change State condition
+        GameManager.State = GameManager.GameState.IntroHelperBuffer;
+    }
+    public static void Level2()
+    {
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
 

@@ -41,6 +41,7 @@ public partial class GameManager : Node2D
     public enum GameState
     {
         Virus,
+        Helper,
         // Game state
         Difficulty,
         IntroGame,
@@ -49,12 +50,14 @@ public partial class GameManager : Node2D
         VirusTuto,
         Level1,
         BlueScreen,
+        IntroHelper,
         Level2,
         // _Process state
         IntroGame_Process,
         // Buffer state
         Debug,
         IntroVirusBuffer,
+        IntroHelperBuffer,
         VirusDialogue1Buffer,
         TutoBuffer,
         Void
@@ -81,6 +84,7 @@ public partial class GameManager : Node2D
     public static Window FixWindow;
     public static MenuWindow MenuWindow;
     public static Virus virus;
+    public static Helper helper;  
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
     public static bool ShakeAllWindows = false;
@@ -118,6 +122,9 @@ public partial class GameManager : Node2D
             case GameState.Virus:
                 States.Virus();
                 break;
+            case GameState.Helper:
+                States.Helper();
+                break;
 
             // Game state
             case GameState.Difficulty:
@@ -140,6 +147,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.BlueScreen:
                 States.BlueScreen();
+                break;
+            case GameState.IntroHelper:
+                States.IntroHelper();
                 break;
             case GameState.Level2:
                 States.Level2();
