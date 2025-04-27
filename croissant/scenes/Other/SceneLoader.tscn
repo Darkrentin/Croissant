@@ -1,0 +1,34 @@
+[gd_scene load_steps=16 format=3 uid="uid://ckx6m1bn0k11e"]
+
+[ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
+[ext_resource type="PackedScene" uid="uid://dk1l5cx57mxbv" path="res://scenes/Windows/DifficultyMenu.tscn" id="2_yx4fs"]
+[ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="3_rvotm"]
+[ext_resource type="PackedScene" uid="uid://cppwo1k4kuwg2" path="res://scenes/Level1/Level1.tscn" id="4_inof8"]
+[ext_resource type="PackedScene" uid="uid://d13xxxigq3m7y" path="res://scenes/Level2/Level2.tscn" id="5_uq2bd"]
+[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Npc/Virus/Virus.tscn" id="6_rop1k"]
+[ext_resource type="PackedScene" uid="uid://dy032f0nfm2vk" path="res://scenes/Npc/Helper/Helper.tscn" id="7_dafyj"]
+[ext_resource type="PackedScene" uid="uid://dojmcfkfdnwsu" path="res://scenes/Level1/StaticWindow.tscn" id="8_djw06"]
+[ext_resource type="PackedScene" uid="uid://ce1xhbt2knpmv" path="res://scenes/Level1/TimerWindow.tscn" id="9_2mdes"]
+[ext_resource type="PackedScene" uid="uid://cb1neywi8udoc" path="res://scenes/Level1/MoveWindow.tscn" id="10_ccpnw"]
+[ext_resource type="PackedScene" uid="uid://cdcpehwcb167t" path="res://scenes/Level1/DodgeWindow.tscn" id="11_1v343"]
+[ext_resource type="PackedScene" uid="uid://dsmobrvf3clby" path="res://scenes/Level1/TankWindow.tscn" id="12_vdxpo"]
+[ext_resource type="PackedScene" uid="uid://cjcfsjb8cgs3k" path="res://scenes/Level1/BombWindow.tscn" id="13_hjhek"]
+[ext_resource type="PackedScene" uid="uid://b5ce1wjnvbedm" path="res://scenes/Npc/Virus/VirusSplash.tscn" id="14_d3g4q"]
+[ext_resource type="PackedScene" uid="uid://dogpe8p1am58j" path="res://scenes/Windows/Bsod.tscn" id="15_hu4ei"]
+
+[node name="SceneLoader" type="Node"]
+script = ExtResource("1_6c1vk")
+DifficultyScene = ExtResource("2_yx4fs")
+IntroGameScene = ExtResource("3_rvotm")
+Level1Scene = ExtResource("4_inof8")
+Level2Scene = ExtResource("5_uq2bd")
+VirusScene = ExtResource("6_rop1k")
+HelperScene = ExtResource("7_dafyj")
+StaticWindowScene = ExtResource("8_djw06")
+TimerWindowScene = ExtResource("9_2mdes")
+MoveWindowScene = ExtResource("10_ccpnw")
+DodgeWindowScene = ExtResource("11_1v343")
+TankWindowScene = ExtResource("12_vdxpo")
+BombWindowScene = ExtResource("13_hjhek")
+VirusSplashScene = ExtResource("14_d3g4q")
+BsodScene = ExtResource("15_hu4ei")

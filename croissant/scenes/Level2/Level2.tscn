@@ -8,10 +8,9 @@
 [ext_resource type="PackedScene" uid="uid://wmn0s55jslit" path="res://scenes/Level2/ExtendWindow.tscn" id="4_ldj83"]
 [ext_resource type="PackedScene" uid="uid://qiac3wawneng" path="res://scenes/Level2/CompressWindow.tscn" id="5_wgxlr"]
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("CursorWindow", "WaveManager")]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("CursorWindow")]
 script = ExtResource("1_u87iq")
 CursorWindow = NodePath("CursorWindow")
-WaveManager = NodePath("WaveManager")
 
 [node name="WaveManager" parent="." node_paths=PackedStringArray("SpawnNode") instance=ExtResource("2_qsvqe")]
 EnemyWindows = Array[PackedScene]([ExtResource("4_eyjwi"), ExtResource("4_ldj83"), ExtResource("5_wgxlr"), ExtResource("3_315dx")])

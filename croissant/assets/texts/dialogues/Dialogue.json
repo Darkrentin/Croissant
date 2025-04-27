@@ -20,7 +20,7 @@
 				"anim": "Angry"
 			},
 			"2": {
-				"text": "I was not supposed to sleep but I'm a [color=#2f3ec4][wave amp=10 freq=1]F[/wave][wave amp=10 freq=2]r[/wave][/color][color=#FFFFFF][wave amp=10 freq=3]e[/wave][wave amp=10 freq=4]n[/wave][/color][color=#E1000F][wave amp=10 freq=5]c[/wave][wave amp=10 freq=6]h[/wave][/color] virus, jetlag is [pulse freq=2.0 color=##ffd9d9][b]HUGE[/b][/pulse]",
+				"text": "I was not supposed to sleep but I'm a [color=#2f3ec4][wave amp=10 freq=1]F[/wave][wave amp=10 freq=2]r[/wave][/color][color=#FFFFFF][wave amp=10 freq=3]e[/wave][wave amp=10 freq=4]n[/wave][/color][color=#E1000F][wave amp=10 freq=5]c[/wave][wave amp=10 freq=6]h[/wave][/color] virus, jetlag is [pulse freq=2.0 color=##ffd9d9][b]HUGE[/b][/pulse]!",
 				"anim": "Surprise"
 			},
 			"3": {
@@ -106,10 +106,8 @@
 				"anim": "Working"
 			}
 		}
-		
 	},
-	"Helper":
-	{
+	"Helper": {
 		"Restart": {
 			"0": {
 				"text": "Hello !",

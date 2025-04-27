@@ -1,25 +1,26 @@
 using Godot;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public static class States
 {
-    public static PackedScene Difficultycene = ResourceLoader.Load<PackedScene>("uid://cgj1ul5xki8ym");
-    public static PackedScene IntroGameScene = ResourceLoader.Load<PackedScene>("uid://wm3w6j1qernu");
-    public static PackedScene Level1Scene = ResourceLoader.Load<PackedScene>("uid://cppwo1k4kuwg2");
-    public static PackedScene Level2Scene = ResourceLoader.Load<PackedScene>("uid://d13xxxigq3m7y");
-    public static PackedScene VirusScene = ResourceLoader.Load<PackedScene>("uid://cbd8iklbee2ig");
-    public static PackedScene HelperScene = ResourceLoader.Load<PackedScene>("uid://dy032f0nfm2vk");
-    public static PackedScene StaticWindowScene = ResourceLoader.Load<PackedScene>("uid://dojmcfkfdnwsu");
-    public static PackedScene TimerWindowScene = ResourceLoader.Load<PackedScene>("uid://ce1xhbt2knpmv");
-    public static PackedScene MoveWindowScene = ResourceLoader.Load<PackedScene>("uid://cb1neywi8udoc");
-    public static PackedScene DodgeWindowScene = ResourceLoader.Load<PackedScene>("uid://cdcpehwcb167t");
-    public static PackedScene TankWindowScene = ResourceLoader.Load<PackedScene>("uid://dsmobrvf3clby");
-    public static PackedScene BombWindowScene = ResourceLoader.Load<PackedScene>("uid://cjcfsjb8cgs3k");
-    public static PackedScene VirusSplashScene = ResourceLoader.Load<PackedScene>("uid://b5ce1wjnvbedm");
-    public static PackedScene BodsSene = ResourceLoader.Load<PackedScene>("uid://dogpe8p1am58j");
-    public static Window Bods;
+    public static SceneLoader SceneLoader = ResourceLoader.Load<PackedScene>("res://scenes/Other/SceneLoader.tscn").Instantiate<SceneLoader>();
+
+    public static PackedScene DifficultyScene = SceneLoader.DifficultyScene;
+    public static PackedScene IntroGameScene = SceneLoader.IntroGameScene;
+    public static PackedScene Level1Scene = SceneLoader.Level1Scene;
+    public static PackedScene Level2Scene = SceneLoader.Level2Scene;
+    public static PackedScene VirusScene = SceneLoader.VirusScene;
+    public static PackedScene HelperScene = SceneLoader.HelperScene;
+    public static PackedScene StaticWindowScene = SceneLoader.StaticWindowScene;
+    public static PackedScene TimerWindowScene = SceneLoader.TimerWindowScene;
+    public static PackedScene MoveWindowScene = SceneLoader.MoveWindowScene;
+    public static PackedScene DodgeWindowScene = SceneLoader.DodgeWindowScene;
+    public static PackedScene TankWindowScene = SceneLoader.TankWindowScene;
+    public static PackedScene BombWindowScene = SceneLoader.BombWindowScene;
+    public static PackedScene VirusSplashScene = SceneLoader.VirusSplashScene;
+    public static PackedScene BsodScene = SceneLoader.BsodScene;
+
+    public static Window Bsod;
     public static Window IntroLvl;
     public static Node Lvl1;
     public static Node Lvl2;
@@ -39,7 +40,7 @@ public static class States
         //change state condition
         GameManager.State = GameManager.GameState.Void;
     }
-    
+
     public static void Helper()
     {
         Helper helper = HelperScene.Instantiate<Helper>();
@@ -52,7 +53,7 @@ public static class States
     }
     public static void ChooseDifficulty()
     {
-        GameManager.GameRoot.AddChild(Difficultycene.Instantiate<Window>());
+        GameManager.GameRoot.AddChild(DifficultyScene.Instantiate<Window>());
         GameManager.State = GameManager.GameState.Void;
     }
     public static void IntroGame()
@@ -161,7 +162,7 @@ public static class States
 
     public static void IntroHelper()
     {
-        Bods.QueueFree();
+        Bsod.QueueFree();
         Helper helper = HelperScene.Instantiate<Helper>();
         GameManager.helper = helper;
         GameManager.GameRoot.AddChild(helper);

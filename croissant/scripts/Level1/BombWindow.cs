@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Numerics;
 
 public partial class BombWindow : PopUpWindow
 {
@@ -37,10 +36,10 @@ public partial class BombWindow : PopUpWindow
                 Sprite.Play();
                 break;
         }
-        time = 8f;
+        time = 6f;
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
-        
+
         progressBar.SetDeferred("size", Size);
         timer.Start();
     }

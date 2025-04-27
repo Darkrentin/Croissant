@@ -3,6 +3,8 @@ using System;
 
 public partial class MoveWindow : PopUpWindow
 {
+    [Export] private TextureRect Jet;
+
     public override void _Ready()
     {
         HasChangingTitle = true;
@@ -44,6 +46,12 @@ public partial class MoveWindow : PopUpWindow
         Vector2I target = Lib.GetScreenPosition(Lib.GetRandomNormal(0.2f, 0.80f), Lib.GetRandomNormal(0.2f, 0.80f));
         float speed = CalculateMovementSpeed();
         StartExponentialTransition(target, speed, reset: true);
+
+
+        Vector2I direction = target - Position;
+        float angle = Mathf.RadToDeg(Mathf.Atan2(direction.Y, direction.X));
+        Jet.RotationDegrees = angle + 90;
+
     }
 
 }

@@ -1,22 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://cb1neywi8udoc"]
+[gd_scene load_steps=4 format=3 uid="uid://cb1neywi8udoc"]
 
 [ext_resource type="Script" uid="uid://brxoeijijfprq" path="res://scripts/Level1/MoveWindow.cs" id="1_o0mg8"]
-[ext_resource type="Texture2D" uid="uid://dy2ab6xryrlsm" path="res://assets/popups/popup.png" id="2_pba2s"]
+[ext_resource type="Texture2D" uid="uid://ca7aj22k2i5v1" path="res://assets/popups/jet_bg.png" id="2_83mil"]
+[ext_resource type="Texture2D" uid="uid://bvatdt45i2rql" path="res://assets/popups/jet.png" id="3_4tysl"]
 
-[node name="MoveWindow" type="Window"]
+[node name="MoveWindow" type="Window" node_paths=PackedStringArray("Jet")]
 position = Vector2i(0, 36)
 size = Vector2i(400, 400)
 unresizable = true
 always_on_top = true
 script = ExtResource("1_o0mg8")
+Jet = NodePath("Jet")
 Draggable = false
 Minimizable = false
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="JetBg" type="TextureRect" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_pba2s")
+texture = ExtResource("2_83mil")
 expand_mode = 1
+
+[node name="Jet" type="TextureRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -219.0
+offset_right = 200.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_4tysl")

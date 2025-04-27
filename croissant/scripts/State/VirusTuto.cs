@@ -68,6 +68,7 @@ public static class VirusTuto
     {
         BombWindow popup4 = States.BombWindowScene.Instantiate<BombWindow>();
         GameManager.GameRoot.AddChild(popup4);
+        popup4.timer.WaitTime = 4f;
         popup4.Position = Lib.GetScreenPosition(0.5f, 0.5f) - popup4.Size / 2;
         popup4.CloseRequested -= popup4.OnClose;
         popup4.CloseRequested += () =>

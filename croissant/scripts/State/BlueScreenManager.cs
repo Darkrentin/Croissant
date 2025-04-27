@@ -10,36 +10,36 @@ public static class BlueScreenManage
 
     public static void ManageBlueScreen()
     {
-        if(state==0)
+        if (state == 0)
         {
             Window window = States.StaticWindowScene.Instantiate<Window>();
             window.AlwaysOnTop = false;
             GameManager.GameRoot.AddChild(window);
             CrashWindows.Add(window);
             NbOfFakeWindow++;
-            if(NbOfFakeWindow >= MaxWindows)
+            if (NbOfFakeWindow >= MaxWindows)
             {
                 state = 1;
                 return;
             }
         }
-        if(state==1)
-        {   
-            States.Bods = States.BodsSene.Instantiate<Window>();
-            States.Bods.Position = new Vector2I(0, 0);
-            GameManager.GameRoot.AddChild(States.Bods);
-            States.Bods.GrabFocus();
+        if (state == 1)
+        {
+            States.Bsod = States.BsodScene.Instantiate<Window>();
+            States.Bsod.Position = new Vector2I(0, 0);
+            GameManager.GameRoot.AddChild(States.Bsod);
+            States.Bsod.GrabFocus();
             GameManager.virus.HideNpc();
             state = 2;
             return;
         }
-        if(state==2)
+        if (state == 2)
         {
             States.Lvl1.QueueFree();
             state = 3;
             return;
         }
-        if(state==3)
+        if (state == 3)
         {
             for (int i = 0; i < CrashWindows.Count; i++)
             {
