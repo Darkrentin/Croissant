@@ -50,6 +50,8 @@ public static class Lib
 
     public static Vector2I GetRandomPositionOutsideScreen(int side = 0, int margin = 50)
     {
+        if(side==-1)
+            side = rand.Next(0, 4);
         Vector2I screenSize = GameManager.ScreenSize;
 
         return side switch

@@ -41,7 +41,7 @@ public partial class DialogueWindow : FloatWindow
 		timer.Timeout += ShowNextCharacter;
 		ShowNextCharacter();
 		label.Text = "";
-		cursorTimer.Timeout += ProcessCursor;
+		cursorTimer.Timeout += _ProcessCursor;
 		cursorTimer.Start();
 
 		OnDialogueFinished += DialogueFinished;
@@ -68,7 +68,7 @@ public partial class DialogueWindow : FloatWindow
 			isTyping = false;
 
 	}
-	public void ProcessCursor()
+	public void _ProcessCursor()
 	{
 		if (isTyping)
 		{
@@ -144,12 +144,13 @@ public partial class DialogueWindow : FloatWindow
 
 	public static void DialogueFinished(string id)
 	{
-		Lib.Print("Dialogue Finished");
+		//Lib.Print("Dialogue Finished");
 	}
 
-	public void PlaceDialogueWindow()
+	public void PlaceDialogueWindow(bool force = false)
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
-		SetWindowPosition(new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin);
+		SetWindowPosition(new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
+		Visible = true;
 	}
 }

@@ -13,7 +13,7 @@ public partial class VisualCollision : ColorRect
 	}
 
 	public override void _Process(double delta)
-	{
+	{	
 		if (elapsedTime < duration)
 		{
 			elapsedTime += (float)delta;

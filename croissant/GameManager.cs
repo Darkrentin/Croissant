@@ -48,9 +48,10 @@ public partial class GameManager : Node2D
         VirusDialogue1,
         VirusTuto,
         Level1,
+        BlueScreen,
         Level2,
-        // Process state
-        IntroGameProcess,
+        // _Process state
+        IntroGame_Process,
         // Buffer state
         Debug,
         IntroVirusBuffer,
@@ -66,7 +67,7 @@ public partial class GameManager : Node2D
         set
         {
             _state = value;
-            //Lib.Print($"State: {_state}");
+            ////Lib.Print($"State: {_state}");
             StateChange(_state);
         }
     }
@@ -109,7 +110,7 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
-        ProcessShake();
+        _ProcessShake();
         CleanupWindowsList();
 
         switch (State)
@@ -137,13 +138,16 @@ public partial class GameManager : Node2D
             case GameState.Level1:
                 States.Level1();
                 break;
+            case GameState.BlueScreen:
+                States.BlueScreen();
+                break;
             case GameState.Level2:
                 States.Level2();
                 break;
 
-            // Process state
-            case GameState.IntroGameProcess:
-                States.IntroGameProcess(delta);
+            // _Process state
+            case GameState.IntroGame_Process:
+                States.IntroGame_Process(delta);
                 break;
 
             // Buffer state
@@ -192,7 +196,7 @@ public partial class GameManager : Node2D
             }
             catch (ObjectDisposedException)
             {
-                //Lib.Print("A window was already disposed and removed from the list.");
+                ////Lib.Print("A window was already disposed and removed from the list.");
             }
             catch (Exception e)
             {
@@ -202,7 +206,7 @@ public partial class GameManager : Node2D
         Windows = validWindows;
     }
 
-    public void ProcessShake()
+    public void _ProcessShake()
     {
         if (!ShakeAllWindows)
             return;

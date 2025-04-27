@@ -105,6 +105,16 @@
 				"text": "",
 				"anim": "Working"
 			}
+		},
+		"EndLevel1":{
+			"0": {
+				"text": "EndLevel1",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "",
+				"anim": "Idle"
+			}
 		}
 	}
 }

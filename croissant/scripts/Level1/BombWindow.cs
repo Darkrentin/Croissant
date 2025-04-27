@@ -13,6 +13,7 @@ public partial class BombWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = true;
+        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(250, 250));
         base._Ready();
         timer.Timeout += _on_timer_timeout;
 
@@ -39,7 +40,7 @@ public partial class BombWindow : PopUpWindow
         time = 8f;
         progressBar.MaxValue = time * 100f;
         timer.WaitTime = time;
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(250, 250));
+        
         progressBar.SetDeferred("size", Size);
         timer.Start();
     }

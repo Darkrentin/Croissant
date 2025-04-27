@@ -43,19 +43,23 @@ public partial class AttackWindow : FloatWindow
         set
         {
             _phase = value;
-            Lib.Print($"Current phase: {value}");
+            //Lib.Print($"Current phase: {value}");
         }
     }
 
     public override void _Ready()
     {
+        Position = Lib.GetRandomPositionOutsideScreen(-1, 150);
         SharpCorners = true;
+        Unresizable = true;
+        Draggable = false;
+        Minimizable = false;
         base._Ready();
 
         const int WindowSizeX = 130;
         Size = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX)) - TitleBarSize;
 
-        //Lib.Print(TitleBarHeight.ToString());
+        ////Lib.Print(TitleBarHeight.ToString());
 
         Timer = new Timer();
         Timer.OneShot = true;
@@ -74,6 +78,7 @@ public partial class AttackWindow : FloatWindow
         if (!Disable)
         {
             Parent = GetParent<Level2>();
+            Lives = Parent.WaveManager.CurrentWave;
             Timer.Start();
         }
         else
@@ -81,6 +86,7 @@ public partial class AttackWindow : FloatWindow
             GD.Print("Disabled");
             Timer.Stop();
         }
+
     }
 
     public void ShowVisualCollision(Vector2I size, Vector2 position, float duration = 0.5f)
@@ -170,12 +176,21 @@ public partial class AttackWindow : FloatWindow
 
     public void Delete()
     {
+        Parent.WaveManager.EnemyDefeated();
         GameManager.GameRoot.RemoveChild(VisualCollision);
-        GameManager.Windows.Remove(this);
+        //GameManager.Windows.Remove(this);
         VisualCollision.QueueFree();
         GrabFocus();
-        GetParent().RemoveChild(this);
-        QueueFree();
+        //GetParent().RemoveChild(this);
+        Parent.CursorWindow.GrabFocus();
+        
+        Timer death = new Timer();
+        AddChild(death);
+        death.Timeout += QueueFree;
+        Timer.WaitTime = 0.1f;
+        Timer.OneShot = true;
+        Hide();
+        death.Start();
         //GameManager.MainWindow.GrabFocus();
 
     }

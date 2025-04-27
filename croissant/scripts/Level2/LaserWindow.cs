@@ -23,7 +23,7 @@ public partial class LaserWindow : AttackWindow
 		if (!Random)
 			margin = Math.Max(Parent.CursorWindow.Size.X, Parent.CursorWindow.Size.Y);
 
-		//Lib.Print($"Side: {side}");
+		////Lib.Print($"Side: {side}");
 		switch (side)
 		{
 			case 3:

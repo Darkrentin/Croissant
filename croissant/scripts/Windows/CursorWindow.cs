@@ -7,12 +7,20 @@ public partial class CursorWindow : FloatWindow
 
 	public CollisionShape2D collision;
 	public Area2D area;
+	public bool Freeze = false;
+	public Timer FreezeTimer;
 	public override void _Ready()
 	{
+		Borderless = true;
+		Transparent = false;
 		base._Ready();
 		Size = Lib.GetScreenSize(0.1f, 0.1f);
 		Size = Lib.GetAspectFactor(new Vector2I(150,150)) - TitleBarSize; 
 		SetWindowPosition(Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2);
+		FreezeTimer = new Timer();
+		FreezeTimer.OneShot = true;
+		FreezeTimer.Timeout += FreezFrameStop;
+		AddChild(FreezeTimer);
 
 	}
 
@@ -21,7 +29,7 @@ public partial class CursorWindow : FloatWindow
 	{
 		base._Process(delta);
 
-		if (Input.IsActionJustPressed("LeftClick"))
+		if (!Freeze && Input.IsActionJustPressed("LeftClick"))
 		{
 			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 1f, reset: true);
 		}
@@ -35,11 +43,25 @@ public partial class CursorWindow : FloatWindow
 
 	public void TakeDamage()
 	{
+		FreezFrameStart();
+	}
+
+	public void FreezFrameStart()
+	{
+
+		ProcessMode = ProcessModeEnum.Always;
 		IsTransitioning = false;
-		if (!Shaking)
-		{
-			StartShake(0.2f, 10);
-		}
-		GameManager.MenuWindow.Open();
+		Freeze = true;
+		GetTree().Paused = true;
+		StartShake(0.4f, 10);
+		FreezeTimer.WaitTime = 0.4f;
+		FreezeTimer.Start();
+	}
+
+	public void FreezFrameStop()
+	{
+		ProcessMode = ProcessModeEnum.Pausable;
+		Freeze = false;
+		GetTree().Paused = false;
 	}
 }

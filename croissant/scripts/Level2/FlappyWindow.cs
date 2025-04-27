@@ -109,9 +109,14 @@ public partial class FlappyWindow : AttackWindow
 		const float MoveTime = 0.3f;
 		const float AttackDuration = 0.3f;
 		int TargetX = 0;
+		int ConnectedWindowTargetX = 0;
 		if(Position.X - Parent.CursorWindow.Position.X < 0)
 		{
 			TargetX = GameManager.ScreenSize.X - Size.X;
+		}
+		if(ConnectedWindow.Position.X - Parent.CursorWindow.Position.X < 0)
+		{
+			ConnectedWindowTargetX = GameManager.ScreenSize.X - ConnectedWindow.Size.X;
 		}
 		if(Visible)
 		{
@@ -121,7 +126,7 @@ public partial class FlappyWindow : AttackWindow
 
 		if(ConnectedWindow.Visible)
 		{
-			ConnectedWindow.StartLinearTransition(new Vector2I(TargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
+			ConnectedWindow.StartLinearTransition(new Vector2I(ConnectedWindowTargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
 			ConnectedWindow.HideVisualCollision();
 		}
 

@@ -10,6 +10,7 @@ public partial class DifficultyMenu : FloatWindow
 	public override void _Ready()
 	{
 		PlayButton.Pressed += StartGame;
+		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
