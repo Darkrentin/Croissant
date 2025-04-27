@@ -6,10 +6,9 @@ public partial class MoveWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = true;
-        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(384, 264));
         base._Ready();
 
-        
+        Size = (Vector2I)Lib.GetAspectFactor(new Vector2I(400, 400));
         StartNewMovement();
     }
 
@@ -33,17 +32,11 @@ public partial class MoveWindow : PopUpWindow
     private float CalculateMovementSpeed()
     {
         if (Level1.WindowCount >= 10)
-        {
             return Lib.rand.Next(80, 150) / 10f;
-        }
         else if (Level1.WindowCount >= 5)
-        {
             return Lib.rand.Next(30, 50) / 10f;
-        }
         else
-        {
             return Lib.rand.Next(15, 30) / 10f;
-        }
     }
 
     public void StartNewMovement()
