@@ -4,20 +4,20 @@ public partial class TimerWindow : PopUpWindow
 {
     [Export] public Timer timer;
     [Export] public ProgressBar progressBar;
+    [Export] public Label timeLabel;
     private float time;
 
     public override void _Ready()
     {
         HasChangingTitle = true;
-        Size = Lib.GetAspectFactor(new Vector2I(400, 600));
+        Size = Lib.GetAspectFactor(new Vector2I(600, 400));
         base._Ready();
 
         time = CalculateTimerDuration();
-        progressBar.MaxValue = time * 100f;
+        progressBar.MaxValue = time;
         timer.WaitTime = time;
         timer.Timeout += _on_timer_timeout;
 
-        progressBar.Size = Size;
         timer.Start();
     }
 
@@ -25,11 +25,11 @@ public partial class TimerWindow : PopUpWindow
     private float CalculateTimerDuration()
     {
         if (Level1.WindowCount >= 15)
-            return Lib.rand.Next(8, 10);
+            return Lib.rand.Next(7, 9);
         else if (Level1.WindowCount >= 10)
-            return Lib.rand.Next(6, 8);
+            return Lib.rand.Next(5, 7);
         else
-            return Lib.rand.Next(4, 6);
+            return Lib.rand.Next(3, 5);
     }
 
     public override void OnClose()
@@ -41,11 +41,10 @@ public partial class TimerWindow : PopUpWindow
     public override void _Process(double delta)
     {
         base._Process(delta);
-        progressBar.Value = timer.TimeLeft * 100f;
-        if (timer.TimeLeft <= 1 && timer.TimeLeft >= 0.9)
-        {
+        progressBar.Value = time - timer.TimeLeft;
+        timeLabel.Text = $"{Mathf.Ceil(timer.TimeLeft * 10) / 10:0.0}s";
+        if (timer.TimeLeft <= 2f && timer.TimeLeft >= 1.9f)
             GrabFocus();
-        }
     }
 
     public void _on_timer_timeout()

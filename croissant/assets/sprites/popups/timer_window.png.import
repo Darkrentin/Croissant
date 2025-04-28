@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b12awpnqfs3mp"
-path="res://.godot/imported/popup2.png-fa2837fafde7b60a0bf6adaeb6c1e7c6.ctex"
+uid="uid://b5xq57w4bb463"
+path="res://.godot/imported/timer_window.png-f0392b3f62348b34a8d4e224dc0c2343.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/popups/popup2.png"
-dest_files=["res://.godot/imported/popup2.png-fa2837fafde7b60a0bf6adaeb6c1e7c6.ctex"]
+source_file="res://assets/sprites/popups/timer_window.png"
+dest_files=["res://.godot/imported/timer_window.png-f0392b3f62348b34a8d4e224dc0c2343.ctex"]
 
 [params]
 

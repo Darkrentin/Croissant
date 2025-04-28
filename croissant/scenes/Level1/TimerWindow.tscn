@@ -1,15 +1,24 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce1xhbt2knpmv"]
+[gd_scene load_steps=6 format=3 uid="uid://ce1xhbt2knpmv"]
 
 [ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/Level1/TimerWindow.cs" id="1_gkcfg"]
-[ext_resource type="Texture2D" uid="uid://b12awpnqfs3mp" path="res://assets/sprites/popups/popup2.png" id="2_6061h"]
+[ext_resource type="Texture2D" uid="uid://b5xq57w4bb463" path="res://assets/sprites/popups/timer_window.png" id="2_2q6k5"]
+[ext_resource type="FontFile" uid="uid://obbkukv56e3r" path="res://assets/texts/fonts/CourierPrime-Regular.ttf" id="3_x7nfb"]
 
-[node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar")]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7nfb"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_10qgm"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar", "timeLabel")]
 position = Vector2i(0, 36)
+size = Vector2i(600, 400)
 unresizable = true
 always_on_top = true
 script = ExtResource("1_gkcfg")
 timer = NodePath("Timer")
 progressBar = NodePath("ProgressBar")
+timeLabel = NodePath("Label")
 Draggable = false
 Minimizable = false
 
@@ -22,10 +31,33 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_6061h")
+texture = ExtResource("2_2q6k5")
 expand_mode = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="."]
-offset_right = 100.0
-offset_bottom = 100.0
-step = 1.0
+anchors_preset = -1
+anchor_top = 0.835
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_x7nfb")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/background = SubResource("StyleBoxFlat_x7nfb")
+theme_override_styles/fill = SubResource("StyleBoxFlat_10qgm")
+fill_mode = 1
+show_percentage = false
+
+[node name="Label" type="Label" parent="."]
+anchors_preset = -1
+anchor_left = 0.033
+anchor_top = 0.5
+anchor_right = 0.208
+anchor_bottom = 0.685
+offset_left = 0.200001
+offset_top = 1.52588e-05
+offset_right = 0.199997
+offset_bottom = -3.05176e-05
+rotation = -0.000409353
+theme_override_fonts/font = ExtResource("3_x7nfb")
+theme_override_font_sizes/font_size = 46
+horizontal_alignment = 1
