@@ -45,6 +45,7 @@ public partial class Level1 : Node2D
         debug.Timeout += () =>
         {
             GameManager.State = GameManager.GameState.BlueScreen;
+            QueueFree();
             debug.Stop();
         };
         debug.Start();

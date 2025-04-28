@@ -18,6 +18,7 @@ public partial class Bsod : Window
 
 	public void AnimationFinished(StringName animationName)
 	{
+		QueueFree();
 		GameManager.State = GameManager.GameState.IntroHelper;
 	}
 }

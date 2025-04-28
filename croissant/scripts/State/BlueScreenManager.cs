@@ -17,7 +17,7 @@ public static class BlueScreenManager
                 state = 1;
                 return;
             }
-            Window window = States.StaticWindowScene.Instantiate<Window>();
+            StaticWindow window = States.StaticWindowScene.Instantiate<StaticWindow>();
             window.AlwaysOnTop = false;
             GameManager.GameRoot.AddChild(window);
             CrashWindows.Add(window);
@@ -35,7 +35,6 @@ public static class BlueScreenManager
         }
         if (state == 2)
         {
-            States.Lvl1.QueueFree();
             state = 3;
             return;
         }

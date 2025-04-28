@@ -19,7 +19,6 @@ public partial class Helper : Npc
 		switch (name)
 		{
 			case "Restart":
-				HideNpc(1);
 				GameManager.State = GameManager.GameState.Level2;
 				break;
 		}

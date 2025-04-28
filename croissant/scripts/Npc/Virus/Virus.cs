@@ -38,8 +38,7 @@ public partial class Virus : Npc
 			case "1":
 				GameManager.State = GameManager.GameState.TutoBuffer;
 				StartExponentialTransition(GameManager.ScreenSize - Size, 1f);
-				ForceDialoguePlacement = false;
-				Dialogue.Visible = false;
+				GameManager.virus.Dialogue.Visible = false;
 				break;
 			case "sleep":
 				AnimationScreen.Travel("Idle");
@@ -47,7 +46,6 @@ public partial class Virus : Npc
 				Dialogue.StartDialogue(NpcName, "1");
 				break;
 			case "tutoEnd":
-				HideNpc(1);
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 		}

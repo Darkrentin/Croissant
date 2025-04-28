@@ -72,10 +72,24 @@ public partial class GameManager : Node2D
         // Le reste du code _Ready existant
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
-
+        InitializeNpc();
         ShakeTimer = new Timer();
         ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
+    }
+
+    private void InitializeNpc()
+    {
+        virus = States.VirusScene.Instantiate<Virus>();
+        GameRoot.AddChild(virus);
+        virus.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
+        virus.Dialogue.PlaceDialogueWindow();
+        virus.On = true;
+
+        helper = States.HelperScene.Instantiate<Helper>();
+        GameRoot.AddChild(helper);
+        helper.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
+        virus.Dialogue.PlaceDialogueWindow();
     }
 
     private void InitializeGame()

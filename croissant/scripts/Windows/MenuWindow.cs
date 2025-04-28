@@ -5,8 +5,8 @@ public partial class MenuWindow : FloatWindow
 	[Export] private Control Menu;
 	[Export] public CheckButton FakeDesktopButton;
 	[Export] public CheckButton DebugButton;
-	public bool FakeDesktop;
-	public bool DebugMode;
+	public bool FakeDesktop = false;
+	public bool DebugMode = false;
 
 	public override void _Ready()
 	{

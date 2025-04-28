@@ -25,12 +25,9 @@ public static class States
 
     public static void Virus()
     {
-        Virus virus = VirusScene.Instantiate<Virus>();
-        GameManager.virus = virus;
-        GameManager.GameRoot.AddChild(virus);
-        virus.Position = Lib.GetScreenPosition(0.5f, 0.5f) - virus.Size / 2;
-        virus.AnimationScreen.Travel("PowerOn");
-        virus.On = true;
+        GameManager.virus.Position = Lib.GetScreenPosition(0.5f, 0.5f) - GameManager.virus.Size / 2;
+        GameManager.virus.AnimationScreen.Travel("PowerOn");
+        GameManager.virus.On = true;
 
         //change state condition
         GameManager.State = GameManager.GameState.Void;
@@ -38,10 +35,7 @@ public static class States
 
     public static void Helper()
     {
-        Helper helper = HelperScene.Instantiate<Helper>();
-        GameManager.helper = helper;
-        helper.Position = Lib.GetScreenPosition(0.5f, 0.5f) - helper.Size / 2;
-        GameManager.GameRoot.AddChild(helper);
+        GameManager.helper.Position = Lib.GetScreenPosition(0.5f, 0.5f) - GameManager.helper.Size / 2;
 
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
@@ -63,12 +57,10 @@ public static class States
 
     public static void IntroVirus()
     {
-        Virus virus = VirusScene.Instantiate<Virus>();
-        GameManager.virus = virus;
-        GameManager.GameRoot.AddChild(virus);
-        virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - virus.Size / 2;
+        GameManager.virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - GameManager.virus.Size / 2;
         ////Lib.Print(virus.Position.ToString());
-        virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(virus.Size.X / 2, virus.Size.Y), 2f);
+        GameManager.virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y), 2f);
+        GameManager.virus.On = false;
 
         //change state condition
         GameManager.State = GameManager.GameState.IntroVirusBuffer;
@@ -78,7 +70,10 @@ public static class States
     {
 
         //Freeze the game
-        IntroGameManager.Instance.GetParent().QueueFree();
+        if(IntroGameManager.Instance != null)
+            IntroGameManager.Instance.GetParent().QueueFree();
+
+        GameManager.virus.Position = Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y);
 
         ////Lib.Print("First Virus Dialogue");
         GameManager.virus.Dialogue.StartDialogue("Virus", "sleep");
@@ -97,6 +92,8 @@ public static class States
 
     public static void VirusTutoSelection()
     {
+        GameManager.virus.ForceDialoguePlacement = false;
+        GameManager.virus.Position = GameManager.virus.RightDown;
         switch (LevelOfTuto)
         {
             case 0:
@@ -141,6 +138,7 @@ public static class States
 
     public static void Level1()
     {
+        GameManager.virus.HideNpc(0);
         Lvl1 = Level1Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Lvl1);
 
@@ -155,19 +153,16 @@ public static class States
 
     public static void IntroHelper()
     {
-        Bsod.QueueFree();
-        Helper helper = HelperScene.Instantiate<Helper>();
-        GameManager.helper = helper;
-        GameManager.GameRoot.AddChild(helper);
-        helper.Position = Lib.GetScreenPosition(2f, 0.5f);
-        helper.StartInverseExponentialTransition(helper.RightDown, 2f);
-        helper.DialogueToPlayAfterTransition = "Restart";
+        GameManager.helper.Position = Lib.GetScreenPosition(2f, 0.5f);
+        GameManager.helper.StartInverseExponentialTransition(GameManager.helper.RightDown, 2f);
+        GameManager.helper.DialogueToPlayAfterTransition = "Restart";
 
         //Change State condition
         GameManager.State = GameManager.GameState.IntroHelperBuffer;
     }
     public static void Level2()
     {
+        GameManager.helper.HideNpc(1);
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
 
