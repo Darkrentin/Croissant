@@ -22,9 +22,9 @@ public partial class AttackWindow : FloatWindow
             if (Random)
                 return new Vector2I(Lib.rand.Next(0, GameManager.ScreenSize.X - Size.X), Lib.rand.Next(0, GameManager.ScreenSize.Y - Size.Y));
             else
-                return Parent.CursorWindow.Position + Parent.CursorWindow.Size / 2;
+                return Level2.CursorWindow.Position + Level2.CursorWindow.Size / 2;
         }
-        set { Parent.CursorWindow.Position = value; }
+        set { Level2.CursorWindow.Position = value; }
     }
 
     public override void _Ready()
@@ -91,12 +91,12 @@ public partial class AttackWindow : FloatWindow
 			Parent.CursorWindow.TakeDamage();
 		}
         */
-        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Parent.CursorWindow))
+        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Level2.CursorWindow))
         {
-            Parent.CursorWindow.TakeDamage();
+            Level2.CursorWindow.TakeDamage();
             CurrentPhase = Phase.Dammage;
         }
-        if (CurrentPhase == Phase.Dammage && !IsCollided(Parent.CursorWindow))
+        if (CurrentPhase == Phase.Dammage && !IsCollided(Level2.CursorWindow))
             CurrentPhase = Phase.Attack;
     }
 
@@ -159,7 +159,7 @@ public partial class AttackWindow : FloatWindow
         VisualCollision.QueueFree();
         GrabFocus();
         //GetParent().RemoveChild(this);
-        Parent.CursorWindow.GrabFocus();
+        Level2.CursorWindow.GrabFocus();
 
         Timer death = new Timer();
         AddChild(death);

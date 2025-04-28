@@ -16,6 +16,7 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene BombWindowScene;
 	[Export] public PackedScene VirusSplashScene;
 	[Export] public PackedScene BsodScene;
+	[Export] public PackedScene CursorWindowScene;
 
 	public override void _Ready()
 	{

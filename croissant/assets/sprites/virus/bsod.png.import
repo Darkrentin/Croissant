@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://sjvy5uesh2nh"
-path="res://.godot/imported/bsodmaker.png-ead134c66df44638a3011d7858367b08.ctex"
+uid="uid://bfum56urr505j"
+path="res://.godot/imported/bsod.png-829b32ef51580fdbd51855662f128bcd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/virus/bsodmaker.png"
-dest_files=["res://.godot/imported/bsodmaker.png-ead134c66df44638a3011d7858367b08.ctex"]
+source_file="res://assets/sprites/virus/bsod.png"
+dest_files=["res://.godot/imported/bsod.png-829b32ef51580fdbd51855662f128bcd.ctex"]
 
 [params]
 

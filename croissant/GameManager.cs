@@ -84,13 +84,18 @@ public partial class GameManager : Node2D
         virus = States.VirusScene.Instantiate<Virus>();
         GameRoot.AddChild(virus);
         virus.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
+        virus.ForceDialoguePlacement = true;
         virus.Dialogue.PlaceDialogueWindow();
         virus.On = true;
 
         helper = States.HelperScene.Instantiate<Helper>();
         GameRoot.AddChild(helper);
         helper.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
-        virus.Dialogue.PlaceDialogueWindow();
+        helper.ForceDialoguePlacement = true;
+        helper.Dialogue.PlaceDialogueWindow();
+
+        //virus.Visible = false;
+        //helper.Visible = false;
     }
 
     private void InitializeGame()

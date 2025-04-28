@@ -65,3 +65,4 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("2_4ql8l")]
 ParentWindow = NodePath("..")
 Margin = Vector2i(30, -50)
+LeftSide = false

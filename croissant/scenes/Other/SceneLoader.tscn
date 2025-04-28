@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckx6m1bn0k11e"]
+[gd_scene load_steps=17 format=3 uid="uid://ckx6m1bn0k11e"]
 
 [ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
 [ext_resource type="PackedScene" uid="uid://dk1l5cx57mxbv" path="res://scenes/Windows/DifficultyMenu.tscn" id="2_yx4fs"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cjcfsjb8cgs3k" path="res://scenes/Level1/BombWindow.tscn" id="13_hjhek"]
 [ext_resource type="PackedScene" uid="uid://b5ce1wjnvbedm" path="res://scenes/Npc/Virus/VirusSplash.tscn" id="14_d3g4q"]
 [ext_resource type="PackedScene" uid="uid://dogpe8p1am58j" path="res://scenes/Windows/bsod.tscn" id="15_hu4ei"]
+[ext_resource type="PackedScene" uid="uid://byd00eniliv1s" path="res://scenes/Windows/CursorWindow.tscn" id="16_rvotm"]
 
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_6c1vk")
@@ -32,3 +33,4 @@ TankWindowScene = ExtResource("12_vdxpo")
 BombWindowScene = ExtResource("13_hjhek")
 VirusSplashScene = ExtResource("14_d3g4q")
 BsodScene = ExtResource("15_hu4ei")
+CursorWindowScene = ExtResource("16_rvotm")

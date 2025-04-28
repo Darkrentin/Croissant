@@ -24,6 +24,8 @@ public partial class DialogueWindow : FloatWindow
 	public static int DialogueCount = 0;
 	public static int Dialogueid = 0;
 
+	[Export] public bool LeftSide = true;
+
 	public override void _Ready()
 	{
 		const string dialoguePath = "res://assets/texts/dialogues/Dialogue.json";
@@ -97,7 +99,9 @@ public partial class DialogueWindow : FloatWindow
 			isDialogue = false;
 			Lib.Print($"Dialogue finished: {ActualDialogueName} id: {Dialogueid} Parent: {ParentWindow.NpcName}");
 			OnDialogueFinished(ActualDialogueName);
-			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
+			//text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
+			text = "";
+			label.Text = "";
 			if (anim != "")
 				ParentWindow.AnimationScreen.Travel(anim);
 			return;
@@ -145,7 +149,10 @@ public partial class DialogueWindow : FloatWindow
 	public void PlaceDialogueWindow(bool force = false)
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
-		SetWindowPosition(new Vector2I(ParentWindow.Position.X + ParentWindow.Size.X / 2 - Size.X / 2, ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
+		int side = 3;
+		if(LeftSide)
+			side = 1;
+		SetWindowPosition(new Vector2I(ParentWindow.Position.X + (ParentWindow.Size.X / 2)*side - (Size.X / 2), ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
 		Visible = true;
 		Lib.Print($"Place dialogue window: {ParentWindow.Position} id: {Dialogueid}");
 	}

@@ -21,7 +21,7 @@ public partial class LaserWindow : AttackWindow
 	{
 		int margin = Math.Max(Size.X, Size.Y);
 		if (!Random)
-			margin = Math.Max(Parent.CursorWindow.Size.X, Parent.CursorWindow.Size.Y);
+			margin = Math.Max(Level2.CursorWindow.Size.X, Level2.CursorWindow.Size.Y);
 
 		////Lib.Print($"Side: {side}");
 		switch (side)

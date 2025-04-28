@@ -71,8 +71,8 @@ public partial class FlappyWindow : AttackWindow
 		Vector2I targetPosition2;
 
 		int targetY = Lib.rand.Next(Size.Y + Margin, GameManager.ScreenSize.Y - Size.Y - Margin);
-		nsizeA = targetY - Parent.CursorWindow.Size.Y - (int)(Size.Y * SizeMargin);
-		nsizeB = GameManager.ScreenSize.Y - targetY - Parent.CursorWindow.Size.Y - (int)(ConnectedWindow.Size.Y * SizeMargin);
+		nsizeA = targetY - Level2.CursorWindow.Size.Y - (int)(Size.Y * SizeMargin);
+		nsizeB = GameManager.ScreenSize.Y - targetY - Level2.CursorWindow.Size.Y - (int)(ConnectedWindow.Size.Y * SizeMargin);
 
 		if (Visible)
 		{
@@ -106,9 +106,9 @@ public partial class FlappyWindow : AttackWindow
 		const float AttackDuration = 0.3f;
 		int TargetX = 0;
 		int ConnectedWindowTargetX = 0;
-		if (Position.X - Parent.CursorWindow.Position.X < 0)
+		if (Position.X - Level2.CursorWindow.Position.X < 0)
 			TargetX = GameManager.ScreenSize.X - Size.X;
-		if (ConnectedWindow.Position.X - Parent.CursorWindow.Position.X < 0)
+		if (ConnectedWindow.Position.X - Level2.CursorWindow.Position.X < 0)
 			ConnectedWindowTargetX = GameManager.ScreenSize.X - ConnectedWindow.Size.X;
 		if (Visible)
 		{

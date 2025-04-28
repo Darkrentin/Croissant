@@ -17,6 +17,7 @@ public static class States
     public static PackedScene BombWindowScene = SceneLoader.BombWindowScene;
     public static PackedScene VirusSplashScene = SceneLoader.VirusSplashScene;
     public static PackedScene BsodScene = SceneLoader.BsodScene;
+    public static PackedScene CursorWindowScene = SceneLoader.CursorWindowScene;
     public static Window Bsod;
     public static Window IntroLvl;
     public static Node Lvl1;
@@ -153,8 +154,8 @@ public static class States
 
     public static void IntroHelper()
     {
-        GameManager.helper.Position = Lib.GetScreenPosition(2f, 0.5f);
-        GameManager.helper.StartInverseExponentialTransition(GameManager.helper.RightDown, 2f);
+        GameManager.helper.Position = Lib.GetScreenPosition(-0.5f, 1);
+        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
         GameManager.helper.DialogueToPlayAfterTransition = "Restart";
 
         //Change State condition
@@ -162,7 +163,7 @@ public static class States
     }
     public static void Level2()
     {
-        GameManager.helper.HideNpc(1);
+        GameManager.helper.HideNpc(3);
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
 
@@ -172,8 +173,8 @@ public static class States
 
     public static void HelperDialogue1()
     {
-        GameManager.helper.ShowNpc(GameManager.helper.RightDown);
-        GameManager.helper.DialogueToPlayAfterTransition = "1";
+        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
+        GameManager.helper.DialogueToPlayAfterTransition = "2";
         GameManager.State = GameManager.GameState.Void;
     }
 

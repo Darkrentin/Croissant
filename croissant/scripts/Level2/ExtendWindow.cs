@@ -19,8 +19,8 @@ public partial class ExtendWindow : AttackWindow
 	{
 		const float MoveTime = 0.5f;
 		const float MarginTime = 0.1f;
-		Vector2I margin = Parent.CursorWindow.Size / 2;
-		TargetPosition = new Vector2I(Lib.rand.Next(CursorPosition.X - margin.X, CursorPosition.X + margin.X), Lib.rand.Next(CursorPosition.Y - margin.Y, CursorPosition.Y + margin.Y)) - Parent.CursorWindow.Size / 2;
+		Vector2I margin = Level2.CursorWindow.Size / 2;
+		TargetPosition = new Vector2I(Lib.rand.Next(CursorPosition.X - margin.X, CursorPosition.X + margin.X), Lib.rand.Next(CursorPosition.Y - margin.Y, CursorPosition.Y + margin.Y)) - Level2.CursorWindow.Size / 2;
 		windowPosition = TargetPosition;
 		windowSize = Size;
 		StartTransition(TargetPosition, MoveTime - MarginTime);

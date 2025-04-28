@@ -105,42 +105,132 @@
 				"text": "",
 				"anim": "Working"
 			}
+		},
+		"Virus/Helper Dialogue 1":
+		{
+			"0": {
+				"text": "AAAAAAAAH !",
+				"anim": "Angry"
+			},
+			"1": {
+				"text": "Me revoila ! la quarantaine n'est pas assez pour me retenir !",
+				"anim": "Angry"
+			},
+			"2": {
+				"text": "je vais pourvoir continuer ce que javais commencé. !",
+				"anim": "Angry"
+			},
+			"3": {
+				"text": "",
+				"anim": "Angry"
+			}
+		},
+		"Virus/Helper Dialogue 3":
+		{
+			"0": {
+				"text": "Maintenant que tu est seul plus rien ne m'empeche de detruire ton pc",
+				"anim": "Angry"
+			},
+			"1": {
+				"text": "TU POURRA PAS M'ENMPECHER DE SUPPRIMER CE DOSSIER !",
+				"anim": "Angry"
+			},
+			"2": {
+				"text": "",
+				"anim": "Angry"
+			}
 		}
 	},
 	"Helper": {
 		"Restart": {
 			"0": {
-				"text": "Hello !",
+				"text": "Salut je suis Helper.exe, le programme Anti-virus de ce PC.",
 				"anim": "Idle"
 			},
 			"1": {
-				"text": "le pc a crash",
+				"text": "j'ai remarqué q'un virus a infécté ton PC.",
 				"anim": "Idle"
 			},
 			"2": {
-				"text": "Test dialogue",
+				"text": "il a surchargé tout les processus jusqu'a ce que le PC crash",
 				"anim": "Idle"
 			},
 			"3": {
+				"text": "Heureusement j'ai pu profité du reboot du pc pour le mettre en quarantaine.",
+				"anim": "Idle"
+			},
+			"4": {
+				"text": "Cependant ça ne suffira pas à l'arrêter.",
+				"anim": "Idle"
+			},
+			"5": {
+				"text": "j'ai malheureusement pas assez de connaisance pour savoir quoi faire avec ce genre trés particulier de virus.",
+				"anim": "Idle"
+			},
+			"6": {
+				"text": "je vais devoir faire une mise à jour system pour connaitre un moyen de l'arreter.",
+				"anim": "Idle"
+			},
+			"7": {
+				"text": "cela veut dire que je vais etre désactiver pendant un temps, je vais devoir te laisser la tache de proteger ton PC le temps que je revienne.",
+				"anim": "Idle"
+			},
+			"8": {
 				"text": "",
 				"anim": "Idle"
 			}
 		},
-		"1":
-		{
+		"HelperTuto": {
 			"0": {
-				"text": "Hello !",
+				"text": "Voici le dossier System32, c'est le fichier le plus important de ton PC.",
 				"anim": "Idle"
 			},
 			"1": {
-				"text": "voila la fin du jeu",
+				"text": "je te le laisse pour que tu puisses le proteger.",
 				"anim": "Idle"
 			},
 			"2": {
-				"text": "Salut o7",
+				"text": "Comment tu peux le voir, tu peux deplacer ce dossier avec ta souris",
 				"anim": "Idle"
 			},
 			"3": {
+				"text": "Fait en sorte de le garder en lieux sur en attendant mon retour.",
+				"anim": "Idle"
+			},
+			"4": {
+				"text": "",
+				"anim": "Idle"
+			}
+		},
+		"Virus/Helper Dialogue 2":
+		{
+			"0": {
+				"text": "Le virus est déja la !",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "il a été plus rapide que je ne le pensais.",
+				"anim": "Idle"
+			},
+			"2": {
+				"text": "je vais devoir commencer la mise à jour MAINTENANT !",
+				"anim": "Idle"
+			},
+			"3": {
+				"text": "Je te laisse, Bonne chance !",
+				"anim": "Idle"
+			},
+			"4": {
+				"text": "",
+				"anim": "Idle"
+			}
+		},
+		"EndLvl2" : {
+			"0": {
+				"text": "Je suis de retour !",
+				"anim": "Idle"
+			},
+			"1": {
 				"text": "",
 				"anim": "Idle"
 			}

@@ -51,9 +51,17 @@ public abstract partial class Npc : FloatWindow
     {
         Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side, Math.Max(Size.X, Size.Y) * 2);
         ForceDialoguePlacement = true;
-        StartLinearTransition(HidePosition, 0.5f, reset: true);
+        if(!OnSreen())
+        {
+            Position = HidePosition;
+        }
+        else
+        {
+            StartLinearTransition(HidePosition, 0.5f, reset: true);
+        }
         Dialogue.Visible = false;
         Dialogue.label.Text = "";
+        //Visible = false;
     }
 
     public void ShowNpc(Vector2I Position)
@@ -61,6 +69,7 @@ public abstract partial class Npc : FloatWindow
         ForceDialoguePlacement = false;
         StartLinearTransition(Position, 0.1f, reset: true);
         GrabFocus();
+        //Visible = true;
     }
 
     public override void TransitionFinished()
@@ -71,5 +80,10 @@ public abstract partial class Npc : FloatWindow
             Dialogue.StartDialogue(NpcName, DialogueToPlayAfterTransition);
             DialogueToPlayAfterTransition = "";
         }
+    }
+
+    public bool OnSreen()
+    {
+        return Position.X > 0 && Position.Y > 0 && Position.X < GameManager.ScreenSize.X && Position.Y < GameManager.ScreenSize.Y;
     }
 }

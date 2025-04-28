@@ -48,6 +48,12 @@ public partial class Virus : Npc
 			case "tutoEnd":
 				GameManager.State = GameManager.GameState.Level1;
 				break;
+			case "Virus/Helper Dialogue 1":
+				GameManager.helper.Dialogue.StartDialogue("Helper", "Virus/Helper Dialogue 2");
+				break;
+			case "Virus/Helper Dialogue 3":
+				GameManager.State = GameManager.GameState.Level2;
+				break;
 		}
 		Lib.Print("Virus");
 	}

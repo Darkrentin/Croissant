@@ -19,9 +19,20 @@ public partial class Helper : Npc
 		switch (name)
 		{
 			case "Restart":
-				GameManager.State = GameManager.GameState.Level2;
+				CursorWindow cursorWindow = States.CursorWindowScene.Instantiate<CursorWindow>();
+				GameManager.GameRoot.AddChild(cursorWindow);
+				Level2.CursorWindow = cursorWindow;
+				Dialogue.StartDialogue(NpcName, "HelperTuto");
 				break;
-			case "1":
+			case "HelperTuto":
+			    GameManager.virus.ShowNpc(GameManager.virus.RightDown);
+				GameManager.virus.DialogueToPlayAfterTransition = "Virus/Helper Dialogue 1";
+				break;
+			case "Virus/Helper Dialogue 2":
+				HideNpc(3);
+				GameManager.virus.Dialogue.StartDialogue("Virus", "Virus/Helper Dialogue 3");
+				break;
+			case "EndLevel2":
 				GetTree().Quit();
 				break;
 		}

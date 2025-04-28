@@ -1,16 +1,14 @@
-[gd_scene load_steps=8 format=3 uid="uid://d13xxxigq3m7y"]
+[gd_scene load_steps=7 format=3 uid="uid://d13xxxigq3m7y"]
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
-[ext_resource type="PackedScene" uid="uid://byd00eniliv1s" path="res://scenes/Windows/CursorWindow.tscn" id="2_5gxfl"]
 [ext_resource type="PackedScene" uid="uid://b4i4iwr3qk44x" path="res://scenes/Level2/WaveManager.tscn" id="2_qsvqe"]
 [ext_resource type="PackedScene" uid="uid://c5djekulorxqs" path="res://scenes/Level2/FlappyWindow.tscn" id="3_315dx"]
 [ext_resource type="PackedScene" uid="uid://bh5bvmpmfbmfs" path="res://scenes/Level2/LaserWindow.tscn" id="4_eyjwi"]
 [ext_resource type="PackedScene" uid="uid://wmn0s55jslit" path="res://scenes/Level2/ExtendWindow.tscn" id="4_ldj83"]
 [ext_resource type="PackedScene" uid="uid://qiac3wawneng" path="res://scenes/Level2/CompressWindow.tscn" id="5_wgxlr"]
 
-[node name="Level2" type="Node2D" node_paths=PackedStringArray("CursorWindow", "WaveManager")]
+[node name="Level2" type="Node2D" node_paths=PackedStringArray("WaveManager")]
 script = ExtResource("1_u87iq")
-CursorWindow = NodePath("CursorWindow")
 WaveManager = NodePath("WaveManager")
 
 [node name="WaveManager" parent="." node_paths=PackedStringArray("SpawnNode") instance=ExtResource("2_qsvqe")]
@@ -20,5 +18,3 @@ NumberOfEnemy = 4
 SpawnNode = NodePath("..")
 CurrentWaveMaxPoints = 3
 IncreasePoints = 2
-
-[node name="CursorWindow" parent="." instance=ExtResource("2_5gxfl")]
