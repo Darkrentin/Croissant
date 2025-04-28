@@ -170,6 +170,13 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
+    public static void HelperDialogue1()
+    {
+        GameManager.helper.ShowNpc(GameManager.helper.RightDown);
+        GameManager.helper.DialogueToPlayAfterTransition = "1";
+        GameManager.State = GameManager.GameState.Void;
+    }
+
     public static void IntroGame_Process(double delta)
     {
         //Change State condition

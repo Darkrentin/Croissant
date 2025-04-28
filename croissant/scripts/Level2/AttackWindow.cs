@@ -52,13 +52,13 @@ public partial class AttackWindow : FloatWindow
         VisualCollision.Visible = false;
         GameManager.GameRoot.AddChild(VisualCollision);
 
-        Timer.WaitTime = Lib.GetRandomNormal(0.1f, 2.0f);
+        Timer.WaitTime = Lib.GetRandomNormal(0.1f, 5.0f);
         Timer.Timeout += Start;
 
         if (!Disable)
         {
             Parent = GetParent<Level2>();
-            Lives = Parent.WaveManager.CurrentWave;
+            Lives = 3;
             Timer.Start();
         }
         else

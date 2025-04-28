@@ -21,6 +21,9 @@ public partial class Helper : Npc
 			case "Restart":
 				GameManager.State = GameManager.GameState.Level2;
 				break;
+			case "1":
+				GetTree().Quit();
+				break;
 		}
 	}
 

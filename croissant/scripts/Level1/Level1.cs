@@ -11,8 +11,7 @@ public partial class Level1 : Node2D
     [Export] private PackedScene BombWindowScene;
     private Timer spawnTimer;
     private Timer totalTimer;
-    private static int _windowKillCount = 0;
-    public static int WindowKillCount { get => _windowKillCount; set { _windowKillCount = value; } }
+
     public static int WindowCount;
     public int InitialWindowCount = 0;
     public float TimerLimit = 0.025f;
@@ -23,32 +22,32 @@ public partial class Level1 : Node2D
     public override void _Ready()
     {
         Instance = this;
-        WindowKillCount = 0;
         WindowCount = 0;
 
         spawnTimer = new Timer();
         AddChild(spawnTimer);
         spawnTimer.WaitTime = 1f / GameManager.Difficulty;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
-        //spawnTimer.Start();
+        spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
         totalTimer.WaitTime = 3f * GameManager.Difficulty;
         totalTimer.Timeout += TotalSpawnerTimeout;
-        //totalTimer.Start();
+        totalTimer.Start();
 
         //Debug
+        /*
         Timer debug = new Timer();
         AddChild(debug);
         debug.WaitTime = 5f;
         debug.Timeout += () =>
         {
             GameManager.State = GameManager.GameState.BlueScreen;
-            QueueFree();
             debug.Stop();
         };
         debug.Start();
+        */
 
     }
 
@@ -98,7 +97,7 @@ public partial class Level1 : Node2D
 		}*/
         //////Lib.Print($"timertic: {TimerTic}");
         //////Lib.Print($"window: {WindowCount}");
-        /*
+        
         if (InitialWindowCount < 22 * GameManager.Difficulty)
         {
             AddNewWindow();
@@ -112,8 +111,11 @@ public partial class Level1 : Node2D
 
         if(WindowCount == 0)
         {
+            Lib.Print("No windows left, ending game...");
+            GameManager.State = GameManager.GameState.BlueScreen;
+            QueueFree();
         }
-        */
+        
     }
 
     public static void AddNewWindow()
@@ -156,11 +158,12 @@ public partial class Level1 : Node2D
             Instance.Windows.Add(window);
         }
         WindowCount++;
+        Lib.Print($"WindowAdd : count: {WindowCount}");
     }
 
     public static void WindowKill()
     {
-        WindowKillCount++;
         WindowCount--;
+        Lib.Print($"WindowKill : count: {WindowCount}");
     }
 }

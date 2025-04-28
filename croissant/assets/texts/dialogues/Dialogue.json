@@ -125,6 +125,25 @@
 				"text": "",
 				"anim": "Idle"
 			}
+		},
+		"1":
+		{
+			"0": {
+				"text": "Hello !",
+				"anim": "Idle"
+			},
+			"1": {
+				"text": "voila la fin du jeu",
+				"anim": "Idle"
+			},
+			"2": {
+				"text": "Salut o7",
+				"anim": "Idle"
+			},
+			"3": {
+				"text": "",
+				"anim": "Idle"
+			}
 		}
 	}
 }

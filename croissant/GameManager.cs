@@ -53,6 +53,7 @@ public partial class GameManager : Node2D
         BlueScreen,
         IntroHelper,
         Level2,
+        HelperDialogue1,
         // _Process state
         IntroGame_Process,
         // Buffer state
@@ -139,6 +140,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.Level2:
                 States.Level2();
+                break;
+            case GameState.HelperDialogue1:
+                States.HelperDialogue1();
                 break;
 
             // _Process state

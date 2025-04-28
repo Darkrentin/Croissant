@@ -45,7 +45,7 @@ public partial class BombWindow : PopUpWindow
 
     public override void OnClose()
     {
-        Level1.WindowCount--;
+        Level1.WindowKill();
         for (int i = 0; i < 3; i++)
             Level1.AddNewWindow();
         QueueFree();
@@ -59,7 +59,7 @@ public partial class BombWindow : PopUpWindow
 
     public void _on_timer_timeout()
     {
-        Level1.WindowCount--;
+        Level1.WindowKill();
         QueueFree();
     }
 }

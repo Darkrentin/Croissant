@@ -42,11 +42,15 @@ public partial class TimerWindow : PopUpWindow
     {
         base._Process(delta);
         progressBar.Value = timer.TimeLeft * 100f;
+        if (timer.TimeLeft <= 1 && timer.TimeLeft >= 0.9)
+        {
+            GrabFocus();
+        }
     }
 
     public void _on_timer_timeout()
     {
-        Level1.WindowCount--;
+        Level1.WindowKill();
         for (int i = 0; i < 2; i++)
             Level1.AddNewWindow();
         QueueFree();

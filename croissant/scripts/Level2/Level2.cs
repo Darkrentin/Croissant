@@ -16,7 +16,7 @@ public partial class Level2 : Node2D
 		const int MaxWave = 10;
 		if (WaveManager.CurrentWave > MaxWave)
 		{
-			GameManager.State = GameManager.GameState.Void;
+			GameManager.State = GameManager.GameState.HelperDialogue1;
 			QueueFree();
 		}
 	}
