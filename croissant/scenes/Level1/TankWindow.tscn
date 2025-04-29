@@ -5,7 +5,7 @@
 
 [node name="TankWindow" type="Window" node_paths=PackedStringArray("Image")]
 position = Vector2i(0, 36)
-size = Vector2i(480, 360)
+size = Vector2i(560, 420)
 unresizable = true
 always_on_top = true
 script = ExtResource("1_jrr7c")

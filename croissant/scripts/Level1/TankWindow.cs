@@ -10,7 +10,7 @@ public partial class TankWindow : PopUpWindow
     public override void _Ready()
     {
         HasChangingTitle = false;
-        Size = Lib.GetAspectFactor(new Vector2I(480, 360));
+        Size = Lib.GetAspectFactor(new Vector2I(560, 420));
         base._Ready();
         Title = "☻   ☻   ☻";
 

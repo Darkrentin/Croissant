@@ -51,14 +51,10 @@ public abstract partial class Npc : FloatWindow
     {
         Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side, Math.Max(Size.X, Size.Y) * 2);
         ForceDialoguePlacement = true;
-        if(!OnSreen())
-        {
+        if (!OnSreen())
             Position = HidePosition;
-        }
         else
-        {
             StartLinearTransition(HidePosition, 0.5f, reset: true);
-        }
         Dialogue.Visible = false;
         Dialogue.label.Text = "";
         //Visible = false;

@@ -23,21 +23,24 @@ public static class BlueScreenManager
             CrashWindows.Add(window);
             NbOfFakeWindow++;
         }
+
         if (state == 1)
         {
             States.Bsod = States.BsodScene.Instantiate<Window>();
             States.Bsod.Position = new Vector2I(0, 0);
             GameManager.GameRoot.AddChild(States.Bsod);
             States.Bsod.GrabFocus();
-            GameManager.virus.HideNpc();
+            GameManager.virus.HideNpc(1);
             state = 2;
             return;
         }
+
         if (state == 2)
         {
             state = 3;
             return;
         }
+
         if (state == 3)
         {
             for (int i = 0; i < CrashWindows.Count; i++)

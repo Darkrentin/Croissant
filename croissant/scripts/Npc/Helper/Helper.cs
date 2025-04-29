@@ -25,7 +25,7 @@ public partial class Helper : Npc
 				Dialogue.StartDialogue(NpcName, "HelperTuto");
 				break;
 			case "HelperTuto":
-			    GameManager.virus.ShowNpc(GameManager.virus.RightDown);
+				GameManager.virus.ShowNpc(GameManager.virus.RightDown);
 				GameManager.virus.DialogueToPlayAfterTransition = "Virus/Helper Dialogue 1";
 				break;
 			case "Virus/Helper Dialogue 2":
