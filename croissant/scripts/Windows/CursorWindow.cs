@@ -8,11 +8,8 @@ public partial class CursorWindow : FloatWindow
 	public Timer FreezeTimer;
 	public override void _Ready()
 	{
-		Borderless = true;
-		Transparent = false;
 		base._Ready();
-		Size = Lib.GetScreenSize(0.1f, 0.1f);
-		Size = Lib.GetAspectFactor(new Vector2I(150, 150)) - TitleBarSize;
+		Size = Lib.GetAspectFactor(Size);
 		SetWindowPosition(Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2);
 		FreezeTimer = new Timer();
 		FreezeTimer.OneShot = true;

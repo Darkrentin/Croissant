@@ -69,7 +69,7 @@ content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
 content_scale_aspect = 4
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer", "GameNode")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer")]
 script = ExtResource("1_8rhfo")
 Player = NodePath("GameNode/Player")
 BulletScene = ExtResource("2_g36va")
@@ -80,7 +80,6 @@ ExportGameExplosion = ExtResource("5_b7rdj")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
 MaxScore = 2
-GameNode = NodePath("GameNode")
 
 [node name="Camera" type="Camera2D" parent="Game"]
 anchor_mode = 0

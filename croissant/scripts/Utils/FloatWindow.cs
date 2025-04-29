@@ -75,7 +75,6 @@ public partial class FloatWindow : Window
 			return;
 		}
 		//Lib.Print("Transition Start !");
-		GD.Print("Target Position : " + targetPosition);
 		StartPosition = Position;
 		if (IsTransitioning && !reset)
 			TargetPosition += targetPosition - StartPosition;
