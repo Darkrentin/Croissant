@@ -1,3 +1,5 @@
+using Godot;
+
 public static class VirusTuto
 {
     public static void _Process()
@@ -28,16 +30,22 @@ public static class VirusTuto
         popup2.CloseRequested -= popup2.OnClose;
         popup2.CloseRequested += () =>
         {
-            popup2.HPs--;
-            if (popup2.HPs <= 0)
+            if (popup2.HPs == 1)
             {
                 GameManager.State = GameManager.GameState.VirusTuto;
                 States.LevelOfTuto++;
                 popup2.QueueFree();
             }
             else
-                popup2.CheckHp();
-            popup2.StartShake(0.2f, 10);
+            {
+                popup2.HPs--;
+                popup2.Title = "";
+                for (int i = 0; i < popup2.HPs; i++)
+                    popup2.Title += "☻   ";
+            }
+
+            popup2.Image.Texture = GD.Load<Texture2D>($"res://assets/sprites/popups/yaai_{popup2.HPs}_{popup2.state}.png");
+            popup2.StartShake(0.15f, 10);
         };
     }
 

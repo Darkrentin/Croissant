@@ -2,28 +2,40 @@ using Godot;
 
 public partial class TankWindow : PopUpWindow
 {
-    [Export] public ProgressBar progressBar;
+    [Export] public TextureRect Image;
+    public Timer AlternateTimer = new Timer();
+    public int state;
     public int HPs = 3;
 
     public override void _Ready()
     {
         HasChangingTitle = false;
-        Size = Lib.GetAspectFactor(new Vector2I(437, 526));
+        Size = Lib.GetAspectFactor(new Vector2I(480, 360));
         base._Ready();
-        Title = "---";
-        CheckHp();
+        Title = "☻   ☻   ☻";
+
+        AddChild(AlternateTimer);
+        AlternateTimer.WaitTime = 0.5f;
+        AlternateTimer.Timeout += OnAlternateTimerTimeout;
+        AlternateTimer.Start();
     }
 
     public override void OnClose()
     {
-        HPs--;
-        if (HPs <= 0)
+        if (HPs == 1)
         {
             Level1.WindowKill();
             QueueFree();
         }
         else
-            CheckHp();
+        {
+            HPs--;
+            Title = "";
+            for (int i = 0; i < HPs; i++)
+                Title += "☻   ";
+        }
+
+        Image.Texture = GD.Load<Texture2D>($"res://assets/sprites/popups/yaai_{HPs}_{state}.png");
         StartShake(0.15f, 10);
     }
 
@@ -32,10 +44,9 @@ public partial class TankWindow : PopUpWindow
         base._Process(delta);
     }
 
-    public void CheckHp()
+    public void OnAlternateTimerTimeout()
     {
-        Title = "";
-        for (int i = 0; i < HPs; i++)
-            Title += "❤︎";
+        state = state == 0 ? 1 : 0;
+        Image.Texture = GD.Load<Texture2D>($"res://assets/sprites/popups/yaai_{HPs}_{state}.png");
     }
 }
