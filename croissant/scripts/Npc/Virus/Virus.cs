@@ -64,6 +64,14 @@ public partial class Virus : Npc
 		base._Process(delta);
 		if (On)
 			UpdateModelRotation(delta);	
+		if(On && !OnScreen())
+		{
+			On = false;
+		}
+		if(!On && OnScreen() && AnimationScreen.GetCurrentNode()!="Off")
+		{
+			On = true;
+		}
 		// Movement Fiesta test
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
 	}

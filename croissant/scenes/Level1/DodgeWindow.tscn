@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://cdcpehwcb167t"]
+[gd_scene load_steps=2 format=3 uid="uid://cdcpehwcb167t"]
 
 [ext_resource type="Script" uid="uid://5obqqwi6yips" path="res://scripts/Level1/DodgeWindow.cs" id="1_ai85r"]
-[ext_resource type="Texture2D" uid="uid://mbmtcioh8ae1" path="res://assets/sprites/popups/popup5.png" id="2_m1d22"]
 
 [node name="DodgeWindow" type="Window"]
 position = Vector2i(0, 36)
@@ -17,5 +16,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_m1d22")
 expand_mode = 1
+
+[node name="WIP" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Work In Progress"

@@ -51,7 +51,7 @@ public abstract partial class Npc : FloatWindow
     {
         Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side, Math.Max(Size.X, Size.Y) * 2);
         ForceDialoguePlacement = true;
-        if (!OnSreen())
+        if (!OnScreen())
             Position = HidePosition;
         else
             StartLinearTransition(HidePosition, 0.5f, reset: true);
@@ -78,7 +78,7 @@ public abstract partial class Npc : FloatWindow
         }
     }
 
-    public bool OnSreen()
+    public bool OnScreen()
     {
         return Position.X >= 0 && Position.Y >= 0 && Position.X <= GameManager.ScreenSize.X && Position.Y <= GameManager.ScreenSize.Y;
     }

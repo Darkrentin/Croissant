@@ -171,7 +171,7 @@ public static class States
     public static void HelperDialogue1()
     {
         GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
-        GameManager.helper.DialogueToPlayAfterTransition = "2";
+        GameManager.helper.DialogueToPlayAfterTransition = "EndLvl2";
         GameManager.State = GameManager.GameState.Void;
     }
 
