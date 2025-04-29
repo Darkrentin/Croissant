@@ -389,7 +389,6 @@ albedo_color = Color(0, 0, 0, 1)
 roughness = 0.804041
 roughness_texture_channel = 1
 emission_enabled = true
-emission = Color(1, 0, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_hqxcu"]
 _surfaces = [{
@@ -1820,6 +1819,7 @@ offset_bottom = 40.0
 
 [node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("10_k1eiq")]
 ParentWindow = NodePath("..")
+CanSkip = true
 Margin = Vector2i(0, 0)
 
 [node name="BlinkTimer" type="Timer" parent="."]
