@@ -91,6 +91,7 @@ public static class States
     {
         GameManager.virus.ForceDialoguePlacement = false;
         GameManager.virus.Position = GameManager.virus.RightDown;
+        GameManager.virus.Dialogue.LockSkip = true;
         switch (LevelOfTuto)
         {
             case 0:

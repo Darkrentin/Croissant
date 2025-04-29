@@ -46,6 +46,7 @@ public partial class Virus : Npc
 				Dialogue.StartDialogue(NpcName, "1");
 				break;
 			case "tutoEnd":
+				Dialogue.LockSkip = false;
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 			case "Virus/Helper Dialogue 1":

@@ -16,7 +16,7 @@ public abstract partial class Npc : FloatWindow
 
     public virtual void Skip()
     {
-        if (Dialogue.isDialogue)
+        if (Dialogue.isDialogue && !Dialogue.LockSkip)
             Dialogue.NextLine();
     }
 

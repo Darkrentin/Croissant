@@ -10,6 +10,7 @@ public partial class DialogueWindow : FloatWindow
 	[Export] public Timer timer;
 	[Export] public Timer cursorTimer;
 	[Export] public bool CanSkip = false;
+	[Export] public bool LockSkip = false;
 	[Export] public Vector2I Margin { get => _margin; set { _margin = (Vector2I)Lib.GetScreenRatio() * value; } }
 	private Vector2I _margin = new Vector2I(0, 0);
 	public bool cursorVisible = false;
@@ -90,7 +91,14 @@ public partial class DialogueWindow : FloatWindow
 	{
 		Lib.Print($"Next line: {index} id: {Dialogueid}");
 		if (isTyping && !CanSkip)
+		{
 			return;
+		}
+		if(isTyping)
+		{
+			label.VisibleCharacters = label.GetTotalCharacterCount() - 1;
+			return;
+		}
 		Dictionary dialogue = ((Dictionary)ActualDialogue[$"{index}"]);
 		string text = (String)dialogue["text"];
 		string anim = (String)dialogue["anim"];
