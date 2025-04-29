@@ -18,6 +18,7 @@ public partial class Level1 : Node2D
     public int TimerTic = 2;
     public static Level1 Instance;
     public List<FloatWindow> Windows = new List<FloatWindow>();
+    
 
     public override void _Ready()
     {

@@ -63,7 +63,7 @@ public partial class Virus : Npc
 	{
 		base._Process(delta);
 		if (On)
-			UpdateModelRotation(delta);
+			UpdateModelRotation(delta);	
 		// Movement Fiesta test
 		//StartExponentialTransition(Lib.GetScreenPosition(Lib.GetRandomNormal(0, 1), Lib.GetRandomNormal(0, 1)), 1f);
 	}
@@ -137,4 +137,5 @@ public partial class Virus : Npc
         VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
         VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
 	}
+
 }

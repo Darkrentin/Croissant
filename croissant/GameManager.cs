@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 
 public enum DifficultyLevel { Easy, Normal, Hard }
 
@@ -86,7 +87,7 @@ public partial class GameManager : Node2D
         virus.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
         virus.ForceDialoguePlacement = true;
         virus.Dialogue.PlaceDialogueWindow();
-        virus.On = true;
+        virus.On = false;
 
         helper = States.HelperScene.Instantiate<Helper>();
         GameRoot.AddChild(helper);

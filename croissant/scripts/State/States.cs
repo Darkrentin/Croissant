@@ -72,7 +72,7 @@ public static class States
 
         //Freeze the game
         if (IntroGameManager.Instance != null)
-            IntroGameManager.Instance.GetParent().QueueFree();
+            IntroGameManager.Instance.GameNode.Visible = false;
 
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y);
 

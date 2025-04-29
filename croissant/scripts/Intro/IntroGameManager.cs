@@ -21,8 +21,10 @@ public partial class IntroGameManager : Node2D
 	private Timer ShootTimer = new Timer();
 	private bool CanShoot = true;
 	private Timer enemySpawnTimer;
+	private Timer ExplosionTimer;
 	public static int score = 0;
 	public static IntroGameManager Instance;
+	[Export] public Node2D GameNode;
 
 	public override void _Ready()
 	{
@@ -36,6 +38,15 @@ public partial class IntroGameManager : Node2D
 		ShootTimer.WaitTime = 0.15f;
 		ShootTimer.OneShot = true;
 		AddChild(ShootTimer);
+
+		ExplosionTimer = new Timer();
+		ExplosionTimer.WaitTime = 3f;
+		ExplosionTimer.Timeout += () =>
+		{
+			Instance.GetParent().QueueFree();
+		};
+		ExplosionTimer.OneShot = true;
+		AddChild(ExplosionTimer);
 
 		SpawnEnemy();
 	}
@@ -101,6 +112,7 @@ public partial class IntroGameManager : Node2D
 		GameExplosion.Position = new Vector2(1920 / 2, 1080 / 2);
 		Instance.AddChild(GameExplosion);
 		GameExplosion.Emitting = true;
+		Instance.ExplosionTimer.Start();
 	}
 
 	private void SpawnEnemy()
@@ -111,7 +123,7 @@ public partial class IntroGameManager : Node2D
 		Enemy.Position = new Vector2(
 			Player.Position.X + (float)Math.Cos(randAngle) * windowSize.X,
 			Player.Position.Y + (float)Math.Sin(randAngle) * windowSize.Y);
-		AddChild(Enemy);
+		GameNode.AddChild(Enemy);
 	}
 
 	private void Shoot()
@@ -121,7 +133,7 @@ public partial class IntroGameManager : Node2D
 		Node2D BulletPosition = Player.GetNode<Node2D>("BulletPosition");
 		Bullet.Position = BulletPosition.GlobalPosition;
 		Bullet.Rotation = Bullet.Position.AngleToPoint(GetGlobalMousePosition());
-		AddChild(Bullet);
+		GameNode.AddChild(Bullet);
 	}
 
 	public static void CameraShake(float intensity, float duration)
