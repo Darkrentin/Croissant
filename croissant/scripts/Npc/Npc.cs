@@ -84,6 +84,6 @@ public abstract partial class Npc : FloatWindow
 
     public bool OnSreen()
     {
-        return Position.X > 0 && Position.Y > 0 && Position.X < GameManager.ScreenSize.X && Position.Y < GameManager.ScreenSize.Y;
+        return Position.X >= 0 && Position.Y >= 0 && Position.X <= GameManager.ScreenSize.X && Position.Y <= GameManager.ScreenSize.Y;
     }
 }

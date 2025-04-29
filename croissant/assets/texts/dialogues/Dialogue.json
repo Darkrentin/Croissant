@@ -106,134 +106,135 @@
 				"anim": "Working"
 			}
 		},
-		"Virus/Helper Dialogue 1":
-		{
-			"0": {
-				"text": "AAAAAAAAH !",
-				"anim": "Angry"
-			},
-			"1": {
-				"text": "Me revoila ! la quarantaine n'est pas assez pour me retenir !",
-				"anim": "Angry"
-			},
-			"2": {
-				"text": "je vais pourvoir continuer ce que javais commencé. !",
-				"anim": "Angry"
-			},
-			"3": {
-				"text": "",
-				"anim": "Angry"
-			}
-		},
-		"Virus/Helper Dialogue 3":
-		{
-			"0": {
-				"text": "Maintenant que tu est seul plus rien ne m'empeche de detruire ton pc",
-				"anim": "Angry"
-			},
-			"1": {
-				"text": "TU POURRA PAS M'ENMPECHER DE SUPPRIMER CE DOSSIER !",
-				"anim": "Angry"
-			},
-			"2": {
-				"text": "",
-				"anim": "Angry"
-			}
-		}
+		"Virus/Helper Dialogue 1": {
+            "0": {
+                "text": "[shake rate=20 level=6][color=#ff3333]AAAAAAAAH![/color][/shake]",
+                "anim": "Angry"
+            },
+            "1": {
+                "text": "[b]I'm back![/b] Quarantine isn't enough to hold [i]me[/i]!",
+                "anim": "Angry"
+            },
+            "2": {
+                "text": "Now I can finish what I started!",
+                "anim": "Angry"
+            },
+            "3": {
+                "text": "",
+                "anim": "Angry"
+            }
+        },
+        "Virus/Helper Dialogue 3": {
+            "0": {
+                "text": "Now that you're alone, nothing can stop me from [wave amp=15 freq=5][color=#ff0000]destroying your PC![/color][/wave]",
+                "anim": "Angry"
+            },
+            "1": {
+                "text": "[shake rate=18 level=4][color=#ff0000]YOU CAN'T STOP ME FROM DELETING THIS FOLDER![/color][/shake]",
+                "anim": "Angry"
+            },
+            "2": {
+                "text": "",
+                "anim": "Angry"
+            }
+        }
 	},
 	"Helper": {
 		"Restart": {
-			"0": {
-				"text": "Salut je suis Helper.exe, le programme Anti-virus de ce PC.",
-				"anim": "Idle"
-			},
-			"1": {
-				"text": "j'ai remarqué q'un virus a infécté ton PC.",
-				"anim": "Idle"
-			},
-			"2": {
-				"text": "il a surchargé tout les processus jusqu'a ce que le PC crash",
-				"anim": "Idle"
-			},
-			"3": {
-				"text": "Heureusement j'ai pu profité du reboot du pc pour le mettre en quarantaine.",
-				"anim": "Idle"
-			},
-			"4": {
-				"text": "Cependant ça ne suffira pas à l'arrêter.",
-				"anim": "Idle"
-			},
-			"5": {
-				"text": "j'ai malheureusement pas assez de connaisance pour savoir quoi faire avec ce genre trés particulier de virus.",
-				"anim": "Idle"
-			},
-			"6": {
-				"text": "je vais devoir faire une mise à jour system pour connaitre un moyen de l'arreter.",
-				"anim": "Idle"
-			},
-			"7": {
-				"text": "cela veut dire que je vais etre désactiver pendant un temps, je vais devoir te laisser la tache de proteger ton PC le temps que je revienne.",
-				"anim": "Idle"
-			},
-			"8": {
-				"text": "",
-				"anim": "Idle"
-			}
-		},
-		"HelperTuto": {
-			"0": {
-				"text": "Voici le dossier System32, c'est le fichier le plus important de ton PC.",
-				"anim": "Idle"
-			},
-			"1": {
-				"text": "je te le laisse pour que tu puisses le proteger.",
-				"anim": "Idle"
-			},
-			"2": {
-				"text": "Comment tu peux le voir, tu peux deplacer ce dossier avec ta souris",
-				"anim": "Idle"
-			},
-			"3": {
-				"text": "Fait en sorte de le garder en lieux sur en attendant mon retour.",
-				"anim": "Idle"
-			},
-			"4": {
-				"text": "",
-				"anim": "Idle"
-			}
-		},
-		"Virus/Helper Dialogue 2":
-		{
-			"0": {
-				"text": "Le virus est déja la !",
-				"anim": "Idle"
-			},
-			"1": {
-				"text": "il a été plus rapide que je ne le pensais.",
-				"anim": "Idle"
-			},
-			"2": {
-				"text": "je vais devoir commencer la mise à jour MAINTENANT !",
-				"anim": "Idle"
-			},
-			"3": {
-				"text": "Je te laisse, Bonne chance !",
-				"anim": "Idle"
-			},
-			"4": {
-				"text": "",
-				"anim": "Idle"
-			}
-		},
-		"EndLvl2" : {
-			"0": {
-				"text": "Je suis de retour !",
-				"anim": "Idle"
-			},
-			"1": {
-				"text": "",
-				"anim": "Idle"
-			}
-		}
+            "0": {
+                "text": "Hi, I'm [color=#00ccff]Helper.exe[/color], the Anti-virus program for this PC.",
+                "anim": "Idle"
+            },
+            "1": {
+                "text": "I've noticed a virus has infected your PC.",
+                "anim": "Idle"
+            },
+            "2": {
+                "text": "It overloaded all processes until the PC crashed.",
+                "anim": "Idle"
+            },
+            "3": {
+                "text": "Luckily, I took advantage of the PC reboot to quarantine it.",
+                "anim": "Idle"
+            },
+            "4": {
+                "text": "However, that won't be enough to stop it for good.",
+                "anim": "Idle"
+            },
+            "5": {
+                "text": "Unfortunately, I don't know enough to handle this specific type of virus.",
+                "anim": "Idle"
+            },
+            "6": {
+                "text": "I'll need to perform a system update to figure out how to stop it.",
+                "anim": "Idle"
+            },
+            "7": {
+                "text": "This means I'll be temporarily disabled.",
+                "anim": "Idle"
+            },
+            "8": {
+                "text": "I'll have to entrust you with protecting your PC until I return.",
+                "anim": "Idle"
+            },
+            "9": {
+                "text": "",
+                "anim": "Idle"
+            }
+        },
+        "HelperTuto": {
+            "0": {
+                "text": "This is the System32 folder, the most important file on your PC.",
+                "anim": "Idle"
+            },
+            "1": {
+                "text": "I'm leaving it with you so you can protect it.",
+                "anim": "Idle"
+            },
+            "2": {
+                "text": "As you can see, you can move this folder with your mouse.",
+                "anim": "Idle"
+            },
+            "3": {
+                "text": "Make sure to keep it somewhere safe until I get back.",
+                "anim": "Idle"
+            },
+            "4": {
+                "text": "",
+                "anim": "Idle"
+            }
+        },
+        "Virus/Helper Dialogue 2": {
+            "0": {
+                "text": "[color=#ffaa00]The virus is already here![/color]",
+                "anim": "Idle"
+            },
+            "1": {
+                "text": "It was faster than I anticipated.",
+                "anim": "Idle"
+            },
+            "2": {
+                "text": "I need to start the update [b][color=#ff5555]RIGHT NOW![/color][/b]",
+                "anim": "Idle"
+            },
+            "3": {
+                "text": "I'm leaving now. [i]Good luck![/i]",
+                "anim": "Idle"
+            },
+            "4": {
+                "text": "",
+                "anim": "Idle"
+            }
+        },
+        "EndLvl2": {
+            "0": {
+                "text": "[color=#00ccff][b]I'm back![/b][/color]",
+                "anim": "Idle"
+            },
+            "1": {
+                "text": "",
+                "anim": "Idle"
+            }
+        }
 	}
 }

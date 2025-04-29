@@ -79,11 +79,7 @@ public static class States
         ////Lib.Print("First Virus Dialogue");
         GameManager.virus.Dialogue.StartDialogue("Virus", "sleep");
 
-        Node2D VirusSplash = VirusSplashScene.Instantiate<Node2D>();
-        VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
-        GameManager.GameRoot.AddChild(VirusSplash);
-        VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
-        VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
+        GameManager.virus.Splash();
 
         GameManager.virus.StartShake(0.5f, 10);
 

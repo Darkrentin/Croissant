@@ -98,12 +98,11 @@ public partial class DialogueWindow : FloatWindow
 		{
 			isDialogue = false;
 			Lib.Print($"Dialogue finished: {ActualDialogueName} id: {Dialogueid} Parent: {ParentWindow.NpcName}");
-			OnDialogueFinished(ActualDialogueName);
-			//text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
-			text = "";
+			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
 			label.Text = "";
 			if (anim != "")
 				ParentWindow.AnimationScreen.Travel(anim);
+			OnDialogueFinished(ActualDialogueName);
 			return;
 		}
 		label.Text = label.Text.Replace("|", "");

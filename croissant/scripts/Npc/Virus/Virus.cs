@@ -114,6 +114,10 @@ public partial class Virus : Npc
 			GameManager.State = GameManager.GameState.VirusTuto;
 			GrabFocus();
 		}
+		if(DialogueToPlayAfterTransition=="Virus/Helper Dialogue 1")
+		{
+			Splash();
+		}
 		base.TransitionFinished();
 	}
 
@@ -122,5 +126,14 @@ public partial class Virus : Npc
 		AnimationScale.Play("Blink");
 		BlinkTimer.WaitTime = Lib.GetRandomNormal(3f, 6f);
 		BlinkTimer.Start();
+	}
+
+	public void Splash()
+	{
+		Node2D VirusSplash = States.VirusSplashScene.Instantiate<Node2D>();
+        VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
+        GameManager.GameRoot.AddChild(VirusSplash);
+        VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
+        VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
 	}
 }
