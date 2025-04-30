@@ -8,7 +8,7 @@ public partial class PopUpWindow : FloatWindow
     public override void _Ready()
     {
         base._Ready();
-        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.9f), Lib.GetRandomNormal(0f, 0.9f)));
+        SetWindowPosition(Lib.GetScreenPosition(Lib.GetRandomNormal(0f, 0.9f), Lib.GetRandomNormal(0.1f, 0.9f)));
         if (HasChangingTitle)
         {
             TitleTimer = new Timer

@@ -16,5 +16,5 @@ EnemyWindows = Array[PackedScene]([ExtResource("4_eyjwi"), ExtResource("4_ldj83"
 EnimyWindowsWeights = PackedInt32Array(3, 5, 10, 15)
 NumberOfEnemy = 4
 SpawnNode = NodePath("..")
-CurrentWaveMaxPoints = 3
+WaveResetTime = Vector2(0.5, 1.5)
 IncreasePoints = 2

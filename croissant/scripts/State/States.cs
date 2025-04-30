@@ -125,6 +125,7 @@ public static class States
                 GameManager.State = GameManager.GameState.Void;
                 break;
             case 6:
+                GameManager.virus.Dialogue.LockSkip = false;
                 GameManager.virus.Dialogue.StartDialogue("Virus", "tutoEnd");
                 GameManager.State = GameManager.GameState.Void;
                 break;
