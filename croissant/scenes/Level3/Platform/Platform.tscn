@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://dyjib31ak5lxc"]
+
+[ext_resource type="Script" uid="uid://bqu5egkm51ssa" path="res://scripts/Level3/Platform/Platform.cs" id="1_oxpu6"]
+[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="2_4mjje"]
+[ext_resource type="Texture2D" uid="uid://1sbqbykep51h" path="res://assets/sprites/virus/uwu.png" id="3_4mjje"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mjje"]
+size = Vector2(256, 208)
+
+[node name="Platform" type="Node2D" node_paths=PackedStringArray("area", "window")]
+script = ExtResource("1_oxpu6")
+area = NodePath("Area2D")
+window = NodePath("Window")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(128, 96)
+scale = Vector2(0.0568889, 0.064)
+texture = ExtResource("2_4mjje")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(128, -8)
+scale = Vector2(0.4, 0.0333333)
+texture = ExtResource("3_4mjje")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(128, 88)
+shape = SubResource("RectangleShape2D_4mjje")
+
+[node name="Window" type="Window" parent="."]
+visible = false

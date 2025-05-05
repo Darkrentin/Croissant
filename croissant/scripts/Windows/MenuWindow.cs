@@ -82,4 +82,5 @@ public partial class MenuWindow : FloatWindow
 		DebugMode = toggled;
 		MainWindow.DebugInfo.Visible = DebugMode;
 	}
+		
 }
