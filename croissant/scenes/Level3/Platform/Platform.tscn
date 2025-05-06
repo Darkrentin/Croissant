@@ -2,31 +2,30 @@
 
 [ext_resource type="Script" uid="uid://bqu5egkm51ssa" path="res://scripts/Level3/Platform/Platform.cs" id="1_oxpu6"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="2_4mjje"]
-[ext_resource type="Texture2D" uid="uid://1sbqbykep51h" path="res://assets/sprites/virus/uwu.png" id="3_4mjje"]
+[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_tveni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mjje"]
-size = Vector2(256, 208)
+size = Vector2(120, 120)
 
-[node name="Platform" type="Node2D" node_paths=PackedStringArray("area", "window")]
+[node name="Platform" type="CharacterBody2D" node_paths=PackedStringArray("window", "attackWindows")]
 script = ExtResource("1_oxpu6")
-area = NodePath("Area2D")
 window = NodePath("Window")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(128, 96)
-scale = Vector2(0.0568889, 0.064)
-texture = ExtResource("2_4mjje")
-
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(128, -8)
-scale = Vector2(0.4, 0.0333333)
-texture = ExtResource("3_4mjje")
-
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(128, 88)
-shape = SubResource("RectangleShape2D_4mjje")
+attackWindows = []
 
 [node name="Window" type="Window" parent="."]
-visible = false
+size = Vector2i(120, 120)
+script = ExtResource("2_tveni")
+Minimizable = false
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_4mjje")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_4mjje")

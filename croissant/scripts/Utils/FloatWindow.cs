@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class FloatWindow : Window
@@ -31,6 +32,8 @@ public partial class FloatWindow : Window
 	public int TitleBarHeight { get { return DisplayServer.WindowGetSizeWithDecorations(WindowId).Y - DisplayServer.WindowGetSize(WindowId).Y; } }
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }
 	public Rect2I WindowRect;
+
+	public Action DeleteWindow;
 
 	public override void _Ready()
 	{
@@ -262,7 +265,10 @@ public partial class FloatWindow : Window
 		return clampedPosition == newPosition;
 	}
 
-	public virtual void OnClose() { }
+	public virtual void OnClose()
+	{
+		DeleteWindow();
+	}
 
 	public virtual void TransitionFinished() { }
 

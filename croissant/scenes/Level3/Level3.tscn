@@ -8,11 +8,15 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7smpx"]
 size = Vector2(3881, 342)
 
-[node name="Level3" type="Node2D"]
+[node name="Level3" type="Window"]
+transparent_bg = true
+mode = 3
+position = Vector2i(0, 36)
+size = Vector2i(1000, 1000)
+borderless = true
+always_on_top = true
+transparent = true
 script = ExtResource("1_pl275")
-
-[node name="Player" parent="." instance=ExtResource("1_7smpx")]
-position = Vector2(1763, 653)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
@@ -27,5 +31,8 @@ position = Vector2(7.99994, 16)
 scale = Vector2(3.70873, 0.901747)
 texture = ExtResource("2_xr4r7")
 
+[node name="Player" parent="." instance=ExtResource("1_7smpx")]
+position = Vector2(1763, 653)
+
 [node name="Platform" parent="." instance=ExtResource("3_apgcq")]
-position = Vector2(40.275, 61.67)
+position = Vector2(500, 500)

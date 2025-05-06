@@ -153,7 +153,7 @@ public partial class AttackWindow : FloatWindow
 
     public void Delete()
     {
-        Parent.WaveManager.EnemyDefeated();
+        OnClose();
         GameManager.GameRoot.RemoveChild(VisualCollision);
         //GameManager.Windows.Remove(this);
         VisualCollision.QueueFree();

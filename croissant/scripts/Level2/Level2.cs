@@ -14,15 +14,16 @@ public partial class Level2 : Node2D
 			CursorWindow = States.CursorWindowScene.Instantiate<CursorWindow>();
 			GameManager.GameRoot.AddChild(CursorWindow);
 		}
+		WaveManager.EndWave+=NextLvl;
 	}
 
 	public override void _Process(double delta)
 	{
-		const int MaxWave = 10;
-		if (WaveManager.CurrentWave > MaxWave)
-		{
-			GameManager.State = GameManager.GameState.HelperDialogue1;
-			QueueFree();
-		}
+	}
+
+	public void NextLvl()
+	{
+		GameManager.State = GameManager.GameState.HelperDialogue1;
+		QueueFree();
 	}
 }

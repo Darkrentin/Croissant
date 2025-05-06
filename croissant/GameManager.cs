@@ -86,14 +86,12 @@ public partial class GameManager : Node2D
         GameRoot.AddChild(virus);
         virus.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
         virus.ForceDialoguePlacement = true;
-        virus.Dialogue.PlaceDialogueWindow();
         virus.On = false;
 
         helper = States.HelperScene.Instantiate<Helper>();
         GameRoot.AddChild(helper);
         helper.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
         helper.ForceDialoguePlacement = true;
-        helper.Dialogue.PlaceDialogueWindow();
 
         //virus.Visible = false;
         //helper.Visible = false;

@@ -32,8 +32,8 @@ public abstract partial class Npc : FloatWindow
     {
         Lib.Print($"Npc : {NpcName} initialized DialogueId :{DialogueWindow.Dialogueid}");
         AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
-        Dialogue.PlaceDialogueWindow();
-        ForceDialoguePlacement = false;
+        Dialogue.Position = -Dialogue.Size*2;
+        ForceDialoguePlacement = true;
 
         LeftDown = new Vector2I(0, GameManager.ScreenSize.Y - Size.Y);
         RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);

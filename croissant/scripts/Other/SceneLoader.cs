@@ -2,6 +2,7 @@ using Godot;
 
 public partial class SceneLoader : Node
 {
+	public static SceneLoader Instance; 
 	[Export] public PackedScene DifficultyScene;
 	[Export] public PackedScene IntroGameScene;
 	[Export] public PackedScene Level1Scene;
@@ -17,10 +18,14 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene VirusSplashScene;
 	[Export] public PackedScene BsodScene;
 	[Export] public PackedScene CursorWindowScene;
+	[Export] public PackedScene LaserWindowScene;
+	[Export] public PackedScene ExtendWindowScene;
+	[Export] public PackedScene CompressWindowScene;
+	[Export] public PackedScene FlappyWindowScene;
 
 	public override void _Ready()
 	{
-
+		SceneLoader.Instance = this;
 	}
 
 	public override void _Process(double delta)
