@@ -23,6 +23,11 @@ public partial class MenuWindow : FloatWindow
 
 		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
 		DebugButton.Toggled += DebugButtonToggled;
+		FakeDesktop = GameManager.SaveData.FakeDesktop;
+		DebugMode = GameManager.SaveData.DebugMode;
+
+		FakeDesktopButton.ButtonPressed = FakeDesktop;
+		DebugButton.ButtonPressed = DebugMode;
 	}
 
 	public override void _Process(double delta)
@@ -43,6 +48,11 @@ public partial class MenuWindow : FloatWindow
 			////Lib.Print("Close Minimized");
 			Close();
 		}
+
+		if(FakeDesktop && !MainWindow.FakeBackground.Visible)
+			FakeDesktopButtonToggled(FakeDesktop);
+		if(DebugMode && !MainWindow.DebugInfo.Visible)
+			DebugButtonToggled(DebugMode);
 	}
 
 	public void Close()
@@ -62,6 +72,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void _on_quit_button_pressed()
 	{
+		GameManager.SaveData.Save();
 		GetTree().Quit();
 	}
 
@@ -74,6 +85,8 @@ public partial class MenuWindow : FloatWindow
 	public void FakeDesktopButtonToggled(bool toggled)
 	{
 		FakeDesktop = toggled;
+		if(MainWindow.FakeBackground == null)
+			return;
 		MainWindow.FakeBackground.Visible = FakeDesktop;
 	}
 

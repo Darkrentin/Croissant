@@ -10,7 +10,7 @@ Lvl 1 :
 - Ajouter un type de fenetre qui se téléporte toutes les 0.8s aléatoirement sur l'écran : la TeleportWindow
 
 Lvl 2 :
-- Faire un système de vagues où on peut choisir les fenetres qui vont pop
+- Faire un système de vagues où on peut choisir les fenetres qui vont pop @done
 - Ajouter un shader sur la visualisation des hitboxes pour qu'ils ondulent un peu en mode ondulations de perlin noise
 - Ajouter 2 nouveaux types de fenêtres pour arriver à 6
 - Trouver une dissotiation logique pour les 3 fenetres de couleurs primaires (R,G,B) et les 3 fenetres de couleurs additive

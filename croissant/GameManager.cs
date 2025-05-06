@@ -11,7 +11,7 @@ public partial class GameManager : Node2D
     [Export] public float difficulty { get => _difficulty; set => _difficulty = value; }
     [Export] public GameState ExportState { get => _state; set => _state = value; }
     private static float _difficulty = 1f;
-    private static GameState _state = GameState.Difficulty; // 0 : normal, -1 : debug
+    private static GameState _state = GameState.Difficulty;
     public static float Difficulty { get => _difficulty; private set => _difficulty = value; }
     public static Node2D GameRoot;
     public static GameState State { get => _state; set { _state = value; StateChange(_state); } }
@@ -20,6 +20,8 @@ public partial class GameManager : Node2D
     public static MenuWindow MenuWindow;
     public static Virus virus;
     public static Helper helper;
+    public static SaveData SaveData;
+    public static bool HaveFinishTheGameAtLeastOneTime = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
     public static bool ShakeAllWindows = false;
@@ -69,6 +71,7 @@ public partial class GameManager : Node2D
     public override void _Ready()
     {
         GameRoot = this;
+        LoadSave();
         AddFixWindow();
         InitMainWindow();
         // Le reste du code _Ready existant
@@ -95,6 +98,22 @@ public partial class GameManager : Node2D
 
         //virus.Visible = false;
         //helper.Visible = false;
+    }
+
+    public void LoadSave()
+    {
+        SaveData = SaveData.LoadData();
+        if(SaveData == null)
+        {
+            SaveData = new SaveData();
+            SaveData.Save();
+            Lib.Print("SaveData is null, creating a new one.");
+        }
+        else
+        {
+            Difficulty = SaveData.Difficulty;
+            HaveFinishTheGameAtLeastOneTime = SaveData.HaveFinishTheGameAtLeastOneTime;
+        }
     }
 
     private void InitializeGame()
