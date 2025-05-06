@@ -1,15 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=4 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://810np22fqce" path="res://scenes/Windows/MenuWindow.tscn" id="2_uu6xs"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="3_r0du0"]
-[ext_resource type="PackedScene" uid="uid://hca4ftw22ecd" path="res://scenes/Level3/Level3.tscn" id="4_cm0pq"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_uu6xs")
 difficulty = 0.5
-ExportState = 13
+ExportState = 10
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
 visible = false
@@ -42,5 +41,3 @@ anchor_bottom = 0.415
 offset_right = -0.640015
 offset_bottom = -0.200012
 text = "Test"
-
-[node name="Level3" parent="." instance=ExtResource("4_cm0pq")]

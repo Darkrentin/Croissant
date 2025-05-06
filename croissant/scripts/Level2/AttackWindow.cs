@@ -67,9 +67,8 @@ public partial class AttackWindow : FloatWindow
         }
     }
 
-    public void ShowVisualCollision(Vector2I size, Vector2 position, Color color)
+    public void ShowVisualCollision(Vector2I size, Vector2 position)
     {
-        VisualCollision.Color = new Color(color, 0f);
         VisualCollision.duration = 1f;
         VisualCollision.elapsedTime = 0f;
         VisualCollision.Position = position - TitleBarSize;

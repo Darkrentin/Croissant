@@ -9,7 +9,10 @@ public partial class CompressWindow : AttackWindow
 
 	public override void _Ready()
 	{
+		
 		base._Ready();
+		VisualCollision.Color = Colors.Yellow;
+		ConnectedWindow.VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.Timer.Stop();
 	}
 
@@ -83,8 +86,8 @@ public partial class CompressWindow : AttackWindow
 		IsResizing = false;
 		ConnectedWindow.IsResizing = false;
 
-		ShowVisualCollision(targetSize, targetPosition, Colors.Yellow);
-		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, Colors.Yellow);
+		ShowVisualCollision(targetSize, targetPosition);
+		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();

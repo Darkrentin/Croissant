@@ -38,4 +38,3 @@ Autres :
 - Faire une version infinie du intro game à la fin du jeu
 - Commenter le code
 - Optimiser le code
-

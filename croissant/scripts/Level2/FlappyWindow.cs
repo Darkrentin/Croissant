@@ -9,7 +9,10 @@ public partial class FlappyWindow : AttackWindow
 
 	public override void _Ready()
 	{
+		
 		base._Ready();
+		VisualCollision.Color = Colors.Magenta;
+		ConnectedWindow.VisualCollision.Color = Colors.Magenta;
 		ConnectedWindow.Timer.Stop();
 		int r = Lib.rand.Next(0, 3);
 		switch (r)
@@ -82,7 +85,7 @@ public partial class FlappyWindow : AttackWindow
 			targetSize = new Vector2I(GameManager.ScreenSize.X, targetSize.Y);
 			targetPosition = Vector2I.Zero;
 
-			ShowVisualCollision(targetSize, targetPosition, Colors.Magenta);
+			ShowVisualCollision(targetSize, targetPosition);
 		}
 
 		if (ConnectedWindow.Visible)
@@ -93,7 +96,7 @@ public partial class FlappyWindow : AttackWindow
 			targetSize2 = new Vector2I(GameManager.ScreenSize.X, targetSize2.Y);
 			targetPosition2 = new Vector2I(0, GameManager.ScreenSize.Y - targetSize2.Y);
 
-			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, Colors.Magenta);
+			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
 		}
 
 		Timer.WaitTime = ShakeTime;

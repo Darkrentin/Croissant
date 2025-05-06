@@ -7,7 +7,9 @@ public partial class ExtendWindow : AttackWindow
 
 	public override void _Ready()
 	{
+		
 		base._Ready();
+		VisualCollision.Color = Colors.Red;
 	}
 
 	public override void _Process(double delta)
@@ -36,7 +38,7 @@ public partial class ExtendWindow : AttackWindow
 
 		TargetSize = Size + Lib.GetScreenSize(0.2f, 0.2f);
 		//Vector2I targetPosition = Position + (Size / 2) - (TargetSize / 2);
-		ShowVisualCollision(TargetSize, StartResize(TargetSize, -1f), Colors.Red);
+		ShowVisualCollision(TargetSize, StartResize(TargetSize, -1f));
 		IsResizing = false;
 
 		Timer.WaitTime = ShakeTime;

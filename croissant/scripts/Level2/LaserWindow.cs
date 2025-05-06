@@ -9,7 +9,9 @@ public partial class LaserWindow : AttackWindow
 
 	public override void _Ready()
 	{
+		
 		base._Ready();
+		VisualCollision.Color = Colors.Cyan;
 	}
 
 	public override void _Process(double delta)
@@ -105,7 +107,7 @@ public partial class LaserWindow : AttackWindow
 			nsize = Math.Min(GameManager.ScreenSize.X, GameManager.ScreenSize.Y);
 		(Vector2I targetSize, Vector2I targetPosition) = CallResize(nsize, -1f);
 		IsResizing = false;
-		ShowVisualCollision(targetSize, targetPosition, Colors.Cyan);
+		ShowVisualCollision(targetSize, targetPosition);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
