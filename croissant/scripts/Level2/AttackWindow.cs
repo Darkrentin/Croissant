@@ -63,14 +63,14 @@ public partial class AttackWindow : FloatWindow
         }
         else
         {
-            GD.Print("Disabled");
             Timer.Stop();
         }
     }
 
-    public void ShowVisualCollision(Vector2I size, Vector2 position, float duration = 0.5f)
+    public void ShowVisualCollision(Vector2I size, Vector2 position, Color color)
     {
-        VisualCollision.duration = duration;
+        VisualCollision.Color = new Color(color, 0f);
+        VisualCollision.duration = 1f;
         VisualCollision.elapsedTime = 0f;
         VisualCollision.Position = position - TitleBarSize;
         VisualCollision.Size = size + TitleBarSize;
