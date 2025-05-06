@@ -88,4 +88,13 @@ public static class Lib
 
         return new string(chars);
     }
+
+    public static float Distance(Vector2I a, Vector2I b)
+    {
+        return (float)Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+    }
+    public static float Distance(Vector2 a, Vector2 b)
+    {
+        return (float)Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+    }
 }
