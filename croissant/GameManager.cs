@@ -103,10 +103,10 @@ public partial class GameManager : Node2D
     public void LoadSave()
     {
         SaveData = SaveData.LoadData();
-        if(SaveData == null)
+        if (SaveData == null)
         {
             SaveData = new SaveData();
-            SaveData.Save();
+            //SaveData.Save();
             Lib.Print("SaveData is null, creating a new one.");
         }
         else

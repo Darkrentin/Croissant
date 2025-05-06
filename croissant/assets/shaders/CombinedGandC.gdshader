@@ -1,9 +1,9 @@
 shader_type canvas_item;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 
-uniform vec2 r_displacement = vec2(-2.0, -2.0);
+uniform vec2 r_displacement = vec2(-3.0, -3.0);
 uniform vec2 g_displacement = vec2(0.0, 0.0);
-uniform vec2 b_displacement = vec2(2.0, 2.0);
+uniform vec2 b_displacement = vec2(3.0, 3.0);
 
 uniform float shake_power = 0; //0.03
 uniform float shake_rate : hint_range(0.0, 1.0) = 0; //0.2
@@ -33,8 +33,10 @@ void fragment()
 
     float final_alpha = max(max(a_r * r, a_g * g), a_b * b);
 
-    if (enable_shift > 0.5) {
-        r = mix(
+    if (enable_shift > 0.5)
+    {
+        r = mix
+        (
             r,
             texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement) + vec2(shake_color_rate, 0.0), 0.0).r,
             enable_shift

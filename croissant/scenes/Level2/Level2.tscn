@@ -1,9 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://d13xxxigq3m7y"]
+[gd_scene load_steps=9 format=3 uid="uid://d13xxxigq3m7y"]
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
 [ext_resource type="PackedScene" uid="uid://b4i4iwr3qk44x" path="res://scenes/WaveManager/WaveManager.tscn" id="2_qsvqe"]
 [ext_resource type="PackedScene" uid="uid://baual4txy33sp" path="res://scenes/Level2/WaveDataLevel2.tscn" id="3_eyjwi"]
 [ext_resource type="PackedScene" uid="uid://bjgcj0eb3671" path="res://scenes/WaveManager/Wave.tscn" id="4_8crk8"]
+[ext_resource type="Shader" uid="uid://bftao4rpwgs0w" path="res://assets/shaders/Wavy.gdshader" id="5_8crk8"]
+[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_s1ih2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qsvqe"]
+shader = ExtResource("5_s1ih2")
+shader_parameter/r_displacement = Vector2(-2, -2)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(2, 2)
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 0.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_s1ih2"]
+shader = ExtResource("5_8crk8")
+shader_parameter/amplitude = 0.008
+shader_parameter/frequency = 20.0
+shader_parameter/speed = 5.0
+shader_parameter/time_offset = 0.0
+shader_parameter/random_strength = 0.1
+shader_parameter/random_seed = Vector2(12.9898, 78.233)
 
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("WaveManager")]
 script = ExtResource("1_u87iq")
@@ -55,3 +77,21 @@ NextWave = NodePath("../Wave10")
 
 [node name="Wave10" parent="WaveManager" instance=ExtResource("4_8crk8")]
 id = 10
+
+[node name="ShaderCanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ChromaticAberration" type="ColorRect" parent="ShaderCanvasLayer"]
+material = SubResource("ShaderMaterial_qsvqe")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Wavy" type="ColorRect" parent="ShaderCanvasLayer"]
+material = SubResource("ShaderMaterial_s1ih2")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

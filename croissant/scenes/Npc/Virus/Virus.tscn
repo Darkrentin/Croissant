@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cysnokpyl38ma" path="res://scripts/Npc/Virus/Virus.cs" id="1_hbnjr"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_baseColor.png" id="2_g2kwp"]
-[ext_resource type="Shader" uid="uid://c7ny7bh0v6chr" path="res://assets/shaders/VHSEffect.gdshader" id="3_pgs5n"]
+[ext_resource type="Shader" uid="uid://c7ny7bh0v6chr" path="res://assets/shaders/VHS.gdshader" id="3_pgs5n"]
 [ext_resource type="Texture2D" uid="uid://bd12vap3lhkxj" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_metallicRoughness.png" id="3_yhxpa"]
 [ext_resource type="Texture2D" uid="uid://bx3xixfeuwwap" path="res://assets/sprites/virus/computer3D/textures/PC9801UX.001_normal.png" id="4_kbwjh"]
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/sprites/virus/computer3D/textures/PCKD854n.001_baseColor.png" id="6_c3fl0"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
 [ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
+
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3

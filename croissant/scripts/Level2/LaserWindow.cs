@@ -9,9 +9,9 @@ public partial class LaserWindow : AttackWindow
 
 	public override void _Ready()
 	{
-		
+
 		base._Ready();
-		VisualCollision.Color = Colors.Cyan;
+		VisualCollision.Color = Colors.Magenta;
 	}
 
 	public override void _Process(double delta)

@@ -9,10 +9,10 @@ public partial class FlappyWindow : AttackWindow
 
 	public override void _Ready()
 	{
-		
+
 		base._Ready();
-		VisualCollision.Color = Colors.Magenta;
-		ConnectedWindow.VisualCollision.Color = Colors.Magenta;
+		VisualCollision.Color = Colors.Cyan;
+		ConnectedWindow.VisualCollision.Color = Colors.Cyan;
 		ConnectedWindow.Timer.Stop();
 		int r = Lib.rand.Next(0, 3);
 		switch (r)

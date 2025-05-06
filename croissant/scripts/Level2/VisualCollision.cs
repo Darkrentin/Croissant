@@ -4,15 +4,10 @@ public partial class VisualCollision : ColorRect
 {
 	public float duration;
 	public float elapsedTime = 0f;
-	public static int nbOfInstances = 0;
-	public ShaderMaterial Shader;
-	public int id = 0;
 
 	public override void _Ready()
 	{
-		nbOfInstances++;
-		id = nbOfInstances;
-		Shader = ((ShaderMaterial)Material);
+
 	}
 
 	public override void _Process(double delta)
@@ -21,7 +16,8 @@ public partial class VisualCollision : ColorRect
 		{
 			elapsedTime += (float)delta;
 			//Color = new Color(Color.R, Color.G, Color.B, Mathf.Lerp(0f, 1f, elapsedTime / duration));
-			Shader.SetShaderParameter("col", new Color(Color.R, Color.G, Color.B, Mathf.Lerp(0f, 1f, elapsedTime / duration)));
+			((ShaderMaterial)Material).SetShaderParameter("col", new Color(Color.R, Color.G, Color.B, Mathf.Lerp(0f, 0.75f, elapsedTime / duration)));
+			((ShaderMaterial)Material).SetShaderParameter("mult", Mathf.Lerp(3f, 0.8f, elapsedTime / duration));
 		}
 		else
 		{

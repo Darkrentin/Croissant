@@ -9,12 +9,12 @@ public partial class Level2 : Node2D
 	public override void _Ready()
 	{
 		Instance = this;
-		if(CursorWindow == null)
+		if (CursorWindow == null)
 		{
 			CursorWindow = States.CursorWindowScene.Instantiate<CursorWindow>();
 			GameManager.GameRoot.AddChild(CursorWindow);
 		}
-		WaveManager.EndWave+=NextLvl;
+		WaveManager.EndWave += NextLvl;
 	}
 
 	public override void _Process(double delta)

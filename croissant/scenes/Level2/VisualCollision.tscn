@@ -1,12 +1,14 @@
 [gd_scene load_steps=4 format=3 uid="uid://chuegp025s2xl"]
 
-[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/DithemingShader.gdshader" id="1_s50o0"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="1_s50o0"]
 [ext_resource type="Script" uid="uid://cb1q4xtqraqkh" path="res://scripts/Level2/VisualCollision.cs" id="1_t1cuy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_s50o0"]
 resource_local_to_scene = true
 shader = ExtResource("1_s50o0")
+shader_parameter/scale = 3.0
 shader_parameter/col = Vector4(0, 0, 0, 1)
+shader_parameter/mult = 1.0
 
 [node name="VisualCollision" type="ColorRect"]
 material = SubResource("ShaderMaterial_s50o0")
