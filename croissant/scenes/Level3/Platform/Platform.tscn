@@ -5,17 +5,19 @@
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_tveni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mjje"]
+resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="Platform" type="CharacterBody2D" node_paths=PackedStringArray("window", "attackWindows")]
+[node name="Platform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
 script = ExtResource("1_oxpu6")
 window = NodePath("Window")
-attackWindows = []
+shape = SubResource("RectangleShape2D_4mjje")
+collisionShape = NodePath("CollisionShape2D")
 
 [node name="Window" type="Window" parent="."]
+position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 script = ExtResource("2_tveni")
-Minimizable = false
 
 [node name="TextureRect" type="TextureRect" parent="Window"]
 anchors_preset = 15

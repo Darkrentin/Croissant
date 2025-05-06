@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://hca4ftw22ecd"]
+[gd_scene load_steps=8 format=3 uid="uid://hca4ftw22ecd"]
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
@@ -7,6 +7,10 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7smpx"]
 size = Vector2(3881, 342)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k31tl"]
+resource_local_to_scene = true
+size = Vector2(520, 150)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
 size = Vector2(426, 274)
@@ -37,12 +41,14 @@ texture = ExtResource("2_xr4r7")
 position = Vector2(1763, 653)
 
 [node name="Platform" parent="." instance=ExtResource("3_apgcq")]
-position = Vector2(500, 500)
+position = Vector2(784, 344)
 motion_mode = 1
+shape = SubResource("RectangleShape2D_k31tl")
 
 [node name="Platform2" parent="." instance=ExtResource("3_apgcq")]
 position = Vector2(1000, 500)
 motion_mode = 1
+shape = null
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 

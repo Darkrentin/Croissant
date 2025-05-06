@@ -24,9 +24,9 @@ Lvl 3 :
 Autres :
 - Faire le Helper
 - Vérifier le texte du Helper de Corentin
-- Ajouter un système de timer pour l'entièreté du jeu, avec un nouvelle scène de fin du jeu et le temps qu'on a mis pour le finir
-- Ajouter un système de variables globales qui se stockent sur l'ordinateur : volume des sons, volume de la musique, si le joueur à terminé une fois le jeu, son meilleur temps
-- Ajouter le timer dans la main window en haut à droite mais seulement quand il a terminé le jeu une fois
+- Ajouter un système de timer pour l'entièreté du jeu, avec un nouvelle scène de fin du jeu et le temps qu'on a mis pour le finir @done
+- Ajouter un système de variables globales qui se stockent sur l'ordinateur : volume des sons, volume de la musique, si le joueur à terminé une fois le jeu, son meilleur temps @done
+- Ajouter le timer dans la main window en haut à droite mais seulement quand il a terminé le jeu une fois @done
 - Ajouter des sons au jeu
 - Ajouter des musiques au jeu
 - Ajouter un son à la Undertale quand le virus et le Helper parle, avec des voix différentes en faisant varier légèrement le pitch
