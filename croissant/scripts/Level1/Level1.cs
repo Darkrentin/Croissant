@@ -146,7 +146,7 @@ public partial class Level1 : Node2D
             Instance.AddChild(window);
             Instance.Windows.Add(window);
         }
-        else if (i == 7 || i == 8 || i == 13 || i == 17)
+        else if (i == 7 || i == 12 || i == 13 || i == 17)
         {
             TimerWindow window = Instance.TimerWindowScene.Instantiate<TimerWindow>();
             Instance.AddChild(window);
