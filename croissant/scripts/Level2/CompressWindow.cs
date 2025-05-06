@@ -83,8 +83,8 @@ public partial class CompressWindow : AttackWindow
 		IsResizing = false;
 		ConnectedWindow.IsResizing = false;
 
-		ShowVisualCollision(targetSize, targetPosition, ShakeTime);
-		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, ShakeTime);
+		ShowVisualCollision(targetSize, targetPosition, Colors.Yellow);
+		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, Colors.Yellow);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();

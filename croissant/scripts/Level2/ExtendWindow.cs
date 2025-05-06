@@ -36,7 +36,7 @@ public partial class ExtendWindow : AttackWindow
 
 		TargetSize = Size + Lib.GetScreenSize(0.2f, 0.2f);
 		//Vector2I targetPosition = Position + (Size / 2) - (TargetSize / 2);
-		ShowVisualCollision(TargetSize, StartResize(TargetSize, -1f), ShakeTime);
+		ShowVisualCollision(TargetSize, StartResize(TargetSize, -1f), Colors.Red);
 		IsResizing = false;
 
 		Timer.WaitTime = ShakeTime;
