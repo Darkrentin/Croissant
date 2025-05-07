@@ -44,6 +44,8 @@ public partial class Maze : Node3D
     {
 
         MazeData[r, c] = 0;
+		if(Lib.rand.Next(0, 2) == 0)
+			MazeData[r, c] = 2; // Lamp
 
         int[] directions = { 0, 1, 2, 3 }; // 0:N, 1:E, 2:S, 3:W
         Lib.rand.Shuffle(directions);
@@ -98,7 +100,7 @@ public partial class Maze : Node3D
                     wall.Position = new Vector3(nx, 0, nz) * WallSize;
                     AddChild(wall);
                 }
-                if (MazeData[i, j] == 0)
+                else if (MazeData[i, j] == 2)
                 {
                     int nx = i - MazeSize / 2;
                     int nz = j - MazeSize / 2;
@@ -106,6 +108,16 @@ public partial class Maze : Node3D
                     lamp.Position = new Vector3(nx, 0, nz) * WallSize;
                     AddChild(lamp);
                 }
+
+				if(MazeData[i, j] == 0 || MazeData[i, j] == 2)
+				{
+					int nx = i - MazeSize / 2;
+					int nz = j - MazeSize / 2;
+					Node3D floor = WallScene.Instantiate<Node3D>();
+					floor.Position = new Vector3(nx, 0, nz) * WallSize;
+					floor.Position += new Vector3(0, -WallSize, 0);
+					AddChild(floor);
+				}
             }
         }
     }
