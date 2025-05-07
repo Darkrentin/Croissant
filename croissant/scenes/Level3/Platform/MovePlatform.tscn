@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://uhnhsc4jvdgm"]
+
+[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="1_p3h6d"]
+[ext_resource type="Script" uid="uid://ug8rmjlf4rth" path="res://scripts/Level3/Platform/MovePlatform.cs" id="1_xf3iu"]
+[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="2_xf3iu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3h6d"]
+resource_local_to_scene = true
+size = Vector2(120, 120)
+
+[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
+script = ExtResource("1_xf3iu")
+window = NodePath("Window")
+collisionShape = NodePath("CollisionShape2D")
+
+[node name="Window" type="Window" parent="."]
+auto_translate_mode = 1
+size = Vector2i(120, 120)
+script = ExtResource("1_p3h6d")
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_xf3iu")
+expand_mode = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(60, 60)
+shape = SubResource("RectangleShape2D_p3h6d")

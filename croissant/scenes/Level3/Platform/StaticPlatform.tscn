@@ -1,23 +1,21 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyjib31ak5lxc"]
 
-[ext_resource type="Script" uid="uid://bqu5egkm51ssa" path="res://scripts/Level3/Platform/Platform.cs" id="1_oxpu6"]
-[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="2_4mjje"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_tveni"]
+[ext_resource type="Script" uid="uid://dl8bhkrsc3ujq" path="res://scripts/Level3/Platform/StaticPlatform.cs" id="1_paa4m"]
+[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_l0hd8"]
+[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="3_hfmd4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mjje"]
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="Platform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
-script = ExtResource("1_oxpu6")
+[node name="StaticPlateform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
+script = ExtResource("1_paa4m")
 window = NodePath("Window")
-shape = SubResource("RectangleShape2D_4mjje")
 collisionShape = NodePath("CollisionShape2D")
 
 [node name="Window" type="Window" parent="."]
-position = Vector2i(0, 36)
 size = Vector2i(120, 120)
-script = ExtResource("2_tveni")
+script = ExtResource("2_l0hd8")
 
 [node name="TextureRect" type="TextureRect" parent="Window"]
 anchors_preset = 15
@@ -25,7 +23,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_4mjje")
+texture = ExtResource("3_hfmd4")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

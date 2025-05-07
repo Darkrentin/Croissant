@@ -1,14 +1,14 @@
 using Godot;
 using System;
 using System.Security.Principal;
-// using System.Drawing; // Peut être supprimé si FloatWindow et Lib utilisent les types Godot Vector2I
+
 public partial class Platform : CharacterBody2D
 {
     [Export] public FloatWindow window;
     public bool Pressed = false;
     public Vector2 MouseOffset;
     public Level3 level3;
-    [Export] public RectangleShape2D shape;
+    public RectangleShape2D shape;
     [Export] public CollisionShape2D collisionShape;
 
     [Export] public Vector2 BaseSpeeds = new Vector2(20f, 20f);
@@ -18,7 +18,7 @@ public partial class Platform : CharacterBody2D
 
     private Vector2 currentAppliedSpeeds;
 
-    [Export] public bool Freeze = false;
+    [Export] public bool Freeze = true;
 
     public override void _Ready()
     {
@@ -27,11 +27,12 @@ public partial class Platform : CharacterBody2D
         level3 = (Level3)GetParent();
         level3.MouseEvent+=MouseEvent;
 
+        shape = collisionShape.Shape as RectangleShape2D;
+
         shape.Size = (Vector2I)shape.Size;
         currentAppliedSpeeds = BaseSpeeds;
-        collisionShape.Position = shape.Size / 2;
-        Position -= shape.Size * (new Vector2I(1,0)) / 2;
         window.Size = (Vector2I)shape.Size;
+        window.Position = (Vector2I)GlobalPosition;
     }
 
     public override void _PhysicsProcess(double delta)

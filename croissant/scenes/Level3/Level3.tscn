@@ -1,19 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://hca4ftw22ecd"]
+[gd_scene load_steps=10 format=3 uid="uid://hca4ftw22ecd"]
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
 [ext_resource type="Texture2D" uid="uid://b8u718jpkuqn0" path="res://assets/Level3/staticwindow.png" id="2_xr4r7"]
-[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/Platform.tscn" id="3_apgcq"]
+[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="3_apgcq"]
+[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="5_k31tl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7smpx"]
 size = Vector2(3881, 342)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
+resource_local_to_scene = true
+size = Vector2(120, 384)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k31tl"]
 resource_local_to_scene = true
-size = Vector2(520, 150)
+size = Vector2(768, 120)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
-size = Vector2(426, 274)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0j7d"]
+resource_local_to_scene = true
+size = Vector2(184, 120)
 
 [node name="Level3" type="Window"]
 transparent_bg = true
@@ -25,12 +31,12 @@ transparent = true
 script = ExtResource("1_pl275")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-visible = false
-position = Vector2(73, 471)
+position = Vector2(232, 472)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(1713, 550)
 shape = SubResource("RectangleShape2D_7smpx")
+debug_color = Color(0, 0.6, 0.701961, 0.588235)
 
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D/CollisionShape2D"]
 position = Vector2(7.99994, 16)
@@ -40,18 +46,27 @@ texture = ExtResource("2_xr4r7")
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(1763, 653)
 
-[node name="Platform" parent="." instance=ExtResource("3_apgcq")]
-position = Vector2(784, 344)
-motion_mode = 1
+[node name="StaticPlateform" parent="." instance=ExtResource("3_apgcq")]
+position = Vector2(456, 448)
+
+[node name="CollisionShape2D" parent="StaticPlateform" index="1"]
+position = Vector2(60, 192)
+shape = SubResource("RectangleShape2D_pl275")
+
+[node name="StaticPlateform2" parent="." instance=ExtResource("3_apgcq")]
+position = Vector2(768, 448)
+
+[node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
+position = Vector2(384, 60)
 shape = SubResource("RectangleShape2D_k31tl")
 
-[node name="Platform2" parent="." instance=ExtResource("3_apgcq")]
-position = Vector2(1000, 500)
-motion_mode = 1
-shape = null
+[node name="MovePlatform" parent="." instance=ExtResource("5_k31tl")]
+position = Vector2(128, 704)
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+[node name="CollisionShape2D" parent="MovePlatform" index="1"]
+position = Vector2(92, 60)
+shape = SubResource("RectangleShape2D_k0j7d")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
-position = Vector2(800, 176)
-shape = SubResource("RectangleShape2D_pl275")
+[editable path="StaticPlateform"]
+[editable path="StaticPlateform2"]
+[editable path="MovePlatform"]
