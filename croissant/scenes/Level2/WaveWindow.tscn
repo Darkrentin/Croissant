@@ -10,12 +10,13 @@ shader = ExtResource("4_el182")
 shader_parameter/color = Color(0, 1, 1, 1)
 shader_parameter/direction = -1.0
 shader_parameter/frequency = 15.0
-shader_parameter/speed = 8.0
+shader_parameter/speed = 3.0
 shader_parameter/radius = 1.0
-shader_parameter/line_thickness = 0.02
+shader_parameter/line_thickness = 0.03
 
 [node name="FlappyWindow" type="Window" node_paths=PackedStringArray("ConnectedWindow")]
 transparent_bg = true
+position = Vector2i(0, 36)
 transparent = true
 script = ExtResource("1_cewmj")
 ConnectedWindow = NodePath("SubWindow")
@@ -24,6 +25,7 @@ CollisionDisabled = false
 
 [node name="SubWindow" type="Window" parent="."]
 transparent_bg = true
+position = Vector2i(0, 36)
 transparent = true
 script = ExtResource("3_pnako")
 ExportVisualCollisionScene = ExtResource("2_el182")
