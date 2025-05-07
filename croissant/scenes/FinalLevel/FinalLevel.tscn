@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://pus1csxsvyfw"]
+
+[ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_laevf"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_laevf"]
+size = Vector2(100, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_wf7iu"]
+size = Vector3(1, 10, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wf7iu"]
+radius = 1.0
+height = 2.0
+
+[node name="FinalLevel" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+shape = SubResource("BoxShape3D_laevf")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_laevf")
+
+[node name="Sun" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.623893, 0.78151, 0, -0.78151, 0.623893, 0, 0, 0)
+
+[node name="Player3D" parent="." instance=ExtResource("1_wf7iu")]
+
+[node name="Kern" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1568, 0, 0)
+mesh = SubResource("BoxMesh_wf7iu")
+
+[node name="Ball" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19923, 1.60986, -3.47448)
+mesh = SubResource("SphereMesh_wf7iu")
