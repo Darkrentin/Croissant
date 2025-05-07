@@ -10,9 +10,11 @@ Lvl 1 :
 - Ajouter un type de fenetre qui se téléporte toutes les 0.8s aléatoirement sur l'écran : la TeleportWindow
 
 Lvl 2 :
+- Rendre la ExtendWindow carrée, ainsi que son explosion, pas rectangulaire
 - Faire un système de vagues où on peut choisir les fenetres qui vont pop @done
 - Ajouter un shader sur la visualisation des hitboxes pour qu'ils ondulent un peu en mode ondulations de perlin noise
 - Ajouter 2 nouveaux types de fenêtres pour arriver à 6
+- Parmis les deux fenetres, en ajouter une qui suit lentement la fenetre à l'infini constament (elle n'a pas d'attaque juste elle suis la position du joueur où il était il y a 2 secondes)
 - Trouver une dissotiation logique pour les 3 fenetres de couleurs primaires (R,G,B) et les 3 fenetres de couleurs additive
 - Ajouter des particules pour chaque fenetres qui sont cohérentes à l'attaque
 - Rendre la couleur des fenetres de la couleur de leur attaque mais foncées avec un effet de shader stylé, puis lorsque leur hitbox est active mettre la couleur à la couleur de l'attaque

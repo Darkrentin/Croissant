@@ -1,15 +1,49 @@
-[gd_scene load_steps=4 format=3 uid="uid://qiac3wawneng"]
+[gd_scene load_steps=6 format=3 uid="uid://qiac3wawneng"]
 
 [ext_resource type="Script" uid="uid://dk62vn1atnd43" path="res://scripts/Level2/CompressWindow.cs" id="1_bpm5o"]
 [ext_resource type="Script" uid="uid://6mob1yhk5kfe" path="res://scripts/Level2/AttackWindow.cs" id="2_b7jvd"]
 [ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_ure8x"]
+[ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="4_1y5u6"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xlxhb"]
+shader = ExtResource("4_1y5u6")
+shader_parameter/color = Color(1, 1, 0, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 8.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.02
 
 [node name="CompressWindow" type="Window" node_paths=PackedStringArray("ConnectedWindow")]
+transparent_bg = true
+transparent = true
 script = ExtResource("1_bpm5o")
 ConnectedWindow = NodePath("SubWindow")
 ExportVisualCollisionScene = ExtResource("2_ure8x")
 
 [node name="SubWindow" type="Window" parent="."]
+transparent_bg = true
+transparent = true
 script = ExtResource("2_b7jvd")
 ExportVisualCollisionScene = ExtResource("2_ure8x")
 Disable = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SubWindow"]
+
+[node name="ColorRect" type="ColorRect" parent="SubWindow/CanvasLayer"]
+material = SubResource("ShaderMaterial_xlxhb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_xlxhb")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

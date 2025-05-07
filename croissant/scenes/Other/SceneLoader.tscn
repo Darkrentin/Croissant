@@ -19,7 +19,8 @@
 [ext_resource type="PackedScene" uid="uid://bh5bvmpmfbmfs" path="res://scenes/Level2/LaserWindow.tscn" id="17_dafyj"]
 [ext_resource type="PackedScene" uid="uid://wmn0s55jslit" path="res://scenes/Level2/ExtendWindow.tscn" id="18_djw06"]
 [ext_resource type="PackedScene" uid="uid://qiac3wawneng" path="res://scenes/Level2/CompressWindow.tscn" id="19_2mdes"]
-[ext_resource type="PackedScene" uid="uid://c5djekulorxqs" path="res://scenes/Level2/FlappyWindow.tscn" id="20_ccpnw"]
+[ext_resource type="PackedScene" uid="uid://c5djekulorxqs" path="res://scenes/Level2/WaveWindow.tscn" id="20_ccpnw"]
+
 
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_6c1vk")

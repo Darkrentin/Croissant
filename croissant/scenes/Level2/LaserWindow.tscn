@@ -1,10 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://bh5bvmpmfbmfs"]
+[gd_scene load_steps=5 format=3 uid="uid://bh5bvmpmfbmfs"]
 
 [ext_resource type="Script" uid="uid://b5up5ncwii07n" path="res://scripts/Level2/LaserWindow.cs" id="1_a1amo"]
 [ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_vm0ge"]
+[ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="3_hcn3y"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_78wwr"]
+shader = ExtResource("3_hcn3y")
+shader_parameter/color = Color(1, 0, 1, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 8.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.02
 
 [node name="LaserWindow" type="Window"]
+transparent_bg = true
 position = Vector2i(0, 36)
+transparent = true
 script = ExtResource("1_a1amo")
 ExportVisualCollisionScene = ExtResource("2_vm0ge")
 CollisionDisabled = false
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_78wwr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

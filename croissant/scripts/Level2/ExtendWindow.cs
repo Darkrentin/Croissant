@@ -7,7 +7,7 @@ public partial class ExtendWindow : AttackWindow
 
 	public override void _Ready()
 	{
-		
+
 		base._Ready();
 		VisualCollision.Color = Colors.Red;
 	}

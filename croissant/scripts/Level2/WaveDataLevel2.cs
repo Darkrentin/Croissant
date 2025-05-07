@@ -18,7 +18,7 @@ public partial class WaveDataLevel2 : WaveData
 		WaveStart[7] = StartWave8;
 		WaveStart[8] = StartWave9;
 		WaveStart[9] = StartWave10;
-		
+
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -42,7 +42,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -65,7 +65,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -88,7 +88,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -111,7 +111,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -134,7 +134,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -157,7 +157,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -180,7 +180,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -203,7 +203,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -226,7 +226,7 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -249,12 +249,10 @@ public partial class WaveDataLevel2 : WaveData
 		C.Random = false;
 		windows.Add(C);
 
-		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;
 		windows.Add(F);
 
 		return windows;
 	}
-
-
 }

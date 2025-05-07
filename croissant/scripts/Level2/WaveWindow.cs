@@ -1,6 +1,6 @@
 using Godot;
 
-public partial class FlappyWindow : AttackWindow
+public partial class WaveWindow : AttackWindow
 {
 	[Export] AttackWindow ConnectedWindow;
 	public Vector2I ConnectedWindowPosition;
