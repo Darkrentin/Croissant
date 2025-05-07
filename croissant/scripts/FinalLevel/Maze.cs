@@ -3,12 +3,10 @@ using System;
 
 public partial class Maze : Node3D
 {
-    // Called when the node enters the scene tree for the first time.
-
-    public int MazeSize = 11; // Pour un labyrinthe intéressant avec cette méthode, préférez une taille impaire >= 5 si vous voulez des bordures et des piliers clairs. Ex: 11, 13.
-    public int[,] MazeData;
     [Export] public PackedScene WallScene;
     [Export] public PackedScene LampScene;
+    public int MazeSize = 11; // Pour un labyrinthe intéressant avec cette méthode, préférez une taille impaire >= 5 si vous voulez des bordures et des piliers clairs. Ex: 11, 13.
+    public int[,] MazeData;
 
     public override void _Ready()
     {
@@ -17,7 +15,6 @@ public partial class Maze : Node3D
         MakeMaze();
     }
 
-    // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
     }
@@ -27,25 +24,19 @@ public partial class Maze : Node3D
         MazeData = new int[MazeSize, MazeSize];
 
         for (int i = 0; i < MazeSize; i++)
-        {
             for (int j = 0; j < MazeSize; j++)
-            {
                 MazeData[i, j] = 1; // Initialise tout en mur
-            }
-        }
 
         if (MazeSize > 0)
-        {
             GenerateMazeDFS(1, 1);
-        }
         MazeData[MazeSize / 2, MazeSize / 2] = 0; // Sortie
     }
     private void GenerateMazeDFS(int r, int c)
     {
 
         MazeData[r, c] = 0;
-		if(Lib.rand.Next(0, 2) == 0)
-			MazeData[r, c] = 2; // Lamp
+        if (Lib.rand.Next(0, 2) == 0)
+            MazeData[r, c] = 2; // Lamp
 
         int[] directions = { 0, 1, 2, 3 }; // 0:N, 1:E, 2:S, 3:W
         Lib.rand.Shuffle(directions);
@@ -74,14 +65,11 @@ public partial class Maze : Node3D
             }
 
             if (nextR >= 0 && nextR < MazeSize && nextC >= 0 && nextC < MazeSize)
-            {
-
                 if (MazeData[nextR, nextC] == 1)
                 {
                     MazeData[wallR, wallC] = 0;
                     GenerateMazeDFS(nextR, nextC);
                 }
-            }
         }
     }
 
@@ -109,15 +97,19 @@ public partial class Maze : Node3D
                     AddChild(lamp);
                 }
 
-				if(MazeData[i, j] == 0 || MazeData[i, j] == 2)
-				{
-					int nx = i - MazeSize / 2;
-					int nz = j - MazeSize / 2;
-					Node3D floor = WallScene.Instantiate<Node3D>();
-					floor.Position = new Vector3(nx, 0, nz) * WallSize;
-					floor.Position += new Vector3(0, -WallSize, 0);
-					AddChild(floor);
-				}
+                if (MazeData[i, j] == 0 || MazeData[i, j] == 2)
+                {
+                    int nx = i - MazeSize / 2;
+                    int nz = j - MazeSize / 2;
+                    Node3D floor = WallScene.Instantiate<Node3D>();
+                    floor.Position = new Vector3(nx, 0, nz) * WallSize;
+                    floor.Position += new Vector3(0, -WallSize, 0);
+                    AddChild(floor);
+                    Node3D ceil = WallScene.Instantiate<Node3D>();
+                    ceil.Position = new Vector3(nx, 0, nz) * WallSize;
+                    ceil.Position += new Vector3(0, WallSize, 0);
+                    AddChild(ceil);
+                }
             }
         }
     }
@@ -128,10 +120,7 @@ public partial class Maze : Node3D
         {
             string line = "";
             for (int j = 0; j < MazeSize; j++)
-            {
-
                 line += (MazeData[i, j] == 1 ? "#" : ".") + " ";
-            }
             GD.Print(line);
         }
     }

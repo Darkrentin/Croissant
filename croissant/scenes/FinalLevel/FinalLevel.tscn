@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://pus1csxsvyfw"]
 
-[ext_resource type="Shader" path="res://assets/shaders/Dithering3D.gdshader" id="1_ctihd"]
+[ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
 [ext_resource type="Texture2D" uid="uid://dfb2h1ui8x4ad" path="res://assets/shaders/palette.png" id="2_ctihd"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
@@ -18,6 +18,8 @@ sky_material = SubResource("ProceduralSkyMaterial_56we2")
 [sub_resource type="Environment" id="Environment_d5vjr"]
 background_mode = 2
 sky = SubResource("Sky_knvm8")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_mode = 1
 adjustment_enabled = true
 adjustment_brightness = 1.2
@@ -27,9 +29,9 @@ shader = ExtResource("1_ctihd")
 shader_parameter/u_dither_tex = ExtResource("3_knvm8")
 shader_parameter/u_color_tex = ExtResource("2_ctihd")
 shader_parameter/u_bit_depth = 32
-shader_parameter/u_contrast = 0.5
+shader_parameter/u_contrast = 1.0
 shader_parameter/u_offset = 0.0
-shader_parameter/u_dither_size = 3
+shader_parameter/u_dither_size = 2
 
 [node name="FinalLevel" type="Node3D"]
 
