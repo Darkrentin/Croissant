@@ -1,10 +1,9 @@
-[gd_scene load_steps=37 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=50 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
+[ext_resource type="PackedScene" uid="uid://dhkfqv7r6e01q" path="res://scenes/FinalLevel/Bullet3D.tscn" id="2_3r0jc"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
-[ext_resource type="PackedScene" uid="uid://dhkfqv7r6e01q" path="res://scenes/FinalLevel/Bullet3D.tscn" id="2_10gut"]
 [ext_resource type="Texture2D" uid="uid://ctcw2js43e8ya" path="res://assets/sprites/Sgun0.png" id="2_h2v7r"]
-[ext_resource type="PackedScene" uid="uid://cimi7w1dx80pn" path="res://scenes/FinalLevel/Enemy3D.tscn" id="3_6l3yh"]
 [ext_resource type="Texture2D" uid="uid://cyul661qhorrb" path="res://assets/sprites/Sgun4.png" id="3_aofux"]
 [ext_resource type="Texture2D" uid="uid://dqh3rygqtihv5" path="res://assets/sprites/Sgun5.png" id="4_4x0oc"]
 [ext_resource type="Texture2D" uid="uid://bswiddnvoecm8" path="res://assets/sprites/Sgun1.png" id="6_n4wqm"]
@@ -39,6 +38,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(960, 768)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_10gut"]
 resource_name = "Reload"
@@ -55,22 +66,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [ExtResource("2_h2v7r"), ExtResource("2_6l3yh"), ExtResource("3_aofux"), ExtResource("4_4x0oc"), ExtResource("3_aofux"), ExtResource("2_6l3yh"), ExtResource("2_h2v7r")]
-}
-
-[sub_resource type="Animation" id="Animation_ley8d"]
-resource_name = "Run"
-length = 0.6
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(870, 785.705), Vector2(915, 845), Vector2(960, 855), Vector2(1005, 845), Vector2(1050, 785)]
 }
 
 [sub_resource type="Animation" id="Animation_aofux"]
@@ -117,6 +112,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [Vector2(960, 768), Vector2(710, 768), Vector2(550, 768), Vector2(600, 768), Vector2(550, 768), Vector2(710, 768), Vector2(960, 768)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 5.0, 3.0, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_h7i27"]
 resource_name = "StartRunLeft"
@@ -136,7 +143,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_o3k41"]
 resource_name = "StartRunRight"
-length = 0.1
+length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -144,19 +151,69 @@ tracks/0/path = NodePath("Control/Sprite2D:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(960, 768), Vector2(1050, 785)]
+}
+
+[sub_resource type="Animation" id="Animation_ley8d"]
+resource_name = "RunL"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(870, 785.705), Vector2(915, 845), Vector2(960, 855)]
+}
+
+[sub_resource type="Animation" id="Animation_3r0jc"]
+resource_name = "RunR"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(960, 855), Vector2(1005, 845), Vector2(1050, 785)]
+}
+
+[sub_resource type="Animation" id="Animation_gf1pk"]
+resource_name = "StartMid"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 768), Vector2(960, 855)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aofux"]
 _data = {
 &"RESET": SubResource("Animation_6l3yh"),
 &"Reload": SubResource("Animation_10gut"),
-&"Run": SubResource("Animation_ley8d"),
+&"RunL": SubResource("Animation_ley8d"),
+&"RunR": SubResource("Animation_3r0jc"),
 &"Shoot": SubResource("Animation_aofux"),
 &"ShootAndReload": SubResource("Animation_n4wqm"),
+&"StartMid": SubResource("Animation_gf1pk"),
 &"StartRunLeft": SubResource("Animation_h7i27"),
 &"StartRunRight": SubResource("Animation_o3k41")
 }
@@ -165,14 +222,25 @@ _data = {
 animation = &"RESET"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o3k41"]
-animation = &"Run"
-play_mode = 1
+animation = &"RunL"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gf1pk"]
-animation = &"Run"
+animation = &"RunL"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a0jgr"]
+animation = &"RunR"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4qb4h"]
+animation = &"RunR"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ley8d"]
 animation = &"ShootAndReload"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_parfq"]
+animation = &"StartMid"
+play_mode = 1
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8xvos"]
 animation = &"StartRunLeft"
@@ -180,56 +248,92 @@ animation = &"StartRunLeft"
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_228hw"]
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a0jgr"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4qb4h"]
-switch_mode = 2
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_parfq"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6u1r"]
-switch_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3r0jc"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7i27"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o3k41"]
+priority = 3
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gf1pk"]
 switch_mode = 2
 advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xvos"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6u1r"]
+switch_mode = 2
+advance_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lcsot"]
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eoddy"]
+priority = 2
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4opju"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o5en5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y5a14"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_df6ge"]
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vdv5x"]
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bdsnf"]
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1yi64"]
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_31ird"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oppu7"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ad7fj"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2n0e"]
+priority = 3
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3r0jc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7i27"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xvos"]
+priority = 3
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ley8d"]
 states/End/position = Vector2(1049, 100)
 states/RESET/node = SubResource("AnimationNodeAnimation_h7i27")
 states/RESET/position = Vector2(322, 100)
-states/Run/node = SubResource("AnimationNodeAnimation_gf1pk")
-states/Run/position = Vector2(600, -87)
-"states/Run Back/node" = SubResource("AnimationNodeAnimation_o3k41")
-"states/Run Back/position" = Vector2(837, -87)
+states/Run/node = SubResource("AnimationNodeAnimation_o3k41")
+states/Run/position = Vector2(454, -203)
+"states/RunL 2/node" = SubResource("AnimationNodeAnimation_gf1pk")
+"states/RunL 2/position" = Vector2(631, -150)
+states/RunR/node = SubResource("AnimationNodeAnimation_4qb4h")
+states/RunR/position = Vector2(1033, -203)
+"states/RunR 2/node" = SubResource("AnimationNodeAnimation_a0jgr")
+"states/RunR 2/position" = Vector2(798, -150)
 states/Shoot/node = SubResource("AnimationNodeAnimation_ley8d")
 states/Shoot/position = Vector2(711, 213)
 states/Start/position = Vector2(204, 100)
+states/StartMid/node = SubResource("AnimationNodeAnimation_parfq")
+states/StartMid/position = Vector2(709, 15)
 states/StartRunLeft/node = SubResource("AnimationNodeAnimation_8xvos")
 states/StartRunLeft/position = Vector2(322, -87)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "Run", "Run Back", SubResource("AnimationNodeStateMachineTransition_a0jgr"), "Run Back", "Run", SubResource("AnimationNodeStateMachineTransition_4qb4h"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "Run Back", "Shoot", SubResource("AnimationNodeStateMachineTransition_h7i27"), "RESET", "Shoot", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "Run", "RESET", SubResource("AnimationNodeStateMachineTransition_8xvos"), "Run Back", "RESET", SubResource("AnimationNodeStateMachineTransition_lcsot")]
-graph_offset = Vector2(82, 16)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "RESET", "Shoot", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_df6ge"), "RunR 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_vdv5x"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_bdsnf"), "RunR", "Shoot", SubResource("AnimationNodeStateMachineTransition_1yi64"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "StartMid", "Shoot", SubResource("AnimationNodeStateMachineTransition_q2n0e"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "StartRunLeft", "Shoot", SubResource("AnimationNodeStateMachineTransition_8xvos")]
+graph_offset = Vector2(116, -127)
 
 [node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("AnimationTree", "Bullet3DSpawnPosition")]
-transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
 script = ExtResource("1_rrt4f")
 AnimationTree = NodePath("AnimationTree")
 Bullet3DSpawnPosition = NodePath("BulletSpawnPosition")
-Bullet3DScene = ExtResource("2_10gut")
-Enemy3DScene = ExtResource("3_6l3yh")
+Bullet3DScene = ExtResource("2_3r0jc")
+Enemy3DScene = ExtResource("2_3r0jc")
 MoveSpeed = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -240,9 +344,9 @@ shape = SubResource("CapsuleShape3D_jwlh4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-visible = false
-omni_range = 2.0
-omni_attenuation = 5.0
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+light_energy = 0.0
+omni_range = 4.0
 
 [node name="ShootAnimation" type="AnimationPlayer" parent="."]
 libraries = {

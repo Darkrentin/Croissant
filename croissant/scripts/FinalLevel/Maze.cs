@@ -39,6 +39,8 @@ public partial class Maze : Node3D
 
         if (MazeSize > 2)
             GenerateMazeDFS(1, 1);
+
+        MazeData[MazeSize/2,MazeSize/2] = 0; // Start point
     }
 
     private void GenerateMazeDFS(int r, int c)
