@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://hydpfc60do7x"]
+
+[ext_resource type="Texture2D" uid="uid://di0wec2b4yo70" path="res://assets/sprites/WhiteSquare.png" id="1_1nyjo"]
+[ext_resource type="Script" uid="uid://d2o8xkfkptm1l" path="res://scripts/FinalLevel/MiniMap.cs" id="2_mtl0e"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1nyjo"]
+texture = ExtResource("1_1nyjo")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_mtl0e"]
+sources/0 = SubResource("TileSetAtlasSource_1nyjo")
+
+[node name="MiniMap" type="TileMapLayer" node_paths=PackedStringArray("Sprite")]
+tile_set = SubResource("TileSet_mtl0e")
+script = ExtResource("2_mtl0e")
+Sprite = NodePath("Sprite2D")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+anchor_mode = 0
+zoom = Vector2(0.5, 0.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_1nyjo")
