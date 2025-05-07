@@ -1,40 +1,46 @@
-[gd_scene load_steps=10 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=12 format=3 uid="uid://pus1csxsvyfw"]
 
-[ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
+[ext_resource type="Shader" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
-[ext_resource type="Texture2D" uid="uid://dfb2h1ui8x4ad" path="res://assets/shaders/palette.png" id="2_ctihd"]
+[ext_resource type="Texture2D" uid="uid://d314a13s04tl" path="res://assets/shaders/halloween-palette-1x.png" id="2_56we2"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
-sky_top_color = Color(0.0579088, 0.0784697, 0.107062, 1)
-sky_horizon_color = Color(0.0894392, 0.0927246, 0.0979111, 1)
+sky_top_color = Color(0.0905869, 0.116999, 0.153729, 1)
+sky_horizon_color = Color(0.107869, 0.111565, 0.1174, 1)
 ground_bottom_color = Color(0, 0, 0, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Sky" id="Sky_knvm8"]
 sky_material = SubResource("ProceduralSkyMaterial_56we2")
 
-[sub_resource type="Environment" id="Environment_d5vjr"]
+[sub_resource type="Environment" id="Environment_56we2"]
 background_mode = 2
+background_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
 sky = SubResource("Sky_knvm8")
+ambient_light_color = Color(0.151276, 0.151276, 0.151276, 1)
 tonemap_mode = 1
-adjustment_enabled = true
-adjustment_brightness = 1.2
+tonemap_exposure = 1.2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf7iu"]
 shader = ExtResource("1_ctihd")
 shader_parameter/u_dither_tex = ExtResource("3_knvm8")
-shader_parameter/u_color_tex = ExtResource("2_ctihd")
+shader_parameter/u_color_tex = ExtResource("2_56we2")
 shader_parameter/u_bit_depth = 128
 shader_parameter/u_contrast = 1.0
 shader_parameter/u_offset = 0.0
 shader_parameter/u_dither_size = 3
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knvm8"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_d5vjr"]
+material = SubResource("StandardMaterial3D_knvm8")
+
 [node name="FinalLevel" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_d5vjr")
+environment = SubResource("Environment_56we2")
 
 [node name="ViewportWithShader" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_wf7iu")
@@ -57,3 +63,7 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1, 0, 1)
 [node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+visible = false
+mesh = SubResource("SphereMesh_d5vjr")

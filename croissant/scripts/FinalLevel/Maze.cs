@@ -5,7 +5,7 @@ public partial class Maze : Node3D
 {
     [Export] public PackedScene WallScene;
     [Export] public PackedScene LampScene;
-    public int MazeSize = 11; // Pour un labyrinthe intéressant avec cette méthode, préférez une taille impaire >= 5 si vous voulez des bordures et des piliers clairs. Ex: 11, 13.
+    public int MazeSize = 15; // Pour un labyrinthe intéressant avec cette méthode, préférez une taille impaire >= 5 si vous voulez des bordures et des piliers clairs. Ex: 11, 13.
     public int[,] MazeData;
 
     public override void _Ready()

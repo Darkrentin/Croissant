@@ -1,9 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0rwmg3mas3cc"]
+[gd_scene load_steps=7 format=3 uid="uid://b0rwmg3mas3cc"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lvuuv"]
+[sub_resource type="Gradient" id="Gradient_lvuuv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
+noise_type = 3
+frequency = 0.1416
+fractal_type = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kkjf7"]
+color_ramp = SubResource("Gradient_lvuuv")
+noise = SubResource("FastNoiseLite_f603f")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjpp2"]
+albedo_texture = SubResource("NoiseTexture2D_kkjf7")
 
 [sub_resource type="BoxMesh" id="BoxMesh_lvuuv"]
-material = SubResource("StandardMaterial3D_lvuuv")
+material = SubResource("StandardMaterial3D_vjpp2")
 size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lvuuv"]

@@ -17,7 +17,7 @@ void fragment() {
 
   circle *= step(0.5, wave);
   circle_outline = vec4(color.rgb, circle * color.a);
-   
+
   float rect_alpha = 1.0 - step(abs(pos.x), (0.5-line_thickness)) * step(abs(pos.y), (0.5-line_thickness));
   COLOR =  circle_outline * vec4(1.0, 1.0, 1.0, rect_alpha);
 }
