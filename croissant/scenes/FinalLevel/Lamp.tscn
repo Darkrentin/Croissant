@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://dp0vjok53fueo"]
+[gd_scene load_steps=0 format=3 uid="uid://dp0vjok53fueo"]
 
 [node name="Lamp" type="Node3D"]
 

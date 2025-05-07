@@ -1,19 +1,19 @@
 [gd_scene load_steps=11 format=3 uid="uid://pus1csxsvyfw"]
 
-[ext_resource type="Shader" path="res://assets/shaders/Dithering3D.gdshader" id="1_ctihd"]
+[ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/Dithering3D.gdshader" id="1_ctihd"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
-[ext_resource type="Texture2D" uid="uid://kmco41oii2tm" path="res://assets/shaders/palette1.png" id="2_56we2"]
+[ext_resource type="Texture2D" uid="uid://dfb2h1ui8x4ad" path="res://assets/shaders/palette.png" id="2_ctihd"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
-[ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
+[ext_resource type="PackedScene" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf7iu"]
 shader = ExtResource("1_ctihd")
 shader_parameter/u_dither_tex = ExtResource("3_knvm8")
-shader_parameter/u_color_tex = ExtResource("2_56we2")
+shader_parameter/u_color_tex = ExtResource("2_ctihd")
 shader_parameter/u_bit_depth = 32
-shader_parameter/u_contrast = 1.0
+shader_parameter/u_contrast = 0.5
 shader_parameter/u_offset = 0.0
-shader_parameter/u_dither_size = 4
+shader_parameter/u_dither_size = 3
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_laevf"]
 size = Vector3(100, 1, 100)
@@ -30,7 +30,9 @@ size = Vector3(1, 10, 1)
 
 [node name="FinalLevel" type="Node3D"]
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+[node name="Maze" parent="." instance=ExtResource("5_56we2")]
+
+[node name="ViewportWithShader" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_wf7iu")
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,35 +40,36 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+[node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="ViewportWithoutShader"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="SubViewportContainer/SubViewport"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="ViewportWithoutShader/SubViewport"]
 transform = Transform3D(0.75, -0.5, 0.433013, -0.5, -2.2954e-08, 0.866025, -0.433013, -0.866025, -0.25, 0.0358658, 18.9718, 0.0119019)
-visible = false
 
-[node name="Floor" type="StaticBody3D" parent="SubViewportContainer/SubViewport"]
+[node name="Floor" type="StaticBody3D" parent="ViewportWithoutShader/SubViewport"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewportContainer/SubViewport/Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ViewportWithoutShader/SubViewport/Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
 shape = SubResource("BoxShape3D_laevf")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewportContainer/SubViewport/Floor"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ViewportWithoutShader/SubViewport/Floor"]
 mesh = SubResource("PlaneMesh_laevf")
 
-[node name="Ball" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+[node name="Ball" type="MeshInstance3D" parent="ViewportWithoutShader/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.19923, 1.60986, -3.47448)
 mesh = SubResource("SphereMesh_wf7iu")
 skeleton = NodePath("../../..")
 
-[node name="Kern" type="MeshInstance3D" parent="SubViewportContainer/SubViewport"]
+[node name="Kern" type="MeshInstance3D" parent="ViewportWithoutShader/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1568, 0, 0)
 mesh = SubResource("BoxMesh_wf7iu")
 skeleton = NodePath("../../..")
 
-[node name="Player3D" parent="SubViewportContainer/SubViewport" instance=ExtResource("1_wf7iu")]
+[node name="Player3D" parent="ViewportWithoutShader/SubViewport" instance=ExtResource("1_wf7iu")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
-
-[node name="Maze" parent="." instance=ExtResource("5_56we2")]
