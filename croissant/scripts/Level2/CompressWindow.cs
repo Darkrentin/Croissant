@@ -14,6 +14,7 @@ public partial class CompressWindow : AttackWindow
 		VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.Timer.Stop();
+		ConnectedWindow.Lives = Lives;
 	}
 
 	public override void _Process(double delta)
@@ -86,8 +87,8 @@ public partial class CompressWindow : AttackWindow
 		IsResizing = false;
 		ConnectedWindow.IsResizing = false;
 
-		ShowVisualCollision(targetSize, targetPosition);
-		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
+		ShowVisualCollision(targetSize, targetPosition, ShakeTime);
+		ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, ShakeTime);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();

@@ -29,6 +29,7 @@ public partial class WaveWindow : AttackWindow
 		RemoveChild(ConnectedWindow);
 		GetParent().AddChild(ConnectedWindow);
 		ConnectedWindow.Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X*2);
+		ConnectedWindow.Lives = Lives;
 	}
 
 	public override void _Process(double delta)
@@ -88,7 +89,7 @@ public partial class WaveWindow : AttackWindow
 			targetSize = new Vector2I(GameManager.ScreenSize.X, targetSize.Y);
 			targetPosition = Vector2I.Zero;
 
-			ShowVisualCollision(targetSize, targetPosition);
+			ShowVisualCollision(targetSize, targetPosition, ShakeTime);
 		}
 
 		if (ConnectedWindow.Visible)
@@ -99,7 +100,7 @@ public partial class WaveWindow : AttackWindow
 			targetSize2 = new Vector2I(GameManager.ScreenSize.X, targetSize2.Y);
 			targetPosition2 = new Vector2I(0, GameManager.ScreenSize.Y - targetSize2.Y);
 
-			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2);
+			ConnectedWindow.ShowVisualCollision(targetSize2, targetPosition2, ShakeTime);
 		}
 
 		Timer.WaitTime = ShakeTime;

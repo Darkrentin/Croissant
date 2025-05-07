@@ -34,18 +34,6 @@ public partial class WaveDataLevel2 : WaveData
 		l.Random = false;
 		windows.Add(l);
 
-		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
-		E.Random = false;
-		windows.Add(E);
-
-		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
-		C.Random = false;
-		windows.Add(C);
-
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
-		F.Random = false;
-		windows.Add(F);
-
 		return windows;
 	}
 
@@ -53,21 +41,9 @@ public partial class WaveDataLevel2 : WaveData
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 
-		LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
-		l.Random = false;
-		windows.Add(l);
-
 		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
 		E.Random = false;
 		windows.Add(E);
-
-		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
-		C.Random = false;
-		windows.Add(C);
-
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
-		F.Random = false;
-		windows.Add(F);
 
 		return windows;
 	}
@@ -76,19 +52,7 @@ public partial class WaveDataLevel2 : WaveData
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 
-		LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
-		l.Random = false;
-		windows.Add(l);
-
-		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
-		E.Random = false;
-		windows.Add(E);
-
-		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
-		C.Random = false;
-		windows.Add(C);
-
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+		FollowWindow F = States.SceneLoader.FollowWindowScene.Instantiate<FollowWindow>();
 		F.Random = false;
 		windows.Add(F);
 
@@ -99,21 +63,9 @@ public partial class WaveDataLevel2 : WaveData
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 
-		LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
-		l.Random = false;
-		windows.Add(l);
-
-		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
-		E.Random = false;
-		windows.Add(E);
-
-		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
-		C.Random = false;
-		windows.Add(C);
-
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
-		F.Random = false;
-		windows.Add(F);
+		SpikeWindow S = States.SceneLoader.SpikeWindowScene.Instantiate<SpikeWindow>();
+		S.Random = false;
+		windows.Add(S);
 
 		return windows;
 	}
@@ -122,21 +74,9 @@ public partial class WaveDataLevel2 : WaveData
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 
-		LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
-		l.Random = false;
-		windows.Add(l);
-
-		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
-		E.Random = false;
-		windows.Add(E);
-
 		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C.Random = false;
 		windows.Add(C);
-
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
-		F.Random = false;
-		windows.Add(F);
 
 		return windows;
 	}
@@ -144,18 +84,6 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave6()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
-		LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
-		l.Random = false;
-		windows.Add(l);
-
-		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
-		E.Random = false;
-		windows.Add(E);
-
-		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
-		C.Random = false;
-		windows.Add(C);
 
 		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F.Random = false;

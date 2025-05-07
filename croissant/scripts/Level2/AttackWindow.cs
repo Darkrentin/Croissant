@@ -59,7 +59,6 @@ public partial class AttackWindow : FloatWindow
         if (!Disable)
         {
             Parent = GetParent<Level2>();
-            Lives = 3;
             Timer.Start();
         }
         else
@@ -68,9 +67,9 @@ public partial class AttackWindow : FloatWindow
         }
     }
 
-    public void ShowVisualCollision(Vector2I size, Vector2 position)
+    public void ShowVisualCollision(Vector2I size, Vector2 position, float duration = 1f)
     {
-        VisualCollision.duration = 1f;
+        VisualCollision.duration = duration;
         VisualCollision.elapsedTime = 0f;
         VisualCollision.Position = position - TitleBarSize;
         VisualCollision.Size = size + TitleBarSize;

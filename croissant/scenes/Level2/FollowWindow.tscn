@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://c28b6pj5bujn3"]
+
+[ext_resource type="Script" uid="uid://w73gf2357toi" path="res://scripts/Level2/FollowWindow.cs" id="1_ujdie"]
+[ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_vcqb6"]
+[ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="3_iw07i"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c68na"]
+shader = ExtResource("3_iw07i")
+shader_parameter/color = Color(0, 1, 0, 1)
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.03
+
+[node name="FollowWindow" type="Window"]
+transparent_bg = true
+transparent = true
+script = ExtResource("1_ujdie")
+ExportVisualCollisionScene = ExtResource("2_vcqb6")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_c68na")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

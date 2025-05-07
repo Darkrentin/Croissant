@@ -22,6 +22,8 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene ExtendWindowScene;
 	[Export] public PackedScene CompressWindowScene;
 	[Export] public PackedScene FlappyWindowScene;
+	[Export] public PackedScene FollowWindowScene;
+	[Export] public PackedScene SpikeWindowScene;
 
 	public override void _Ready()
 	{
