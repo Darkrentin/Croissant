@@ -22,7 +22,7 @@ public partial class CursorWindow : FloatWindow
 		base._Process(delta);
 
 		if (!Freeze && Input.IsActionJustPressed("LeftClick"))
-			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 1f, reset: true);
+			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 0.9f, reset: true);
 	}
 
 	public override void OnClose()

@@ -17,7 +17,7 @@ public partial class VisualCollision : ColorRect
 			elapsedTime += (float)delta;
 			//Color = new Color(Color.R, Color.G, Color.B, Mathf.Lerp(0f, 1f, elapsedTime / duration));
 			((ShaderMaterial)Material).SetShaderParameter("col", new Color(Color.R, Color.G, Color.B, Mathf.Lerp(0f, 0.70f, elapsedTime / duration)));
-			((ShaderMaterial)Material).SetShaderParameter("mult", Mathf.Lerp(3f, 1f, elapsedTime / duration));
+			((ShaderMaterial)Material).SetShaderParameter("mult", Mathf.Lerp(4f, 0.9f, elapsedTime / duration));
 		}
 		else
 		{

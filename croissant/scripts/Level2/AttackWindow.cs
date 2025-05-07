@@ -29,17 +29,17 @@ public partial class AttackWindow : FloatWindow
 
     public override void _Ready()
     {
-        Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X*2);
         SharpCorners = true;
         Unresizable = true;
         Draggable = false;
         Minimizable = false;
         base._Ready();
 
-        const int WindowSizeX = 130;
+        const int WindowSizeX = 160;
         int newSize = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX)).X;
-        Size = new Vector2I(newSize,newSize) - TitleBarSize;
+        Size = new Vector2I(newSize, newSize - TitleBarHeight);
 
+        Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X * 2);
         ////Lib.Print(TitleBarHeight.ToString());
 
         Timer = new Timer();
