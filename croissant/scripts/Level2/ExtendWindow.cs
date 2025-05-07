@@ -36,7 +36,8 @@ public partial class ExtendWindow : AttackWindow
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5);
 
-		TargetSize = Size + Lib.GetScreenSize(0.2f, 0.2f);
+		TargetSize = new Vector2I(Size.X,Size.X) + new Vector2I(Lib.GetScreenSize(0.2f, 0.2f).X,Lib.GetScreenSize(0.2f, 0.2f).X);
+		TargetSize-= TitleBarSize;
 		//Vector2I targetPosition = Position + (Size / 2) - (TargetSize / 2);
 		ShowVisualCollision(TargetSize, StartResize(TargetSize, -1f));
 		IsResizing = false;

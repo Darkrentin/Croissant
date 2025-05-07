@@ -26,6 +26,9 @@ public partial class WaveWindow : AttackWindow
 				CollisionDisabled = true;
 				break;
 		}
+		RemoveChild(ConnectedWindow);
+		GetParent().AddChild(ConnectedWindow);
+		ConnectedWindow.Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X*2);
 	}
 
 	public override void _Process(double delta)
