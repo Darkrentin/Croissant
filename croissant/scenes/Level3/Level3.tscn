@@ -49,6 +49,9 @@ position = Vector2(1763, 653)
 [node name="StaticPlateform" parent="." instance=ExtResource("3_apgcq")]
 position = Vector2(456, 448)
 
+[node name="Window" parent="StaticPlateform" index="0"]
+position = Vector2i(0, 36)
+
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(60, 192)
 shape = SubResource("RectangleShape2D_pl275")
@@ -56,12 +59,18 @@ shape = SubResource("RectangleShape2D_pl275")
 [node name="StaticPlateform2" parent="." instance=ExtResource("3_apgcq")]
 position = Vector2(768, 448)
 
+[node name="Window" parent="StaticPlateform2" index="0"]
+position = Vector2i(0, 36)
+
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
 position = Vector2(384, 60)
 shape = SubResource("RectangleShape2D_k31tl")
 
 [node name="MovePlatform" parent="." instance=ExtResource("5_k31tl")]
 position = Vector2(128, 704)
+
+[node name="Window" parent="MovePlatform" index="0"]
+position = Vector2i(0, 36)
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(92, 60)
