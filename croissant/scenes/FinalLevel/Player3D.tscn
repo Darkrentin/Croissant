@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=49 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
 [ext_resource type="PackedScene" uid="uid://dhkfqv7r6e01q" path="res://scenes/FinalLevel/Bullet3D.tscn" id="2_3r0jc"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://dqh3rygqtihv5" path="res://assets/sprites/Sgun5.png" id="4_4x0oc"]
 [ext_resource type="Texture2D" uid="uid://bswiddnvoecm8" path="res://assets/sprites/Sgun1.png" id="6_n4wqm"]
 [ext_resource type="Texture2D" uid="uid://congju50q684c" path="res://assets/sprites/Sgun2.png" id="7_ley8d"]
-[ext_resource type="Texture2D" uid="uid://di0wec2b4yo70" path="res://assets/sprites/WhiteSquare.png" id="8_ley8d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwlh4"]
 
@@ -68,6 +67,38 @@ tracks/0/keys = {
 "values": [ExtResource("2_h2v7r"), ExtResource("2_6l3yh"), ExtResource("3_aofux"), ExtResource("4_4x0oc"), ExtResource("3_aofux"), ExtResource("2_6l3yh"), ExtResource("2_h2v7r")]
 }
 
+[sub_resource type="Animation" id="Animation_ley8d"]
+resource_name = "RunL"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(870, 785.705), Vector2(915, 845), Vector2(960, 855)]
+}
+
+[sub_resource type="Animation" id="Animation_3r0jc"]
+resource_name = "RunR"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(960, 855), Vector2(1005, 845), Vector2(1050, 785)]
+}
+
 [sub_resource type="Animation" id="Animation_aofux"]
 resource_name = "Shoot"
 length = 0.5
@@ -125,6 +156,22 @@ tracks/2/keys = {
 "values": [0.0, 5.0, 3.0, 0.0]
 }
 
+[sub_resource type="Animation" id="Animation_gf1pk"]
+resource_name = "StartMid"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 768), Vector2(960, 855)]
+}
+
 [sub_resource type="Animation" id="Animation_h7i27"]
 resource_name = "StartRunLeft"
 length = 0.2
@@ -155,54 +202,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector2(960, 768), Vector2(1050, 785)]
-}
-
-[sub_resource type="Animation" id="Animation_ley8d"]
-resource_name = "RunL"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(870, 785.705), Vector2(915, 845), Vector2(960, 855)]
-}
-
-[sub_resource type="Animation" id="Animation_3r0jc"]
-resource_name = "RunR"
-length = 0.3
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(960, 855), Vector2(1005, 845), Vector2(1050, 785)]
-}
-
-[sub_resource type="Animation" id="Animation_gf1pk"]
-resource_name = "StartMid"
-length = 0.2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Control/Sprite2D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(960, 768), Vector2(960, 855)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_aofux"]
@@ -326,15 +325,13 @@ states/StartMid/position = Vector2(709, 15)
 states/StartRunLeft/node = SubResource("AnimationNodeAnimation_8xvos")
 states/StartRunLeft/position = Vector2(322, -87)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "RESET", "Shoot", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_df6ge"), "RunR 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_vdv5x"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_bdsnf"), "RunR", "Shoot", SubResource("AnimationNodeStateMachineTransition_1yi64"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "StartMid", "Shoot", SubResource("AnimationNodeStateMachineTransition_q2n0e"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "StartRunLeft", "Shoot", SubResource("AnimationNodeStateMachineTransition_8xvos")]
-graph_offset = Vector2(116, -127)
+graph_offset = Vector2(109, -254)
 
 [node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("AnimationTree", "Bullet3DSpawnPosition")]
 script = ExtResource("1_rrt4f")
 AnimationTree = NodePath("AnimationTree")
 Bullet3DSpawnPosition = NodePath("BulletSpawnPosition")
 Bullet3DScene = ExtResource("2_3r0jc")
-Enemy3DScene = ExtResource("2_3r0jc")
-MoveSpeed = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -344,9 +341,10 @@ shape = SubResource("CapsuleShape3D_jwlh4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.1)
 light_energy = 0.0
-omni_range = 4.0
+omni_range = 20.0
+omni_attenuation = 2.0
 
 [node name="ShootAnimation" type="AnimationPlayer" parent="."]
 libraries = {
@@ -366,15 +364,9 @@ position = Vector2(960, 768)
 scale = Vector2(8, 8)
 texture = ExtResource("2_h2v7r")
 
-[node name="Sprite2D2" type="Sprite2D" parent="Control"]
-visible = false
-position = Vector2(960, 800)
-scale = Vector2(0.5, 21)
-texture = ExtResource("8_ley8d")
-
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ley8d")
 anim_player = NodePath("../ShootAnimation")
 
 [node name="BulletSpawnPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.1)

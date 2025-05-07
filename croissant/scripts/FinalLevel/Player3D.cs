@@ -1,21 +1,20 @@
 using Godot;
-using System;
 
 public partial class Player3D : CharacterBody3D
 {
 	[Export] private AnimationTree AnimationTree;
 	[Export] private Node3D Bullet3DSpawnPosition;
 	[Export] private PackedScene Bullet3DScene;
-	[Export] private PackedScene Enemy3DScene;
-	[Export] private float MoveSpeed = 6.0f;
-	[Export] private float RotationSpeed = 4.0f;
+	[Export] private float MoveSpeed = 5.0f;
+	[Export] private float RotationSpeed = 2.0f;
 	public AnimationNodeStateMachinePlayback AnimationPlayer;
-	private Timer ShootTimer = new Timer();
+	private Timer ShootTimer;
 	private bool CanShoot = true;
 
 	public override void _Ready()
 	{
 		AnimationPlayer = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
+		ShootTimer = new Timer();
 		ShootTimer.Timeout += () => CanShoot = true;
 		ShootTimer.WaitTime = 0.95f;
 		ShootTimer.OneShot = true;
@@ -25,14 +24,11 @@ public partial class Player3D : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("Shoot"))
+		if (Input.IsActionPressed("Shoot") && CanShoot)
 		{
-			if (CanShoot)
-			{
-				CanShoot = false;
-				Shoot(delta);
-				ShootTimer.Start();
-			}
+			CanShoot = false;
+			Shoot(delta);
+			ShootTimer.Start();
 		}
 	}
 
@@ -42,20 +38,12 @@ public partial class Player3D : CharacterBody3D
 		float rotate = Input.GetActionStrength("LeftRot") - Input.GetActionStrength("RightRot");
 
 		Rotation = new Vector3(Rotation.X, Rotation.Y + RotationSpeed * rotate * (float)delta, Rotation.Z);
+		Vector3 direction = Transform.Basis.Z;
+		Velocity = z_movement * direction * MoveSpeed;
 
-		Vector3 direction = new Vector3(0, 0, 1).Rotated(new Vector3(0, 1, 0), Rotation.Y);
-		Vector3 motion = z_movement * direction * MoveSpeed * (float)delta;
+		MoveAndSlide();
 
-
-
-		MoveAndCollide(motion);
-
-		
-
-		if (motion.LengthSquared() > 0)
-			AnimationPlayer.Travel("Run");
-		else
-			AnimationPlayer.Travel("RESET");
+		AnimationPlayer.Travel(Velocity.LengthSquared() > 0 ? "Run" : "RESET");
 	}
 
 	private void Shoot(double delta)
@@ -65,7 +53,7 @@ public partial class Player3D : CharacterBody3D
 		Bullet3D Bullet3D = Bullet3DScene.Instantiate<Bullet3D>();
 		Bullet3D.Position = Bullet3DSpawnPosition.GlobalPosition;
 		Bullet3D.Rotation = Rotation;
-		Bullet3D.Velocity = (Bullet3DSpawnPosition.GlobalPosition - (GlobalPosition + new Vector3(0, Scale.Y, 0))).Normalized() * 10000 * (float)delta;
+		Bullet3D.Velocity = (Bullet3DSpawnPosition.GlobalPosition - (GlobalPosition + new Vector3(0, Scale.Y, 0))).Normalized() * 30000 * (float)delta;
 		GetParent().AddChild(Bullet3D);
 	}
 }

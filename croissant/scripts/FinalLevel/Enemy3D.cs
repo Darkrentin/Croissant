@@ -1,7 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 
-public partial class Enemy3D : Area3D
+public partial class Enemy3D : CharacterBody3D
 {
 	[Export] private MeshInstance3D Mesh;
 	[Export] private Mesh IcosahedronMesh;
@@ -14,14 +14,13 @@ public partial class Enemy3D : Area3D
 	private int currentShapeIndex;
 	private List<Mesh> shapeSequence;
 	public bool Alive = true;
-	private float rotationSpeed = 2.0f;
-	private int totalShapes = 4;
+	private float rotationSpeed = 1.0f;
 
 	public override void _Ready()
 	{
 		RotationAxis = new Vector3(Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1));
 		shapeSequence = new List<Mesh> { IcosahedronMesh, DodecahedronMesh, CubeMesh, TetrahedronMesh };
-		currentShapeIndex = Lib.rand.Next(0, totalShapes);
+		currentShapeIndex = Lib.rand.Next(0, 4);
 		UpdateShape();
 	}
 
@@ -40,7 +39,7 @@ public partial class Enemy3D : Area3D
 	{
 		if (!Alive) return;
 		currentShapeIndex++;
-		if (currentShapeIndex >= totalShapes)
+		if (currentShapeIndex >= 4)
 			Destroy();
 		else
 			UpdateShape();
@@ -49,7 +48,7 @@ public partial class Enemy3D : Area3D
 	private void Destroy()
 	{
 		Alive = false;
-		Collision.Disabled = true;
+		Collision.Position = new Vector3(0, 10, 0);
 		AnimationPlayer.Play("Depop");
 		Mesh.Visible = false;
 		Timer destroyTimer = new Timer();

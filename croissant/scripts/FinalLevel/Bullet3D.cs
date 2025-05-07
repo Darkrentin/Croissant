@@ -31,7 +31,6 @@ public partial class Bullet3D : CharacterBody3D
 		{
 			//WallExplosion.Emitting = true;
 		}
-		Lib.Print("Bullet3D Timeout");
 		OmniLight3D.Visible = false;
 		Alive = false;
 		Mesh.Visible = false;
@@ -42,7 +41,6 @@ public partial class Bullet3D : CharacterBody3D
 
 	public void OnTimerTimeout()
 	{
-		Lib.Print("Bullet3D Timeout");
 		QueueFree();
 	}
 }
