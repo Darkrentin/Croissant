@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dqfo1oymeb7ha"
-path="res://.godot/imported/stickman.png-b05a64c5feabec62bfa189bc983df561.ctex"
+path="res://.godot/imported/stickman.png-bdc2893c0c7f72bdc9b7f82fa655531a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Level3/stickman.png"
-dest_files=["res://.godot/imported/stickman.png-b05a64c5feabec62bfa189bc983df561.ctex"]
+source_file="res://assets/sprites/platformer/stickman.png"
+dest_files=["res://.godot/imported/stickman.png-bdc2893c0c7f72bdc9b7f82fa655531a.ctex"]
 
 [params]
 

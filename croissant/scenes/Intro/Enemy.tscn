@@ -8,6 +8,7 @@
 
 [sub_resource type="Animation" id="Animation_n1hot"]
 resource_name = "Depop"
+length = 0.25
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true

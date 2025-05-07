@@ -1,0 +1,19 @@
+[gd_resource type="ArrayMesh" load_steps=2 format=4 uid="uid://dd58n73thinjc"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip440"]
+
+[resource]
+_surfaces = [{
+"aabb": AABB(-0.76942, -0.65451, -0.809016, 1.53884, 1.30902, 1.61803),
+"attribute_data": PackedByteArray("OPH5lVDZO9///0DDorJAw2jB+ZXbo7y284v//6KyA+RFZQPkC3S8tvlFGaARLlvpwFRgzWMHYM0pFhmgUFlYcWhBmroXaJ+euhqfnoApWHEmwxZrPqtZtO3RXZiQhF2YVpMWa5v4WbQFup/h1emf4T6rWbTt0V2YROWYha6m3rJ+1t6y55eYhZa+nGlue1Z/2DydrKhsnawRLlZ/wFRaY1xNOarGDn/Xlj5/1wAAOaquJj2OuZr8yiNcQ/jzi0P4XE38ygt0AK+24h7WIplQvj211OQ9tc2XtuKDphdfHtaEFVC+njHU5J4xzZcXX4Om"),
+"format": 34896613399,
+"index_count": 108,
+"index_data": PackedByteArray("AAABAAIAAAADAAEAAAAEAAMABQAGAAcABQAIAAYABQAJAAgACgALAAwACgANAAsACgAOAA0ADwAQABEADwASABAADwATABIAFAAVABYAFAAXABUAFAAYABcAGQAaABsAGQAcABoAGQAdABwAHgAfACAAHgAhAB8AHgAiACEAIwAkACUAIwAmACQAIwAnACYAKAApACoAKAArACkAKAAsACsALQAuAC8ALQAwAC4ALQAxADAAMgAzADQAMgA1ADMAMgA2ADUANwA4ADkANwA6ADgANwA7ADoA"),
+"material": SubResource("StandardMaterial3D_ip440"),
+"name": "Surface",
+"primitive": 3,
+"uv_scale": Vector4(123.9, 124.439, 0, 0),
+"vertex_count": 60,
+"vertex_data": PackedByteArray("/3///xrPygUbz8hhjOfKBf9/Np7//8oF//82no2nygUbz///cZjKBeMw//9xmMoF4zDIYYznygUAADaejafKBf9/Np7//8oF/3///xrPygUbT////z87DwAAyGFxWDsP4zA2nnIYOw8AADaejac7D+Mw//9xmDsP47D///8/4xL/f8hhAADjEhvPNp5yGOMS4zA2nnIY4xIbT////z/jEhvP//9xmDsP///IYXFYOw///zaejac7DxvPNp5yGDsP47D///8/Ow8bz8hhjOcJCxvPAACNZwkL47AAAP+/CQv//8hhcVgJC///Np6NpwkL4zDIYYznAADjsAAA/78AABtPAAD/vwAAG8/IYYznAAD/fzae//8AAAAAyGFxWAkLG08AAP+/CQvjMAAAjWcJC+MwyGGM5wkLAAA2no2nCQv/f8hhAADzEeMwAACNZ/MR/38AAOQw8xEAAMhhcVjzEeMwNp5yGPMR///IYXFY8xH/fwAA5DDzERvPAACNZ/MR/3/IYQAA8xEbzzaechjzERtPAAD/v6oq/38AAOQwqirjMAAAjWeqKhvPAACNZ6oq47AAAP+/qiobT////z+qKv9///8az6oq4zD//3GYqiobz///cZiqKuOw////P6oqo5pak6OaWpOjmlqTo5pak6OaWpOj7KQao+ykGqPspBqj7KQao+ykGm70b0Nu9G9DbvRvQ270b0Nu9G9D/v//f/7//3/+//9//v//f////39vw5CLb8OQi2/DkItvw5CLb8OQi2UPnNBlD5zQZQ+c0GUPnNBlD5zQ/3+NZ/9/jWf/f41n/3+NZ/9/jWedUJpwnVCacJ1QmnCdUJpwnVCacK0k/nitJP54rST+eK0k/nitJP54AQespAEHrKQBB6ykAQespAEHrKSqKlTVqipU1aoqVNWqKlTVqipU1VTVqipU1aoqVNWqKlTVqipU1aoq")
+}]
+blend_shape_mode = 0

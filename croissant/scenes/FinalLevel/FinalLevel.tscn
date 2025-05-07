@@ -1,11 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=14 format=3 uid="uid://pus1csxsvyfw"]
 
-[ext_resource type="Shader" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
+[ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
 [ext_resource type="Texture2D" uid="uid://d314a13s04tl" path="res://assets/shaders/halloween-palette-1x.png" id="2_56we2"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
-[ext_resource type="PackedScene" uid="uid://hydpfc60do7x" path="res://scenes/FinalLevel/MiniMap.tscn" id="6_knvm8"]
+[ext_resource type="PackedScene" path="res://scenes/FinalLevel/MiniMap.tscn" id="6_knvm8"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
 sky_top_color = Color(0.0905869, 0.116999, 0.153729, 1)
@@ -33,10 +33,32 @@ shader_parameter/u_contrast = 1.0
 shader_parameter/u_offset = 0.0
 shader_parameter/u_dither_size = 3
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knvm8"]
-
-[sub_resource type="SphereMesh" id="SphereMesh_d5vjr"]
-material = SubResource("StandardMaterial3D_knvm8")
+[sub_resource type="Animation" id="Animation_knvm8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ViewportWithShader:material:shader_parameter/u_dither_size")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ViewportWithShader:material:shader_parameter/u_bit_depth")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [128]
+}
 
 [sub_resource type="Animation" id="Animation_56we2"]
 resource_name = "Start"
@@ -64,33 +86,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [2, 128]
-}
-
-[sub_resource type="Animation" id="Animation_knvm8"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ViewportWithShader:material:shader_parameter/u_dither_size")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ViewportWithShader:material:shader_parameter/u_bit_depth")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [128]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d5vjr"]
@@ -125,10 +120,6 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1, 0, 1)
 [node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("SphereMesh_d5vjr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

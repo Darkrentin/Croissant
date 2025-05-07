@@ -1,0 +1,67 @@
+[gd_scene load_steps=10 format=3 uid="uid://cimi7w1dx80pn"]
+
+[ext_resource type="Script" uid="uid://d1283ira3bkqa" path="res://scripts/FinalLevel/Enemy3D.cs" id="1_vqa6h"]
+[ext_resource type="ArrayMesh" uid="uid://dp0dgbo55w32s" path="res://assets/meshes/Icosahedron.tres" id="2_0vp8b"]
+[ext_resource type="BoxMesh" uid="uid://b0qi04ygb7wxi" path="res://assets/meshes/Cube.tres" id="2_sjjoh"]
+[ext_resource type="ArrayMesh" uid="uid://dd58n73thinjc" path="res://assets/meshes/Dodecahedron.tres" id="3_0l5py"]
+[ext_resource type="ArrayMesh" uid="uid://dkkr5885q3gxs" path="res://assets/meshes/Tetrahedron.tres" id="5_fjuj0"]
+
+[sub_resource type="Animation" id="Animation_0vp8b"]
+resource_name = "Depop"
+length = 0.25
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(0.001, 0.001, 0.001)]
+}
+
+[sub_resource type="Animation" id="Animation_0l5py"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjuj0"]
+_data = {
+&"Depop": SubResource("Animation_0vp8b"),
+&"RESET": SubResource("Animation_0l5py")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_0vp8b"]
+radius = 1.0
+
+[node name="Enemy3D" type="CharacterBody3D" node_paths=PackedStringArray("Mesh", "AnimationPlayer", "Collision")]
+script = ExtResource("1_vqa6h")
+Mesh = NodePath("MeshInstance3D")
+IcosahedronMesh = ExtResource("2_0vp8b")
+DodecahedronMesh = ExtResource("3_0l5py")
+CubeMesh = ExtResource("2_sjjoh")
+TetrahedronMesh = ExtResource("5_fjuj0")
+AnimationPlayer = NodePath("AnimationPlayer")
+Collision = NodePath("CollisionShape3D")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fjuj0")
+}
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_0vp8b")

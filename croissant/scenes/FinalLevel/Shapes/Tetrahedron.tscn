@@ -1,0 +1,41 @@
+[gd_scene load_steps=4 format=4 uid="uid://c1d7jd582uclf"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxspq"]
+resource_name = "Scene_-_Root"
+cull_mode = 2
+roughness = 0.6
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2wfra"]
+_surfaces = [{
+"aabb": AABB(-1, -1.1547, -0.544331, 2, 1.73205, 1.63299),
+"format": 34896613377,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAQAAAAMAAAACAAMA"),
+"name": "Scene_-_Root",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("/3+qqv//AAD/fwAAAAAAAAAA//8AAAAA/////wAAAAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_0kpil"]
+resource_name = "Sketchfab_Scene_Object_0"
+_surfaces = [{
+"aabb": AABB(-1, -1.1547, -0.544331, 2, 1.73205, 1.63299),
+"format": 34896613383,
+"index_count": 12,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABgAHAAgACQAKAAsA"),
+"material": SubResource("StandardMaterial3D_bxspq"),
+"name": "Scene_-_Root",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("/3+qqv//o7z/fwAAAACjvAAA//8AAKO8AAD//wAA////fwAAAAD///////8AAP///38AAAAAmfP/f6qq//+Z8/////8AAJnz/3+qqv//FfQAAP//AAAV9P////8AABX0uUtS+rlLUvq5S1L6/z//v/8//7//P/+/qKIwYqiiMGKoojBi8IhQsfCIULHwiFCx")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2wfra")
+
+[node name="Triangle" type="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, -0.943899, -0.330234, 0, 0.330234, -0.943899, 0, -0.241182, 0)
+mesh = SubResource("ArrayMesh_0kpil")
