@@ -1,8 +1,227 @@
-[gd_scene load_steps=3 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=35 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
+[ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
+[ext_resource type="Texture2D" uid="uid://ctcw2js43e8ya" path="res://assets/sprites/Sgun0.png" id="2_h2v7r"]
+[ext_resource type="Texture2D" uid="uid://cyul661qhorrb" path="res://assets/sprites/Sgun4.png" id="3_aofux"]
+[ext_resource type="Texture2D" uid="uid://dqh3rygqtihv5" path="res://assets/sprites/Sgun5.png" id="4_4x0oc"]
+[ext_resource type="Texture2D" uid="uid://bswiddnvoecm8" path="res://assets/sprites/Sgun1.png" id="6_n4wqm"]
+[ext_resource type="Texture2D" uid="uid://congju50q684c" path="res://assets/sprites/Sgun2.png" id="7_ley8d"]
+[ext_resource type="Texture2D" uid="uid://di0wec2b4yo70" path="res://assets/sprites/WhiteSquare.png" id="8_ley8d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwlh4"]
+
+[sub_resource type="Animation" id="Animation_6l3yh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [ExtResource("2_h2v7r")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(960, 768)]
+}
+
+[sub_resource type="Animation" id="Animation_10gut"]
+resource_name = "Reload"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("2_h2v7r"), ExtResource("2_6l3yh"), ExtResource("3_aofux"), ExtResource("4_4x0oc"), ExtResource("3_aofux"), ExtResource("2_6l3yh"), ExtResource("2_h2v7r")]
+}
+
+[sub_resource type="Animation" id="Animation_aofux"]
+resource_name = "Shoot"
+length = 0.5
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("2_h2v7r"), ExtResource("6_n4wqm"), ExtResource("7_ley8d"), ExtResource("2_h2v7r")]
+}
+
+[sub_resource type="Animation" id="Animation_n4wqm"]
+resource_name = "ShootAndReload"
+length = 0.9
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.3, 0.4, 0.5, 0.65, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [ExtResource("2_h2v7r"), ExtResource("6_n4wqm"), ExtResource("7_ley8d"), ExtResource("2_6l3yh"), ExtResource("3_aofux"), ExtResource("4_4x0oc"), ExtResource("3_aofux"), ExtResource("2_6l3yh"), ExtResource("2_h2v7r")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.4, 0.5, 0.65, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(960, 768), Vector2(710, 768), Vector2(550, 768), Vector2(600, 768), Vector2(550, 768), Vector2(710, 768), Vector2(960, 768)]
+}
+
+[sub_resource type="Animation" id="Animation_h7i27"]
+resource_name = "StartRunLeft"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 768), Vector2(870, 785.705)]
+}
+
+[sub_resource type="Animation" id="Animation_o3k41"]
+resource_name = "StartRunRight"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(960, 768), Vector2(1050, 785)]
+}
+
+[sub_resource type="Animation" id="Animation_ley8d"]
+resource_name = "Run"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(870, 785.705), Vector2(915, 845), Vector2(960, 855), Vector2(1005, 845), Vector2(1050, 785)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aofux"]
+_data = {
+&"RESET": SubResource("Animation_6l3yh"),
+&"Reload": SubResource("Animation_10gut"),
+&"Run": SubResource("Animation_ley8d"),
+&"Shoot": SubResource("Animation_aofux"),
+&"ShootAndReload": SubResource("Animation_n4wqm"),
+&"StartRunLeft": SubResource("Animation_h7i27"),
+&"StartRunRight": SubResource("Animation_o3k41")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h7i27"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o3k41"]
+animation = &"Run"
+play_mode = 1
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gf1pk"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ley8d"]
+animation = &"ShootAndReload"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8xvos"]
+animation = &"StartRunLeft"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_228hw"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a0jgr"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4qb4h"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_parfq"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_b6u1r"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3r0jc"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7i27"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o3k41"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gf1pk"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xvos"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_lcsot"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ley8d"]
+states/End/position = Vector2(1049, 100)
+states/RESET/node = SubResource("AnimationNodeAnimation_h7i27")
+states/RESET/position = Vector2(322, 100)
+states/Run/node = SubResource("AnimationNodeAnimation_gf1pk")
+states/Run/position = Vector2(600, -87)
+"states/Run Back/node" = SubResource("AnimationNodeAnimation_o3k41")
+"states/Run Back/position" = Vector2(837, -87)
+states/ShootAndReload/node = SubResource("AnimationNodeAnimation_ley8d")
+states/ShootAndReload/position = Vector2(711, 213)
+states/Start/position = Vector2(204, 100)
+states/StartRunLeft/node = SubResource("AnimationNodeAnimation_8xvos")
+states/StartRunLeft/position = Vector2(322, -87)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "Run", "Run Back", SubResource("AnimationNodeStateMachineTransition_a0jgr"), "Run Back", "Run", SubResource("AnimationNodeStateMachineTransition_4qb4h"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "Run", "ShootAndReload", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "Run Back", "ShootAndReload", SubResource("AnimationNodeStateMachineTransition_h7i27"), "RESET", "ShootAndReload", SubResource("AnimationNodeStateMachineTransition_o3k41"), "ShootAndReload", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "Run", "RESET", SubResource("AnimationNodeStateMachineTransition_8xvos"), "Run Back", "RESET", SubResource("AnimationNodeStateMachineTransition_lcsot")]
+graph_offset = Vector2(74, -141)
 
 [node name="Player3D" type="CharacterBody3D"]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 0, 0)
@@ -20,3 +239,31 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 visible = false
 omni_range = 2.0
 omni_attenuation = 5.0
+
+[node name="ShootAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_aofux")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Control"]
+position = Vector2(960, 768)
+scale = Vector2(8, 8)
+texture = ExtResource("2_h2v7r")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Control"]
+visible = false
+position = Vector2(960, 800)
+scale = Vector2(0.5, 21)
+texture = ExtResource("8_ley8d")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_ley8d")
+anim_player = NodePath("../ShootAnimation")
