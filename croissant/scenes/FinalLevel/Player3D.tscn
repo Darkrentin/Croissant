@@ -1,7 +1,6 @@
-[gd_scene load_steps=49 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=53 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
-[ext_resource type="PackedScene" uid="uid://dhkfqv7r6e01q" path="res://scenes/FinalLevel/Bullet3D.tscn" id="2_3r0jc"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
 [ext_resource type="Texture2D" uid="uid://ctcw2js43e8ya" path="res://assets/sprites/Sgun0.png" id="2_h2v7r"]
 [ext_resource type="Texture2D" uid="uid://cyul661qhorrb" path="res://assets/sprites/Sgun4.png" id="3_aofux"]
@@ -327,12 +326,38 @@ states/StartRunLeft/position = Vector2(322, -87)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "RESET", "Shoot", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_df6ge"), "RunR 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_vdv5x"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_bdsnf"), "RunR", "Shoot", SubResource("AnimationNodeStateMachineTransition_1yi64"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "StartMid", "Shoot", SubResource("AnimationNodeStateMachineTransition_q2n0e"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "StartRunLeft", "Shoot", SubResource("AnimationNodeStateMachineTransition_8xvos")]
 graph_offset = Vector2(109, -254)
 
-[node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree", "Bullet3DSpawnPosition")]
+[sub_resource type="Curve" id="Curve_n4wqm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.749091, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_ley8d"]
+curve = SubResource("Curve_n4wqm")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3r0jc"]
+particle_flag_align_y = true
+spread = 180.0
+initial_velocity_min = 12.0
+initial_velocity_max = 14.0
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_ley8d")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7i27"]
+albedo_color = Color(1, 0.541176, 0, 1)
+emission_enabled = true
+emission = Color(1, 0.541176, 0, 1)
+emission_energy_multiplier = 2.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_o3k41"]
+material = SubResource("StandardMaterial3D_h7i27")
+top_radius = 0.1
+bottom_radius = 0.0
+
+[node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree", "BulletHitParticles")]
 script = ExtResource("1_rrt4f")
 RayCast3D = NodePath("RayCast3D")
 AnimationTree = NodePath("AnimationTree")
-Bullet3DSpawnPosition = NodePath("BulletSpawnPosition")
-Bullet3DScene = ExtResource("2_3r0jc")
+BulletHitParticles = NodePath("BulletHit")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -369,9 +394,18 @@ texture = ExtResource("2_h2v7r")
 tree_root = SubResource("AnimationNodeStateMachine_ley8d")
 anim_player = NodePath("../ShootAnimation")
 
-[node name="BulletSpawnPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.1)
-
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+enabled = false
 target_position = Vector3(0, 0, -100)
+
+[node name="BulletHit" type="GPUParticles3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+emitting = false
+amount = 24
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_3r0jc")
+draw_pass_1 = SubResource("CylinderMesh_o3k41")

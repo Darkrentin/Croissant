@@ -4,8 +4,7 @@ public partial class Player3D : CharacterBody3D
 {
 	[Export] private RayCast3D RayCast3D;
 	[Export] private AnimationTree AnimationTree;
-	[Export] private Node3D Bullet3DSpawnPosition;
-	[Export] private PackedScene Bullet3DScene;
+	[Export] private GpuParticles3D BulletHitParticles;
 	[Export] private float MoveSpeed = 5.0f;
 	[Export] private float RotationSpeed = 2.0f;
 	public AnimationNodeStateMachinePlayback AnimationPlayer;
@@ -25,12 +24,7 @@ public partial class Player3D : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
-		if (Input.IsActionPressed("Shoot") && CanShoot)
-		{
-			CanShoot = false;
-			Shoot(delta);
-			ShootTimer.Start();
-		}
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -45,25 +39,25 @@ public partial class Player3D : CharacterBody3D
 		MoveAndSlide();
 
 		AnimationPlayer.Travel(Velocity.LengthSquared() > 0 ? "Run" : "RESET");
+		if (Input.IsActionPressed("Shoot") && CanShoot)
+		{
+			CanShoot = false;
+			Shoot();
+			ShootTimer.Start();
+		}
 	}
 
-	private void Shoot(double delta)
+	private void Shoot()
 	{
 		AnimationPlayer.Travel("Shoot");
 
+		RayCast3D.ForceRaycastUpdate();
 		if (RayCast3D.GetCollider() is Node3D Body)
 		{
+			BulletHitParticles.GlobalPosition = RayCast3D.GetCollisionPoint();
+			BulletHitParticles.Emitting = true;
 			if (Body is Enemy3D Enemy)
-			{
 				Enemy.OnBulletCollide();
-			}
 		}
-		/*
-		Bullet3D Bullet3D = Bullet3DScene.Instantiate<Bullet3D>();
-		Bullet3D.Position = Bullet3DSpawnPosition.GlobalPosition;
-		Bullet3D.Rotation = Rotation;
-		Bullet3D.Velocity = (Bullet3DSpawnPosition.GlobalPosition - (GlobalPosition + new Vector3(0, Scale.Y, 0))).Normalized() * 10000 * (float)delta;
-		GetParent().AddChild(Bullet3D);
-		*/
 	}
 }

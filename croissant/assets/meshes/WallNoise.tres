@@ -1,0 +1,20 @@
+[gd_resource type="NoiseTexture2D" load_steps=3 format=3 uid="uid://dmqa4nul5b2m3"]
+
+[sub_resource type="Gradient" id="Gradient_lvuuv"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
+resource_local_to_scene = true
+noise_type = 0
+frequency = 0.0092
+
+[resource]
+resource_local_to_scene = true
+width = 256
+height = 256
+generate_mipmaps = false
+seamless = true
+seamless_blend_skirt = 1.0
+as_normal_map = true
+bump_strength = 32.0
+color_ramp = SubResource("Gradient_lvuuv")
+noise = SubResource("FastNoiseLite_f603f")

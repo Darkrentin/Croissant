@@ -28,7 +28,7 @@ public partial class IntroGameManager : Node2D
 
 	public override void _Ready()
 	{
-		GetWindow().Size = GameManager.ScreenSize;
+		GetWindow().Size = GameManager.ScreenSize + new Vector2I(1, 1);
 		Instance = this;
 
 		Camera = GetNode<Camera2D>("Camera");

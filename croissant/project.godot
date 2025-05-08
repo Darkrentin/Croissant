@@ -219,7 +219,6 @@ common/physics_jitter_fix=0.0
 occlusion_culling/bvh_build_quality=1
 textures/canvas_textures/default_texture_filter=0
 gl_compatibility/fallback_to_angle=false
-renderer/rendering_method="gl_compatibility"
 textures/lossless_compression/force_png=true
 lights_and_shadows/directional_shadow/size=1024
 lights_and_shadows/directional_shadow/size.mobile=512

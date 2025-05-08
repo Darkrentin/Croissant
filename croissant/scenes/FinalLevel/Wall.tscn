@@ -1,31 +1,18 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0rwmg3mas3cc"]
+[gd_scene load_steps=6 format=3 uid="uid://b0rwmg3mas3cc"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lvuuv"]
+[ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/meshes/WallNoise.tres" id="1_f603f"]
+[ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_kkjf7"]
 
-[sub_resource type="Gradient" id="Gradient_lvuuv"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
-noise_type = 0
-frequency = 0.0029
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vjpp2"]
-seamless = true
-seamless_blend_skirt = 1.0
-as_normal_map = true
-bump_strength = 32.0
-color_ramp = SubResource("Gradient_lvuuv")
-noise = SubResource("FastNoiseLite_f603f")
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjpp2"]
-normal_enabled = true
-normal_scale = 10.49
-normal_texture = SubResource("NoiseTexture2D_vjpp2")
-heightmap_texture = SubResource("NoiseTexture2D_lvuuv")
-uv1_triplanar = true
-uv1_world_triplanar = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjpp2"]
+render_priority = 0
+shader = ExtResource("1_kkjf7")
+shader_parameter/world_noise_normal_texture = ExtResource("1_f603f")
+shader_parameter/noise_scale = 0.5
+shader_parameter/normal_strength = 1.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_lvuuv"]
-material = SubResource("StandardMaterial3D_vjpp2")
+lightmap_size_hint = Vector2i(24, 36)
+material = SubResource("ShaderMaterial_vjpp2")
 size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lvuuv"]
