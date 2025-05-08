@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=9 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Texture2D" uid="uid://dqfo1oymeb7ha" path="res://assets/sprites/platformer/stickman.png" id="1_8pltl"]
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_j2rac"]
@@ -7,13 +7,16 @@
 [ext_resource type="Script" uid="uid://dv3cf7rfc5x2k" path="res://scripts/Level3/Character/States/IdleState.cs" id="5_che0y"]
 [ext_resource type="Script" uid="uid://v3uhhhkv0kxc" path="res://scripts/Level3/Character/States/JumpState.cs" id="6_edkpl"]
 
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
 radius = 39.0
 height = 256.0
 
-[node name="Player" type="CharacterBody2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xk4oe"]
+size = Vector2(48.875, 8.25)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("area2D")]
 script = ExtResource("1_j2rac")
+area2D = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, -136)
@@ -36,3 +39,9 @@ script = ExtResource("5_che0y")
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("6_edkpl")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, -1)
+shape = SubResource("RectangleShape2D_xk4oe")

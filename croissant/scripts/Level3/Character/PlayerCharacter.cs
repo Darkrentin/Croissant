@@ -11,9 +11,20 @@ public partial class PlayerCharacter : CharacterBody2D
 
     private float gravityAcceleration = GravityExponentStart;
 
+    [Export] public Area2D area2D;
+
     public override void _Ready()
     {
         AddToGroup("player");
+        area2D.BodyEntered += OnBodyEntered;
+    }
+
+    public void OnBodyEntered(Node body)
+    {
+        if (body is StaticPlatform platform)
+        {
+            GD.Print("static test");
+        }
     }
 
     public override void _PhysicsProcess(double delta)

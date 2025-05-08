@@ -7,7 +7,6 @@ Lvl 1 :
 - Ajouter plus de static windows
 - Faire un système de vagues où on peut choisir les fenetres qui vont pop et le temps entre chaque fenetre de la vague
 - Faire des vagues
-- Ajouter un type de fenetre qui se téléporte toutes les 0.8s aléatoirement sur l'écran : la TeleportWindow
 
 Lvl 2 :
 - Rendre la ExtendWindow carrée, ainsi que son explosion, pas rectangulaire @done
@@ -21,7 +20,8 @@ Lvl 2 :
 
 Lvl 3 :
 - Trouver des idées
-- TODO à remplir
+- mouvements réalistes de platforms
+
 
 Autres :
 - Faire le Helper
