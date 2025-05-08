@@ -12,9 +12,8 @@ public partial class Enemy3D : CharacterBody3D
 	[Export] private CollisionShape3D Collision;
 	[Export] private NavigationAgent3D navigationAgent3D;
 	private Vector3 RotationAxis;
-	private int currentShapeIndex;
+	private int currentShape;
 	private List<Mesh> shapeSequence;
-	public bool Alive = true;
 	private float rotationSpeed = 2.0f;
 	[Export] private float movementSpeed = 1.0f;
 	[Export] private RayCast3D rayCast;
@@ -26,7 +25,7 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		RotationAxis = new Vector3(Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1));
 		shapeSequence = new List<Mesh> { IcosahedronMesh, DodecahedronMesh, CubeMesh, TetrahedronMesh };
-		currentShapeIndex = Lib.rand.Next(0, 4);
+		currentShape = Lib.rand.Next(0, 4);
 		UpdateShape();
 	}
 
@@ -43,9 +42,9 @@ public partial class Enemy3D : CharacterBody3D
 		navigationAgent3D.Velocity = IntendedVelocity;
 
 		Vector3 directionToPlayer = FinalLevel.Instance.Player3D.GlobalPosition - rayCast.GlobalPosition + new Vector3(0, 0.75f, 0);
-    	rayCast.TargetPosition = rayCast.ToLocal(rayCast.GlobalPosition + directionToPlayer);
+		rayCast.TargetPosition = rayCast.ToLocal(rayCast.GlobalPosition + directionToPlayer);
 
-		if(rayCast.GetCollider() is Player3D player && rayCast.IsEnabled())
+		if (rayCast.GetCollider() is Player3D player && rayCast.IsEnabled())
 		{
 			Agro = MaxAgro;
 		}
@@ -60,30 +59,36 @@ public partial class Enemy3D : CharacterBody3D
 	}
 	private void UpdateShape()
 	{
-		Mesh.Mesh = shapeSequence[currentShapeIndex];
+		Mesh.Mesh = shapeSequence[currentShape];
 	}
 
 	public void OnBulletCollide()
 	{
-		if (!Alive) return;
-		currentShapeIndex++;
-		if (currentShapeIndex == 3)
-		{
-			Scale = new Vector3(0.88f, 0.88f, 0.88f);
-			Position += new Vector3(0, 0.2f, 0);
-		}
-		if (currentShapeIndex == 4)
+		if (currentShape == 3)
 			Destroy();
 		else
-			UpdateShape();
+		{
+			currentShape++;
+			if (currentShape == 3)
+			{
+				Scale = new Vector3(0.8f, 0.8f, 0.8f);
+				Position += new Vector3(0, 0.25f, 0);
+			}
+
+			Timer ShapeChangeTimer = new Timer();
+			ShapeChangeTimer.WaitTime = 0.25f;
+			ShapeChangeTimer.OneShot = true;
+			AddChild(ShapeChangeTimer);
+			ShapeChangeTimer.Timeout += () => UpdateShape();
+			ShapeChangeTimer.Start();
+			AnimationPlayer.Play("ShapeChange");
+		}
 	}
 
 	private void Destroy()
 	{
-		Alive = false;
 		Collision.Position = new Vector3(0, 10, 0);
 		AnimationPlayer.Play("Depop");
-		Mesh.Visible = false;
 		Timer destroyTimer = new Timer();
 		destroyTimer.WaitTime = 0.5f;
 		destroyTimer.OneShot = true;
@@ -91,7 +96,6 @@ public partial class Enemy3D : CharacterBody3D
 		destroyTimer.Timeout += () => QueueFree();
 		destroyTimer.Start();
 		FinalLevel.Instance.EnemyCount--;
-		Lib.Print("Enemy Count: " + FinalLevel.Instance.EnemyCount);
 	}
 
 	public void _on_navigation_agent_3d_velocity_computed(Vector3 velocity)

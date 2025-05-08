@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://buutrxsk7ssr0"]
+[gd_scene load_steps=8 format=3 uid="uid://buutrxsk7ssr0"]
 
 [sub_resource type="Curve" id="Curve_w1fs3"]
 _limits = [-50.0, 50.0, 0.0, 1.0]
@@ -44,13 +44,9 @@ albedo_color = Color(0, 1, 1, 1)
 [sub_resource type="BoxMesh" id="BoxMesh_cjy56"]
 material = SubResource("StandardMaterial3D_3ry8w")
 
-[sub_resource type="PrismMesh" id="PrismMesh_42j4i"]
-
 [node name="Node3D" type="GPUParticles3D"]
 amount = 50
 lifetime = 1.2
 explosiveness = 0.95
 process_material = SubResource("ParticleProcessMaterial_2i8dk")
-draw_passes = 2
 draw_pass_1 = SubResource("BoxMesh_cjy56")
-draw_pass_2 = SubResource("PrismMesh_42j4i")

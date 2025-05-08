@@ -17,6 +17,10 @@ run/low_processor_mode_sleep_usec=0
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
+[debug]
+
+settings/stdout/print_fps=true
+
 [display]
 
 window/size/viewport_width=1920

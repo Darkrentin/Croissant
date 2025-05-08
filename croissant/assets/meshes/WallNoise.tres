@@ -5,7 +5,7 @@
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
 resource_local_to_scene = true
 noise_type = 0
-frequency = 0.0092
+frequency = 0.02
 
 [resource]
 resource_local_to_scene = true

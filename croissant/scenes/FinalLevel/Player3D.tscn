@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=56 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
@@ -327,7 +327,7 @@ transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransitio
 graph_offset = Vector2(109, -254)
 
 [sub_resource type="Curve" id="Curve_n4wqm"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.749091, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_ley8d"]
@@ -336,22 +336,36 @@ curve = SubResource("Curve_n4wqm")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3r0jc"]
 particle_flag_align_y = true
 spread = 180.0
-initial_velocity_min = 12.0
-initial_velocity_max = 14.0
-scale_min = 0.5
-scale_max = 1.5
+flatness = 0.8
+initial_velocity_min = 2.0
+initial_velocity_max = 6.0
+scale_min = 0.1
+scale_max = 0.3
 scale_curve = SubResource("CurveTexture_ley8d")
 
+[sub_resource type="Gradient" id="Gradient_n4wqm"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ley8d"]
+noise_type = 0
+frequency = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3r0jc"]
+width = 32
+height = 32
+color_ramp = SubResource("Gradient_n4wqm")
+noise = SubResource("FastNoiseLite_ley8d")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7i27"]
-albedo_color = Color(1, 0.541176, 0, 1)
+albedo_texture = SubResource("NoiseTexture2D_3r0jc")
 emission_enabled = true
 emission = Color(1, 0.541176, 0, 1)
-emission_energy_multiplier = 2.0
+emission_energy_multiplier = 12.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_o3k41"]
 material = SubResource("StandardMaterial3D_h7i27")
-top_radius = 0.1
+top_radius = 0.08
 bottom_radius = 0.0
+height = 0.8
 
 [node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree", "BulletHitParticles")]
 script = ExtResource("1_rrt4f")
@@ -400,9 +414,8 @@ enabled = false
 target_position = Vector3(0, 0, -100)
 
 [node name="BulletHit" type="GPUParticles3D" parent="."]
-transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
 emitting = false
-amount = 24
+amount = 60
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0

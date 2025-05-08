@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cimi7w1dx80pn"]
+[gd_scene load_steps=15 format=3 uid="uid://cimi7w1dx80pn"]
 
 [ext_resource type="Script" uid="uid://d1283ira3bkqa" path="res://scripts/FinalLevel/Enemy3D.cs" id="1_vqa6h"]
 [ext_resource type="ArrayMesh" uid="uid://dp0dgbo55w32s" path="res://assets/meshes/Icosahedron.tres" id="2_0vp8b"]
@@ -37,11 +37,39 @@ tracks/0/keys = {
 "values": [Vector3(1, 1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_fjuj0"]
+resource_name = "ShapeChange"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(0.01, 0.01, 0.01), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjuj0"]
 _data = {
 &"Depop": SubResource("Animation_0vp8b"),
-&"RESET": SubResource("Animation_0l5py")
+&"RESET": SubResource("Animation_0l5py"),
+&"ShapeChange": SubResource("Animation_fjuj0")
 }
+
+[sub_resource type="Gradient" id="Gradient_0vp8b"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_0l5py"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fjuj0"]
+color_ramp = SubResource("Gradient_0vp8b")
+noise = SubResource("FastNoiseLite_0l5py")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vp8b"]
+backlight_texture = SubResource("NoiseTexture2D_fjuj0")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vp8b"]
 radius = 0.75
@@ -66,6 +94,7 @@ libraries = {
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+material_override = SubResource("StandardMaterial3D_0vp8b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
