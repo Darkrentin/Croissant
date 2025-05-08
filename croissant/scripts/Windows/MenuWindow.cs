@@ -68,6 +68,7 @@ public partial class MenuWindow : FloatWindow
 		ProcessMode = ProcessModeEnum.Always;
 		Virus.SetPause(true);
 		GetTree().Paused = true;
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 	}
 
 	public void _on_quit_button_pressed()

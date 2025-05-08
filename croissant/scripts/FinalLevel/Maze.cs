@@ -39,7 +39,7 @@ public partial class Maze : Node3D
         if (MazeSize > 2)
             GenerateMazeDFS(1, 1);
 
-        MazeData[MazeSize / 2, MazeSize / 2] = 0; // Start point
+        PlaceRoom(MazeSize / 2, MazeSize / 2, 3, 3, true);
     }
 
     private void GenerateMazeDFS(int r, int c)
@@ -131,6 +131,26 @@ public partial class Maze : Node3D
             for (int j = 0; j < MazeSize; j++)
                 line += (MazeData[i, j] == 1 ? "#" : (MazeData[i, j] == 2 ? "L" : ".")) + " ";
             GD.Print(line);
+        }
+    }
+
+    public void PlaceRoom(int x, int y, int w, int h, bool center = false, int Label = 0)
+    {
+        if (center)
+        {
+            x -= w / 2;
+            y -= h / 2;
+        }
+
+        for (int i = x; i < x + w; i++)
+        {
+            for (int j = y; j < y + h; j++)
+            {
+                if (i > 0 && i < MazeSize - 1 && j > 0 && j < MazeSize - 1)
+                {
+                    MazeData[i, j] = Label;
+                }
+            }
         }
     }
 }
