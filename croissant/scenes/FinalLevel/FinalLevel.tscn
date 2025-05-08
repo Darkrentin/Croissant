@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
 [ext_resource type="PackedScene" uid="uid://cimi7w1dx80pn" path="res://scenes/FinalLevel/Enemy3D.tscn" id="7_ebjtf"]
-[ext_resource type="PackedScene" uid="uid://hydpfc60do7x" path="res://scenes/FinalLevel/MiniMap.tscn" id="8_ebjtf"]
+[ext_resource type="PackedScene" path="res://scenes/FinalLevel/MiniMap.tscn" id="8_ebjtf"]
 [ext_resource type="PackedScene" uid="uid://craldw8v15324" path="res://scenes/Other/SpecCam.tscn" id="9_1aisa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
@@ -23,9 +23,10 @@ sky_material = SubResource("ProceduralSkyMaterial_56we2")
 background_mode = 2
 background_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
 sky = SubResource("Sky_knvm8")
-ambient_light_color = Color(0.151276, 0.151276, 0.151276, 1)
-tonemap_mode = 1
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
 tonemap_exposure = 1.2
+fog_enabled = true
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf7iu"]
 shader = ExtResource("1_ctihd")
@@ -133,6 +134,7 @@ grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="ViewportWithShader"]
 handle_input_locally = false
+canvas_item_default_texture_filter = 0
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
@@ -147,8 +149,9 @@ navigation_mesh = SubResource("NavigationMesh_d5vjr")
 [node name="SpecCam" parent="ViewportWithShader/SubViewport" instance=ExtResource("9_1aisa")]
 
 [node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -160,6 +163,8 @@ autoplay = "Start"
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="MiniMap"]
 transparent_bg = true

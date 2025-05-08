@@ -2,6 +2,7 @@ using Godot;
 
 public partial class Player3D : CharacterBody3D
 {
+	[Export] private RayCast3D RayCast3D;
 	[Export] private AnimationTree AnimationTree;
 	[Export] private Node3D Bullet3DSpawnPosition;
 	[Export] private PackedScene Bullet3DScene;
@@ -50,10 +51,19 @@ public partial class Player3D : CharacterBody3D
 	{
 		AnimationPlayer.Travel("Shoot");
 
+		if (RayCast3D.GetCollider() is Node3D Body)
+		{
+			if (Body is Enemy3D Enemy)
+			{
+				Enemy.OnBulletCollide();
+			}
+		}
+		/*
 		Bullet3D Bullet3D = Bullet3DScene.Instantiate<Bullet3D>();
 		Bullet3D.Position = Bullet3DSpawnPosition.GlobalPosition;
 		Bullet3D.Rotation = Rotation;
 		Bullet3D.Velocity = (Bullet3DSpawnPosition.GlobalPosition - (GlobalPosition + new Vector3(0, Scale.Y, 0))).Normalized() * 10000 * (float)delta;
 		GetParent().AddChild(Bullet3D);
+		*/
 	}
 }

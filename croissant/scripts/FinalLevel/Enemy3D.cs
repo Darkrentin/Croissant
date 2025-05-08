@@ -15,7 +15,7 @@ public partial class Enemy3D : CharacterBody3D
 	private int currentShapeIndex;
 	private List<Mesh> shapeSequence;
 	public bool Alive = true;
-	private float rotationSpeed = 1.0f;
+	private float rotationSpeed = 2.0f;
 	[Export] private float movementSpeed = 1.0f;
 
 	public override void _Ready()
@@ -31,14 +31,14 @@ public partial class Enemy3D : CharacterBody3D
 		Mesh.Rotation += RotationAxis * (float)delta * rotationSpeed;
 	}
 
-    public override void _PhysicsProcess(double delta)
-    {
-        navigationAgent3D.TargetPosition =FinalLevel.Instance.Player3D.GlobalPosition;// ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
+	public override void _PhysicsProcess(double delta)
+	{
+		navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;// ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
 		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
 		Vector3 IntendedVelocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
 		navigationAgent3D.Velocity = IntendedVelocity;
 
-    }
+	}
 	private void UpdateShape()
 	{
 		Mesh.Mesh = shapeSequence[currentShapeIndex];
@@ -48,7 +48,12 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		if (!Alive) return;
 		currentShapeIndex++;
-		if (currentShapeIndex >= 4)
+		if (currentShapeIndex == 3)
+		{
+			Scale = new Vector3(0.88f, 0.88f, 0.88f);
+			Position += new Vector3(0, 0.2f, 0);
+		}
+		if (currentShapeIndex == 4)
 			Destroy();
 		else
 			UpdateShape();
