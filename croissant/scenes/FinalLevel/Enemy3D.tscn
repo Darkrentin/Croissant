@@ -46,7 +46,7 @@ _data = {
 [sub_resource type="SphereShape3D" id="SphereShape3D_0vp8b"]
 radius = 1.0
 
-[node name="Enemy3D" type="CharacterBody3D" node_paths=PackedStringArray("Mesh", "AnimationPlayer", "Collision")]
+[node name="Enemy3D" type="CharacterBody3D" node_paths=PackedStringArray("Mesh", "AnimationPlayer", "Collision", "navigationAgent3D")]
 script = ExtResource("1_vqa6h")
 Mesh = NodePath("MeshInstance3D")
 IcosahedronMesh = ExtResource("2_0vp8b")
@@ -55,6 +55,7 @@ CubeMesh = ExtResource("2_sjjoh")
 TetrahedronMesh = ExtResource("5_fjuj0")
 AnimationPlayer = NodePath("AnimationPlayer")
 Collision = NodePath("CollisionShape3D")
+navigationAgent3D = NodePath("NavigationAgent3D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -65,3 +66,7 @@ libraries = {
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_0vp8b")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
+debug_enabled = true
+debug_path_custom_color = Color(0, 1, 1, 1)

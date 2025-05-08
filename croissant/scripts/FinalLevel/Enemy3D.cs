@@ -10,11 +10,13 @@ public partial class Enemy3D : CharacterBody3D
 	[Export] private Mesh TetrahedronMesh;
 	[Export] private AnimationPlayer AnimationPlayer;
 	[Export] private CollisionShape3D Collision;
+	[Export] private NavigationAgent3D navigationAgent3D;
 	private Vector3 RotationAxis;
 	private int currentShapeIndex;
 	private List<Mesh> shapeSequence;
 	public bool Alive = true;
 	private float rotationSpeed = 1.0f;
+	[Export] private float movementSpeed = 5.0f;
 
 	public override void _Ready()
 	{
@@ -28,8 +30,17 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		Rotation += RotationAxis * (float)delta * rotationSpeed;
 		Mesh.Rotation = Rotation;
+		
 	}
 
+    public override void _PhysicsProcess(double delta)
+    {
+        navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;
+		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
+		Velocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
+		MoveAndSlide();
+
+    }
 	private void UpdateShape()
 	{
 		Mesh.Mesh = shapeSequence[currentShapeIndex];

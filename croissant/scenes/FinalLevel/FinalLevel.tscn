@@ -1,11 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=17 format=3 uid="uid://pus1csxsvyfw"]
 
 [ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
+[ext_resource type="Script" uid="uid://bh33sr5jvo6xt" path="res://scripts/FinalLevel/FinalLevel.cs" id="1_d5vjr"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
 [ext_resource type="Texture2D" uid="uid://d314a13s04tl" path="res://assets/shaders/halloween-palette-1x.png" id="2_56we2"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
-[ext_resource type="PackedScene" path="res://scenes/FinalLevel/MiniMap.tscn" id="6_knvm8"]
+[ext_resource type="PackedScene" uid="uid://cimi7w1dx80pn" path="res://scenes/FinalLevel/Enemy3D.tscn" id="7_ebjtf"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
 sky_top_color = Color(0.0905869, 0.116999, 0.153729, 1)
@@ -32,6 +33,19 @@ shader_parameter/u_bit_depth = 128
 shader_parameter/u_contrast = 1.0
 shader_parameter/u_offset = 0.0
 shader_parameter/u_dither_size = 3
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_d5vjr"]
+geometry_parsed_geometry_type = 1
+cell_height = 0.1
+agent_height = 1.0
+agent_radius = 0.1
+agent_max_climb = 0.0
+region_min_size = 0.1
+region_merge_size = 1.0
+edge_max_error = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d5vjr"]
+size = Vector3(100, 1, 100)
 
 [sub_resource type="Animation" id="Animation_knvm8"]
 length = 0.001
@@ -94,7 +108,11 @@ _data = {
 &"Start": SubResource("Animation_56we2")
 }
 
-[node name="FinalLevel" type="Node3D"]
+[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "NavigationRegion", "Player3D")]
+script = ExtResource("1_d5vjr")
+maze = NodePath("ViewportWithoutShader/SubViewport/NavigationRegion3D/Maze")
+NavigationRegion = NodePath("ViewportWithoutShader/SubViewport/NavigationRegion3D")
+Player3D = NodePath("ViewportWithoutShader/SubViewport/Player3D")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_56we2")
@@ -107,20 +125,31 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="ViewportWithShader"]
+[node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="ViewportWithoutShader"]
 handle_input_locally = false
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="Player3D" parent="ViewportWithShader/SubViewport" instance=ExtResource("1_wf7iu")]
+[node name="Player3D" parent="ViewportWithoutShader/SubViewport" instance=ExtResource("1_wf7iu")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1, 0, 1)
 
-[node name="Maze" parent="ViewportWithShader/SubViewport" instance=ExtResource("5_56we2")]
-LoopCreationProbability = 0.2
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="ViewportWithoutShader/SubViewport"]
+navigation_mesh = SubResource("NavigationMesh_d5vjr")
 
-[node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="Maze" parent="ViewportWithoutShader/SubViewport/NavigationRegion3D" instance=ExtResource("5_56we2")]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="ViewportWithoutShader/SubViewport/NavigationRegion3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ViewportWithoutShader/SubViewport/NavigationRegion3D/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+shape = SubResource("BoxShape3D_d5vjr")
+
+[node name="Enemy3D" parent="ViewportWithoutShader/SubViewport/NavigationRegion3D" instance=ExtResource("7_ebjtf")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.5)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -137,7 +166,3 @@ anchor_bottom = 1.0
 transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 4
-
-[node name="MiniMap" parent="MiniMap/SubViewport" node_paths=PackedStringArray("Maze", "Player") instance=ExtResource("6_knvm8")]
-Maze = NodePath("../../../ViewportWithShader/SubViewport/Maze")
-Player = NodePath("../../../ViewportWithShader/SubViewport/Player3D")

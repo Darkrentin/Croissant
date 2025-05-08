@@ -18,11 +18,16 @@ public partial class Maze : Node3D
         {
             MazeSize++;
         }
+        
+        
+
+    }
+
+    public void CreateMaze()
+    {
         initMaze();
         DisplayMaze();
         MakeMaze();
-        
-
     }
 
     public override void _Process(double delta)
