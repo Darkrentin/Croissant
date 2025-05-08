@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://ckx6m1bn0k11e"]
+[gd_scene load_steps=24 format=3 uid="uid://ckx6m1bn0k11e"]
 
 [ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
 [ext_resource type="PackedScene" uid="uid://dk1l5cx57mxbv" path="res://scenes/Windows/DifficultyMenu.tscn" id="2_yx4fs"]
@@ -22,6 +22,7 @@
 [ext_resource type="PackedScene" uid="uid://c5djekulorxqs" path="res://scenes/Level2/WaveWindow.tscn" id="20_ccpnw"]
 [ext_resource type="PackedScene" uid="uid://c28b6pj5bujn3" path="res://scenes/Level2/FollowWindow.tscn" id="21_djw06"]
 [ext_resource type="PackedScene" uid="uid://blu5tcq0yepaj" path="res://scenes/Level2/SpikeWindow.tscn" id="22_2mdes"]
+[ext_resource type="PackedScene" uid="uid://pus1csxsvyfw" path="res://scenes/FinalLevel/FinalLevel.tscn" id="23_ccpnw"]
 
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_6c1vk")
@@ -46,3 +47,4 @@ CompressWindowScene = ExtResource("19_2mdes")
 FlappyWindowScene = ExtResource("20_ccpnw")
 FollowWindowScene = ExtResource("21_djw06")
 SpikeWindowScene = ExtResource("22_2mdes")
+FinalLevelScene = ExtResource("23_ccpnw")

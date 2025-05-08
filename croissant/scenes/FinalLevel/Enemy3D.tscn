@@ -47,7 +47,7 @@ _data = {
 radius = 0.75
 height = 1.5
 
-[node name="Enemy3D" type="CharacterBody3D" node_paths=PackedStringArray("Mesh", "AnimationPlayer", "Collision", "navigationAgent3D")]
+[node name="Enemy3D" type="CharacterBody3D" node_paths=PackedStringArray("Mesh", "AnimationPlayer", "Collision", "navigationAgent3D", "rayCast")]
 script = ExtResource("1_vqa6h")
 Mesh = NodePath("MeshInstance3D")
 IcosahedronMesh = ExtResource("2_0vp8b")
@@ -57,6 +57,7 @@ TetrahedronMesh = ExtResource("5_fjuj0")
 AnimationPlayer = NodePath("AnimationPlayer")
 Collision = NodePath("CollisionShape3D")
 navigationAgent3D = NodePath("NavigationAgent3D")
+rayCast = NodePath("RayCast3D")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -75,9 +76,9 @@ path_max_distance = 100.01
 avoidance_enabled = true
 radius = 0.9
 neighbor_distance = 5.0
-debug_enabled = true
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+visible = false
 
 [connection signal="velocity_computed" from="NavigationAgent3D" to="." method="_on_navigation_agent_3d_velocity_computed"]

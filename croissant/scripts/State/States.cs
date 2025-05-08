@@ -176,6 +176,20 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
+    public static void FinalLevel()
+    {
+        GameManager.GameRoot.RemoveChild(GameManager.helper);
+        GameManager.helper.QueueFree();
+        GameManager.GameRoot.RemoveChild(GameManager.virus);
+        GameManager.virus.QueueFree();
+        
+        Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
+        GameManager.GameRoot.AddChild(FinalLevel);
+
+        //Change State condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+
     public static void IntroGame_Process(double delta)
     {
         //Change State condition

@@ -57,6 +57,7 @@ public partial class GameManager : Node2D
         IntroHelper,
         Level2,
         HelperDialogue1,
+        FinalLevel,
         // _Process state
         IntroGame_Process,
         // Buffer state
@@ -166,6 +167,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.HelperDialogue1:
                 States.HelperDialogue1();
+                break;
+            case GameState.FinalLevel:
+                States.FinalLevel();
                 break;
 
             // _Process state

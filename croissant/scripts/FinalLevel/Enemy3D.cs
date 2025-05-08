@@ -17,6 +17,10 @@ public partial class Enemy3D : CharacterBody3D
 	public bool Alive = true;
 	private float rotationSpeed = 2.0f;
 	[Export] private float movementSpeed = 1.0f;
+	[Export] private RayCast3D rayCast;
+	public double MaxAgro = 5f;
+
+	public double Agro = 0f;
 
 	public override void _Ready()
 	{
@@ -37,6 +41,21 @@ public partial class Enemy3D : CharacterBody3D
 		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
 		Vector3 IntendedVelocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
 		navigationAgent3D.Velocity = IntendedVelocity;
+
+		Vector3 directionToPlayer = FinalLevel.Instance.Player3D.GlobalPosition - rayCast.GlobalPosition + new Vector3(0, 0.75f, 0);
+    	rayCast.TargetPosition = rayCast.ToLocal(rayCast.GlobalPosition + directionToPlayer);
+
+		if(rayCast.GetCollider() is Player3D player && rayCast.IsEnabled())
+		{
+			Agro = MaxAgro;
+		}
+		else if (Agro > 0f)
+		{
+			Agro -= delta;
+			if (Agro < 0f) Agro = 0f;
+		}
+		else
+			navigationAgent3D.Velocity = Vector3.Zero;
 
 	}
 	private void UpdateShape()
