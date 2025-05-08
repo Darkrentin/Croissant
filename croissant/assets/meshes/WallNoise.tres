@@ -4,14 +4,13 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
 resource_local_to_scene = true
-noise_type = 0
-frequency = 0.02
+noise_type = 3
+fractal_octaves = 10
 
 [resource]
 resource_local_to_scene = true
 width = 256
 height = 256
-generate_mipmaps = false
 seamless = true
 seamless_blend_skirt = 1.0
 as_normal_map = true

@@ -4,7 +4,7 @@ public partial class Player3D : CharacterBody3D
 {
 	[Export] private RayCast3D RayCast3D;
 	[Export] private AnimationTree AnimationTree;
-	[Export] private GpuParticles3D BulletHitParticles;
+	[Export] private PackedScene BulletHitScene;
 	[Export] private float MoveSpeed = 5.0f;
 	[Export] private float RotationSpeed = 2.0f;
 	public AnimationNodeStateMachinePlayback AnimationPlayer;
@@ -54,8 +54,11 @@ public partial class Player3D : CharacterBody3D
 		RayCast3D.ForceRaycastUpdate();
 		if (RayCast3D.GetCollider() is Node3D Body)
 		{
-			BulletHitParticles.GlobalPosition = RayCast3D.GetCollisionPoint();
-			BulletHitParticles.Emitting = true;
+			GpuParticles3D bulletHitInstance = BulletHitScene.Instantiate<GpuParticles3D>();
+			GetTree().Root.AddChild(bulletHitInstance);
+			bulletHitInstance.GlobalPosition = RayCast3D.GetCollisionPoint();
+			bulletHitInstance.Emitting = true;
+
 			if (Body is Enemy3D Enemy)
 				Enemy.OnBulletCollide();
 		}
