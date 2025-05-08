@@ -5,19 +5,24 @@
 [sub_resource type="Gradient" id="Gradient_lvuuv"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
+noise_type = 0
+frequency = 0.0029
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vjpp2"]
 seamless = true
 seamless_blend_skirt = 1.0
 as_normal_map = true
+bump_strength = 32.0
 color_ramp = SubResource("Gradient_lvuuv")
 noise = SubResource("FastNoiseLite_f603f")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vjpp2"]
 normal_enabled = true
-normal_scale = 16.0
+normal_scale = 10.49
 normal_texture = SubResource("NoiseTexture2D_vjpp2")
 heightmap_texture = SubResource("NoiseTexture2D_lvuuv")
+uv1_triplanar = true
+uv1_world_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_lvuuv"]
 material = SubResource("StandardMaterial3D_vjpp2")

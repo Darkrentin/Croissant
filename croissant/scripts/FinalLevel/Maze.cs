@@ -1,26 +1,17 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 public partial class Maze : Node3D
 {
     [Export] public PackedScene WallScene;
     [Export] public PackedScene LampScene;
     [Export] public int MazeSize = 21;
-    
     public int[,] MazeData;
-    [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;   
+    [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;
 
     public override void _Ready()
     {
         if (MazeSize % 2 == 0)
-        {
             MazeSize++;
-        }
-        
-        
-
     }
 
     public void CreateMaze()
@@ -45,7 +36,7 @@ public partial class Maze : Node3D
         if (MazeSize > 2)
             GenerateMazeDFS(1, 1);
 
-        MazeData[MazeSize/2,MazeSize/2] = 0; // Start point
+        MazeData[MazeSize / 2, MazeSize / 2] = 0; // Start point
     }
 
     private void GenerateMazeDFS(int r, int c)
@@ -85,9 +76,7 @@ public partial class Maze : Node3D
                          (MazeData[nextR, nextC] == 0 || MazeData[nextR, nextC] == 2))
                 {
                     if (Lib.rand.NextDouble() < LoopCreationProbability)
-                    {
                         MazeData[wallR, wallC] = 0;
-                    }
                 }
             }
         }
@@ -100,18 +89,16 @@ public partial class Maze : Node3D
         {
             for (int j = 0; j < MazeSize; j++)
             {
+                int nx = i - MazeSize / 2;
+                int nz = j - MazeSize / 2;
                 if (MazeData[i, j] == 1)
                 {
-                    int nx = i - MazeSize / 2;
-                    int nz = j - MazeSize / 2;
                     Node3D wall = WallScene.Instantiate<Node3D>();
                     wall.Position = new Vector3(nx, 0, nz) * WallSize;
                     AddChild(wall);
                 }
                 else if (MazeData[i, j] == 2)
                 {
-                    int nx = i - MazeSize / 2;
-                    int nz = j - MazeSize / 2;
                     Node3D lamp = LampScene.Instantiate<Node3D>();
                     lamp.Position = new Vector3(nx, 0, nz) * WallSize;
                     AddChild(lamp);
@@ -119,8 +106,6 @@ public partial class Maze : Node3D
 
                 if (MazeData[i, j] == 0 || MazeData[i, j] == 2)
                 {
-                    int nx = i - MazeSize / 2;
-                    int nz = j - MazeSize / 2;
                     Node3D floor = WallScene.Instantiate<Node3D>();
                     floor.Position = new Vector3(nx, 0, nz) * WallSize;
                     floor.Position += new Vector3(0, -WallSize, 0);
@@ -141,11 +126,7 @@ public partial class Maze : Node3D
         {
             string line = "";
             for (int j = 0; j < MazeSize; j++)
-            {
-                line += (MazeData[i, j] == 1 ? "#" : (MazeData[i,j] == 2 ? "L" : ".")) + " ";
-                
-                
-            }
+                line += (MazeData[i, j] == 1 ? "#" : (MazeData[i, j] == 2 ? "L" : ".")) + " ";
             GD.Print(line);
         }
     }
