@@ -1,10 +1,20 @@
-[gd_scene format=3 uid="uid://dp0vjok53fueo"]
+[gd_scene load_steps=3 format=3 uid="uid://dp0vjok53fueo"]
 
-[node name="Lamp" type="Node3D"]
+[ext_resource type="Script" uid="uid://c8xu73ydmiym4" path="res://scripts/FinalLevel/Lamp.cs" id="1_3cs27"]
+[ext_resource type="PackedScene" uid="uid://b1osouqeloh38" path="res://assets/final level model/CeillingLamp.tscn" id="1_sn6js"]
 
-[node name="SpotLight3D" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 1, 1.9, 1)
-light_indirect_energy = 0.8
+[node name="Lamp" type="Node3D" node_paths=PackedStringArray("Light")]
+script = ExtResource("1_3cs27")
+RenderDistance = 20
+Light = NodePath("OmniLight3D")
+
+[node name="Ceilling Lamp" parent="." instance=ExtResource("1_sn6js")]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1, 2, 1)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.90173, 1)
+light_energy = 0.3
 shadow_enabled = true
-spot_range = 6.0
-spot_angle_attenuation = 3.0
+omni_range = 2.5
+omni_attenuation = 2.0
+omni_shadow_mode = 0

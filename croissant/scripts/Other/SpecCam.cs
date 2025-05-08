@@ -13,7 +13,7 @@ public partial class SpecCam : Camera3D
         // If this camera is set as current in the editor, capture the mouse
         if (IsCurrent())
         {
-            Input.MouseMode = Input.MouseModeEnum.Captured;
+            //Input.MouseMode = Input.MouseModeEnum.Captured;
         }
     }
 

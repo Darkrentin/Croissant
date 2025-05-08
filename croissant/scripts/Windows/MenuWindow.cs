@@ -64,11 +64,12 @@ public partial class MenuWindow : FloatWindow
 
 	public void Open()
 	{
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Visible = true;
 		ProcessMode = ProcessModeEnum.Always;
 		Virus.SetPause(true);
 		GetTree().Paused = true;
-		Input.MouseMode = Input.MouseModeEnum.Visible;
+		
 	}
 
 	public void _on_quit_button_pressed()
