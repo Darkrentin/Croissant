@@ -3,12 +3,12 @@
 importer="mp3"
 type="AudioStreamMP3"
 uid="uid://f1isyqcqnpjt"
-path="res://.godot/imported/StartUpSound.mp3-ff1115b59ebeb2d221c085064fbdd706.mp3str"
+path="res://.godot/imported/StartUpSound.mp3-54720fab06c5ecd3dbd8f80ed50fcecf.mp3str"
 
 [deps]
 
-source_file="res://assets/sounds/virus/StartUpSound.mp3"
-dest_files=["res://.godot/imported/StartUpSound.mp3-ff1115b59ebeb2d221c085064fbdd706.mp3str"]
+source_file="res://assets/sounds/Virus/StartUpSound.mp3"
+dest_files=["res://.godot/imported/StartUpSound.mp3-54720fab06c5ecd3dbd8f80ed50fcecf.mp3str"]
 
 [params]
 

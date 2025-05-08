@@ -5,6 +5,9 @@ public partial class Maze : Node3D
     [Export] public PackedScene WallScene;
     [Export] public PackedScene LampScene;
     [Export] public int MazeSize = 21;
+
+    public int WallSize = 2;
+    
     public int[,] MazeData;
     [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;
 
@@ -84,7 +87,6 @@ public partial class Maze : Node3D
 
     public void MakeMaze()
     {
-        const int WallSize = 2;
         for (int i = 0; i < MazeSize; i++)
         {
             for (int j = 0; j < MazeSize; j++)
@@ -112,6 +114,7 @@ public partial class Maze : Node3D
                     AddChild(floor);
 
                     Node3D ceil = WallScene.Instantiate<Node3D>();
+                    ceil.RemoveChild(ceil.GetNode("CollisionShape3D"));
                     ceil.Position = new Vector3(nx, 0, nz) * WallSize;
                     ceil.Position += new Vector3(0, WallSize * 1, 0);
                     AddChild(ceil);

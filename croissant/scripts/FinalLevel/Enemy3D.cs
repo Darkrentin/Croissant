@@ -23,7 +23,6 @@ public partial class Enemy3D : CharacterBody3D
 		RotationAxis = new Vector3(Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1));
 		shapeSequence = new List<Mesh> { IcosahedronMesh, DodecahedronMesh, CubeMesh, TetrahedronMesh };
 		currentShapeIndex = Lib.rand.Next(0, 4);
-		currentShapeIndex = 0;
 		UpdateShape();
 	}
 
@@ -34,10 +33,10 @@ public partial class Enemy3D : CharacterBody3D
 
     public override void _PhysicsProcess(double delta)
     {
-        navigationAgent3D.TargetPosition = ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
+        navigationAgent3D.TargetPosition =FinalLevel.Instance.Player3D.GlobalPosition;// ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
 		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
-		Velocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
-		MoveAndSlide();
+		Vector3 IntendedVelocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
+		navigationAgent3D.Velocity = IntendedVelocity;
 
     }
 	private void UpdateShape()
@@ -67,5 +66,14 @@ public partial class Enemy3D : CharacterBody3D
 		AddChild(destroyTimer);
 		destroyTimer.Timeout += () => QueueFree();
 		destroyTimer.Start();
+		FinalLevel.Instance.EnemyCount--;
+		Lib.Print("Enemy Count: " + FinalLevel.Instance.EnemyCount);
+	}
+
+	public void _on_navigation_agent_3d_velocity_computed(Vector3 velocity)
+	{
+		velocity = velocity * new Vector3(1, 0, 1);
+		Velocity = velocity;
+		MoveAndSlide();
 	}
 }
