@@ -43,8 +43,9 @@ _data = {
 &"RESET": SubResource("Animation_0l5py")
 }
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_0vp8b"]
-radius = 1.0
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vp8b"]
+radius = 0.75
+height = 1.5
 
 [node name="Enemy3D" type="CharacterBody3D" node_paths=PackedStringArray("Mesh", "AnimationPlayer", "Collision", "navigationAgent3D")]
 script = ExtResource("1_vqa6h")
@@ -63,10 +64,11 @@ libraries = {
 }
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("SphereShape3D_0vp8b")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
+shape = SubResource("CapsuleShape3D_0vp8b")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]
 debug_enabled = true
-debug_path_custom_color = Color(0, 1, 1, 1)

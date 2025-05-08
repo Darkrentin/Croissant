@@ -16,26 +16,25 @@ public partial class Enemy3D : CharacterBody3D
 	private List<Mesh> shapeSequence;
 	public bool Alive = true;
 	private float rotationSpeed = 1.0f;
-	[Export] private float movementSpeed = 5.0f;
+	[Export] private float movementSpeed = 1.0f;
 
 	public override void _Ready()
 	{
 		RotationAxis = new Vector3(Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1));
 		shapeSequence = new List<Mesh> { IcosahedronMesh, DodecahedronMesh, CubeMesh, TetrahedronMesh };
 		currentShapeIndex = Lib.rand.Next(0, 4);
+		currentShapeIndex = 0;
 		UpdateShape();
 	}
 
 	public override void _Process(double delta)
 	{
-		Rotation += RotationAxis * (float)delta * rotationSpeed;
-		Mesh.Rotation = Rotation;
-		
+		Mesh.Rotation += RotationAxis * (float)delta * rotationSpeed;
 	}
 
     public override void _PhysicsProcess(double delta)
     {
-        navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;
+        navigationAgent3D.TargetPosition = ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
 		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
 		Velocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
 		MoveAndSlide();

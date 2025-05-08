@@ -16,7 +16,6 @@ public partial class MiniMap : TileMapLayer
 	{
 		sourceId = TileSet.GetSourceId(0);
         layer = 0;
-		DrawMaze();
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.

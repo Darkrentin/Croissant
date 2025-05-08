@@ -53,7 +53,7 @@ public partial class Player3D : CharacterBody3D
 		Bullet3D Bullet3D = Bullet3DScene.Instantiate<Bullet3D>();
 		Bullet3D.Position = Bullet3DSpawnPosition.GlobalPosition;
 		Bullet3D.Rotation = Rotation;
-		Bullet3D.Velocity = (Bullet3DSpawnPosition.GlobalPosition - (GlobalPosition + new Vector3(0, Scale.Y, 0))).Normalized() * 30000 * (float)delta;
+		Bullet3D.Velocity = (Bullet3DSpawnPosition.GlobalPosition - (GlobalPosition + new Vector3(0, Scale.Y, 0))).Normalized() * 10000 * (float)delta;
 		GetParent().AddChild(Bullet3D);
 	}
 }
