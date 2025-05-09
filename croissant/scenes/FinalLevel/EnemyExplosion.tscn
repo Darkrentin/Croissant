@@ -45,8 +45,10 @@ albedo_color = Color(0, 1, 1, 1)
 material = SubResource("StandardMaterial3D_3ry8w")
 
 [node name="Node3D" type="GPUParticles3D"]
+emitting = false
 amount = 50
 lifetime = 1.2
+one_shot = true
 explosiveness = 0.95
 process_material = SubResource("ParticleProcessMaterial_2i8dk")
 draw_pass_1 = SubResource("BoxMesh_cjy56")

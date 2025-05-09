@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 public partial class Enemy3D : CharacterBody3D
 {
+	
 	[Export] private MeshInstance3D Mesh;
 	[Export] private Mesh IcosahedronMesh;
 	[Export] private Mesh DodecahedronMesh;
@@ -18,6 +19,15 @@ public partial class Enemy3D : CharacterBody3D
 	[Export] private float _movementSpeed = 1.0f;
 	private float movementSpeed = 1.0f;
 	[Export] private RayCast3D rayCast;
+	[Export] private PackedScene EnemyExplosionScene;
+	[Export] public bool UpdateShapeButton {
+		get => false;
+		set => UpdateShape();
+	}
+	[Export] public bool ExplosionButton {
+		get => false;
+		set => AddExplosion();
+	}
 	public double MaxAgro = 5f;
 	public bool CanHarmPlayer = true;
 
@@ -31,6 +41,7 @@ public partial class Enemy3D : CharacterBody3D
 		UpdateShape();
 		movementSpeed = _movementSpeed;
 		AnimationPlayer.AnimationFinished += OnAnimationFinished;
+		navigationAgent3D.DebugEnabled = FinalLevel.Instance.Debug;
 	}
 
 	public override void _Process(double delta)
@@ -40,17 +51,22 @@ public partial class Enemy3D : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if(!CanHarmPlayer)
+		{
+			navigationAgent3D.Velocity = Vector3.Zero;
+			return;
+		}
 		if(Agro > 0f)
 		{
 			Agro -= delta;
 			if (Agro < 0f) Agro = 0f;
 			navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;
-			rayCast.Visible = true;
+			rayCast.Visible = true && FinalLevel.Instance.Debug;
 		}
 		else
 		{
 			if(GlobalPosition.DistanceTo(FinalLevel.Instance.Player3D.GlobalPosition) < 10f)
-				rayCast.Visible = true;
+				rayCast.Visible = true && FinalLevel.Instance.Debug;
 			else
 				rayCast.Visible = false;
 			navigationAgent3D.TargetPosition = GlobalPosition;
@@ -93,14 +109,7 @@ public partial class Enemy3D : CharacterBody3D
 				Position += new Vector3(0, 0.25f, 0);
 			}
 
-			Timer ShapeChangeTimer = new Timer();
-			ShapeChangeTimer.WaitTime = 0.25f;
-			ShapeChangeTimer.OneShot = true;
-			AddChild(ShapeChangeTimer);
-			ShapeChangeTimer.Timeout += () => UpdateShape();
-			ShapeChangeTimer.Start();
 			AnimationPlayer.Play("ShapeChange");
-			movementSpeed = 0f;
 			CanHarmPlayer = false;
 		}
 	}
@@ -109,7 +118,6 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		if (animationName == "ShapeChange")
 		{
-			movementSpeed = _movementSpeed;
 			CanHarmPlayer = true;
 		}
 	}
@@ -118,12 +126,6 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		Collision.Position = new Vector3(0, 10, 0);
 		AnimationPlayer.Play("Depop");
-		Timer destroyTimer = new Timer();
-		destroyTimer.WaitTime = 0.5f;
-		destroyTimer.OneShot = true;
-		AddChild(destroyTimer);
-		destroyTimer.Timeout += () => QueueFree();
-		destroyTimer.Start();
 		FinalLevel.Instance.EnemyCount--;
 		CanHarmPlayer = false;
 	}
@@ -133,5 +135,21 @@ public partial class Enemy3D : CharacterBody3D
 		velocity = velocity * new Vector3(1, 0, 1);
 		Velocity = velocity;
 		MoveAndSlide();
+	}
+
+	public void AddExplosion()
+	{
+		GpuParticles3D explosion = EnemyExplosionScene.Instantiate<GpuParticles3D>();
+		explosion.Emitting = true;
+		AddChild(explosion);
+		explosion.GlobalPosition = GlobalPosition;
+
+		Timer explosionTimer = new Timer();
+		explosionTimer.WaitTime = 1.5f;
+		explosionTimer.OneShot = true;
+		explosionTimer.Timeout += () => QueueFree();
+		AddChild(explosionTimer);
+		explosionTimer.Start();
+		//QueueFree();
 	}
 }

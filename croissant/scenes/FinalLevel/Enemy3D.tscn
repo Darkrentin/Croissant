@@ -1,10 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://cimi7w1dx80pn"]
+[gd_scene load_steps=17 format=3 uid="uid://cimi7w1dx80pn"]
 
 [ext_resource type="Script" uid="uid://d1283ira3bkqa" path="res://scripts/FinalLevel/Enemy3D.cs" id="1_vqa6h"]
 [ext_resource type="ArrayMesh" uid="uid://dp0dgbo55w32s" path="res://assets/meshes/Icosahedron.tres" id="2_0vp8b"]
 [ext_resource type="BoxMesh" uid="uid://b0qi04ygb7wxi" path="res://assets/meshes/Cube.tres" id="2_sjjoh"]
 [ext_resource type="ArrayMesh" uid="uid://dd58n73thinjc" path="res://assets/meshes/Dodecahedron.tres" id="3_0l5py"]
 [ext_resource type="ArrayMesh" uid="uid://dkkr5885q3gxs" path="res://assets/meshes/Tetrahedron.tres" id="5_fjuj0"]
+[ext_resource type="PackedScene" uid="uid://buutrxsk7ssr0" path="res://scenes/FinalLevel/EnemyExplosion.tscn" id="6_0l5py"]
 
 [sub_resource type="Animation" id="Animation_0vp8b"]
 resource_name = "Depop"
@@ -21,6 +22,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(0.001, 0.001, 0.001)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:ExplosionButton")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
 
 [sub_resource type="Animation" id="Animation_0l5py"]
 length = 0.001
@@ -35,6 +48,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:UpdateShapeButton")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:ExplosionButton")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_fjuj0"]
@@ -51,6 +88,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(0.01, 0.01, 0.01), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:UpdateShapeButton")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjuj0"]
@@ -73,6 +122,8 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 3.0
 backlight_texture = SubResource("NoiseTexture2D_fjuj0")
 
+[sub_resource type="BoxMesh" id="BoxMesh_0vp8b"]
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vp8b"]
 radius = 0.75
 height = 1.5
@@ -88,6 +139,7 @@ AnimationPlayer = NodePath("AnimationPlayer")
 Collision = NodePath("CollisionShape3D")
 navigationAgent3D = NodePath("NavigationAgent3D")
 rayCast = NodePath("RayCast3D")
+EnemyExplosionScene = ExtResource("6_0l5py")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -97,6 +149,7 @@ libraries = {
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 material_override = SubResource("StandardMaterial3D_0vp8b")
+mesh = SubResource("BoxMesh_0vp8b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)

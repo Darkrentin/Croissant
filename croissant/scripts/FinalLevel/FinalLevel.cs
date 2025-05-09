@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class FinalLevel : Node3D
 {
+	[Export] public bool Debug = false;
 	[Export] public Maze maze;
 	[Export] public MiniMap miniMap;
 	[Export] public NavigationRegion3D NavigationRegion;
