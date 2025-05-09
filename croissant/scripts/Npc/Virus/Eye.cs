@@ -4,6 +4,7 @@ public partial class Eye : Node2D
 {
 	[Export] public Vector2 MaxEyeDistance = new Vector2(100f, 100f);
 	[Export] public Node2D black;
+	[Export] public bool disable = false;
 	public Virus virus;
 
 	public override void _Ready()
@@ -13,6 +14,8 @@ public partial class Eye : Node2D
 
 	public override void _Process(double d)
 	{
+		if(disable)
+			return;
 		Vector2I cursorPosition = Lib.GetCursorPosition();
 		Vector2I centerPosition = virus.Position + virus.Size / 2;
 		Vector2I relativePosition = centerPosition - cursorPosition;

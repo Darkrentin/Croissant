@@ -10,13 +10,16 @@ public partial class Player3D : CharacterBody3D
 	public AnimationNodeStateMachinePlayback AnimationPlayer;
 	private Timer ShootTimer;
 	private bool CanShoot = true;
+	public string ShootAnimation = "ShootAndReload";
+	public float ShootCooldown = 0.9f;
 
 	public override void _Ready()
 	{
+
 		AnimationPlayer = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
 		ShootTimer = new Timer();
 		ShootTimer.Timeout += () => CanShoot = true;
-		ShootTimer.WaitTime = 0.9f;
+		ShootTimer.WaitTime = ShootCooldown;
 		ShootTimer.OneShot = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		if(BulletHitScene == null)
@@ -45,13 +48,14 @@ public partial class Player3D : CharacterBody3D
 		{
 			CanShoot = false;
 			Shoot();
+			ShootTimer.WaitTime = ShootCooldown;
 			ShootTimer.Start();
 		}
 	}
 
 	private void Shoot()
 	{
-		AnimationPlayer.Start("Shoot", reset: true);
+		AnimationPlayer.Start(ShootAnimation, reset: true);
 
 		RayCast3D.ForceRaycastUpdate();
 		if (RayCast3D.GetCollider() is Node3D Body)

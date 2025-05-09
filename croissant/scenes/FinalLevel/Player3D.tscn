@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=46 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
@@ -101,8 +101,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_aofux"]
 resource_name = "Shoot"
-length = 0.5
-loop_mode = 1
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -110,10 +109,34 @@ tracks/0/path = NodePath("Control/Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [ExtResource("2_h2v7r"), ExtResource("6_n4wqm"), ExtResource("7_ley8d"), ExtResource("2_h2v7r")]
+"values": [ExtResource("2_h2v7r"), ExtResource("6_n4wqm"), ExtResource("7_ley8d"), ExtResource("2_6l3yh"), ExtResource("3_aofux"), ExtResource("4_4x0oc"), ExtResource("3_aofux"), ExtResource("2_6l3yh"), ExtResource("2_h2v7r")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(960, 768), Vector2(710, 768), Vector2(550, 768), Vector2(600, 768), Vector2(550, 768), Vector2(710, 768), Vector2(960, 768)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OmniLight3D:light_energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 5.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_n4wqm"]
@@ -234,6 +257,9 @@ play_mode = 1
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4qb4h"]
 animation = &"RunR"
 
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3r0jc"]
+animation = &"Shoot"
+
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ley8d"]
 animation = &"ShootAndReload"
 
@@ -287,6 +313,12 @@ switch_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ley8d"]
 switch_mode = 2
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o3k41"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xvos"]
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ley8d"]
 states/End/position = Vector2(1049, 100)
 states/RESET/node = SubResource("AnimationNodeAnimation_h7i27")
@@ -299,15 +331,17 @@ states/RunR/node = SubResource("AnimationNodeAnimation_4qb4h")
 states/RunR/position = Vector2(1033, -203)
 "states/RunR 2/node" = SubResource("AnimationNodeAnimation_a0jgr")
 "states/RunR 2/position" = Vector2(798, -150)
-states/Shoot/node = SubResource("AnimationNodeAnimation_ley8d")
-states/Shoot/position = Vector2(711, 213)
+states/Shoot/node = SubResource("AnimationNodeAnimation_3r0jc")
+states/Shoot/position = Vector2(517, 213)
+states/ShootAndReload/node = SubResource("AnimationNodeAnimation_ley8d")
+states/ShootAndReload/position = Vector2(711, 213)
 states/Start/position = Vector2(204, 100)
 states/StartMid/node = SubResource("AnimationNodeAnimation_parfq")
 states/StartMid/position = Vector2(709, 15)
 states/StartRunLeft/node = SubResource("AnimationNodeAnimation_8xvos")
 states/StartRunLeft/position = Vector2(322, -87)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "Shoot", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_ley8d")]
-graph_offset = Vector2(72, -200)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "ShootAndReload", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "ShootAndReload", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_ley8d"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_8xvos")]
+graph_offset = Vector2(129, -127)
 
 [node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree")]
 script = ExtResource("1_rrt4f")
