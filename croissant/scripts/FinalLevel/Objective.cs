@@ -8,7 +8,9 @@ public partial class Objective : StaticBody3D
 	[Export] public CollisionShape3D CollisionShape;
 	[Export] public OmniLight3D Light;
 	[Export] public AnimationPlayer AnimationPlayer;
+	public AnimationPlayer LocalAnimationPlayer;
 	[Export] public RigidBody3D[] PartList;
+	public bool _isBreaking = false;
 	public Timer timer;
 	public int PartCount = 8;
 	public override void _Ready()
@@ -21,20 +23,26 @@ public partial class Objective : StaticBody3D
 			QueueFree();
 		};
 		AddChild(timer);
+		LocalAnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
 		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		if (_isBreaking && AnimationPlayer.IsPlaying())
+		{
+			AnimationPlayer.Advance((float)delta);
+		}
 	}
 
 	public void Break()
 	{
+		_isBreaking = true;
 		Lib.Print("Break");
 		RemoveChild(CollisionShape);
 		CollisionShape.QueueFree();
-		RemoveChild(Light);
+		GetNode<Node3D>("Obj").RemoveChild(Light);
 		Light.QueueFree();
 
 		const float impulse = 5f;
@@ -43,7 +51,13 @@ public partial class Objective : StaticBody3D
 			part.Freeze = false;
 			part.ApplyImpulse(((GlobalPosition-FinalLevel.Instance.Player3D.GlobalPosition).Normalized() + part.Position).Normalized()*impulse);
 		}
-		AnimationPlayer.Play("Break");
+		
+		//AnimationPlayer.CallbackModeProcess = AnimationPlayer.AnimationCallbackModeProcess.Idle;
+		
+		LocalAnimationPlayer.Play("Break");
+
+		FinalLevel.Instance.ObjectiveDestroy();
+
 		timer.Start();
 	}
 }

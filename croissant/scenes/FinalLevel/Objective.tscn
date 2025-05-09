@@ -1,14 +1,56 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjn4lukcecj37"]
+[gd_scene load_steps=22 format=3 uid="uid://cjn4lukcecj37"]
 
 [ext_resource type="Script" uid="uid://cru6f15nehrvy" path="res://scripts/FinalLevel/Objective.cs" id="1_8j1cb"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_qwjt5"]
+[sub_resource type="SphereShape3D" id="SphereShape3D_8j1cb"]
 radius = 1.0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8j1cb"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="BoxMesh" id="BoxMesh_qwjt5"]
+[sub_resource type="BoxMesh" id="BoxMesh_uivtg"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mtdh5"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_01r7f"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u8f8b"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3vqf0"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ccdpp"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_c4ccl"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_isvax"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_oywy0"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rcdlm"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nnh5h"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yg1ru"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_r11ul"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wivf4"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fsexr"]
 size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="Animation" id="Animation_8j1cb"]
@@ -16,7 +58,7 @@ resource_name = "Break"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Obj/Part2/CollisionShape3D:shape:size")
+tracks/0/path = NodePath("Obj/Part1/C1:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +70,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Obj/Part3/CollisionShape3D:shape:size")
+tracks/1/path = NodePath("Obj/Part2/C2:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -40,7 +82,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Obj/Part4/CollisionShape3D:shape:size")
+tracks/2/path = NodePath("Obj/Part3/C3:shape:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -52,7 +94,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Obj/Part5/CollisionShape3D:shape:size")
+tracks/3/path = NodePath("Obj/Part4/C4:shape:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -64,7 +106,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Obj/Part6/CollisionShape3D:shape:size")
+tracks/4/path = NodePath("Obj/Part5/C5:shape:size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -76,7 +118,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Obj/Part7/CollisionShape3D:shape:size")
+tracks/5/path = NodePath("Obj/Part6/C6:shape:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -88,7 +130,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Obj/Part8/CollisionShape3D:shape:size")
+tracks/6/path = NodePath("Obj/Part7/C7:shape:size")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -100,7 +142,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Obj/Part1/MeshInstance3D:mesh:size")
+tracks/7/path = NodePath("Obj/Part8/C8:shape:size")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -112,7 +154,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Obj/Part2/MeshInstance3D:mesh:size")
+tracks/8/path = NodePath("Obj/Part1/M1:mesh:size")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -124,7 +166,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Obj/Part3/MeshInstance3D:mesh:size")
+tracks/9/path = NodePath("Obj/Part2/M2:mesh:size")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -136,7 +178,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Obj/Part4/MeshInstance3D:mesh:size")
+tracks/10/path = NodePath("Obj/Part3/M3:mesh:size")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -148,7 +190,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Obj/Part5/MeshInstance3D:mesh:size")
+tracks/11/path = NodePath("Obj/Part4/M4:mesh:size")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -160,7 +202,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Obj/Part6/MeshInstance3D:mesh:size")
+tracks/12/path = NodePath("Obj/Part5/M5:mesh:size")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -172,7 +214,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Obj/Part7/MeshInstance3D:mesh:size")
+tracks/13/path = NodePath("Obj/Part6/M6:mesh:size")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -184,10 +226,22 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Obj/Part8/MeshInstance3D:mesh:size")
+tracks/14/path = NodePath("Obj/Part7/M7:mesh:size")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Obj/Part8/M8:mesh:size")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
@@ -199,7 +253,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Obj/Part2/CollisionShape3D:shape:size")
+tracks/0/path = NodePath("Obj/Part1/C1:shape:size")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -211,7 +265,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Obj/Part3/CollisionShape3D:shape:size")
+tracks/1/path = NodePath("Obj/Part2/C2:shape:size")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -223,7 +277,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Obj/Part4/CollisionShape3D:shape:size")
+tracks/2/path = NodePath("Obj/Part3/C3:shape:size")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -235,7 +289,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Obj/Part5/CollisionShape3D:shape:size")
+tracks/3/path = NodePath("Obj/Part4/C4:shape:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -247,7 +301,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Obj/Part6/CollisionShape3D:shape:size")
+tracks/4/path = NodePath("Obj/Part5/C5:shape:size")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -259,7 +313,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Obj/Part7/CollisionShape3D:shape:size")
+tracks/5/path = NodePath("Obj/Part6/C6:shape:size")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -271,7 +325,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Obj/Part8/CollisionShape3D:shape:size")
+tracks/6/path = NodePath("Obj/Part7/C7:shape:size")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -283,7 +337,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Obj/Part1/MeshInstance3D:mesh:size")
+tracks/7/path = NodePath("Obj/Part8/C8:shape:size")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -295,7 +349,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Obj/Part2/MeshInstance3D:mesh:size")
+tracks/8/path = NodePath("Obj/Part1/M1:mesh:size")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -307,7 +361,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Obj/Part3/MeshInstance3D:mesh:size")
+tracks/9/path = NodePath("Obj/Part2/M2:mesh:size")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -319,7 +373,7 @@ tracks/9/keys = {
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("Obj/Part4/MeshInstance3D:mesh:size")
+tracks/10/path = NodePath("Obj/Part3/M3:mesh:size")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
@@ -331,7 +385,7 @@ tracks/10/keys = {
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("Obj/Part5/MeshInstance3D:mesh:size")
+tracks/11/path = NodePath("Obj/Part4/M4:mesh:size")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
@@ -343,7 +397,7 @@ tracks/11/keys = {
 tracks/12/type = "value"
 tracks/12/imported = false
 tracks/12/enabled = true
-tracks/12/path = NodePath("Obj/Part6/MeshInstance3D:mesh:size")
+tracks/12/path = NodePath("Obj/Part5/M5:mesh:size")
 tracks/12/interp = 1
 tracks/12/loop_wrap = true
 tracks/12/keys = {
@@ -355,7 +409,7 @@ tracks/12/keys = {
 tracks/13/type = "value"
 tracks/13/imported = false
 tracks/13/enabled = true
-tracks/13/path = NodePath("Obj/Part7/MeshInstance3D:mesh:size")
+tracks/13/path = NodePath("Obj/Part6/M6:mesh:size")
 tracks/13/interp = 1
 tracks/13/loop_wrap = true
 tracks/13/keys = {
@@ -367,10 +421,22 @@ tracks/13/keys = {
 tracks/14/type = "value"
 tracks/14/imported = false
 tracks/14/enabled = true
-tracks/14/path = NodePath("Obj/Part8/MeshInstance3D:mesh:size")
+tracks/14/path = NodePath("Obj/Part7/M7:mesh:size")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.5, 0.5, 0.5)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Obj/Part8/M8:mesh:size")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -391,94 +457,94 @@ AnimationPlayer = NodePath("AnimationPlayer")
 PartList = [NodePath("Obj/Part1"), NodePath("Obj/Part2"), NodePath("Obj/Part3"), NodePath("Obj/Part4"), NodePath("Obj/Part5"), NodePath("Obj/Part6"), NodePath("Obj/Part7"), NodePath("Obj/Part8")]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("SphereShape3D_qwjt5")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+shape = SubResource("SphereShape3D_8j1cb")
 
 [node name="Obj" type="Node3D" parent="."]
-transform = Transform3D(0.707417, 0.000310749, 0.706796, 0.577096, 0.577096, -0.577858, -0.408069, 0.816676, 0.408069, 0, 1, 0)
+transform = Transform3D(0.707417, 0.000310749, 0.706796, 0.577096, 0.577096, -0.577858, -0.408069, 0.816676, 0.408069, 1, 1, 1)
 
 [node name="Part1" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part1"]
+[node name="C1" type="CollisionShape3D" parent="Obj/Part1"]
 shape = SubResource("BoxShape3D_8j1cb")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part1"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M1" type="MeshInstance3D" parent="Obj/Part1"]
+mesh = SubResource("BoxMesh_uivtg")
 
 [node name="Part2" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, 0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part2"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C2" type="CollisionShape3D" parent="Obj/Part2"]
+shape = SubResource("BoxShape3D_mtdh5")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part2"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M2" type="MeshInstance3D" parent="Obj/Part2"]
+mesh = SubResource("BoxMesh_01r7f")
 
 [node name="Part3" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, -0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part3"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C3" type="CollisionShape3D" parent="Obj/Part3"]
+shape = SubResource("BoxShape3D_u8f8b")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part3"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M3" type="MeshInstance3D" parent="Obj/Part3"]
+mesh = SubResource("BoxMesh_3vqf0")
 
 [node name="Part4" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, -0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part4"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C4" type="CollisionShape3D" parent="Obj/Part4"]
+shape = SubResource("BoxShape3D_ccdpp")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part4"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M4" type="MeshInstance3D" parent="Obj/Part4"]
+mesh = SubResource("BoxMesh_c4ccl")
 
 [node name="Part5" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, 0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part5"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C5" type="CollisionShape3D" parent="Obj/Part5"]
+shape = SubResource("BoxShape3D_isvax")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part5"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M5" type="MeshInstance3D" parent="Obj/Part5"]
+mesh = SubResource("BoxMesh_oywy0")
 
 [node name="Part6" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.3, 0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part6"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C6" type="CollisionShape3D" parent="Obj/Part6"]
+shape = SubResource("BoxShape3D_rcdlm")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part6"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M6" type="MeshInstance3D" parent="Obj/Part6"]
+mesh = SubResource("BoxMesh_nnh5h")
 
 [node name="Part7" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.3, -0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part7"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C7" type="CollisionShape3D" parent="Obj/Part7"]
+shape = SubResource("BoxShape3D_yg1ru")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part7"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M7" type="MeshInstance3D" parent="Obj/Part7"]
+mesh = SubResource("BoxMesh_r11ul")
 
 [node name="Part8" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, -0.3)
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Obj/Part8"]
-shape = SubResource("BoxShape3D_8j1cb")
+[node name="C8" type="CollisionShape3D" parent="Obj/Part8"]
+shape = SubResource("BoxShape3D_wivf4")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Obj/Part8"]
-mesh = SubResource("BoxMesh_qwjt5")
+[node name="M8" type="MeshInstance3D" parent="Obj/Part8"]
+mesh = SubResource("BoxMesh_fsexr")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Obj"]
-omni_range = 1.0
+omni_range = 1.5
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

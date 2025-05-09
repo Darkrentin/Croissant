@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class Maze : Node3D
@@ -8,7 +9,7 @@ public partial class Maze : Node3D
     [Export] public int MazeSize = 31;
 
     public int WallSize = 2;
-    public const int LampSpacing = 10;
+    public const int LampSpacing = 6;
 
     public const int Lamp = -2;
     public const int CantSpawn = -1;
@@ -50,7 +51,7 @@ public partial class Maze : Node3D
             }
 
         if (MazeSize > 2)
-            GenerateMazeDFS(1, 1, 0);
+            GenerateMazeDFS(1, 1);
 
         PlaceRoom(MazeSize / 2, MazeSize / 2, 3, 3, true);
         const int SafeZone = 11;
@@ -67,13 +68,17 @@ public partial class Maze : Node3D
 
         PlaceRoom(MazeSize - 3, MazeSize - 3, 3, 3, true, CantSpawn);
         MazeData[MazeSize-3,MazeSize-3] = Objective;
+
+        MazeData[MazeSize/2 - 1, MazeSize/2 - 1] = Objective;
+        MazeData[MazeSize/2 - 1, MazeSize/2] = Objective;
+        MazeData[MazeSize/2, MazeSize/2 - 1] = Objective;
+
+        CalculateDistancesFromCenter();
     }
 
-    private void GenerateMazeDFS(int r, int c, int depth)
+    private void GenerateMazeDFS(int r, int c)
     {
         MazeData[r, c] = Floor;
-        MazeDist[r, c] = depth;
-        depth++;
 
         int[] directions = { 0, 1, 2, 3 };
         Lib.rand.Shuffle(directions);
@@ -99,9 +104,8 @@ public partial class Maze : Node3D
                     MazeData[nextR, nextC] == Wall)
                 {
                     MazeData[wallR, wallC] = Floor;
-                    MazeDist[wallR, wallC] = depth;
 
-                    GenerateMazeDFS(nextR, nextC, depth+1);
+                    GenerateMazeDFS(nextR, nextC);
                 }
                 else if (MazeData[wallR, wallC] == Wall &&
                          nextR > 0 && nextR < MazeSize - 1 && nextC > 0 && nextC < MazeSize - 1 &&
@@ -110,7 +114,46 @@ public partial class Maze : Node3D
                     if (Lib.rand.NextDouble() < LoopCreationProbability)
                     {
                         MazeData[wallR, wallC] = Floor;
-                        MazeDist[wallR, wallC] = depth;
+                    }
+                }
+            }
+        }
+    }
+
+    private void CalculateDistancesFromCenter()
+    {
+        // Create a queue for BFS
+        Queue<(int, int)> queue = new Queue<(int, int)>();
+        int centerX = MazeSize / 2;
+        int centerY = MazeSize / 2;
+        
+        // Start BFS from the center
+        MazeDist[centerX, centerY] = 0;
+        queue.Enqueue((centerX, centerY));
+        
+        // Directions: up, right, down, left
+        int[] dx = { -1, 0, 1, 0 };
+        int[] dy = { 0, 1, 0, -1 };
+        
+        while (queue.Count > 0)
+        {
+            var (x, y) = queue.Dequeue();
+            
+            // Check all four adjacent cells
+            for (int i = 0; i < 4; i++)
+            {
+                int nx = x + dx[i];
+                int ny = y + dy[i];
+                
+                // Check if the cell is within bounds
+                if (nx >= 0 && nx < MazeSize && ny >= 0 && ny < MazeSize)
+                {
+                    // Check if it's a floor cell (walkable) and hasn't been visited yet
+                    if ((MazeData[nx, ny] != Wall) && MazeDist[nx, ny] == -1)
+                    {
+                        // Set the distance to be one more than the current cell
+                        MazeDist[nx, ny] = MazeDist[x, y] + 1;
+                        queue.Enqueue((nx, ny));
                     }
                 }
             }
@@ -147,7 +190,7 @@ public partial class Maze : Node3D
                     ceil.Position += new Vector3(0, WallSize * 1, 0);
                     AddChild(ceil);
 
-                    if(MazeDist[i,j]%LampSpacing==0)
+                    if((MazeDist[i,j]%LampSpacing==0 && Lib.rand.Next(0,2)==0) || MazeDist[i,j] == 0)
                     {
                         Node3D lamp = LampScene.Instantiate<Node3D>();
                         lamp.Position = new Vector3(nx, 0, nz) * WallSize;
@@ -193,6 +236,16 @@ public partial class Maze : Node3D
             GD.Print(line);
         }
         GD.Print("Maze size: " + MazeSize + "x" + MazeSize);
+
+        for(int i = 0; i < MazeSize; i++)
+        {
+            string line = "";
+            for (int j = 0; j < MazeSize; j++)
+            {
+                line += MazeDist[i, j] + " ";
+            }
+            GD.Print(line);
+        }
 
         
     }

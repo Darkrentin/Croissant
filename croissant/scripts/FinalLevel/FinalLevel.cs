@@ -9,6 +9,8 @@ public partial class FinalLevel : Node3D
 	[Export] public Player3D Player3D;
 	public static FinalLevel Instance;
 	[Export] public PackedScene Enemy3DScene;
+	public int ObjectiveDestroyed = 0;
+	public int ObjectiveCount = 3;
 	public int EnemyCount = 0;
 	public override void _Ready()
 	{
@@ -43,5 +45,18 @@ public partial class FinalLevel : Node3D
 
 	public override void _Process(double delta)
 	{
+	}
+
+	public void ObjectiveDestroy()
+	{
+		ObjectiveDestroyed++;
+		if (ObjectiveDestroyed >= ObjectiveCount)
+		{
+			Lib.Print("All objectives destroyed");
+		}
+		else
+		{
+			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);
+		}
 	}
 }

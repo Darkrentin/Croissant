@@ -19,6 +19,8 @@ public partial class Player3D : CharacterBody3D
 		ShootTimer.WaitTime = 0.95f;
 		ShootTimer.OneShot = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
+		if(BulletHitScene == null)
+			BulletHitScene = GD.Load<PackedScene>("res://scenes/FinalLevel/BulletHit.tscn");
 		AddChild(ShootTimer);
 	}
 
@@ -54,12 +56,11 @@ public partial class Player3D : CharacterBody3D
 		RayCast3D.ForceRaycastUpdate();
 		if (RayCast3D.GetCollider() is Node3D Body)
 		{
-			/*
+			
 			GpuParticles3D bulletHitInstance = BulletHitScene.Instantiate<GpuParticles3D>();
-			GetTree().Root.AddChild(bulletHitInstance);
+			FinalLevel.Instance.AddChild(bulletHitInstance);
 			bulletHitInstance.GlobalPosition = RayCast3D.GetCollisionPoint();
-			bulletHitInstance.Emitting = true;
-²			*/
+			bulletHitInstance.Emitting = true;	
 			if (Body is Enemy3D Enemy)
 				Enemy.OnBulletCollide();
 			else if(RayCast3D.GetCollider() is Objective obj)
