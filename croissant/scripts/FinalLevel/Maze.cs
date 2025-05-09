@@ -183,6 +183,7 @@ public partial class Maze : Node3D
                     Node3D floor = WallScene.Instantiate<Node3D>();
                     floor.Position = new Vector3(nx, 0, nz) * WallSize;
                     floor.Position += new Vector3(0, -WallSize, 0);
+                    FinalLevel.Instance.FloorTiles.Add(floor as StaticBody3D);
                     AddChild(floor);
 
                     Node3D ceil = WallScene.Instantiate<Node3D>();

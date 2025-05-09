@@ -45,13 +45,12 @@ shader_parameter/u_dither_size = 3
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_d5vjr"]
 geometry_parsed_geometry_type = 1
-cell_size = 0.1
+cell_size = 0.05
 cell_height = 0.1
 agent_height = 2.0
 agent_radius = 0.9
 agent_max_climb = 0.1
 agent_max_slope = 0.02
-region_merge_size = 4.0
 vertices_per_polygon = 3.0
 filter_low_hanging_obstacles = true
 filter_ledge_spans = true

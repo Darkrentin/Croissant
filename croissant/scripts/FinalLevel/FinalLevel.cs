@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class FinalLevel : Node3D
 {
@@ -12,6 +13,7 @@ public partial class FinalLevel : Node3D
 	[Export] public MeltShader MeltShader;
 	[Export] public CompressedTexture2D PaletteMain;
 	[Export] public CompressedTexture2D PaletteDeath;
+	public List<StaticBody3D> FloorTiles = new List<StaticBody3D>();
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
 	public int ObjectiveCount = 3;
