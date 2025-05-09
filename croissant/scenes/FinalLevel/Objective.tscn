@@ -60,7 +60,7 @@ emission_energy_multiplier = 3.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_mtdh5"]
 material = SubResource("StandardMaterial3D_8j1cb")
-size = Vector3(0.75, 0.75, 0.75)
+size = Vector3(0.8, 0.8, 0.8)
 
 [sub_resource type="Animation" id="Animation_8j1cb"]
 resource_name = "Break"

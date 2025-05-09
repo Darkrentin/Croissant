@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=21 format=3 uid="uid://pus1csxsvyfw"]
 
 [ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="Script" uid="uid://bh33sr5jvo6xt" path="res://scripts/FinalLevel/FinalLevel.cs" id="1_d5vjr"]
@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cimi7w1dx80pn" path="res://scenes/FinalLevel/Enemy3D.tscn" id="7_ebjtf"]
 [ext_resource type="PackedScene" uid="uid://bkwjrnbau2d5c" path="res://scenes/FinalLevel/MiniMap.tscn" id="8_ebjtf"]
 [ext_resource type="PackedScene" uid="uid://craldw8v15324" path="res://scenes/Other/SpecCam.tscn" id="9_1aisa"]
+[ext_resource type="Shader" uid="uid://dg5tcbq218w5i" path="res://assets/shaders/Melt.gdshader" id="9_cun7r"]
+[ext_resource type="Script" uid="uid://4ajgefy7d4re" path="res://scripts/FinalLevel/MeltShader.cs" id="10_x2utw"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
 sky_top_color = Color(0.0905869, 0.116999, 0.153729, 1)
@@ -54,6 +56,12 @@ filter_low_hanging_obstacles = true
 filter_ledge_spans = true
 filter_walkable_low_height_spans = true
 filter_baking_aabb = AABB(-50, 0, -50, 100, 1, 100)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ml31f"]
+shader = ExtResource("9_cun7r")
+shader_parameter/timer = 0.0
+shader_parameter/y_offsets = PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+shader_parameter/melting = false
 
 [sub_resource type="Animation" id="Animation_knvm8"]
 length = 0.001
@@ -116,13 +124,14 @@ _data = {
 &"Start": SubResource("Animation_56we2")
 }
 
-[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D")]
+[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "MeltShader")]
 script = ExtResource("1_d5vjr")
 maze = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
 miniMap = NodePath("MiniMap/SubViewport/MiniMap")
 NavigationRegion = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D")
 Player3D = NodePath("ViewportWithShader/SubViewport/Player3D")
 Enemy3DScene = ExtResource("7_ebjtf")
+MeltShader = NodePath("ViewportWithShader/SubViewport/MeltShader")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_56we2")
@@ -152,10 +161,22 @@ navigation_mesh = SubResource("NavigationMesh_d5vjr")
 
 [node name="SpecCam" parent="ViewportWithShader/SubViewport" instance=ExtResource("9_1aisa")]
 
+[node name="MeltShader" type="ColorRect" parent="ViewportWithShader/SubViewport"]
+material = SubResource("ShaderMaterial_ml31f")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("10_x2utw")
+XResolution = 128.0
+
 [node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
