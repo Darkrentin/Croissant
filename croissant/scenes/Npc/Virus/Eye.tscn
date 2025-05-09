@@ -1,10 +1,9 @@
 [gd_scene load_steps=5 format=3 uid="uid://lxid8bikpdli"]
 
-[ext_resource type="Script" uid="uid://dxslokmyu2wbi" path="res://scripts/Virus/Eye.cs" id="1_ibrrh"]
+[ext_resource type="Script" uid="uid://dxslokmyu2wbi" path="res://scripts/Npc/Virus/Eye.cs" id="1_ibrrh"]
 [ext_resource type="Texture2D" uid="uid://432qy5woiw38" path="res://assets/sprites/virus/eye/0.png" id="2_pg8is"]
 [ext_resource type="Texture2D" uid="uid://b3080xct8nnyv" path="res://assets/sprites/virus/eye/1.png" id="3_d6ifo"]
 [ext_resource type="Texture2D" uid="uid://dkup1ldcx04ts" path="res://assets/sprites/virus/eye/2.png" id="4_0lf2e"]
-
 
 [node name="Eye" type="Node2D" node_paths=PackedStringArray("black")]
 script = ExtResource("1_ibrrh")

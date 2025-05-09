@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
 [ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
 
-
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 3
 ambient_light_color = Color(1, 0.763106, 0.633046, 1)

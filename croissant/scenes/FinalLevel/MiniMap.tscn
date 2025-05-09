@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://hydpfc60do7x"]
+[gd_scene load_steps=5 format=3 uid="uid://bkwjrnbau2d5c"]
 
 [ext_resource type="Texture2D" uid="uid://di0wec2b4yo70" path="res://assets/sprites/WhiteSquare.png" id="1_1nyjo"]
 [ext_resource type="Script" uid="uid://d2o8xkfkptm1l" path="res://scripts/FinalLevel/MiniMap.cs" id="2_mtl0e"]

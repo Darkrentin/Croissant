@@ -16,7 +16,7 @@ public partial class Maze : Node3D
     public const int Floor = 0;
     public const int Wall = 1;
     public const int Objective = 2;
-    
+
     public int[,] MazeData;
     public int[,] MazeDist;
     [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;
@@ -58,20 +58,20 @@ public partial class Maze : Node3D
         ReplaceLabel(MazeSize / 2, MazeSize / 2, SafeZone, SafeZone, Floor, CantSpawn, true);
 
         PlaceRoom(2, 2, 3, 3, true, CantSpawn);
-        MazeData[2,2] = Objective;
+        MazeData[2, 2] = Objective;
 
         PlaceRoom(2, MazeSize - 3, 3, 3, true, CantSpawn);
-        MazeData[2,MazeSize-3] = Objective;
+        MazeData[2, MazeSize - 3] = Objective;
 
         PlaceRoom(MazeSize - 3, 2, 3, 3, true, CantSpawn);
-        MazeData[MazeSize-3,2] = Objective;
+        MazeData[MazeSize - 3, 2] = Objective;
 
         PlaceRoom(MazeSize - 3, MazeSize - 3, 3, 3, true, CantSpawn);
-        MazeData[MazeSize-3,MazeSize-3] = Objective;
+        MazeData[MazeSize - 3, MazeSize - 3] = Objective;
 
-        MazeData[MazeSize/2 - 1, MazeSize/2 - 1] = Objective;
-        MazeData[MazeSize/2 - 1, MazeSize/2] = Objective;
-        MazeData[MazeSize/2, MazeSize/2 - 1] = Objective;
+        MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = Objective;
+        MazeData[MazeSize / 2 - 1, MazeSize / 2] = Objective;
+        MazeData[MazeSize / 2, MazeSize / 2 - 1] = Objective;
 
         CalculateDistancesFromCenter();
     }
@@ -126,25 +126,25 @@ public partial class Maze : Node3D
         Queue<(int, int)> queue = new Queue<(int, int)>();
         int centerX = MazeSize / 2;
         int centerY = MazeSize / 2;
-        
+
         // Start BFS from the center
         MazeDist[centerX, centerY] = 0;
         queue.Enqueue((centerX, centerY));
-        
+
         // Directions: up, right, down, left
         int[] dx = { -1, 0, 1, 0 };
         int[] dy = { 0, 1, 0, -1 };
-        
+
         while (queue.Count > 0)
         {
             var (x, y) = queue.Dequeue();
-            
+
             // Check all four adjacent cells
             for (int i = 0; i < 4; i++)
             {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
-                
+
                 // Check if the cell is within bounds
                 if (nx >= 0 && nx < MazeSize && ny >= 0 && ny < MazeSize)
                 {
@@ -168,7 +168,7 @@ public partial class Maze : Node3D
             {
                 int nx = i - MazeSize / 2;
                 int nz = j - MazeSize / 2;
-                
+
                 if (MazeData[i, j] == Wall)
                 {
                     Node3D wall = WallScene.Instantiate<Node3D>();
@@ -177,7 +177,7 @@ public partial class Maze : Node3D
                 }
                 else
                 {
-                    
+
                     // Add floor and ceiling for lamp spaces too
                     Node3D floor = WallScene.Instantiate<Node3D>();
                     floor.Position = new Vector3(nx, 0, nz) * WallSize;
@@ -190,7 +190,7 @@ public partial class Maze : Node3D
                     ceil.Position += new Vector3(0, WallSize * 1, 0);
                     AddChild(ceil);
 
-                    if((MazeDist[i,j]%LampSpacing==0 && Lib.rand.Next(0,2)==0) || MazeDist[i,j] == 0)
+                    if ((MazeDist[i, j] % LampSpacing == 0 && Lib.rand.Next(0, 2) == 0) || MazeDist[i, j] == 0)
                     {
                         Node3D lamp = LampScene.Instantiate<Node3D>();
                         lamp.Position = new Vector3(nx, 0, nz) * WallSize;
@@ -214,30 +214,30 @@ public partial class Maze : Node3D
             string line = "";
             for (int j = 0; j < MazeSize; j++)
             {
-            switch (MazeData[i, j])
-            {
-                case Wall:
-                line += "■ ";
-                break;
-                case Floor:
-                line += "  ";
-                break;
-                case Lamp:
-                line += "* ";
-                break;
-                case CantSpawn:
-                line += "X ";
-                break;
-                default:
-                line += MazeData[i, j] + " ";
-                break;
-            }
+                switch (MazeData[i, j])
+                {
+                    case Wall:
+                        line += "■ ";
+                        break;
+                    case Floor:
+                        line += "  ";
+                        break;
+                    case Lamp:
+                        line += "* ";
+                        break;
+                    case CantSpawn:
+                        line += "X ";
+                        break;
+                    default:
+                        line += MazeData[i, j] + " ";
+                        break;
+                }
             }
             GD.Print(line);
         }
         GD.Print("Maze size: " + MazeSize + "x" + MazeSize);
 
-        for(int i = 0; i < MazeSize; i++)
+        for (int i = 0; i < MazeSize; i++)
         {
             string line = "";
             for (int j = 0; j < MazeSize; j++)
@@ -247,7 +247,7 @@ public partial class Maze : Node3D
             GD.Print(line);
         }
 
-        
+
     }
 
     public void PlaceRoom(int x, int y, int w, int h, bool center = false, int Label = 0)
