@@ -5,10 +5,10 @@ using System.Collections.Generic;
 public partial class Objective : StaticBody3D
 {
 	// Called when the node enters the scene tree for the first time.
+	public static List<Objective> ObjectiveList = new List<Objective>();
 	[Export] public CollisionShape3D CollisionShape;
 	[Export] public OmniLight3D Light;
 	[Export] public AnimationPlayer AnimationPlayer;
-	public AnimationPlayer LocalAnimationPlayer;
 	[Export] public RigidBody3D[] PartList;
 	public bool _isBreaking = false;
 	public Timer timer;
@@ -20,20 +20,18 @@ public partial class Objective : StaticBody3D
 		timer.OneShot = true;
 		timer.Timeout += () =>
 		{
+			ObjectiveList.Remove(this);
+			ResetOtherObjectives();
 			QueueFree();
 		};
+		ObjectiveList.Add(this);
 		AddChild(timer);
-		LocalAnimationPlayer = (AnimationPlayer)GetNode("AnimationPlayer");
 		
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		if (_isBreaking && AnimationPlayer.IsPlaying())
-		{
-			AnimationPlayer.Advance((float)delta);
-		}
 	}
 
 	public void Break()
@@ -54,10 +52,18 @@ public partial class Objective : StaticBody3D
 		
 		//AnimationPlayer.CallbackModeProcess = AnimationPlayer.AnimationCallbackModeProcess.Idle;
 		
-		LocalAnimationPlayer.Play("Break");
+		AnimationPlayer.Play("Break");
 
 		FinalLevel.Instance.ObjectiveDestroy();
 
 		timer.Start();
+	}
+
+	public void ResetOtherObjectives()
+	{
+		foreach (var obj in ObjectiveList)
+		{
+			obj.AnimationPlayer.Play("RESET");
+		}
 	}
 }

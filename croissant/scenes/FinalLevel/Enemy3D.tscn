@@ -69,6 +69,8 @@ color_ramp = SubResource("Gradient_0vp8b")
 noise = SubResource("FastNoiseLite_0l5py")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0vp8b"]
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
 backlight_texture = SubResource("NoiseTexture2D_fjuj0")
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vp8b"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=43 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
@@ -150,10 +150,10 @@ tracks/2/path = NodePath("OmniLight3D:light_energy")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, 5.0, 3.0, 0.0]
+"values": [0.0, 5.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_gf1pk"]
@@ -249,9 +249,6 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_parfq"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o3k41"]
-priority = 3
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gf1pk"]
 switch_mode = 2
 advance_mode = 2
@@ -276,18 +273,6 @@ advance_mode = 2
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y5a14"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_df6ge"]
-priority = 3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vdv5x"]
-priority = 3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bdsnf"]
-priority = 3
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1yi64"]
-priority = 3
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_31ird"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oppu7"]
@@ -295,15 +280,12 @@ priority = 3
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ad7fj"]
 switch_mode = 2
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q2n0e"]
-priority = 3
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3r0jc"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h7i27"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8xvos"]
-priority = 3
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ley8d"]
+switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_ley8d"]
 states/End/position = Vector2(1049, 100)
@@ -324,8 +306,8 @@ states/StartMid/node = SubResource("AnimationNodeAnimation_parfq")
 states/StartMid/position = Vector2(709, 15)
 states/StartRunLeft/node = SubResource("AnimationNodeAnimation_8xvos")
 states/StartRunLeft/position = Vector2(322, -87)
-transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "RESET", "Shoot", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_df6ge"), "RunR 2", "Shoot", SubResource("AnimationNodeStateMachineTransition_vdv5x"), "Run", "Shoot", SubResource("AnimationNodeStateMachineTransition_bdsnf"), "RunR", "Shoot", SubResource("AnimationNodeStateMachineTransition_1yi64"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "StartMid", "Shoot", SubResource("AnimationNodeStateMachineTransition_q2n0e"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "StartRunLeft", "Shoot", SubResource("AnimationNodeStateMachineTransition_8xvos")]
-graph_offset = Vector2(109, -254)
+transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "Shoot", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_ley8d")]
+graph_offset = Vector2(72, -200)
 
 [node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree")]
 script = ExtResource("1_rrt4f")

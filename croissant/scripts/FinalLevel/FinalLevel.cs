@@ -58,5 +58,6 @@ public partial class FinalLevel : Node3D
 		{
 			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);
 		}
+
 	}
 }

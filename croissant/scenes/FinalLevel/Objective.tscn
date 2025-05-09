@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cjn4lukcecj37"]
+[gd_scene load_steps=24 format=3 uid="uid://cjn4lukcecj37"]
 
 [ext_resource type="Script" uid="uid://cru6f15nehrvy" path="res://scripts/FinalLevel/Objective.cs" id="1_8j1cb"]
 
@@ -52,6 +52,15 @@ size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fsexr"]
 size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8j1cb"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 3.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_mtdh5"]
+material = SubResource("StandardMaterial3D_8j1cb")
+size = Vector3(0.75, 0.75, 0.75)
 
 [sub_resource type="Animation" id="Animation_8j1cb"]
 resource_name = "Break"
@@ -246,6 +255,18 @@ tracks/15/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Vector3(0.5, 0.5, 0.5), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Obj/Center:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_uivtg"]
@@ -442,6 +463,18 @@ tracks/15/keys = {
 "update": 0,
 "values": [Vector3(0.5, 0.5, 0.5)]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Obj/Center:visible")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtdh5"]
 _data = {
@@ -545,6 +578,9 @@ mesh = SubResource("BoxMesh_fsexr")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Obj"]
 omni_range = 1.5
+
+[node name="Center" type="MeshInstance3D" parent="Obj"]
+mesh = SubResource("BoxMesh_mtdh5")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

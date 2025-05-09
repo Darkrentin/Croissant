@@ -162,6 +162,7 @@ public partial class Maze : Node3D
 
     public void MakeMaze()
     {
+        int ObjectiveCount = 0;
         for (int i = 0; i < MazeSize; i++)
         {
             for (int j = 0; j < MazeSize; j++)
@@ -200,6 +201,7 @@ public partial class Maze : Node3D
                     {
                         Node3D objective = ObjectiveScene.Instantiate<Node3D>();
                         objective.Position = new Vector3(nx, 0, nz) * WallSize;
+                        ObjectiveCount++;
                         AddChild(objective);
                     }
                 }

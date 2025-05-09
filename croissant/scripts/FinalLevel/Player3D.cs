@@ -16,7 +16,7 @@ public partial class Player3D : CharacterBody3D
 		AnimationPlayer = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
 		ShootTimer = new Timer();
 		ShootTimer.Timeout += () => CanShoot = true;
-		ShootTimer.WaitTime = 0.95f;
+		ShootTimer.WaitTime = 0.9f;
 		ShootTimer.OneShot = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		if(BulletHitScene == null)
@@ -51,7 +51,7 @@ public partial class Player3D : CharacterBody3D
 
 	private void Shoot()
 	{
-		AnimationPlayer.Travel("Shoot");
+		AnimationPlayer.Start("Shoot", reset: true);
 
 		RayCast3D.ForceRaycastUpdate();
 		if (RayCast3D.GetCollider() is Node3D Body)
