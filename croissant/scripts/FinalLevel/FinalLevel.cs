@@ -8,7 +8,10 @@ public partial class FinalLevel : Node3D
 	[Export] public NavigationRegion3D NavigationRegion;
 	[Export] public Player3D Player3D;
 	[Export] public PackedScene Enemy3DScene;
+	[Export] public SubViewportContainer ShaderViewport;
 	[Export] public MeltShader MeltShader;
+	[Export] public CompressedTexture2D PaletteMain;
+	[Export] public CompressedTexture2D PaletteDeath;
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
 	public int ObjectiveCount = 3;
@@ -53,13 +56,40 @@ public partial class FinalLevel : Node3D
 			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);
 	}
 
-	public void Death()
+	public void Death(Vector3 enemyPosition)
 	{
+		Player3D.ProcessMode = ProcessModeEnum.Disabled;
+		((ShaderMaterial)ShaderViewport.Material).SetShaderParameter("u_color_tex", PaletteDeath);
 
-		MeltShader.GenerateOffsets();
-		
-		FinalLevel.Instance.Player3D.GlobalPosition = new Vector3(0, 0, 0);
-		FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
-		MeltShader.Transition();
+		// Store the original position for the look-at calculation
+		Vector3 originalPlayerPos = Player3D.GlobalPosition;
+
+		// Create a target position at the same height as the player
+		Vector3 targetPos = new Vector3(enemyPosition.X, originalPlayerPos.Y, enemyPosition.Z);
+
+		// Calculate the direction to face the enemy
+		Vector3 direction = targetPos - originalPlayerPos;
+
+		// Calculate the target rotation angle
+		float targetY = Mathf.Atan2(direction.X, direction.Z) + Mathf.Pi; // Add Pi to face toward the enemy
+
+		// Normalize the target angle to avoid rotation issues
+		while (targetY > Mathf.Pi) targetY -= Mathf.Pi * 2;
+		while (targetY < -Mathf.Pi) targetY += Mathf.Pi * 2;
+
+		var tween = CreateTween();
+		tween.TweenProperty(Player3D, "rotation:y", targetY, 0.5f)
+			 .SetTrans(Tween.TransitionType.Linear)
+			 .SetEase(Tween.EaseType.InOut);
+		tween.TweenInterval(0.5f);
+		tween.TweenCallback(Callable.From(() =>
+		{
+			MeltShader.GenerateOffsets();
+			((ShaderMaterial)ShaderViewport.Material).SetShaderParameter("u_color_tex", PaletteMain);
+			MeltShader.Transition();
+
+			// Now teleport the player after the rotation is complete
+			Player3D.GlobalPosition = Vector3.Zero;
+		}));
 	}
 }

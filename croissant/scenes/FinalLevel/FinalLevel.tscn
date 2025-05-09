@@ -1,10 +1,11 @@
-[gd_scene load_steps=21 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=22 format=3 uid="uid://pus1csxsvyfw"]
 
 [ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="Script" uid="uid://bh33sr5jvo6xt" path="res://scripts/FinalLevel/FinalLevel.cs" id="1_d5vjr"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
 [ext_resource type="Texture2D" uid="uid://d314a13s04tl" path="res://assets/shaders/halloween-palette-1x.png" id="2_56we2"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
+[ext_resource type="Texture2D" uid="uid://dfb2h1ui8x4ad" path="res://assets/shaders/palette.png" id="4_x2utw"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
 [ext_resource type="PackedScene" uid="uid://cimi7w1dx80pn" path="res://scenes/FinalLevel/Enemy3D.tscn" id="7_ebjtf"]
 [ext_resource type="PackedScene" uid="uid://bkwjrnbau2d5c" path="res://scenes/FinalLevel/MiniMap.tscn" id="8_ebjtf"]
@@ -124,14 +125,17 @@ _data = {
 &"Start": SubResource("Animation_56we2")
 }
 
-[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "MeltShader")]
+[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "ShaderViewport", "MeltShader")]
 script = ExtResource("1_d5vjr")
 maze = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
 miniMap = NodePath("MiniMap/SubViewport/MiniMap")
 NavigationRegion = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D")
 Player3D = NodePath("ViewportWithShader/SubViewport/Player3D")
 Enemy3DScene = ExtResource("7_ebjtf")
+ShaderViewport = NodePath("ViewportWithShader")
 MeltShader = NodePath("ViewportWithShader/SubViewport/MeltShader")
+PaletteMain = ExtResource("2_56we2")
+PaletteDeath = ExtResource("4_x2utw")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_56we2")
