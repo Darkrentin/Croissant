@@ -197,5 +197,6 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="MiniMap" parent="MiniMap/SubViewport" node_paths=PackedStringArray("Maze", "Player") instance=ExtResource("8_ebjtf")]
+visible = false
 Maze = NodePath("../../../ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
 Player = NodePath("../../../ViewportWithShader/SubViewport/Player3D")

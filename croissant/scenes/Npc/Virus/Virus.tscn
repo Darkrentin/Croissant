@@ -389,7 +389,7 @@ albedo_color = Color(0, 0, 0, 1)
 roughness = 0.804041
 roughness_texture_channel = 1
 emission_enabled = true
-emission = Color(1, 0, 0, 1)
+emission = Color(0.171982, 1, 0, 1)
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_c2tj1"]
 _surfaces = [{
@@ -1478,7 +1478,6 @@ advance_mode = 2
 advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qtk15"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oq100"]
 switch_mode = 2
@@ -1491,7 +1490,6 @@ switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7qgky"]
 switch_mode = 2
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xl0md"]
 switch_mode = 2

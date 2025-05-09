@@ -57,7 +57,9 @@ public partial class FinalLevel : Node3D
 	{
 
 		MeltShader.GenerateOffsets();
+		
 		FinalLevel.Instance.Player3D.GlobalPosition = new Vector3(0, 0, 0);
+		FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
 		MeltShader.Transition();
 	}
 }

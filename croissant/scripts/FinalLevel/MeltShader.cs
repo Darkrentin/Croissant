@@ -8,6 +8,7 @@ public partial class MeltShader : ColorRect
 	[Export] public double XResolution { get; set; } = 100.0;
 	[Export] public double MaxOffset { get; set; } = 2.0;
 	[Export] public double MeltSpeed { get; set; } = 0.02;
+	public float _maxYOffset;
 
 	public override void _Ready()
 	{
@@ -16,11 +17,21 @@ public partial class MeltShader : ColorRect
 
 	public override void _Process(double delta)
 	{
-		if (_melting)
+			if (_melting)
 		{
 			_timer += MeltSpeed; // Assuming MeltSpeed is not delta-dependent as per GDScript
 			if (Material is ShaderMaterial shaderMaterial)
 				shaderMaterial.SetShaderParameter("timer", _timer);
+
+			if(_timer*_maxYOffset > 1.0f)
+			{
+				_melting = false;
+				_timer = 0.0f;
+				if (Material is ShaderMaterial SM)
+					SM.SetShaderParameter("melting", false);
+				FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Always;
+				Hide();
+			}
 		}
 	}
 
@@ -29,9 +40,13 @@ public partial class MeltShader : ColorRect
 	public void GenerateOffsets()
 	{
 		var offsets = new Godot.Collections.Array<float>();
+		_maxYOffset = 0.0f;
 		for (int i = 0; i < (int)XResolution; i++)
-
+		{
 			offsets.Add(Lib.GetRandomNormal(1.0f, (float)MaxOffset));
+			if (offsets[i] > _maxYOffset)
+				_maxYOffset = offsets[i];
+		}
 
 		if (Material is ShaderMaterial SM)
 		{
