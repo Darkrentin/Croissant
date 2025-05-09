@@ -58,7 +58,8 @@ public partial class MenuWindow : FloatWindow
 	public void Close()
 	{
 		Visible = false;
-		Virus.SetPause(false);
+		if(GameManager.virus!=null)
+		    Virus.SetPause(false);
 		GetTree().Paused = false;
 	}
 
@@ -67,7 +68,8 @@ public partial class MenuWindow : FloatWindow
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Visible = true;
 		ProcessMode = ProcessModeEnum.Always;
-		Virus.SetPause(true);
+		if(GameManager.virus!=null)
+		    Virus.SetPause(true);
 		GetTree().Paused = true;
 		
 	}

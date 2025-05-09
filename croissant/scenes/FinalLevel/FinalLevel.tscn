@@ -7,7 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/bayer16tile2.png" id="3_knvm8"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]
 [ext_resource type="PackedScene" uid="uid://cimi7w1dx80pn" path="res://scenes/FinalLevel/Enemy3D.tscn" id="7_ebjtf"]
-[ext_resource type="PackedScene" path="res://scenes/FinalLevel/MiniMap.tscn" id="8_ebjtf"]
+[ext_resource type="PackedScene" uid="uid://hydpfc60do7x" path="res://scenes/FinalLevel/MiniMap.tscn" id="8_ebjtf"]
 [ext_resource type="PackedScene" uid="uid://craldw8v15324" path="res://scenes/Other/SpecCam.tscn" id="9_1aisa"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
@@ -143,6 +143,7 @@ render_target_update_mode = 4
 
 [node name="Player3D" parent="ViewportWithShader/SubViewport" instance=ExtResource("1_wf7iu")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1, 0, 1)
+BulletHitScene = null
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="ViewportWithShader/SubViewport"]
 navigation_mesh = SubResource("NavigationMesh_d5vjr")

@@ -4,6 +4,7 @@ public partial class Maze : Node3D
 {
     [Export] public PackedScene WallScene;
     [Export] public PackedScene LampScene;
+    [Export] public PackedScene ObjectiveScene;
     [Export] public int MazeSize = 31;
 
     public int WallSize = 2;
@@ -13,6 +14,7 @@ public partial class Maze : Node3D
     public const int CantSpawn = -1;
     public const int Floor = 0;
     public const int Wall = 1;
+    public const int Objective = 2;
     
     public int[,] MazeData;
     public int[,] MazeDist;
@@ -53,10 +55,18 @@ public partial class Maze : Node3D
         PlaceRoom(MazeSize / 2, MazeSize / 2, 3, 3, true);
         const int SafeZone = 11;
         ReplaceLabel(MazeSize / 2, MazeSize / 2, SafeZone, SafeZone, Floor, CantSpawn, true);
+
         PlaceRoom(2, 2, 3, 3, true, CantSpawn);
+        MazeData[2,2] = Objective;
+
         PlaceRoom(2, MazeSize - 3, 3, 3, true, CantSpawn);
+        MazeData[2,MazeSize-3] = Objective;
+
         PlaceRoom(MazeSize - 3, 2, 3, 3, true, CantSpawn);
+        MazeData[MazeSize-3,2] = Objective;
+
         PlaceRoom(MazeSize - 3, MazeSize - 3, 3, 3, true, CantSpawn);
+        MazeData[MazeSize-3,MazeSize-3] = Objective;
     }
 
     private void GenerateMazeDFS(int r, int c, int depth)
@@ -142,6 +152,12 @@ public partial class Maze : Node3D
                         Node3D lamp = LampScene.Instantiate<Node3D>();
                         lamp.Position = new Vector3(nx, 0, nz) * WallSize;
                         AddChild(lamp);
+                    }
+                    if (MazeData[i, j] == Objective)
+                    {
+                        Node3D objective = ObjectiveScene.Instantiate<Node3D>();
+                        objective.Position = new Vector3(nx, 0, nz) * WallSize;
+                        AddChild(objective);
                     }
                 }
             }

@@ -195,7 +195,8 @@ public partial class GameManager : Node2D
             Transparent = true,
             TransparentBg = true,
             AlwaysOnTop = true,
-            Size = new Vector2I(40, 40),
+            Size = new Vector2I(1, 1),
+            //Visible = false,
             Borderless = true
         };
         AddChild(FixWindow);

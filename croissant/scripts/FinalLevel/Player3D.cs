@@ -54,13 +54,20 @@ public partial class Player3D : CharacterBody3D
 		RayCast3D.ForceRaycastUpdate();
 		if (RayCast3D.GetCollider() is Node3D Body)
 		{
+			/*
 			GpuParticles3D bulletHitInstance = BulletHitScene.Instantiate<GpuParticles3D>();
 			GetTree().Root.AddChild(bulletHitInstance);
 			bulletHitInstance.GlobalPosition = RayCast3D.GetCollisionPoint();
 			bulletHitInstance.Emitting = true;
-
+²			*/
 			if (Body is Enemy3D Enemy)
 				Enemy.OnBulletCollide();
+			else if(RayCast3D.GetCollider() is Objective obj)
+			{
+				obj.Break();
+				Lib.Print("Objective hit!");
+			}
 		}
+		Lib.Print("Hit: " + RayCast3D.GetCollider().GetClass());
 	}
 }
