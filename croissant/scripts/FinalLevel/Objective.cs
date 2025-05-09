@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 public partial class Objective : StaticBody3D
 {
-	// Called when the node enters the scene tree for the first time.
 	public static List<Objective> ObjectiveList = new List<Objective>();
 	[Export] public CollisionShape3D CollisionShape;
 	[Export] public OmniLight3D Light;
 	[Export] public AnimationPlayer AnimationPlayer;
 	[Export] public RigidBody3D[] PartList;
+	[Export] public Color PixelColor;
 	public bool _isBreaking = false;
 	public Timer timer;
 	public int PartCount = 8;
@@ -26,10 +26,8 @@ public partial class Objective : StaticBody3D
 		};
 		ObjectiveList.Add(this);
 		AddChild(timer);
-		
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
@@ -47,11 +45,11 @@ public partial class Objective : StaticBody3D
 		foreach (var part in PartList)
 		{
 			part.Freeze = false;
-			part.ApplyImpulse(((GlobalPosition-FinalLevel.Instance.Player3D.GlobalPosition).Normalized() + part.Position).Normalized()*impulse);
+			part.ApplyImpulse(((GlobalPosition - FinalLevel.Instance.Player3D.GlobalPosition).Normalized() + part.Position).Normalized() * impulse);
 		}
-		
+
 		//AnimationPlayer.CallbackModeProcess = AnimationPlayer.AnimationCallbackModeProcess.Idle;
-		
+
 		AnimationPlayer.Play("Break");
 
 		FinalLevel.Instance.ObjectiveDestroy();
@@ -61,9 +59,7 @@ public partial class Objective : StaticBody3D
 
 	public void ResetOtherObjectives()
 	{
-		foreach (var obj in ObjectiveList)
-		{
+		foreach (Objective obj in ObjectiveList)
 			obj.AnimationPlayer.Play("RESET");
-		}
 	}
 }

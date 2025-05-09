@@ -6,71 +6,143 @@ the modified result to godotshaders.com.
 */
 shader_type canvas_item;
 
+// Samplers
 uniform sampler2D u_dither_tex : repeat_enable, filter_nearest;
 uniform sampler2D u_color_tex : filter_nearest;
-uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
+// NOTE: TEXTURE is a built-in sampler for canvas_item shaders.
+// It refers to the texture of the node this shader is applied to.
+// Do NOT declare 'uniform sampler2D TEXTURE' here.
 
-uniform int u_bit_depth;
-uniform float u_contrast;
-uniform float u_offset;
-uniform int u_dither_size;
+// If you intend to use the screen's backbuffer (for a full-screen post-process effect),
+// you would declare and use SCREEN_TEXTURE like this:
+// uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_nearest;
+// And then replace all uses of 'TEXTURE' below with 'SCREEN_TEXTURE'.
+// You would also need to enable "Screen Texture" in the Material properties in the Godot editor.
+
+// Parameters
+uniform int u_bit_depth = 8;
+uniform float u_contrast = 1.0;
+uniform float u_offset = 0.0;
+uniform int u_dither_size = 1; // How much to "pixelate" the source texture before dithering
+uniform float u_exclusion_tolerance : hint_range(0.0, 0.5, 0.01) = 0.05;
 
 void fragment()
 {
-	// sample the screen texture at the desired output resolution
-	vec2 screen_size = vec2(textureSize(TEXTURE, 0)) / float(u_dither_size);
-	vec2 screen_sample_uv = floor(UV * screen_size) / screen_size;
+	// --- 1. SAMPLE ORIGINAL PIXEL (from the node's own texture/appearance) ---
+	// TEXTURE here refers to the built-in texture of the CanvasItem.
+	vec2 source_texture_true_size = vec2(textureSize(TEXTURE, 0));
+	
+	// Ensure u_dither_size is at least 1 to avoid division by zero or unexpected behavior.
+	float dither_size_clamped = float(max(1, u_dither_size));
+	
+	// Calculate the number of "pixel blocks" across the source texture.
+	vec2 pixelated_block_count = source_texture_true_size / dither_size_clamped;
+	
+	// UV for sampling the input TEXTURE at the "pixelated" resolution.
+	// This effectively "pixelates" the source texture based on u_dither_size.
+	vec2 screen_sample_uv = floor(UV * pixelated_block_count) / pixelated_block_count;
+	
 	vec3 screen_col = texture(TEXTURE, screen_sample_uv).rgb;
+	float original_alpha = texture(TEXTURE, screen_sample_uv).a;
 
-	// calculate pixel luminosity (https://stackoverflow.com/questions/596216/formula-to-determine-brightness-of-rgb-color)
-	float lum = (screen_col.r * 0.299) + (screen_col.g * 0.587) + (screen_col.b * 0.114);
+	vec3 processed_color; // This will hold the color after dithering or fallback
 
-	// adjust with contrast and offset parameters
-	float contrast = u_contrast;
-	lum = (lum - 0.5 + u_offset) * contrast + 0.5;
-	lum = clamp(lum, 0.0, 1.0);
+	// --- 2. CHECK IF DITHERING CAN BE PERFORMED (dependencies are valid) ---
+	ivec2 palette_tex_dims = textureSize(u_color_tex, 0);
+	ivec2 dither_tex_dims = textureSize(u_dither_tex, 0);
 
-	// reduce luminosity bit depth to give a more banded visual if desired
-	float bits = float(u_bit_depth);
-	lum = floor(lum * bits) / bits;
+	// Conditions for performing dithering:
+	// - Palette texture must have dimensions > 0
+	// - Dither texture must have dimensions > 0
+	bool can_dither = palette_tex_dims.x > 0 && palette_tex_dims.y > 0 &&
+	                  dither_tex_dims.x > 0 && dither_tex_dims.y > 0;
 
-	// to support multicolour palettes, we want to dither between the two colours on the palette
-	// which are adjacent to the current pixel luminosity.
-	// to do this, we need to determine which 'band' lum falls into, calculate the upper and lower
-	// bound of that band, then later we will use the dither texture to pick either the upper or
-	// lower colour.
+	if (can_dither)
+	{
+		// --- 3. DITHERING LOGIC (applied to screen_col from node's TEXTURE) ---
+		
+		// Calculate pixel luminosity
+		float lum = (screen_col.r * 0.299) + (screen_col.g * 0.587) + (screen_col.b * 0.114);
 
-	// get the palette texture size mapped so it is 1px high (so the x value however many colour bands there are)
-	ivec2 col_size = textureSize(u_color_tex, 0);
-	col_size /= col_size.y;
+		// Adjust with contrast and offset parameters
+		lum = (lum - 0.5 + u_offset) * u_contrast + 0.5;
+		lum = clamp(lum, 0.0, 1.0);
 
-	float col_x = float(col_size.x) - 1.0; // colour boundaries is 1 less than the number of colour bands
-	float col_texel_size = 1.0 / col_x; // the size of one colour boundary
+		// Reduce luminosity bit depth
+		float bits = float(max(1, u_bit_depth)); // Ensure bits is at least 1
+		lum = floor(lum * bits) / bits;
 
-	lum = max(lum - 0.00001, 0.0); // makes sure our floor calculation below behaves when lum == 1.0
-	float lum_lower = floor(lum * col_x) * col_texel_size;
-	float lum_upper = (floor(lum * col_x) + 1.0) * col_texel_size;
-	float lum_scaled = lum * col_x - floor(lum * col_x); // calculates where lum lies between the upper and lower bound
+		// Palette properties
+		ivec2 col_size_normalized_h = palette_tex_dims;
+		col_size_normalized_h.x = max(1, col_size_normalized_h.x); // Ensure at least 1xY
+		col_size_normalized_h.y = max(1, col_size_normalized_h.y); // Ensure at least Xx1
+		col_size_normalized_h /= col_size_normalized_h.y; // Conceptually make palette a 1px high strip
 
-	// map the dither texture onto the screen. there are better ways of doing this that makes the dither pattern 'stick'
-	// with objects in the 3D world, instead of being mapped onto the screen. see lucas pope's details posts on how he
-	// achieved this in Obra Dinn: https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742
-	ivec2 noise_size = textureSize(u_dither_tex, 0);
-	vec2 inv_noise_size = vec2(1.0 / float(noise_size.x), 1.0 / float(noise_size.y));
-	vec2 noise_uv = UV * inv_noise_size * vec2(float(screen_size.x), float(screen_size.y));
-	float threshold = texture(u_dither_tex, noise_uv).r;
+		float col_x = float(col_size_normalized_h.x) - 1.0; // Number of color boundaries
+        if (col_x < 0.0) col_x = 0.0; // Handle single color palettes (col_x becomes 0)
 
-	// adjust the dither slightly so min and max aren't quite at 0.0 and 1.0
-	// otherwise we wouldn't get fullly dark and fully light dither patterns at lum 0.0 and 1.0
-	threshold = threshold * 0.99 + 0.005;
+		float col_texel_size = 0.0; // Size of one color band in UV space for palette
+		if (col_x > 0.0) { // If more than one color in palette
+			col_texel_size = 1.0 / col_x;
+		}
 
-	// the lower lum_scaled is, the fewer pixels will be below the dither threshold, and thus will use the lower bound colour,
-	// and vice-versa
-	float ramp_val = lum_scaled < threshold ? 0.0f : 1.0f;
-	// sample at the lower bound colour if ramp_val is 0.0, upper bound colour if 1.0
-	float col_sample = mix(lum_lower, lum_upper, ramp_val);
-	vec3 final_col = texture(u_color_tex, vec2(col_sample, 0.5)).rgb;
+		lum = max(lum - 0.00001, 0.0); // Nudge lum slightly for floor() behavior at 1.0
+		
+		// lum_scaled: How far lum is into its current quantized band [0,1)
+		float lum_scaled = lum * col_x - floor(lum * col_x);
+		// If col_x is 0 (single color palette), lum_scaled becomes 0.
 
-	// return the final colour!
-	COLOR.rgb = final_col;
+		// lum_lower, lum_upper: UV coordinates for sampling the color palette
+		float lum_lower = floor(lum * col_x) * col_texel_size;
+		float lum_upper = (floor(lum * col_x) + 1.0) * col_texel_size;
+        lum_upper = clamp(lum_upper, 0.0, 1.0); // Ensure upper bound is valid (e.g., not > 1.0)
+
+		// Dither texture mapping
+		vec2 inv_dither_tex_size = vec2(1.0); // Default if dither_tex_dims are invalid
+        if (dither_tex_dims.x > 0 && dither_tex_dims.y > 0) {
+            inv_dither_tex_size = vec2(1.0 / float(dither_tex_dims.x), 1.0 / float(dither_tex_dims.y));
+        }
+        // Map dither pattern based on the node's UVs, scaled by pixelation factor
+		vec2 dither_uv = UV * inv_dither_tex_size * pixelated_block_count;
+
+		float threshold = texture(u_dither_tex, dither_uv).r;
+		threshold = threshold * 0.99 + 0.005; // Adjust threshold range
+
+		// Pick lower or upper color from palette based on threshold
+		float ramp_val = lum_scaled < threshold ? 0.0f : 1.0f;
+		float col_sample_x = mix(lum_lower, lum_upper, ramp_val); // X-coordinate for palette lookup
+        col_sample_x = clamp(col_sample_x, 0.0, 1.0); // Clamp final palette sample UV
+
+		processed_color = texture(u_color_tex, vec2(col_sample_x, 0.5)).rgb;
+	}
+	else // Not all conditions for dithering met (e.g., invalid textures)
+	{
+		processed_color = screen_col; // Fallback to the original (pixelated) screen color
+	}
+
+	// --- 4. EXCLUSION LOGIC ---
+	// Decide whether to use the original color or the processed (dithered/fallback) color.
+	bool exclude_pixel = false;
+	float high_threshold = 1.0 - u_exclusion_tolerance;
+	float low_threshold = u_exclusion_tolerance;
+
+	// Check for predominantly Red, Green, or Blue based on the (pixelated) original color
+	if (screen_col.r >= high_threshold && screen_col.g <= low_threshold && screen_col.b <= low_threshold) {
+		exclude_pixel = true;
+	}
+	else if (screen_col.g >= high_threshold && screen_col.r <= low_threshold && screen_col.b <= low_threshold) {
+		exclude_pixel = true;
+	}
+	else if (screen_col.b >= high_threshold && screen_col.r <= low_threshold && screen_col.g <= low_threshold) {
+		exclude_pixel = true;
+	}
+
+	if (exclude_pixel) {
+		COLOR.rgb = screen_col; // Use original (pixelated) color
+	} else {
+		COLOR.rgb = processed_color; // Use dithered color (or fallback if dithering failed)
+	}
+	
+	// --- 5. APPLY ORIGINAL ALPHA (from the node's own texture/appearance) ---
+	COLOR.a = original_alpha;
 }

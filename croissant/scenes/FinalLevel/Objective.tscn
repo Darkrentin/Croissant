@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://cjn4lukcecj37"]
+[gd_scene load_steps=25 format=3 uid="uid://cjn4lukcecj37"]
 
 [ext_resource type="Script" uid="uid://cru6f15nehrvy" path="res://scripts/FinalLevel/Objective.cs" id="1_8j1cb"]
 
@@ -54,13 +54,13 @@ size = Vector3(0.5, 0.5, 0.5)
 size = Vector3(0.5, 0.5, 0.5)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8j1cb"]
+albedo_color = Color(0, 1, 0, 1)
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
-emission_energy_multiplier = 3.0
+emission = Color(0, 1, 0, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_mtdh5"]
 material = SubResource("StandardMaterial3D_8j1cb")
-size = Vector3(0.8, 0.8, 0.8)
+size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="Animation" id="Animation_8j1cb"]
 resource_name = "Break"
@@ -475,10 +475,160 @@ tracks/16/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Obj:rotation")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.616101, 1.0472, 0.785398)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Obj:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1.2, 1)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Obj/Center:mesh:size")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Obj/Center:mesh:material:emission_energy_multiplier")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Obj/Center:mesh:material:albedo_color")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0, 1)]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Obj/Center:mesh:material:emission")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_mtdh5"]
+resource_name = "Idle"
+length = 8.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Obj:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.616101, -3.14159, 0.785398), Vector3(0.616101, 3.14159, 0.785398), Vector3(0.616101, 9.42478, 0.785398)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Obj:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 4, 8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, 1.1, 1), Vector3(1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Obj/Center:mesh:size")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1, 1.1, 1.9, 2, 2.1, 2.9, 3, 3.1, 3.9, 4, 4.1, 4.9, 5, 5.1, 5.9, 6, 6.1, 6.9, 7, 7.1, 7.9, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Obj/Center:mesh:material:emission_energy_multiplier")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.9, 1, 1.1, 1.9, 2, 2.1, 2.9, 3, 3.1, 3.9, 4, 4.1, 4.9, 5, 5.1, 5.9, 6, 6.1, 6.9, 7, 7.1, 7.9, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Obj/Center:mesh:material:albedo_color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 2.6667, 5.3333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Obj/Center:mesh:material:emission")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 2.66667, 5.3333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Color(1, 0, 0, 1), Color(0, 1, 0, 1), Color(0, 0, 1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtdh5"]
 _data = {
 &"Break": SubResource("Animation_8j1cb"),
+&"Idle": SubResource("Animation_mtdh5"),
 &"RESET": SubResource("Animation_uivtg")
 }
 
@@ -494,7 +644,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
 shape = SubResource("SphereShape3D_8j1cb")
 
 [node name="Obj" type="Node3D" parent="."]
-transform = Transform3D(0.707417, 0.000310749, 0.706796, 0.577096, 0.577096, -0.577858, -0.408069, 0.816676, 0.408069, 1, 1, 1)
+transform = Transform3D(0.707417, 0.000311226, 0.706796, 0.577096, 0.577096, -0.577858, -0.408069, 0.816676, 0.408069, 1, 1.2, 1)
 
 [node name="Part1" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.3)
@@ -586,3 +736,4 @@ mesh = SubResource("BoxMesh_mtdh5")
 libraries = {
 &"": SubResource("AnimationLibrary_mtdh5")
 }
+autoplay = "Idle"

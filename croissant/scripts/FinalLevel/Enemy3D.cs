@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public partial class Enemy3D : CharacterBody3D
 {
-	
+
 	[Export] private MeshInstance3D Mesh;
 	[Export] private Mesh IcosahedronMesh;
 	[Export] private Mesh DodecahedronMesh;
@@ -20,11 +20,15 @@ public partial class Enemy3D : CharacterBody3D
 	private float movementSpeed = 1.0f;
 	[Export] private RayCast3D rayCast;
 	[Export] private PackedScene EnemyExplosionScene;
-	[Export] public bool UpdateShapeButton {
+	[Export]
+	public bool UpdateShapeButton
+	{
 		get => false;
 		set => UpdateShape();
 	}
-	[Export] public bool ExplosionButton {
+	[Export]
+	public bool ExplosionButton
+	{
 		get => false;
 		set => AddExplosion();
 	}
@@ -51,12 +55,12 @@ public partial class Enemy3D : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(!CanHarmPlayer)
+		if (!CanHarmPlayer)
 		{
 			navigationAgent3D.Velocity = Vector3.Zero;
 			return;
 		}
-		if(Agro > 0f)
+		if (Agro > 0f)
 		{
 			Agro -= delta;
 			if (Agro < 0f) Agro = 0f;
@@ -65,7 +69,7 @@ public partial class Enemy3D : CharacterBody3D
 		}
 		else
 		{
-			if(GlobalPosition.DistanceTo(FinalLevel.Instance.Player3D.GlobalPosition) < 10f)
+			if (GlobalPosition.DistanceTo(FinalLevel.Instance.Player3D.GlobalPosition) < 10f)
 				rayCast.Visible = true && FinalLevel.Instance.Debug;
 			else
 				rayCast.Visible = false;
@@ -81,8 +85,8 @@ public partial class Enemy3D : CharacterBody3D
 		rayCast.TargetPosition = rayCast.ToLocal(rayCast.GlobalPosition + directionToPlayer);
 
 		rayCast.ForceRaycastUpdate();
-		
-		
+
+
 		if (rayCast.GetCollider() is Player3D player && rayCast.IsEnabled())
 		{
 			Agro = MaxAgro;
