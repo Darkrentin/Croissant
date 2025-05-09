@@ -1,18 +1,12 @@
 shader_type canvas_item;
 
-//Incremented by outside script to move effect
 uniform float timer = 0.0; 
-
-//Array size determines how many vertical strips appear
-uniform float[128] y_offsets; 
-
-//Texture to melt away, example above uses a duplicate screen texture as a transition
+uniform float[256] y_offsets; 
 uniform sampler2D melt_tex; 
-
-//Controls whether the effect can play
 uniform bool melting = false;
 
-void fragment() {
+void fragment()
+{
 	vec2 tex_uv = SCREEN_UV;
 	if (melting)
 	{

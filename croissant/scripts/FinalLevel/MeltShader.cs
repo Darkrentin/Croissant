@@ -4,6 +4,8 @@ public partial class MeltShader : ColorRect
 {
 	private bool _melting = false;
 	private double _timer = 0.0;
+	private Godot.Collections.Array<float> _offsets;
+	private ImageTexture _cachedTexture;
 
 	[Export] public double XResolution { get; set; } = 100.0;
 	[Export] public double MaxOffset { get; set; } = 2.0;
@@ -13,48 +15,59 @@ public partial class MeltShader : ColorRect
 	public override void _Ready()
 	{
 		Hide();
+		GenerateOffsetsOnce();
 	}
 
 	public override void _Process(double delta)
 	{
-			if (_melting)
+		if (_melting)
 		{
-			_timer += MeltSpeed; // Assuming MeltSpeed is not delta-dependent as per GDScript
-			if (Material is ShaderMaterial shaderMaterial)
+			_timer += MeltSpeed;
+			if (Engine.GetFramesDrawn() % 2 == 0 && Material is ShaderMaterial shaderMaterial)
 				shaderMaterial.SetShaderParameter("timer", _timer);
-
-			if(_timer*_maxYOffset > 1.0f)
-			{
-				_melting = false;
-				_timer = 0.0f;
-				if (Material is ShaderMaterial SM)
-					SM.SetShaderParameter("melting", false);
-				FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Always;
-				Hide();
-			}
+			if (_timer * _maxYOffset > 2.0f)
+				ResetMelt();
 		}
 	}
 
-	// Call this before transitioning, creates a copy of the screen texture so changes
-	// can be made underneath before melting to show the new screen.
-	public void GenerateOffsets()
+	private void ResetMelt()
 	{
-		var offsets = new Godot.Collections.Array<float>();
+		_melting = false;
+		_timer = 0.0f;
+		if (Material is ShaderMaterial SM)
+			SM.SetShaderParameter("melting", false);
+		FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Always;
+		Hide();
+	}
+
+	private void GenerateOffsetsOnce()
+	{
+		_offsets = new Godot.Collections.Array<float>();
 		_maxYOffset = 0.0f;
 		for (int i = 0; i < (int)XResolution; i++)
 		{
-			offsets.Add(Lib.GetRandomNormal(1.0f, (float)MaxOffset));
-			if (offsets[i] > _maxYOffset)
-				_maxYOffset = offsets[i];
+			_offsets.Add(Lib.GetRandomNormal(1.0f, (float)MaxOffset));
+			if (_offsets[i] > _maxYOffset)
+				_maxYOffset = _offsets[i];
 		}
-
 		if (Material is ShaderMaterial SM)
+			SM.SetShaderParameter("y_offsets", _offsets);
+	}
+
+	public void PrepareTransition()
+	{
+		if (_cachedTexture == null)
 		{
-			SM.SetShaderParameter("y_offsets", offsets);
 			Image img = GetViewport().GetTexture().GetImage();
-			ImageTexture tex = ImageTexture.CreateFromImage(img);
-			SM.SetShaderParameter("melt_tex", tex);
+			_cachedTexture = ImageTexture.CreateFromImage(img);
 		}
+		else
+		{
+			Image img = GetViewport().GetTexture().GetImage();
+			_cachedTexture.Update(img);
+		}
+		if (Material is ShaderMaterial SM)
+			SM.SetShaderParameter("melt_tex", _cachedTexture);
 
 		Show();
 	}
