@@ -22,17 +22,30 @@ public partial class Platform : CharacterBody2D
 
     public override void _Ready()
     {
-        window.Visible = true;
-        Lib.Print("titlebar height: " + window.TitleBarHeight);
-        level3 = (Level3)GetParent();
-        level3.MouseEvent+=MouseEvent;
+        // First get the shape from collisionShape
+        shape = collisionShape?.Shape as RectangleShape2D;
+        if (shape == null)
+        {
+            GD.PrintErr("No valid RectangleShape2D found on collisionShape");
+            return;
+        }
 
-        shape = collisionShape.Shape as RectangleShape2D;
+        // Then initialize the window if it exists
+        if (window != null && IsInstanceValid(window))
+        {
+            window.Visible = true;
+            window.Size = (Vector2I)shape.Size;
+            window.Position = (Vector2I)GlobalPosition;
+        }
 
-        shape.Size = (Vector2I)shape.Size;
+        // Get Level3 instance and subscribe to events
+        level3 = Level3.Instance;
+        if (level3 != null)
+        {
+            level3.MouseEvent += MouseEvent;
+        }
+
         currentAppliedSpeeds = BaseSpeeds;
-        window.Size = (Vector2I)shape.Size;
-        window.Position = (Vector2I)GlobalPosition;
     }
 
     public override void _PhysicsProcess(double delta)
@@ -105,33 +118,79 @@ public partial class Platform : CharacterBody2D
 
     public void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
-        Lib.Print("MouseEvent: " + mouseButtonEvent.Pressed);
-        if (!Freeze && mouseButtonEvent.ButtonIndex == MouseButton.Left)
+        if (!IsInstanceValid(window) || window == null)
         {
-            if (mouseButtonEvent.Pressed && MouseOnWindow())
+            if (level3 != null)
             {
-                GD.Print("Clic gauche ENFONCÉ dans la zone !");
-                Pressed = true;
-                MouseOffset = (Vector2)Lib.GetCursorPosition() - GlobalPosition;
+                level3.MouseEvent -= MouseEvent;
             }
-            else if (!mouseButtonEvent.Pressed && Pressed)
+            return;
+        }
+
+        try
+        {
+            if (!Freeze && mouseButtonEvent.ButtonIndex == MouseButton.Left)
             {
-                GD.Print("Clic gauche RELÂCHÉ !");
-                Pressed = false;
+                if (mouseButtonEvent.Pressed && MouseOnWindow())
+                {
+                    Pressed = true;
+                    MouseOffset = (Vector2)Lib.GetCursorPosition() - GlobalPosition;
+                }
+                else if (!mouseButtonEvent.Pressed && Pressed)
+                {
+                    Pressed = false;
+                }
             }
+        }
+        catch (ObjectDisposedException)
+        {
+            if (level3 != null)
+            {
+                level3.MouseEvent -= MouseEvent;
+            }
+            Pressed = false;
         }
     }
 
     public bool MouseOnWindow()
     {
-        Vector2I mousePos = Lib.GetCursorPosition();
-        Vector2I windowPos = window.Position;
-        Vector2I windowSize = window.Size;
-        int titleBarHeight = window.TitleBarHeight;
+        // Check if window is valid before accessing it
+        if (window == null || window.IsQueuedForDeletion())
+        {
+            return false;
+        }
 
-        return mousePos.X >= windowPos.X &&
-               mousePos.X <= windowPos.X + windowSize.X &&
-               mousePos.Y >= windowPos.Y - titleBarHeight &&
-               mousePos.Y < windowPos.Y;
+        try
+        {
+            Vector2I mousePos = Lib.GetCursorPosition();
+            Vector2I windowPos = window.Position;
+            Vector2I windowSize = window.Size;
+            int titleBarHeight = window.TitleBarHeight;
+
+            return mousePos.X >= windowPos.X &&
+                   mousePos.X <= windowPos.X + windowSize.X &&
+                   mousePos.Y >= windowPos.Y - titleBarHeight &&
+                   mousePos.Y < windowPos.Y;
+        }
+        catch (ObjectDisposedException)
+        {
+            // Window has been disposed, return false
+            return false;
+        }
+    }
+
+    public override void _ExitTree()
+    {
+        if (level3 != null)
+        {
+            level3.MouseEvent -= MouseEvent;
+        }
+
+        if (IsInstanceValid(window))
+        {
+            window.QueueFree();
+        }
+        
+        base._ExitTree();
     }
 }
