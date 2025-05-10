@@ -10,6 +10,7 @@ public partial class Objective : StaticBody3D
 	[Export] public AnimationPlayer AnimationPlayer;
 	[Export] public RigidBody3D[] PartList;
 	[Export] public Color PixelColor;
+	[Export] public MeshInstance3D Center;
 	public bool _isBreaking = false;
 	public Timer timer;
 	public int PartCount = 8;
@@ -27,6 +28,8 @@ public partial class Objective : StaticBody3D
 		ObjectiveList.Add(this);
 		AddChild(timer);
 		AnimationPlayer.AnimationFinished += AnimationFinished;
+		Center.Mesh.SurfaceGetMaterial(0).Set("albedo_color", PixelColor);
+		Center.Mesh.SurfaceGetMaterial(0).Set("emission_color", PixelColor);
 	}
 
 	public override void _Process(double delta)
@@ -71,6 +74,7 @@ public partial class Objective : StaticBody3D
 		foreach (Objective obj in ObjectiveList)
 		{
 			obj.AnimationPlayer.Play("RESET");
+			
 		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=23 format=3 uid="uid://pus1csxsvyfw"]
 
 [ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="Script" uid="uid://bh33sr5jvo6xt" path="res://scripts/FinalLevel/FinalLevel.cs" id="1_d5vjr"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://craldw8v15324" path="res://scenes/Other/SpecCam.tscn" id="9_1aisa"]
 [ext_resource type="Shader" uid="uid://dg5tcbq218w5i" path="res://assets/shaders/Melt.gdshader" id="9_cun7r"]
 [ext_resource type="Script" uid="uid://4ajgefy7d4re" path="res://scripts/FinalLevel/MeltShader.cs" id="10_x2utw"]
+[ext_resource type="VoxelGIData" uid="uid://wkk3bivljlue" path="res://scenes/FinalLevel/FinalLevel.VoxelGI_data.res" id="13_ml31f"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_56we2"]
 sky_top_color = Color(0.0905869, 0.116999, 0.153729, 1)
@@ -126,7 +127,6 @@ _data = {
 
 [node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "ShaderViewport", "MeltShader")]
 script = ExtResource("1_d5vjr")
-Debug = true
 maze = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
 miniMap = NodePath("MiniMap/SubViewport/MiniMap")
 NavigationRegion = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D")
@@ -204,3 +204,7 @@ render_target_update_mode = 4
 visible = false
 Maze = NodePath("../../../ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
 Player = NodePath("../../../ViewportWithShader/SubViewport/Player3D")
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+size = Vector3(100, 4, 100)
+data = ExtResource("13_ml31f")
