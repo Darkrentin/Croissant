@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btow5hxusyoqf"
-path.s3tc="res://.godot/imported/angry.png-632034da90f184dfdc7f63be54163873.s3tc.ctex"
+uid="uid://05lecafdnx66"
+path.s3tc="res://.godot/imported/rusty_baseColor.png-f1ad9adaa0bf2155192673a008b1e3c1.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/virus/eye/angry.png"
-dest_files=["res://.godot/imported/angry.png-632034da90f184dfdc7f63be54163873.s3tc.ctex"]
+source_file="res://assets/sprites/lamp/rusty_baseColor.png"
+dest_files=["res://.godot/imported/rusty_baseColor.png-f1ad9adaa0bf2155192673a008b1e3c1.s3tc.ctex"]
 
 [params]
 

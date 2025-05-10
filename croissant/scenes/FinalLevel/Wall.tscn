@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://b0rwmg3mas3cc"]
 
-[ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/meshes/WallNoise.tres" id="1_f603f"]
+[ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/shaders/dependencies/WallNoise.tres" id="1_f603f"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_kkjf7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkjf7"]

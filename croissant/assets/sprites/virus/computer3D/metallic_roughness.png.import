@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btow5hxusyoqf"
-path.s3tc="res://.godot/imported/angry.png-632034da90f184dfdc7f63be54163873.s3tc.ctex"
+uid="uid://chg1powqtybpd"
+path.s3tc="res://.godot/imported/metallic_roughness.png-105ea56726eb06cf769c7caf60a6fe38.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/virus/eye/angry.png"
-dest_files=["res://.godot/imported/angry.png-632034da90f184dfdc7f63be54163873.s3tc.ctex"]
+source_file="res://assets/sprites/virus/computer3D/metallic_roughness.png"
+dest_files=["res://.godot/imported/metallic_roughness.png-105ea56726eb06cf769c7caf60a6fe38.s3tc.ctex"]
 
 [params]
 

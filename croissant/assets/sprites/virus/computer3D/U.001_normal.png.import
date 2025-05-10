@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btow5hxusyoqf"
-path.s3tc="res://.godot/imported/angry.png-632034da90f184dfdc7f63be54163873.s3tc.ctex"
+uid="uid://tp10682offch"
+path.s3tc="res://.godot/imported/U.001_normal.png-b2fd8e60c230a1a64d88251c9465e8cd.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/sprites/virus/eye/angry.png"
-dest_files=["res://.godot/imported/angry.png-632034da90f184dfdc7f63be54163873.s3tc.ctex"]
+source_file="res://assets/sprites/virus/computer3D/U.001_normal.png"
+dest_files=["res://.godot/imported/U.001_normal.png-b2fd8e60c230a1a64d88251c9465e8cd.s3tc.ctex"]
 
 [params]
 
@@ -20,12 +20,12 @@ compress/mode=2
 compress/high_quality=false
 compress/lossy_quality=0.7
 compress/hdr_compression=1
-compress/normal_map=0
+compress/normal_map=1
 compress/channel_pack=0
 mipmaps/generate=true
 mipmaps/limit=-1
-roughness/mode=0
-roughness/src_normal=""
+roughness/mode=1
+roughness/src_normal="res://assets/3D/computer/textures/PC9801U.001_normal.png"
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/normal_map_invert_y=false

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=45 format=3 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/Sgun3.png" id="2_6l3yh"]
@@ -7,7 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://dqh3rygqtihv5" path="res://assets/sprites/Sgun5.png" id="4_4x0oc"]
 [ext_resource type="Texture2D" uid="uid://bswiddnvoecm8" path="res://assets/sprites/Sgun1.png" id="6_n4wqm"]
 [ext_resource type="Texture2D" uid="uid://congju50q684c" path="res://assets/sprites/Sgun2.png" id="7_ley8d"]
-[ext_resource type="PackedScene" uid="uid://djmj3t20yrg7w" path="res://scenes/FinalLevel/BulletHit.tscn" id="8_ley8d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwlh4"]
 
@@ -347,7 +346,6 @@ graph_offset = Vector2(129, -127)
 script = ExtResource("1_rrt4f")
 RayCast3D = NodePath("RayCast3D")
 AnimationTree = NodePath("AnimationTree")
-BulletHitScene = ExtResource("8_ley8d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

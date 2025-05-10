@@ -28,7 +28,7 @@ public partial class SpecCam : Camera3D
             if (IsCurrent())
             {
                 // If this is the current camera, make it non-current and release the mouse
-                ClearCurrent(); 
+                ClearCurrent();
                 Input.MouseMode = Input.MouseModeEnum.Visible;
                 GD.Print("SpecCam Deactivated. MouseMode: " + Input.MouseMode);
             }
@@ -82,10 +82,10 @@ public partial class SpecCam : Camera3D
             inputDir.Y += 1;
         if (Input.IsActionPressed("Down")) // Define in Input Map (e.g., Shift or Q)
             inputDir.Y -= 1;
-		if(Input.IsActionPressed("E")) // Define in Input Map (e.g., Space)
-			RotationDegrees -= new Vector3(0, 0.4f, 0);
-		if(Input.IsActionPressed("A")) // Define in Input Map (e.g, Shift)
-			RotationDegrees += new Vector3(0, 0.4f, 0);
+        if (Input.IsActionPressed("E")) // Define in Input Map (e.g., Space)
+            RotationDegrees -= new Vector3(0, 0.4f, 0);
+        if (Input.IsActionPressed("A")) // Define in Input Map (e.g, Shift)
+            RotationDegrees += new Vector3(0, 0.4f, 0);
         if (inputDir != Vector3.Zero)
         {
             inputDir = inputDir.Normalized(); // Normalize for consistent speed in all directions

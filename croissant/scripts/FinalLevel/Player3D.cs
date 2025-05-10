@@ -4,14 +4,14 @@ public partial class Player3D : CharacterBody3D
 {
 	[Export] private RayCast3D RayCast3D;
 	[Export] private AnimationTree AnimationTree;
-	[Export] private PackedScene BulletHitScene;
 	[Export] private float MoveSpeed = 5.0f;
 	[Export] private float RotationSpeed = 2.0f;
-	public AnimationNodeStateMachinePlayback AnimationPlayer;
+	private PackedScene BulletHitScene;
+	private AnimationNodeStateMachinePlayback AnimationPlayer;
 	private Timer ShootTimer;
 	private bool CanShoot = true;
-	public string ShootAnimation = "ShootAndReload";
-	public float ShootCooldown = 0.9f;
+	private string ShootAnimation = "ShootAndReload";
+	private float ShootCooldown = 0.9f;
 
 	public override void _Ready()
 	{
@@ -22,8 +22,7 @@ public partial class Player3D : CharacterBody3D
 		ShootTimer.WaitTime = ShootCooldown;
 		ShootTimer.OneShot = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		if (BulletHitScene == null)
-			BulletHitScene = GD.Load<PackedScene>("res://scenes/FinalLevel/BulletHit.tscn");
+		BulletHitScene = GD.Load<PackedScene>("res://scenes/FinalLevel/Particles/BulletHit.tscn");
 		AddChild(ShootTimer);
 	}
 
