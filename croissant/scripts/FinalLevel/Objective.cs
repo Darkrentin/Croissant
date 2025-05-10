@@ -26,10 +26,19 @@ public partial class Objective : StaticBody3D
 		};
 		ObjectiveList.Add(this);
 		AddChild(timer);
+		AnimationPlayer.AnimationFinished += AnimationFinished;
 	}
 
 	public override void _Process(double delta)
 	{
+	}
+
+	public void AnimationFinished(StringName name)
+	{
+		if (name == "RESET")
+		{
+			AnimationPlayer.Play("Idle");
+		}
 	}
 
 	public void Break()
@@ -60,6 +69,8 @@ public partial class Objective : StaticBody3D
 	public void ResetOtherObjectives()
 	{
 		foreach (Objective obj in ObjectiveList)
+		{
 			obj.AnimationPlayer.Play("RESET");
+		}
 	}
 }

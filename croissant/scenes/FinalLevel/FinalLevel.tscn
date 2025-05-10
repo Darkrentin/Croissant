@@ -126,13 +126,14 @@ _data = {
 
 [node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "ShaderViewport", "MeltShader")]
 script = ExtResource("1_d5vjr")
-maze = NodePath("ViewportWithoutShader/SubViewport/NavigationRegion3D/Maze")
+Debug = true
+maze = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
 miniMap = NodePath("MiniMap/SubViewport/MiniMap")
-NavigationRegion = NodePath("ViewportWithoutShader/SubViewport/NavigationRegion3D")
-Player3D = NodePath("ViewportWithoutShader/SubViewport/Player3D")
+NavigationRegion = NodePath("ViewportWithShader/SubViewport/NavigationRegion3D")
+Player3D = NodePath("ViewportWithShader/SubViewport/Player3D")
 Enemy3DScene = ExtResource("7_ebjtf")
 ShaderViewport = NodePath("ViewportWithShader")
-MeltShader = NodePath("ViewportWithoutShader/SubViewport/MeltShader")
+MeltShader = NodePath("ViewportWithShader/SubViewport/MeltShader")
 PaletteMain = ExtResource("2_56we2")
 PaletteDeath = ExtResource("4_x2utw")
 
@@ -147,31 +148,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="SubViewport" type="SubViewport" parent="ViewportWithoutShader"]
+[node name="SubViewport" type="SubViewport" parent="ViewportWithShader"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
-[node name="Player3D" parent="ViewportWithoutShader/SubViewport" instance=ExtResource("1_wf7iu")]
+[node name="Player3D" parent="ViewportWithShader/SubViewport" instance=ExtResource("1_wf7iu")]
 transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1, 0, 1)
 BulletHitScene = null
 
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="ViewportWithoutShader/SubViewport"]
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="ViewportWithShader/SubViewport"]
 navigation_mesh = SubResource("NavigationMesh_d5vjr")
 
-[node name="Maze" parent="ViewportWithoutShader/SubViewport/NavigationRegion3D" instance=ExtResource("5_56we2")]
+[node name="Maze" parent="ViewportWithShader/SubViewport/NavigationRegion3D" instance=ExtResource("5_56we2")]
 
-[node name="SpecCam" parent="ViewportWithoutShader/SubViewport" instance=ExtResource("9_1aisa")]
+[node name="SpecCam" parent="ViewportWithShader/SubViewport" instance=ExtResource("9_1aisa")]
 
-[node name="MeltShader" type="ColorRect" parent="ViewportWithoutShader/SubViewport"]
+[node name="MeltShader" type="ColorRect" parent="ViewportWithShader/SubViewport"]
 material = SubResource("ShaderMaterial_ml31f")
 anchors_preset = 15
 anchor_right = 1.0
@@ -180,6 +174,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("10_x2utw")
 XResolution = 256.0
+
+[node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -201,5 +202,5 @@ render_target_update_mode = 4
 
 [node name="MiniMap" parent="MiniMap/SubViewport" node_paths=PackedStringArray("Maze", "Player") instance=ExtResource("8_ebjtf")]
 visible = false
-Maze = NodePath("../../../ViewportWithoutShader/SubViewport/NavigationRegion3D/Maze")
-Player = NodePath("../../../ViewportWithoutShader/SubViewport/Player3D")
+Maze = NodePath("../../../ViewportWithShader/SubViewport/NavigationRegion3D/Maze")
+Player = NodePath("../../../ViewportWithShader/SubViewport/Player3D")

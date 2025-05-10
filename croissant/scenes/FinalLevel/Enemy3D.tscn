@@ -5,6 +5,7 @@
 [ext_resource type="BoxMesh" uid="uid://b0qi04ygb7wxi" path="res://assets/meshes/Cube.tres" id="2_sjjoh"]
 [ext_resource type="ArrayMesh" uid="uid://dd58n73thinjc" path="res://assets/meshes/Dodecahedron.tres" id="3_0l5py"]
 [ext_resource type="ArrayMesh" uid="uid://dkkr5885q3gxs" path="res://assets/meshes/Tetrahedron.tres" id="5_fjuj0"]
+[ext_resource type="PackedScene" uid="uid://buutrxsk7ssr0" path="res://scenes/FinalLevel/EnemyExplosion.tscn" id="6_0l5py"]
 
 [sub_resource type="Animation" id="Animation_0vp8b"]
 resource_name = "Depop"
@@ -121,8 +122,6 @@ emission = Color(1, 1, 1, 1)
 emission_energy_multiplier = 3.0
 backlight_texture = SubResource("NoiseTexture2D_fjuj0")
 
-[sub_resource type="BoxMesh" id="BoxMesh_0vp8b"]
-
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0vp8b"]
 radius = 0.75
 height = 1.5
@@ -138,6 +137,7 @@ AnimationPlayer = NodePath("AnimationPlayer")
 Collision = NodePath("CollisionShape3D")
 navigationAgent3D = NodePath("NavigationAgent3D")
 rayCast = NodePath("RayCast3D")
+EnemyExplosionScene = ExtResource("6_0l5py")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -147,7 +147,6 @@ libraries = {
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
 material_override = SubResource("StandardMaterial3D_0vp8b")
-mesh = SubResource("BoxMesh_0vp8b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.75, 0)
