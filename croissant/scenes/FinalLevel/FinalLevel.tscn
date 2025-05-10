@@ -26,9 +26,12 @@ sky_material = SubResource("ProceduralSkyMaterial_56we2")
 [sub_resource type="Environment" id="Environment_56we2"]
 background_mode = 2
 background_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
+background_energy_multiplier = 1.2
 sky = SubResource("Sky_knvm8")
 reflected_light_source = 2
 tonemap_mode = 1
+glow_enabled = true
+glow_bloom = 0.1
 volumetric_fog_density = 0.02
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf7iu"]

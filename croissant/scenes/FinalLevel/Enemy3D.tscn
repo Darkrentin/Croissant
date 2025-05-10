@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cimi7w1dx80pn"]
+[gd_scene load_steps=17 format=3 uid="uid://cimi7w1dx80pn"]
 
 [ext_resource type="Script" uid="uid://d1283ira3bkqa" path="res://scripts/FinalLevel/Enemy3D.cs" id="1_vqa6h"]
 [ext_resource type="ArrayMesh" uid="uid://dp0dgbo55w32s" path="res://assets/shape_meshes/Icosahedron.tres" id="2_0vp8b"]
@@ -6,6 +6,7 @@
 [ext_resource type="ArrayMesh" uid="uid://dd58n73thinjc" path="res://assets/shape_meshes/Dodecahedron.tres" id="3_0l5py"]
 [ext_resource type="ArrayMesh" uid="uid://dkkr5885q3gxs" path="res://assets/shape_meshes/Tetrahedron.tres" id="5_fjuj0"]
 [ext_resource type="PackedScene" uid="uid://buutrxsk7ssr0" path="res://scenes/FinalLevel/Particles/EnemyExplosion.tscn" id="6_0l5py"]
+[ext_resource type="PackedScene" uid="uid://y8t7ulakyqcn" path="res://scenes/FinalLevel/Particles/EnemyHit.tscn" id="6_fjuj0"]
 
 [sub_resource type="Animation" id="Animation_0vp8b"]
 resource_name = "Depop"
@@ -137,6 +138,7 @@ AnimationPlayer = NodePath("AnimationPlayer")
 Collision = NodePath("CollisionShape3D")
 navigationAgent3D = NodePath("NavigationAgent3D")
 rayCast = NodePath("RayCast3D")
+EnemyHitScene = ExtResource("6_fjuj0")
 EnemyExplosionScene = ExtResource("6_0l5py")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -675,7 +675,6 @@ shape = SubResource("BoxShape3D_wivf4")
 mesh = SubResource("BoxMesh_fsexr")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Obj"]
-omni_range = 1.5
 
 [node name="Center" type="MeshInstance3D" parent="Obj"]
 gi_mode = 2

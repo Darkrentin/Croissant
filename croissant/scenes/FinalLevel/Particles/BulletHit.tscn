@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://djmj3t20yrg7w"]
+[gd_scene load_steps=7 format=3 uid="uid://djmj3t20yrg7w"]
 
 [ext_resource type="Script" uid="uid://3exn7iictblj" path="res://scripts/FinalLevel/BulletHit.cs" id="1_2jlct"]
 
@@ -19,24 +19,11 @@ scale_min = 0.1
 scale_max = 0.3
 scale_curve = SubResource("CurveTexture_ley8d")
 
-[sub_resource type="Gradient" id="Gradient_n4wqm"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ley8d"]
-noise_type = 0
-frequency = 1.0
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3r0jc"]
-width = 32
-height = 32
-color_ramp = SubResource("Gradient_n4wqm")
-noise = SubResource("FastNoiseLite_ley8d")
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h7i27"]
-albedo_color = Color(1, 0.541176, 0, 1)
-albedo_texture = SubResource("NoiseTexture2D_3r0jc")
+albedo_color = Color(1, 0.607843, 0, 1)
 emission_enabled = true
-emission = Color(1, 0.541176, 0, 1)
-emission_energy_multiplier = 12.0
+emission = Color(1, 0.607843, 0, 1)
+emission_energy_multiplier = 8.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_o3k41"]
 material = SubResource("StandardMaterial3D_h7i27")
@@ -44,9 +31,9 @@ top_radius = 0.08
 bottom_radius = 0.0
 height = 0.8
 
-[node name="BulletHit" type="GPUParticles3D"]
+[node name="BulletHit" type="GPUParticles3D" node_paths=PackedStringArray("BulletHitLight")]
 emitting = false
-amount = 60
+amount = 50
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0
@@ -54,6 +41,11 @@ fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_3r0jc")
 draw_pass_1 = SubResource("CylinderMesh_o3k41")
 script = ExtResource("1_2jlct")
+BulletHitLight = NodePath("OmniLight3D")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_energy = 0.8
+omni_range = 3.0
 
 [node name="Timer" type="Timer" parent="."]
 process_callback = 0

@@ -12,6 +12,7 @@ public partial class Enemy3D : CharacterBody3D
 	[Export] private CollisionShape3D Collision;
 	[Export] private NavigationAgent3D navigationAgent3D;
 	[Export] private RayCast3D rayCast;
+	[Export] private PackedScene EnemyHitScene;
 	[Export] private PackedScene EnemyExplosionScene;
 	[Export] public bool UpdateShapeButton { get => false; set => UpdateShape(); }
 	[Export] public bool ExplosionButton { get => false; set { if (value) AddExplosion(); } }
@@ -96,14 +97,18 @@ public partial class Enemy3D : CharacterBody3D
 		else
 		{
 			currentShape++;
+
+			AnimationPlayer.Play("ShapeChange");
+			CanHarmPlayer = false;
+			GpuParticles3D enemyHit = EnemyHitScene.Instantiate<GpuParticles3D>();
+			AddChild(enemyHit);
+			enemyHit.GlobalPosition = GlobalPosition + new Vector3(0, 0.6f, 0);
+
 			if (currentShape == 3)
 			{
 				Scale = new Vector3(0.75f, 0.75f, 0.75f);
 				Position += new Vector3(0, 0.4f, 0);
 			}
-
-			AnimationPlayer.Play("ShapeChange");
-			CanHarmPlayer = false;
 		}
 	}
 
@@ -130,27 +135,8 @@ public partial class Enemy3D : CharacterBody3D
 
 	public void AddExplosion()
 	{
-		OmniLight3D explosionLight = new OmniLight3D();
-		explosionLight.OmniRange = 8f;
-		explosionLight.OmniAttenuation = 3f;
-		explosionLight.LightEnergy = 1f;
-		AddChild(explosionLight);
-		explosionLight.GlobalPosition = GlobalPosition + new Vector3(0, 0.6f, 0);
-
 		GpuParticles3D explosion = EnemyExplosionScene.Instantiate<GpuParticles3D>();
 		AddChild(explosion);
 		explosion.GlobalPosition = GlobalPosition + new Vector3(0, 0.6f, 0);
-		explosion.Emitting = true;
-
-		Timer explosionTimer = new Timer();
-		explosionTimer.WaitTime = 1.5f;
-		explosionTimer.OneShot = true;
-		explosionTimer.Timeout += () => { QueueFree(); explosion.QueueFree(); explosionLight.QueueFree(); };
-		AddChild(explosionTimer);
-		explosionTimer.Start();
-
-		Tween lightTween = CreateTween();
-		lightTween.TweenProperty(explosionLight, "light_energy", 0f, 1.5f);
-		lightTween.Play();
 	}
 }

@@ -2,7 +2,7 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qivyb"]
 noise_type = 0
-frequency = 0.02
+frequency = 0.015
 
 [resource]
 width = 1024
@@ -10,5 +10,5 @@ height = 1024
 seamless = true
 seamless_blend_skirt = 1.0
 as_normal_map = true
-bump_strength = 32.0
+bump_strength = 16.0
 noise = SubResource("FastNoiseLite_qivyb")

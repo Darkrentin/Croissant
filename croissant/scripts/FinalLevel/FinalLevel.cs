@@ -18,7 +18,6 @@ public partial class FinalLevel : Node3D
 	[Export] public Area3D Area3D;
 	[Export] public SubViewport GameNode;
 	public Node3D BossLevel;
-
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
 	public int ObjectiveCount = 3;
@@ -31,7 +30,7 @@ public partial class FinalLevel : Node3D
 		NavigationRegion.BakeNavigationMesh();
 		miniMap.DrawMaze();
 		SpawnEnemy();
-		Area3D.BodyEntered+=EndReach;
+		Area3D.BodyEntered += EndReach;
 	}
 
 	public void SpawnEnemy()
@@ -91,7 +90,7 @@ public partial class FinalLevel : Node3D
 
 	public void EndReach(Node body)
 	{
-		if(body is Player3D player)
+		if (body is Player3D player)
 		{
 			CallDeferred(nameof(TransitionToBossLevel));
 		}
@@ -99,9 +98,9 @@ public partial class FinalLevel : Node3D
 	public void TransitionToBossLevel()
 	{
 		GameNode.RemoveChild(Area3D);
-			GameNode.RemoveChild(NavigationRegion);
-			NavigationRegion.QueueFree();
-			BossLevel = BossLevelScene.Instantiate<Node3D>();
-			GameNode.AddChild(BossLevel);
+		GameNode.RemoveChild(NavigationRegion);
+		NavigationRegion.QueueFree();
+		BossLevel = BossLevelScene.Instantiate<Node3D>();
+		GameNode.AddChild(BossLevel);
 	}
 }
