@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://c5avgc26i0v58"]
+
+[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="2_7k7pd"]
+[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="2_x0mh1"]
+[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Platform/Portal.tscn" id="3_7k7pd"]
+[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/ConfigFile.tscn" id="4_e0fg1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mh1"]
+resource_local_to_scene = true
+size = Vector2(1946, 120)
+
+[node name="3_1" type="Node"]
+
+[node name="KillingPlatform" parent="." instance=ExtResource("2_x0mh1")]
+position = Vector2(1343, 359)
+
+[node name="Window" parent="KillingPlatform" index="0"]
+auto_translate_mode = 1
+
+[node name="TextureRect" parent="KillingPlatform/Window" index="0"]
+anchor_right = 1.16
+anchor_bottom = 1.2
+offset_left = -195.0
+offset_top = 528.0
+offset_right = -191.0
+offset_bottom = 528.0
+
+[node name="StaticPlateform" parent="." instance=ExtResource("2_7k7pd")]
+position = Vector2(-8, 479)
+
+[node name="CollisionShape2D" parent="StaticPlateform" index="1"]
+position = Vector2(962, 60)
+shape = SubResource("RectangleShape2D_x0mh1")
+
+[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("3_7k7pd")]
+position = Vector2(27, 180)
+NextSceneId = 0
+SpawnPosition = NodePath("Node2D")
+
+[node name="Node2D" type="Node2D" parent="Portal"]
+position = Vector2(210, 514)
+
+[node name="ConfigFile" parent="." instance=ExtResource("4_e0fg1")]
+position = Vector2(1769, 378)
+scale = Vector2(1.5, 1.5)
+
+[node name="TextureRect" parent="ConfigFile" index="0"]
+offset_left = -20.6667
+offset_top = -27.3333
+offset_right = 34.3333
+offset_bottom = 23.6667
+scale = Vector2(1.5, 1.5)
+metadata/_edit_use_anchors_ = true
+
+[node name="CollisionShape2D" parent="ConfigFile" index="1"]
+scale = Vector2(1.5, 1.5)
+
+[editable path="KillingPlatform"]
+[editable path="StaticPlateform"]
+[editable path="ConfigFile"]
