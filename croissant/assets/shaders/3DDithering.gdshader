@@ -122,23 +122,21 @@ void fragment()
 
 	// --- 4. EXCLUSION LOGIC ---
 	// Decide whether to use the original color or the processed (dithered/fallback) color.
-	bool exclude_pixel = false;
+	// If close to Magenta, G, or B, force to specific pure colors.
 	float high_threshold = 1.0 - u_exclusion_tolerance;
 	float low_threshold = u_exclusion_tolerance;
 
-	// Check for predominantly Red, Green, or Blue based on the (pixelated) original color
-	if (screen_col.r >= high_threshold && screen_col.g <= low_threshold && screen_col.b <= low_threshold) {
-		exclude_pixel = true;
-	}
-	else if (screen_col.g >= high_threshold && screen_col.r <= low_threshold && screen_col.b <= low_threshold) {
-		exclude_pixel = true;
-	}
-	else if (screen_col.b >= high_threshold && screen_col.r <= low_threshold && screen_col.g <= low_threshold) {
-		exclude_pixel = true;
-	}
+	// Check for predominantly Magenta, Green, or Blue based on the (pixelated) original color
+	bool is_predominantly_magenta = screen_col.r >= high_threshold && screen_col.g <= low_threshold && screen_col.b >= high_threshold;
+	bool is_predominantly_green = screen_col.g >= high_threshold && screen_col.r <= low_threshold && screen_col.b <= low_threshold;
+	bool is_predominantly_blue = screen_col.b >= high_threshold && screen_col.r <= low_threshold && screen_col.g <= low_threshold;
 
-	if (exclude_pixel) {
-		COLOR.rgb = screen_col; // Use original (pixelated) color
+	if (is_predominantly_magenta) {
+		COLOR.rgb = vec3(1.0, 0.0, 0.0); // Force to pure Red
+	} else if (is_predominantly_green) {
+		COLOR.rgb = vec3(0.0, 1.0, 0.0); // Force to pure Green
+	} else if (is_predominantly_blue) {
+		COLOR.rgb = vec3(0.0, 0.0, 1.0); // Force to pure Blue
 	} else {
 		COLOR.rgb = processed_color; // Use dithered color (or fallback if dithering failed)
 	}

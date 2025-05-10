@@ -12,26 +12,15 @@ public partial class Enemy3D : CharacterBody3D
 	[Export] private AnimationPlayer AnimationPlayer;
 	[Export] private CollisionShape3D Collision;
 	[Export] private NavigationAgent3D navigationAgent3D;
+	[Export] private RayCast3D rayCast;
+	[Export] private PackedScene EnemyExplosionScene;
+	[Export] public bool UpdateShapeButton { get => false; set => UpdateShape(); }
+	[Export] public bool ExplosionButton { get => false; set => AddExplosion(); }
+	[Export] private float MovementSpeed = 1.0f;
 	private Vector3 RotationAxis;
 	private int currentShape;
 	private List<Mesh> shapeSequence;
 	private float rotationSpeed = 2.0f;
-	[Export] private float _movementSpeed = 1.0f;
-	private float movementSpeed = 1.0f;
-	[Export] private RayCast3D rayCast;
-	[Export] private PackedScene EnemyExplosionScene;
-	[Export]
-	public bool UpdateShapeButton
-	{
-		get => false;
-		set => UpdateShape();
-	}
-	[Export]
-	public bool ExplosionButton
-	{
-		get => false;
-		set => AddExplosion();
-	}
 	public double MaxAgro = 5f;
 	public bool CanHarmPlayer = true;
 
@@ -43,7 +32,6 @@ public partial class Enemy3D : CharacterBody3D
 		shapeSequence = new List<Mesh> { IcosahedronMesh, DodecahedronMesh, CubeMesh, TetrahedronMesh };
 		currentShape = Lib.rand.Next(0, 4);
 		UpdateShape();
-		movementSpeed = _movementSpeed;
 		AnimationPlayer.AnimationFinished += OnAnimationFinished;
 		navigationAgent3D.DebugEnabled = FinalLevel.Instance.Debug;
 	}
@@ -78,7 +66,7 @@ public partial class Enemy3D : CharacterBody3D
 
 		//navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;// ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
 		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
-		Vector3 IntendedVelocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * movementSpeed;
+		Vector3 IntendedVelocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * MovementSpeed;
 		navigationAgent3D.Velocity = IntendedVelocity;
 
 		Vector3 directionToPlayer = FinalLevel.Instance.Player3D.GlobalPosition - rayCast.GlobalPosition + new Vector3(0, 0.75f, 0);
@@ -121,9 +109,7 @@ public partial class Enemy3D : CharacterBody3D
 	public void OnAnimationFinished(StringName animationName)
 	{
 		if (animationName == "ShapeChange")
-		{
 			CanHarmPlayer = true;
-		}
 	}
 
 	private void Destroy()
@@ -144,9 +130,12 @@ public partial class Enemy3D : CharacterBody3D
 	public void AddExplosion()
 	{
 		GpuParticles3D explosion = EnemyExplosionScene.Instantiate<GpuParticles3D>();
-		explosion.Emitting = true;
+
+		//explosion.GetChild<GpuParticles3D>(0).Emitting = true;
+		//explosion.GetChild<GpuParticles3D>(1).Emitting = true;
 		AddChild(explosion);
-		explosion.GlobalPosition = GlobalPosition;
+		explosion.GlobalPosition = GlobalPosition + new Vector3(0, 0.8f, 0);
+		explosion.Emitting = true;
 
 		Timer explosionTimer = new Timer();
 		explosionTimer.WaitTime = 1.5f;

@@ -11,9 +11,11 @@ config_version=5
 [application]
 
 config/name="Shape Glitch"
+config/version="1.0"
 run/main_scene="uid://c2f4mqkrcs2ea"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-run/low_processor_mode_sleep_usec=0
+run/delta_smoothing=false
+boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 0)
 boot_splash/show_image=false
 config/icon="res://icon.svg"
 
@@ -213,12 +215,13 @@ A={
 3d/run_on_separate_thread=true
 common/physics_jitter_fix=0.0
 2d/physics_engine="GodotPhysics2D"
+3d/physics_engine="Jolt Physics"
 
 [rendering]
 
-occlusion_culling/bvh_build_quality=1
-textures/canvas_textures/default_texture_filter=0
 gl_compatibility/fallback_to_angle=false
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 textures/lossless_compression/force_png=true
 lights_and_shadows/directional_shadow/size=1024
 lights_and_shadows/directional_shadow/size.mobile=512
@@ -229,9 +232,6 @@ reflections/reflection_atlas/reflection_size=128
 reflections/reflection_atlas/reflection_size.mobile=64
 reflections/reflection_atlas/reflection_count=32
 global_illumination/gi/use_half_resolution=true
-textures/decals/filter=0
-textures/light_projectors/filter=0
-occlusion_culling/occlusion_rays_per_thread=256
 lightmapping/probe_capture/update_speed=8.0
 global_illumination/sdfgi/probe_ray_count=0
 global_illumination/sdfgi/frames_to_converge=0

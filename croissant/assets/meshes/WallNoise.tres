@@ -4,8 +4,8 @@
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_f603f"]
 resource_local_to_scene = true
-noise_type = 3
-fractal_octaves = 10
+noise_type = 0
+fractal_octaves = 8
 
 [resource]
 resource_local_to_scene = true

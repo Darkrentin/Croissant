@@ -1,9 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://buutrxsk7ssr0"]
+[gd_scene load_steps=12 format=3 uid="uid://buutrxsk7ssr0"]
 
 [sub_resource type="Curve" id="Curve_w1fs3"]
 _limits = [-50.0, 50.0, 0.0, 1.0]
-_data = [Vector2(0.75, -0.551361), 0.0, 0.0, 0, 0, Vector2(0.882166, 20.1973), 0.0, 0.0, 0, 0, Vector2(1, 50), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0.75, -0.551361), 0.0, 0.0, 0, 0, Vector2(1, 50), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_xx7rf"]
 curve = SubResource("Curve_w1fs3")
@@ -21,16 +21,15 @@ lifetime_randomness = 0.1
 angle_min = -720.0
 angle_max = 720.0
 spread = 180.0
-initial_velocity_min = 8.0
-initial_velocity_max = 16.0
+initial_velocity_max = 5.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -10.0
 radial_accel_max = -10.0
 radial_accel_curve = SubResource("CurveTexture_xx7rf")
-damping_min = 15.044
-damping_max = 15.044
-scale_min = 0.8
-scale_max = 2.0
+damping_min = 15.0
+damping_max = 15.0
+scale_min = 0.2
+scale_max = 0.4
 scale_curve = SubResource("CurveTexture_w1fs3")
 turbulence_noise_speed = Vector3(10, 10, 10)
 turbulence_influence_min = 1.0
@@ -38,15 +37,54 @@ turbulence_influence_max = 1.0
 turbulence_initial_displacement_min = 1.49012e-06
 turbulence_initial_displacement_max = 1.49012e-06
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx7rf"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(1, 0, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bcgx0"]
+material = SubResource("StandardMaterial3D_xx7rf")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w1fs3"]
+albedo_color = Color(0, 1, 0, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xx7rf"]
+material = SubResource("StandardMaterial3D_w1fs3")
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ry8w"]
-albedo_color = Color(0, 1, 1, 1)
+albedo_color = Color(0, 0, 1, 1)
+emission_enabled = true
+emission = Color(0, 0, 1, 1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_cjy56"]
 material = SubResource("StandardMaterial3D_3ry8w")
 
-[node name="Node3D" type="GPUParticles3D"]
+[node name="R" type="GPUParticles3D"]
 emitting = false
-amount = 50
+amount = 60
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.95
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_2i8dk")
+draw_pass_1 = SubResource("BoxMesh_bcgx0")
+
+[node name="G" type="GPUParticles3D" parent="."]
+visible = false
+emitting = false
+amount = 20
+lifetime = 1.2
+one_shot = true
+explosiveness = 0.95
+process_material = SubResource("ParticleProcessMaterial_2i8dk")
+draw_pass_1 = SubResource("BoxMesh_xx7rf")
+
+[node name="B" type="GPUParticles3D" parent="."]
+visible = false
+emitting = false
+amount = 20
 lifetime = 1.2
 one_shot = true
 explosiveness = 0.95
