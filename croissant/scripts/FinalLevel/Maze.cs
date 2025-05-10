@@ -15,7 +15,14 @@ public partial class Maze : Node3D
     public const int CantSpawn = -1;
     public const int Floor = 0;
     public const int Wall = 1;
-    public const int Objective = 2;
+    public const int ObjectiveLabel = 2;
+
+    public Color[] ObjectiveColors = new Color[]
+    {
+        Colors.Magenta,
+        Colors.Green,
+        Colors.Blue,
+    };
 
     public int[,] MazeData;
     public int[,] MazeDist;
@@ -57,21 +64,30 @@ public partial class Maze : Node3D
         const int SafeZone = 11;
         ReplaceLabel(MazeSize / 2, MazeSize / 2, SafeZone, SafeZone, Floor, CantSpawn, true);
 
-        PlaceRoom(2, 2, 3, 3, true, CantSpawn);
-        MazeData[2, 2] = Objective;
 
-        PlaceRoom(2, MazeSize - 3, 3, 3, true, CantSpawn);
-        MazeData[2, MazeSize - 3] = Objective;
+        (int x,int y)[] corners = new (int, int)[]
+        {
+            (2, 2),
+            (MazeSize - 3, 2),
+            (2, MazeSize - 3),
+            (MazeSize - 3, MazeSize - 3)
+        };
 
-        PlaceRoom(MazeSize - 3, 2, 3, 3, true, CantSpawn);
-        MazeData[MazeSize - 3, 2] = Objective;
+        int cornerToRemove = Lib.rand.Next(0, corners.Length);
+        corners[cornerToRemove] = (0, 0);
 
-        PlaceRoom(MazeSize - 3, MazeSize - 3, 3, 3, true, CantSpawn);
-        MazeData[MazeSize - 3, MazeSize - 3] = Objective;
+        for(int i = 0; i < corners.Length; i++)
+        {
+            if (corners[i] != (0, 0))
+            {
+                PlaceRoom(corners[i].x, corners[i].y, 3, 3, true);
+                MazeData[2, 2] = ObjectiveLabel;
+            }
+        }
 
-        MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = Objective;
-        MazeData[MazeSize / 2 - 1, MazeSize / 2] = Objective;
-        MazeData[MazeSize / 2, MazeSize / 2 - 1] = Objective;
+        MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
+        MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
+        MazeData[MazeSize / 2, MazeSize / 2 - 1] = ObjectiveLabel;
 
         CalculateDistancesFromCenter();
     }
@@ -198,16 +214,18 @@ public partial class Maze : Node3D
                         lamp.Position = new Vector3(nx, 0, nz) * WallSize;
                         AddChild(lamp);
                     }
-                    if (MazeData[i, j] == Objective)
+                    if (MazeData[i, j] == ObjectiveLabel)
                     {
-                        Node3D objective = ObjectiveScene.Instantiate<Node3D>();
+                        Objective objective = ObjectiveScene.Instantiate<Objective>();
                         objective.Position = new Vector3(nx, 0, nz) * WallSize;
                         ObjectiveCount++;
+                        objective.PixelColor = ObjectiveColors[(ObjectiveCount-1) % ObjectiveColors.Length];
                         AddChild(objective);
                     }
                 }
             }
         }
+
     }
 
     public void DisplayMaze()

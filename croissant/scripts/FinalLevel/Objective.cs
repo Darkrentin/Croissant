@@ -28,12 +28,19 @@ public partial class Objective : StaticBody3D
 		ObjectiveList.Add(this);
 		AddChild(timer);
 		AnimationPlayer.AnimationFinished += AnimationFinished;
-		Center.Mesh.SurfaceGetMaterial(0).Set("albedo_color", PixelColor);
-		Center.Mesh.SurfaceGetMaterial(0).Set("emission_color", PixelColor);
+		ApplyEmissionColor();
 	}
 
 	public override void _Process(double delta)
 	{
+	}
+
+	public void ApplyEmissionColor()
+	{
+		Center.MaterialOverride = new StandardMaterial3D();
+		Center.MaterialOverride.Set("emission_enabled", true);
+		Center.MaterialOverride.Set("albedo_color", PixelColor);
+		Center.MaterialOverride.Set("emission", PixelColor);
 	}
 
 	public void AnimationFinished(StringName name)

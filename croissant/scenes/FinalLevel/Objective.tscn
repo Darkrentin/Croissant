@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cjn4lukcecj37"]
+[gd_scene load_steps=24 format=3 uid="uid://cjn4lukcecj37"]
 
 [ext_resource type="Script" uid="uid://cru6f15nehrvy" path="res://scripts/FinalLevel/Objective.cs" id="1_8j1cb"]
 
@@ -53,13 +53,7 @@ size = Vector3(0.5, 0.5, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_fsexr"]
 size = Vector3(0.5, 0.5, 0.5)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8j1cb"]
-albedo_color = Color(1, 0, 0, 1)
-emission_enabled = true
-emission = Color(1, 0, 0, 1)
-
 [sub_resource type="BoxMesh" id="BoxMesh_mtdh5"]
-material = SubResource("StandardMaterial3D_8j1cb")
 size = Vector3(0.9, 0.9, 0.9)
 
 [sub_resource type="Animation" id="Animation_8j1cb"]
@@ -590,7 +584,7 @@ CollisionShape = NodePath("CollisionShape3D")
 Light = NodePath("Obj/OmniLight3D")
 AnimationPlayer = NodePath("AnimationPlayer")
 PartList = [NodePath("Obj/Part1"), NodePath("Obj/Part2"), NodePath("Obj/Part3"), NodePath("Obj/Part4"), NodePath("Obj/Part5"), NodePath("Obj/Part6"), NodePath("Obj/Part7"), NodePath("Obj/Part8")]
-PixelColor = Color(0.392157, 0.423529, 0.776471, 1)
+PixelColor = Color(0, 0, 0, 1)
 Center = NodePath("Obj/Center")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
