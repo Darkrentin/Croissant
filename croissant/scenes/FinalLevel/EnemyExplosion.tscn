@@ -2,16 +2,16 @@
 
 [sub_resource type="Curve" id="Curve_w1fs3"]
 _limits = [-50.0, 50.0, 0.0, 1.0]
-_data = [Vector2(0.75, -0.551361), 0.0, 0.0, 0, 0, Vector2(1, 24.1722), 0.0, 0.0, 0, 0]
-point_count = 2
+_data = [Vector2(0.008, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0), 0.0, 0.0, 0, 0, Vector2(0.8, 8), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_xx7rf"]
 curve = SubResource("Curve_w1fs3")
 
 [sub_resource type="Curve" id="Curve_3ry8w"]
 _limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.75, 0.5), 0.0, 0.0, 0, 0, Vector2(0.883758, 0.973883), 0.0, 0.0, 0, 0, Vector2(0.964706, 0), -8.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.5, 0.497), 0.0, 0.0, 0, 0, Vector2(0.6, 1), 0.0, 0.0, 0, 0, Vector2(0.7, 1), 0.0, 0.0, 0, 0, Vector2(0.894118, 0), -12.6656, 0.0, 0, 0]
+point_count = 5
 
 [sub_resource type="CurveTexture" id="CurveTexture_w1fs3"]
 curve = SubResource("Curve_3ry8w")
@@ -20,12 +20,14 @@ curve = SubResource("Curve_3ry8w")
 angle_min = -720.0
 angle_max = 720.0
 spread = 180.0
-initial_velocity_min = 4.0
-initial_velocity_max = 5.0
+initial_velocity_min = 6.0
+initial_velocity_max = 6.0
 gravity = Vector3(0, 0, 0)
 radial_accel_min = -10.0
 radial_accel_max = -10.0
 radial_accel_curve = SubResource("CurveTexture_xx7rf")
+tangential_accel_min = 15.0
+tangential_accel_max = 15.0
 damping_min = 15.0
 damping_max = 15.0
 scale_min = 0.2
@@ -45,10 +47,10 @@ material = SubResource("StandardMaterial3D_xx7rf")
 
 [node name="GPUParticles3D" type="GPUParticles3D"]
 emitting = false
-amount = 70
-lifetime = 1.2
+amount = 80
+lifetime = 0.8
 one_shot = true
-explosiveness = 0.95
+explosiveness = 1.0
 fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_2i8dk")
 draw_pass_1 = SubResource("BoxMesh_bcgx0")

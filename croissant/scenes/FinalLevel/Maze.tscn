@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://3ybo6oykrlh7" path="res://scripts/FinalLevel/Maze.cs" id="1_1hnml"]
 [ext_resource type="PackedScene" uid="uid://b0rwmg3mas3cc" path="res://scenes/FinalLevel/Wall.tscn" id="2_f2dw1"]
 [ext_resource type="PackedScene" uid="uid://dp0vjok53fueo" path="res://scenes/FinalLevel/Lamp.tscn" id="3_md7u8"]
-[ext_resource type="PackedScene" uid="uid://c22lbgx023hx7" path="res://scenes/FinalLevel/Path.tscn" id="3_rlbri"]
+[ext_resource type="PackedScene" uid="uid://dgq2j8vp8c72q" path="res://scenes/FinalLevel/Path.tscn" id="3_rlbri"]
 [ext_resource type="PackedScene" uid="uid://cjn4lukcecj37" path="res://scenes/FinalLevel/Objective.tscn" id="4_awxkg"]
 
 [node name="Maze" type="Node3D"]

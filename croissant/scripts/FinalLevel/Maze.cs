@@ -330,7 +330,8 @@ public partial class Maze : Node3D
 
         foreach (var enemy in Enemies)
         {
-            enemy.QueueFree();
+            if (enemy.IsInsideTree())
+                enemy.QueueFree();
         }
         Enemies.Clear();
 

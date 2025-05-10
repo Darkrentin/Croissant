@@ -12,7 +12,7 @@ curve = SubResource("Curve_n4wqm")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3r0jc"]
 particle_flag_align_y = true
 spread = 180.0
-flatness = 0.6
+flatness = 0.4
 initial_velocity_min = 1.0
 initial_velocity_max = 5.0
 scale_min = 0.1

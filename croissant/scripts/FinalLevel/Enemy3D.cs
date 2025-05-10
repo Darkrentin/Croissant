@@ -31,6 +31,11 @@ public partial class Enemy3D : CharacterBody3D
 		shapeSequence = new List<Mesh> { IcosahedronMesh, DodecahedronMesh, CubeMesh, TetrahedronMesh };
 		currentShape = Lib.rand.Next(0, 4);
 		UpdateShape();
+		if (currentShape == 3)
+		{
+			Scale = new Vector3(0.75f, 0.75f, 0.75f);
+			Position += new Vector3(0, 0.4f, 0);
+		}
 		AnimationPlayer.AnimationFinished += OnAnimationFinished;
 		navigationAgent3D.DebugEnabled = FinalLevel.Instance.Debug;
 	}
@@ -93,8 +98,8 @@ public partial class Enemy3D : CharacterBody3D
 			currentShape++;
 			if (currentShape == 3)
 			{
-				Scale = new Vector3(0.8f, 0.8f, 0.8f);
-				Position += new Vector3(0, 0.25f, 0);
+				Scale = new Vector3(0.75f, 0.75f, 0.75f);
+				Position += new Vector3(0, 0.4f, 0);
 			}
 
 			AnimationPlayer.Play("ShapeChange");
@@ -130,11 +135,11 @@ public partial class Enemy3D : CharacterBody3D
 		explosionLight.OmniAttenuation = 3f;
 		explosionLight.LightEnergy = 1f;
 		AddChild(explosionLight);
-		explosionLight.GlobalPosition = GlobalPosition + new Vector3(0, 0.8f, 0);
+		explosionLight.GlobalPosition = GlobalPosition + new Vector3(0, 0.6f, 0);
 
 		GpuParticles3D explosion = EnemyExplosionScene.Instantiate<GpuParticles3D>();
 		AddChild(explosion);
-		explosion.GlobalPosition = GlobalPosition + new Vector3(0, 0.8f, 0);
+		explosion.GlobalPosition = GlobalPosition + new Vector3(0, 0.6f, 0);
 		explosion.Emitting = true;
 
 		Timer explosionTimer = new Timer();
