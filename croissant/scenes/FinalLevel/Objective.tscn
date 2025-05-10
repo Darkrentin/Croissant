@@ -253,14 +253,62 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Obj/Center:visible")
-tracks/16/interp = 1
+tracks/16/path = NodePath("Obj/Center:position")
+tracks/16/interp = 2
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 2),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.206, 0.02, 0), Vector3(0.00426054, 0.00518513, 0.19924), Vector3(0.0753824, -0.283833, -0.0183697), Vector3(-0.2, -0.2, 0.2), Vector3(10, 10, -10)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Obj/OmniLight3D:omni_range")
+tracks/17/interp = 2
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [5.0, 10.0, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Obj/Center:mesh:size")
+tracks/18/interp = 2
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0.9, 0.9, 0.9), Vector3(0.6, 0.6, 0.6), Vector3(0.6, 0.6, 0.6), Vector3(5, 5, 5)]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Obj/Center:rotation")
+tracks/19/interp = 2
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.6, 1, 15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07), Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07), Vector3(6.28319, 6.28319, -6.28319), Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Obj/OmniLight3D:light_energy")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_mtdh5"]
@@ -294,26 +342,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Obj/Center:mesh:size")
+tracks/2/path = NodePath("Obj/Center:mesh:material:emission_energy_multiplier")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.9, 1, 1.1, 1.9, 2, 2.1, 2.9, 3, 3.1, 3.9, 4, 4.1, 4.9, 5, 5.1, 5.9, 6, 6.1, 6.9, 7, 7.1, 7.9, 8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1)]
+"values": [2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Obj/Center:mesh:material:emission_energy_multiplier")
+tracks/3/path = NodePath("Obj/Center:mesh:size")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.9, 1, 1.1, 1.9, 2, 2.1, 2.9, 3, 3.1, 3.9, 4, 4.1, 4.9, 5, 5.1, 5.9, 6, 6.1, 6.9, 7, 7.1, 7.9, 8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0, 1.0, 1.0, 2.0]
+"values": [Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1), Vector3(0.9, 0.9, 0.9), Vector3(0.9, 0.9, 0.9), Vector3(1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_uivtg"]
@@ -513,38 +561,38 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Obj/Center:visible")
+tracks/16/path = NodePath("Obj:rotation")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"update": 0,
+"values": [Vector3(0.616101, 1.0472, 0.785398)]
 }
 tracks/17/type = "value"
 tracks/17/imported = false
 tracks/17/enabled = true
-tracks/17/path = NodePath("Obj:rotation")
+tracks/17/path = NodePath("Obj:position")
 tracks/17/interp = 1
 tracks/17/loop_wrap = true
 tracks/17/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0.616101, 1.0472, 0.785398)]
+"values": [Vector3(1, 1.2, 1)]
 }
 tracks/18/type = "value"
 tracks/18/imported = false
 tracks/18/enabled = true
-tracks/18/path = NodePath("Obj:position")
+tracks/18/path = NodePath("Obj/Center:mesh:material:emission_energy_multiplier")
 tracks/18/interp = 1
 tracks/18/loop_wrap = true
 tracks/18/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(1, 1.2, 1)]
+"values": [1.0]
 }
 tracks/19/type = "value"
 tracks/19/imported = false
@@ -561,10 +609,46 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("Obj/Center:mesh:material:emission_energy_multiplier")
+tracks/20/path = NodePath("Obj/Center:position")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Obj/OmniLight3D:omni_range")
+tracks/21/interp = 1
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Obj/Center:rotation")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07)]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Obj/OmniLight3D:light_energy")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -677,6 +761,7 @@ mesh = SubResource("BoxMesh_fsexr")
 [node name="OmniLight3D" type="OmniLight3D" parent="Obj"]
 
 [node name="Center" type="MeshInstance3D" parent="Obj"]
+transform = Transform3D(1, -1.78814e-07, -2.38419e-07, 1.78814e-07, 1, -2.98023e-08, 2.38419e-07, 2.98023e-08, 1, 0, 0, 0)
 gi_mode = 2
 mesh = SubResource("BoxMesh_mtdh5")
 
