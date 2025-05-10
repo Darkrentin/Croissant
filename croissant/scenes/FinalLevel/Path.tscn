@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://c22lbgx023hx7"]
+
+[ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_j4qbm"]
+[ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/meshes/WallNoise.tres" id="2_s63yj"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjpp2"]
+render_priority = 0
+shader = ExtResource("1_j4qbm")
+shader_parameter/world_noise_normal_texture = ExtResource("2_s63yj")
+shader_parameter/noise_scale = 1.0
+shader_parameter/normal_strength = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_5ja37"]
+lightmap_size_hint = Vector2i(24, 36)
+material = SubResource("ShaderMaterial_vjpp2")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k74uf"]
+size = Vector3(2, 2, 2)
+
+[node name="Path" type="StaticBody3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
+mesh = SubResource("BoxMesh_5ja37")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
+shape = SubResource("BoxShape3D_k74uf")
+
+[node name="Ceil" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 3, 1)
+mesh = SubResource("BoxMesh_5ja37")

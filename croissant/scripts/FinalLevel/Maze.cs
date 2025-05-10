@@ -4,9 +4,11 @@ using Godot;
 public partial class Maze : Node3D
 {
     [Export] public PackedScene WallScene;
+    [Export] public PackedScene FloorScene;
     [Export] public PackedScene LampScene;
     [Export] public PackedScene ObjectiveScene;
     [Export] public int MazeSize = 31;
+
 
     public int WallSize = 2;
     public const int LampSpacing = 6;
@@ -26,6 +28,10 @@ public partial class Maze : Node3D
 
     public int[,] MazeData;
     public int[,] MazeDist;
+    public StaticBody3D[,] MazeTiles;
+
+    public List<Node3D> Lamps = new List<Node3D>();
+    public List<Enemy3D> Enemies = new List<Enemy3D>();
     [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;
 
     public override void _Ready()
@@ -47,12 +53,14 @@ public partial class Maze : Node3D
     {
         MazeData = new int[MazeSize, MazeSize];
         MazeDist = new int[MazeSize, MazeSize];
+        MazeTiles = new StaticBody3D[MazeSize, MazeSize];
 
         for (int i = 0; i < MazeSize; i++)
             for (int j = 0; j < MazeSize; j++)
             {
                 MazeData[i, j] = Wall;
                 MazeDist[i, j] = -1;
+                MazeTiles[i, j] = null;
             }
 
         if (MazeSize > 2)
@@ -177,31 +185,26 @@ public partial class Maze : Node3D
 
                 if (MazeData[i, j] == Wall)
                 {
-                    Node3D wall = WallScene.Instantiate<Node3D>();
+                    StaticBody3D wall = WallScene.Instantiate<StaticBody3D>();
                     wall.Position = new Vector3(nx, 0, nz) * WallSize;
                     AddChild(wall);
+                    MazeTiles[i, j] = wall;
                 }
                 else
                 {
 
                     // Add floor and ceiling for lamp spaces too
-                    Node3D floor = WallScene.Instantiate<Node3D>();
+                    StaticBody3D floor = FloorScene.Instantiate<StaticBody3D>();
                     floor.Position = new Vector3(nx, 0, nz) * WallSize;
-                    floor.Position += new Vector3(0, -WallSize, 0);
-                    FinalLevel.Instance.FloorTiles.Add(floor as StaticBody3D);
                     AddChild(floor);
-
-                    Node3D ceil = WallScene.Instantiate<Node3D>();
-                    ceil.RemoveChild(ceil.GetNode("CollisionShape3D"));
-                    ceil.Position = new Vector3(nx, 0, nz) * WallSize;
-                    ceil.Position += new Vector3(0, WallSize * 1, 0);
-                    AddChild(ceil);
+                    MazeTiles[i, j] = floor;
 
                     if ((MazeDist[i, j] % LampSpacing == 0 && Lib.rand.Next(0, 2) == 0) || MazeDist[i, j] == 0)
                     {
                         Node3D lamp = LampScene.Instantiate<Node3D>();
                         lamp.Position = new Vector3(nx, 0, nz) * WallSize;
                         AddChild(lamp);
+                        Lamps.Add(lamp);
                     }
                     if (MazeData[i, j] == ObjectiveLabel)
                     {
@@ -297,5 +300,46 @@ public partial class Maze : Node3D
                 }
             }
         }
+    }
+
+    public void RemoveAllWall()
+    {
+        for (int i = 1; i < MazeSize - 1; i++)
+        {
+            for (int j = 1; j < MazeSize - 1; j++)
+            {
+                if (MazeData[i, j] == Wall)
+                {
+                    MazeData[i, j] = Floor;
+                    MazeTiles[i, j].QueueFree();
+                    StaticBody3D floor = FloorScene.Instantiate<StaticBody3D>();
+                    int nx = i - MazeSize / 2;
+                    int nz = j - MazeSize / 2;
+                    floor.Position = new Vector3(nx, 0, nz) * WallSize;
+                    AddChild(floor);
+                    MazeTiles[i, j] = floor;
+                }
+            }
+        }
+
+        foreach (var lamp in Lamps)
+        {
+            lamp.QueueFree();
+        }
+        Lamps.Clear();
+
+        foreach (var enemy in Enemies)
+        {
+            enemy.QueueFree();
+        }
+        Enemies.Clear();
+
+        Lamp Lamp = LampScene.Instantiate<Lamp>();
+        Lamp.Position = new Vector3(0, 0, 0);
+        Lamp.RenderDistance = 100;
+        Lamp.Light.OmniRange = 15;
+        Lamp.Light.LightIntensityLumens = 1500;
+        AddChild(Lamp);
+        FinalLevel.Instance.Area3D.Position = new Vector3(0, 0, 0);
     }
 }

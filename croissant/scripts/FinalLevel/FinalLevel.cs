@@ -10,11 +10,15 @@ public partial class FinalLevel : Node3D
 	[Export] public NavigationRegion3D NavigationRegion;
 	[Export] public Player3D Player3D;
 	[Export] public PackedScene Enemy3DScene;
+	[Export] public PackedScene BossLevelScene;
 	[Export] public SubViewportContainer ShaderViewport;
 	[Export] public MeltShader MeltShader;
 	[Export] public CompressedTexture2D PaletteMain;
 	[Export] public CompressedTexture2D PaletteDeath;
-	public List<StaticBody3D> FloorTiles = new List<StaticBody3D>();
+	[Export] public Area3D Area3D;
+	[Export] public SubViewport GameNode;
+	public Node3D BossLevel;
+
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
 	public int ObjectiveCount = 3;
@@ -27,6 +31,7 @@ public partial class FinalLevel : Node3D
 		NavigationRegion.BakeNavigationMesh();
 		miniMap.DrawMaze();
 		SpawnEnemy();
+		Area3D.BodyEntered+=EndReach;
 	}
 
 	public void SpawnEnemy()
@@ -39,6 +44,7 @@ public partial class FinalLevel : Node3D
 					Enemy3D enemy = (Enemy3D)Enemy3DScene.Instantiate();
 					enemy.Position = spawnPosition;
 					AddChild(enemy);
+					maze.Enemies.Add(enemy);
 					//enemy.GlobalPosition = spawnPosition;
 					EnemyCount++;
 				}
@@ -49,7 +55,10 @@ public partial class FinalLevel : Node3D
 	{
 		ObjectiveDestroyed++;
 		if (ObjectiveDestroyed >= ObjectiveCount)
+		{
 			Lib.Print("All objectives destroyed");
+			maze.RemoveAllWall();
+		}
 		else
 			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);
 	}
@@ -78,5 +87,21 @@ public partial class FinalLevel : Node3D
 			MeltShader.Transition();
 			Player3D.GlobalPosition = Vector3.Zero;
 		};
+	}
+
+	public void EndReach(Node body)
+	{
+		if(body is Player3D player)
+		{
+			CallDeferred(nameof(TransitionToBossLevel));
+		}
+	}
+	public void TransitionToBossLevel()
+	{
+		GameNode.RemoveChild(Area3D);
+			GameNode.RemoveChild(NavigationRegion);
+			NavigationRegion.QueueFree();
+			BossLevel = BossLevelScene.Instantiate<Node3D>();
+			GameNode.AddChild(BossLevel);
 	}
 }

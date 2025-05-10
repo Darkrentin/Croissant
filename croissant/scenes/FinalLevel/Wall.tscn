@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/meshes/WallNoise.tres" id="1_f603f"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_kkjf7"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vjpp2"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kkjf7"]
 render_priority = 0
 shader = ExtResource("1_kkjf7")
 shader_parameter/world_noise_normal_texture = ExtResource("1_f603f")
@@ -12,7 +12,7 @@ shader_parameter/normal_strength = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_lvuuv"]
 lightmap_size_hint = Vector2i(24, 36)
-material = SubResource("ShaderMaterial_vjpp2")
+material = SubResource("ShaderMaterial_kkjf7")
 size = Vector3(2, 2, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lvuuv"]
