@@ -51,20 +51,6 @@ position = Vector2(128, 704)
 position = Vector2(92, 60)
 shape = SubResource("RectangleShape2D_k0j7d")
 
-[node name="KillingPlatform" parent="." instance=ExtResource("5_0dahx")]
-position = Vector2(1541, 755)
-
-[node name="Window" parent="KillingPlatform" index="0"]
-auto_translate_mode = 1
-
-[node name="TextureRect" parent="KillingPlatform/Window" index="0"]
-anchor_right = 1.2
-anchor_bottom = 1.2
-offset_left = 4.0
-offset_top = 16.0
-offset_right = 4.0
-offset_bottom = 16.0
-
 [node name="StaticPlateform3" parent="." instance=ExtResource("3_voees")]
 position = Vector2(-68, 877)
 
@@ -83,7 +69,7 @@ position = Vector2(107, 242)
 SpawnPosition = NodePath("Node2D")
 
 [node name="Node2D" type="Node2D" parent="Portal"]
-position = Vector2(241, 238)
+position = Vector2(252, 236)
 
 [node name="ConfigFile" parent="." instance=ExtResource("5_irsaa")]
 position = Vector2(1135, 340)
@@ -100,9 +86,17 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" parent="ConfigFile" index="1"]
 scale = Vector2(1.5, 1.5)
 
+[node name="KillingPlatform" parent="." instance=ExtResource("5_0dahx")]
+position = Vector2(1529, 731)
+
+[node name="TextureRect" parent="KillingPlatform/Window" index="0"]
+anchors_preset = 15
+grow_horizontal = 2
+grow_vertical = 2
+
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
 [editable path="MovePlatform"]
-[editable path="KillingPlatform"]
 [editable path="StaticPlateform3"]
 [editable path="ConfigFile"]
+[editable path="KillingPlatform"]

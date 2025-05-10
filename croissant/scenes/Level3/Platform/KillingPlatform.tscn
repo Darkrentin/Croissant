@@ -4,11 +4,11 @@
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_ylwtk"]
 [ext_resource type="Texture2D" uid="uid://d1gjr6yxhl2kj" path="res://assets/sprites/Placeholder.png" id="3_iqbkw"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_worxj"]
-size = Vector2(150, 120)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3r00"]
-size = Vector2(160, 122)
+size = Vector2(120, 140)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ylwtk"]
+size = Vector2(130, 150)
 
 [node name="KillingPlatform" type="CharacterBody2D" node_paths=PackedStringArray("area2D", "window", "collisionShape")]
 script = ExtResource("1_k3r00")
@@ -18,21 +18,22 @@ collisionShape = NodePath("CollisionShape2D")
 
 [node name="Window" type="Window" parent="."]
 position = Vector2i(0, 36)
+size = Vector2i(120, 120)
 script = ExtResource("2_ylwtk")
 
 [node name="TextureRect" type="TextureRect" parent="Window"]
 anchors_preset = -1
-anchor_right = 1.02
-anchor_bottom = 1.04
+anchor_right = 1.0
+anchor_bottom = 1.0
 texture = ExtResource("3_iqbkw")
-expand_mode = 2
+expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(75, 60)
-shape = SubResource("RectangleShape2D_worxj")
+position = Vector2(60, 70)
+shape = SubResource("RectangleShape2D_k3r00")
 
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(73, 59)
-shape = SubResource("RectangleShape2D_k3r00")
+position = Vector2(60, 70)
+shape = SubResource("RectangleShape2D_ylwtk")
