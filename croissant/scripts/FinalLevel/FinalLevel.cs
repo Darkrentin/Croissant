@@ -45,11 +45,6 @@ public partial class FinalLevel : Node3D
 		Lib.Print("Enemy Count: " + Instance.EnemyCount);
 	}
 
-	public override void _Process(double delta)
-	{
-
-	}
-
 	public void ObjectiveDestroy()
 	{
 		ObjectiveDestroyed++;

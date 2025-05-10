@@ -22,14 +22,9 @@ public partial class Player3D : CharacterBody3D
 		ShootTimer.WaitTime = ShootCooldown;
 		ShootTimer.OneShot = true;
 		Input.MouseMode = Input.MouseModeEnum.Captured;
-		if(BulletHitScene == null)
+		if (BulletHitScene == null)
 			BulletHitScene = GD.Load<PackedScene>("res://scenes/FinalLevel/BulletHit.tscn");
 		AddChild(ShootTimer);
-	}
-
-	public override void _Process(double delta)
-	{
-
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -58,21 +53,37 @@ public partial class Player3D : CharacterBody3D
 		AnimationPlayer.Start(ShootAnimation, reset: true);
 
 		RayCast3D.ForceRaycastUpdate();
-		if (RayCast3D.GetCollider() is Node3D Body)
+		var collider = RayCast3D.GetCollider(); // Store collider
+
+		if (collider is Node3D Body)
 		{
-			
+			OmniLight3D explosionLight = new OmniLight3D();
+			explosionLight.OmniRange = 3f;
+			explosionLight.OmniAttenuation = 1f;
+			explosionLight.LightEnergy = 0.1f;
+			GetParent().AddChild(explosionLight);
+			explosionLight.GlobalPosition = RayCast3D.GetCollisionPoint();
+
+			Timer explosionLightTimer = new Timer();
+			explosionLightTimer.WaitTime = 0.5f;
+			explosionLightTimer.OneShot = true;
+			explosionLightTimer.Timeout += () => explosionLight.QueueFree();
+			explosionLight.AddChild(explosionLightTimer);
+			explosionLightTimer.Start();
+
+			Tween lightTween = CreateTween();
+			lightTween.TweenProperty(explosionLight, "light_energy", 0f, 0.3f);
+			lightTween.Play();
+
 			GpuParticles3D bulletHitInstance = BulletHitScene.Instantiate<GpuParticles3D>();
 			FinalLevel.Instance.AddChild(bulletHitInstance);
 			bulletHitInstance.GlobalPosition = RayCast3D.GetCollisionPoint();
-			bulletHitInstance.Emitting = true;	
+			bulletHitInstance.Emitting = true;
 			if (Body is Enemy3D Enemy)
 				Enemy.OnBulletCollide();
-			else if(RayCast3D.GetCollider() is Objective obj)
-			{
+			else if (Body is Objective obj)
 				obj.Break();
-				Lib.Print("Objective hit!");
-			}
 		}
-		Lib.Print("Hit: " + RayCast3D.GetCollider().GetClass());
+
 	}
 }

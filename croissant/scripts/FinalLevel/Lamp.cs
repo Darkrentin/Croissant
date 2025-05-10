@@ -3,7 +3,6 @@ using System;
 
 public partial class Lamp : Node3D
 {
-	// Called when the node enters the scene tree for the first time.
 	[Export] public int RenderDistance = 10;
 	[Export] public OmniLight3D Light;
 	public Timer timer;
@@ -22,21 +21,11 @@ public partial class Lamp : Node3D
 		timer.Start();
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
-		if(GlobalPosition.DistanceTo(FinalLevel.Instance.Player3D.GlobalPosition)<RenderDistance)
-		{
+		if (GlobalPosition.DistanceSquaredTo(FinalLevel.Instance.Player3D.GlobalPosition) < (RenderDistance * RenderDistance))
 			Visible = true;
-
-		}
 		else
-		{
 			Visible = false;
-		}
-	}	
+	}
 }

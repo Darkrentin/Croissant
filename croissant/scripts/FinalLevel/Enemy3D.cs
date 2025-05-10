@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 public partial class Enemy3D : CharacterBody3D
 {
-
 	[Export] private MeshInstance3D Mesh;
 	[Export] private Mesh IcosahedronMesh;
 	[Export] private Mesh DodecahedronMesh;
@@ -15,7 +14,7 @@ public partial class Enemy3D : CharacterBody3D
 	[Export] private RayCast3D rayCast;
 	[Export] private PackedScene EnemyExplosionScene;
 	[Export] public bool UpdateShapeButton { get => false; set => UpdateShape(); }
-	[Export] public bool ExplosionButton { get => false; set => AddExplosion(); }
+	[Export] public bool ExplosionButton { get => false; set { if (value) AddExplosion(); } }
 	[Export] private float MovementSpeed = 1.0f;
 	private Vector3 RotationAxis;
 	private int currentShape;
@@ -36,13 +35,10 @@ public partial class Enemy3D : CharacterBody3D
 		navigationAgent3D.DebugEnabled = FinalLevel.Instance.Debug;
 	}
 
-	public override void _Process(double delta)
-	{
-		Mesh.Rotation += RotationAxis * (float)delta * rotationSpeed;
-	}
-
 	public override void _PhysicsProcess(double delta)
 	{
+		Mesh.Rotation += RotationAxis * (float)delta * rotationSpeed;
+
 		if (!CanHarmPlayer)
 		{
 			navigationAgent3D.Velocity = Vector3.Zero;
@@ -129,10 +125,14 @@ public partial class Enemy3D : CharacterBody3D
 
 	public void AddExplosion()
 	{
-		GpuParticles3D explosion = EnemyExplosionScene.Instantiate<GpuParticles3D>();
+		OmniLight3D explosionLight = new OmniLight3D();
+		explosionLight.OmniRange = 8f;
+		explosionLight.OmniAttenuation = 3f;
+		explosionLight.LightEnergy = 1f;
+		AddChild(explosionLight);
+		explosionLight.GlobalPosition = GlobalPosition + new Vector3(0, 0.8f, 0);
 
-		//explosion.GetChild<GpuParticles3D>(0).Emitting = true;
-		//explosion.GetChild<GpuParticles3D>(1).Emitting = true;
+		GpuParticles3D explosion = EnemyExplosionScene.Instantiate<GpuParticles3D>();
 		AddChild(explosion);
 		explosion.GlobalPosition = GlobalPosition + new Vector3(0, 0.8f, 0);
 		explosion.Emitting = true;
@@ -140,9 +140,12 @@ public partial class Enemy3D : CharacterBody3D
 		Timer explosionTimer = new Timer();
 		explosionTimer.WaitTime = 1.5f;
 		explosionTimer.OneShot = true;
-		explosionTimer.Timeout += () => QueueFree();
+		explosionTimer.Timeout += () => { QueueFree(); explosion.QueueFree(); explosionLight.QueueFree(); };
 		AddChild(explosionTimer);
 		explosionTimer.Start();
-		//QueueFree();
+
+		Tween lightTween = CreateTween();
+		lightTween.TweenProperty(explosionLight, "light_energy", 0f, 1.5f);
+		lightTween.Play();
 	}
 }

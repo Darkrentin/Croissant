@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Objective : StaticBody3D
@@ -13,7 +12,6 @@ public partial class Objective : StaticBody3D
 	[Export] public MeshInstance3D Center;
 	public bool _isBreaking = false;
 	public Timer timer;
-	public int PartCount = 8;
 	public override void _Ready()
 	{
 		timer = new Timer();
@@ -46,9 +44,7 @@ public partial class Objective : StaticBody3D
 	public void AnimationFinished(StringName name)
 	{
 		if (name == "RESET")
-		{
 			AnimationPlayer.Play("Idle");
-		}
 	}
 
 	public void Break()
@@ -70,18 +66,13 @@ public partial class Objective : StaticBody3D
 		//AnimationPlayer.CallbackModeProcess = AnimationPlayer.AnimationCallbackModeProcess.Idle;
 
 		AnimationPlayer.Play("Break");
-
 		FinalLevel.Instance.ObjectiveDestroy();
-
 		timer.Start();
 	}
 
 	public void ResetOtherObjectives()
 	{
 		foreach (Objective obj in ObjectiveList)
-		{
 			obj.AnimationPlayer.Play("RESET");
-			
-		}
 	}
 }

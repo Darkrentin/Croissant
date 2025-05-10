@@ -41,9 +41,7 @@ public partial class Maze : Node3D
         MakeMaze();
     }
 
-    public override void _Process(double delta)
-    {
-    }
+
 
     public void initMaze()
     {
@@ -65,7 +63,7 @@ public partial class Maze : Node3D
         ReplaceLabel(MazeSize / 2, MazeSize / 2, SafeZone, SafeZone, Floor, CantSpawn, true);
 
 
-        (int x,int y)[] corners = new (int, int)[]
+        (int x, int y)[] corners = new (int, int)[]
         {
             (2, 2),
             (MazeSize - 3, 2),
@@ -76,12 +74,12 @@ public partial class Maze : Node3D
         int cornerToRemove = Lib.rand.Next(0, corners.Length);
         corners[cornerToRemove] = (0, 0);
 
-        for(int i = 0; i < corners.Length; i++)
+        for (int i = 0; i < corners.Length; i++)
         {
             if (corners[i] != (0, 0))
             {
                 PlaceRoom(corners[i].x, corners[i].y, 3, 3, true);
-                MazeData[2, 2] = ObjectiveLabel;
+                MazeData[corners[i].x, corners[i].y] = ObjectiveLabel;
             }
         }
 
@@ -120,7 +118,6 @@ public partial class Maze : Node3D
                     MazeData[nextR, nextC] == Wall)
                 {
                     MazeData[wallR, wallC] = Floor;
-
                     GenerateMazeDFS(nextR, nextC);
                 }
                 else if (MazeData[wallR, wallC] == Wall &&
@@ -128,9 +125,7 @@ public partial class Maze : Node3D
                          (MazeData[nextR, nextC] == Floor))
                 {
                     if (Lib.rand.NextDouble() < LoopCreationProbability)
-                    {
                         MazeData[wallR, wallC] = Floor;
-                    }
                 }
             }
         }
@@ -138,12 +133,10 @@ public partial class Maze : Node3D
 
     private void CalculateDistancesFromCenter()
     {
-        // Create a queue for BFS
         Queue<(int, int)> queue = new Queue<(int, int)>();
         int centerX = MazeSize / 2;
         int centerY = MazeSize / 2;
 
-        // Start BFS from the center
         MazeDist[centerX, centerY] = 0;
         queue.Enqueue((centerX, centerY));
 
@@ -155,19 +148,15 @@ public partial class Maze : Node3D
         {
             var (x, y) = queue.Dequeue();
 
-            // Check all four adjacent cells
             for (int i = 0; i < 4; i++)
             {
                 int nx = x + dx[i];
                 int ny = y + dy[i];
 
-                // Check if the cell is within bounds
                 if (nx >= 0 && nx < MazeSize && ny >= 0 && ny < MazeSize)
                 {
-                    // Check if it's a floor cell (walkable) and hasn't been visited yet
                     if ((MazeData[nx, ny] != Wall) && MazeDist[nx, ny] == -1)
                     {
-                        // Set the distance to be one more than the current cell
                         MazeDist[nx, ny] = MazeDist[x, y] + 1;
                         queue.Enqueue((nx, ny));
                     }
@@ -219,7 +208,7 @@ public partial class Maze : Node3D
                         Objective objective = ObjectiveScene.Instantiate<Objective>();
                         objective.Position = new Vector3(nx, 0, nz) * WallSize;
                         ObjectiveCount++;
-                        objective.PixelColor = ObjectiveColors[(ObjectiveCount-1) % ObjectiveColors.Length];
+                        objective.PixelColor = ObjectiveColors[(ObjectiveCount - 1) % ObjectiveColors.Length];
                         AddChild(objective);
                     }
                 }
@@ -262,9 +251,7 @@ public partial class Maze : Node3D
         {
             string line = "";
             for (int j = 0; j < MazeSize; j++)
-            {
                 line += MazeDist[i, j] + " ";
-            }
             GD.Print(line);
         }
 
