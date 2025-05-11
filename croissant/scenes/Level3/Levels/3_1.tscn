@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://c5avgc26i0v58"]
 
-[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="2_7k7pd"]
-[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="2_x0mh1"]
-[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Portal.tscn" id="3_7k7pd"]
-[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/ConfigFile.tscn" id="4_e0fg1"]
-[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="5_q63kx"]
+[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_brot1"]
+[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="2_l2671"]
+[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="3_cjr8i"]
+[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="4_26hxk"]
+[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_uybjc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mh1"]
 resource_local_to_scene = true
@@ -26,7 +26,7 @@ size = Vector2(572, 146)
 
 [node name="3_1" type="Node"]
 
-[node name="Portal2" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("3_7k7pd")]
+[node name="Portal2" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("1_brot1")]
 position = Vector2(37, 775)
 NextSceneId = 2
 SpawnPosition = NodePath("Node2D")
@@ -34,7 +34,7 @@ SpawnPosition = NodePath("Node2D")
 [node name="Node2D" type="Node2D" parent="Portal2"]
 position = Vector2(223, 49)
 
-[node name="StaticPlateform" parent="." instance=ExtResource("2_7k7pd")]
+[node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(2, 577)
 
 [node name="TextureRect" parent="StaticPlateform/Window" index="0"]
@@ -49,7 +49,7 @@ offset_bottom = 1.0
 position = Vector2(759, 58)
 shape = SubResource("RectangleShape2D_x0mh1")
 
-[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("3_7k7pd")]
+[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("1_brot1")]
 position = Vector2(27, 180)
 NextSceneId = 0
 SpawnPosition = NodePath("Node2D")
@@ -57,7 +57,7 @@ SpawnPosition = NodePath("Node2D")
 [node name="Node2D" type="Node2D" parent="Portal"]
 position = Vector2(368, 303)
 
-[node name="ConfigFile" parent="." instance=ExtResource("4_e0fg1")]
+[node name="ConfigFile" parent="." instance=ExtResource("3_cjr8i")]
 position = Vector2(251, 18)
 scale = Vector2(1.5, 1.5)
 
@@ -72,7 +72,7 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" parent="ConfigFile" index="1"]
 scale = Vector2(1.5, 1.5)
 
-[node name="StaticPlateform2" parent="." instance=ExtResource("2_7k7pd")]
+[node name="StaticPlateform2" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(321, 960)
 
 [node name="TextureRect" parent="StaticPlateform2/Window" index="0"]
@@ -88,14 +88,14 @@ offset_bottom = -0.0400085
 position = Vector2(799.25, 60)
 shape = SubResource("RectangleShape2D_e0fg1")
 
-[node name="MovePlatform" parent="." instance=ExtResource("5_q63kx")]
+[node name="MovePlatform" parent="." instance=ExtResource("4_26hxk")]
 position = Vector2(32, 959)
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(126.5, 60)
 shape = SubResource("RectangleShape2D_olxyy")
 
-[node name="KillingPlatform" parent="." instance=ExtResource("2_x0mh1")]
+[node name="KillingPlatform" parent="." instance=ExtResource("5_uybjc")]
 position = Vector2(1395, 428)
 
 [node name="TextureRect" parent="KillingPlatform/Window" index="0"]
@@ -105,7 +105,7 @@ offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="KillingPlatform2" parent="." instance=ExtResource("2_x0mh1")]
+[node name="KillingPlatform2" parent="." instance=ExtResource("5_uybjc")]
 position = Vector2(82, 1167)
 
 [node name="TextureRect" parent="KillingPlatform2/Window" index="0"]
