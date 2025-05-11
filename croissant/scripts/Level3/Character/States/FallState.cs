@@ -11,6 +11,8 @@ public partial class FallState : State
 			var player = fsm?.GetParent() as PlayerCharacter;
 			if (player == null)
 				return;
+			
+			player.AnimationPlayer.Play("Fall");
 		}
 
 		public override void Update(float delta)
@@ -25,6 +27,14 @@ public partial class FallState : State
 			Vector2 velocity = player.Velocity;
 			velocity.X = direction.X * PlayerCharacter.Speed;
 			player.Velocity = velocity;
+			if(velocity.X>0)
+			{
+				player.Sprite.FlipH = false;
+			}
+			else if(velocity.X<0)
+			{
+				player.Sprite.FlipH = true;
+			}
 
 			if (player.IsOnFloor())
 			{

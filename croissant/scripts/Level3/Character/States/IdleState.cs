@@ -14,6 +14,7 @@ public partial class IdleState : State
             velocity.X = 0;
             player.Velocity = velocity;
         }
+        player.AnimationPlayer.Play("Idle");
     }
 
     public override void Update(float delta)

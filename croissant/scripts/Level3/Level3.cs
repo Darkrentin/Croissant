@@ -9,6 +9,7 @@ public partial class Level3 : FloatWindow
     public static Level3 Instance;
     public Node actualScene;
     public Action<InputEventMouseButton> MouseEvent;
+    [Export] public PlayerCharacter player;
 
     public override void _Ready()
     {

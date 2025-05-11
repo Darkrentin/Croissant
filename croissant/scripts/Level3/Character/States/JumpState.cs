@@ -13,6 +13,7 @@ public partial class JumpState : State
             return;
 
         player.Velocity = new Vector2(player.Velocity.X, PlayerCharacter.JumpVelocity);
+        player.AnimationPlayer.Play("Jump");
     }
 
     public override void Update(float delta)
@@ -28,6 +29,14 @@ public partial class JumpState : State
         Vector2 velocity = player.Velocity;
         velocity.X = direction.X * PlayerCharacter.Speed;
         player.Velocity = velocity;
+        if(velocity.X>0)
+        {
+            player.Sprite.FlipH = false;
+        }
+        else if(velocity.X<0)
+        {
+            player.Sprite.FlipH = true;
+        }
 
         if (player.IsOnFloor())
 		{

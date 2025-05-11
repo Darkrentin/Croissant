@@ -18,6 +18,8 @@ public partial class WallSlideLeft : State
             velocity.X = 0;
             player.Velocity = velocity;
         }
+        player.Sprite.FlipH = true;
+        player.AnimationPlayer.Play("WallSlideLeft");
     }
 
     public override void Update(float delta)

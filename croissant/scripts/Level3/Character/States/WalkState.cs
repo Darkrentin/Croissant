@@ -14,6 +14,7 @@ public partial class WalkState : State
             velocity.X = 0;
             player.Velocity = velocity;
         }
+        player.AnimationPlayer.Play("Run");
     }
 
     public override void Update(float delta)
@@ -26,6 +27,14 @@ public partial class WalkState : State
         Vector2 velocity = player.Velocity;
         velocity.X = direction.X * PlayerCharacter.Speed;
         player.Velocity = velocity;
+        if(velocity.X>0)
+        {
+            player.Sprite.FlipH = false;
+        }
+        else if(velocity.X<0)
+        {
+            player.Sprite.FlipH = true;
+        }
 
         if (Mathf.Abs(direction.Y) > 0.1f)
         {

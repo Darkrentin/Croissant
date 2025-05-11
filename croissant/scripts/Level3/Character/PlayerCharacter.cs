@@ -8,6 +8,8 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityBase = 2500.0f;
     public const float GravityExponentStart = 1.0f;
     public const float GravityExponentFactor = 0.50f;
+    [Export] public AnimationPlayer AnimationPlayer;
+    [Export] public Sprite2D Sprite;
 
     private float gravityAcceleration = GravityExponentStart;
 

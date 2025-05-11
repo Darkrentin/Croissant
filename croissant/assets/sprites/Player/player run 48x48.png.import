@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b27x3aob6e8bb"
-path="res://.godot/imported/Sgun3.png-2ac3f5d1d58599104c1d943fe312aba4.ctex"
+uid="uid://cyjxx8wfaohhf"
+path="res://.godot/imported/player run 48x48.png-6b1f727e87a3145993e118e772cf5565.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Sgun3.png"
-dest_files=["res://.godot/imported/Sgun3.png-2ac3f5d1d58599104c1d943fe312aba4.ctex"]
+source_file="res://assets/sprites/Player/player run 48x48.png"
+dest_files=["res://.godot/imported/player run 48x48.png-6b1f727e87a3145993e118e772cf5565.ctex"]
 
 [params]
 
