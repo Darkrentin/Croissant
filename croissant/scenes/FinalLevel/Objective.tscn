@@ -1,6 +1,7 @@
-[gd_scene load_steps=24 format=3 uid="uid://cjn4lukcecj37"]
+[gd_scene load_steps=25 format=3 uid="uid://cjn4lukcecj37"]
 
 [ext_resource type="Script" uid="uid://cru6f15nehrvy" path="res://scripts/FinalLevel/Objective.cs" id="1_8j1cb"]
+[ext_resource type="PackedScene" uid="uid://bwhskdu522trx" path="res://scenes/FinalLevel/Particles/ObjectiveExplosion.tscn" id="2_uivtg"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_8j1cb"]
 radius = 1.0
@@ -253,62 +254,38 @@ tracks/15/keys = {
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("Obj/Center:position")
+tracks/16/path = NodePath("Obj/OmniLight3D:omni_range")
 tracks/16/interp = 2
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.3, 0.45, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 2),
-"update": 0,
-"values": [Vector3(0, 0, 0), Vector3(-0.206, 0.02, 0), Vector3(0.00426054, 0.00518513, 0.19924), Vector3(0.0753824, -0.283833, -0.0183697), Vector3(-0.2, -0.2, 0.2), Vector3(10, 10, -10)]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("Obj/OmniLight3D:omni_range")
-tracks/17/interp = 2
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(0, 0.6, 1),
+"times": PackedFloat32Array(0, 0.1, 0.12),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [5.0, 10.0, 0.0]
 }
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("Obj/Center:mesh:size")
-tracks/18/interp = 2
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(0.9, 0.9, 0.9), Vector3(0.6, 0.6, 0.6), Vector3(0.6, 0.6, 0.6), Vector3(5, 5, 5)]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("Obj/Center:rotation")
-tracks/19/interp = 2
-tracks/19/loop_wrap = true
-tracks/19/keys = {
-"times": PackedFloat32Array(0, 0.6, 1, 15),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07), Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07), Vector3(6.28319, 6.28319, -6.28319), Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07)]
-}
-tracks/20/type = "value"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("Obj/OmniLight3D:light_energy")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(0, 0.6, 1),
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Obj/OmniLight3D:light_energy")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.12),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [1.0, 2.0, 0.0]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Obj/Center:visible")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_mtdh5"]
@@ -609,50 +586,38 @@ tracks/19/keys = {
 tracks/20/type = "value"
 tracks/20/imported = false
 tracks/20/enabled = true
-tracks/20/path = NodePath("Obj/Center:position")
+tracks/20/path = NodePath("Obj/OmniLight3D:omni_range")
 tracks/20/interp = 1
 tracks/20/loop_wrap = true
 tracks/20/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [5.0]
 }
 tracks/21/type = "value"
 tracks/21/imported = false
 tracks/21/enabled = true
-tracks/21/path = NodePath("Obj/OmniLight3D:omni_range")
+tracks/21/path = NodePath("Obj/OmniLight3D:light_energy")
 tracks/21/interp = 1
 tracks/21/loop_wrap = true
 tracks/21/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [5.0]
+"values": [1.0]
 }
 tracks/22/type = "value"
 tracks/22/imported = false
 tracks/22/enabled = true
-tracks/22/path = NodePath("Obj/Center:rotation")
+tracks/22/path = NodePath("Obj/Center:visible")
 tracks/22/interp = 1
 tracks/22/loop_wrap = true
 tracks/22/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.98023e-08, -2.38419e-07, 1.78814e-07)]
-}
-tracks/23/type = "value"
-tracks/23/imported = false
-tracks/23/enabled = true
-tracks/23/path = NodePath("Obj/OmniLight3D:light_energy")
-tracks/23/interp = 1
-tracks/23/loop_wrap = true
-tracks/23/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mtdh5"]
@@ -662,7 +627,7 @@ _data = {
 &"RESET": SubResource("Animation_uivtg")
 }
 
-[node name="Objective" type="StaticBody3D" node_paths=PackedStringArray("CollisionShape", "Light", "AnimationPlayer", "PartList", "Center")]
+[node name="Objective" type="StaticBody3D" node_paths=PackedStringArray("CollisionShape", "Light", "AnimationPlayer", "PartList", "Center", "Explosion")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_8j1cb")
@@ -672,6 +637,7 @@ AnimationPlayer = NodePath("AnimationPlayer")
 PartList = [NodePath("Obj/Part1"), NodePath("Obj/Part2"), NodePath("Obj/Part3"), NodePath("Obj/Part4"), NodePath("Obj/Part5"), NodePath("Obj/Part6"), NodePath("Obj/Part7"), NodePath("Obj/Part8")]
 PixelColor = Color(0, 0, 0, 1)
 Center = NodePath("Obj/Center")
+Explosion = NodePath("ObjectiveExplosion")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
@@ -788,3 +754,8 @@ libraries = {
 &"": SubResource("AnimationLibrary_mtdh5")
 }
 autoplay = "Idle"
+
+[node name="ObjectiveExplosion" parent="." instance=ExtResource("2_uivtg")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+emitting = false
+one_shot = true

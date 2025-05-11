@@ -33,7 +33,7 @@ height = 0.8
 
 [node name="BulletHit" type="GPUParticles3D" node_paths=PackedStringArray("BulletHitLight")]
 emitting = false
-amount = 50
+amount = 40
 lifetime = 0.5
 one_shot = true
 explosiveness = 1.0

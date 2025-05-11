@@ -1,5 +1,6 @@
 using Godot;
 using System.Collections.Generic;
+using System.Numerics;
 
 public partial class Objective : StaticBody3D
 {
@@ -10,6 +11,7 @@ public partial class Objective : StaticBody3D
 	[Export] public RigidBody3D[] PartList;
 	[Export] public Color PixelColor;
 	[Export] public MeshInstance3D Center;
+	[Export] public ObjectiveExplosion Explosion;
 	public bool _isBreaking = false;
 	public Timer timer;
 	public override void _Ready()
@@ -29,16 +31,17 @@ public partial class Objective : StaticBody3D
 		ApplyEmissionColor();
 	}
 
-	public override void _Process(double delta)
-	{
-	}
-
 	public void ApplyEmissionColor()
 	{
 		Center.MaterialOverride = new StandardMaterial3D();
 		Center.MaterialOverride.Set("emission_enabled", true);
 		Center.MaterialOverride.Set("albedo_color", PixelColor);
 		Center.MaterialOverride.Set("emission", PixelColor);
+
+		Explosion.MaterialOverride = new StandardMaterial3D();
+		Explosion.MaterialOverride.Set("emission_enabled", true);
+		Explosion.MaterialOverride.Set("albedo_color", PixelColor);
+		Explosion.MaterialOverride.Set("emission", PixelColor);
 	}
 
 	public void AnimationFinished(StringName name)
@@ -49,6 +52,7 @@ public partial class Objective : StaticBody3D
 
 	public void Break()
 	{
+		Godot.Vector3 tmp = (GlobalPosition - FinalLevel.Instance.Player3D.GlobalPosition).Normalized();
 		_isBreaking = true;
 		Lib.Print("Break");
 		RemoveChild(CollisionShape);
@@ -60,11 +64,13 @@ public partial class Objective : StaticBody3D
 		foreach (var part in PartList)
 		{
 			part.Freeze = false;
-			part.ApplyImpulse(((GlobalPosition - FinalLevel.Instance.Player3D.GlobalPosition).Normalized() + part.Position).Normalized() * impulse);
+			part.ApplyImpulse((tmp + part.Position).Normalized() * impulse);
 		}
 
 		//AnimationPlayer.CallbackModeProcess = AnimationPlayer.AnimationCallbackModeProcess.Idle;
-
+		Explosion.ProcessMaterial.Set("gravity", tmp * 30);
+		Explosion.Emitting = true;
+		Explosion.Timer.Start();
 		AnimationPlayer.Play("Break");
 		FinalLevel.Instance.ObjectiveDestroy();
 		timer.Start();

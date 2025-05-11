@@ -1,6 +1,6 @@
-[gd_scene load_steps=9 format=3 uid="uid://y8t7ulakyqcn"]
+[gd_scene load_steps=9 format=3 uid="uid://bwhskdu522trx"]
 
-[ext_resource type="Script" uid="uid://4w6mnmkxo0v7" path="res://scripts/FinalLevel/Particles/EnemyHit.cs" id="1_1vt7k"]
+[ext_resource type="Script" uid="uid://ylo4blmkrqx4" path="res://scripts/FinalLevel/Particles/ObjectiveExplosion.cs" id="1_twauv"]
 
 [sub_resource type="Curve" id="Curve_w1fs3"]
 _limits = [-50.0, 50.0, 0.0, 1.0]
@@ -12,26 +12,25 @@ curve = SubResource("Curve_w1fs3")
 
 [sub_resource type="Curve" id="Curve_3ry8w"]
 _limits = [0.0, 2.0, 0.0, 1.0]
-_data = [Vector2(0, 0.5), 0.0, 0.0, 0, 0, Vector2(0.8, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0.5), 0.0, -0.5, 0, 0, Vector2(1, 0), -0.5, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_w1fs3"]
 curve = SubResource("Curve_3ry8w")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_cfxyw"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2i8dk"]
 angle_min = -720.0
 angle_max = 720.0
+direction = Vector3(0, 1, 0)
 spread = 180.0
-initial_velocity_min = 4.0
-initial_velocity_max = 6.0
+initial_velocity_min = 6.0
+initial_velocity_max = 10.0
 gravity = Vector3(0, 0, 0)
 radial_accel_curve = SubResource("CurveTexture_xx7rf")
-damping_min = 12.0
-damping_max = 12.0
-scale_min = 0.1
-scale_max = 0.3
+damping_min = 15.0
+damping_max = 15.0
+scale_min = 0.5
 scale_curve = SubResource("CurveTexture_w1fs3")
-turbulence_noise_speed = Vector3(10, 10, 10)
 turbulence_influence_min = 1.0
 turbulence_influence_max = 1.0
 turbulence_initial_displacement_min = 1.49012e-06
@@ -39,22 +38,23 @@ turbulence_initial_displacement_max = 1.49012e-06
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xx7rf"]
 emission_enabled = true
-emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 8.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_bcgx0"]
 material = SubResource("StandardMaterial3D_xx7rf")
 
-[node name="EnemyHit" type="GPUParticles3D"]
-emitting = false
-amount = 10
-lifetime = 0.8
-one_shot = true
+[node name="ObjectiveExplosion" type="GPUParticles3D" node_paths=PackedStringArray("Timer")]
+amount = 30
+lifetime = 1.2
 explosiveness = 1.0
 fixed_fps = 60
-process_material = SubResource("ParticleProcessMaterial_cfxyw")
+process_material = SubResource("ParticleProcessMaterial_2i8dk")
 draw_pass_1 = SubResource("BoxMesh_bcgx0")
-script = ExtResource("1_1vt7k")
+script = ExtResource("1_twauv")
+Timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 one_shot = true
-autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
