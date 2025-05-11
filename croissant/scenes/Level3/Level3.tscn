@@ -8,6 +8,7 @@
 
 [node name="Level3" type="Window"]
 transparent_bg = true
+canvas_item_default_texture_filter = 0
 mode = 4
 size = Vector2i(1920, 1080)
 borderless = true
