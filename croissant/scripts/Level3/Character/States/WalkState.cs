@@ -22,7 +22,7 @@ public partial class WalkState : State
         if (player == null)
             return;
 
-        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_down", "ui_up");
         Vector2 velocity = player.Velocity;
         velocity.X = direction.X * PlayerCharacter.Speed;
         player.Velocity = velocity;
@@ -35,6 +35,11 @@ public partial class WalkState : State
         if (Mathf.Abs(direction.X) <= 0.1f)
         {
             EmitSignal(SignalName.StateTransition, this, "IdleState");
+        }
+        
+        if (!player.IsOnFloor() && player.Velocity.Y > 0)
+        {
+            EmitSignal(SignalName.StateTransition, this, "FallState");
         }
 
 

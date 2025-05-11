@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=12 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
 [ext_resource type="Texture2D" uid="uid://dqfo1oymeb7ha" path="res://assets/sprites/platformer/stickman.png" id="2_7gokg"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://0cahh1ocw2s8" path="res://scripts/Level3/Character/States/WalkState.cs" id="4_j7gwp"]
 [ext_resource type="Script" uid="uid://dv3cf7rfc5x2k" path="res://scripts/Level3/Character/States/IdleState.cs" id="5_46r6c"]
 [ext_resource type="Script" uid="uid://v3uhhhkv0kxc" path="res://scripts/Level3/Character/States/JumpState.cs" id="6_mt1tc"]
+[ext_resource type="Script" uid="uid://cxmpyfdmy0kno" path="res://scripts/Level3/Character/States/WallSlideLeft.cs" id="8_j7gwp"]
+[ext_resource type="Script" uid="uid://deq7vo7fx0nao" path="res://scripts/Level3/Character/States/WallSlideRight.cs" id="9_46r6c"]
+[ext_resource type="Script" uid="uid://c13ef5rxeeh2o" path="res://scripts/Level3/Character/States/FallState.cs" id="9_j7gwp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
 radius = 39.0
@@ -41,6 +44,15 @@ script = ExtResource("5_46r6c")
 
 [node name="JumpState" type="Node" parent="StateMachine"]
 script = ExtResource("6_mt1tc")
+
+[node name="FallState" type="Node" parent="StateMachine"]
+script = ExtResource("9_j7gwp")
+
+[node name="WallSlideLeft" type="Node" parent="StateMachine"]
+script = ExtResource("8_j7gwp")
+
+[node name="WallSlideRight" type="Node" parent="StateMachine"]
+script = ExtResource("9_46r6c")
 
 [node name="Area2D" type="Area2D" parent="."]
 

@@ -22,7 +22,7 @@ public partial class IdleState : State
         if (player == null)
             return;
         
-        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
+        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_down", "ui_up");
 
         if (Mathf.Abs(direction.Y) > 0.1f)
         {
@@ -33,6 +33,34 @@ public partial class IdleState : State
         {
             EmitSignal(SignalName.StateTransition, this, "WalkState");
         }
+
+        if (!player.IsOnFloor() && player.Velocity.Y > 0)
+        {
+            if (player.IsOnWall())
+            {
+                for (int i = 0; i < player.GetSlideCollisionCount(); i++)
+                {
+                    KinematicCollision2D collision = player.GetSlideCollision(i);
+                    Vector2 normal = collision.GetNormal();
+
+                    if (normal.X > 0)
+                    {
+                        EmitSignal(SignalName.StateTransition, this, "WallSlideRight");
+                        return;
+                    }
+                    else if (normal.X < 0)
+                    {
+                        EmitSignal(SignalName.StateTransition, this, "WallSlideLeft");
+                        return;
+                    }
+                }
+            }
+            EmitSignal(SignalName.StateTransition, this, "FallState");
+        }
+
+
+
+        
     }
 
     public override void Exit() { GD.Print("Exit Idle"); }
