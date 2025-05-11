@@ -5,6 +5,16 @@ using System.Collections.Generic;
 public partial class WaveDataLevel2 : WaveData
 {
 
+	public enum WindowType
+	{
+		Laser,
+		Extend,
+		Follow,
+		Spike,
+		Compress,
+		Wave
+	}
+
 	public override void _Ready()
 	{
 		WaveStart = new Func<List<FloatWindow>>[NbOFWaves];
@@ -21,10 +31,49 @@ public partial class WaveDataLevel2 : WaveData
 
 	}
 
+	public void AddWindow(List<FloatWindow> windows, WindowType type, bool random = false)
+	{
+		switch (type)
+		{
+			case WindowType.Laser:
+				LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
+				l.Random = random;
+				windows.Add(l);
+				break;
+			case WindowType.Extend:
+				ExtendWindow e = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
+				e.Random = random;
+				windows.Add(e);
+				break;
+			case WindowType.Follow:
+				FollowWindow f = States.SceneLoader.FollowWindowScene.Instantiate<FollowWindow>();
+				f.Random = random;
+				windows.Add(f);
+				break;
+			case WindowType.Spike:
+				SpikeWindow s = States.SceneLoader.SpikeWindowScene.Instantiate<SpikeWindow>();
+				s.Random = random;
+				windows.Add(s);
+				break;
+			case WindowType.Compress:
+				CompressWindow c = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
+				c.Random = random;
+				windows.Add(c);
+				break;
+			case WindowType.Wave:
+				WaveWindow w = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+				w.Random = random;
+				windows.Add(w);
+				break;
+		}
+	}
+
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 	}
+
+
 
 	public List<FloatWindow> StartWave1()
 	{
@@ -41,9 +90,7 @@ public partial class WaveDataLevel2 : WaveData
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 
-		ExtendWindow E = States.SceneLoader.ExtendWindowScene.Instantiate<ExtendWindow>();
-		E.Random = false;
-		windows.Add(E);
+		AddWindow(windows, WindowType.Laser, false);
 
 		return windows;
 	}
