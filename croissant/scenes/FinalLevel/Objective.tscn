@@ -663,6 +663,8 @@ _data = {
 }
 
 [node name="Objective" type="StaticBody3D" node_paths=PackedStringArray("CollisionShape", "Light", "AnimationPlayer", "PartList", "Center")]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_8j1cb")
 CollisionShape = NodePath("CollisionShape3D")
 Light = NodePath("Obj/OmniLight3D")
@@ -680,6 +682,8 @@ transform = Transform3D(0.707416, 0.000312656, 0.706797, 0.577096, 0.577097, -0.
 
 [node name="Part1" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, 0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C1" type="CollisionShape3D" parent="Obj/Part1"]
@@ -690,6 +694,8 @@ mesh = SubResource("BoxMesh_uivtg")
 
 [node name="Part2" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, 0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C2" type="CollisionShape3D" parent="Obj/Part2"]
@@ -700,6 +706,8 @@ mesh = SubResource("BoxMesh_01r7f")
 
 [node name="Part3" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, 0.3, -0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C3" type="CollisionShape3D" parent="Obj/Part3"]
@@ -710,6 +718,8 @@ mesh = SubResource("BoxMesh_3vqf0")
 
 [node name="Part4" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0.3, -0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C4" type="CollisionShape3D" parent="Obj/Part4"]
@@ -720,6 +730,8 @@ mesh = SubResource("BoxMesh_c4ccl")
 
 [node name="Part5" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, 0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C5" type="CollisionShape3D" parent="Obj/Part5"]
@@ -730,6 +742,8 @@ mesh = SubResource("BoxMesh_oywy0")
 
 [node name="Part6" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.3, 0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C6" type="CollisionShape3D" parent="Obj/Part6"]
@@ -740,6 +754,8 @@ mesh = SubResource("BoxMesh_nnh5h")
 
 [node name="Part7" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3, -0.3, -0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C7" type="CollisionShape3D" parent="Obj/Part7"]
@@ -750,6 +766,8 @@ mesh = SubResource("BoxMesh_r11ul")
 
 [node name="Part8" type="RigidBody3D" parent="Obj"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, -0.3, -0.3)
+collision_layer = 2
+collision_mask = 2
 freeze = true
 
 [node name="C8" type="CollisionShape3D" parent="Obj/Part8"]

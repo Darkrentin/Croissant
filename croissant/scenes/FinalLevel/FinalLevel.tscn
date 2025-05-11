@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://pus1csxsvyfw"]
+[gd_scene load_steps=25 format=3 uid="uid://pus1csxsvyfw"]
 
 [ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="Script" uid="uid://bh33sr5jvo6xt" path="res://scripts/FinalLevel/FinalLevel.cs" id="1_d5vjr"]
@@ -57,6 +57,9 @@ filter_low_hanging_obstacles = true
 filter_ledge_spans = true
 filter_walkable_low_height_spans = true
 filter_baking_aabb = AABB(-50, 0, -50, 100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ml31f"]
+size = Vector3(2, 2, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ml31f"]
 shader = ExtResource("9_cun7r")
@@ -128,7 +131,7 @@ _data = {
 &"Start": SubResource("Animation_56we2")
 }
 
-[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "ShaderViewport", "MeltShader", "Area3D", "GameNode")]
+[node name="FinalLevel" type="Node3D" node_paths=PackedStringArray("maze", "miniMap", "NavigationRegion", "Player3D", "ShaderViewport", "MeltShader", "Area3D", "GameNode", "SafeZone")]
 script = ExtResource("1_d5vjr")
 maze = NodePath("ViewportWithShader/SubViewport/Map/Maze")
 miniMap = NodePath("MiniMap/SubViewport/MiniMap")
@@ -142,6 +145,7 @@ PaletteMain = ExtResource("2_56we2")
 PaletteDeath = ExtResource("4_x2utw")
 Area3D = NodePath("ViewportWithShader/SubViewport/Area3D")
 GameNode = NodePath("ViewportWithShader/SubViewport")
+SafeZone = NodePath("ViewportWithShader/SubViewport/Map/SafeZone")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_56we2")
@@ -167,6 +171,12 @@ transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 1, 0, 1)
 navigation_mesh = SubResource("NavigationMesh_d5vjr")
 
 [node name="Maze" parent="ViewportWithShader/SubViewport/Map" instance=ExtResource("5_56we2")]
+
+[node name="SafeZone" type="StaticBody3D" parent="ViewportWithShader/SubViewport/Map"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ViewportWithShader/SubViewport/Map/SafeZone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
+shape = SubResource("BoxShape3D_ml31f")
 
 [node name="SpecCam" parent="ViewportWithShader/SubViewport" instance=ExtResource("9_1aisa")]
 
@@ -213,6 +223,5 @@ handle_input_locally = false
 render_target_update_mode = 4
 
 [node name="MiniMap" parent="MiniMap/SubViewport" node_paths=PackedStringArray("Maze", "Player") instance=ExtResource("8_ebjtf")]
-visible = false
 Maze = NodePath("../../../ViewportWithShader/SubViewport/Map/Maze")
 Player = NodePath("../../../ViewportWithShader/SubViewport/Player3D")

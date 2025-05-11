@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.IO;
 using Godot;
 
 public partial class Maze : Node3D
@@ -32,6 +33,8 @@ public partial class Maze : Node3D
 
     public List<Node3D> Lamps = new List<Node3D>();
     public List<Enemy3D> Enemies = new List<Enemy3D>();
+    public List<StaticBody3D> Paths = new List<StaticBody3D>();
+    public List<Objective> Objectives = new List<Objective>();
     [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;
 
     public override void _Ready()
@@ -197,6 +200,7 @@ public partial class Maze : Node3D
                     StaticBody3D floor = FloorScene.Instantiate<StaticBody3D>();
                     floor.Position = new Vector3(nx, 0, nz) * WallSize;
                     AddChild(floor);
+                    Paths.Add(floor);
                     MazeTiles[i, j] = floor;
 
                     if ((MazeDist[i, j] % LampSpacing == 0 && Lib.rand.Next(0, 2) == 0) || MazeDist[i, j] == 0)
@@ -212,7 +216,8 @@ public partial class Maze : Node3D
                         objective.Position = new Vector3(nx, 0, nz) * WallSize;
                         ObjectiveCount++;
                         objective.PixelColor = ObjectiveColors[(ObjectiveCount - 1) % ObjectiveColors.Length];
-                        AddChild(objective);
+                        Objectives.Add(objective);
+                        //AddChild(objective);
                     }
                 }
             }

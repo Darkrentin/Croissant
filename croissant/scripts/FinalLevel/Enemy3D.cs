@@ -23,6 +23,7 @@ public partial class Enemy3D : CharacterBody3D
 	private float rotationSpeed = 2.0f;
 	public double MaxAgro = 5f;
 	public bool CanHarmPlayer = true;
+	public Vector3 RandomTargetPosition;
 
 	public double Agro = 0f;
 
@@ -39,6 +40,7 @@ public partial class Enemy3D : CharacterBody3D
 		}
 		AnimationPlayer.AnimationFinished += OnAnimationFinished;
 		navigationAgent3D.DebugEnabled = FinalLevel.Instance.Debug;
+		RandomTargetPosition = GlobalPosition;
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -63,7 +65,18 @@ public partial class Enemy3D : CharacterBody3D
 				rayCast.Visible = true && FinalLevel.Instance.Debug;
 			else
 				rayCast.Visible = false;
-			navigationAgent3D.TargetPosition = GlobalPosition;
+			//navigationAgent3D.TargetPosition = GlobalPosition;
+
+			if(GlobalPosition.DistanceTo(RandomTargetPosition)<0.5f)
+			{
+				int RandomPathIndex = Lib.rand.Next(0,FinalLevel.Instance.maze.Paths.Count);
+				RandomTargetPosition = FinalLevel.Instance.maze.Paths[RandomPathIndex].GlobalPosition + new Vector3(1,0,1);
+				Lib.Print("Random Target Position: " + RandomTargetPosition);
+			}
+
+			navigationAgent3D.TargetPosition = RandomTargetPosition;
+
+
 		}
 
 		//navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;// ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);

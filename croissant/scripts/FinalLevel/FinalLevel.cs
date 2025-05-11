@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 public partial class FinalLevel : Node3D
 {
@@ -17,6 +18,7 @@ public partial class FinalLevel : Node3D
 	[Export] public CompressedTexture2D PaletteDeath;
 	[Export] public Area3D Area3D;
 	[Export] public SubViewport GameNode;
+	[Export] public StaticBody3D SafeZone;
 	public Node3D BossLevel;
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
@@ -28,6 +30,14 @@ public partial class FinalLevel : Node3D
 		maze.CreateMaze();
 		//NavigationRegion.NavigationMesh = new NavigationMesh();
 		NavigationRegion.BakeNavigationMesh();
+
+		foreach(Objective objective in maze.Objectives)
+		{
+			maze.AddChild(objective);
+		}
+
+		SafeZone.GetParent().RemoveChild(SafeZone);
+		SafeZone.QueueFree();
 		miniMap.DrawMaze();
 		SpawnEnemy();
 		Area3D.BodyEntered += EndReach;
