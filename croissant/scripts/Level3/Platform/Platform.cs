@@ -33,7 +33,7 @@ public partial class Platform : CharacterBody2D
         // Then initialize the window if it exists
         if (window != null && IsInstanceValid(window))
         {
-            window.Visible = true;
+            //window.Visible = true;
             window.Size = (Vector2I)shape.Size;
             window.Position = (Vector2I)GlobalPosition;
         }
@@ -46,6 +46,7 @@ public partial class Platform : CharacterBody2D
         }
 
         currentAppliedSpeeds = BaseSpeeds;
+        window.Title = "Platform";
     }
 
     public override void _PhysicsProcess(double delta)
@@ -118,6 +119,8 @@ public partial class Platform : CharacterBody2D
 
     public void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
+        if(!window.Visible)
+            return;
         if (!IsInstanceValid(window) || window == null)
         {
             if (level3 != null)

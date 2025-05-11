@@ -4,6 +4,7 @@ using System;
 public partial class Level3 : FloatWindow
 {
     [Export] public PackedScene[] level3Scenes;
+    public Node[] Level3Nodes;
     public int sceneid = 0;
     public static Level3 Instance;
     public Node actualScene;
@@ -14,6 +15,11 @@ public partial class Level3 : FloatWindow
         GrabFocus();
         Instance = this;
         actualScene = level3Scenes[sceneid].Instantiate<Node>();
+        Level3Nodes = new Node[level3Scenes.Length];
+        for (int i = 0; i < level3Scenes.Length; i++)
+        {
+            Level3Nodes[i] = null;
+        }
         AddChild(actualScene);
     }
 

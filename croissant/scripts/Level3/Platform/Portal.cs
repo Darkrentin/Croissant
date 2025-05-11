@@ -29,7 +29,15 @@ public partial class Portal : Area2D
 
 	private void OnLevelComplete()
 	{
-		var nextScene = Level3.Instance.level3Scenes[Level3.Instance.sceneid].Instantiate<Node>();
+		Node nextScene = null;
+		if(Level3.Instance.Level3Nodes[NextSceneId] != null)
+		{
+			nextScene = Level3.Instance.Level3Nodes[NextSceneId];
+		}
+		else
+		{
+			nextScene = Level3.Instance.level3Scenes[Level3.Instance.sceneid].Instantiate<Node>();
+		}
 		CallDeferred(nameof(CompleteLevel), nextScene);
 	}
 
@@ -43,7 +51,7 @@ public partial class Portal : Area2D
 	{
 		if (Level3.Instance.actualScene != null)
 		{
-			Level3.Instance.actualScene.QueueFree();
+			Level3.Instance.RemoveChild(Level3.Instance.actualScene);
 		}
 		Level3.Instance.AddChild(nextScene);
 		Level3.Instance.actualScene = nextScene;

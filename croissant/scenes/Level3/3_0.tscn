@@ -90,6 +90,7 @@ scale = Vector2(1.5, 1.5)
 position = Vector2(1529, 731)
 
 [node name="TextureRect" parent="KillingPlatform/Window" index="0"]
+anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 
