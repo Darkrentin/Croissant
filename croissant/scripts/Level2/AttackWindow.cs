@@ -3,7 +3,7 @@ using Godot;
 public partial class AttackWindow : FloatWindow
 {
     [Export] private PackedScene ExportVisualCollisionScene { get => VisualCollisionScene; set => VisualCollisionScene = value; }
-    [Export] public bool Random = false;
+    [Export] public bool RandomPosition = false;
     [Export] public bool Disable = false;
     private Phase _phase = Phase.Move;
     protected Level2 Parent;
@@ -19,7 +19,7 @@ public partial class AttackWindow : FloatWindow
     {
         get
         {
-            if (Random)
+            if (RandomPosition)
                 return new Vector2I(Lib.rand.Next(0, GameManager.ScreenSize.X - Size.X), Lib.rand.Next(0, GameManager.ScreenSize.Y - Size.Y));
             else
                 return Level2.CursorWindow.Position + Level2.CursorWindow.Size / 2;

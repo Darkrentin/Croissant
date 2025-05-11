@@ -7,7 +7,6 @@ public partial class ExtendWindow : AttackWindow
 
 	public override void _Ready()
 	{
-
 		base._Ready();
 		VisualCollision.Color = Colors.Red;
 	}
@@ -22,7 +21,29 @@ public partial class ExtendWindow : AttackWindow
 		const float MoveTime = 0.5f;
 		const float MarginTime = 0.1f;
 		Vector2I margin = Level2.CursorWindow.Size / 2;
-		TargetPosition = new Vector2I(Lib.rand.Next(CursorPosition.X - margin.X, CursorPosition.X + margin.X), Lib.rand.Next(CursorPosition.Y - margin.Y, CursorPosition.Y + margin.Y)) - Level2.CursorWindow.Size / 2;
+
+		int effectiveMarginX = Mathf.Abs(margin.X);
+		int effectiveMarginY = Mathf.Abs(margin.Y);
+
+		int randomPosX;
+		int minX = CursorPosition.X - effectiveMarginX;
+		int maxX = CursorPosition.X + effectiveMarginX;
+
+		if (minX >= maxX)
+			randomPosX = minX;
+		else
+			randomPosX = Lib.rand.Next(minX, maxX);
+
+		int randomPosY;
+		int minY = CursorPosition.Y - effectiveMarginY;
+		int maxY = CursorPosition.Y + effectiveMarginY;
+
+		if (minY >= maxY)
+			randomPosY = minY;
+		else
+			randomPosY = Lib.rand.Next(minY, maxY);
+
+		TargetPosition = new Vector2I(randomPosX, randomPosY) - Level2.CursorWindow.Size / 2;
 		windowPosition = TargetPosition;
 		windowSize = Size;
 		StartTransition(TargetPosition, MoveTime - MarginTime);
@@ -36,8 +57,8 @@ public partial class ExtendWindow : AttackWindow
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5);
 
-		TargetSize = new Vector2I(Size.X,Size.X) + new Vector2I(Lib.GetScreenSize(0.2f, 0.2f).X,Lib.GetScreenSize(0.2f, 0.2f).X);
-		TargetSize-= TitleBarSize;
+		TargetSize = new Vector2I(Size.X, Size.X) + new Vector2I(Lib.GetScreenSize(0.2f, 0.2f).X, Lib.GetScreenSize(0.2f, 0.2f).X);
+		TargetSize -= TitleBarSize;
 		//Vector2I targetPosition = Position + (Size / 2) - (TargetSize / 2);
 		ShowVisualCollision(TargetSize, StartResize(TargetSize, -1f), ShakeTime);
 		IsResizing = false;
@@ -51,7 +72,7 @@ public partial class ExtendWindow : AttackWindow
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 		StartResize(TargetSize, ResizeTime, KeepCenter: true);
-		
+
 
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();

@@ -40,11 +40,11 @@ public partial class Wave : Node
 				WaveManager.SpawnNode.AddChild(window);
 			}
 		}
+		else
+			Level2.AddWave();
 
 		if (duration > 0)
-		{
 			WaveTimer.Start();
-		}
 	}
 
 	public void StartNextWave()
@@ -66,12 +66,8 @@ public partial class Wave : Node
 	{
 		NbOfEnemies--;
 		if (NbOfEnemies <= 0 && !WaitWave)
-		{
 			StartNextWave();
-		}
 		else
-		{
 			GD.Print("Enemies left: " + NbOfEnemies);
-		}
 	}
 }

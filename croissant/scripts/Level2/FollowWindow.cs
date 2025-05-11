@@ -8,7 +8,7 @@ public partial class FollowWindow : AttackWindow
 	public override void _Ready()
 	{
 		base._Ready();
-		Lives = 15;
+		Lives = 10;
 		VisualCollision.Color = Colors.Green;
 	}
 
@@ -36,7 +36,7 @@ public partial class FollowWindow : AttackWindow
 
 	public override void Prevent()
 	{
-		const float ShakeTime = 0.5f;
+		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5); //FIND WHY THE WINDOWS DISEAPPEAR WHEN I DON'T USE THE SHAKE !
 
 		TargetPosition = CursorPosition - Level2.CursorWindow.Size / 2;

@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dy032f0nfm2vk"]
+[gd_scene load_steps=21 format=3 uid="uid://dy032f0nfm2vk"]
 
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
+[ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/platformer/player/Player Idle 48x48.png" id="3_58gsr"]
 
 [sub_resource type="Animation" id="Animation_8cb3g"]
 resource_name = "Idle"
@@ -25,9 +26,92 @@ states/Idle/node = SubResource("AnimationNodeAnimation_8cb3g")
 states/Idle/position = Vector2(538, 100)
 transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_4ql8l"), "Idle", "End", SubResource("AnimationNodeStateMachineTransition_58gsr")]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_4jimj"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xau07"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e0dbo"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7nx6g"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(144, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kfd1f"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(192, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b02x2"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(240, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u7gj"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(288, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3bd0"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(336, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_op81s"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(384, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqk5q"]
+atlas = ExtResource("3_58gsr")
+region = Rect2(432, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jthw1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4jimj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xau07")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e0dbo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7nx6g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kfd1f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b02x2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1u7gj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b3bd0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_op81s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tqk5q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 15.0
+}]
+
 [node name="Helper" type="Window" node_paths=PackedStringArray("AnimationTree", "Dialogue")]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+position = Vector2i(0, 36)
 size = Vector2i(300, 300)
+unresizable = true
 borderless = true
+transparent = true
 script = ExtResource("1_8cb3g")
 NpcName = "Helper"
 AnimationTree = NodePath("AnimationTree")
@@ -36,6 +120,7 @@ Draggable = false
 Minimizable = false
 
 [node name="ColorRect" type="ColorRect" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -43,20 +128,11 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
-[node name="Label" type="Label" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "Helper.tscn
-Npc
-\\\\"
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_4ql8l")
 }
+autoplay = "Idle"
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_4jimj")
@@ -66,3 +142,10 @@ anim_player = NodePath("../AnimationPlayer")
 ParentWindow = NodePath("..")
 Margin = Vector2i(30, -50)
 LeftSide = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(160, 140)
+scale = Vector2(10, 10)
+sprite_frames = SubResource("SpriteFrames_jthw1")
+autoplay = "default"
+frame_progress = 0.0112304

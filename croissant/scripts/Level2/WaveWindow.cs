@@ -124,15 +124,11 @@ public partial class WaveWindow : AttackWindow
 		if (ConnectedWindow.Position.X - Level2.CursorWindow.Position.X < 0)
 			ConnectedWindowTargetX = GameManager.ScreenSize.X - ConnectedWindow.Size.X;
 		if (Visible)
-		{
 			StartLinearTransition(new Vector2I(TargetX, 0), MoveTime);
-
-		}
 
 		if (ConnectedWindow.Visible)
 		{
 			ConnectedWindow.StartLinearTransition(new Vector2I(ConnectedWindowTargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
-
 		}
 
 		Timer.WaitTime = MoveTime + AttackDuration;

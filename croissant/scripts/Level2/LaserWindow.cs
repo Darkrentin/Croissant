@@ -22,8 +22,8 @@ public partial class LaserWindow : AttackWindow
 	private Vector2I GetTargetPosition(int side)
 	{
 		int margin = Math.Max(Size.X, Size.Y);
-		if (!Random)
-			margin =(int)(Math.Max(Level2.CursorWindow.Size.X, Level2.CursorWindow.Size.Y) * 1.5f);
+		if (!RandomPosition)
+			margin = (int)(Math.Max(Level2.CursorWindow.Size.X, Level2.CursorWindow.Size.Y) * 1.5f);
 
 		////Lib.Print($"Side: {side}");
 		switch (side)
@@ -101,7 +101,7 @@ public partial class LaserWindow : AttackWindow
 	{
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5); //FIND WHY THE WINDOWS DISEAPPEAR WHEN I DON'T USE THE SHAKE !
-		if (!Random)
+		if (!RandomPosition)
 			nsize = (int)(GetDistance() * 1.2f); // distance to the cursor window
 		else
 			nsize = Math.Min(GameManager.ScreenSize.X, GameManager.ScreenSize.Y);
@@ -118,7 +118,7 @@ public partial class LaserWindow : AttackWindow
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 		CallResize(nsize, ResizeTime);
-		
+
 
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();

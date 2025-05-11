@@ -4,9 +4,9 @@ using Godot;
 public partial class WaveManager : Node
 {
 	[Export] public Node SpawnNode;
-	public int CurrentWave = 1;
 	[Export] public Wave FirstWave;
 	[Export] public WaveData WaveData;
+	public int CurrentWave = 1;
 	public Timer WaveStartTimer;
 	public Action EndWave;
 
@@ -20,15 +20,8 @@ public partial class WaveManager : Node
 		WaveStartTimer.Start();
 	}
 
-	public override void _Process(double delta)
-	{
-
-	}
-
 	public void StartWave()
 	{
 		FirstWave.StartWave();
 	}
-
-
 }
