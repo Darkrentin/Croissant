@@ -1,14 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://qkuoa8g4g2cl"]
+[gd_scene load_steps=12 format=3 uid="uid://qkuoa8g4g2cl"]
 
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="2_gijp6"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="3_5q6or"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="4_8j6u2"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_vwnnv"]
+[ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="6_gijp6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
 resource_local_to_scene = true
-size = Vector2(120, 384)
+size = Vector2(120, 400)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k31tl"]
 resource_local_to_scene = true
@@ -22,6 +23,10 @@ size = Vector2(184, 120)
 resource_local_to_scene = true
 size = Vector2(2104, 120)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gijp6"]
+resource_local_to_scene = true
+size = Vector2(120, 448)
+
 [node name="3_0" type="Node"]
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
@@ -31,7 +36,7 @@ position = Vector2(456, 448)
 auto_translate_mode = 1
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
-position = Vector2(60, 192)
+position = Vector2(60, 200)
 shape = SubResource("RectangleShape2D_pl275")
 
 [node name="StaticPlateform2" parent="." instance=ExtResource("1_yrjvf")]
@@ -45,7 +50,13 @@ position = Vector2(384, 60)
 shape = SubResource("RectangleShape2D_k31tl")
 
 [node name="MovePlatform" parent="." instance=ExtResource("2_gijp6")]
-position = Vector2(128, 704)
+position = Vector2(131, 675)
+
+[node name="TextureRect" parent="MovePlatform/Window" index="0"]
+offset_left = -1.0
+offset_top = 1.0
+offset_right = -1.0
+offset_bottom = 1.0
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(92, 60)
@@ -54,14 +65,8 @@ shape = SubResource("RectangleShape2D_k0j7d")
 [node name="StaticPlateform3" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(-68, 877)
 
-[node name="TextureRect" parent="StaticPlateform3/Window" index="0"]
-offset_left = -66.0
-offset_top = 842.0
-offset_right = -66.0
-offset_bottom = 842.0
-
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
-position = Vector2(1052, 60)
+position = Vector2(1049, 31)
 shape = SubResource("RectangleShape2D_irsaa")
 
 [node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("3_5q6or")]
@@ -87,14 +92,23 @@ metadata/_edit_use_anchors_ = true
 scale = Vector2(1.5, 1.5)
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_vwnnv")]
-position = Vector2(1529, 731)
+position = Vector2(1530, 708)
 
 [node name="Window" parent="KillingPlatform" index="0"]
 visible = true
 
 [node name="TextureRect" parent="KillingPlatform/Window" index="0"]
+offset_top = 1.0
+offset_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="PlayerOnly" parent="." instance=ExtResource("6_gijp6")]
+position = Vector2(922, 0)
+
+[node name="CollisionShape2D" parent="PlayerOnly" index="1"]
+position = Vector2(60, 224)
+shape = SubResource("RectangleShape2D_gijp6")
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
@@ -102,3 +116,4 @@ grow_vertical = 2
 [editable path="StaticPlateform3"]
 [editable path="ConfigFile"]
 [editable path="KillingPlatform"]
+[editable path="PlayerOnly"]

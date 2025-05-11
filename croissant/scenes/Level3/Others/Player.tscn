@@ -16,6 +16,7 @@ size = Vector2(48.875, 8.25)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("area2D")]
 collision_layer = 2
+collision_mask = 9
 script = ExtResource("1_45nm6")
 area2D = NodePath("Area2D")
 
