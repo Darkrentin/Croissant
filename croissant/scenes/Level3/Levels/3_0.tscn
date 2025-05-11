@@ -89,8 +89,10 @@ scale = Vector2(1.5, 1.5)
 [node name="KillingPlatform" parent="." instance=ExtResource("5_vwnnv")]
 position = Vector2(1529, 731)
 
+[node name="Window" parent="KillingPlatform" index="0"]
+visible = true
+
 [node name="TextureRect" parent="KillingPlatform/Window" index="0"]
-anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 

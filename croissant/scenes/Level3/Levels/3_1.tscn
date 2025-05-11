@@ -37,9 +37,6 @@ position = Vector2(223, 49)
 [node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(2, 577)
 
-[node name="Window" parent="StaticPlateform" index="0"]
-visible = false
-
 [node name="TextureRect" parent="StaticPlateform/Window" index="0"]
 anchors_preset = -1
 anchor_top = 0.008
@@ -101,8 +98,10 @@ shape = SubResource("RectangleShape2D_olxyy")
 [node name="KillingPlatform" parent="." instance=ExtResource("5_uybjc")]
 position = Vector2(1395, 428)
 
+[node name="Window" parent="KillingPlatform" index="0"]
+visible = true
+
 [node name="TextureRect" parent="KillingPlatform/Window" index="0"]
-anchors_preset = 15
 offset_top = -1.0
 offset_right = 1.0
 offset_bottom = 1.0
@@ -112,8 +111,10 @@ grow_vertical = 2
 [node name="KillingPlatform2" parent="." instance=ExtResource("5_uybjc")]
 position = Vector2(82, 1167)
 
+[node name="Window" parent="KillingPlatform2" index="0"]
+visible = true
+
 [node name="TextureRect" parent="KillingPlatform2/Window" index="0"]
-anchors_preset = 15
 grow_horizontal = 2
 grow_vertical = 2
 
