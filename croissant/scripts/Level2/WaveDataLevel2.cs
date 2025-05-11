@@ -68,21 +68,13 @@ public partial class WaveDataLevel2 : WaveData
 		}
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
-
-
 
 	public List<FloatWindow> StartWave1()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 
-		LaserWindow l = States.SceneLoader.LaserWindowScene.Instantiate<LaserWindow>();
-		l.Random = false;
-		windows.Add(l);
-
+		AddWindow(windows, WindowType.Follow, false);
+		AddWindow(windows, WindowType.Spike, true);
 		return windows;
 	}
 

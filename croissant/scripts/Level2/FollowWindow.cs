@@ -7,8 +7,8 @@ public partial class FollowWindow : AttackWindow
 
 	public override void _Ready()
 	{
-
 		base._Ready();
+		Lives = 15;
 		VisualCollision.Color = Colors.Green;
 	}
 
@@ -24,9 +24,10 @@ public partial class FollowWindow : AttackWindow
 
 	public override void Move()
 	{
+		HideVisualCollision();
 		const float MoveTime = 0.1f;
 		//const float margin = 0.1f;
-		
+
 		//windowPosition = TargetPosition;
 
 		Timer.WaitTime = MoveTime;
@@ -35,10 +36,10 @@ public partial class FollowWindow : AttackWindow
 
 	public override void Prevent()
 	{
-		const float ShakeTime = 1f;
+		const float ShakeTime = 0.5f;
 		StartShake(ShakeTime, 5); //FIND WHY THE WINDOWS DISEAPPEAR WHEN I DON'T USE THE SHAKE !
-		
-        TargetPosition = CursorPosition - Level2.CursorWindow.Size / 2;
+
+		TargetPosition = CursorPosition - Level2.CursorWindow.Size / 2;
 		ShowVisualCollision(Size, TargetPosition, ShakeTime);
 
 		Timer.WaitTime = ShakeTime;
@@ -47,19 +48,19 @@ public partial class FollowWindow : AttackWindow
 
 	public override void Attack()
 	{
-		const float ResizeTime = 0.2f;
+		const float ResizeTime = 0.1f;
 		const float AttackDuration = 0.1f;
-		
-        StartExponentialTransition(TargetPosition, ResizeTime, reset: true);
+
+		StartExponentialTransition(TargetPosition, ResizeTime, reset: true);
 
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();
+		CurrentPhase = Phase.Reload;
 	}
 
 	public override void Reload()
 	{
-		HideVisualCollision();
-		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();
+		CurrentPhase = Phase.Attack;
 	}
 }

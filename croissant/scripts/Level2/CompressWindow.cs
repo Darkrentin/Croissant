@@ -9,7 +9,7 @@ public partial class CompressWindow : AttackWindow
 
 	public override void _Ready()
 	{
-		
+
 		base._Ready();
 		VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.VisualCollision.Color = Colors.Yellow;
@@ -52,7 +52,7 @@ public partial class CompressWindow : AttackWindow
 
 		Timer.WaitTime = MoveTime;
 		base.Move();
-
+		ConnectedWindow.CurrentPhase = Phase.Move;
 	}
 
 	public override void Prevent()
@@ -92,6 +92,7 @@ public partial class CompressWindow : AttackWindow
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
+		ConnectedWindow.CurrentPhase = Phase.Prevent;
 	}
 
 	public override void Attack()
@@ -110,9 +111,10 @@ public partial class CompressWindow : AttackWindow
 			ConnectedWindow.StartResizeLeft(nsize, ResizeTime);
 		}
 
-		
+
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();
+		ConnectedWindow.CurrentPhase = Phase.Attack;
 	}
 
 	public override void Reload()
@@ -132,5 +134,6 @@ public partial class CompressWindow : AttackWindow
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();
+		ConnectedWindow.CurrentPhase = Phase.Reload;
 	}
 }

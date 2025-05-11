@@ -32,7 +32,7 @@ public partial class WaveWindow : AttackWindow
 		}
 		RemoveChild(ConnectedWindow);
 		GetParent().AddChild(ConnectedWindow);
-		ConnectedWindow.Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X*2);
+		ConnectedWindow.Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X * 2);
 		ConnectedWindow.Lives = Lives;
 	}
 
@@ -67,11 +67,12 @@ public partial class WaveWindow : AttackWindow
 
 		Timer.WaitTime = MoveTime;
 		base.Move();
+		ConnectedWindow.CurrentPhase = Phase.Move;
 	}
 
 	public override void Prevent()
 	{
-		
+
 		const int Margin = 150;
 		const float SizeMargin = 1.5f;
 
@@ -109,6 +110,7 @@ public partial class WaveWindow : AttackWindow
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
+		ConnectedWindow.CurrentPhase = Phase.Prevent;
 	}
 
 	public override void Attack()
@@ -124,17 +126,18 @@ public partial class WaveWindow : AttackWindow
 		if (Visible)
 		{
 			StartLinearTransition(new Vector2I(TargetX, 0), MoveTime);
-			
+
 		}
 
 		if (ConnectedWindow.Visible)
 		{
 			ConnectedWindow.StartLinearTransition(new Vector2I(ConnectedWindowTargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
-			
+
 		}
 
 		Timer.WaitTime = MoveTime + AttackDuration;
 		base.Attack();
+		ConnectedWindow.CurrentPhase = Phase.Attack;
 	}
 
 	public override void Reload()
@@ -160,5 +163,6 @@ public partial class WaveWindow : AttackWindow
 		if (Lives <= 0)
 			ConnectedWindow.Delete();
 		base.Reload();
+		ConnectedWindow.CurrentPhase = Phase.Reload;
 	}
 }
