@@ -6,6 +6,8 @@ public partial class Virus : Npc
 	[Export] Node3D Computer;
 	[Export] Node2D Eye;
 	[Export] Node2D EyeBrow;
+	[Export] Node2D black1;
+	[Export] Node2D black2;
 	[Export] Vector2 MaxRotation = new Vector2(0.2f, 0.2f);
 	[Export] Vector2 MaxEyeDistance = new Vector2(0.1f, 0.1f);
 	[Export] float RotationSmoothing = 5;
@@ -102,6 +104,9 @@ public partial class Virus : Npc
 		targetRotation = new Vector3(rotationX, rotationY, Computer.Rotation.Z);
 
 		Computer.Rotation = Computer.Rotation.Lerp(targetRotation, (float)delta * RotationSmoothing);
+		const float PosMultiplier = 4f;
+		black1.Position = new Vector2(positionX, positionY)*PosMultiplier;
+		black2.Position = new Vector2(positionX, positionY)*PosMultiplier;
 	}
 
 	public static void SetPause(bool Visible)

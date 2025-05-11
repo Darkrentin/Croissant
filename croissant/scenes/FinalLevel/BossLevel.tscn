@@ -1,12 +1,25 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsvg7n4ll3xg7"]
+[gd_scene load_steps=6 format=3 uid="uid://bsvg7n4ll3xg7"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_7weta"]
-size = Vector3(100, 1, 100)
+[ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_ynqx5"]
+[ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/shaders/dependencies/WallNoise.tres" id="2_n6tki"]
+[ext_resource type="PackedScene" uid="uid://btjmeghne5sev" path="res://scenes/Npc/Virus/Virus3D.tscn" id="3_n6tki"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_chkxq"]
+render_priority = 0
+shader = ExtResource("1_ynqx5")
+shader_parameter/world_noise_normal_texture = ExtResource("2_n6tki")
+shader_parameter/noise_scale = 0.134
+shader_parameter/normal_strength = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_7weta"]
+material = SubResource("ShaderMaterial_chkxq")
+size = Vector3(20, 1, 20)
 
 [node name="BossLevel" type="Node3D"]
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+mesh = SubResource("BoxMesh_7weta")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-shape = SubResource("BoxShape3D_7weta")
+[node name="Virus" parent="." instance=ExtResource("3_n6tki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15.1171)

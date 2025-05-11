@@ -1,6 +1,11 @@
-[gd_scene load_steps=9 format=3 uid="uid://y8t7ulakyqcn"]
+[gd_scene load_steps=10 format=3 uid="uid://y8t7ulakyqcn"]
 
 [ext_resource type="Script" uid="uid://4w6mnmkxo0v7" path="res://scripts/FinalLevel/Particles/EnemyHit.cs" id="1_1vt7k"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1vt7k"]
+albedo_color = Color(1, 0, 1, 1)
+emission_enabled = true
+emission = Color(0, 1, 0, 1)
 
 [sub_resource type="Curve" id="Curve_w1fs3"]
 _limits = [-50.0, 50.0, 0.0, 1.0]
@@ -45,6 +50,7 @@ emission = Color(1, 1, 1, 1)
 material = SubResource("StandardMaterial3D_xx7rf")
 
 [node name="EnemyHit" type="GPUParticles3D"]
+material_override = SubResource("StandardMaterial3D_1vt7k")
 emitting = false
 amount = 15
 lifetime = 0.8
