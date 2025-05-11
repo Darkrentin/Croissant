@@ -51,7 +51,7 @@ public partial class ExtendWindow : AttackWindow
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 		StartResize(TargetSize, ResizeTime, KeepCenter: true);
-		HideVisualCollision();
+		
 
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();
@@ -63,6 +63,7 @@ public partial class ExtendWindow : AttackWindow
 		resizeMode = TransitionMode.Exponential;
 		StartResize(windowSize, ResetTime);
 		StartTransition(windowPosition, ResetTime, reset: true);
+		HideVisualCollision();
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();

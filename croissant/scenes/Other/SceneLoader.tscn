@@ -1,10 +1,11 @@
-[gd_scene load_steps=24 format=3 uid="uid://ckx6m1bn0k11e"]
+[gd_scene load_steps=25 format=3 uid="uid://ckx6m1bn0k11e"]
 
 [ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
 [ext_resource type="PackedScene" uid="uid://dk1l5cx57mxbv" path="res://scenes/Windows/DifficultyMenu.tscn" id="2_yx4fs"]
 [ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="3_rvotm"]
 [ext_resource type="PackedScene" uid="uid://cppwo1k4kuwg2" path="res://scenes/Level1/Level1.tscn" id="4_inof8"]
 [ext_resource type="PackedScene" uid="uid://d13xxxigq3m7y" path="res://scenes/Level2/Level2.tscn" id="5_uq2bd"]
+[ext_resource type="PackedScene" uid="uid://hca4ftw22ecd" path="res://scenes/Level3/Level3.tscn" id="6_1v343"]
 [ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Npc/Virus/Virus.tscn" id="6_rop1k"]
 [ext_resource type="PackedScene" uid="uid://dy032f0nfm2vk" path="res://scenes/Npc/Helper/Helper.tscn" id="7_dafyj"]
 [ext_resource type="PackedScene" uid="uid://dojmcfkfdnwsu" path="res://scenes/Level1/StaticWindow.tscn" id="8_djw06"]
@@ -30,6 +31,7 @@ DifficultyScene = ExtResource("2_yx4fs")
 IntroGameScene = ExtResource("3_rvotm")
 Level1Scene = ExtResource("4_inof8")
 Level2Scene = ExtResource("5_uq2bd")
+Level3Scene = ExtResource("6_1v343")
 VirusScene = ExtResource("6_rop1k")
 HelperScene = ExtResource("7_dafyj")
 StaticWindowScene = ExtResource("8_djw06")

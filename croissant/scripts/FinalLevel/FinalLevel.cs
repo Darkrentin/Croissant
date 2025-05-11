@@ -113,4 +113,12 @@ public partial class FinalLevel : Node3D
 		BossLevel = BossLevelScene.Instantiate<Node3D>();
 		GameNode.AddChild(BossLevel);
 	}
+
+    public override void _Process(double delta)
+    {
+        if(Input.MouseMode == Input.MouseModeEnum.Visible)
+		{
+			Input.MouseMode = Input.MouseModeEnum.Captured;
+		}
+    }
 }

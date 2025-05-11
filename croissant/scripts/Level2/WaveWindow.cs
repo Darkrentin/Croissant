@@ -6,6 +6,9 @@ public partial class WaveWindow : AttackWindow
 	public Vector2I ConnectedWindowPosition;
 	public int nsizeA = 0;
 	public int nsizeB = 0;
+	[Export] public int _Mode = 0;
+
+	const float ShakeTime = 1f;
 
 	public override void _Ready()
 	{
@@ -14,8 +17,9 @@ public partial class WaveWindow : AttackWindow
 		VisualCollision.Color = Colors.Cyan;
 		ConnectedWindow.VisualCollision.Color = Colors.Cyan;
 		ConnectedWindow.Timer.Stop();
-		int r = Lib.rand.Next(0, 3);
-		switch (r)
+		if (_Mode == -1)
+			_Mode = Lib.rand.Next(0, 3);
+		switch (_Mode)
 		{
 			case 0:
 				ConnectedWindow.Visible = false;
@@ -67,7 +71,7 @@ public partial class WaveWindow : AttackWindow
 
 	public override void Prevent()
 	{
-		const float ShakeTime = 1f;
+		
 		const int Margin = 150;
 		const float SizeMargin = 1.5f;
 
@@ -120,13 +124,13 @@ public partial class WaveWindow : AttackWindow
 		if (Visible)
 		{
 			StartLinearTransition(new Vector2I(TargetX, 0), MoveTime);
-			HideVisualCollision();
+			
 		}
 
 		if (ConnectedWindow.Visible)
 		{
 			ConnectedWindow.StartLinearTransition(new Vector2I(ConnectedWindowTargetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), MoveTime);
-			ConnectedWindow.HideVisualCollision();
+			
 		}
 
 		Timer.WaitTime = MoveTime + AttackDuration;
@@ -141,6 +145,7 @@ public partial class WaveWindow : AttackWindow
 			resizeMode = TransitionMode.Exponential;
 			StartResize(windowSize, ResetTime);
 			StartTransition(new Vector2I(Position.X, 0), ResetTime, reset: true);
+			HideVisualCollision();
 		}
 
 		if (ConnectedWindow.Visible)
@@ -148,6 +153,7 @@ public partial class WaveWindow : AttackWindow
 			ConnectedWindow.resizeMode = TransitionMode.Exponential;
 			ConnectedWindow.StartResize(ConnectedWindow.windowSize, ResetTime);
 			ConnectedWindow.StartTransition(new Vector2I(ConnectedWindow.Position.X, GameManager.ScreenSize.Y - ConnectedWindow.windowSize.Y), ResetTime, reset: true);
+			ConnectedWindow.HideVisualCollision();
 		}
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting

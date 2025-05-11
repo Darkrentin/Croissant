@@ -110,14 +110,17 @@ public partial class CompressWindow : AttackWindow
 			ConnectedWindow.StartResizeLeft(nsize, ResizeTime);
 		}
 
-		HideVisualCollision();
-		ConnectedWindow.HideVisualCollision();
+		
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();
 	}
 
 	public override void Reload()
 	{
+
+		HideVisualCollision();
+		ConnectedWindow.HideVisualCollision();
+
 		const float ResetTime = 1f;
 		resizeMode = TransitionMode.Exponential;
 		StartResize(windowSize, ResetTime);

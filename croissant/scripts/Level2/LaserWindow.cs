@@ -23,7 +23,7 @@ public partial class LaserWindow : AttackWindow
 	{
 		int margin = Math.Max(Size.X, Size.Y);
 		if (!Random)
-			margin = Math.Max(Level2.CursorWindow.Size.X, Level2.CursorWindow.Size.Y);
+			margin =(int)(Math.Max(Level2.CursorWindow.Size.X, Level2.CursorWindow.Size.Y) * 1.5f);
 
 		////Lib.Print($"Side: {side}");
 		switch (side)
@@ -118,7 +118,7 @@ public partial class LaserWindow : AttackWindow
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 		CallResize(nsize, ResizeTime);
-		HideVisualCollision();
+		
 
 		Timer.WaitTime = ResizeTime + AttackDuration;
 		base.Attack();
@@ -130,6 +130,7 @@ public partial class LaserWindow : AttackWindow
 		resizeMode = TransitionMode.Exponential;
 		StartResize(windowSize, ResetTime);
 		StartTransition(windowPosition, ResetTime, reset: true);
+		HideVisualCollision();
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();

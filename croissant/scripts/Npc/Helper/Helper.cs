@@ -32,8 +32,8 @@ public partial class Helper : Npc
 				HideNpc(3);
 				GameManager.virus.Dialogue.StartDialogue("Virus", "Virus/Helper Dialogue 3");
 				break;
-			case "EndLevel2":
-				GetTree().Quit();
+			case "EndLvl2":
+				GameManager.State = GameManager.GameState.Level3;
 				break;
 		}
 	}

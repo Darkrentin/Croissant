@@ -176,14 +176,26 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
+    public static void Level3()
+    {
+        GameManager.helper.HideNpc(3);
+        Node2D Level3 = SceneLoader.Level3Scene.Instantiate<Node2D>();
+        GameManager.GameRoot.AddChild(Level3);
+
+        //Change State condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+
     public static void FinalLevel()
     {
+        /*
         GameManager.GameRoot.RemoveChild(GameManager.helper);
         GameManager.helper.QueueFree();
         GameManager.GameRoot.RemoveChild(GameManager.virus);
         GameManager.virus.QueueFree();
         GameManager.helper = null;
         GameManager.virus = null;
+        */
         
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
         GameManager.GameRoot.AddChild(FinalLevel);

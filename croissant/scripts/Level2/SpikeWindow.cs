@@ -49,8 +49,6 @@ public partial class SpikeWindow : AttackWindow
 	{
 		const float ResizeTime = 0.1f;
 		const float AttackDuration = 5f;
-		HideVisualCollision();
-        
 
 		Timer.WaitTime = ResizeTime + AttackDuration + Lib.GetRandomNormal(0.5f, 3.0f);;
 		base.Attack();
@@ -58,6 +56,8 @@ public partial class SpikeWindow : AttackWindow
 
 	public override void Reload()
 	{
+		HideVisualCollision();
+        
 		Timer.WaitTime = 0.1f; // time to wait before restarting
 		base.Reload();
 	}

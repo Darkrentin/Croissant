@@ -7,6 +7,7 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene IntroGameScene;
 	[Export] public PackedScene Level1Scene;
 	[Export] public PackedScene Level2Scene;
+	[Export] public PackedScene Level3Scene;
 	[Export] public PackedScene VirusScene;
 	[Export] public PackedScene HelperScene;
 	[Export] public PackedScene StaticWindowScene;

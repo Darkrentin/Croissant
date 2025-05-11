@@ -49,7 +49,7 @@ public partial class FollowWindow : AttackWindow
 	{
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.1f;
-		HideVisualCollision();
+		
         StartExponentialTransition(TargetPosition, ResizeTime, reset: true);
 
 		Timer.WaitTime = ResizeTime + AttackDuration;
@@ -58,6 +58,7 @@ public partial class FollowWindow : AttackWindow
 
 	public override void Reload()
 	{
+		HideVisualCollision();
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();
 	}

@@ -21,8 +21,6 @@ public partial class VisualCollision : ColorRect
 		}
 		else
 		{
-			Visible = false;
-			elapsedTime = 0f;
 		}
 	}
 }
