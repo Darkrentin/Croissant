@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://yaacwup8xpjj"]
 
-[ext_resource type="Texture2D" uid="uid://dqfo1oymeb7ha" path="res://assets/sprites/platformer/stickman.png" id="1_8pltl"]
-[ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_j2rac"]
-[ext_resource type="Script" uid="uid://cenrt4boidy05" path="res://scripts/Level3/StateMachine/StateMachine.cs" id="3_s8nyw"]
-[ext_resource type="Script" uid="uid://0cahh1ocw2s8" path="res://scripts/Level3/Character/States/WalkState.cs" id="4_xk4oe"]
-[ext_resource type="Script" uid="uid://dv3cf7rfc5x2k" path="res://scripts/Level3/Character/States/IdleState.cs" id="5_che0y"]
-[ext_resource type="Script" uid="uid://v3uhhhkv0kxc" path="res://scripts/Level3/Character/States/JumpState.cs" id="6_edkpl"]
+[ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
+[ext_resource type="Texture2D" uid="uid://dqfo1oymeb7ha" path="res://assets/sprites/platformer/stickman.png" id="2_7gokg"]
+[ext_resource type="Script" uid="uid://cenrt4boidy05" path="res://scripts/Level3/StateMachine/StateMachine.cs" id="3_n83g5"]
+[ext_resource type="Script" uid="uid://0cahh1ocw2s8" path="res://scripts/Level3/Character/States/WalkState.cs" id="4_j7gwp"]
+[ext_resource type="Script" uid="uid://dv3cf7rfc5x2k" path="res://scripts/Level3/Character/States/IdleState.cs" id="5_46r6c"]
+[ext_resource type="Script" uid="uid://v3uhhhkv0kxc" path="res://scripts/Level3/Character/States/JumpState.cs" id="6_mt1tc"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
 radius = 39.0
@@ -16,7 +16,7 @@ size = Vector2(48.875, 8.25)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("area2D")]
 collision_layer = 2
-script = ExtResource("1_j2rac")
+script = ExtResource("1_45nm6")
 area2D = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -26,20 +26,20 @@ shape = SubResource("CapsuleShape2D_hnbnl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(8, -121)
 scale = Vector2(0.831349, 0.785088)
-texture = ExtResource("1_8pltl")
+texture = ExtResource("2_7gokg")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState")]
-script = ExtResource("3_s8nyw")
+script = ExtResource("3_n83g5")
 InitialState = NodePath("IdleState")
 
 [node name="WalkState" type="Node" parent="StateMachine"]
-script = ExtResource("4_xk4oe")
+script = ExtResource("4_j7gwp")
 
 [node name="IdleState" type="Node" parent="StateMachine"]
-script = ExtResource("5_che0y")
+script = ExtResource("5_46r6c")
 
 [node name="JumpState" type="Node" parent="StateMachine"]
-script = ExtResource("6_edkpl")
+script = ExtResource("6_mt1tc")
 
 [node name="Area2D" type="Area2D" parent="."]
 

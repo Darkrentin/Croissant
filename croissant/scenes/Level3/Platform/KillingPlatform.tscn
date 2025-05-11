@@ -8,9 +8,10 @@
 size = Vector2(120, 140)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylwtk"]
-size = Vector2(130, 150)
+size = Vector2(120, 140)
 
 [node name="KillingPlatform" type="CharacterBody2D" node_paths=PackedStringArray("area2D", "window", "collisionShape")]
+collision_layer = 4
 script = ExtResource("1_k3r00")
 area2D = NodePath("Area2D")
 window = NodePath("Window")
@@ -19,10 +20,11 @@ collisionShape = NodePath("CollisionShape2D")
 [node name="Window" type="Window" parent="."]
 position = Vector2i(0, 36)
 size = Vector2i(120, 120)
+visible = false
 script = ExtResource("2_ylwtk")
 
 [node name="TextureRect" type="TextureRect" parent="Window"]
-anchors_preset = -1
+anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 texture = ExtResource("3_iqbkw")
@@ -33,6 +35,7 @@ position = Vector2(60, 70)
 shape = SubResource("RectangleShape2D_k3r00")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(60, 70)

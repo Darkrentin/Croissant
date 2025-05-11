@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b6ci8vrbwflc5"]
+
+[ext_resource type="Script" uid="uid://bs2soqlm0dbss" path="res://scripts/Level3/Platform/PlayerOnly.cs" id="1_ysnk1"]
+
+[node name="PlayerOnly" type="CharacterBody2D"]
+script = ExtResource("1_ysnk1")

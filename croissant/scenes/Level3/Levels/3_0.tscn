@@ -1,10 +1,10 @@
 [gd_scene load_steps=10 format=3 uid="uid://qkuoa8g4g2cl"]
 
-[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="3_voees"]
-[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Portal.tscn" id="4_c6ddw"]
-[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="4_srgqm"]
-[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_0dahx"]
-[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/ConfigFile.tscn" id="5_irsaa"]
+[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
+[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="2_gijp6"]
+[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="3_5q6or"]
+[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="4_8j6u2"]
+[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_vwnnv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
 resource_local_to_scene = true
@@ -24,7 +24,7 @@ size = Vector2(2104, 120)
 
 [node name="3_0" type="Node"]
 
-[node name="StaticPlateform" parent="." instance=ExtResource("3_voees")]
+[node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(456, 448)
 
 [node name="Window" parent="StaticPlateform" index="0"]
@@ -34,7 +34,7 @@ auto_translate_mode = 1
 position = Vector2(60, 192)
 shape = SubResource("RectangleShape2D_pl275")
 
-[node name="StaticPlateform2" parent="." instance=ExtResource("3_voees")]
+[node name="StaticPlateform2" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(768, 448)
 
 [node name="Window" parent="StaticPlateform2" index="0"]
@@ -44,14 +44,14 @@ auto_translate_mode = 1
 position = Vector2(384, 60)
 shape = SubResource("RectangleShape2D_k31tl")
 
-[node name="MovePlatform" parent="." instance=ExtResource("4_srgqm")]
+[node name="MovePlatform" parent="." instance=ExtResource("2_gijp6")]
 position = Vector2(128, 704)
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(92, 60)
 shape = SubResource("RectangleShape2D_k0j7d")
 
-[node name="StaticPlateform3" parent="." instance=ExtResource("3_voees")]
+[node name="StaticPlateform3" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(-68, 877)
 
 [node name="TextureRect" parent="StaticPlateform3/Window" index="0"]
@@ -64,14 +64,14 @@ offset_bottom = 842.0
 position = Vector2(1052, 60)
 shape = SubResource("RectangleShape2D_irsaa")
 
-[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("4_c6ddw")]
+[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("3_5q6or")]
 position = Vector2(107, 242)
 SpawnPosition = NodePath("Node2D")
 
 [node name="Node2D" type="Node2D" parent="Portal"]
 position = Vector2(252, 236)
 
-[node name="ConfigFile" parent="." instance=ExtResource("5_irsaa")]
+[node name="ConfigFile" parent="." instance=ExtResource("4_8j6u2")]
 position = Vector2(1135, 340)
 scale = Vector2(1.5, 1.5)
 
@@ -86,7 +86,7 @@ metadata/_edit_use_anchors_ = true
 [node name="CollisionShape2D" parent="ConfigFile" index="1"]
 scale = Vector2(1.5, 1.5)
 
-[node name="KillingPlatform" parent="." instance=ExtResource("5_0dahx")]
+[node name="KillingPlatform" parent="." instance=ExtResource("5_vwnnv")]
 position = Vector2(1529, 731)
 
 [node name="TextureRect" parent="KillingPlatform/Window" index="0"]

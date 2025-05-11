@@ -9,6 +9,7 @@ resource_local_to_scene = true
 size = Vector2(120, 120)
 
 [node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
+collision_mask = 5
 script = ExtResource("1_xf3iu")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")

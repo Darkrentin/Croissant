@@ -1,10 +1,10 @@
 [gd_scene load_steps=6 format=3 uid="uid://hca4ftw22ecd"]
 
-[ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Player.tscn" id="1_7smpx"]
+[ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Others/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
-[ext_resource type="PackedScene" uid="uid://qkuoa8g4g2cl" path="res://scenes/Level3/3_0.tscn" id="2_apgcq"]
-[ext_resource type="PackedScene" uid="uid://c5avgc26i0v58" path="res://scenes/Level3/3_1.tscn" id="3_pl275"]
-[ext_resource type="PackedScene" uid="uid://lryqgy5js16r" path="res://scenes/Level3/3_2.tscn" id="4_k31tl"]
+[ext_resource type="PackedScene" uid="uid://qkuoa8g4g2cl" path="res://scenes/Level3/Levels/3_0.tscn" id="2_apgcq"]
+[ext_resource type="PackedScene" uid="uid://c5avgc26i0v58" path="res://scenes/Level3/Levels/3_1.tscn" id="3_pl275"]
+[ext_resource type="PackedScene" uid="uid://lryqgy5js16r" path="res://scenes/Level3/Levels/3_2.tscn" id="4_k31tl"]
 
 [node name="Level3" type="Window"]
 transparent_bg = true
