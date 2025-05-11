@@ -15,6 +15,7 @@ height = 256.0
 size = Vector2(48.875, 8.25)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("area2D")]
+collision_layer = 2
 script = ExtResource("1_j2rac")
 area2D = NodePath("Area2D")
 

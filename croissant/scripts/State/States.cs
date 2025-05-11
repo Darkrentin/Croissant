@@ -179,7 +179,7 @@ public static class States
     public static void Level3()
     {
         GameManager.helper.HideNpc(3);
-        Node2D Level3 = SceneLoader.Level3Scene.Instantiate<Node2D>();
+        Window Level3 = SceneLoader.Level3Scene.Instantiate<Window>();
         GameManager.GameRoot.AddChild(Level3);
 
         //Change State condition
