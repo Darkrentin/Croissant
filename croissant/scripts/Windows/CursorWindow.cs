@@ -6,6 +6,8 @@ public partial class CursorWindow : FloatWindow
 	public Area2D area;
 	public bool Freeze = false;
 	public Timer FreezeTimer;
+
+	public int Livers = 3;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -34,11 +36,13 @@ public partial class CursorWindow : FloatWindow
 	public void TakeDamage()
 	{
 		FreezFrameStart();
+		Livers--;
 	}
 
 	public void FreezFrameStart()
 	{
 		ProcessMode = ProcessModeEnum.Always;
+		GameManager.MenuWindow.ProcessMode = ProcessModeEnum.Pausable;
 		IsTransitioning = false;
 		Freeze = true;
 		GetTree().Paused = true;
@@ -50,6 +54,7 @@ public partial class CursorWindow : FloatWindow
 	public void FreezFrameStop()
 	{
 		ProcessMode = ProcessModeEnum.Pausable;
+		GameManager.MenuWindow.ProcessMode = ProcessModeEnum.Always;
 		Freeze = false;
 		GetTree().Paused = false;
 	}
