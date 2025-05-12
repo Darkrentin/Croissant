@@ -20,24 +20,15 @@ public partial class KillingPlatform : Platform
 
     private void HandlePlayerDeath(PlayerCharacter player)
     {
-        var nextScene = Level3.Instance.level3Scenes[Level3.Instance.sceneid].Instantiate<SubLevel3>();
-        Level3.Instance.sceneid = 0;
+        SubLevel3 MainScene = Level3.Instance.Level3Nodes[0];
         
+        Level3.Instance.actualScene.HideSubLevel();
+        Level3.Instance.sceneid = 0;
+        MainScene.ShowSubLevel();
+        Level3.Instance.actualScene = MainScene;
         // Use SetDeferred for physics-related changes
         player.SetDeferred("position", new Vector2(1846, 610));
         
         // Use CallDeferred for scene changes
-        CallDeferred(nameof(UpdateScene), nextScene);
-    }
-
-    private void UpdateScene(SubLevel3 nextScene)
-    {
-        if (Level3.Instance.actualScene != null)
-        {
-            Level3.Instance.actualScene.QueueFree();
-        }
-        Level3.Instance.AddChild(nextScene);
-        Level3.Instance.actualScene = nextScene;
-        //GD.Print("You are dead!");
-    }
+    } //GD.Print("You are dead!");
 }
