@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://b1381i153gft1"]
+
+[ext_resource type="Script" uid="uid://cdhhhhdoj2wi1" path="res://scripts/Other/FirebaseManager.cs" id="1_64jkp"]
+
+[node name="FirebaseManager" type="Node" node_paths=PackedStringArray("HttpRequest")]
+script = ExtResource("1_64jkp")
+HttpRequest = NodePath("HTTPRequest")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]
