@@ -188,15 +188,15 @@ public static class States
 
     public static void FinalLevel()
     {
-        /*
+        
         GameManager.GameRoot.RemoveChild(GameManager.helper);
         GameManager.helper.QueueFree();
         GameManager.GameRoot.RemoveChild(GameManager.virus);
         GameManager.virus.QueueFree();
         GameManager.helper = null;
         GameManager.virus = null;
-        */
         
+    
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
         GameManager.GameRoot.AddChild(FinalLevel);
 

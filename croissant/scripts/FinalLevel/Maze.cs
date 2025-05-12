@@ -8,6 +8,7 @@ public partial class Maze : Node3D
     [Export] public PackedScene FloorScene;
     [Export] public PackedScene LampScene;
     [Export] public PackedScene ObjectiveScene;
+    [Export] public PackedScene EasterScene;
     [Export] public int MazeSize = 31;
 
 
@@ -19,6 +20,7 @@ public partial class Maze : Node3D
     public const int Floor = 0;
     public const int Wall = 1;
     public const int ObjectiveLabel = 2;
+    public const int EasterEgg = 3;
 
     public Color[] ObjectiveColors = new Color[]
     {
@@ -82,8 +84,9 @@ public partial class Maze : Node3D
             (MazeSize - 3, MazeSize - 3)
         };
 
-        int cornerToRemove = Lib.rand.Next(0, corners.Length);
-        corners[cornerToRemove] = (0, 0);
+        int cornerToRemoveIndex = Lib.rand.Next(0, corners.Length);
+        Vector2I cornerToRemove = new Vector2I(corners[cornerToRemoveIndex].x, corners[cornerToRemoveIndex].y);
+        corners[cornerToRemoveIndex] = (0, 0);
 
         for (int i = 0; i < corners.Length; i++)
         {
@@ -93,6 +96,8 @@ public partial class Maze : Node3D
                 MazeData[corners[i].x, corners[i].y] = ObjectiveLabel;
             }
         }
+        PlaceRoom(cornerToRemove.X, cornerToRemove.Y, 3, 3, true);
+        MazeData[cornerToRemove.X, cornerToRemove.Y] = EasterEgg;
 
         MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
         MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
@@ -218,6 +223,13 @@ public partial class Maze : Node3D
                         objective.PixelColor = ObjectiveColors[(ObjectiveCount - 1) % ObjectiveColors.Length];
                         Objectives.Add(objective);
                         //AddChild(objective);
+                    }
+                    if (MazeData[i, j] == EasterEgg)
+                    {
+                        Node3D easter = EasterScene.Instantiate<Node3D>();
+                        easter.Position = new Vector3(nx, 0, nz) * WallSize;
+                        AddChild(easter);
+                        //EasterEggs.Add(easter);
                     }
                 }
             }

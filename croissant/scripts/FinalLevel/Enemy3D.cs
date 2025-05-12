@@ -69,9 +69,9 @@ public partial class Enemy3D : CharacterBody3D
 
 			if(GlobalPosition.DistanceTo(RandomTargetPosition)<0.5f)
 			{
-				int RandomPathIndex = Lib.rand.Next(0,FinalLevel.Instance.maze.Paths.Count);
-				RandomTargetPosition = FinalLevel.Instance.maze.Paths[RandomPathIndex].GlobalPosition + new Vector3(1,0,1);
-				Lib.Print("Random Target Position: " + RandomTargetPosition);
+				//int RandomPathIndex = Lib.rand.Next(0,FinalLevel.Instance.maze.Paths.Count);
+				//RandomTargetPosition = FinalLevel.Instance.maze.Paths[RandomPathIndex].GlobalPosition + new Vector3(1,0,1);
+				//Lib.Print("Random Target Position: " + RandomTargetPosition);
 			}
 
 			navigationAgent3D.TargetPosition = RandomTargetPosition;

@@ -9,7 +9,7 @@
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_fos0i")
 difficulty = 0.5
-ExportState = 10
+ExportState = 13
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
 visible = false

@@ -94,7 +94,7 @@ public partial class FinalLevel : Node3D
 			MeltShader.PrepareTransition();
 			shaderMaterial.SetShaderParameter("u_color_tex", PaletteMain);
 			MeltShader.Transition();
-			Player3D.GlobalPosition = Vector3.Zero;
+			Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
 		};
 	}
 

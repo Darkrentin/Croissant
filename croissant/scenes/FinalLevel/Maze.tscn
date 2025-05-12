@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://dntjiebaav3e5"]
+[gd_scene load_steps=7 format=3 uid="uid://dntjiebaav3e5"]
 
 [ext_resource type="Script" uid="uid://3ybo6oykrlh7" path="res://scripts/FinalLevel/Maze.cs" id="1_1hnml"]
 [ext_resource type="PackedScene" uid="uid://b0rwmg3mas3cc" path="res://scenes/FinalLevel/Wall.tscn" id="2_f2dw1"]
 [ext_resource type="PackedScene" uid="uid://dp0vjok53fueo" path="res://scenes/FinalLevel/Lamp.tscn" id="3_md7u8"]
 [ext_resource type="PackedScene" uid="uid://dgq2j8vp8c72q" path="res://scenes/FinalLevel/Path.tscn" id="3_rlbri"]
 [ext_resource type="PackedScene" uid="uid://cjn4lukcecj37" path="res://scenes/FinalLevel/Objective.tscn" id="4_awxkg"]
+[ext_resource type="PackedScene" uid="uid://cwdiwawxk2qht" path="res://scenes/Other/Easter.tscn" id="6_xiqy0"]
 
 [node name="Maze" type="Node3D"]
 script = ExtResource("1_1hnml")
@@ -12,3 +13,4 @@ WallScene = ExtResource("2_f2dw1")
 FloorScene = ExtResource("3_rlbri")
 LampScene = ExtResource("3_md7u8")
 ObjectiveScene = ExtResource("4_awxkg")
+EasterScene = ExtResource("6_xiqy0")
