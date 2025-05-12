@@ -156,9 +156,19 @@ public partial class WaveWindow : AttackWindow
 		}
 
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
-		if (Lives <= 0)
-			ConnectedWindow.Delete();
 		base.Reload();
 		ConnectedWindow.CurrentPhase = Phase.Reload;
 	}
+
+	public override void Delete()
+	{
+		// Assurez-vous que la fenêtre connectée est supprimée correctement
+		if (ConnectedWindow != null && IsInstanceValid(ConnectedWindow))
+		{
+			ConnectedWindow.Delete();
+			ConnectedWindow.QueueFree();
+		}
+		base.Delete();
+	}
 }
+

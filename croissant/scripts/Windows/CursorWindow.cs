@@ -5,9 +5,9 @@ public partial class CursorWindow : FloatWindow
 	public CollisionShape2D collision;
 	public Area2D area;
 	public bool Freeze = false;
+	public bool Invisible = false;
 	public Timer FreezeTimer;
 
-	public int Livers = 3;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -35,8 +35,10 @@ public partial class CursorWindow : FloatWindow
 
 	public void TakeDamage()
 	{
+		Lib.Print("CursorWindow: TakeDamage");
+		if(Invisible)
+			return;
 		FreezFrameStart();
-		Livers--;
 	}
 
 	public void FreezFrameStart()
@@ -47,8 +49,9 @@ public partial class CursorWindow : FloatWindow
 		Freeze = true;
 		GetTree().Paused = true;
 		StartShake(0.4f, 10);
-		FreezeTimer.WaitTime = 0.4f;
+		FreezeTimer.WaitTime = 0.5f;
 		FreezeTimer.Start();
+		Invisible = true;
 	}
 
 	public void FreezFrameStop()
@@ -57,5 +60,7 @@ public partial class CursorWindow : FloatWindow
 		GameManager.MenuWindow.ProcessMode = ProcessModeEnum.Always;
 		Freeze = false;
 		GetTree().Paused = false;
+		Level2.Instance.WaveManager.GoBackToWave();
+		Invisible = false;
 	}
 }

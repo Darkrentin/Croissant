@@ -58,7 +58,7 @@ public partial class AttackWindow : FloatWindow
 
         if (!Disable)
         {
-            Parent = GetParent<Level2>();
+            Parent = Level2.Instance;
             Timer.Start();
         }
         else
@@ -150,14 +150,15 @@ public partial class AttackWindow : FloatWindow
         Timer.Start();
     }
 
-    public void Delete()
+    public virtual void Delete()
     {
-        OnClose();
-        GameManager.GameRoot.RemoveChild(VisualCollision);
-        //GameManager.Windows.Remove(this);
-        VisualCollision.QueueFree();
+        if (VisualCollision != null && IsInstanceValid(VisualCollision) && VisualCollision.GetParent() != null)
+        {
+            GameManager.GameRoot.RemoveChild(VisualCollision);
+            VisualCollision.QueueFree();
+        }
+        
         GrabFocus();
-        //GetParent().RemoveChild(this);
         Level2.CursorWindow.GrabFocus();
 
         Timer death = new Timer();
@@ -167,6 +168,6 @@ public partial class AttackWindow : FloatWindow
         Timer.OneShot = true;
         Hide();
         death.Start();
-        //GameManager.MainWindow.GrabFocus();
+    
     }
 }

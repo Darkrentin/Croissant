@@ -30,6 +30,9 @@ public partial class Wave : Node
 	{
 		Lib.Print("Starting wave " + id);
 		CurrentWave = true;
+		WaveManager.CurrentWave = this;
+		WaveManager.CurrentWaveId = id;
+		
 		if (!WaitWave)
 		{
 			WaveWindows = WaveManager.WaveData.WaveStart[id - 1]();
@@ -41,7 +44,11 @@ public partial class Wave : Node
 			}
 		}
 		else
-			Level2.AddWave();
+		{
+			WaveManager.LastWave = this;
+			WaveManager.AddWave();
+		}
+			
 
 		if (duration > 0)
 			WaveTimer.Start();

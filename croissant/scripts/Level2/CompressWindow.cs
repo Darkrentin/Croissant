@@ -15,6 +15,8 @@ public partial class CompressWindow : AttackWindow
 		ConnectedWindow.VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.Timer.Stop();
 		ConnectedWindow.Lives = Lives;
+		RemoveChild(ConnectedWindow);
+		GetParent().AddChild(ConnectedWindow);
 	}
 
 	public override void _Process(double delta)
@@ -135,5 +137,16 @@ public partial class CompressWindow : AttackWindow
 		Timer.WaitTime = Lib.GetRandomNormal(0.5f, 3.0f); // time to wait before restarting
 		base.Reload();
 		ConnectedWindow.CurrentPhase = Phase.Reload;
+	}
+
+	public override void Delete()
+	{
+		// Assurez-vous que la fenêtre connectée est supprimée correctement
+		if (ConnectedWindow != null && IsInstanceValid(ConnectedWindow))
+		{
+			ConnectedWindow.Delete();
+			ConnectedWindow.QueueFree();
+		}
+		base.Delete();
 	}
 }

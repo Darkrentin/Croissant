@@ -3,11 +3,6 @@ using Godot;
 public partial class Level2 : Node2D
 {
 	[Export] public WaveManager WaveManager;
-	[Export] public Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
-	[Export] public AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
-	public static Label ScoreLabel;
-	public static AnimationPlayer AnimationPlayer;
-	public static int WaveNum = 0;
 	public static CursorWindow CursorWindow;
 	public static Level2 Instance;
 
@@ -20,7 +15,6 @@ public partial class Level2 : Node2D
 			GameManager.GameRoot.AddChild(CursorWindow);
 		}
 		WaveManager.EndWave += NextLvl;
-		AddWave();
 	}
 
 	public void NextLvl()
@@ -29,10 +23,5 @@ public partial class Level2 : Node2D
 		QueueFree();
 	}
 
-	public static void AddWave()
-	{
-		WaveNum++;
-		ScoreLabel.Text = WaveNum.ToString();
-		AnimationPlayer.Play("ScoreUp");
-	}
+	
 }
