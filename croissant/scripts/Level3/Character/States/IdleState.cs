@@ -5,7 +5,7 @@ public partial class IdleState : State
 {
     public override void Enter()
     {
-        GD.Print("Idle");
+        //GD.Print("Idle");
         var fsm = GetParent();
         var player = fsm?.GetParent() as PlayerCharacter;
         if (player != null)
@@ -64,5 +64,5 @@ public partial class IdleState : State
         
     }
 
-    public override void Exit() { GD.Print("Exit Idle"); }
+    public override void Exit() {} //GD.Print("Exit Idle"); }
 }

@@ -4,57 +4,61 @@ using Godot;
 public partial class Portal : Area2D
 {
 	[Export] public int NextSceneId = 1;
-	[Export] public Node2D SpawnPosition;
-	
-	public override void _PhysicsProcess(double delta)
+	public Timer timer;
+	public bool isChangingScene = false;
+	public override void _Ready()
 	{
-		base._PhysicsProcess(delta);
-		CheckForPlayerCollision();
+		// Connect the body entered signal to the OnBoddyEntered method
+		BodyEntered += OnBoddyEntered;
+		timer = new Timer();
+		timer.WaitTime = 0.5f;
+		timer.OneShot = true;
+		timer.Timeout += () =>
+		{
+			isChangingScene = false;
+			timer.Stop();
+		};
+		VisibilityChanged += OnVisibilityChange;
+		AddChild(timer);
+
 	}
 
-	private void CheckForPlayerCollision()
+	public void OnBoddyEntered(Node body)
 	{
-		var overlappingBodies = GetOverlappingBodies();
+		if(isChangingScene)
+			return;
 		
-		foreach (var body in overlappingBodies)
+		if (body is PlayerCharacter player)
 		{
-			if (body is PlayerCharacter player)
-			{
-				CallDeferred(nameof(OnLevelComplete));
-				player.SetDeferred("position",SpawnPosition.GlobalPosition);
-				break;
-			}
+			GD.Print("OnBoddyEntered");
+			OnLevelComplete(player);
+			
+			
 		}
 	}
 
-	private void OnLevelComplete()
+	public void OnVisibilityChange()
 	{
-		Node nextScene = null;
-		if(Level3.Instance.Level3Nodes[NextSceneId] != null)
+		if(Visible)
 		{
-			nextScene = Level3.Instance.Level3Nodes[NextSceneId];
+			timer.Start();
+			isChangingScene = true;
 		}
-		else
-		{
-			nextScene = Level3.Instance.level3Scenes[Level3.Instance.sceneid].Instantiate<Node>();
-		}
-		CallDeferred(nameof(CompleteLevel), nextScene);
 	}
 
-	private void CompleteLevel(Node nextScene)
+	private void OnLevelComplete(PlayerCharacter player)
 	{
-		Level3.Instance.sceneid = NextSceneId;
-		CallDeferred(nameof(UpdateScene), nextScene);
-	}
-
-	private void UpdateScene(Node nextScene)
-	{
+		SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];	
+		
 		if (Level3.Instance.actualScene != null)
 		{
-			Level3.Instance.RemoveChild(Level3.Instance.actualScene);
+			Level3.Instance.actualScene.HideSubLevel();
 		}
-		Level3.Instance.AddChild(nextScene);
+		nextScene.ShowSubLevel();
+		player.GlobalPosition = nextScene.GetNode<Portal>($"{Level3.Instance.sceneid}").GlobalPosition + new Vector2(60,60);
+		Level3.Instance.sceneid = NextSceneId;
 		Level3.Instance.actualScene = nextScene;
 		GD.Print("Level complete!");
 	}
+
 }

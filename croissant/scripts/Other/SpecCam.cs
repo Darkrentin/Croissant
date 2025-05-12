@@ -24,20 +24,20 @@ public partial class SpecCam : Camera3D
         // Toggle camera state on "debug" action
         if (@event.IsActionPressed("debug"))
         {
-            GD.Print("Debug action pressed!"); // Check if action is detected
+            //GD.Print("Debug action pressed!"); // Check if action is detected
             if (IsCurrent())
             {
                 // If this is the current camera, make it non-current and release the mouse
                 ClearCurrent();
                 Input.MouseMode = Input.MouseModeEnum.Visible;
-                GD.Print("SpecCam Deactivated. MouseMode: " + Input.MouseMode);
+                //GD.Print("SpecCam Deactivated. MouseMode: " + Input.MouseMode);
             }
             else
             {
                 // If this is not the current camera, make it current and capture the mouse
                 MakeCurrent();
                 Input.MouseMode = Input.MouseModeEnum.Captured;
-                GD.Print("SpecCam Activated. MouseMode: " + Input.MouseMode);
+                //GD.Print("SpecCam Activated. MouseMode: " + Input.MouseMode);
             }
         }
     }
@@ -45,7 +45,7 @@ public partial class SpecCam : Camera3D
     // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(double delta)
     {
-        // GD.Print($"IsCurrent: {IsCurrent()}, MouseMode: {Input.MouseMode}, MouseDelta: {_mouseDelta}"); // Uncomment for continuous status
+        // //GD.Print($"IsCurrent: {IsCurrent()}, MouseMode: {Input.MouseMode}, MouseDelta: {_mouseDelta}"); // Uncomment for continuous status
 
         // Only process if this camera is the current one
         if (!IsCurrent())

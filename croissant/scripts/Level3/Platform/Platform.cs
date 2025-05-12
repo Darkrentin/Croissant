@@ -26,7 +26,7 @@ public partial class Platform : CharacterBody2D
         shape = collisionShape?.Shape as RectangleShape2D;
         if (shape == null)
         {
-            GD.PrintErr("No valid RectangleShape2D found on collisionShape");
+            //GD.PrintErr("No valid RectangleShape2D found on collisionShape");
             return;
         }
 

@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://lryqgy5js16r"]
+[gd_scene load_steps=5 format=3 uid="uid://lryqgy5js16r"]
 
+[ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_6my4b"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_w0pfg"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_s5xex"]
 
@@ -7,7 +8,9 @@
 resource_local_to_scene = true
 size = Vector2(1918, 120)
 
-[node name="Node" type="Node"]
+[node name="3_2" type="Node2D" node_paths=PackedStringArray("windows")]
+script = ExtResource("1_6my4b")
+windows = [NodePath("StaticPlateform/Window")]
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_w0pfg")]
 position = Vector2(2, 959)
@@ -16,11 +19,10 @@ position = Vector2(2, 959)
 position = Vector2(959, 60)
 shape = SubResource("RectangleShape2D_73yxm")
 
-[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("2_s5xex")]
+[node name="1" parent="." instance=ExtResource("2_s5xex")]
 position = Vector2(27, 649)
-SpawnPosition = NodePath("Node2D")
 
-[node name="Node2D" type="Node2D" parent="Portal"]
+[node name="Node2D" type="Node2D" parent="1"]
 position = Vector2(367, 305)
 
 [editable path="StaticPlateform"]

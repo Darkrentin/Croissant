@@ -73,7 +73,7 @@ public static class Lib
     public static void Print(string msg, [CallerFilePath] string filePath = "", [CallerMemberName] string methodName = "")
     {
         string fileName = System.IO.Path.GetFileName(filePath);
-        GD.Print($"[{fileName}][{methodName}] {msg}");
+        //GD.Print($"[{fileName}][{methodName}] {msg}");
     }
 
     public static string GetCursedString()

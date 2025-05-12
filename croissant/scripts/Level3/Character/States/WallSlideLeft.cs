@@ -9,7 +9,7 @@ public partial class WallSlideLeft : State
 
     public override void Enter()
     {
-        GD.Print("WallSlideLeft");
+        //GD.Print("WallSlideLeft");
         var fsm = GetParent();
         var player = fsm?.GetParent() as PlayerCharacter;
         if (player != null)
@@ -32,7 +32,7 @@ public partial class WallSlideLeft : State
         
         if (player.IsOnWall())
         {
-            player.Velocity = new Vector2(player.Velocity.X, WallSlideSpeed * delta);
+            player.Velocity = new Vector2(player.Velocity.X, WallSlideSpeed); // Remove delta dependency
         }
         else
         {
@@ -43,7 +43,7 @@ public partial class WallSlideLeft : State
         
         if (Input.IsActionJustPressed("ui_up"))
         {
-
+            player.Velocity = new Vector2(PushOffForce, player.Velocity.Y);
 			EmitSignal(SignalName.StateTransition, this, "JumpState");
 			return;
 
@@ -55,13 +55,10 @@ public partial class WallSlideLeft : State
 			if (player.IsOnWall())
 			{
 				player.Velocity = new Vector2(PushOffForce, player.Velocity.X);
-				return;
+                player.Position -= new Vector2(0.1f, 0);
 			}
-			else
-			{
-				EmitSignal(SignalName.StateTransition, this, "FallState");
-				return;
-			}
+			EmitSignal(SignalName.StateTransition, this, "FallState");
+            return;
 		}
         
         if (player.IsOnFloor())
@@ -81,5 +78,5 @@ public partial class WallSlideLeft : State
         }
     }
 
-    public override void Exit() { GD.Print("Exit WallSlideLeft"); }
+    //public override void Exit() { //GD.Print("Exit WallSlideLeft"); }
 }

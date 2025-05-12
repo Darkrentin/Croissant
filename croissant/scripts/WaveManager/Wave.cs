@@ -68,6 +68,9 @@ public partial class Wave : Node
 		if (NbOfEnemies <= 0 && !WaitWave)
 			StartNextWave();
 		else
-			GD.Print("Enemies left: " + NbOfEnemies);
+		{
+			
+		}
+			//GD.Print("Enemies left: " + NbOfEnemies);
 	}
 }

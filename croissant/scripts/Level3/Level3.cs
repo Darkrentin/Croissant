@@ -4,10 +4,10 @@ using System;
 public partial class Level3 : FloatWindow
 {
     [Export] public PackedScene[] level3Scenes;
-    public Node[] Level3Nodes;
+    public SubLevel3[] Level3Nodes;
     public int sceneid = 0;
     public static Level3 Instance;
-    public Node actualScene;
+    public SubLevel3 actualScene;
     public Action<InputEventMouseButton> MouseEvent;
     [Export] public PlayerCharacter player;
 
@@ -15,13 +15,15 @@ public partial class Level3 : FloatWindow
     {
         GrabFocus();
         Instance = this;
-        actualScene = level3Scenes[sceneid].Instantiate<Node>();
-        Level3Nodes = new Node[level3Scenes.Length];
+        Level3Nodes = new SubLevel3[level3Scenes.Length];
         for (int i = 0; i < level3Scenes.Length; i++)
         {
-            Level3Nodes[i] = null;
+            Level3Nodes[i] = level3Scenes[i].Instantiate<SubLevel3>();
+            AddChild(Level3Nodes[i]);
+            Level3Nodes[i].HideSubLevel();
         }
-        AddChild(actualScene);
+        actualScene = Level3Nodes[sceneid];
+        actualScene.ShowSubLevel();
     }
 
     public override void _Input(InputEvent @event)

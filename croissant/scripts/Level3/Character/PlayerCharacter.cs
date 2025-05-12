@@ -25,7 +25,7 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         if (body is StaticPlatform platform)
         {
-            GD.Print("static test");
+            //GD.Print("static test");
         }
     }
 

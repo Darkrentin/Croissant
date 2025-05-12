@@ -39,13 +39,13 @@ public partial class StateMachine : Node
     {
         if (sourceState != _currentState)
         {
-            GD.Print($"Invalid change_state attempt from: {sourceState.Name} but currently in: {_currentState?.Name}");
+            //GD.Print($"Invalid change_state attempt from: {sourceState.Name} but currently in: {_currentState?.Name}");
             return;
         }
 
         if (!_states.TryGetValue(newStateName.ToLower(), out State newState))
         {
-            GD.Print("New state is empty");
+            //GD.Print("New state is empty");
             return;
         }
 

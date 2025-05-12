@@ -48,14 +48,14 @@ public partial class SaveData : Resource
         Error makeDirError = DirAccess.MakeDirRecursiveAbsolute(dirPath);
         if (makeDirError != Error.Ok)
         {
-            GD.PrintErr($"Error creating save directory {dirPath}: {makeDirError}");
+            //GD.PrintErr($"Error creating save directory {dirPath}: {makeDirError}");
             return makeDirError;
         }
 
         var error = ResourceSaver.Save(this, path);
         if (error != Error.Ok)
         {
-            GD.PrintErr($"Error saving resource to {path}: {error}");
+            //GD.PrintErr($"Error saving resource to {path}: {error}");
         }
         else
         {
@@ -84,7 +84,7 @@ public partial class SaveData : Resource
             }
             else
             {
-                GD.PrintErr($"Loaded resource at {path} is not of type SaveData or failed to load.");
+                //GD.PrintErr($"Loaded resource at {path} is not of type SaveData or failed to load.");
                 return null;
             }
         }

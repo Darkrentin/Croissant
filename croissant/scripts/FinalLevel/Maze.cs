@@ -251,16 +251,16 @@ public partial class Maze : Node3D
                         break;
                 }
             }
-            GD.Print(line);
+            //GD.Print(line);
         }
-        GD.Print("Maze size: " + MazeSize + "x" + MazeSize);
+        //GD.Print("Maze size: " + MazeSize + "x" + MazeSize);
 
         for (int i = 0; i < MazeSize; i++)
         {
             string line = "";
             for (int j = 0; j < MazeSize; j++)
                 line += MazeDist[i, j] + " ";
-            GD.Print(line);
+            //GD.Print(line);
         }
 
 

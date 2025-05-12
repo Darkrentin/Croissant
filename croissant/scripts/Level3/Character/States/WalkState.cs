@@ -5,7 +5,7 @@ public partial class WalkState : State
 {
     public override void Enter()
     {
-        GD.Print("Walking");
+        //GD.Print("Walking");
         var fsm = GetParent();
         var player = fsm?.GetParent() as PlayerCharacter;
         if (player != null)
@@ -54,6 +54,6 @@ public partial class WalkState : State
 
     }
 
-    public override void Exit() { GD.Print("Exit Walk");}
+    //public override void Exit() { //GD.Print("Exit Walk");}
 
 }

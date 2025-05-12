@@ -1,6 +1,7 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5avgc26i0v58"]
+[gd_scene load_steps=14 format=3 uid="uid://c5avgc26i0v58"]
 
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_brot1"]
+[ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_cjr8i"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="2_l2671"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="3_cjr8i"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="4_26hxk"]
@@ -29,14 +30,15 @@ size = Vector2(572, 146)
 resource_local_to_scene = true
 size = Vector2(120, 439)
 
-[node name="3_1" type="Node"]
+[node name="3_1" type="Node2D" node_paths=PackedStringArray("windows")]
+script = ExtResource("1_cjr8i")
+windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("MovePlatform/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("WindowsOnly/Window")]
 
-[node name="Portal2" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("1_brot1")]
+[node name="2" parent="." instance=ExtResource("1_brot1")]
 position = Vector2(37, 775)
 NextSceneId = 2
-SpawnPosition = NodePath("Node2D")
 
-[node name="Node2D" type="Node2D" parent="Portal2"]
+[node name="Node2D" type="Node2D" parent="2"]
 position = Vector2(223, 49)
 
 [node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
@@ -54,12 +56,11 @@ offset_bottom = 1.0
 position = Vector2(759, 58)
 shape = SubResource("RectangleShape2D_x0mh1")
 
-[node name="Portal" parent="." node_paths=PackedStringArray("SpawnPosition") instance=ExtResource("1_brot1")]
+[node name="0" parent="." instance=ExtResource("1_brot1")]
 position = Vector2(27, 180)
 NextSceneId = 0
-SpawnPosition = NodePath("Node2D")
 
-[node name="Node2D" type="Node2D" parent="Portal"]
+[node name="Node2D" type="Node2D" parent="0"]
 position = Vector2(368, 303)
 
 [node name="ConfigFile" parent="." instance=ExtResource("3_cjr8i")]

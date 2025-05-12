@@ -5,7 +5,7 @@ public partial class FallState : State
 {
 	public override void Enter()
 		{
-			GD.Print("Falling");
+			//GD.Print("Falling");
 
 			var fsm = GetParent();
 			var player = fsm?.GetParent() as PlayerCharacter;

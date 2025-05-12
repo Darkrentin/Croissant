@@ -9,7 +9,7 @@ public partial class WallSlideRight : State
 
     public override void Enter()
     {
-        GD.Print("WallSlideRight");
+        //GD.Print("WallSlideRight");
         var fsm = GetParent();
         var player = fsm?.GetParent() as PlayerCharacter;
         if (player != null)
@@ -82,5 +82,5 @@ public partial class WallSlideRight : State
         }
     }
 
-    public override void Exit() { GD.Print("Exit WallSlideRight"); }
+    //public override void Exit() { //GD.Print("Exit WallSlideRight"); }
 }
