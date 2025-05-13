@@ -459,6 +459,7 @@ _data = {
 }
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "Sprite", "area2D")]
+position = Vector2(1, 0)
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_45nm6")

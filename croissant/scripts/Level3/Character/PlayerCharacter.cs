@@ -3,11 +3,11 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-    public const float Speed = 1000.0f;
-    public const float JumpVelocity = -1000.0f;
-    public const float GravityBase = 2500.0f;
+    public const float Speed = 400.0f;
+    public const float JumpVelocity = -950.0f;
+    public const float GravityBase = 4000.0f; 
     public const float GravityExponentStart = 1.0f;
-    public const float GravityExponentFactor = 0.50f;
+    public const float GravityExponentFactor = 0.25f;
     [Export] public AnimationPlayer AnimationPlayer;
     [Export] public Sprite2D Sprite;
 
@@ -15,10 +15,20 @@ public partial class PlayerCharacter : CharacterBody2D
 
     [Export] public Area2D area2D;
 
+    private Timer wallJumpTimer;
+    private bool isWallJumping = false;
+
     public override void _Ready()
     {
         AddToGroup("player");
         area2D.BodyEntered += OnBodyEntered;
+
+
+        wallJumpTimer = new Timer();
+        wallJumpTimer.WaitTime = 0.3f;
+        wallJumpTimer.OneShot = true;
+        AddChild(wallJumpTimer);
+        wallJumpTimer.Timeout += OnWallJumpTimerTimeout;
     }
 
     public void OnBodyEntered(Node body)
@@ -45,6 +55,22 @@ public partial class PlayerCharacter : CharacterBody2D
 
         Velocity = velocity;
         MoveAndSlide();
+    }
+
+    private void OnWallJumpTimerTimeout()
+    {
+        isWallJumping = false;
+    }
+
+    public void StartWallJumpTimer()
+    {
+        isWallJumping = true;
+        wallJumpTimer.Start();
+    }
+
+    public bool IsWallJumping()
+    {
+        return isWallJumping;
     }
 
 }

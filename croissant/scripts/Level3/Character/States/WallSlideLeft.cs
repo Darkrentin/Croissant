@@ -4,8 +4,9 @@ using System;
 public partial class WallSlideLeft : State
 {
     [Export] public float WallSlideSpeed = 50.0f;
+    [Export] public float PushOffForce = -450.0f;
 
-	[Export] public float PushOffForce = -100.0f;
+    private float horizontalDirection = 0f;
 
     public override void Enter()
     {
@@ -18,6 +19,7 @@ public partial class WallSlideLeft : State
             velocity.X = 0;
             player.Velocity = velocity;
         }
+        
         player.Sprite.FlipH = true;
         player.AnimationPlayer.Play("WallSlideLeft");
     }
@@ -28,51 +30,61 @@ public partial class WallSlideLeft : State
         if (player == null)
             return;
 
-		Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_down", "ui_up");
-        
-        if (player.IsOnWall())
+        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_down", "ui_up");
+
+        if (Input.IsActionPressed("ui_left"))
         {
-            player.Velocity = new Vector2(player.Velocity.X, WallSlideSpeed); // Remove delta dependency
+            horizontalDirection = -1f;
+        }
+        else if (Input.IsActionPressed("ui_right"))
+        {
+            horizontalDirection = 1f;
         }
         else
         {
-            //EmitSignal(SignalName.StateTransition, this, "FallState");
-            //return;
+            horizontalDirection = 0f;
+        }
+        
+        if (player.IsOnWall())
+        {
+            player.Velocity = new Vector2(player.Velocity.X, WallSlideSpeed);
+        }
+        else
+        {
+            EmitSignal(SignalName.StateTransition, this, "FallState");
+            return; 
         }
 
         
         if (Input.IsActionJustPressed("ui_up"))
         {
-            player.Velocity = new Vector2(PushOffForce, player.Velocity.Y);
-			EmitSignal(SignalName.StateTransition, this, "JumpState");
-			return;
-
+            player.Position -= new Vector2(0.1f, 0);
+            player.Velocity = new Vector2(PushOffForce, PlayerCharacter.JumpVelocity);
+            player.StartWallJumpTimer();
+            EmitSignal(SignalName.StateTransition, this, "JumpState");
+            return;
         }
-
 
         if (Input.IsActionJustPressed("ui_left"))
         {
-			if (player.IsOnWall())
-			{
-				player.Velocity = new Vector2(PushOffForce, player.Velocity.X);
-                player.Position -= new Vector2(0.1f, 0);
-			}
-			EmitSignal(SignalName.StateTransition, this, "FallState");
+            player.Position -= new Vector2(0.1f, 0);
+            player.Velocity = new Vector2(PushOffForce, horizontalDirection * PlayerCharacter.Speed);
+            EmitSignal(SignalName.StateTransition, this, "FallState");
             return;
-		}
+        }
         
         if (player.IsOnFloor())
         {
             
             if (Mathf.Abs(direction.X) <= 0.1f)
             {
-				player.Velocity = new Vector2(PushOffForce, player.Velocity.X);
+                player.Velocity = new Vector2(PushOffForce, player.Velocity.X);
                 EmitSignal(SignalName.StateTransition, this, "IdleState");
             }
             
             else
             {
-				player.Velocity = new Vector2(PushOffForce, player.Velocity.X);
+                player.Velocity = new Vector2(PushOffForce, player.Velocity.X);
                 EmitSignal(SignalName.StateTransition, this, "WalkState");
             }
         }
