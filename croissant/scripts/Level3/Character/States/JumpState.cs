@@ -3,6 +3,8 @@ using System;
 
 public partial class JumpState : State
 {
+    private Vector2 initialVelocity;
+
     public override void Enter()
     {
         GD.Print("Jumping");
@@ -12,7 +14,9 @@ public partial class JumpState : State
         if (player == null)
             return;
 
-        player.Velocity = new Vector2(player.Velocity.X, PlayerCharacter.JumpVelocity);
+        initialVelocity = player.Velocity;
+        initialVelocity.Y = PlayerCharacter.JumpVelocity;
+        player.Velocity = initialVelocity;
         player.AnimationPlayer.Play("Jump");
     }
 
@@ -24,11 +28,15 @@ public partial class JumpState : State
             return;
 
         Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-
-        
         Vector2 velocity = player.Velocity;
-        velocity.X = direction.X * PlayerCharacter.Speed;
+
+        if (Mathf.Abs(direction.X) > 0.1f && !player.IsWallJumping())
+        {
+            velocity.X = direction.X * PlayerCharacter.Speed;
+        }
+        
         player.Velocity = velocity;
+
         if(velocity.X>0)
         {
             player.Sprite.FlipH = false;
@@ -39,13 +47,13 @@ public partial class JumpState : State
         }
 
         if (player.IsOnFloor())
-		{
-			if (Mathf.Abs(direction.X) > 0.1f)
-				EmitSignal(SignalName.StateTransition, this, "WalkState");
-			else
-				EmitSignal(SignalName.StateTransition, this, "IdleState");
-		}
-		
+        {
+            if (Mathf.Abs(direction.X) > 0.1f)
+                EmitSignal(SignalName.StateTransition, this, "WalkState");
+            else
+                EmitSignal(SignalName.StateTransition, this, "IdleState");
+        }
+        
 
         if (!player.IsOnFloor() && player.Velocity.Y > 0)
         {
@@ -54,5 +62,7 @@ public partial class JumpState : State
 
     }
 
-    public override void Exit() { }
+    public override void Exit() 
+    {
+    }
 }

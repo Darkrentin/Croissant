@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://dwoxfvrhewmea" path="res://scripts/Level3/Others/ConfigFile.cs" id="1_j5ubr"]
 [ext_resource type="Texture2D" uid="uid://congju50q684c" path="res://assets/sprites/Shotgun/Sgun2.png" id="2_jvydt"]
 
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xfbkd"]
 radius = 21.0
 height = 44.0
