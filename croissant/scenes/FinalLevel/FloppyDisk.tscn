@@ -1,4 +1,6 @@
-[gd_scene load_steps=14 format=4 uid="uid://dgba76cb311r2"]
+[gd_scene load_steps=15 format=4 uid="uid://dgba76cb311r2"]
+
+[ext_resource type="Script" uid="uid://cytb23rn3ovqp" path="res://scripts/FinalLevel/FloppyDisk.cs" id="1_cgo7u"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0v8p"]
 resource_name = ".007"
@@ -166,9 +168,12 @@ shadow_mesh = SubResource("ArrayMesh_4w728")
 size = Vector3(1.25787, 0.0482788, 1.33307)
 
 [node name="FloppyDisk" type="CharacterBody3D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_cgo7u")
 
 [node name="Mesh" type="Node3D" parent="."]
-transform = Transform3D(5, 0, 0, 0, -2.18557e-07, 5, 0, -5, -2.18557e-07, 0, 0, 0)
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
 
 [node name="base" type="MeshInstance3D" parent="Mesh"]
 mesh = SubResource("ArrayMesh_syf53")
@@ -187,5 +192,5 @@ mesh = SubResource("ArrayMesh_aj3nx")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0567322, 0.00796509, 0.166534)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0.0572674, -0.173053, 0)
 shape = SubResource("BoxShape3D_nfjby")

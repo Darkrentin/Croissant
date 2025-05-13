@@ -38,6 +38,7 @@ public abstract partial class Npc : FloatWindow
         LeftDown = new Vector2I(0, GameManager.ScreenSize.Y - Size.Y);
         RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);
         RightDown = new Vector2I(GameManager.ScreenSize.X - Size.X, GameManager.ScreenSize.Y - Size.Y);
+        Title = NpcName;
     }
 
     public override void _Process(double delta)
@@ -45,6 +46,7 @@ public abstract partial class Npc : FloatWindow
         base._Process(delta);
         if (Input.IsActionJustPressed("LeftClick"))
             Skip();
+        
     }
 
     public void HideNpc(int side = -1)
@@ -57,7 +59,7 @@ public abstract partial class Npc : FloatWindow
             StartLinearTransition(HidePosition, 0.5f, reset: true);
         Dialogue.Visible = false;
         Dialogue.label.Text = "";
-        //Visible = false;
+        Visible = false;
     }
 
     public void ShowNpc(Vector2I Position)
@@ -65,7 +67,7 @@ public abstract partial class Npc : FloatWindow
         ForceDialoguePlacement = false;
         StartLinearTransition(Position, 0.1f, reset: true);
         GrabFocus();
-        //Visible = true;
+        Visible = true;
     }
 
     public override void TransitionFinished()
