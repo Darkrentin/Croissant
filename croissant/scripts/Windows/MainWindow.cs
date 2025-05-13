@@ -3,7 +3,7 @@ using Godot;
 public partial class MainWindow : FloatWindow
 {
     public static TextureRect FakeBackground;
-    public static Control DebugInfo;
+    public static CanvasLayer DebugInfo;
     public Label DebugLabel;
 
     public override void _Ready()
@@ -12,8 +12,7 @@ public partial class MainWindow : FloatWindow
         FakeBackground = GetNode<TextureRect>("Main/FakeDesktop");
         FakeBackground.Size = DisplayServer.ScreenGetUsableRect().Size;
 
-        DebugInfo = GetNode<Control>("Main/DebugInfo");
-        DebugInfo.Size = DisplayServer.ScreenGetUsableRect().Size;
+        DebugInfo = GetNode<CanvasLayer>("Main/DebugInfo");
 
         DebugLabel = GetNode<Label>("Main/DebugInfo/DebugLabel");
 
