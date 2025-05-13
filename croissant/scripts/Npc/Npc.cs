@@ -26,6 +26,7 @@ public abstract partial class Npc : FloatWindow
     {
         base._Ready();
         InitNpc();
+        Visible = false;
     }
 
     public virtual void InitNpc()
