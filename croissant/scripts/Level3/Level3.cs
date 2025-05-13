@@ -25,6 +25,7 @@ public partial class Level3 : FloatWindow
         actualScene = Level3Nodes[sceneid];
         actualScene.ShowSubLevel();
     }
+    
 
     public override void _Input(InputEvent @event)
     {
@@ -53,5 +54,31 @@ public partial class Level3 : FloatWindow
 		if(!HasFocus()) GrabFocus();
     }
 
+
+    public void Transition(Portal Portal)
+    {
+        SubLevel3 nextScene = Level3.Instance.Level3Nodes[Portal.NextSceneId];	
+        player.ProcessMode = ProcessModeEnum.Disabled;
+		
+		if (Level3.Instance.actualScene != null)
+		{
+			Level3.Instance.actualScene.HideSubLevel();
+		}
+		nextScene.ShowSubLevel();
+        Vector2 playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
+        Tween tween = GetTree().CreateTween();
+        float distance = (player.GlobalPosition - playerTargetPosition).Length();
+        float screenWidth = GameManager.ScreenSize.X;
+        float duration = distance / (float)screenWidth; // Time to cross full screen = 1 second
+        tween.SetTrans(Tween.TransitionType.Sine);
+        tween.SetEase(Tween.EaseType.InOut);
+        tween.TweenProperty(player, "global_position", playerTargetPosition, duration);
+        tween.TweenCallback(Callable.From(() => {
+            player.ProcessMode = ProcessModeEnum.Pausable;
+        }));
+		sceneid = Portal.NextSceneId;
+		actualScene = nextScene;
+		GD.Print("Level complete!");
+    }
 	
 }

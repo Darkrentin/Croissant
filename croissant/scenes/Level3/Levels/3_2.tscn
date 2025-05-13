@@ -1,8 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://lryqgy5js16r"]
+[gd_scene load_steps=9 format=3 uid="uid://lryqgy5js16r"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_6my4b"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_w0pfg"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_s5xex"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_6my4b"]
+b = Vector2(0, 1080)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_nu3jg"]
+a = Vector2(0, 1080)
+b = Vector2(1920, 1080)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_ca8mj"]
+a = Vector2(1920, 1080)
+b = Vector2(1920, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_67ltn"]
+a = Vector2(1920, 0)
+b = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73yxm"]
 resource_local_to_scene = true
@@ -11,6 +26,20 @@ size = Vector2(1918, 120)
 [node name="3_2" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_6my4b")
 windows = [NodePath("StaticPlateform/Window")]
+
+[node name="Limit" type="StaticBody2D" parent="."]
+
+[node name="L" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_6my4b")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_nu3jg")
+
+[node name="R" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_ca8mj")
+
+[node name="U" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_67ltn")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_w0pfg")]
 position = Vector2(2, 959)

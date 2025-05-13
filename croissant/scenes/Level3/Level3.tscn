@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://c5avgc26i0v58" path="res://scenes/Level3/Levels/3_1.tscn" id="3_pl275"]
 [ext_resource type="PackedScene" uid="uid://lryqgy5js16r" path="res://scenes/Level3/Levels/3_2.tscn" id="4_k31tl"]
 
-[node name="Level3" type="Window"]
+[node name="Level3" type="Window" node_paths=PackedStringArray("player")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 mode = 4
@@ -16,6 +16,7 @@ always_on_top = true
 transparent = true
 script = ExtResource("1_pl275")
 level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl")])
+player = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(1763, 653)

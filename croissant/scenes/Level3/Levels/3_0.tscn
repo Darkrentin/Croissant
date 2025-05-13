@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://qkuoa8g4g2cl"]
+[gd_scene load_steps=17 format=3 uid="uid://qkuoa8g4g2cl"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
@@ -7,6 +7,21 @@
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="4_8j6u2"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_vwnnv"]
 [ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="6_gijp6"]
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5q6or"]
+b = Vector2(0, 1080)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_8j6u2"]
+a = Vector2(0, 1080)
+b = Vector2(1920, 1080)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_vwnnv"]
+a = Vector2(1920, 1080)
+b = Vector2(1920, 0)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_fgx1k"]
+a = Vector2(1920, 0)
+b = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
 resource_local_to_scene = true
@@ -31,6 +46,20 @@ size = Vector2(120, 448)
 [node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform3/Window"), NodePath("KillingPlatform/Window"), NodePath("PlayerOnly/Window")]
+
+[node name="Limit" type="StaticBody2D" parent="."]
+
+[node name="L" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_5q6or")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_8j6u2")
+
+[node name="R" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_vwnnv")
+
+[node name="U" type="CollisionShape2D" parent="Limit"]
+shape = SubResource("SegmentShape2D_fgx1k")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(456, 448)
@@ -73,25 +102,17 @@ position = Vector2(1049, 31)
 shape = SubResource("RectangleShape2D_irsaa")
 
 [node name="1" parent="." instance=ExtResource("3_5q6or")]
-position = Vector2(107, 242)
+position = Vector2(1448, 720)
 
 [node name="ConfigFile" parent="." instance=ExtResource("4_8j6u2")]
 position = Vector2(1135, 340)
 scale = Vector2(1.5, 1.5)
 
-[node name="TextureRect" parent="ConfigFile" index="0"]
-offset_left = -20.6667
-offset_top = -27.3333
-offset_right = 34.3333
-offset_bottom = 23.6667
-scale = Vector2(1.5, 1.5)
-metadata/_edit_use_anchors_ = true
-
 [node name="CollisionShape2D" parent="ConfigFile" index="1"]
 scale = Vector2(1.5, 1.5)
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_vwnnv")]
-position = Vector2(1530, 708)
+position = Vector2(848, 704)
 
 [node name="Window" parent="KillingPlatform" index="0"]
 visible = true

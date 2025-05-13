@@ -4,6 +4,7 @@ using System;
 public partial class ConfigFile : Area2D
 {
     public static int count = 0;
+    [Export] public Label FileName;
 
     public override void _Ready()
     {

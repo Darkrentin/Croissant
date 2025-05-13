@@ -11,7 +11,7 @@ public partial class Portal : Area2D
 		// Connect the body entered signal to the OnBoddyEntered method
 		BodyEntered += OnBoddyEntered;
 		timer = new Timer();
-		timer.WaitTime = 0.5f;
+		timer.WaitTime = 2f;
 		timer.OneShot = true;
 		timer.Timeout += () =>
 		{
@@ -31,7 +31,7 @@ public partial class Portal : Area2D
 		if (body is PlayerCharacter player)
 		{
 			GD.Print("OnBoddyEntered");
-			OnLevelComplete(player);
+			Level3.Instance.Transition(this);
 			
 			
 		}
@@ -46,19 +46,6 @@ public partial class Portal : Area2D
 		}
 	}
 
-	private void OnLevelComplete(PlayerCharacter player)
-	{
-		SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];	
-		
-		if (Level3.Instance.actualScene != null)
-		{
-			Level3.Instance.actualScene.HideSubLevel();
-		}
-		nextScene.ShowSubLevel();
-		player.GlobalPosition = nextScene.GetNode<Portal>($"{Level3.Instance.sceneid}").GlobalPosition + new Vector2(60,60);
-		Level3.Instance.sceneid = NextSceneId;
-		Level3.Instance.actualScene = nextScene;
-		GD.Print("Level complete!");
-	}
+	
 
 }
