@@ -8,8 +8,6 @@ public partial class SaveData : Resource
     //Variable to Save
 
     [Export]
-    public float Difficulty = 1f;
-    [Export]
     public bool FakeDesktop = false;
     [Export]
     public bool DebugMode = false;
@@ -26,7 +24,6 @@ public partial class SaveData : Resource
 
     public void GetData()
     {
-        Difficulty = GameManager.Difficulty;
         FakeDesktop = GameManager.MenuWindow.FakeDesktop;
         DebugMode = GameManager.MenuWindow.DebugMode;
         HaveFinishTheGameAtLeastOneTime = GameManager.HaveFinishTheGameAtLeastOneTime;
@@ -37,7 +34,6 @@ public partial class SaveData : Resource
     {
         GetData();
         Lib.Print("Data to save:");
-        Lib.Print("Difficulty: " + Difficulty);
         Lib.Print("FakeDesktop: " + FakeDesktop);
         Lib.Print("DebugMode: " + DebugMode);
         Lib.Print("HaveFinishTheGameAtLeastOneTime: " + HaveFinishTheGameAtLeastOneTime);
@@ -75,7 +71,6 @@ public partial class SaveData : Resource
             {
                 Lib.Print($"Resource loaded successfully from {path}");
                 Lib.Print("Data loaded:");
-                Lib.Print("Difficulty: " + loadedResource.Difficulty);
                 Lib.Print("FakeDesktop: " + loadedResource.FakeDesktop);
                 Lib.Print("DebugMode: " + loadedResource.DebugMode);
                 Lib.Print("HaveFinishTheGameAtLeastOneTime: " + loadedResource.HaveFinishTheGameAtLeastOneTime);

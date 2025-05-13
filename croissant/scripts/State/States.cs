@@ -41,11 +41,6 @@ public static class States
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
-    public static void ChooseDifficulty()
-    {
-        GameManager.GameRoot.AddChild(DifficultyScene.Instantiate<Window>());
-        GameManager.State = GameManager.GameState.Void;
-    }
     public static void IntroGame()
     {
         IntroLvl = IntroGameScene.Instantiate<Window>();

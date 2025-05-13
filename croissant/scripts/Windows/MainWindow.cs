@@ -36,5 +36,11 @@ public partial class MainWindow : FloatWindow
     void UpdateDebugLabel()
     {
         DebugLabel.Text = $"FPS: {Engine.GetFramesPerSecond()}\n";
+        DebugLabel.Text += $"Mouse Position: {Lib.GetCursorPosition()}\n";
+        DebugLabel.Text += $"Game State: {GameManager.State}\n";
+        DebugLabel.Text += $"Memory Usage: {Godot.OS.GetStaticMemoryUsage() / 1024 / 1024}MB\n";
+        DebugLabel.Text += $"Uptime: {Time.GetTicksMsec() / 1000.0f}s\n";
+
+
     }
 }

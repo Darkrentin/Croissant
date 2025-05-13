@@ -27,13 +27,13 @@ public partial class Level1 : Node2D
 
         spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1f / GameManager.Difficulty;
+        spawnTimer.WaitTime = 1f;
         spawnTimer.Timeout += OnSpawnTimerTimeout;
         spawnTimer.Start();
 
         totalTimer = new Timer();
         AddChild(totalTimer);
-        totalTimer.WaitTime = 3f * GameManager.Difficulty;
+        totalTimer.WaitTime = 3f;
         totalTimer.Timeout += TotalSpawnerTimeout;
         totalTimer.Start();
 
@@ -54,10 +54,10 @@ public partial class Level1 : Node2D
 
     public void OnSpawnTimerTimeout()
     {
-        if (WindowCount < 20 * GameManager.Difficulty && WindowCount > 0)
+        if (WindowCount < 20 && WindowCount > 0)
         {
             AddNewWindow();
-            spawnTimer.WaitTime = (Lib.rand.NextDouble() * 0.4f + 0.6f + TimerLimit) / GameManager.Difficulty;
+            spawnTimer.WaitTime = (Lib.rand.NextDouble() * 0.4f + 0.6f + TimerLimit);
             //UpdateSpawnTimer();
         }
     }
@@ -99,12 +99,12 @@ public partial class Level1 : Node2D
         //////Lib.Print($"timertic: {TimerTic}");
         //////Lib.Print($"window: {WindowCount}");
         
-        if (InitialWindowCount < 22 * GameManager.Difficulty)
+        if (InitialWindowCount < 22)
         {
             AddNewWindow();
             InitialWindowCount++;
         }
-        else if (InitialWindowCount == 22 * GameManager.Difficulty)
+        else if (InitialWindowCount == 22)
         {
             totalTimer.WaitTime = 1.5f;
             InitialWindowCount++;

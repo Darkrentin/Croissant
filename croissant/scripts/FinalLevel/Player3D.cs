@@ -62,6 +62,8 @@ public partial class Player3D : CharacterBody3D
 				Enemy.OnBulletCollide();
 			else if (Body is Objective Obj)
 				Obj.Break();
+			else if (Body is Virus3D Virus)
+				Virus.TakeDamage();
 		}
 	}
 }

@@ -1,7 +1,6 @@
-[gd_scene load_steps=25 format=3 uid="uid://ckx6m1bn0k11e"]
+[gd_scene load_steps=26 format=3 uid="uid://ckx6m1bn0k11e"]
 
 [ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
-[ext_resource type="PackedScene" uid="uid://dk1l5cx57mxbv" path="res://scenes/Windows/DifficultyMenu.tscn" id="2_yx4fs"]
 [ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="3_rvotm"]
 [ext_resource type="PackedScene" uid="uid://cppwo1k4kuwg2" path="res://scenes/Level1/Level1.tscn" id="4_inof8"]
 [ext_resource type="PackedScene" uid="uid://d13xxxigq3m7y" path="res://scenes/Level2/Level2.tscn" id="5_uq2bd"]
@@ -25,9 +24,60 @@
 [ext_resource type="PackedScene" uid="uid://blu5tcq0yepaj" path="res://scenes/Level2/SpikeWindow.tscn" id="22_2mdes"]
 [ext_resource type="PackedScene" uid="uid://pus1csxsvyfw" path="res://scenes/FinalLevel/FinalLevel.tscn" id="23_ccpnw"]
 
+[sub_resource type="CSharpScript" id="CSharpScript_ccpnw"]
+script/source = "using Godot;
+
+public partial class DifficultyMenu : FloatWindow
+{
+	[Export] Button PlayButton;
+	[Export] OptionButton Difficulty;
+
+	public override void _Ready()
+	{
+		PlayButton.Pressed += StartGame;
+		Position = Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2;
+	}
+
+	public override void _Process(double delta)
+	{
+
+	}
+
+	public void StartGame()
+	{
+		switch (Difficulty.Selected)
+		{
+			case 0:
+				GameManager.SetDifficulty(DifficultyLevel.Easy);
+				break;
+			case 1:
+				GameManager.SetDifficulty(DifficultyLevel.Normal);
+				break;
+			case 2:
+				GameManager.SetDifficulty(DifficultyLevel.Hard);
+				break;
+		}
+		GameManager.State = GameManager.GameState.IntroGame;
+		QueueFree();
+	}
+}"
+
+[sub_resource type="PackedScene" id="PackedScene_1v343"]
+_bundled = {
+"conn_count": 0,
+"conns": PackedInt32Array(),
+"editable_instances": [],
+"names": PackedStringArray("Difficulty", "Window", "position", "size", "script", "PlayButton", "Difficulty", "Control", "Control", "layout_mode", "anchors_preset", "anchor_right", "anchor_bottom", "grow_horizontal", "grow_vertical", "Label", "Label", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_left", "text", "horizontal_alignment", "OptionButton", "OptionButton", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_right", "selected", "item_count", "popup/item_0/text", "popup/item_0/id", "popup/item_1/text", "popup/item_1/id", "popup/item_2/text", "popup/item_2/id", "Button", "Button", "layout_mode", "anchors_preset", "anchor_left", "anchor_top", "anchor_right", "anchor_bottom", "offset_right", "text"),
+"node_count": 5,
+"node_paths": [NodePath("."), NodePath("./Control"), NodePath("./Control"), NodePath("./Control")],
+"nodes": PackedInt32Array(-1, -1, 1, 0, -1, 5, 2, 0, 3, 1, 4, 2, 1073741829, 3, 1073741830, 4, 0, 1073741824, 0, 8, 7, -1, 6, 9, 5, 10, 6, 11, 7, 12, 8, 13, 9, 14, 10, 0, 1073741825, 0, 16, 15, -1, 9, 17, 11, 18, 12, 19, 13, 20, 14, 21, 15, 22, 16, 23, 17, 24, 18, 25, 19, 0, 1073741826, 0, 27, 26, -1, 15, 28, 20, 29, 21, 30, 22, 31, 23, 32, 24, 33, 25, 34, 26, 35, 27, 36, 28, 37, 29, 38, 30, 39, 31, 40, 32, 41, 33, 42, 34, 0, 1073741827, 0, 44, 43, -1, 8, 45, 35, 46, 36, 47, 37, 48, 38, 49, 39, 50, 40, 51, 41, 52, 42, 0),
+"variants": [Vector2i(0, 36), Vector2i(150, 200), SubResource("CSharpScript_ccpnw"), NodePath("Control/Button"), NodePath("Control/OptionButton"), 3, 15, 1.0, 1.0, 2, 2, 1, -1, 0.053, 0.02, 0.96, 0.135, 0.0499997, "Difficulty", 1, 1, -1, 0.16, 0.22, 0.853, 0.375, 0.0499954, 1, 3, "Easy", 0, "Normal", 1, "Hard", 2, 1, -1, 0.16, 0.62, 0.853, 0.9, 0.0499954, "PLAY"],
+"version": 3
+}
+
 [node name="SceneLoader" type="Node"]
 script = ExtResource("1_6c1vk")
-DifficultyScene = ExtResource("2_yx4fs")
+DifficultyScene = SubResource("PackedScene_1v343")
 IntroGameScene = ExtResource("3_rvotm")
 Level1Scene = ExtResource("4_inof8")
 Level2Scene = ExtResource("5_uq2bd")

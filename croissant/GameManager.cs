@@ -8,11 +8,8 @@ public enum DifficultyLevel { Easy, Normal, Hard }
 public partial class GameManager : Node2D
 {
     [Export] PackedScene menuScene;
-    [Export] public float difficulty { get => _difficulty; set => _difficulty = value; }
     [Export] public GameState ExportState { get => _state; set => _state = value; }
-    private static float _difficulty = 1f;
-    private static GameState _state = GameState.Difficulty;
-    public static float Difficulty { get => _difficulty; private set => _difficulty = value; }
+    private static GameState _state = GameState.IntroGame;
     public static Node2D GameRoot;
     public static GameState State { get => _state; set { _state = value; StateChange(_state); } }
     public static MainWindow MainWindow;
@@ -27,27 +24,11 @@ public partial class GameManager : Node2D
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
-    public static void SetDifficulty(DifficultyLevel level)
-    {
-        switch (level)
-        {
-            case DifficultyLevel.Easy:
-                Difficulty = 0.75f;
-                break;
-            case DifficultyLevel.Normal:
-                Difficulty = 1f;
-                break;
-            case DifficultyLevel.Hard:
-                Difficulty = 1.5f;
-                break;
-        }
-    }
     public enum GameState
     {
         Virus,
         Helper,
         // Game state
-        Difficulty,
         IntroGame,
         IntroVirus,
         VirusDialogue1,
@@ -113,7 +94,6 @@ public partial class GameManager : Node2D
         }
         else
         {
-            Difficulty = SaveData.Difficulty;
             HaveFinishTheGameAtLeastOneTime = SaveData.HaveFinishTheGameAtLeastOneTime;
         }
     }
@@ -139,9 +119,6 @@ public partial class GameManager : Node2D
                 break;
 
             // Game state
-            case GameState.Difficulty:
-                States.ChooseDifficulty();
-                break;
             case GameState.IntroGame:
                 States.IntroGame();
                 break;

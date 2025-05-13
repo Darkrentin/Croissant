@@ -8,8 +8,7 @@
 [node name="Main" type="Node2D"]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_fos0i")
-difficulty = 0.5
-ExportState = 13
+ExportState = 15
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
 visible = false
@@ -27,20 +26,28 @@ offset_bottom = 1080.0
 [node name="ColorRect" type="ColorRect" parent="DebugInfo"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.033
-anchor_bottom = 0.059
+anchor_top = 0.119
+anchor_right = 0.133
+anchor_bottom = 0.244
+offset_top = -0.520004
 offset_right = 0.639999
-offset_bottom = 0.279995
-color = Color(0, 0, 0, 0.329412)
+offset_bottom = 0.47998
+color = Color(0, 0, 0, 0.564706)
 
 [node name="DebugLabel" type="Label" parent="DebugInfo"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 0.267
-anchor_bottom = 0.415
-offset_right = -0.640015
-offset_bottom = -0.200012
-text = "Test"
+anchor_top = 0.119
+anchor_right = 0.133
+anchor_bottom = 0.244
+offset_top = -0.520004
+offset_right = 0.639999
+offset_bottom = 0.47998
+text = "Test
+Test
+Test
+Test
+Test"
 
 [node name="SpeedRunTimer" parent="." instance=ExtResource("4_cm0pq")]
 visible = false
