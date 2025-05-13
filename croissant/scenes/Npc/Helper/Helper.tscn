@@ -101,7 +101,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 15.0
+"speed": 10.0
 }]
 
 [node name="Helper" type="Window" node_paths=PackedStringArray("AnimationTree", "Dialogue")]
@@ -119,15 +119,6 @@ Dialogue = NodePath("DialogueWindow")
 Draggable = false
 Minimizable = false
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_4ql8l")
@@ -140,6 +131,7 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("2_4ql8l")]
 ParentWindow = NodePath("..")
+CanSkip = true
 Margin = Vector2i(30, -50)
 LeftSide = false
 
@@ -148,4 +140,4 @@ position = Vector2(160, 140)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_jthw1")
 autoplay = "default"
-frame_progress = 0.0112304
+frame_progress = 0.562743
