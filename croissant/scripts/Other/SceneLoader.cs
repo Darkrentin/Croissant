@@ -2,7 +2,7 @@ using Godot;
 
 public partial class SceneLoader : Node
 {
-	public static SceneLoader Instance; 
+	public static SceneLoader Instance;
 	[Export] public PackedScene DifficultyScene;
 	[Export] public PackedScene IntroGameScene;
 	[Export] public PackedScene Level1Scene;
@@ -26,6 +26,7 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene FollowWindowScene;
 	[Export] public PackedScene SpikeWindowScene;
 	[Export] public PackedScene FinalLevelScene;
+	[Export] public PackedScene ScoreboardScene;
 
 	public override void _Ready()
 	{

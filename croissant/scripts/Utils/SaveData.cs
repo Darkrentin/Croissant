@@ -1,22 +1,13 @@
-// SaveData.cs
 using Godot;
-using System.Collections.Generic;
-using System.ComponentModel.Design;
+using System.Globalization;
 
 public partial class SaveData : Resource
 {
-    //Variable to Save
-
-    [Export]
-    public bool FakeDesktop = false;
-    [Export]
-    public bool DebugMode = false;
-    [Export]
-    public bool HaveFinishTheGameAtLeastOneTime = false;
-
-
+    [Export] public bool FakeDesktop = false;
+    [Export] public bool DebugMode = false;
+    [Export] public bool HaveFinishTheGameAtLeastOneTime = false;
+    [Export] public double PersonalBestTime = 21387599f;
     private const string SaveFolderName = "ShapeGlitch";
-
     private string GetSaveFilePath(string fileName = "Save.tres")
     {
         return $"user://{SaveFolderName}/{fileName}";
@@ -27,9 +18,10 @@ public partial class SaveData : Resource
         FakeDesktop = GameManager.MenuWindow.FakeDesktop;
         DebugMode = GameManager.MenuWindow.DebugMode;
         HaveFinishTheGameAtLeastOneTime = GameManager.HaveFinishTheGameAtLeastOneTime;
-        Lib.Print("Successfully retrieved data");
-
+        PersonalBestTime = GameManager.PersonalBestTime;
+        Lib.Print("Successfully retrieved general game settings for SaveData instance");
     }
+
     public Error Save(string fileName = "Save.tres")
     {
         GetData();
@@ -37,6 +29,7 @@ public partial class SaveData : Resource
         Lib.Print("FakeDesktop: " + FakeDesktop);
         Lib.Print("DebugMode: " + DebugMode);
         Lib.Print("HaveFinishTheGameAtLeastOneTime: " + HaveFinishTheGameAtLeastOneTime);
+        Lib.Print("PersonalBestTime: " + (PersonalBestTime == double.MaxValue ? "N/A" : PersonalBestTime.ToString(CultureInfo.InvariantCulture)));
 
         string path = GetSaveFilePath(fileName);
         string dirPath = $"user://{SaveFolderName}/";
@@ -44,7 +37,6 @@ public partial class SaveData : Resource
         Error makeDirError = DirAccess.MakeDirRecursiveAbsolute(dirPath);
         if (makeDirError != Error.Ok)
         {
-            //GD.PrintErr($"Error creating save directory {dirPath}: {makeDirError}");
             return makeDirError;
         }
 
@@ -74,6 +66,7 @@ public partial class SaveData : Resource
                 Lib.Print("FakeDesktop: " + loadedResource.FakeDesktop);
                 Lib.Print("DebugMode: " + loadedResource.DebugMode);
                 Lib.Print("HaveFinishTheGameAtLeastOneTime: " + loadedResource.HaveFinishTheGameAtLeastOneTime);
+                Lib.Print("PersonalBestTime: " + (loadedResource.PersonalBestTime == double.MaxValue ? "N/A" : loadedResource.PersonalBestTime.ToString(CultureInfo.InvariantCulture)));
 
                 return loadedResource;
             }

@@ -18,6 +18,7 @@ public static class States
     public static PackedScene VirusSplashScene = SceneLoader.VirusSplashScene;
     public static PackedScene BsodScene = SceneLoader.BsodScene;
     public static PackedScene CursorWindowScene = SceneLoader.CursorWindowScene;
+    public static PackedScene ScoreboardScene = SceneLoader.ScoreboardScene;
     public static Window Bsod;
     public static Window IntroLvl;
     public static Node Lvl1;
@@ -41,6 +42,17 @@ public static class States
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
+
+    public static void Scoreboard()
+    {
+        Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
+        Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
+        GameManager.GameRoot.AddChild(Scoreboard);
+
+        //Change State condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+
     public static void IntroGame()
     {
         IntroLvl = IntroGameScene.Instantiate<Window>();
@@ -183,15 +195,15 @@ public static class States
 
     public static void FinalLevel()
     {
-        
+
         GameManager.GameRoot.RemoveChild(GameManager.helper);
         GameManager.helper.QueueFree();
         GameManager.GameRoot.RemoveChild(GameManager.virus);
         GameManager.virus.QueueFree();
         GameManager.helper = null;
         GameManager.virus = null;
-        
-    
+
+
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
         GameManager.GameRoot.AddChild(FinalLevel);
 

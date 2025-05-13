@@ -1,0 +1,304 @@
+[gd_scene load_steps=8 format=3 uid="uid://carai6dnhfx5a"]
+
+[ext_resource type="Script" uid="uid://caomhrumivh7u" path="res://scripts/Other/ScoreboardWindow.cs" id="1_gady3"]
+[ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_xk78v"]
+[ext_resource type="Texture2D" uid="uid://cwgonk1nbqmj0" path="res://icon.svg" id="3_sgbgo"]
+
+[sub_resource type="Theme" id="Theme_xk78v"]
+
+[sub_resource type="Animation" id="Animation_sgbgo"]
+resource_name = "Loading"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer/Sprite2D:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+
+[sub_resource type="Animation" id="Animation_poncd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer/Sprite2D:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5mjg4"]
+_data = {
+&"Loading": SubResource("Animation_sgbgo"),
+&"RESET": SubResource("Animation_poncd")
+}
+
+[node name="ScoreboardWindow" type="Window" node_paths=PackedStringArray("HttpRequest", "TimeLabel", "PersonalBestLabel", "UsernameEntry", "ScoreboardText", "SubmitButton", "ShowScoreboardButton", "EndResultsContainer", "ScoreboardContainer", "WaitingScreenContainer")]
+canvas_item_default_texture_filter = 0
+position = Vector2i(0, 24)
+size = Vector2i(500, 500)
+theme = ExtResource("1_xk78v")
+script = ExtResource("1_gady3")
+HttpRequest = NodePath("HTTPRequest")
+TimeLabel = NodePath("EndResult/VBoxContainer/TimeLabel")
+PersonalBestLabel = NodePath("EndResult/VBoxContainer/PB")
+UsernameEntry = NodePath("EndResult/VBoxContainer/UsernameEntry")
+ScoreboardText = NodePath("Scoreboard/VBoxContainer/Panel/ColorRect/ScoreboardText")
+SubmitButton = NodePath("EndResult/VBoxContainer/SubmitButton")
+ShowScoreboardButton = NodePath("EndResult/VBoxContainer/HBoxContainer3/ShowScoreboardButton")
+EndResultsContainer = NodePath("EndResult")
+ScoreboardContainer = NodePath("Scoreboard")
+WaitingScreenContainer = NodePath("WaitingScreen")
+metadata/_custom_type_script = "uid://kuhg0kaqg182"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00458, 1)
+color = Color(0.764706, 0.780392, 0.796078, 1)
+
+[node name="EndResult" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EndResult"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Congrats" type="RichTextLabel" parent="EndResult/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[wave amp=15 freq=5]Congratulations![/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EndResult/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_xk78v")
+text = "You have finished the game in"
+horizontal_alignment = 1
+
+[node name="TimeLabel" type="RichTextLabel" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 60
+theme_override_font_sizes/bold_font_size = 60
+bbcode_enabled = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PB" type="Label" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(345, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sep2" type="HSeparator" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Submit you time!" type="Label" parent="EndResult/VBoxContainer"]
+layout_mode = 2
+text = "Submit your time to the scoreboard!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="UsernameEntry" type="LineEdit" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_colors/font_placeholder_color = Color(0.605274, 0.605274, 0.605274, 1)
+placeholder_text = "Enter Username..."
+max_length = 20
+caret_blink = true
+
+[node name="SubmitButton" type="Button" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(220, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "SUBMIT TIME"
+
+[node name="Sep3" type="HSeparator" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Or" type="Label" parent="EndResult/VBoxContainer"]
+layout_mode = 2
+text = "OR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sep4" type="HSeparator" parent="EndResult/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EndResult/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="ShowScoreboardButton" type="Button" parent="EndResult/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(220, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "SHOW SCOREBOARD"
+
+[node name="WaitingScreen" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="WaitingScreen"]
+libraries = {
+&"": SubResource("AnimationLibrary_5mjg4")
+}
+autoplay = "Loading"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="WaitingScreen"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.022
+anchor_right = 0.986
+anchor_bottom = 0.511
+offset_left = 7.92
+offset_right = 0.039978
+offset_bottom = 0.0399933
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 28
+bbcode_enabled = true
+text = "[wave amp=15 freq=5]Loading...[/wave]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="WaitingScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="WaitingScreen/AspectRatioContainer"]
+texture_filter = 1
+position = Vector2(-18, 6)
+scale = Vector2(4, 4)
+texture = ExtResource("3_sgbgo")
+offset = Vector2(4, 0)
+
+[node name="Scoreboard" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Congrats" type="RichTextLabel" parent="Scoreboard/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[wave amp=15 freq=5]Scoreboard[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="Scoreboard/VBoxContainer"]
+layout_mode = 2
+
+[node name="Panel" type="Panel" parent="Scoreboard/VBoxContainer"]
+custom_minimum_size = Vector2(490, 370)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ColorRect" type="ColorRect" parent="Scoreboard/VBoxContainer/Panel"]
+custom_minimum_size = Vector2(485, 365)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.007
+anchor_top = 0.008
+anchor_right = 0.993
+anchor_bottom = 0.992
+offset_left = 0.05
+offset_top = 0.0999999
+offset_right = -0.0500183
+offset_bottom = -0.100006
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="ScoreboardText" type="RichTextLabel" parent="Scoreboard/VBoxContainer/Panel/ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+bbcode_enabled = true
+
+[node name="Sep2" type="HSeparator" parent="Scoreboard/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="Scoreboard/VBoxContainer"]
+custom_minimum_size = Vector2(220, 45)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Play Endless mode"
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 10.0
+
+[connection signal="request_completed" from="HTTPRequest" to="." method="_on_http_request_request_completed"]

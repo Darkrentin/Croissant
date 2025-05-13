@@ -1,9 +1,6 @@
 using Godot;
 using System;
 using System.Collections.Generic;
-using System.Runtime.Serialization;
-
-public enum DifficultyLevel { Easy, Normal, Hard }
 
 public partial class GameManager : Node2D
 {
@@ -24,10 +21,12 @@ public partial class GameManager : Node2D
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
+    public static double PersonalBestTime;
     public enum GameState
     {
         Virus,
         Helper,
+        Scoreboard,
         // Game state
         IntroGame,
         IntroVirus,
@@ -95,12 +94,12 @@ public partial class GameManager : Node2D
         else
         {
             HaveFinishTheGameAtLeastOneTime = SaveData.HaveFinishTheGameAtLeastOneTime;
+            PersonalBestTime = SaveData.PersonalBestTime;
         }
     }
 
     private void InitializeGame()
     {
-        // Initialisation du jeu après la sélection de la difficulté
         State = GameState.IntroGame;
     }
 
@@ -116,6 +115,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.Helper:
                 States.Helper();
+                break;
+            case GameState.Scoreboard:
+                States.Scoreboard();
                 break;
 
             // Game state

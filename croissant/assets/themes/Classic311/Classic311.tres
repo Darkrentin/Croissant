@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=67 format=3 uid="uid://sx8r7eylidoh"]
+[gd_resource type="Theme" load_steps=69 format=3 uid="uid://sx8r7eylidoh"]
 
 [ext_resource type="StyleBox" uid="uid://cwxbgtsxbq6lg" path="res://assets/themes/Classic311/Styles/Button/Normal.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://d1ceaid2dg38m" path="res://assets/themes/Classic311/Styles/Scroll/Outline.tres" id="2"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bu4vvyq3lrpwp" path="res://assets/themes/Classic311/Styles/CheckBox/True.png" id="7"]
 [ext_resource type="Texture2D" uid="uid://troyupq6j7r1" path="res://assets/themes/Classic311/Styles/CheckBox/RadioFalse.png" id="8"]
 [ext_resource type="Texture2D" uid="uid://boyfl3l1p2r4l" path="res://assets/themes/Classic311/Styles/CheckBox/False.png" id="9"]
+[ext_resource type="FontFile" uid="uid://obbkukv56e3r" path="res://assets/texts/fonts/CourierPrime-Regular.ttf" id="9_bja74"]
 [ext_resource type="StyleBox" uid="uid://byaiiug5rvdj5" path="res://assets/themes/Classic311/Styles/LineEdit/Normal.tres" id="10"]
 [ext_resource type="StyleBox" uid="uid://dpechjkstnnij" path="res://assets/themes/Classic311/Styles/Scroll/Grabber.tres" id="11"]
 [ext_resource type="StyleBox" uid="uid://bg2lurxie2dph" path="res://assets/themes/Classic311/Styles/Scroll/GrabberHighlight.tres" id="12"]
@@ -41,6 +42,7 @@
 [ext_resource type="Texture2D" uid="uid://dcarp8avq41xg" path="res://assets/themes/Classic311/Styles/Button/OnDis.png" id="40"]
 [ext_resource type="Texture2D" uid="uid://c3qu85t4ycro3" path="res://assets/themes/Classic311/Styles/Panel/Panel.png" id="41"]
 [ext_resource type="Texture2D" uid="uid://cvufgs1nxnk7b" path="res://assets/themes/Classic311/Styles/Window/close_pressed.png" id="41_ie4hh"]
+[ext_resource type="FontFile" uid="uid://bn1uf70x7x3nd" path="res://assets/texts/fonts/NotoSansMono-SemiBold.ttf" id="43_a2fqp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2e5pe"]
 content_margin_left = 10.0
@@ -163,6 +165,9 @@ bg_color = Color(0.396078, 0.396078, 0.396078, 1)
 bg_color = Color(0, 0.356863, 0.737255, 1)
 
 [resource]
+default_font = ExtResource("43_a2fqp")
+default_font_size = 20
+AcceptDialog/constants/buttons_separation = 10
 AcceptDialog/styles/panel = SubResource("StyleBoxFlat_2e5pe")
 Button/colors/font_color = Color(0, 0, 0, 1)
 Button/colors/font_color_disabled = Color(0, 0, 0, 0.419608)
@@ -201,7 +206,7 @@ CheckButton/colors/font_color_disabled = Color(0.9, 0.9, 0.9, 0.2)
 CheckButton/colors/font_color_hover = Color(0, 0, 0, 1)
 CheckButton/colors/font_color_hover_pressed = Color(0, 0, 0, 1)
 CheckButton/colors/font_color_pressed = Color(0, 0, 0, 1)
-CheckButton/fonts/font = null
+CheckButton/fonts/font = ExtResource("9_bja74")
 CheckButton/icons/checked = ExtResource("37")
 CheckButton/icons/checked_disabled = ExtResource("40")
 CheckButton/icons/checked_disabled_mirrored = ExtResource("40")
@@ -237,13 +242,13 @@ Label/constants/line_spacing = 3
 Label/constants/shadow_as_outline = 0
 Label/constants/shadow_offset_x = 1
 Label/constants/shadow_offset_y = 1
-Label/fonts/font = null
+Label/fonts/font = ExtResource("9_bja74")
 LineEdit/colors/caret_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_color = Color(0, 0, 0, 1)
 LineEdit/colors/font_uneditable_color = Color(0.556863, 0.556863, 0.556863, 1)
 LineEdit/colors/selection_color = Color(0, 0.356863, 0.737255, 1)
 LineEdit/constants/minimum_spaces = 12
-LineEdit/fonts/font = null
+LineEdit/fonts/font = ExtResource("9_bja74")
 LineEdit/icons/clear = null
 LineEdit/styles/focus = SubResource("9")
 LineEdit/styles/normal = ExtResource("10")
@@ -253,7 +258,7 @@ OptionButton/colors/font_color_disabled = Color(0, 0, 0, 0.419608)
 OptionButton/colors/font_color_hover = Color(0, 0, 0, 1)
 OptionButton/colors/font_color_pressed = Color(0, 0, 0, 1)
 OptionButton/constants/arrow_margin = 8
-OptionButton/fonts/font = null
+OptionButton/fonts/font = ExtResource("9_bja74")
 OptionButton/icons/arrow = ExtResource("36")
 OptionButton/styles/disabled = ExtResource("5")
 OptionButton/styles/focus = ExtResource("3")
@@ -269,7 +274,7 @@ PopupMenu/colors/font_color_disabled = Color(0.4, 0.4, 0.4, 0.8)
 PopupMenu/colors/font_color_hover = Color(1, 1, 1, 1)
 PopupMenu/constants/hseparation = 4
 PopupMenu/constants/vseparation = 4
-PopupMenu/fonts/font = null
+PopupMenu/fonts/font = ExtResource("9_bja74")
 PopupMenu/icons/checked = ExtResource("7")
 PopupMenu/icons/radio_checked = ExtResource("6")
 PopupMenu/icons/radio_unchecked = ExtResource("8")
@@ -288,7 +293,7 @@ SpinBox/icons/updown = ExtResource("34")
 TabContainer/colors/font_disabled_color = Color(0.41598, 0.41598, 0.41598, 1)
 TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)
 TabContainer/colors/font_unselected_color = Color(0, 0, 0, 1)
-TabContainer/fonts/font = null
+TabContainer/fonts/font = ExtResource("9_bja74")
 TabContainer/icons/decrement = null
 TabContainer/icons/decrement_highlight = null
 TabContainer/icons/increment = null
@@ -329,7 +334,7 @@ TextEdit/constants/completion_lines = 7
 TextEdit/constants/completion_max_width = 50
 TextEdit/constants/completion_scroll_width = 3
 TextEdit/constants/line_spacing = 4
-TextEdit/fonts/font = null
+TextEdit/fonts/font = ExtResource("9_bja74")
 TextEdit/icons/fold = null
 TextEdit/icons/folded = null
 TextEdit/icons/space = null
@@ -353,8 +358,8 @@ Tree/constants/item_margin = 12
 Tree/constants/scroll_border = 4
 Tree/constants/scroll_speed = 12
 Tree/constants/vseparation = 4
-Tree/fonts/font = null
-Tree/fonts/title_button_font = null
+Tree/fonts/font = ExtResource("9_bja74")
+Tree/fonts/title_button_font = ExtResource("9_bja74")
 Tree/icons/arrow = ExtResource("31")
 Tree/icons/arrow_collapsed = ExtResource("32")
 Tree/icons/checked = ExtResource("33")
