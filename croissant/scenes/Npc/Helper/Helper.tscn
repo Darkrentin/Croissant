@@ -140,4 +140,4 @@ position = Vector2(160, 140)
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_jthw1")
 autoplay = "default"
-frame_progress = 0.562743
+frame_progress = 0.778616

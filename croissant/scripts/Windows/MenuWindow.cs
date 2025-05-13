@@ -97,6 +97,8 @@ public partial class MenuWindow : FloatWindow
 	public void DebugButtonToggled(bool toggled)
 	{
 		DebugMode = toggled;
+		if(MainWindow.DebugInfo == null)
+			return;
 		MainWindow.DebugInfo.Visible = DebugMode;
 	}
 		
