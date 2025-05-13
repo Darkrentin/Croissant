@@ -79,8 +79,8 @@ public partial class GameManager : Node2D
         helper.Position = Lib.GetScreenPosition(-0.5f, -0.5f);
         helper.ForceDialoguePlacement = true;
 
-        //virus.Visible = false;
-        //helper.Visible = false;
+        virus.Visible = false;
+        helper.Visible = false;
     }
 
     public void LoadSave()
