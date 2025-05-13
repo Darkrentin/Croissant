@@ -10,6 +10,8 @@ public partial class Level3 : FloatWindow
     public SubLevel3 actualScene;
     public Action<InputEventMouseButton> MouseEvent;
     [Export] public PlayerCharacter player;
+    [Export] public int MaxFiles = 5;
+    public int FilesCollected = 0;
 
     public override void _Ready()
     {
@@ -79,6 +81,17 @@ public partial class Level3 : FloatWindow
 		sceneid = Portal.NextSceneId;
 		actualScene = nextScene;
 		GD.Print("Level complete!");
+    }
+
+    public void CollectFile()
+    {
+        FilesCollected++;
+        if (FilesCollected >= MaxFiles)
+        {
+            GameManager.State = GameManager.GameState.Void;
+            GetParent().RemoveChild(this);
+            QueueFree();
+        }
     }
 	
 }

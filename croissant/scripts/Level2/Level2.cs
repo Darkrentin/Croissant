@@ -20,6 +20,7 @@ public partial class Level2 : Node2D
 	public void NextLvl()
 	{
 		GameManager.State = GameManager.GameState.HelperDialogue1;
+		GetParent().RemoveChild(this);
 		QueueFree();
 	}
 

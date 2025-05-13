@@ -29,7 +29,7 @@ public partial class ConfigFile : Area2D
             if (body is PlayerCharacter player)
             {
                 count++;
-                Lib.Print($"ConfigFile collecté! Total: {count}/5");
+                Level3.Instance.CollectFile();
                 QueueFree();
                 break;
             }
