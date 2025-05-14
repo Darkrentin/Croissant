@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b4hh5c2vwkj84"]
+[gd_scene load_steps=16 format=3 uid="uid://b4hh5c2vwkj84"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_la71s"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_qulun"]
@@ -36,9 +36,13 @@ size = Vector2(222, 677)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psn4i"]
 size = Vector2(222, 677)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yhkvj"]
+resource_local_to_scene = true
+size = Vector2(403, 179)
+
 [node name="3_5" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_la71s")
-windows = [NodePath("StaticPlateform/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform/Window")]
+windows = [NodePath("StaticPlateform/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform/Window"), NodePath("StaticPlateform3/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -105,8 +109,16 @@ shape = SubResource("RectangleShape2D_173t4")
 position = Vector2(111, 338.5)
 shape = SubResource("RectangleShape2D_psn4i")
 
+[node name="StaticPlateform3" parent="." instance=ExtResource("3_6xv5l")]
+position = Vector2(0, 152)
+
+[node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
+position = Vector2(201.5, 89.5)
+shape = SubResource("RectangleShape2D_yhkvj")
+
 [editable path="StaticPlateform"]
 [editable path="MovePlatform"]
 [editable path="StaticPlateform2"]
 [editable path="KillingPlatform"]
 [editable path="KillingPlatform2"]
+[editable path="StaticPlateform3"]
