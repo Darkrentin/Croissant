@@ -1,3 +1,4 @@
+using System.Drawing;
 using Godot;
 
 public partial class DoorPlateform : Platform
@@ -21,7 +22,8 @@ public partial class DoorPlateform : Platform
 		label.Text = $"{Level3.Instance.FilesCollected}/{nbOfFilesToOpen}";
 		if(Level3.Instance.FilesCollected >= nbOfFilesToOpen)
 		{
-			QueueFree();
+			Position = new Vector2(window.Size.X, window.Size.Y)*-3;
+            window.Position = (Vector2I)Position;
 		}
     }
 }

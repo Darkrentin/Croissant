@@ -26,11 +26,27 @@ public partial class WaveManager : Node
 		WaveStartTimer.Timeout += StartWave;
 		AddChild(WaveStartTimer);
 		WaveStartTimer.Start();
+		AnimationPlayer.AnimationFinished += OnAnimationFinished;
 	}
 
 	public void StartWave()
 	{
 		FirstWave.StartWave();
+	}
+
+	public void OnAnimationFinished(StringName anim)
+	{
+		if(anim == "GoBack")
+		{
+			UpdateLabel();
+			AnimationPlayer.Play("GoBackReverse");
+			
+		}
+		if(anim == "GoBackReverse")
+		{
+			LastWave.StartWave();
+			Level2.CursorWindow.animationPlayer.PlayBackwards("Disolve");
+		}
 	}
 
 	public void GoBackToWave()
@@ -39,9 +55,8 @@ public partial class WaveManager : Node
 		CurrentWave.WaveTimer.Stop();
 		CleanUpAllWave(CurrentWave);
 		WaveNum--;
-		UpdateLabel();
-		LastWave.StartWave();
-		
+		Lib.Print($"WaveManager: GoBackToWave {WaveNum}");
+		AnimationPlayer.Play("GoBack");
 
 	}
 
@@ -49,6 +64,7 @@ public partial class WaveManager : Node
 	{
 		WaveNum++;
 		UpdateLabel();
+		Lib.Print($"WaveManager: AddWave {WaveNum}");
 		
 	}
 

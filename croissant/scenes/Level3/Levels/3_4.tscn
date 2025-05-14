@@ -1,23 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmg2wx0jx04xs"]
+[gd_scene load_steps=7 format=3 uid="uid://cmg2wx0jx04xs"]
 
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_2083c"]
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ah0vo"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_ah0vo"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_uhoo4"]
-b = Vector2(0, 1080)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ah0vo"]
+size = Vector2(128, 1344)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_ajanl"]
-a = Vector2(0, 1080)
-b = Vector2(1920, 1080)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_g62jb"]
-a = Vector2(1920, 1080)
-b = Vector2(1920, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_8s5yb"]
-a = Vector2(1920, 0)
-b = Vector2(0, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoo4"]
+size = Vector2(1920, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2083c"]
 resource_local_to_scene = true
@@ -30,16 +21,20 @@ windows = [NodePath("StaticPlateform/Window")]
 [node name="Limit" type="StaticBody2D" parent="."]
 
 [node name="L" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_uhoo4")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_ajanl")
+position = Vector2(-64, 544)
+shape = SubResource("RectangleShape2D_ah0vo")
 
 [node name="R" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_g62jb")
+position = Vector2(1984, 544)
+shape = SubResource("RectangleShape2D_ah0vo")
 
 [node name="U" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_8s5yb")
+position = Vector2(960, -64)
+shape = SubResource("RectangleShape2D_uhoo4")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, 1152)
+shape = SubResource("RectangleShape2D_uhoo4")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_2083c")]
 position = Vector2(0, 952)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://c5avgc26i0v58"]
+[gd_scene load_steps=14 format=3 uid="uid://c5avgc26i0v58"]
 
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_brot1"]
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_cjr8i"]
@@ -8,20 +8,11 @@
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_uybjc"]
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="6_l2671"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_cjr8i"]
-b = Vector2(0, 1080)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26hxk"]
+size = Vector2(128, 1344)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_26hxk"]
-a = Vector2(0, 1080)
-b = Vector2(1920, 1080)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_uybjc"]
-a = Vector2(1920, 1080)
-b = Vector2(1920, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_wxmef"]
-a = Vector2(1920, 0)
-b = Vector2(0, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uybjc"]
+size = Vector2(1920, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x0mh1"]
 resource_local_to_scene = true
@@ -46,16 +37,20 @@ windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window
 [node name="Limit" type="StaticBody2D" parent="."]
 
 [node name="L" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_cjr8i")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_26hxk")
+position = Vector2(-64, 544)
+shape = SubResource("RectangleShape2D_26hxk")
 
 [node name="R" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_uybjc")
+position = Vector2(1984, 544)
+shape = SubResource("RectangleShape2D_26hxk")
 
 [node name="U" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_wxmef")
+position = Vector2(960, -64)
+shape = SubResource("RectangleShape2D_uybjc")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, 1152)
+shape = SubResource("RectangleShape2D_uybjc")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(400, 584)

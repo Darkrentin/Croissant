@@ -25,6 +25,6 @@ public partial class SpeedRunTimer : CanvasLayer
 		int seconds = (int)(timeInSeconds % 60);
 		int milliseconds = (int)((timeInSeconds - (minutes * 60) - seconds) * 1000);
 
-		return string.Format("{0:00}:{1:00}:{2:000}", minutes, seconds, milliseconds);
+		return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, milliseconds);
 	}
 }

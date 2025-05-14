@@ -7,6 +7,7 @@ public partial class CursorWindow : FloatWindow
 	public bool Freeze = false;
 	public bool Invisible = false;
 	public Timer FreezeTimer;
+	[Export] public AnimationPlayer animationPlayer;
 
 	public override void _Ready()
 	{
@@ -39,6 +40,7 @@ public partial class CursorWindow : FloatWindow
 		if(Invisible)
 			return;
 		FreezFrameStart();
+		animationPlayer.Play("Disolve");
 	}
 
 	public void FreezFrameStart()
@@ -48,8 +50,8 @@ public partial class CursorWindow : FloatWindow
 		IsTransitioning = false;
 		Freeze = true;
 		GetTree().Paused = true;
-		StartShake(0.4f, 10);
-		FreezeTimer.WaitTime = 0.5f;
+		StartShake(0.8f, 10);
+		FreezeTimer.WaitTime = 0.9f;
 		FreezeTimer.Start();
 		Invisible = true;
 	}

@@ -11,7 +11,7 @@ public partial class Portal : Area2D
 		// Connect the body entered signal to the OnBoddyEntered method
 		BodyEntered += OnBoddyEntered;
 		timer = new Timer();
-		timer.WaitTime = 2f;
+		timer.WaitTime = 1.1f;
 		timer.OneShot = true;
 		timer.Timeout += () =>
 		{

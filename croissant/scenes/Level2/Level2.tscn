@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d13xxxigq3m7y"]
+[gd_scene load_steps=13 format=3 uid="uid://d13xxxigq3m7y"]
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
 [ext_resource type="PackedScene" uid="uid://b4i4iwr3qk44x" path="res://scenes/WaveManager/WaveManager.tscn" id="2_qsvqe"]
@@ -21,6 +21,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_k45nk"]
 resource_name = "ScoreUp"
@@ -38,8 +50,42 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(1.48, 1.48), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_s1ih2"]
+resource_name = "GoBack"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(768, 540)]
+}
+
+[sub_resource type="Animation" id="Animation_qsvqe"]
+resource_name = "GoBackReverse"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(768, 540), Vector2(0, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fwmwi"]
 _data = {
+&"GoBack": SubResource("Animation_s1ih2"),
+&"GoBackReverse": SubResource("Animation_qsvqe"),
 &"RESET": SubResource("Animation_b7rdj"),
 &"ScoreUp": SubResource("Animation_k45nk")
 }
@@ -184,10 +230,10 @@ NextWave = NodePath(".")
 id = 23
 NextWave = NodePath(".")
 
+[node name="SpawnNode" type="Node2D" parent="."]
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
-anchor_right = 0.267
-anchor_bottom = 0.119
 
 [node name="ScoreLabel" type="Label" parent="UI"]
 layout_mode = 1
@@ -225,5 +271,3 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="SpawnNode" type="Node2D" parent="."]

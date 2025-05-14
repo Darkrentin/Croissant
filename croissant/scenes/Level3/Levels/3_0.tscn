@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qkuoa8g4g2cl"]
+[gd_scene load_steps=14 format=3 uid="uid://qkuoa8g4g2cl"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
@@ -7,20 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlateform.tscn" id="5_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_5q6or"]
-b = Vector2(0, 1080)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8j6u2"]
+size = Vector2(128, 1344)
 
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_8j6u2"]
-a = Vector2(0, 1080)
-b = Vector2(1920, 1080)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_vwnnv"]
-a = Vector2(1920, 1080)
-b = Vector2(1920, 0)
-
-[sub_resource type="SegmentShape2D" id="SegmentShape2D_fgx1k"]
-a = Vector2(1920, 0)
-b = Vector2(0, 0)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnnv"]
+size = Vector2(1920, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkapc"]
 resource_local_to_scene = true
@@ -44,21 +35,25 @@ size = Vector2(120, 320)
 
 [node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
-windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window")]
+windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window"), NodePath("DoorPlateform/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
 [node name="L" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_5q6or")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_8j6u2")
+position = Vector2(-64, 544)
+shape = SubResource("RectangleShape2D_8j6u2")
 
 [node name="R" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_vwnnv")
+position = Vector2(1984, 544)
+shape = SubResource("RectangleShape2D_8j6u2")
 
 [node name="U" type="CollisionShape2D" parent="Limit"]
-shape = SubResource("SegmentShape2D_fgx1k")
+position = Vector2(960, -64)
+shape = SubResource("RectangleShape2D_vwnnv")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, 1152)
+shape = SubResource("RectangleShape2D_vwnnv")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 960)
@@ -105,7 +100,6 @@ NextSceneId = 4
 
 [node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(1472, 0)
-nbOfFilesToOpen = 3
 
 [node name="CollisionShape2D" parent="DoorPlateform" index="0"]
 position = Vector2(60, 160)
