@@ -32,6 +32,10 @@ public partial class StateMachine : Node
 
     public override void _Process(double delta)
     {
+        if(Level3.Instance.player.isDead)
+        {
+            return;
+        }
         _currentState?.Update((float)delta);
     }
 

@@ -1,12 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://qkuoa8g4g2cl"]
+[gd_scene load_steps=16 format=3 uid="uid://qkuoa8g4g2cl"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="2_gijp6"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="3_5q6or"]
-[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="4_8j6u2"]
-[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_vwnnv"]
-[ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="6_gijp6"]
+[ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlateform.tscn" id="5_yrjvf"]
+[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
 
 [sub_resource type="SegmentShape2D" id="SegmentShape2D_5q6or"]
 b = Vector2(0, 1080)
@@ -23,29 +22,29 @@ b = Vector2(1920, 0)
 a = Vector2(1920, 0)
 b = Vector2(0, 0)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pl275"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkapc"]
 resource_local_to_scene = true
-size = Vector2(120, 400)
+size = Vector2(1920, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k31tl"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0s36o"]
 resource_local_to_scene = true
-size = Vector2(768, 120)
+size = Vector2(512, 128)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k0j7d"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yrjvf"]
 resource_local_to_scene = true
-size = Vector2(184, 120)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_irsaa"]
-resource_local_to_scene = true
-size = Vector2(2104, 120)
+size = Vector2(512, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gijp6"]
 resource_local_to_scene = true
-size = Vector2(120, 448)
+size = Vector2(320, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6or"]
+resource_local_to_scene = true
+size = Vector2(120, 320)
 
 [node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
-windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform3/Window"), NodePath("KillingPlatform/Window"), NodePath("PlayerOnly/Window")]
+windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -62,78 +61,61 @@ shape = SubResource("SegmentShape2D_vwnnv")
 shape = SubResource("SegmentShape2D_fgx1k")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
-position = Vector2(456, 448)
-
-[node name="Window" parent="StaticPlateform" index="0"]
-auto_translate_mode = 1
+position = Vector2(0, 960)
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
-position = Vector2(60, 200)
-shape = SubResource("RectangleShape2D_pl275")
+position = Vector2(960, 64)
+shape = SubResource("RectangleShape2D_fkapc")
 
 [node name="StaticPlateform2" parent="." instance=ExtResource("1_yrjvf")]
-position = Vector2(768, 448)
-
-[node name="Window" parent="StaticPlateform2" index="0"]
-auto_translate_mode = 1
+position = Vector2(0, 320)
 
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
-position = Vector2(384, 60)
-shape = SubResource("RectangleShape2D_k31tl")
-
-[node name="MovePlatform" parent="." instance=ExtResource("2_gijp6")]
-position = Vector2(131, 675)
-
-[node name="TextureRect" parent="MovePlatform/Window" index="0"]
-offset_left = -1.0
-offset_top = 1.0
-offset_right = -1.0
-offset_bottom = 1.0
-
-[node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(92, 60)
-shape = SubResource("RectangleShape2D_k0j7d")
+position = Vector2(256, 64)
+shape = SubResource("RectangleShape2D_0s36o")
 
 [node name="StaticPlateform3" parent="." instance=ExtResource("1_yrjvf")]
-position = Vector2(-68, 877)
+position = Vector2(1408, 320)
 
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
-position = Vector2(1049, 31)
-shape = SubResource("RectangleShape2D_irsaa")
+position = Vector2(256, 64)
+shape = SubResource("RectangleShape2D_yrjvf")
+
+[node name="MovePlatform" parent="." instance=ExtResource("2_gijp6")]
+position = Vector2(800, 160)
+
+[node name="CollisionShape2D" parent="MovePlatform" index="1"]
+position = Vector2(160, 16)
+shape = SubResource("RectangleShape2D_gijp6")
 
 [node name="1" parent="." instance=ExtResource("3_5q6or")]
-position = Vector2(1448, 720)
+position = Vector2(64, 776)
 
-[node name="ConfigFile" parent="." instance=ExtResource("4_8j6u2")]
-position = Vector2(1135, 340)
-scale = Vector2(1.5, 1.5)
+[node name="2" parent="." instance=ExtResource("3_5q6or")]
+position = Vector2(1736, 776)
+NextSceneId = 2
 
-[node name="CollisionShape2D" parent="ConfigFile" index="1"]
-scale = Vector2(1.5, 1.5)
+[node name="3" parent="." instance=ExtResource("3_5q6or")]
+position = Vector2(64, 136)
+NextSceneId = 3
 
-[node name="KillingPlatform" parent="." instance=ExtResource("5_vwnnv")]
-position = Vector2(848, 704)
+[node name="4" parent="." instance=ExtResource("3_5q6or")]
+position = Vector2(1736, 136)
+NextSceneId = 4
 
-[node name="Window" parent="KillingPlatform" index="0"]
-visible = true
+[node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
+position = Vector2(1472, 0)
+nbOfFilesToOpen = 3
 
-[node name="TextureRect" parent="KillingPlatform/Window" index="0"]
-offset_top = 1.0
-offset_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="CollisionShape2D" parent="DoorPlateform" index="0"]
+position = Vector2(60, 160)
+shape = SubResource("RectangleShape2D_5q6or")
 
-[node name="PlayerOnly" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(922, 0)
-
-[node name="CollisionShape2D" parent="PlayerOnly" index="1"]
-position = Vector2(60, 224)
-shape = SubResource("RectangleShape2D_gijp6")
+[node name="ConfigFile" parent="." instance=ExtResource("6_gijp6")]
+position = Vector2(432, 248)
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
-[editable path="MovePlatform"]
 [editable path="StaticPlateform3"]
-[editable path="ConfigFile"]
-[editable path="KillingPlatform"]
-[editable path="PlayerOnly"]
+[editable path="MovePlatform"]
+[editable path="DoorPlateform"]

@@ -57,12 +57,8 @@ shape = SubResource("SegmentShape2D_uybjc")
 [node name="U" type="CollisionShape2D" parent="Limit"]
 shape = SubResource("SegmentShape2D_wxmef")
 
-[node name="2" parent="." instance=ExtResource("1_brot1")]
-position = Vector2(37, 775)
-NextSceneId = 2
-
 [node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
-position = Vector2(2, 577)
+position = Vector2(400, 584)
 
 [node name="TextureRect" parent="StaticPlateform/Window" index="0"]
 anchors_preset = -1
@@ -77,7 +73,7 @@ position = Vector2(759, 58)
 shape = SubResource("RectangleShape2D_x0mh1")
 
 [node name="0" parent="." instance=ExtResource("1_brot1")]
-position = Vector2(27, 180)
+position = Vector2(1736, 392)
 NextSceneId = 0
 
 [node name="ConfigFile" parent="." instance=ExtResource("3_cjr8i")]

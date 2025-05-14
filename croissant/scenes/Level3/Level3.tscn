@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=3 uid="uid://hca4ftw22ecd"]
+[gd_scene load_steps=8 format=3 uid="uid://hca4ftw22ecd"]
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Others/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
 [ext_resource type="PackedScene" uid="uid://qkuoa8g4g2cl" path="res://scenes/Level3/Levels/3_0.tscn" id="2_apgcq"]
 [ext_resource type="PackedScene" uid="uid://c5avgc26i0v58" path="res://scenes/Level3/Levels/3_1.tscn" id="3_pl275"]
 [ext_resource type="PackedScene" uid="uid://lryqgy5js16r" path="res://scenes/Level3/Levels/3_2.tscn" id="4_k31tl"]
+[ext_resource type="PackedScene" uid="uid://cu58hpxb2ekmm" path="res://scenes/Level3/Levels/3_3.tscn" id="5_k0j7d"]
+[ext_resource type="PackedScene" uid="uid://cmg2wx0jx04xs" path="res://scenes/Level3/Levels/3_4.tscn" id="6_5olmw"]
 
 [node name="Level3" type="Window" node_paths=PackedStringArray("player")]
 transparent_bg = true
@@ -15,8 +17,8 @@ borderless = true
 always_on_top = true
 transparent = true
 script = ExtResource("1_pl275")
-level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl")])
+level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw")])
 player = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
-position = Vector2(1763, 653)
+position = Vector2(960, 540)

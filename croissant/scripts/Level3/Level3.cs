@@ -71,7 +71,7 @@ public partial class Level3 : FloatWindow
         Tween tween = GetTree().CreateTween();
         float distance = (player.GlobalPosition - playerTargetPosition).Length();
         float screenWidth = GameManager.ScreenSize.X;
-        float duration = distance / (float)screenWidth; // Time to cross full screen = 1 second
+        float duration = Math.Max(distance / (float)screenWidth,0.1f); // Time to cross full screen = 1 second
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetEase(Tween.EaseType.InOut);
         tween.TweenProperty(player, "global_position", playerTargetPosition, duration);

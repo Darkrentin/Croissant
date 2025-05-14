@@ -48,10 +48,8 @@ position = Vector2(2, 959)
 position = Vector2(959, 60)
 shape = SubResource("RectangleShape2D_73yxm")
 
-[node name="1" parent="." instance=ExtResource("2_s5xex")]
-position = Vector2(27, 649)
-
-[node name="Node2D" type="Node2D" parent="1"]
-position = Vector2(367, 305)
+[node name="0" parent="." instance=ExtResource("2_s5xex")]
+position = Vector2(64, 776)
+NextSceneId = 0
 
 [editable path="StaticPlateform"]

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
@@ -10,6 +11,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityExponentFactor = 0.25f;
     [Export] public AnimationPlayer AnimationPlayer;
     [Export] public Sprite2D Sprite;
+    public bool isDead = false;
 
     private float gravityAcceleration = GravityExponentStart;
 
@@ -29,6 +31,7 @@ public partial class PlayerCharacter : CharacterBody2D
         wallJumpTimer.OneShot = true;
         AddChild(wallJumpTimer);
         wallJumpTimer.Timeout += OnWallJumpTimerTimeout;
+        AnimationPlayer.AnimationFinished += OnAnimationFinished;
     }
 
     public void OnBodyEntered(Node body)
@@ -41,6 +44,10 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        if(isDead)
+        {
+            return;
+        }
         Vector2 velocity = Velocity;
 
         if (!IsOnFloor())
@@ -72,5 +79,38 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         return isWallJumping;
     }
+
+    public void Death()
+    {
+        AnimationPlayer.Play("Death");
+        isDead = true;
+    }
+
+    public void OnAnimationFinished(StringName animationName)
+    {
+        if (animationName == "Death")
+        {
+            Level3.Instance.actualScene.HideSubLevel();
+            Level3.Instance.sceneid = 0;
+            Level3.Instance.Level3Nodes[0].ShowSubLevel();
+            Level3.Instance.actualScene = Level3.Instance.Level3Nodes[0];
+            
+            AnimationPlayer.Play("Idle");
+            isDead = false;
+            Vector2 playerTargetPosition = new Vector2(1920/2, 1080/2);
+
+            Tween tween = GetTree().CreateTween();
+            float distance = (GlobalPosition - playerTargetPosition).Length();
+            float screenWidth = GameManager.ScreenSize.X;
+            float duration = Math.Max(distance / (float)screenWidth,0.1f); // Time to cross full screen = 1 second
+            tween.SetTrans(Tween.TransitionType.Sine);
+            tween.SetEase(Tween.EaseType.InOut);
+            tween.TweenProperty(this, "global_position", playerTargetPosition, duration);
+            tween.TweenCallback(Callable.From(() => {
+                ProcessMode = ProcessModeEnum.Pausable;
+            }));
+            ProcessMode = ProcessModeEnum.Disabled;
+        }
+    }   
 
 }
