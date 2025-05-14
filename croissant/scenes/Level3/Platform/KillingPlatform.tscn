@@ -17,10 +17,10 @@ shader_parameter/radius = 1.0
 shader_parameter/line_thickness = 0.05
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3r00"]
-size = Vector2(120, 140)
+size = Vector2(207.5, 244.5)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylwtk"]
-size = Vector2(120, 140)
+size = Vector2(207, 244.5)
 
 [node name="KillingPlatform" type="CharacterBody2D" node_paths=PackedStringArray("area2D", "window", "collisionShape")]
 collision_layer = 4
@@ -43,12 +43,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(60, 70)
+position = Vector2(103.75, 122.25)
 shape = SubResource("RectangleShape2D_k3r00")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(60, 70)
+position = Vector2(103.5, 122.25)
 shape = SubResource("RectangleShape2D_ylwtk")

@@ -110,6 +110,11 @@ public partial class PlayerCharacter : CharacterBody2D
                 ProcessMode = ProcessModeEnum.Pausable;
             }));
             ProcessMode = ProcessModeEnum.Disabled;
+
+            if (Velocity.Y > 0)
+            {
+                Velocity = new Vector2(Velocity.X, 0);
+            }
         }
     }   
 

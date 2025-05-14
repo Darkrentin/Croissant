@@ -5,7 +5,6 @@ public partial class WaveManager : Node
 {
 	[Export] public Node SpawnNode;
 	[Export] public Wave FirstWave;
-	
 	[Export] public WaveData WaveData;
 	[Export] public Label ScoreLabel;
 	[Export] public AnimationPlayer AnimationPlayer;
@@ -13,7 +12,6 @@ public partial class WaveManager : Node
 	public Wave CurrentWave;
 	public Wave LastWave;
 	public Timer WaveStartTimer;
-
 	public static int WaveNum = 0;
 	public Action EndWave;
 
@@ -36,13 +34,13 @@ public partial class WaveManager : Node
 
 	public void OnAnimationFinished(StringName anim)
 	{
-		if(anim == "GoBack")
+		if (anim == "GoBack")
 		{
 			UpdateLabel();
 			AnimationPlayer.Play("GoBackReverse");
-			
+
 		}
-		if(anim == "GoBackReverse")
+		if (anim == "GoBackReverse")
 		{
 			LastWave.StartWave();
 			Level2.CursorWindow.animationPlayer.PlayBackwards("Disolve");
@@ -65,7 +63,7 @@ public partial class WaveManager : Node
 		WaveNum++;
 		UpdateLabel();
 		Lib.Print($"WaveManager: AddWave {WaveNum}");
-		
+
 	}
 
 	public void CleanUpWave(Wave w)
@@ -82,14 +80,13 @@ public partial class WaveManager : Node
 			CleanUpWave(current);
 			current = current.NextWave;
 		}
-		Wave.NbOfEnemies = 0;
-
 		foreach (AttackWindow window in SpawnNode.GetChildren())
 		{
 			window.Delete();
 			SpawnNode.RemoveChild(window);
 			window.QueueFree();
 		}
+		Wave.NbOfEnemies = 0;
 	}
 
 	public void UpdateLabel()
@@ -97,5 +94,4 @@ public partial class WaveManager : Node
 		ScoreLabel.Text = WaveNum.ToString();
 		AnimationPlayer.Play("ScoreUp");
 	}
-
 }
