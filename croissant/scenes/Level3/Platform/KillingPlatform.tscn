@@ -1,8 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://bch7nv4v14u6c"]
+[gd_scene load_steps=7 format=3 uid="uid://bch7nv4v14u6c"]
 
 [ext_resource type="Script" uid="uid://bnwu55cl17dby" path="res://scripts/Level3/Platform/KillingPlatform.cs" id="1_k3r00"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_ylwtk"]
-[ext_resource type="Texture2D" uid="uid://d1gjr6yxhl2kj" path="res://assets/sprites/Placeholder.png" id="3_iqbkw"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_k3r00"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ylwtk"]
+resource_local_to_scene = true
+shader = ExtResource("3_k3r00")
+shader_parameter/color1 = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(1, 1, 0, 1)
+shader_parameter/animate = false
+shader_parameter/direction = 1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 0.11
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.05
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3r00"]
 size = Vector2(120, 140)
@@ -20,15 +32,15 @@ collisionShape = NodePath("CollisionShape2D")
 [node name="Window" type="Window" parent="."]
 position = Vector2i(0, 36)
 size = Vector2i(120, 120)
-visible = false
 script = ExtResource("2_ylwtk")
 
-[node name="TextureRect" type="TextureRect" parent="Window"]
+[node name="ColorRect" type="ColorRect" parent="Window"]
+material = SubResource("ShaderMaterial_ylwtk")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource("3_iqbkw")
-expand_mode = 1
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 70)

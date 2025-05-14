@@ -15,6 +15,7 @@ public partial class CompressWindow : AttackWindow
 		ConnectedWindow.VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.Timer.Stop();
 		ConnectedWindow.Lives = Lives;
+		ConnectedWindow.Position = Lib.GetRandomPositionOutsideScreen(-1, Size.X * 2);
 		RemoveChild(ConnectedWindow);
 		GetParent().AddChild(ConnectedWindow);
 	}

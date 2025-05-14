@@ -1,8 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://uhnhsc4jvdgm"]
+[gd_scene load_steps=6 format=3 uid="uid://uhnhsc4jvdgm"]
 
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="1_p3h6d"]
 [ext_resource type="Script" uid="uid://ug8rmjlf4rth" path="res://scripts/Level3/Platform/MovePlatform.cs" id="1_xf3iu"]
-[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="2_xf3iu"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_xf3iu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_70k7n"]
+resource_local_to_scene = true
+shader = ExtResource("3_xf3iu")
+shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
+shader_parameter/color2 = Color(0.207843, 0.364706, 1, 0)
+shader_parameter/animate = false
+shader_parameter/direction = 1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 0.11
+shader_parameter/radius = 1.0
+shader_parameter/line_thickness = 0.05
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3h6d"]
 resource_local_to_scene = true
@@ -20,14 +32,13 @@ position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 script = ExtResource("1_p3h6d")
 
-[node name="TextureRect" type="TextureRect" parent="Window"]
+[node name="ColorRect" type="ColorRect" parent="Window"]
+material = SubResource("ShaderMaterial_70k7n")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_xf3iu")
-expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 60)
