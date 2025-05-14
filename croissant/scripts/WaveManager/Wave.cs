@@ -32,13 +32,13 @@ public partial class Wave : Node
 		CurrentWave = true;
 		WaveManager.CurrentWave = this;
 		WaveManager.CurrentWaveId = id;
-		
+
 		if (!WaitWave)
 		{
 			WaveWindows = WaveManager.WaveData.WaveStart[id - 1]();
-			foreach (FloatWindow window in WaveWindows)
+			foreach (AttackWindow window in WaveWindows)
 			{
-				window.DeleteWindow += EnemyDefeated;
+				window.ParentWave = this;
 				NbOfEnemies++;
 				WaveManager.SpawnNode.AddChild(window);
 			}
@@ -48,7 +48,7 @@ public partial class Wave : Node
 			WaveManager.LastWave = this;
 			WaveManager.AddWave();
 		}
-			
+
 
 		if (duration > 0)
 			WaveTimer.Start();
@@ -74,10 +74,7 @@ public partial class Wave : Node
 		NbOfEnemies--;
 		if (NbOfEnemies <= 0 && !WaitWave)
 			StartNextWave();
-		else
-		{
-			
-		}
-			//GD.Print("Enemies left: " + NbOfEnemies);
+
+		GD.Print("Enemies left: " + NbOfEnemies);
 	}
 }

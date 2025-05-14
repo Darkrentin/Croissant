@@ -16,6 +16,8 @@ public partial class WaveWindow : AttackWindow
 		base._Ready();
 		VisualCollision.Color = Colors.Cyan;
 		ConnectedWindow.VisualCollision.Color = Colors.Cyan;
+		ConnectedWindow.ParentWave = ParentWave;
+		Wave.NbOfEnemies++;
 		ConnectedWindow.Timer.Stop();
 		if (_Mode == -1)
 			_Mode = Lib.rand.Next(0, 3);

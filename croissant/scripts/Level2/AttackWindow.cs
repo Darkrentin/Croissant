@@ -15,6 +15,7 @@ public partial class AttackWindow : FloatWindow
     public VisualCollision VisualCollision;
     public int Lives = 3;
     public Phase CurrentPhase { get => _phase; set { _phase = value; } }
+    public Wave ParentWave;
     public Vector2I CursorPosition
     {
         get
@@ -157,7 +158,7 @@ public partial class AttackWindow : FloatWindow
             GameManager.GameRoot.RemoveChild(VisualCollision);
             VisualCollision.QueueFree();
         }
-        
+
         GrabFocus();
         Level2.CursorWindow.GrabFocus();
 
@@ -168,6 +169,6 @@ public partial class AttackWindow : FloatWindow
         Timer.OneShot = true;
         Hide();
         death.Start();
-    
+        ParentWave.EnemyDefeated();
     }
 }

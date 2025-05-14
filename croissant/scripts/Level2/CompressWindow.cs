@@ -9,12 +9,13 @@ public partial class CompressWindow : AttackWindow
 
 	public override void _Ready()
 	{
-
 		base._Ready();
 		VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.VisualCollision.Color = Colors.Yellow;
 		ConnectedWindow.Timer.Stop();
 		ConnectedWindow.Lives = Lives;
+		ConnectedWindow.ParentWave = ParentWave;
+		Wave.NbOfEnemies++;
 		RemoveChild(ConnectedWindow);
 		GetParent().AddChild(ConnectedWindow);
 	}
