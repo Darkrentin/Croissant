@@ -6,10 +6,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_eb6lh"]
 size = Vector2(32, 48)
 
-[node name="ConfigFile" type="Area2D" node_paths=PackedStringArray("FileName")]
+[node name="ConfigFile" type="Area2D"]
 collision_mask = 2
 script = ExtResource("1_j5ubr")
-FileName = NodePath("Label")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.365, 0.365)

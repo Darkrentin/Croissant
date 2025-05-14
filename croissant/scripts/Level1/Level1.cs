@@ -70,7 +70,7 @@ public partial class Level1 : Node2D
         {
             //spawnTimer.WaitTime = 5f;
         }
-        TimerLimit *= 1.15f;
+        TimerLimit *= 1.06f;
     }
 
     /*private void UpdateSpawnTimer()
