@@ -58,7 +58,7 @@ public partial class WallSlideRight : State
         
         if (Input.IsActionJustPressed("ui_up"))
         {
-            player.Position -= new Vector2(0.1f, 0);
+            player.Position += new Vector2(0.1f, 0);
             player.Velocity = new Vector2(PushOffForce, PlayerCharacter.JumpVelocity);
             player.StartWallJumpTimer();
             EmitSignal(SignalName.StateTransition, this, "JumpState");
@@ -67,8 +67,8 @@ public partial class WallSlideRight : State
 
         if (Input.IsActionJustPressed("ui_right"))
         {
-            player.Position -= new Vector2(0.1f, 0);
-            player.Velocity = new Vector2(horizontalDirection * PushOffForce, horizontalDirection * PlayerCharacter.Speed);
+            player.Position += new Vector2(0.1f, 0);
+            player.Velocity = new Vector2(PushOffForce, -horizontalDirection * PlayerCharacter.Speed);
             EmitSignal(SignalName.StateTransition, this, "FallState");
             return;
         }

@@ -4,8 +4,8 @@ using System.Diagnostics;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-    public const float Speed = 400.0f;
-    public const float JumpVelocity = -950.0f;
+    public const float Speed = 700.0f;
+    public const float JumpVelocity = -1425.0f;
     public const float GravityBase = 4000.0f; 
     public const float GravityExponentStart = 1.0f;
     public const float GravityExponentFactor = 0.25f;
