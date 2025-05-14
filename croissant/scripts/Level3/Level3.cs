@@ -81,6 +81,12 @@ public partial class Level3 : FloatWindow
 		sceneid = Portal.NextSceneId;
 		actualScene = nextScene;
 		GD.Print("Level complete!");
+
+        
+        if (player.Velocity.Y > 0)
+        {
+            player.Velocity = new Vector2(player.Velocity.X, 0);
+        }
     }
 
     public void CollectFile()
