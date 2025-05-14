@@ -6,37 +6,28 @@ uniform bool animate = true;  // Whether to animate the outline
 uniform float direction: hint_range(-1.0, 1.0, 1.0) = -1.0;
 uniform float frequency: hint_range(0.1, 30.0, 0.1) = 15.0;
 uniform float speed: hint_range(0.5, 20, 0.5) = 3.0;
-uniform float border_width_x = 0.01; // Border width as proportion (0.01 = 1%)
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
 
 void fragment() {
-    // Get actual size in pixels
-    vec2 size_pixels = 1.0 / TEXTURE_PIXEL_SIZE;
-    
-    // Calculate aspect ratio
-    float aspect_ratio = size_pixels.x / size_pixels.y;
-    
-    // Calculate border width for x and y, adjusting y based on aspect ratio
-    float border_x_pixels = size_pixels.x * border_width_x;
-    float border_y_pixels = size_pixels.y * border_width_x * aspect_ratio;
-    
-    // Get pixel position
-    vec2 pixel_position = UV * size_pixels;
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
     
     // Calculate distance from each edge in pixels
     float distance_from_left = pixel_position.x;
-    float distance_from_right = size_pixels.x - pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
     float distance_from_top = pixel_position.y;
-    float distance_from_bottom = size_pixels.y - pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
     
-    // Check if we're in the border area, using the adjusted pixel widths
+    // Check if we're in the border area
     bool is_border = 
-        distance_from_left < border_x_pixels ||
-        distance_from_right < border_x_pixels ||
-        distance_from_top < border_y_pixels ||
-        distance_from_bottom < border_y_pixels;
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
     
     // Calculate angle for color pattern
-    vec2 center = size_pixels * 0.5;
+    vec2 center = window_size * 0.5;
     vec2 to_center = pixel_position - center;
     float angle = atan(to_center.y, to_center.x);
     

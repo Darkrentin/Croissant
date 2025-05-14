@@ -1,19 +1,31 @@
-[gd_scene load_steps=5 format=3 uid="uid://bq4mxmqbe2wau"]
+[gd_scene load_steps=6 format=3 uid="uid://bq4mxmqbe2wau"]
 
 [ext_resource type="Script" uid="uid://b606h66b1yv" path="res://scripts/Level3/Platform/WindowsOnly.cs" id="1_udtmp"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_yy41e"]
-[ext_resource type="Texture2D" uid="uid://kmco41oii2tm" path="res://assets/shaders/dependencies/palette1.png" id="3_udtmp"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_udtmp"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yy41e"]
+shader = ExtResource("3_udtmp")
+shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
+shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
+shader_parameter/animate = false
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/border_width = 10.0
+shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jl265"]
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="WindowsOnly" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
+[node name="WindowsOnly" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape", "Texture")]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_udtmp")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
+Texture = NodePath("Window/ColorRect")
 
 [node name="Window" type="Window" parent="."]
 auto_translate_mode = 1
@@ -21,14 +33,13 @@ position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 script = ExtResource("2_yy41e")
 
-[node name="TextureRect" type="TextureRect" parent="Window"]
+[node name="ColorRect" type="ColorRect" parent="Window"]
+material = SubResource("ShaderMaterial_yy41e")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("3_udtmp")
-expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 60)

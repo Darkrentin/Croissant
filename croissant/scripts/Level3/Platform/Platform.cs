@@ -19,6 +19,7 @@ public partial class Platform : CharacterBody2D
     private Vector2 currentAppliedSpeeds;
 
     [Export] public bool Freeze = true;
+    [Export] ColorRect Texture;
 
     public override void _Ready()
     {
@@ -51,10 +52,23 @@ public partial class Platform : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+
+        ShaderMaterial shader = Texture.Material as ShaderMaterial;
+        if((Vector2I)shader.GetShaderParameter("window_size") != window.Size)
+        {
+            shader.SetShaderParameter("window_size", window.Size);
+        }
+
+
         if(!Freeze)
         {
             if (Pressed)
             {
+                if(!Visible)
+                {
+                    Pressed = false;
+                    return;
+                }
                 Vector2 targetGlobalPosition = (Vector2)Lib.GetCursorPosition() - MouseOffset;
                 Vector2 directionToTarget = targetGlobalPosition - GlobalPosition;
 
