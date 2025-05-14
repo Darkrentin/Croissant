@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4hh5c2vwkj84"]
+
+[ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_la71s"]
+
+[node name="3_5" type="Node2D" node_paths=PackedStringArray("windows")]
+script = ExtResource("1_la71s")
+windows = []

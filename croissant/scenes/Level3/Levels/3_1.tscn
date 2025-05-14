@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5avgc26i0v58"]
+[gd_scene load_steps=16 format=3 uid="uid://c5avgc26i0v58"]
 
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_brot1"]
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_cjr8i"]
@@ -25,6 +25,12 @@ size = Vector2(1599.5, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_olxyy"]
 resource_local_to_scene = true
 size = Vector2(253, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wxmef"]
+size = Vector2(207, 125)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oeyy3"]
+size = Vector2(207, 125)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjr8i"]
 resource_local_to_scene = true
@@ -102,7 +108,7 @@ position = Vector2(126.5, 60)
 shape = SubResource("RectangleShape2D_olxyy")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_uybjc")]
-position = Vector2(1401, 435)
+position = Vector2(1398, 457)
 
 [node name="Window" parent="KillingPlatform" index="0"]
 visible = true
@@ -112,6 +118,14 @@ offset_left = -1.0
 offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CollisionShape2D" parent="KillingPlatform" index="1"]
+position = Vector2(103.5, 62.5)
+shape = SubResource("RectangleShape2D_wxmef")
+
+[node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
+position = Vector2(103.5, 62.5)
+shape = SubResource("RectangleShape2D_oeyy3")
 
 [node name="WindowsOnly" parent="." instance=ExtResource("6_l2671")]
 position = Vector2(913, 136)
