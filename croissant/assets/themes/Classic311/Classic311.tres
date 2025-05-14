@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=69 format=3 uid="uid://sx8r7eylidoh"]
+[gd_resource type="Theme" load_steps=70 format=3 uid="uid://sx8r7eylidoh"]
 
 [ext_resource type="StyleBox" uid="uid://cwxbgtsxbq6lg" path="res://assets/themes/Classic311/Styles/Button/Normal.tres" id="1"]
 [ext_resource type="StyleBox" uid="uid://d1ceaid2dg38m" path="res://assets/themes/Classic311/Styles/Scroll/Outline.tres" id="2"]
@@ -25,6 +25,7 @@
 [ext_resource type="StyleBox" uid="uid://dup8vohhyjm22" path="res://assets/themes/Classic311/Styles/Panel/TabDisabled.tres" id="23"]
 [ext_resource type="StyleBox" uid="uid://cqu4xe868xwjw" path="res://assets/themes/Classic311/Styles/Panel/InlinePanel.tres" id="24"]
 [ext_resource type="StyleBox" uid="uid://dy421m0fvmb61" path="res://assets/themes/Classic311/Styles/Scroll/OutlineSlider.tres" id="25"]
+[ext_resource type="FontFile" uid="uid://dbsqfburxw1vf" path="res://assets/texts/fonts/RobotoMono-Bold.ttf" id="25_squpl"]
 [ext_resource type="Texture2D" uid="uid://dugr6ggmu21m7" path="res://assets/themes/Classic311/Styles/Scroll/SliderGrabHDis.png" id="26"]
 [ext_resource type="Texture2D" uid="uid://b2m5pjld026gd" path="res://assets/themes/Classic311/Styles/Scroll/SliderGrabH.png" id="27"]
 [ext_resource type="Texture2D" uid="uid://dvdnrmkyrmcp3" path="res://assets/themes/Classic311/Styles/Scroll/SliderGrabVDis.png" id="28"]
@@ -42,7 +43,7 @@
 [ext_resource type="Texture2D" uid="uid://dcarp8avq41xg" path="res://assets/themes/Classic311/Styles/Button/OnDis.png" id="40"]
 [ext_resource type="Texture2D" uid="uid://c3qu85t4ycro3" path="res://assets/themes/Classic311/Styles/Panel/Panel.png" id="41"]
 [ext_resource type="Texture2D" uid="uid://cvufgs1nxnk7b" path="res://assets/themes/Classic311/Styles/Window/close_pressed.png" id="41_ie4hh"]
-[ext_resource type="FontFile" uid="uid://bn1uf70x7x3nd" path="res://assets/texts/fonts/NotoSansMono-SemiBold.ttf" id="43_a2fqp"]
+[ext_resource type="FontFile" uid="uid://c3x2cu2lkt3qo" path="res://assets/texts/fonts/RobotoMono-SemiBold.ttf" id="43_a2fqp"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2e5pe"]
 content_margin_left = 10.0
@@ -289,6 +290,8 @@ PopupMenu/styles/separator = SubResource("12")
 PopupPanel/styles/panel = SubResource("22")
 ProgressBar/styles/background = ExtResource("18")
 ProgressBar/styles/fill = SubResource("13")
+RichTextLabel/fonts/bold_font = ExtResource("25_squpl")
+RichTextLabel/fonts/normal_font = ExtResource("43_a2fqp")
 SpinBox/icons/updown = ExtResource("34")
 TabContainer/colors/font_disabled_color = Color(0.41598, 0.41598, 0.41598, 1)
 TabContainer/colors/font_selected_color = Color(0, 0, 0, 1)

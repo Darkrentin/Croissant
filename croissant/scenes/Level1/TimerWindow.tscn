@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ce1xhbt2knpmv"]
+[gd_scene load_steps=7 format=3 uid="uid://ce1xhbt2knpmv"]
 
 [ext_resource type="Script" uid="uid://bn0kkcn2tm7tr" path="res://scripts/Level1/TimerWindow.cs" id="1_gkcfg"]
 [ext_resource type="Texture2D" uid="uid://b5xq57w4bb463" path="res://assets/sprites/popups/timer_window.png" id="2_2q6k5"]
 [ext_resource type="FontFile" uid="uid://obbkukv56e3r" path="res://assets/texts/fonts/CourierPrime-Regular.ttf" id="3_x7nfb"]
+[ext_resource type="FontFile" uid="uid://c3x2cu2lkt3qo" path="res://assets/texts/fonts/RobotoMono-SemiBold.ttf" id="4_x7nfb"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7nfb"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
@@ -58,6 +59,7 @@ offset_top = 1.52588e-05
 offset_right = 0.199997
 offset_bottom = -3.05176e-05
 rotation = -0.000409353
-theme_override_fonts/font = ExtResource("3_x7nfb")
+theme_override_fonts/font = ExtResource("4_x7nfb")
 theme_override_font_sizes/font_size = 46
+text = "4.6s"
 horizontal_alignment = 1

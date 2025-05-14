@@ -21,6 +21,7 @@ public partial class ScoreboardWindow : FloatWindow
 	[Export] private Control EndResultsContainer;
 	[Export] private Control ScoreboardContainer;
 	[Export] private Control WaitingScreenContainer;
+	[Export] private Label SubmitLabel;
 	private string EntryPlayerName = "";
 	private double RunTime;
 	private string FormattedScoreboard = "";
@@ -67,32 +68,66 @@ public partial class ScoreboardWindow : FloatWindow
 	{
 		base._Process(delta);
 
-		if (string.IsNullOrWhiteSpace(UsernameEntry.Text))
-			SubmitButton.Disabled = true;
-		else
-			SubmitButton.Disabled = false;
-
-		if (SubmitButton.ButtonPressed)
+		if (!WaitingScreenContainer.Visible || !ScoreboardContainer.Visible)
 		{
-			EntryPlayerName = Sanitize(UsernameEntry.Text);
-			UsernameEntry.Text = "";
+			if (string.IsNullOrWhiteSpace(UsernameEntry.Text))
+				SubmitButton.Disabled = true;
+			else
+				SubmitButton.Disabled = false;
 
-			ShowLoadingScreen();
-			AlreadyAsked = true;
-			AddRunEntry(EntryPlayerName, RunTime);
-		}
-		else if (ShowScoreboardButton.ButtonPressed)
-		{
-			ShowLoadingScreen();
-			AlreadyAsked = false;
-			GetScoreboard();
+			if (SubmitButton.ButtonPressed)
+			{
+				EntryPlayerName = Sanitize(UsernameEntry.Text);
+				UsernameEntry.Text = "";
+
+				ShowLoadingScreen();
+				AlreadyAsked = true;
+				AddRunEntry(EntryPlayerName, RunTime);
+			}
+			else if (ShowScoreboardButton.ButtonPressed)
+			{
+				ShowLoadingScreen();
+				AlreadyAsked = false;
+				GetScoreboard();
+			}
+
+			bool containsDisallowedChar = false;
+			if (!string.IsNullOrWhiteSpace(UsernameEntry.Text))
+			{
+				foreach (char c in UsernameEntry.Text)
+				{
+					if ((c >= 0x4E00 && c <= 0x9FFF) || // CJK Unified Ideographs
+						(c >= 0x3000 && c <= 0x303F) || // CJK Symbols and Punctuation
+						(c >= 0xAC00 && c <= 0xD7AF) || // Hangul Syllables
+						(c >= 0xFF00 && c <= 0xFFEF) || // Halfwidth and Fullwidth Forms
+						(c >= 0x0400 && c <= 0x04FF) || // Cyrillic
+						(c >= 0x0500 && c <= 0x052F))   // Cyrillic Supplement
+					{
+						containsDisallowedChar = true;
+						break;
+					}
+				}
+			}
+
+			if (containsDisallowedChar)
+			{
+				SubmitButton.Disabled = true;
+				SubmitLabel.Text = "Please use only english characters.";
+				SubmitLabel.AddThemeColorOverride("font_color", new Color(1, 0, 0));
+			}
+			else
+			{
+				SubmitButton.Disabled = false;
+				SubmitLabel.Text = "Submit your time to the scoreboard!";
+				SubmitLabel.AddThemeColorOverride("font_color", new Color(0, 0, 0));
+			}
 		}
 	}
 
 	private void AddRunEntry(string playerName, double time)
 	{
 		string sanitizedPlayerName = Sanitize(playerName);
-		string urlEncodedPlayerName = System.Uri.EscapeDataString(sanitizedPlayerName);
+		string urlEncodedPlayerName = Uri.EscapeDataString(sanitizedPlayerName);
 		string url = $"{DatabaseLink}/{urlEncodedPlayerName}.json";
 		var scoreData = new Dictionary<string, double> { { "time", Math.Round(time, 2) } };
 		string Json = JsonSerializer.Serialize(scoreData);
@@ -149,8 +184,8 @@ public partial class ScoreboardWindow : FloatWindow
 					double time = scoreEntry.Value["time"];
 					string formattedTime = FormatTime(time);
 
-					string rankDisplay = (rank.ToString() + ".").PadRight(3, ' ');
-					string paddedPlayerName = FormatPlayerNameForDisplay(playerName, 20);
+					string rankDisplay = rank.ToString().PadRight(3, ' ');
+					string paddedPlayerName = playerName.PadRight(21, ' ');
 					string line = $"{rankDisplay} {paddedPlayerName}  {formattedTime}";
 
 					if (!string.IsNullOrEmpty(EntryPlayerName) && playerName == EntryPlayerName)
@@ -174,54 +209,6 @@ public partial class ScoreboardWindow : FloatWindow
 		WaitingScreenContainer.Visible = false;
 		ScoreboardContainer.Visible = true;
 		ScoreboardText.Text = FormattedScoreboard;
-	}
-
-	// Returns the estimated number of monospaced cells a character occupies.
-	// Assumes CJK and similar full-width characters occupy 2 cells for alignment, others 1.
-	private int GetCharacterCellWidth(char c)
-	{
-		if (c <= 127) return 1; // Standard ASCII characters
-
-		// Heuristic for CJK and other potentially wider characters
-		// Noto Sans Mono CJK should render these as double-width.
-		if ((c >= 0x4E00 && c <= 0x9FFF) || // CJK Unified Ideographs
-			(c >= 0x3000 && c <= 0x303F) || // CJK Symbols and Punctuation
-			(c >= 0xAC00 && c <= 0xD7AF) || // Hangul Syllables
-			(c >= 0xFF00 && c <= 0xFFEF))   // Halfwidth and Fullwidth Forms
-		{
-			return 2; // Assume these take up two cells for alignment
-		}
-		// Other Unicode characters (e.g., Latin extended with accents) are often 1 cell in monospaced fonts.
-		return 1;
-	}
-
-	private string FormatPlayerNameForDisplay(string playerName, int targetCellCount)
-	{
-		StringBuilder sb = new StringBuilder();
-		int currentCellCount = 0;
-
-		foreach (char c in playerName)
-		{
-			int charCellWidth = GetCharacterCellWidth(c);
-			if (currentCellCount + charCellWidth <= targetCellCount)
-			{
-				sb.Append(c);
-				currentCellCount += charCellWidth;
-			}
-			else
-			{
-				// Character does not fit, truncate here
-				break;
-			}
-		}
-
-		// Pad with spaces to fill the remaining cells
-		if (currentCellCount < targetCellCount)
-		{
-			sb.Append(' ', targetCellCount - currentCellCount);
-		}
-
-		return sb.ToString();
 	}
 
 	private string FormatTime(double totalSeconds)
