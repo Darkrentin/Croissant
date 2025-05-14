@@ -36,8 +36,6 @@ public partial class ScoreboardWindow : FloatWindow
 		WaitingScreenContainer.Visible = false;
 		Size = new Vector2I(500, 500);
 
-		RunTime = 2232.22f;
-
 		string formattedCurrentRunTime = FormatTime(RunTime);
 
 		GD.Print("Current run time: " + GameManager.PersonalBestTime);
@@ -54,9 +52,6 @@ public partial class ScoreboardWindow : FloatWindow
 			PersonalBestLabel.Text = $"Personal best time : {FormatTime(GameManager.PersonalBestTime)}";
 			TimeLabel.Text = $"[wave amp=15 freq=5]{formattedCurrentRunTime}[/wave]\n";
 		}
-
-		//AddRunEntry("TestPlayer", 123.456f);
-		//GetScoreboard();
 	}
 
 	public override void OnClose()

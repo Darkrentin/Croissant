@@ -31,7 +31,7 @@ public partial class FinalLevel : Node3D
 		//NavigationRegion.NavigationMesh = new NavigationMesh();
 		NavigationRegion.BakeNavigationMesh();
 
-		foreach(Objective objective in maze.Objectives)
+		foreach (Objective objective in maze.Objectives)
 		{
 			maze.AddChild(objective);
 		}
@@ -114,11 +114,11 @@ public partial class FinalLevel : Node3D
 		GameNode.AddChild(BossLevel);
 	}
 
-    public override void _Process(double delta)
-    {
-        if(Input.MouseMode == Input.MouseModeEnum.Visible)
+	public override void _Process(double delta)
+	{
+		if (Input.MouseMode == Input.MouseModeEnum.Visible)
 		{
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 		}
-    }
+	}
 }

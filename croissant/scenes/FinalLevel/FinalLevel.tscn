@@ -31,7 +31,8 @@ sky = SubResource("Sky_knvm8")
 reflected_light_source = 2
 tonemap_mode = 1
 glow_enabled = true
-glow_bloom = 0.1
+fog_enabled = true
+fog_density = 0.005
 volumetric_fog_density = 0.02
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wf7iu"]
@@ -211,6 +212,7 @@ libraries = {
 autoplay = "Start"
 
 [node name="MiniMap" type="SubViewportContainer" parent="."]
+visible = false
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -220,8 +222,10 @@ grow_vertical = 2
 [node name="SubViewport" type="SubViewport" parent="MiniMap"]
 transparent_bg = true
 handle_input_locally = false
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MiniMap" parent="MiniMap/SubViewport" node_paths=PackedStringArray("Maze", "Player") instance=ExtResource("8_ebjtf")]
 Maze = NodePath("../../../ViewportWithShader/SubViewport/Map/Maze")
 Player = NodePath("../../../ViewportWithShader/SubViewport/Player3D")
+
+[node name="ResourcePreloader" type="ResourcePreloader" parent="."]
