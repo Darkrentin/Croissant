@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c86vhmqirheox"]
+
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="1_sjotb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0bq50"]
+shader = ExtResource("1_sjotb")
+shader_parameter/color1 = Color(1, 0, 0, 1)
+shader_parameter/color2 = Color(0, 0, 1, 1)
+shader_parameter/animate = true
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 15.0
+shader_parameter/speed = 3.0
+shader_parameter/border_width = 10.0
+shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
+
+[node name="PlatformTexture" type="ColorRect"]
+material = SubResource("ShaderMaterial_0bq50")
+offset_right = 40.0
+offset_bottom = 40.0

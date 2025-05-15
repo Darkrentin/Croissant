@@ -1,19 +1,22 @@
-[gd_scene load_steps=6 format=3 uid="uid://b6ci8vrbwflc5"]
+[gd_scene load_steps=8 format=3 uid="uid://b6ci8vrbwflc5"]
 
 [ext_resource type="Script" uid="uid://bs2soqlm0dbss" path="res://scripts/Level3/Platform/PlayerOnly.cs" id="1_ysnk1"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_r5qs5"]
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_r5qs5"]
+[ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_r5qs5"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="4_3po6g"]
+[ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/platformer/player/Player Idle 48x48.png" id="5_mehpu"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_3po6g"]
-shader = ExtResource("3_r5qs5")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mehpu"]
+shader = ExtResource("4_3po6g")
+shader_parameter/color1 = Color(0, 1, 0, 1)
+shader_parameter/color2 = Color(0, 0, 0, 0)
 shader_parameter/animate = false
 shader_parameter/direction = -1.0
-shader_parameter/frequency = 15.0
+shader_parameter/frequency = 20.0
 shader_parameter/speed = 3.0
-shader_parameter/border_width = 10.0
+shader_parameter/border_width = 15.0
 shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r5qs5"]
 resource_local_to_scene = true
@@ -25,21 +28,46 @@ collision_mask = 2
 script = ExtResource("1_ysnk1")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
-Texture = NodePath("Window/ColorRect")
+Texture = NodePath("Window/PlatformTexture")
 
 [node name="Window" type="Window" parent="."]
 auto_translate_mode = 1
+transparent_bg = true
+canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
 size = Vector2i(120, 120)
+transparent = true
+sharp_corners = true
 script = ExtResource("2_r5qs5")
 
-[node name="ColorRect" type="ColorRect" parent="Window"]
-material = SubResource("ShaderMaterial_3po6g")
+[node name="PlatformTexture" parent="Window" instance=ExtResource("3_r5qs5")]
+material = SubResource("ShaderMaterial_mehpu")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = 0.0
+offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="Control" type="Control" parent="Window"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -0.5
+offset_top = -0.5
+offset_right = 0.5
+offset_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="Window/Control"]
+scale = Vector2(3, 3)
+texture = ExtResource("5_mehpu")
+hframes = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 60)

@@ -1,27 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmg2wx0jx04xs"]
+[gd_scene load_steps=7 format=3 uid="uid://cmg2wx0jx04xs"]
 
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_2083c"]
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ah0vo"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_ah0vo"]
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_uhoo4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ah0vo"]
 size = Vector2(128, 1344)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uhoo4"]
 size = Vector2(1920, 128)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ajanl"]
-resource_local_to_scene = true
-shader = ExtResource("3_uhoo4")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/animate = false
-shader_parameter/direction = 1.0
-shader_parameter/frequency = 15.0
-shader_parameter/speed = 0.11
-shader_parameter/border_width = 4.0
-shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2083c"]
 resource_local_to_scene = true
@@ -54,9 +41,6 @@ position = Vector2(0, 952)
 
 [node name="Window" parent="StaticPlateform" index="0"]
 auto_translate_mode = 1
-
-[node name="ColorRect" parent="StaticPlateform/Window" index="0"]
-material = SubResource("ShaderMaterial_ajanl")
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(960, 64)

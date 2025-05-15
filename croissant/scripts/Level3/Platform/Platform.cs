@@ -19,7 +19,8 @@ public partial class Platform : CharacterBody2D
     private Vector2 currentAppliedSpeeds;
 
     [Export] public bool Freeze = true;
-    [Export] ColorRect Texture;
+    [Export] public ColorRect Texture;
+    public ShaderMaterial Shader;
 
     public override void _Ready()
     {
@@ -48,16 +49,13 @@ public partial class Platform : CharacterBody2D
 
         currentAppliedSpeeds = BaseSpeeds;
         window.Title = "Platform";
+        Shader = Texture.Material as ShaderMaterial;
     }
 
     public override void _PhysicsProcess(double delta)
     {
 
-        ShaderMaterial shader = Texture.Material as ShaderMaterial;
-        if((Vector2I)shader.GetShaderParameter("window_size") != window.Size)
-        {
-            shader.SetShaderParameter("window_size", window.Size);
-        }
+        Shader.SetShaderParameter("window_size", window.Size);
 
 
         if(!Freeze)
@@ -129,9 +127,17 @@ public partial class Platform : CharacterBody2D
             }
             window.Position = (Vector2I)GlobalPosition;
         }
+
+        if((bool)Shader.GetShaderParameter("animate"))
+        {
+            float currentSpeed = (float)Shader.GetShaderParameter("speed");
+            float timeIncrement = (float)delta * currentSpeed;
+            float currentTime = (float)Shader.GetShaderParameter("Time") + timeIncrement;
+            Shader.SetShaderParameter("Time", currentTime);
+        }
     }
 
-    public void MouseEvent(InputEventMouseButton mouseButtonEvent)
+    public virtual void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
         if(!window.Visible)
             return;
@@ -167,6 +173,8 @@ public partial class Platform : CharacterBody2D
             }
             Pressed = false;
         }
+
+        
     }
 
     public bool MouseOnWindow()
@@ -187,7 +195,7 @@ public partial class Platform : CharacterBody2D
             return mousePos.X >= windowPos.X &&
                    mousePos.X <= windowPos.X + windowSize.X &&
                    mousePos.Y >= windowPos.Y - titleBarHeight &&
-                   mousePos.Y < windowPos.Y;
+                   mousePos.Y < windowPos.Y + windowSize.Y;
         }
         catch (ObjectDisposedException)
         {

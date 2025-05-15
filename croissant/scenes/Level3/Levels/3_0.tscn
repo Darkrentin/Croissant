@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_8j6u2"]
 [ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlateform.tscn" id="5_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
+[ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="8_8j6u2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8j6u2"]
 size = Vector2(128, 1344)
@@ -14,84 +15,65 @@ size = Vector2(128, 1344)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnnv"]
 size = Vector2(1920, 128)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwnnv"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8j6u2"]
 shader = ExtResource("3_8j6u2")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
+shader_parameter/color1 = Color(0.173887, 0.368972, 0.853614, 1)
+shader_parameter/color2 = Color(0.173887, 0.368972, 0.853614, 1)
 shader_parameter/animate = false
 shader_parameter/direction = -1.0
 shader_parameter/frequency = 15.0
 shader_parameter/speed = 3.0
-shader_parameter/border_width = 10.0
+shader_parameter/border_width = 15.0
 shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkapc"]
 resource_local_to_scene = true
 size = Vector2(1920, 128)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgx1k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vwnnv"]
 shader = ExtResource("3_8j6u2")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
+shader_parameter/color1 = Color(0.173887, 0.368972, 0.853614, 1)
+shader_parameter/color2 = Color(0.173887, 0.368972, 0.853614, 1)
 shader_parameter/animate = false
 shader_parameter/direction = -1.0
 shader_parameter/frequency = 15.0
 shader_parameter/speed = 3.0
-shader_parameter/border_width = 10.0
+shader_parameter/border_width = 15.0
 shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0s36o"]
 resource_local_to_scene = true
 size = Vector2(512, 128)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_72i25"]
-resource_local_to_scene = true
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fgx1k"]
 shader = ExtResource("3_8j6u2")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
+shader_parameter/color1 = Color(0.173887, 0.368972, 0.853614, 1)
+shader_parameter/color2 = Color(0.173887, 0.368972, 0.853614, 1)
 shader_parameter/animate = false
 shader_parameter/direction = -1.0
 shader_parameter/frequency = 15.0
 shader_parameter/speed = 3.0
-shader_parameter/border_width = 10.0
+shader_parameter/border_width = 15.0
 shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrjvf"]
 resource_local_to_scene = true
 size = Vector2(512, 128)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_sgeyg"]
-resource_local_to_scene = true
-shader = ExtResource("3_8j6u2")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 0)
-shader_parameter/animate = false
-shader_parameter/direction = -1.0
-shader_parameter/frequency = 15.0
-shader_parameter/speed = 3.0
-shader_parameter/border_width = 10.0
-shader_parameter/window_size = Vector2(800, 600)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gijp6"]
 resource_local_to_scene = true
-size = Vector2(320, 32)
+size = Vector2(320, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6or"]
 resource_local_to_scene = true
 size = Vector2(120, 320)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5q6or"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgx1k"]
 resource_local_to_scene = true
-shader = ExtResource("3_8j6u2")
-shader_parameter/color1 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/color2 = Color(0.207843, 0.364706, 1, 1)
-shader_parameter/animate = false
-shader_parameter/direction = -1.0
-shader_parameter/frequency = 15.0
-shader_parameter/speed = 3.0
-shader_parameter/border_width = 10.0
-shader_parameter/window_size = Vector2(800, 600)
+size = Vector2(128, 320)
 
 [node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
@@ -118,8 +100,8 @@ shape = SubResource("RectangleShape2D_vwnnv")
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 960)
 
-[node name="ColorRect" parent="StaticPlateform/Window" index="0"]
-material = SubResource("ShaderMaterial_vwnnv")
+[node name="PlatformTexture" parent="StaticPlateform/Window" index="0"]
+material = SubResource("ShaderMaterial_8j6u2")
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(960, 64)
@@ -128,8 +110,8 @@ shape = SubResource("RectangleShape2D_fkapc")
 [node name="StaticPlateform2" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 320)
 
-[node name="ColorRect" parent="StaticPlateform2/Window" index="0"]
-material = SubResource("ShaderMaterial_fgx1k")
+[node name="PlatformTexture" parent="StaticPlateform2/Window" index="0"]
+material = SubResource("ShaderMaterial_vwnnv")
 
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
 position = Vector2(256, 64)
@@ -138,21 +120,18 @@ shape = SubResource("RectangleShape2D_0s36o")
 [node name="StaticPlateform3" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(1408, 320)
 
-[node name="ColorRect" parent="StaticPlateform3/Window" index="0"]
-material = SubResource("ShaderMaterial_72i25")
+[node name="PlatformTexture" parent="StaticPlateform3/Window" index="0"]
+material = SubResource("ShaderMaterial_fgx1k")
 
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
 position = Vector2(256, 64)
 shape = SubResource("RectangleShape2D_yrjvf")
 
 [node name="MovePlatform" parent="." instance=ExtResource("2_gijp6")]
-position = Vector2(800, 160)
-
-[node name="ColorRect" parent="MovePlatform/Window" index="0"]
-material = SubResource("ShaderMaterial_sgeyg")
+position = Vector2(800, 128)
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(160, 16)
+position = Vector2(160, 32)
 shape = SubResource("RectangleShape2D_gijp6")
 
 [node name="1" parent="." instance=ExtResource("3_5q6or")]
@@ -177,14 +156,19 @@ position = Vector2(1472, 0)
 position = Vector2(60, 160)
 shape = SubResource("RectangleShape2D_5q6or")
 
-[node name="ColorRect" parent="DoorPlateform/Window" index="0"]
-material = SubResource("ShaderMaterial_5q6or")
-
 [node name="ConfigFile" parent="." instance=ExtResource("6_gijp6")]
 position = Vector2(432, 248)
+
+[node name="PlayerOnly" parent="." instance=ExtResource("8_8j6u2")]
+position = Vector2(448, 640)
+
+[node name="CollisionShape2D" parent="PlayerOnly" index="1"]
+position = Vector2(64, 160)
+shape = SubResource("RectangleShape2D_fgx1k")
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
 [editable path="StaticPlateform3"]
 [editable path="MovePlatform"]
 [editable path="DoorPlateform"]
+[editable path="PlayerOnly"]
