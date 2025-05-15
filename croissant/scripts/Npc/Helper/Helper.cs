@@ -1,5 +1,8 @@
+using Godot;
+
 public partial class Helper : Npc
 {
+	[Export] public AnimationPlayer animationPlayer;
 	public override void _Ready()
 	{
 		base._Ready();
@@ -9,6 +12,12 @@ public partial class Helper : Npc
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+	}
+
+	public override void ShowNpc(Vector2I Position)
+	{
+		base.ShowNpc(Position);
+		animationPlayer.Play("Spawn");
 	}
 
 	public override void DialogueFinished(string name)

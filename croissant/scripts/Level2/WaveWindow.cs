@@ -8,7 +8,7 @@ public partial class WaveWindow : AttackWindow
 	public int nsizeB = 0;
 	[Export] public int _Mode = 0;
 
-	const float ShakeTime = 1f;
+	const float ShakeTime = 1.2f;
 
 	public override void _Ready()
 	{

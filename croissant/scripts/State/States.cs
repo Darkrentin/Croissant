@@ -38,7 +38,7 @@ public static class States
     public static void Helper()
     {
         GameManager.helper.Position = Lib.GetScreenPosition(0.5f, 0.5f) - GameManager.helper.Size / 2;
-
+        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }

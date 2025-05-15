@@ -14,6 +14,7 @@ public partial class Virus : Npc
 	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
 	[Export] public Timer BlinkTimer;
 	[Export] public AnimationPlayer AnimationScale;
+	[Export] public AnimationTree AnimationTree;
 	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 	public Vector3 targetRotation;
 	public static Control Pause;
@@ -30,6 +31,12 @@ public partial class Virus : Npc
 		BlinkTimer.Start();
 
 		AnimationScreen.Travel("Off");
+	}
+
+	public override void InitNpc()
+	{
+		base.InitNpc();
+		AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
 	}
 
 	public override void DialogueFinished(string name)
@@ -65,12 +72,12 @@ public partial class Virus : Npc
 	{
 		base._Process(delta);
 		if (On)
-			UpdateModelRotation(delta);	
-		if(On && !OnScreen())
+			UpdateModelRotation(delta);
+		if (On && !OnScreen())
 		{
 			On = false;
 		}
-		if(!On && OnScreen() && AnimationScreen.GetCurrentNode()!="Off")
+		if (!On && OnScreen() && AnimationScreen.GetCurrentNode() != "Off")
 		{
 			On = true;
 		}
@@ -105,8 +112,8 @@ public partial class Virus : Npc
 
 		Computer.Rotation = Computer.Rotation.Lerp(targetRotation, (float)delta * RotationSmoothing);
 		const float PosMultiplier = 4f;
-		black1.Position = new Vector2(positionX, positionY)*PosMultiplier;
-		black2.Position = new Vector2(positionX, positionY)*PosMultiplier;
+		black1.Position = new Vector2(positionX, positionY) * PosMultiplier;
+		black2.Position = new Vector2(positionX, positionY) * PosMultiplier;
 	}
 
 	public static void SetPause(bool Visible)
@@ -128,7 +135,7 @@ public partial class Virus : Npc
 			GameManager.State = GameManager.GameState.VirusTuto;
 			GrabFocus();
 		}
-		if(DialogueToPlayAfterTransition=="Virus/Helper Dialogue 1")
+		if (DialogueToPlayAfterTransition == "Virus/Helper Dialogue 1")
 		{
 			Splash();
 		}
@@ -145,10 +152,10 @@ public partial class Virus : Npc
 	public void Splash()
 	{
 		Node2D VirusSplash = States.VirusSplashScene.Instantiate<Node2D>();
-        VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
-        GameManager.GameRoot.AddChild(VirusSplash);
-        VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
-        VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
+		VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
+		GameManager.GameRoot.AddChild(VirusSplash);
+		VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
+		VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
 	}
 
 }

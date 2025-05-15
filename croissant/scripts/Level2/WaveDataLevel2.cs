@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public partial class WaveDataLevel2 : WaveData
 {
-
 	public enum WindowType { Laser, Extend, Follow, Spike, Compress, Wave }
 
 	public override void _Ready()
@@ -135,18 +134,19 @@ public partial class WaveDataLevel2 : WaveData
 		F.RandomPosition = true;
 		windows.Add(F);
 		AddWindow(windows, WindowType.Extend, false);
-		AddWindow(windows, WindowType.Extend, false);
+		AddWindow(windows, WindowType.Extend, true);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave8()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, true);
-		AddWindow(windows, WindowType.Follow, false);
-		AddWindow(windows, WindowType.Follow, false);
-		AddWindow(windows, WindowType.Follow, false);
-		AddWindow(windows, WindowType.Follow, false);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, true);
 		return windows;
 	}
 
@@ -163,7 +163,6 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave10()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Compress, false);
 		AddWindow(windows, WindowType.Extend, true);
 		AddWindow(windows, WindowType.Follow, true);
@@ -173,7 +172,6 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave11()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Laser, true);
 		AddWindow(windows, WindowType.Laser, true);
 		AddWindow(windows, WindowType.Laser, true);
 		AddWindow(windows, WindowType.Laser, true);

@@ -4,7 +4,7 @@ using System;
 public abstract partial class Npc : FloatWindow
 {
     [Export] public string NpcName;
-    [Export] public AnimationTree AnimationTree;
+
     [Export] public DialogueWindow Dialogue { get; set; }
     public bool ForceDialoguePlacement = false;
     public Vector2I LeftUp = Vector2I.Zero;
@@ -32,8 +32,8 @@ public abstract partial class Npc : FloatWindow
     public virtual void InitNpc()
     {
         Lib.Print($"Npc : {NpcName} initialized DialogueId :{DialogueWindow.Dialogueid}");
-        AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
-        Dialogue.Position = -Dialogue.Size*2;
+
+        Dialogue.Position = -Dialogue.Size * 2;
         ForceDialoguePlacement = true;
 
         LeftDown = new Vector2I(0, GameManager.ScreenSize.Y - Size.Y);
@@ -47,10 +47,10 @@ public abstract partial class Npc : FloatWindow
         base._Process(delta);
         if (Input.IsActionJustPressed("LeftClick"))
             Skip();
-        
+
     }
 
-    public void HideNpc(int side = -1)
+    public virtual void HideNpc(int side = -1)
     {
         Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side, Math.Max(Size.X, Size.Y) * 2);
         ForceDialoguePlacement = true;
@@ -63,7 +63,7 @@ public abstract partial class Npc : FloatWindow
         Visible = false;
     }
 
-    public void ShowNpc(Vector2I Position)
+    public virtual void ShowNpc(Vector2I Position)
     {
         ForceDialoguePlacement = false;
         StartLinearTransition(Position, 0.1f, reset: true);
