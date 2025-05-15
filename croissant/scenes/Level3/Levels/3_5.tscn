@@ -116,6 +116,10 @@ position = Vector2(0, 152)
 position = Vector2(201.5, 89.5)
 shape = SubResource("RectangleShape2D_yhkvj")
 
+[node name="6" parent="." instance=ExtResource("2_qulun")]
+position = Vector2(1736, 88)
+NextSceneId = 6
+
 [editable path="StaticPlateform"]
 [editable path="MovePlatform"]
 [editable path="StaticPlateform2"]
