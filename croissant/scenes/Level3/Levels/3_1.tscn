@@ -61,14 +61,6 @@ shape = SubResource("RectangleShape2D_uybjc")
 [node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(400, 584)
 
-[node name="TextureRect" parent="StaticPlateform/Window" index="0"]
-anchors_preset = -1
-anchor_top = 0.008
-offset_left = -1.0
-offset_top = 0.04
-offset_right = 1.0
-offset_bottom = 1.0
-
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(759, 58)
 shape = SubResource("RectangleShape2D_x0mh1")
@@ -87,15 +79,6 @@ scale = Vector2(1.5, 1.5)
 [node name="StaticPlateform2" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(321, 960)
 
-[node name="TextureRect" parent="StaticPlateform2/Window" index="0"]
-anchors_preset = -1
-anchor_top = -0.025
-anchor_right = 0.992
-anchor_bottom = 1.042
-offset_left = 1.0
-offset_right = -0.0399933
-offset_bottom = -0.0400085
-
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
 position = Vector2(799.25, 60)
 shape = SubResource("RectangleShape2D_e0fg1")
@@ -109,15 +92,6 @@ shape = SubResource("RectangleShape2D_olxyy")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_uybjc")]
 position = Vector2(1398, 457)
-
-[node name="Window" parent="KillingPlatform" index="0"]
-visible = true
-
-[node name="TextureRect" parent="KillingPlatform/Window" index="0"]
-offset_left = -1.0
-offset_bottom = 2.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="1"]
 position = Vector2(103.5, 62.5)
