@@ -343,8 +343,8 @@ transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransitio
 graph_offset = Vector2(129, -127)
 
 [node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree")]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
+collision_mask = 7
 script = ExtResource("1_rrt4f")
 RayCast3D = NodePath("RayCast3D")
 AnimationTree = NodePath("AnimationTree")

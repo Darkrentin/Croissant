@@ -84,7 +84,7 @@ public partial class Virus3D : StaticBody3D
 		// For example, reduce health or trigger an animation
 		StartGlitch();
 		//StartShoot();
-		BossLevel.Instance.FloorAttack();
+		BossLevel.Instance.StartWave();
 		Lib.Print("Virus took damage!");
 	}
 

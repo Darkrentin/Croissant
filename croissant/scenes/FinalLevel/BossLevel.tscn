@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bsvg7n4ll3xg7"]
+[gd_scene load_steps=12 format=3 uid="uid://bsvg7n4ll3xg7"]
 
 [ext_resource type="Script" uid="uid://eatayns1skwp" path="res://scripts/FinalLevel/BossLevel.cs" id="1_chkxq"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_ynqx5"]
@@ -36,6 +36,9 @@ shader_parameter/displacement_strength = 0.2
 material = SubResource("ShaderMaterial_tkrs4")
 size = Vector2(20, 20)
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_74hf8"]
+size = Vector3(0.1, 2, 20)
+
 [node name="BossLevel" type="Node3D"]
 script = ExtResource("1_chkxq")
 BossFloorScene = ExtResource("2_yady8")
@@ -46,7 +49,28 @@ visible = false
 mesh = SubResource("BoxMesh_7weta")
 
 [node name="Virus" parent="." instance=ExtResource("3_n6tki")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
 
 [node name="Lava" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
 mesh = SubResource("PlaneMesh_74hf8")
+
+[node name="Limit" type="StaticBody3D" parent="."]
+collision_layer = 4
+collision_mask = 5
+
+[node name="L" type="CollisionShape3D" parent="Limit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 0)
+shape = SubResource("BoxShape3D_74hf8")
+
+[node name="R" type="CollisionShape3D" parent="Limit"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 0)
+shape = SubResource("BoxShape3D_74hf8")
+
+[node name="U" type="CollisionShape3D" parent="Limit"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.37114e-07, 0, -10)
+shape = SubResource("BoxShape3D_74hf8")
+
+[node name="D" type="CollisionShape3D" parent="Limit"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.37114e-07, 0, 10)
+shape = SubResource("BoxShape3D_74hf8")
