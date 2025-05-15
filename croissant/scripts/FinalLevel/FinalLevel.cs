@@ -41,6 +41,7 @@ public partial class FinalLevel : Node3D
 		miniMap.DrawMaze();
 		SpawnEnemy();
 		Area3D.BodyEntered += EndReach;
+		GameManager.MainWindow.AlwaysOnTop = true;
 	}
 
 	public void SpawnEnemy()

@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=3 uid="uid://c0ixtme6phwg7"]
+
+[ext_resource type="Script" uid="uid://bgshfq2ki3bqa" path="res://scripts/FinalLevel/BossFloor.cs" id="1_vtsjb"]
+[ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="2_3b0w1"]
+[ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/shaders/dependencies/WallNoise.tres" id="3_vtsjb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2u0f"]
+render_priority = 0
+shader = ExtResource("2_3b0w1")
+shader_parameter/world_noise_normal_texture = ExtResource("3_vtsjb")
+shader_parameter/noise_scale = 0.134
+shader_parameter/normal_strength = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_re8sb"]
+material = SubResource("ShaderMaterial_v2u0f")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="Animation" id="Animation_3b0w1"]
+resource_name = "Lava"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, -1, 1), Vector3(1, -1.91, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vtsjb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, -1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2u0f"]
+_data = {
+&"Lava": SubResource("Animation_3b0w1"),
+&"RESET": SubResource("Animation_vtsjb")
+}
+
+[node name="BossFloor" type="Node3D" node_paths=PackedStringArray("animationPlayer")]
+script = ExtResource("1_vtsjb")
+animationPlayer = NodePath("AnimationPlayer")
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
+mesh = SubResource("BoxMesh_re8sb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_v2u0f")
+}

@@ -1,8 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://bsvg7n4ll3xg7"]
+[gd_scene load_steps=11 format=3 uid="uid://bsvg7n4ll3xg7"]
 
+[ext_resource type="Script" uid="uid://eatayns1skwp" path="res://scripts/FinalLevel/BossLevel.cs" id="1_chkxq"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="1_ynqx5"]
 [ext_resource type="Texture2D" uid="uid://dmqa4nul5b2m3" path="res://assets/shaders/dependencies/WallNoise.tres" id="2_n6tki"]
+[ext_resource type="PackedScene" uid="uid://c0ixtme6phwg7" path="res://scenes/FinalLevel/BossFloor.tscn" id="2_yady8"]
 [ext_resource type="PackedScene" uid="uid://btjmeghne5sev" path="res://scenes/Npc/Virus/Virus3D.tscn" id="3_n6tki"]
+[ext_resource type="Shader" uid="uid://6drklppn3fk5" path="res://assets/shaders/Lava.gdshader" id="6_74hf8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_chkxq"]
 render_priority = 0
@@ -15,10 +18,35 @@ shader_parameter/normal_strength = 2.0
 material = SubResource("ShaderMaterial_chkxq")
 size = Vector3(30, 1, 30)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tkrs4"]
+render_priority = 0
+shader = ExtResource("6_74hf8")
+shader_parameter/dark_lava_color = Color(1, 0, 0, 1)
+shader_parameter/light_lava_color = Color(1, 1, 0, 1)
+shader_parameter/speed = 0.476
+shader_parameter/scale = 100.0
+shader_parameter/sharpness = 2.5
+shader_parameter/emission_intensity = 3.145
+shader_parameter/normal_strength = 5.0
+shader_parameter/roughness_value = 0.3
+shader_parameter/roughness_variation = 1.0
+shader_parameter/displacement_strength = 0.2
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_74hf8"]
+material = SubResource("ShaderMaterial_tkrs4")
+size = Vector2(20, 20)
+
 [node name="BossLevel" type="Node3D"]
+script = ExtResource("1_chkxq")
+BossFloorScene = ExtResource("2_yady8")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+visible = false
 mesh = SubResource("BoxMesh_7weta")
 
 [node name="Virus" parent="." instance=ExtResource("3_n6tki")]
+
+[node name="Lava" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.9, 0)
+mesh = SubResource("PlaneMesh_74hf8")

@@ -37,7 +37,7 @@ public partial class Virus3D : StaticBody3D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
-		UpdateVirusMovement(delta);
+		//UpdateVirusMovement(delta);
 	}
 
 	public void UpdateVirusMovement(double delta)
@@ -83,7 +83,8 @@ public partial class Virus3D : StaticBody3D
 		// Handle damage logic here
 		// For example, reduce health or trigger an animation
 		StartGlitch();
-		StartShoot();
+		//StartShoot();
+		BossLevel.Instance.FloorAttack();
 		Lib.Print("Virus took damage!");
 	}
 
