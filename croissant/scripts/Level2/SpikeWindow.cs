@@ -38,8 +38,8 @@ public partial class SpikeWindow : AttackWindow
 	{
 		const float ShakeTime = 1.5f;
 		StartShake(ShakeTime, 5); //FIND WHY THE WINDOWS DISEAPPEAR WHEN I DON'T USE THE SHAKE !
-		
-		ShowVisualCollision(Size, TargetPosition,ShakeTime);
+
+		ShowVisualCollision(Size, TargetPosition, ShakeTime);
 
 		Timer.WaitTime = ShakeTime;
 		base.Prevent();
@@ -50,14 +50,14 @@ public partial class SpikeWindow : AttackWindow
 		const float ResizeTime = 0.1f;
 		const float AttackDuration = 5f;
 
-		Timer.WaitTime = ResizeTime + AttackDuration + Lib.GetRandomNormal(0.5f, 3.0f);;
+		Timer.WaitTime = ResizeTime + AttackDuration + Lib.GetRandomNormal(0.5f, 3.0f); ;
 		base.Attack();
 	}
 
 	public override void Reload()
 	{
 		HideVisualCollision();
-        
+
 		Timer.WaitTime = 0.1f; // time to wait before restarting
 		base.Reload();
 	}

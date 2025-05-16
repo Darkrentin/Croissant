@@ -49,17 +49,17 @@ public partial class MenuWindow : FloatWindow
 			Close();
 		}
 
-		if(FakeDesktop && !MainWindow.FakeBackground.Visible)
+		if (FakeDesktop && !MainWindow.FakeBackground.Visible)
 			FakeDesktopButtonToggled(FakeDesktop);
-		if(DebugMode && !MainWindow.DebugInfo.Visible)
+		if (DebugMode && !MainWindow.DebugInfo.Visible)
 			DebugButtonToggled(DebugMode);
 	}
 
 	public void Close()
 	{
 		Visible = false;
-		if(GameManager.virus!=null)
-		    Virus.SetPause(false);
+		if (GameManager.virus != null)
+			Virus.SetPause(false);
 		GetTree().Paused = false;
 	}
 
@@ -68,10 +68,10 @@ public partial class MenuWindow : FloatWindow
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Visible = true;
 		ProcessMode = ProcessModeEnum.Always;
-		if(GameManager.virus!=null)
-		    Virus.SetPause(true);
+		if (GameManager.virus != null)
+			Virus.SetPause(true);
 		GetTree().Paused = true;
-		
+
 	}
 
 	public void _on_quit_button_pressed()
@@ -89,7 +89,7 @@ public partial class MenuWindow : FloatWindow
 	public void FakeDesktopButtonToggled(bool toggled)
 	{
 		FakeDesktop = toggled;
-		if(MainWindow.FakeBackground == null)
+		if (MainWindow.FakeBackground == null)
 			return;
 		MainWindow.FakeBackground.Visible = FakeDesktop;
 	}
@@ -97,9 +97,9 @@ public partial class MenuWindow : FloatWindow
 	public void DebugButtonToggled(bool toggled)
 	{
 		DebugMode = toggled;
-		if(MainWindow.DebugInfo == null)
+		if (MainWindow.DebugInfo == null)
 			return;
 		MainWindow.DebugInfo.Visible = DebugMode;
 	}
-		
+
 }

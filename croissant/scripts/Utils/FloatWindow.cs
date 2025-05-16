@@ -30,10 +30,12 @@ public partial class FloatWindow : Window
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
 	public Vector2I CenterPosition { set { SetWindowPosition(value - Size / 2); } get { return Position + Size / 2; } }
-	public int TitleBarHeight { 
-		get {
+	public int TitleBarHeight
+	{
+		get
+		{
 			return 25;//return GetSizeWithDecorations().Y - Size.Y;
-		} 
+		}
 	}
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }
 	public Rect2I WindowRect;

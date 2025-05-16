@@ -8,7 +8,7 @@ public partial class Virus3D : StaticBody3D
 	public float MaxRotation = 1f;
 	public float RotationSmoothing = 5;
 	[Export] public MeshInstance3D Base;
-	
+
 	[Export] public Node3D ShootSpawnA;
 	[Export] public Node3D ShootSpawnB;
 	public Timer GlitchTimer;
@@ -43,46 +43,46 @@ public partial class Virus3D : StaticBody3D
 	public override void _Process(double delta)
 	{
 		//UpdateVirusMovement(delta);
-		HealthBar.Frame = 10-Hp;
+		HealthBar.Frame = 10 - Hp;
 	}
 
 	public void UpdateVirusMovement(double delta)
 	{
 		LookAt(FinalLevel.Instance.Player3D.GlobalPosition, Vector3.Up);
-		Rotation*= new Vector3(0, 1, 0);
-		Rotation+=new Vector3(0, (float)Math.PI, 0);
+		Rotation *= new Vector3(0, 1, 0);
+		Rotation += new Vector3(0, (float)Math.PI, 0);
 	}
 
 	public void ShakeNode(Node3D nodeToShake, float intensity = 0.3f, float duration = 0.5f)
-    {
-        Vector3 originalPosition = nodeToShake.Position;
-        Tween shakeTween = CreateTween();
-        int frequency = (int)(duration * 60);
-        float timePerShake = duration / frequency;
-        
-        for (int i = 0; i < frequency; i++)
-        {
-            // Generate random offset
-            Vector3 randomOffset = new Vector3(
-                (float)Lib.rand.NextDouble() * intensity - intensity/2,
-                (float)Lib.rand.NextDouble() * intensity - intensity/2, 
-                (float)Lib.rand.NextDouble() * intensity - intensity/2
-            );
-            
-            // Tween to random position
-            shakeTween.TweenProperty(nodeToShake, "position", originalPosition + randomOffset, timePerShake / 2)
-                .SetEase(Tween.EaseType.Out)
-                .SetTrans(Tween.TransitionType.Sine);
-                
-            // Tween back to midpoint
-            shakeTween.TweenProperty(nodeToShake, "position", originalPosition, timePerShake / 2)
-                .SetEase(Tween.EaseType.In)
-                .SetTrans(Tween.TransitionType.Sine);
-        }
-        
-        // Ensure we return to original position
-        shakeTween.TweenProperty(nodeToShake, "position", originalPosition, 0.01f);
-    }
+	{
+		Vector3 originalPosition = nodeToShake.Position;
+		Tween shakeTween = CreateTween();
+		int frequency = (int)(duration * 60);
+		float timePerShake = duration / frequency;
+
+		for (int i = 0; i < frequency; i++)
+		{
+			// Generate random offset
+			Vector3 randomOffset = new Vector3(
+				(float)Lib.rand.NextDouble() * intensity - intensity / 2,
+				(float)Lib.rand.NextDouble() * intensity - intensity / 2,
+				(float)Lib.rand.NextDouble() * intensity - intensity / 2
+			);
+
+			// Tween to random position
+			shakeTween.TweenProperty(nodeToShake, "position", originalPosition + randomOffset, timePerShake / 2)
+				.SetEase(Tween.EaseType.Out)
+				.SetTrans(Tween.TransitionType.Sine);
+
+			// Tween back to midpoint
+			shakeTween.TweenProperty(nodeToShake, "position", originalPosition, timePerShake / 2)
+				.SetEase(Tween.EaseType.In)
+				.SetTrans(Tween.TransitionType.Sine);
+		}
+
+		// Ensure we return to original position
+		shakeTween.TweenProperty(nodeToShake, "position", originalPosition, 0.01f);
+	}
 
 	public void TakeDamage()
 	{

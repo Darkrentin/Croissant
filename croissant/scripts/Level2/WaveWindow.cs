@@ -173,4 +173,3 @@ public partial class WaveWindow : AttackWindow
 		base.Delete();
 	}
 }
-

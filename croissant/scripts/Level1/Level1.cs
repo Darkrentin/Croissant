@@ -18,7 +18,7 @@ public partial class Level1 : Node2D
     public int TimerTic = 2;
     public static Level1 Instance;
     public List<FloatWindow> Windows = new List<FloatWindow>();
-    
+
 
     public override void _Ready()
     {
@@ -98,7 +98,7 @@ public partial class Level1 : Node2D
 		}*/
         //////Lib.Print($"timertic: {TimerTic}");
         //////Lib.Print($"window: {WindowCount}");
-        
+
         if (InitialWindowCount < 22)
         {
             AddNewWindow();
@@ -110,13 +110,13 @@ public partial class Level1 : Node2D
             InitialWindowCount++;
         }
 
-        if(WindowCount == 0)
+        if (WindowCount == 0)
         {
             Lib.Print("No windows left, ending game...");
             GameManager.State = GameManager.GameState.BlueScreen;
             QueueFree();
         }
-        
+
     }
 
     public static void AddNewWindow()

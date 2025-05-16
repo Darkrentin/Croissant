@@ -37,7 +37,7 @@ public partial class CursorWindow : FloatWindow
 	public void TakeDamage()
 	{
 		Lib.Print("CursorWindow: TakeDamage");
-		if(Invisible)
+		if (Invisible)
 			return;
 		FreezFrameStart();
 		animationPlayer.Play("Disolve");

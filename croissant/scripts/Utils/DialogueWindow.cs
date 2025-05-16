@@ -94,7 +94,7 @@ public partial class DialogueWindow : FloatWindow
 		{
 			return;
 		}
-		if(isTyping)
+		if (isTyping)
 		{
 			label.VisibleCharacters = label.GetTotalCharacterCount() - 1;
 			return;
@@ -157,9 +157,9 @@ public partial class DialogueWindow : FloatWindow
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
 		int side = 3;
-		if(LeftSide)
+		if (LeftSide)
 			side = 1;
-		SetWindowPosition(new Vector2I(ParentWindow.Position.X + (ParentWindow.Size.X / 2)*side - (Size.X / 2), ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
+		SetWindowPosition(new Vector2I(ParentWindow.Position.X + (ParentWindow.Size.X / 2) * side - (Size.X / 2), ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
 		Visible = true;
 		Lib.Print($"Place dialogue window: {ParentWindow.Position} id: {Dialogueid}");
 	}
