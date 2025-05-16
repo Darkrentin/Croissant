@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://byd00eniliv1s"]
 
 [ext_resource type="Script" uid="uid://dv0ljmt2eh375" path="res://scripts/Windows/CursorWindow.cs" id="1_x0xi8"]
-[ext_resource type="Shader" uid="uid://3y7dok8u22mm" path="res://assets/shaders/Disolve.gdshader" id="2_pcuog"]
+[ext_resource type="Shader" path="res://assets/shaders/Disolve.gdshader" id="2_pcuog"]
 [ext_resource type="Texture2D" uid="uid://cmip8bqkeb0kf" path="res://assets/sprites/popups/system32.png" id="2_x0xi8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ool83"]

@@ -7,7 +7,7 @@
 resource_local_to_scene = true
 shader = ExtResource("1_s50o0")
 shader_parameter/scale = 3.0
-shader_parameter/col = Vector4(0, 0, 0, 1)
+shader_parameter/col = Color(0, 0, 0, 1)
 shader_parameter/mult = 1.0
 
 [node name="VisualCollision" type="ColorRect"]
