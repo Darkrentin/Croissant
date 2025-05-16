@@ -1,9 +1,8 @@
-[gd_scene load_steps=118 format=4 uid="uid://btjmeghne5sev"]
+[gd_scene load_steps=117 format=4 uid="uid://btjmeghne5sev"]
 
 [ext_resource type="Script" uid="uid://bajo37lmcljy6" path="res://scripts/Npc/Virus/Virus3D.cs" id="1_t412l"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/UX.001_base_color.png" id="1_wfy2c"]
 [ext_resource type="Texture2D" uid="uid://bd12vap3lhkxj" path="res://assets/sprites/virus/computer3D/UX.001_metallic_roughness.png" id="2_t412l"]
-[ext_resource type="PackedScene" uid="uid://dgba76cb311r2" path="res://scenes/FinalLevel/FloppyDisk.tscn" id="2_trv4f"]
 [ext_resource type="Texture2D" uid="uid://bx3xixfeuwwap" path="res://assets/sprites/virus/computer3D/UX.001_normal.png" id="3_0c86s"]
 [ext_resource type="Shader" uid="uid://c7ny7bh0v6chr" path="res://assets/shaders/VHS.gdshader" id="4_trv4f"]
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/sprites/virus/computer3D/001_base_color.png" id="5_npe1l"]
@@ -1610,7 +1609,6 @@ size = Vector3(5.71594, 6.70145, 5.20413)
 [node name="Virus" type="StaticBody3D" node_paths=PackedStringArray("Base", "ShootSpawnA", "ShootSpawnB", "AnimationTree", "AnimationPlayer", "HealthBar")]
 script = ExtResource("1_t412l")
 Base = NodePath("Computer/Base/Base")
-FloppyDiskScene = ExtResource("2_trv4f")
 ShootSpawnA = NodePath("ShootSpawnA")
 ShootSpawnB = NodePath("ShootSpawnB")
 AnimationTree = NodePath("AnimationTree")

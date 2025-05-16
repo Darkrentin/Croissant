@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bsvg7n4ll3xg7"]
+[gd_scene load_steps=10 format=3 uid="uid://bsvg7n4ll3xg7"]
 
 [ext_resource type="Script" uid="uid://eatayns1skwp" path="res://scripts/FinalLevel/BossLevel.cs" id="1_chkxq"]
 [ext_resource type="PackedScene" uid="uid://c0ixtme6phwg7" path="res://scenes/FinalLevel/BossFloor.tscn" id="2_yady8"]
 [ext_resource type="PackedScene" uid="uid://btjmeghne5sev" path="res://scenes/Npc/Virus/Virus3D.tscn" id="3_n6tki"]
+[ext_resource type="PackedScene" uid="uid://dgba76cb311r2" path="res://scenes/FinalLevel/FloppyDisk.tscn" id="3_yady8"]
 [ext_resource type="Shader" uid="uid://6drklppn3fk5" path="res://assets/shaders/Lava.gdshader" id="6_74hf8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tkrs4"]
@@ -29,10 +30,12 @@ size = Vector3(0.1, 2, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_chkxq"]
 size = Vector3(20, 1, 20)
 
-[node name="BossLevel" type="Node3D" node_paths=PackedStringArray("KillZone")]
+[node name="BossLevel" type="Node3D" node_paths=PackedStringArray("KillZone", "SpawnPoints")]
 script = ExtResource("1_chkxq")
 BossFloorScene = ExtResource("2_yady8")
+FloppyDiskScene = ExtResource("3_yady8")
 KillZone = NodePath("KillZone")
+SpawnPoints = [NodePath("SpwanNode/1"), NodePath("SpwanNode/2"), NodePath("SpwanNode/3"), NodePath("SpwanNode/4"), NodePath("SpwanNode/5"), NodePath("SpwanNode/6"), NodePath("SpwanNode/7"), NodePath("SpwanNode/8"), NodePath("SpwanNode/9"), NodePath("SpwanNode/10")]
 
 [node name="Virus" parent="." instance=ExtResource("3_n6tki")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -15)
@@ -66,3 +69,36 @@ shape = SubResource("BoxShape3D_74hf8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="KillZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.3, 0)
 shape = SubResource("BoxShape3D_chkxq")
+
+[node name="SpwanNode" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -11)
+
+[node name="1" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9, 0, 0)
+
+[node name="2" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7, 0, 0)
+
+[node name="3" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, 0)
+
+[node name="4" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0, 0)
+
+[node name="5" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="6" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="7" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, 0)
+
+[node name="8" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 0)
+
+[node name="9" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
+
+[node name="10" type="Node3D" parent="SpwanNode"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)

@@ -8,7 +8,7 @@ public partial class Virus3D : StaticBody3D
 	public float MaxRotation = 1f;
 	public float RotationSmoothing = 5;
 	[Export] public MeshInstance3D Base;
-	[Export] public PackedScene FloppyDiskScene;
+	
 	[Export] public Node3D ShootSpawnA;
 	[Export] public Node3D ShootSpawnB;
 	public Timer GlitchTimer;
@@ -90,9 +90,10 @@ public partial class Virus3D : StaticBody3D
 		// For example, reduce health or trigger an animation
 		StartGlitch();
 		//StartShoot();
-		BossLevel.Instance.StartWave();
+		BossLevel.Instance.LaunchFloppyDisk();
 		Lib.Print("Virus took damage!");
-		Hp--;
+		if (Hp > 0)
+			Hp--;
 	}
 
 	public void StartGlitch()
@@ -109,26 +110,9 @@ public partial class Virus3D : StaticBody3D
 		GlitchTimer.Stop();
 	}
 
-	public void StartShoot()
-	{
-		AnimationPlayer.Play("ShootA");
-	}
 
 	public void OnAnimationFinished(StringName anim)
 	{
-		switch(anim)
-		{
-			case "ShootA":
-				Shoot();
-				break;
-		}
 	}
 
-	public void Shoot()
-	{
-		FloppyDisk floppyDisk = FloppyDiskScene.Instantiate<FloppyDisk>();
-		AddChild(floppyDisk);
-		floppyDisk.GlobalPosition = ShootSpawnA.GlobalPosition;
-		
-	}
 }

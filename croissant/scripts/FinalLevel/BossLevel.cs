@@ -7,10 +7,12 @@ public partial class BossLevel : Node3D
 
 	public BossFloor[,] BossFloors;
 	[Export] public PackedScene BossFloorScene;
+	[Export] public PackedScene FloppyDiskScene;
 	[Export] Area3D KillZone;
 	public int MapSize = 10;
 	public const int WallSize = 2;
 	public static BossLevel Instance;
+	[Export] public Node3D[] SpawnPoints;
 	public override void _Ready()
 	{
 		Instance = this;
@@ -126,5 +128,15 @@ public partial class BossLevel : Node3D
 				BossFloors[i, j].timer.Stop();
 			}
 		}
+	}
+
+	public void LaunchFloppyDisk()
+	{
+		int SpawnId = Lib.rand.Next(0, SpawnPoints.Length);
+		Vector3 SpawnPosition = SpawnPoints[SpawnId].GlobalPosition;
+		FloppyDisk floppyDisk = (FloppyDisk)FloppyDiskScene.Instantiate();
+		AddChild(floppyDisk);
+		floppyDisk.GlobalPosition = SpawnPosition;
+
 	}
 }

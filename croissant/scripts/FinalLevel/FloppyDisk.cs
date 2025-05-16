@@ -3,29 +3,47 @@ using System;
 
 public partial class FloppyDisk : CharacterBody3D
 {
-	// Called when the node enters the scene tree for the first time.
     [Export]
-    public float Speed { get; set; } = 1f;
+    public float Speed { get; set; } = 5f;
+    
+    private Vector3 _direction = Vector3.Zero;
+    private bool _isMoving = false;
+    private float _timeToLive = 0f;
+    private float _currentTime = 0f;
+	
+	[Export] public bool StartMovementButton { get => false; set { if (value) StartMovement(new Vector3(0, 0, 1), 10f); } }
 
-	public override void _Ready()
+    public override void _Ready()
 	{
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _PhysicsProcess(double delta)
-	{
-		Vector3 velocity;
-            
-        LookAt(FinalLevel.Instance.Player3D.GlobalPosition, Vector3.Up);
-        GlobalRotation *= new Vector3(0, 1, 0);
-		GlobalRotation += new Vector3(0, (float)Math.PI, 0);
-
-		// Calculate the direction to the player and move towards them
- 
-		Vector3 directionToPlayer = (FinalLevel.Instance.Player3D.GlobalPosition - GlobalPosition).Normalized();
-        velocity = directionToPlayer * Speed * new Vector3(1, 0, 1);
+    public void StartMovement(Vector3 direction, float duration)
+    {
+        _direction = direction.Normalized();
+        _isMoving = true;
+        _timeToLive = duration;
+        _currentTime = 0f;
         
+        LookAt(GlobalPosition + _direction, Vector3.Up);
+        GlobalRotation *= new Vector3(0, 1, 0);
+        GlobalRotation += new Vector3(0, (float)Math.PI, 0);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        if (!_isMoving)
+            return;
+            
+        _currentTime += (float)delta;
+        
+        if (_currentTime >= _timeToLive)
+        {
+            QueueFree();
+            return;
+        }
+        
+        Vector3 velocity = _direction * Speed;
         Velocity = velocity;
         MoveAndSlide();
-	}
+    }
 }
