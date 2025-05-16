@@ -30,7 +30,11 @@ public partial class FloatWindow : Window
 	public bool IsTransitioning = false;
 	public bool IsResizing = false;
 	public Vector2I CenterPosition { set { SetWindowPosition(value - Size / 2); } get { return Position + Size / 2; } }
-	public int TitleBarHeight { get { return DisplayServer.WindowGetSizeWithDecorations(WindowId).Y - DisplayServer.WindowGetSize(WindowId).Y; } }
+	public int TitleBarHeight { 
+		get {
+			return 25;//return GetSizeWithDecorations().Y - Size.Y;
+		} 
+	}
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }
 	public Rect2I WindowRect;
 
@@ -38,6 +42,10 @@ public partial class FloatWindow : Window
 
 	public override void _Ready()
 	{
+		Unresizable = true;
+		SharpCorners = true;
+		Minimizable = false;
+
 		GetTree().AutoAcceptQuit = false;
 		CloseRequested += OnClose;
 		ShakeTimer = new Timer();
@@ -45,6 +53,7 @@ public partial class FloatWindow : Window
 		ShakeTimer.Timeout += StopShake;
 		Title = "Window Added";
 		WindowRect = new Rect2I(Position, Size);
+		KeepTitleVisible = false;
 	}
 
 	public override void _Process(double delta)
