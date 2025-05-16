@@ -24,6 +24,8 @@ public partial class FinalLevel : Node3D
 	public int ObjectiveDestroyed = 0;
 	public int ObjectiveCount = 3;
 	public int EnemyCount = 0;
+	public Timer DeathTimer;
+	public ShaderMaterial shaderMaterial;
 	public override void _Ready()
 	{
 		Instance = this;
@@ -42,6 +44,21 @@ public partial class FinalLevel : Node3D
 		SpawnEnemy();
 		Area3D.BodyEntered += EndReach;
 		GameManager.MainWindow.AlwaysOnTop = true;
+
+		DeathTimer = new Timer();
+		DeathTimer.OneShot = true;
+		AddChild(DeathTimer);
+		DeathTimer.Timeout += () =>
+		{
+			MeltShader.PrepareTransition();
+			shaderMaterial.SetShaderParameter("u_color_tex", PaletteMain);
+			MeltShader.Transition();
+			Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
+			(BossLevel as BossLevel).ResetMap();
+			return;
+		};
+
+		shaderMaterial = (ShaderMaterial)ShaderViewport.Material;
 	}
 
 	public void SpawnEnemy()
@@ -75,9 +92,14 @@ public partial class FinalLevel : Node3D
 
 	public void Death(Vector3 enemyPosition)
 	{
-		Player3D.ProcessMode = ProcessModeEnum.Disabled;
-		ShaderMaterial shaderMaterial = (ShaderMaterial)ShaderViewport.Material;
 		shaderMaterial.SetShaderParameter("u_color_tex", PaletteDeath);
+
+		if (enemyPosition == Vector3.Zero)
+		{
+			DeathTimer.WaitTime = 1f;
+			DeathTimer.Start();
+			return;
+		}
 
 		Vector3 originalPlayerPos = Player3D.GlobalPosition;
 		Vector3 direction = new Vector3(enemyPosition.X, originalPlayerPos.Y, enemyPosition.Z) - originalPlayerPos;

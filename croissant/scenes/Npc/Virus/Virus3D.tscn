@@ -1,4 +1,4 @@
-[gd_scene load_steps=117 format=4 uid="uid://btjmeghne5sev"]
+[gd_scene load_steps=118 format=4 uid="uid://btjmeghne5sev"]
 
 [ext_resource type="Script" uid="uid://bajo37lmcljy6" path="res://scripts/Npc/Virus/Virus3D.cs" id="1_t412l"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/UX.001_base_color.png" id="1_wfy2c"]
@@ -8,14 +8,15 @@
 [ext_resource type="Shader" uid="uid://c7ny7bh0v6chr" path="res://assets/shaders/VHS.gdshader" id="4_trv4f"]
 [ext_resource type="Texture2D" uid="uid://1afn5i6p05a4" path="res://assets/sprites/virus/computer3D/001_base_color.png" id="5_npe1l"]
 [ext_resource type="Texture2D" uid="uid://ctoq3ipwk71v7" path="res://assets/sprites/virus/computer3D/001_metallic_roughness.png" id="6_2v8wk"]
-[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/angry.png" id="7_lq3sf"]
+[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="7_lq3sf"]
 [ext_resource type="Texture2D" uid="uid://ctfp0j1fib8gf" path="res://assets/sprites/virus/eye/tear.png" id="8_ic8an"]
 [ext_resource type="Texture2D" uid="uid://c1s4mspfyfp22" path="res://assets/sprites/virus/eye/exclamation.png" id="9_2ixof"]
 [ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="10_fyi1k"]
 [ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Npc/Virus/Eye.tscn" id="11_rm7xc"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="12_7jibh"]
 [ext_resource type="Texture2D" uid="uid://cofcs48nnvt7k" path="res://assets/sprites/virus/pause.svg" id="13_oxg54"]
-[ext_resource type="Shader" path="res://scenes/Npc/Virus/Virus3D.gdshader" id="15_0c86s"]
+[ext_resource type="Shader" uid="uid://bqa4jolexy42y" path="res://scenes/Npc/Virus/Virus3D.gdshader" id="15_0c86s"]
+[ext_resource type="Texture2D" uid="uid://dov4uvj5o52rq" path="res://assets/sprites/virus/barra de vida (bateria) 192X480.png" id="17_npe1l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8qbw1"]
 render_priority = 0
@@ -1606,7 +1607,7 @@ graph_offset = Vector2(239.126, -158)
 [sub_resource type="BoxShape3D" id="BoxShape3D_t412l"]
 size = Vector3(5.71594, 6.70145, 5.20413)
 
-[node name="Virus" type="StaticBody3D" node_paths=PackedStringArray("Base", "ShootSpawnA", "ShootSpawnB", "AnimationTree", "AnimationPlayer")]
+[node name="Virus" type="StaticBody3D" node_paths=PackedStringArray("Base", "ShootSpawnA", "ShootSpawnB", "AnimationTree", "AnimationPlayer", "HealthBar")]
 script = ExtResource("1_t412l")
 Base = NodePath("Computer/Base/Base")
 FloppyDiskScene = ExtResource("2_trv4f")
@@ -1614,6 +1615,7 @@ ShootSpawnA = NodePath("ShootSpawnA")
 ShootSpawnB = NodePath("ShootSpawnB")
 AnimationTree = NodePath("AnimationTree")
 AnimationPlayer = NodePath("AnimationScale")
+HealthBar = NodePath("Control/Control/Sprite2D")
 
 [node name="Computer" type="Node3D" parent="."]
 transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, 0)
@@ -1860,3 +1862,24 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.771, 1.08, 1.12697)
 
 [node name="ShootSpawnB" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.771, 0.767, -0.36)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Control" type="Control" parent="Control"]
+anchors_preset = 0
+offset_left = 960.0
+offset_top = 992.0
+offset_right = 961.0
+offset_bottom = 993.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/Control"]
+scale = Vector2(2, 2)
+texture = ExtResource("17_npe1l")
+hframes = 3
+vframes = 5

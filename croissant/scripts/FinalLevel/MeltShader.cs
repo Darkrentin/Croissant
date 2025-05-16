@@ -22,7 +22,7 @@ public partial class MeltShader : ColorRect
 	{
 		if (_melting)
 		{
-			_timer += MeltSpeed;
+			_timer += MeltSpeed * (float)delta*60;
 			if (Engine.GetFramesDrawn() % 2 == 0 && Material is ShaderMaterial shaderMaterial)
 				shaderMaterial.SetShaderParameter("timer", _timer);
 			if (_timer * _maxYOffset > 2.0f)

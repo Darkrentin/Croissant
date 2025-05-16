@@ -7,6 +7,7 @@ public partial class BossLevel : Node3D
 
 	public BossFloor[,] BossFloors;
 	[Export] public PackedScene BossFloorScene;
+	[Export] Area3D KillZone;
 	public int MapSize = 10;
 	public const int WallSize = 2;
 	public static BossLevel Instance;
@@ -14,6 +15,7 @@ public partial class BossLevel : Node3D
 	{
 		Instance = this;
 		initMap();
+		KillZone.BodyEntered += OnBodyEnteredKillZone;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -69,7 +71,7 @@ public partial class BossLevel : Node3D
 
 		// Configure wave timing
 		float time = 0.5f;
-		float timeStep = 0.5f;
+		float timeStep = 0.7f;
 
 		// Animate both axes simultaneously with appropriate safe zones
 		for (int i = 0; i < MapSize; i++)
@@ -81,7 +83,7 @@ public partial class BossLevel : Node3D
 				{
 					// Skip only the safe column if we're using X axis
 					if (j == SafeX) continue;
-					
+
 					// Skip safe Y point only if Z axis is also active
 					if (launchZWave && i == SafeY) continue;
 
@@ -96,7 +98,7 @@ public partial class BossLevel : Node3D
 				{
 					// Skip only the safe row if we're using Z axis
 					if (j == SafeY) continue;
-					
+
 					// Skip safe X point only if X axis is also active
 					if (launchXWave && i == SafeX) continue;
 
@@ -106,6 +108,23 @@ public partial class BossLevel : Node3D
 
 			// Increase time for the wave effect
 			time += timeStep;
+		}
+	}
+
+	public void OnBodyEnteredKillZone(Node3D body)
+	{
+		FinalLevel.Instance.Death(Vector3.Zero);
+	}
+
+	public void ResetMap()
+	{
+		for (int i = 0; i < MapSize; i++)
+		{
+			for (int j = 0; j < MapSize; j++)
+			{
+				BossFloors[i, j].animationPlayer.Play("RESET");
+				BossFloors[i, j].timer.Stop();
+			}
 		}
 	}
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://c0ixtme6phwg7"]
+[gd_scene load_steps=10 format=3 uid="uid://c0ixtme6phwg7"]
 
 [ext_resource type="Script" uid="uid://bgshfq2ki3bqa" path="res://scripts/FinalLevel/BossFloor.cs" id="1_vtsjb"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="2_3b0w1"]
@@ -13,6 +13,9 @@ shader_parameter/normal_strength = 2.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_re8sb"]
 material = SubResource("ShaderMaterial_v2u0f")
+size = Vector3(2, 2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3b0w1"]
 size = Vector3(2, 2, 2)
 
 [sub_resource type="Animation" id="Animation_3b0w1"]
@@ -58,6 +61,11 @@ animationPlayer = NodePath("AnimationPlayer")
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
 mesh = SubResource("BoxMesh_re8sb")
+
+[node name="Coll" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Coll"]
+shape = SubResource("BoxShape3D_3b0w1")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

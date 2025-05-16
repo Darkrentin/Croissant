@@ -12,6 +12,7 @@ public partial class Player3D : CharacterBody3D
 	private bool CanShoot = true;
 	private string ShootAnimation = "ShootAndReload";
 	private float ShootCooldown = 0.9f;
+	[Export] private float Gravity = 9.8f;
 
 	public override void _Ready()
 	{
@@ -33,6 +34,13 @@ public partial class Player3D : CharacterBody3D
 		Rotation = new Vector3(Rotation.X, Rotation.Y + RotationSpeed * rotate * (float)delta, Rotation.Z);
 		Vector3 direction = Transform.Basis.Z;
 		Velocity = z_movement * direction * MoveSpeed;
+		
+		Vector3 horizontalVelocity = z_movement * direction * MoveSpeed;
+
+        if (!IsOnFloor())
+            Velocity = new Vector3(horizontalVelocity.X, Velocity.Y - Gravity * (float)delta*10, horizontalVelocity.Z);
+        else
+            Velocity = new Vector3(horizontalVelocity.X, 0, horizontalVelocity.Z);
 
 		MoveAndSlide();
 

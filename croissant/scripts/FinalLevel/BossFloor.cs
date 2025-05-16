@@ -22,7 +22,7 @@ public partial class BossFloor : Node3D
 
 	 public void PlayAnimation(string animation, float time = 0.5f, bool PlayBackwards = false, bool reset = true)
     {
-        const float ResetTime = 2.5f;
+        const float ResetTime = 3f;
         
         // Clear any existing callbacks by disconnecting them
         if (currentCallback != null)
