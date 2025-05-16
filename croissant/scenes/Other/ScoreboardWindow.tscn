@@ -72,7 +72,6 @@ scale = Vector2(1.00458, 1)
 color = Color(0.764706, 0.780392, 0.796078, 1)
 
 [node name="EndResult" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -179,6 +178,7 @@ size_flags_vertical = 4
 text = "SHOW SCOREBOARD"
 
 [node name="WaitingScreen" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

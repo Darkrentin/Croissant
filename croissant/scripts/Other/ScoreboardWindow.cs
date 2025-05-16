@@ -63,59 +63,48 @@ public partial class ScoreboardWindow : FloatWindow
 	{
 		base._Process(delta);
 
-		if (!WaitingScreenContainer.Visible || !ScoreboardContainer.Visible)
+		if (string.IsNullOrWhiteSpace(UsernameEntry.Text))
+			SubmitButton.Disabled = true;
+		else
+			SubmitButton.Disabled = false;
+
+		if (SubmitButton.ButtonPressed)
 		{
-			if (string.IsNullOrWhiteSpace(UsernameEntry.Text))
-				SubmitButton.Disabled = true;
-			else
-				SubmitButton.Disabled = false;
+			EntryPlayerName = Sanitize(UsernameEntry.Text);
+			UsernameEntry.Text = "";
 
-			if (SubmitButton.ButtonPressed)
-			{
-				EntryPlayerName = Sanitize(UsernameEntry.Text);
-				UsernameEntry.Text = "";
+			ShowLoadingScreen();
+			AlreadyAsked = true;
+			AddRunEntry(EntryPlayerName, RunTime);
+		}
+		else if (ShowScoreboardButton.ButtonPressed)
+		{
+			ShowLoadingScreen();
+			AlreadyAsked = false;
+			GetScoreboard();
+		}
 
-				ShowLoadingScreen();
-				AlreadyAsked = true;
-				AddRunEntry(EntryPlayerName, RunTime);
-			}
-			else if (ShowScoreboardButton.ButtonPressed)
-			{
-				ShowLoadingScreen();
-				AlreadyAsked = false;
-				GetScoreboard();
-			}
+		string currentUsername = UsernameEntry.Text;
+		SubmitButton.Disabled = true;
 
-			bool containsDisallowedChar = false;
-			if (!string.IsNullOrWhiteSpace(UsernameEntry.Text))
-			{
-				foreach (char c in UsernameEntry.Text)
-				{
-					if ((c >= 0x4E00 && c <= 0x9FFF) || // CJK Unified Ideographs
-						(c >= 0x3000 && c <= 0x303F) || // CJK Symbols and Punctuation
-						(c >= 0xAC00 && c <= 0xD7AF) || // Hangul Syllables
-						(c >= 0xFF00 && c <= 0xFFEF) || // Halfwidth and Fullwidth Forms
-						(c >= 0x0400 && c <= 0x04FF) || // Cyrillic
-						(c >= 0x0500 && c <= 0x052F))   // Cyrillic Supplement
-					{
-						containsDisallowedChar = true;
-						break;
-					}
-				}
-			}
+		// Used Regex for the disallowed characters : CJK, Hangul, Cyrillic
+		const string disallowedCharsPattern = @"[\.\$#\[\]\/\u4E00-\u9FFF\u3000-\u303F\uAC00-\uD7AF\uFF00-\uFFEF\u0400-\u04FF\u0500-\u052F]";
 
-			if (containsDisallowedChar)
-			{
-				SubmitButton.Disabled = true;
-				SubmitLabel.Text = "Please use only english characters.";
-				SubmitLabel.AddThemeColorOverride("font_color", new Color(1, 0, 0));
-			}
-			else
-			{
-				SubmitButton.Disabled = false;
-				SubmitLabel.Text = "Submit your time to the scoreboard!";
-				SubmitLabel.AddThemeColorOverride("font_color", new Color(0, 0, 0));
-			}
+		if (string.IsNullOrWhiteSpace(currentUsername))
+		{
+			SubmitLabel.Text = "Submit your time to the scoreboard!";
+			SubmitLabel.AddThemeColorOverride("font_color", Colors.Black);
+		}
+		else if (Regex.IsMatch(currentUsername, disallowedCharsPattern))
+		{
+			SubmitLabel.Text = "Please only use letters and numbers.";
+			SubmitLabel.AddThemeColorOverride("font_color", Colors.Red);
+		}
+		else
+		{
+			SubmitButton.Disabled = false;
+			SubmitLabel.Text = "Submit your time to the scoreboard!";
+			SubmitLabel.AddThemeColorOverride("font_color", Colors.Black);
 		}
 	}
 
