@@ -61,6 +61,9 @@ shape = SubResource("RectangleShape2D_uybjc")
 [node name="StaticPlateform" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(400, 584)
 
+[node name="Window" parent="StaticPlateform" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(759, 58)
 shape = SubResource("RectangleShape2D_x0mh1")
@@ -79,6 +82,9 @@ scale = Vector2(1.5, 1.5)
 [node name="StaticPlateform2" parent="." instance=ExtResource("2_l2671")]
 position = Vector2(321, 960)
 
+[node name="Window" parent="StaticPlateform2" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
 position = Vector2(799.25, 60)
 shape = SubResource("RectangleShape2D_e0fg1")
@@ -86,12 +92,18 @@ shape = SubResource("RectangleShape2D_e0fg1")
 [node name="MovePlatform" parent="." instance=ExtResource("4_26hxk")]
 position = Vector2(32, 959)
 
+[node name="Window" parent="MovePlatform" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(126.5, 60)
 shape = SubResource("RectangleShape2D_olxyy")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_uybjc")]
 position = Vector2(1398, 457)
+
+[node name="Window" parent="KillingPlatform" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="1"]
 position = Vector2(103.5, 62.5)
@@ -103,6 +115,9 @@ shape = SubResource("RectangleShape2D_oeyy3")
 
 [node name="WindowsOnly" parent="." instance=ExtResource("6_l2671")]
 position = Vector2(913, 136)
+
+[node name="Window" parent="WindowsOnly" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="WindowsOnly" index="1"]
 position = Vector2(60, 219.5)

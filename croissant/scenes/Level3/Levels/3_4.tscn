@@ -41,6 +41,7 @@ position = Vector2(0, 952)
 
 [node name="Window" parent="StaticPlateform" index="0"]
 auto_translate_mode = 1
+visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(960, 64)

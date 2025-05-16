@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://bch7nv4v14u6c"]
+[gd_scene load_steps=9 format=3 uid="uid://bch7nv4v14u6c"]
 
 [ext_resource type="Script" uid="uid://bnwu55cl17dby" path="res://scripts/Level3/Platform/KillingPlatform.cs" id="1_k3r00"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_ylwtk"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_k3r00"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_ylwtk"]
+[ext_resource type="Texture2D" uid="uid://bpfikdvua5v6h" path="res://assets/sprites/broken-screen2.jpg" id="5_iqbkw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iqbkw"]
 shader = ExtResource("3_k3r00")
@@ -34,7 +35,7 @@ Texture = NodePath("Window/PlatformTexture")
 [node name="Window" type="Window" parent="."]
 transparent_bg = true
 position = Vector2i(0, 36)
-size = Vector2i(120, 120)
+size = Vector2i(160, 135)
 transparent = true
 sharp_corners = true
 script = ExtResource("2_ylwtk")
@@ -48,6 +49,15 @@ offset_right = 0.0
 offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Window"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_iqbkw")
+expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(103.75, 122.25)

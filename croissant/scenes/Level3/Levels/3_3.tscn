@@ -39,6 +39,9 @@ shape = SubResource("RectangleShape2D_d4csu")
 [node name="StaticPlateform" parent="." instance=ExtResource("1_psbq6")]
 position = Vector2(0, 952)
 
+[node name="Window" parent="StaticPlateform" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(960, 64)
 shape = SubResource("RectangleShape2D_psbq6")

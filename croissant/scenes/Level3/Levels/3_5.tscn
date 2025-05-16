@@ -69,12 +69,18 @@ NextSceneId = 2
 [node name="StaticPlateform" parent="." instance=ExtResource("3_6xv5l")]
 position = Vector2(0, 817)
 
+[node name="Window" parent="StaticPlateform" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(239.5, 135.5)
 shape = SubResource("RectangleShape2D_tlm41")
 
 [node name="MovePlatform" parent="." instance=ExtResource("4_173t4")]
 position = Vector2(1156, 263)
+
+[node name="Window" parent="MovePlatform" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(171, 31)
@@ -83,12 +89,18 @@ shape = SubResource("RectangleShape2D_2uknv")
 [node name="StaticPlateform2" parent="." instance=ExtResource("3_6xv5l")]
 position = Vector2(1523, 238)
 
+[node name="Window" parent="StaticPlateform2" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
 position = Vector2(198.5, 425)
 shape = SubResource("RectangleShape2D_k80xt")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_173t4")]
 position = Vector2(479, 948)
+
+[node name="Window" parent="KillingPlatform" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="1"]
 position = Vector2(522, 70)
@@ -101,6 +113,9 @@ shape = SubResource("RectangleShape2D_kkuw8")
 [node name="KillingPlatform2" parent="." instance=ExtResource("5_173t4")]
 position = Vector2(810, 0)
 
+[node name="Window" parent="KillingPlatform2" index="0"]
+visible = false
+
 [node name="CollisionShape2D" parent="KillingPlatform2" index="1"]
 position = Vector2(111, 338.5)
 shape = SubResource("RectangleShape2D_173t4")
@@ -111,6 +126,9 @@ shape = SubResource("RectangleShape2D_psn4i")
 
 [node name="StaticPlateform3" parent="." instance=ExtResource("3_6xv5l")]
 position = Vector2(0, 152)
+
+[node name="Window" parent="StaticPlateform3" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
 position = Vector2(201.5, 89.5)

@@ -96,6 +96,9 @@ shape = SubResource("RectangleShape2D_vwnnv")
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 960)
 
+[node name="Window" parent="StaticPlateform" index="0"]
+visible = false
+
 [node name="PlatformTexture" parent="StaticPlateform/Window" index="0"]
 material = SubResource("ShaderMaterial_8j6u2")
 
@@ -105,6 +108,9 @@ shape = SubResource("RectangleShape2D_fkapc")
 
 [node name="StaticPlateform2" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 320)
+
+[node name="Window" parent="StaticPlateform2" index="0"]
+visible = false
 
 [node name="PlatformTexture" parent="StaticPlateform2/Window" index="0"]
 material = SubResource("ShaderMaterial_vwnnv")
@@ -116,6 +122,9 @@ shape = SubResource("RectangleShape2D_0s36o")
 [node name="StaticPlateform3" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(1408, 320)
 
+[node name="Window" parent="StaticPlateform3" index="0"]
+visible = false
+
 [node name="PlatformTexture" parent="StaticPlateform3/Window" index="0"]
 material = SubResource("ShaderMaterial_fgx1k")
 
@@ -125,6 +134,9 @@ shape = SubResource("RectangleShape2D_yrjvf")
 
 [node name="MovePlatform" parent="." instance=ExtResource("2_gijp6")]
 position = Vector2(800, 128)
+
+[node name="Window" parent="MovePlatform" index="0"]
+visible = false
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(160, 32)
@@ -151,6 +163,9 @@ position = Vector2(1472, 0)
 [node name="CollisionShape2D" parent="DoorPlateform" index="0"]
 position = Vector2(60, 160)
 shape = SubResource("RectangleShape2D_5q6or")
+
+[node name="Window" parent="DoorPlateform" index="1"]
+visible = false
 
 [node name="ConfigFile" parent="." instance=ExtResource("6_gijp6")]
 position = Vector2(432, 248)

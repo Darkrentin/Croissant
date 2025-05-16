@@ -36,8 +36,8 @@ public partial class Platform : CharacterBody2D
         if (window != null && IsInstanceValid(window))
         {
             //window.Visible = true;
-            window.Size = (Vector2I)shape.Size;
-            window.Position = (Vector2I)GlobalPosition;
+            window.Size = (Vector2I)shape.Size - window.TitleBarSize;
+            window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
         }
 
         // Get Level3 instance and subscribe to events
@@ -125,16 +125,14 @@ public partial class Platform : CharacterBody2D
                 currentAppliedSpeeds.X = Mathf.Min(BaseSpeeds.X, currentAppliedSpeeds.X + SpeedRecoveryAmounts.X * (float)delta);
                 currentAppliedSpeeds.Y = Mathf.Min(BaseSpeeds.Y, currentAppliedSpeeds.Y + SpeedRecoveryAmounts.Y * (float)delta);
             }
-            window.Position = (Vector2I)GlobalPosition;
+            if (Visible)
+            {
+                window.Size = (Vector2I)shape.Size - window.TitleBarSize;
+                window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
+            }
         }
 
-        if((bool)Shader.GetShaderParameter("animate"))
-        {
-            float currentSpeed = (float)Shader.GetShaderParameter("speed");
-            float timeIncrement = (float)delta * currentSpeed;
-            float currentTime = (float)Shader.GetShaderParameter("Time") + timeIncrement;
-            Shader.SetShaderParameter("Time", currentTime);
-        }
+        
     }
 
     public virtual void MouseEvent(InputEventMouseButton mouseButtonEvent)

@@ -2,7 +2,7 @@ shader_type canvas_item;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;
 uniform float scale : hint_range(1.0, 8.0, 1.0) = 1.0;
-uniform vec4 col;
+uniform vec4 col : source_color;
 uniform float mult = 1.0;
 
 const float bayer[16] = float[]

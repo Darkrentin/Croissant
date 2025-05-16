@@ -22,7 +22,7 @@ public partial class SubLevel3 : Node2D
 			window.Hide();
 		}
 
-		Position = Lib.GetAspectFactor(new Vector2I(1920, 1080));
+		Position = Lib.GetAspectFactor(new Vector2I(1920, 1080))*2;
 		CurrentLevel = false;
 		Visible = false;
 	}
