@@ -369,16 +369,23 @@ libraries = {
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+size_flags_vertical = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Control"]
+top_level = true
+texture_filter = 1
 position = Vector2(960, 768)
 scale = Vector2(8, 8)
 texture = ExtResource("2_h2v7r")
+offset = Vector2(0, 15)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_ley8d")

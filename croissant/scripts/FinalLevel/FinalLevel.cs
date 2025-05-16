@@ -1,13 +1,9 @@
 using Godot;
-using System;
-using System.Collections.Generic;
-using System.Data;
 
 public partial class FinalLevel : Node3D
 {
 	[Export] public bool Debug = false;
 	[Export] public Maze maze;
-	[Export] public MiniMap miniMap;
 	[Export] public NavigationRegion3D NavigationRegion;
 	[Export] public Player3D Player3D;
 	[Export] public PackedScene Enemy3DScene;
@@ -34,13 +30,10 @@ public partial class FinalLevel : Node3D
 		NavigationRegion.BakeNavigationMesh();
 
 		foreach (Objective objective in maze.Objectives)
-		{
 			maze.AddChild(objective);
-		}
 
 		SafeZone.GetParent().RemoveChild(SafeZone);
 		SafeZone.QueueFree();
-		miniMap.DrawMaze();
 		SpawnEnemy();
 		Area3D.BodyEntered += EndReach;
 		GameManager.MainWindow.AlwaysOnTop = true;
@@ -124,9 +117,7 @@ public partial class FinalLevel : Node3D
 	public void EndReach(Node body)
 	{
 		if (body is Player3D player)
-		{
 			CallDeferred(nameof(TransitionToBossLevel));
-		}
 	}
 	public void TransitionToBossLevel()
 	{
@@ -140,8 +131,6 @@ public partial class FinalLevel : Node3D
 	public override void _Process(double delta)
 	{
 		if (Input.MouseMode == Input.MouseModeEnum.Visible)
-		{
 			Input.MouseMode = Input.MouseModeEnum.Captured;
-		}
 	}
 }

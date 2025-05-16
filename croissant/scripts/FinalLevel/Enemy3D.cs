@@ -67,7 +67,7 @@ public partial class Enemy3D : CharacterBody3D
 				rayCast.Visible = false;
 			//navigationAgent3D.TargetPosition = GlobalPosition;
 
-			if(GlobalPosition.DistanceTo(RandomTargetPosition)<0.5f)
+			if (GlobalPosition.DistanceTo(RandomTargetPosition) < 0.5f)
 			{
 				//int RandomPathIndex = Lib.rand.Next(0,FinalLevel.Instance.maze.Paths.Count);
 				//RandomTargetPosition = FinalLevel.Instance.maze.Paths[RandomPathIndex].GlobalPosition + new Vector3(1,0,1);

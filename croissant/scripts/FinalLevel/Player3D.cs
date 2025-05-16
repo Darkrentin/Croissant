@@ -34,13 +34,13 @@ public partial class Player3D : CharacterBody3D
 		Rotation = new Vector3(Rotation.X, Rotation.Y + RotationSpeed * rotate * (float)delta, Rotation.Z);
 		Vector3 direction = Transform.Basis.Z;
 		Velocity = z_movement * direction * MoveSpeed;
-		
+
 		Vector3 horizontalVelocity = z_movement * direction * MoveSpeed;
 
-        if (!IsOnFloor())
-            Velocity = new Vector3(horizontalVelocity.X, Velocity.Y - Gravity * (float)delta*10, horizontalVelocity.Z);
-        else
-            Velocity = new Vector3(horizontalVelocity.X, 0, horizontalVelocity.Z);
+		if (!IsOnFloor())
+			Velocity = new Vector3(horizontalVelocity.X, Velocity.Y - Gravity * (float)delta * 10, horizontalVelocity.Z);
+		else
+			Velocity = new Vector3(horizontalVelocity.X, 0, horizontalVelocity.Z);
 
 		MoveAndSlide();
 
@@ -73,7 +73,7 @@ public partial class Player3D : CharacterBody3D
 			else if (Body is Virus3D Virus)
 				Virus.TakeDamage();
 			else if (Body is FloppyDisk floppyDisk)
-			    floppyDisk.QueueFree();
+				floppyDisk.QueueFree();
 		}
 	}
 }
