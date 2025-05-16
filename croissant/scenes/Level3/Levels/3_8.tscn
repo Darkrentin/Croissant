@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1fab22ik0j66"]
+
+[ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_p6r5p"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mkg2h"]
+size = Vector2(128, 1344)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2j0nq"]
+size = Vector2(1920, 128)
+
+[node name="3_8" type="Node2D" node_paths=PackedStringArray("windows")]
+script = ExtResource("1_p6r5p")
+windows = []
+
+[node name="Limit" type="StaticBody2D" parent="."]
+
+[node name="L" type="CollisionShape2D" parent="Limit"]
+position = Vector2(-64, 544)
+shape = SubResource("RectangleShape2D_mkg2h")
+
+[node name="R" type="CollisionShape2D" parent="Limit"]
+position = Vector2(1984, 544)
+shape = SubResource("RectangleShape2D_mkg2h")
+
+[node name="U" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, -64)
+shape = SubResource("RectangleShape2D_2j0nq")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, 1152)
+shape = SubResource("RectangleShape2D_2j0nq")

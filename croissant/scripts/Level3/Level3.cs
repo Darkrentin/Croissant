@@ -13,6 +13,8 @@ public partial class Level3 : FloatWindow
     [Export] public int MaxFiles = 5;
     public int FilesCollected = 0;
 
+    private Timer invincibleTimer;
+
     public override void _Ready()
     {
         GrabFocus();
@@ -26,8 +28,20 @@ public partial class Level3 : FloatWindow
         }
         actualScene = Level3Nodes[sceneid];
         actualScene.ShowSubLevel();
+
+        invincibleTimer = new Timer();
+        invincibleTimer.WaitTime = 1.0f; 
+        invincibleTimer.OneShot = true; 
+        AddChild(invincibleTimer);
+        invincibleTimer.Timeout += OnInvincibleTimerTimeout;
     }
     
+
+    private void OnInvincibleTimerTimeout()
+    {
+        player.isInvincible = false;
+    }
+
 
     public override void _Input(InputEvent @event)
     {
@@ -39,7 +53,6 @@ public partial class Level3 : FloatWindow
             }
             catch (ObjectDisposedException)
             {
-                // Clean up the disposed window reference
                 MouseEvent = null;
             }
         }
@@ -59,30 +72,36 @@ public partial class Level3 : FloatWindow
 
     public void Transition(Portal Portal)
     {
-        SubLevel3 nextScene = Level3.Instance.Level3Nodes[Portal.NextSceneId];	
+        SubLevel3 nextScene = Level3.Instance.Level3Nodes[Portal.NextSceneId];
         player.ProcessMode = ProcessModeEnum.Disabled;
-		
-		if (Level3.Instance.actualScene != null)
-		{
-			Level3.Instance.actualScene.HideSubLevel();
-		}
-		nextScene.ShowSubLevel();
+
+
+        player.isInvincible = true;
+
+  
+        invincibleTimer.Start();
+
+        if (Level3.Instance.actualScene != null)
+        {
+            Level3.Instance.actualScene.HideSubLevel();
+        }
+        nextScene.ShowSubLevel();
         Vector2 playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
         Tween tween = GetTree().CreateTween();
         float distance = (player.GlobalPosition - playerTargetPosition).Length();
         float screenWidth = GameManager.ScreenSize.X;
-        float duration = Math.Max(distance / (float)screenWidth,0.1f); // Time to cross full screen = 1 second
+        float duration = Math.Max(distance / (float)screenWidth, 0.1f);
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetEase(Tween.EaseType.InOut);
         tween.TweenProperty(player, "global_position", playerTargetPosition, duration);
-        tween.TweenCallback(Callable.From(() => {
+        tween.TweenCallback(Callable.From(() =>
+        {
             player.ProcessMode = ProcessModeEnum.Pausable;
         }));
-		sceneid = Portal.NextSceneId;
-		actualScene = nextScene;
-		GD.Print("Level complete!");
+        sceneid = Portal.NextSceneId;
+        actualScene = nextScene;
+        GD.Print("Level complete!");
 
-        
         if (player.Velocity.Y > 0)
         {
             player.Velocity = new Vector2(player.Velocity.X, 0);

@@ -19,8 +19,11 @@ Lvl 2 :
 - Rendre la couleur des fenetres de la couleur de leur attaque mais foncées avec un effet de shader stylé, puis lorsque leur hitbox est active mettre la couleur à la couleur de l'attaque @done
 
 Lvl 3 :
-- Trouver des idées
-- mouvements réalistes de platforms
+-probleme d'emplacement de la moving platform en changeant de scène (dans des murs parfois)
+-quand on arrive sur un scène parfois les movings platforms suivent notre souris alors qu'on a pas intéragit avec elle
+-la door platform active sa hitbox dans toutes les scènes quand on ramasse un config file
+-comprendre pourquoi y'a un mur invisible en bas à droite dans la scène 3_6
+-faire minis 4 scene par niveaux
 
 
 Autres :

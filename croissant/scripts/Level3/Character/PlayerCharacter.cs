@@ -9,6 +9,8 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityBase = 4000.0f; 
     public const float GravityExponentStart = 1.0f;
     public const float GravityExponentFactor = 0.25f;
+
+    public bool isInvincible;
     [Export] public AnimationPlayer AnimationPlayer;
     [Export] public Sprite2D Sprite;
     public bool isDead = false;
