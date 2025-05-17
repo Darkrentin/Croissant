@@ -69,7 +69,7 @@ size = Vector2(320, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q6or"]
 resource_local_to_scene = true
-size = Vector2(120, 320)
+size = Vector2(128, 320)
 
 [node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
@@ -161,7 +161,7 @@ NextSceneId = 4
 position = Vector2(1472, 0)
 
 [node name="CollisionShape2D" parent="DoorPlateform" index="0"]
-position = Vector2(60, 160)
+position = Vector2(64, 160)
 shape = SubResource("RectangleShape2D_5q6or")
 
 [node name="Window" parent="DoorPlateform" index="1"]

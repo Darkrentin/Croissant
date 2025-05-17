@@ -125,9 +125,9 @@ public partial class Platform : CharacterBody2D
                 currentAppliedSpeeds.X = Mathf.Min(BaseSpeeds.X, currentAppliedSpeeds.X + SpeedRecoveryAmounts.X * (float)delta);
                 currentAppliedSpeeds.Y = Mathf.Min(BaseSpeeds.Y, currentAppliedSpeeds.Y + SpeedRecoveryAmounts.Y * (float)delta);
             }
+            window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
         }
-        window.Size = (Vector2I)shape.Size - window.TitleBarSize;
-        window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
+        
 
         
     }

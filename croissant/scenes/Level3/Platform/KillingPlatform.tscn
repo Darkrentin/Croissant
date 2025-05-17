@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bch7nv4v14u6c"]
+[gd_scene load_steps=6 format=3 uid="uid://bch7nv4v14u6c"]
 
 [ext_resource type="Script" uid="uid://bnwu55cl17dby" path="res://scripts/Level3/Platform/KillingPlatform.cs" id="1_k3r00"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_ylwtk"]
-[ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_ylwtk"]
-[ext_resource type="Shader" uid="uid://pj7mq6hknmxa" path="res://assets/shaders/KillingPlatform.gdshader" id="4_ylwtk"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_iqbkw"]
-shader = ExtResource("4_ylwtk")
+[sub_resource type="Curve" id="Curve_ylwtk"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.692308, 0.735054), -1.10736, -1.10736, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3r00"]
 size = Vector2(207.5, 244.5)
@@ -14,39 +13,70 @@ size = Vector2(207.5, 244.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylwtk"]
 size = Vector2(207, 244.5)
 
-[node name="KillingPlatform" type="CharacterBody2D" node_paths=PackedStringArray("area2D", "window", "collisionShape", "Texture")]
+[node name="KillingPlatform" type="CharacterBody2D" node_paths=PackedStringArray("area2D", "cpuParticles2D_Black", "cpuParticles2D_R", "window", "collisionShape", "Texture")]
 collision_layer = 4
 script = ExtResource("1_k3r00")
 area2D = NodePath("Area2D")
+cpuParticles2D_Black = NodePath("Black")
+cpuParticles2D_R = NodePath("R")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
-Texture = NodePath("Window/PlatformTexture")
+Texture = NodePath("Window/ColorRect")
 
 [node name="Window" type="Window" parent="."]
 transparent_bg = true
 position = Vector2i(0, 36)
-size = Vector2i(160, 135)
+size = Vector2i(120, 120)
+visible = false
 transparent = true
 sharp_corners = true
 script = ExtResource("2_ylwtk")
 
-[node name="PlatformTexture" parent="Window" instance=ExtResource("3_ylwtk")]
-material = SubResource("ShaderMaterial_iqbkw")
+[node name="ColorRect" type="ColorRect" parent="Window"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="Window"]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-expand_mode = 1
+[node name="Black" type="CPUParticles2D" parent="."]
+position = Vector2(60, 60)
+amount = 50
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(60, 60)
+direction = Vector2(-1, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 20.0
+initial_velocity_max = 20.0
+angular_velocity_min = 15.0
+angular_velocity_max = 30.0
+angle_min = -1243.5
+angle_max = 720.0
+scale_amount_min = 70.0
+scale_amount_max = 100.0
+scale_amount_curve = SubResource("Curve_ylwtk")
+color = Color(0, 0, 0, 1)
+
+[node name="R" type="CPUParticles2D" parent="."]
+position = Vector2(60, 60)
+amount = 10
+lifetime = 4.0
+local_coords = true
+emission_shape = 3
+emission_rect_extents = Vector2(60, 60)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 5.0
+initial_velocity_max = 5.0
+angular_velocity_max = 1.0
+angle_min = -720.0
+angle_max = 720.0
+scale_amount_min = 2.0
+scale_amount_max = 2.0
+color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(103.75, 122.25)

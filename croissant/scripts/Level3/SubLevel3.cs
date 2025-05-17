@@ -17,18 +17,21 @@ public partial class SubLevel3 : Node2D
 
 	public void HideSubLevel()
 	{
+		Position = Lib.GetAspectFactor(new Vector2I(1920, 1080))*2;
+		Visible = false;
 		foreach (var window in windows)
 		{
 			window.Hide();
 		}
 
-		Position = Lib.GetAspectFactor(new Vector2I(1920, 1080))*2;
+		
 		CurrentLevel = false;
-		Visible = false;
+		
 	}
 
 	public void ShowSubLevel()
 	{
+
 		foreach (var window in windows)
 		{
 			window.Show();
@@ -37,5 +40,6 @@ public partial class SubLevel3 : Node2D
 		Position = new Vector2(0, 0);
 		CurrentLevel = true;
 		Visible = true;
+		
 	}
 }
