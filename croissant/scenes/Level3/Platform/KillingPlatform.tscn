@@ -1,22 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bch7nv4v14u6c"]
+[gd_scene load_steps=8 format=3 uid="uid://bch7nv4v14u6c"]
 
 [ext_resource type="Script" uid="uid://bnwu55cl17dby" path="res://scripts/Level3/Platform/KillingPlatform.cs" id="1_k3r00"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_ylwtk"]
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="3_k3r00"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_ylwtk"]
-[ext_resource type="Texture2D" uid="uid://bpfikdvua5v6h" path="res://assets/sprites/broken-screen2.jpg" id="5_iqbkw"]
+[ext_resource type="Shader" uid="uid://pj7mq6hknmxa" path="res://assets/shaders/KillingPlatform.gdshader" id="4_ylwtk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_iqbkw"]
-shader = ExtResource("3_k3r00")
-shader_parameter/color1 = Color(1, 1, 0, 1)
-shader_parameter/color2 = Color(0, 0, 0, 1)
-shader_parameter/animate = true
-shader_parameter/direction = -1.0
-shader_parameter/frequency = 10.0
-shader_parameter/speed = 0.5
-shader_parameter/border_width = 15.0
-shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
+shader = ExtResource("4_ylwtk")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3r00"]
 size = Vector2(207.5, 244.5)
@@ -56,7 +46,6 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("5_iqbkw")
 expand_mode = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
