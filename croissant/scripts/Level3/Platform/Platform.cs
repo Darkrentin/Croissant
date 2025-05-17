@@ -55,7 +55,7 @@ public partial class Platform : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
 
-        Shader.SetShaderParameter("window_size", window.Size);
+        //Shader.SetShaderParameter("window_size", window.Size);
 
 
         if (!Freeze)

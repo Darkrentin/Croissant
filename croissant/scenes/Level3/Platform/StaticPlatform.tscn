@@ -22,7 +22,7 @@ shader_parameter/Time = 0.0
 shader = ExtResource("5_hfmd4")
 shader_parameter/scale = 5.0
 shader_parameter/col = Color(0, 0.231373, 0.435294, 1)
-shader_parameter/mult = 0.4
+shader_parameter/mult = 0.35
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mjje"]
 resource_local_to_scene = true
@@ -37,7 +37,6 @@ Texture = NodePath("Window/PlatformTexture")
 
 [node name="Window" type="Window" parent="."]
 transparent_bg = true
-position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 unresizable = true
 transparent = true

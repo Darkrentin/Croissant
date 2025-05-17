@@ -117,10 +117,7 @@ NextSceneId = 5
 [node name="KillingPlatform" parent="." instance=ExtResource("4_vcfts")]
 position = Vector2(384, 576)
 
-[node name="Window" parent="KillingPlatform" index="0"]
-visible = false
-
-[node name="CollisionShape2D" parent="KillingPlatform" index="1"]
+[node name="CollisionShape2D" parent="KillingPlatform" index="3"]
 position = Vector2(572, 48)
 shape = SubResource("RectangleShape2D_bkoxb")
 
@@ -181,10 +178,7 @@ shape = SubResource("RectangleShape2D_fsg7g")
 [node name="KillingPlatform2" parent="." instance=ExtResource("4_vcfts")]
 position = Vector2(384, 992)
 
-[node name="Window" parent="KillingPlatform2" index="0"]
-visible = false
-
-[node name="CollisionShape2D" parent="KillingPlatform2" index="1"]
+[node name="CollisionShape2D" parent="KillingPlatform2" index="3"]
 position = Vector2(768, 48)
 shape = SubResource("RectangleShape2D_5q68r")
 

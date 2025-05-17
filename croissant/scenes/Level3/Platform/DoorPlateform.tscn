@@ -12,7 +12,7 @@ size = Vector2(120, 120)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5t0ej"]
 shader = ExtResource("4_a3hxs")
 shader_parameter/color1 = Color(1, 0, 0, 1)
-shader_parameter/color2 = Color(1, 0, 0, 1)
+shader_parameter/color2 = Color(0, 0, 1, 0)
 shader_parameter/animate = false
 shader_parameter/direction = -1.0
 shader_parameter/frequency = 15.0

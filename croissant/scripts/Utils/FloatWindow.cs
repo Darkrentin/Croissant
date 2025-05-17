@@ -34,7 +34,7 @@ public partial class FloatWindow : Window
 	{
 		get
 		{
-			return 25;//return GetSizeWithDecorations().Y - Size.Y;
+			return (int)(25 * GameManager.ScreenScale);//return GetSizeWithDecorations().Y - Size.Y;
 		}
 	}
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }

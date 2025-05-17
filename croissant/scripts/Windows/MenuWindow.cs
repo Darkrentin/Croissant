@@ -28,6 +28,8 @@ public partial class MenuWindow : FloatWindow
 
 		FakeDesktopButton.ButtonPressed = FakeDesktop;
 		DebugButton.ButtonPressed = DebugMode;
+
+		Minimizable = true;
 	}
 
 	public override void _Process(double delta)

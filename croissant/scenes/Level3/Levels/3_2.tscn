@@ -96,10 +96,7 @@ shape = SubResource("RectangleShape2D_67ltn")
 [node name="KillingPlatform" parent="." instance=ExtResource("4_nu3jg")]
 position = Vector2(440, 717)
 
-[node name="Window" parent="KillingPlatform" index="0"]
-visible = false
-
-[node name="CollisionShape2D" parent="KillingPlatform" index="1"]
+[node name="CollisionShape2D" parent="KillingPlatform" index="3"]
 position = Vector2(150, 185.5)
 shape = SubResource("RectangleShape2D_4nmph")
 
@@ -110,10 +107,7 @@ shape = SubResource("RectangleShape2D_i83aj")
 [node name="KillingPlatform2" parent="." instance=ExtResource("4_nu3jg")]
 position = Vector2(1137, 717)
 
-[node name="Window" parent="KillingPlatform2" index="0"]
-visible = false
-
-[node name="CollisionShape2D" parent="KillingPlatform2" index="1"]
+[node name="CollisionShape2D" parent="KillingPlatform2" index="3"]
 position = Vector2(151, 185.5)
 shape = SubResource("RectangleShape2D_l81p5")
 

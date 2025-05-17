@@ -18,6 +18,7 @@ public partial class GameManager : Node2D
     public static bool HaveFinishTheGameAtLeastOneTime = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
+    public static float ScreenScale => DisplayServer.ScreenGetDpi()/96f; // 96 DPI is the default for most monitors
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
@@ -52,6 +53,7 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
+        Lib.Print($"ScreenScale: {ScreenScale}");
         GameRoot = this;
         LoadSave();
         AddFixWindow();

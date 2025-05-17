@@ -10,7 +10,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityExponentStart = 1.0f;
     public const float GravityExponentFactor = 0.25f;
 
-    public bool isInvincible;
+    public bool isInvincible = true;
     [Export] public AnimationPlayer AnimationPlayer;
     [Export] public Sprite2D Sprite;
     public bool isDead = false;
@@ -27,13 +27,18 @@ public partial class PlayerCharacter : CharacterBody2D
         AddToGroup("player");
         area2D.BodyEntered += OnBodyEntered;
 
-
         wallJumpTimer = new Timer();
         wallJumpTimer.WaitTime = 0.3f;
         wallJumpTimer.OneShot = true;
         AddChild(wallJumpTimer);
         wallJumpTimer.Timeout += OnWallJumpTimerTimeout;
         AnimationPlayer.AnimationFinished += OnAnimationFinished;
+
+    }
+
+    public void SetInitialPosition()
+    {
+        Position = GameManager.ScreenSize / 2;
     }
 
     public void OnBodyEntered(Node body)

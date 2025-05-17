@@ -29,11 +29,18 @@ public partial class Level3 : FloatWindow
         actualScene = Level3Nodes[sceneid];
         actualScene.ShowSubLevel();
 
+        player.Position = GameManager.ScreenSize / 2;
+
         invincibleTimer = new Timer();
-        invincibleTimer.WaitTime = 1.0f; 
-        invincibleTimer.OneShot = true; 
+        invincibleTimer.WaitTime = 1.0f;
+        invincibleTimer.OneShot = true;
         AddChild(invincibleTimer);
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
+        invincibleTimer.Start();
+        
+        GetTree().CreateTimer(0.2f).Timeout += () => {
+            player.Position = GameManager.ScreenSize / 2;
+        };
     }
     
 
