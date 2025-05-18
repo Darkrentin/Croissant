@@ -199,6 +199,26 @@
                 "text": "",
                 "anim": "Idle"
             }
+        },
+        "EndLvl3": {
+            "0": {
+                "text": "EndLevel3",
+                "anim": "Idle"
+            },
+            "1": {
+                "text": "",
+                "anim": "Idle"
+            }
+        },
+        "EndFinalLevel": {
+            "0": {
+                "text": "EndFinalLevel",
+                "anim": "Idle"
+            },
+            "1": {
+                "text": "",
+                "anim": "Idle"
+            }
         }
     }
 }

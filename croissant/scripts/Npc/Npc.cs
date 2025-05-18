@@ -6,6 +6,7 @@ public abstract partial class Npc : FloatWindow
     [Export] public string NpcName;
 
     [Export] public DialogueWindow Dialogue { get; set; }
+    [Export] public AnimationTree AnimationTree;
     public bool ForceDialoguePlacement = false;
     public Vector2I LeftUp = Vector2I.Zero;
     public Vector2I LeftDown;
@@ -40,6 +41,8 @@ public abstract partial class Npc : FloatWindow
         RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);
         RightDown = new Vector2I(GameManager.ScreenSize.X - Size.X, GameManager.ScreenSize.Y - Size.Y);
         Title = NpcName;
+
+        AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
     }
 
     public override void _Process(double delta)

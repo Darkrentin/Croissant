@@ -31,22 +31,24 @@ public partial class GameManager : Node2D
         // Game state
         IntroGame,
         IntroVirus,
-        VirusDialogue1,
+        Dialogue1,
         VirusTuto,
         Level1,
         BlueScreen,
         IntroHelper,
         Level2,
-        HelperDialogue1,
+        Dialogue2,
         Level3,
+        Dialogue3,
         FinalLevel,
+        Dialogue4,
         // _Process state
         IntroGame_Process,
         // Buffer state
         Debug,
         IntroVirusBuffer,
         IntroHelperBuffer,
-        VirusDialogue1Buffer,
+        Dialogue1Buffer,
         TutoBuffer,
         Void
     }
@@ -129,8 +131,8 @@ public partial class GameManager : Node2D
             case GameState.IntroVirus:
                 States.IntroVirus();
                 break;
-            case GameState.VirusDialogue1:
-                States.VirusDialogue1();
+            case GameState.Dialogue1:
+                States.Dialogue1();
                 break;
             case GameState.VirusTuto:
                 States.VirusTutoSelection();
@@ -147,14 +149,20 @@ public partial class GameManager : Node2D
             case GameState.Level2:
                 States.Level2();
                 break;
-            case GameState.HelperDialogue1:
-                States.HelperDialogue1();
+            case GameState.Dialogue2:
+                States.Dialogue2();
                 break;
             case GameState.Level3:
                 States.Level3();
                 break;
+            case GameState.Dialogue3:
+                States.Dialogue3();
+                break;
             case GameState.FinalLevel:
                 States.FinalLevel();
+                break;
+            case GameState.Dialogue4:
+                States.Dialogue4();
                 break;
 
             // _Process state

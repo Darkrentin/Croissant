@@ -1,22 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dyjib31ak5lxc"]
+[gd_scene load_steps=6 format=3 uid="uid://dyjib31ak5lxc"]
 
 [ext_resource type="Script" uid="uid://dl8bhkrsc3ujq" path="res://scripts/Level3/Platform/StaticPlatform.cs" id="1_paa4m"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_l0hd8"]
-[ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_paa4m"]
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="4_l0hd8"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_hfmd4"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_l0hd8"]
-shader = ExtResource("4_l0hd8")
-shader_parameter/color1 = Color(0.173887, 0.368972, 0.853614, 1)
-shader_parameter/color2 = Color(0.173887, 0.368972, 0.853614, 1)
-shader_parameter/animate = false
-shader_parameter/direction = -1.0
-shader_parameter/frequency = 15.0
-shader_parameter/speed = 3.0
-shader_parameter/border_width = 15.0
-shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkcy4"]
 shader = ExtResource("5_hfmd4")
@@ -33,27 +19,17 @@ collision_mask = 7
 script = ExtResource("1_paa4m")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
-Texture = NodePath("Window/PlatformTexture")
+Texture = NodePath("")
 
 [node name="Window" type="Window" parent="."]
 transparent_bg = true
+position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 unresizable = true
 transparent = true
 unfocusable = true
 sharp_corners = true
 script = ExtResource("2_l0hd8")
-
-[node name="PlatformTexture" parent="Window" instance=ExtResource("3_paa4m")]
-visible = false
-material = SubResource("ShaderMaterial_l0hd8")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 0.0
-offset_bottom = 0.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="Window"]
 material = SubResource("ShaderMaterial_kkcy4")

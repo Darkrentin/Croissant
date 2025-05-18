@@ -14,7 +14,7 @@ public partial class Virus : Npc
 	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
 	[Export] public Timer BlinkTimer;
 	[Export] public AnimationPlayer AnimationScale;
-	[Export] public AnimationTree AnimationTree;
+
 	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 	public Vector3 targetRotation;
 	public static Control Pause;
@@ -36,7 +36,7 @@ public partial class Virus : Npc
 	public override void InitNpc()
 	{
 		base.InitNpc();
-		AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
+		
 	}
 
 	public override void DialogueFinished(string name)
@@ -127,7 +127,7 @@ public partial class Virus : Npc
 		//Lib.Print("Transition Finished");
 		if (GameManager.State == GameManager.GameState.IntroVirusBuffer)
 		{
-			GameManager.State = GameManager.GameState.VirusDialogue1;
+			GameManager.State = GameManager.GameState.Dialogue1;
 			GrabFocus();
 		}
 		if (GameManager.State == GameManager.GameState.TutoBuffer)

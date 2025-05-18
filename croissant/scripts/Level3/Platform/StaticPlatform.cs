@@ -5,7 +5,6 @@ public partial class StaticPlatform : Platform
     public override void _Ready()
     {
         base._Ready();
-        Shader.SetShaderParameter("window_size", window.Size);
     }
 
     public override void _PhysicsProcess(double delta)

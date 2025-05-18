@@ -49,7 +49,7 @@ public partial class Platform : CharacterBody2D
 
         currentAppliedSpeeds = BaseSpeeds;
         window.Title = "Platform";
-        Shader = Texture.Material as ShaderMaterial;
+        
     }
 
     public override void _PhysicsProcess(double delta)
@@ -190,7 +190,7 @@ public partial class Platform : CharacterBody2D
             return mousePos.X >= windowPos.X &&
                    mousePos.X <= windowPos.X + windowSize.X &&
                    mousePos.Y >= windowPos.Y - titleBarHeight &&
-                   mousePos.Y < windowPos.Y + windowSize.Y;
+                   mousePos.Y < windowPos.Y;// + windowSize.Y;
         }
         catch (ObjectDisposedException)
         {

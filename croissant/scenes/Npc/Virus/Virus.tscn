@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c1s4mspfyfp22" path="res://assets/sprites/virus/eye/exclamation.png" id="10_g3po4"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
-[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/angry.png" id="13_hlkw5"]
+[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 2
@@ -1565,7 +1565,7 @@ states/WorkingOn/position = Vector2(676, -42)
 transitions = ["WorkingOn", "Working", SubResource("AnimationNodeStateMachineTransition_g3po4"), "Working", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_6qkuw"), "WorkingOn", "WorkingOff", SubResource("AnimationNodeStateMachineTransition_0sk7e"), "WorkingOff", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_g1gol"), "WorkingOff", "Idle", SubResource("AnimationNodeStateMachineTransition_ctv3p"), "Start", "Off", SubResource("AnimationNodeStateMachineTransition_s3vw3"), "Off", "PowerOn", SubResource("AnimationNodeStateMachineTransition_qtk15"), "PowerOn", "Idle", SubResource("AnimationNodeStateMachineTransition_oq100"), "Idle", "WorkingOn", SubResource("AnimationNodeStateMachineTransition_hlkw5"), "Idle", "AngryOn", SubResource("AnimationNodeStateMachineTransition_v6l2n"), "Idle", "PowerOff", SubResource("AnimationNodeStateMachineTransition_igvld"), "PowerOff", "Off", SubResource("AnimationNodeStateMachineTransition_7qgky"), "AngryOff", "Idle", SubResource("AnimationNodeStateMachineTransition_xl0md"), "Idle", "SadOn", SubResource("AnimationNodeStateMachineTransition_38h0a"), "SadOff", "Idle", SubResource("AnimationNodeStateMachineTransition_wiym5"), "AngryOn", "Angry", SubResource("AnimationNodeStateMachineTransition_0porm"), "Angry", "AngryOff", SubResource("AnimationNodeStateMachineTransition_xsmmv"), "SadOn", "Sad", SubResource("AnimationNodeStateMachineTransition_lffwj"), "Sad", "SadOff", SubResource("AnimationNodeStateMachineTransition_t2glt"), "Idle", "SurpriseOn", SubResource("AnimationNodeStateMachineTransition_5bq7i"), "SurpriseOff", "Idle", SubResource("AnimationNodeStateMachineTransition_6budr"), "SurpriseOn", "Surprise", SubResource("AnimationNodeStateMachineTransition_rhxnc"), "Surprise", "SurpriseOff", SubResource("AnimationNodeStateMachineTransition_d4u37"), "PowerOn", "PowerOff", SubResource("AnimationNodeStateMachineTransition_cebil")]
 graph_offset = Vector2(193.126, -28.016)
 
-[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "Eye", "EyeBrow", "black1", "black2", "ExportPause", "BlinkTimer", "AnimationScale", "AnimationTree", "Dialogue")]
+[node name="Virus" type="Window" node_paths=PackedStringArray("Camera", "Computer", "Eye", "EyeBrow", "black1", "black2", "ExportPause", "BlinkTimer", "AnimationScale", "Dialogue", "AnimationTree")]
 transparent_bg = true
 size = Vector2i(800, 800)
 unresizable = true
@@ -1583,9 +1583,9 @@ MaxEyeDistance = Vector2(25, 25)
 ExportPause = NodePath("SubViewport/Pause")
 BlinkTimer = NodePath("BlinkTimer")
 AnimationScale = NodePath("AnimationScale")
-AnimationTree = NodePath("AnimationTree")
 NpcName = "Virus"
 Dialogue = NodePath("DialogueWindow")
+AnimationTree = NodePath("AnimationTree")
 Draggable = false
 Minimizable = false
 

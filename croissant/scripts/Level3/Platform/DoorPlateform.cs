@@ -9,6 +9,7 @@ public partial class DoorPlateform : Platform
     public override void _Ready()
     {
         base._Ready();
+        Shader = Texture.Material as ShaderMaterial;
         Shader.SetShaderParameter("window_size", window.Size);
     }
 

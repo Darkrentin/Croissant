@@ -74,7 +74,7 @@ public static class States
         GameManager.State = GameManager.GameState.IntroVirusBuffer;
     }
 
-    public static void VirusDialogue1()
+    public static void Dialogue1()
     {
 
         //Freeze the game
@@ -91,7 +91,7 @@ public static class States
         GameManager.virus.StartShake(0.5f, 10);
 
         //change state condition
-        GameManager.State = GameManager.GameState.VirusDialogue1Buffer;
+        GameManager.State = GameManager.GameState.Dialogue1Buffer;
     }
 
     public static void VirusTutoSelection()
@@ -176,7 +176,7 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void HelperDialogue1()
+    public static void Dialogue2()
     {
         GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
         GameManager.helper.DialogueToPlayAfterTransition = "EndLvl2";
@@ -190,6 +190,13 @@ public static class States
         GameManager.GameRoot.AddChild(Level3);
 
         //Change State condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+
+    public static void Dialogue3()
+    {
+        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
+        GameManager.helper.DialogueToPlayAfterTransition = "EndLvl3";
         GameManager.State = GameManager.GameState.Void;
     }
 
@@ -208,6 +215,13 @@ public static class States
         GameManager.GameRoot.AddChild(FinalLevel);
 
         //Change State condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+
+    public static void Dialogue4()
+    {
+        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
+        GameManager.helper.DialogueToPlayAfterTransition = "EndFinalLevel";
         GameManager.State = GameManager.GameState.Void;
     }
 

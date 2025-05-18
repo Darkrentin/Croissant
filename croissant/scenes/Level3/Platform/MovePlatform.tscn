@@ -31,7 +31,6 @@ Texture = NodePath("Window/PlatformTexture")
 [node name="Window" type="Window" parent="."]
 auto_translate_mode = 1
 transparent_bg = true
-position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 transparent = true
 sharp_corners = true

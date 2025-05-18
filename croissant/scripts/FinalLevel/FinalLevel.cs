@@ -36,7 +36,6 @@ public partial class FinalLevel : Node3D
 		SafeZone.QueueFree();
 		SpawnEnemy();
 		Area3D.BodyEntered += EndReach;
-		GameManager.MainWindow.AlwaysOnTop = true;
 
 		DeathTimer = new Timer();
 		DeathTimer.OneShot = true;
@@ -52,6 +51,11 @@ public partial class FinalLevel : Node3D
 		};
 
 		shaderMaterial = (ShaderMaterial)ShaderViewport.Material;
+		GameManager.MainWindow.GrabFocus();
+		GameManager.MainWindow.AlwaysOnTop = true;
+		GameManager.MainWindow.Show();
+		GameManager.MainWindow.SetProcessInput(true);
+
 	}
 
 	public void SpawnEnemy()
@@ -130,6 +134,8 @@ public partial class FinalLevel : Node3D
 
 	public override void _Process(double delta)
 	{
+		
+		// Your existing code
 		if (Input.MouseMode == Input.MouseModeEnum.Visible)
 			Input.MouseMode = Input.MouseModeEnum.Captured;
 	}
