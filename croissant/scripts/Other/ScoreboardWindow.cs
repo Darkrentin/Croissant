@@ -171,17 +171,28 @@ public partial class ScoreboardWindow : FloatWindow
 					string rankDisplay = rank.ToString().PadRight(3, ' ');
 					string paddedPlayerName = playerName.PadRight(21, ' ');
 					string line = $"{rankDisplay} {paddedPlayerName}  {formattedTime}";
+					string formattedLineEntry = "";
 
 					if (!string.IsNullOrEmpty(EntryPlayerName) && playerName == EntryPlayerName)
-						Result += $"[wave amp=15 freq=5][b]{line}[/b][/wave]\n";
+					{
+						string colorOpenTag = "";
+						string colorCloseTag = "";
+						if (rank == 1) { colorOpenTag = "[color=RED]"; colorCloseTag = "[/color]"; }
+						else if (rank == 2) { colorOpenTag = "[color=GREEN]"; colorCloseTag = "[/color]"; }
+						else if (rank == 3) { colorOpenTag = "[color=BLUE]"; colorCloseTag = "[/color]"; }
+
+						formattedLineEntry = $"[wave amp=15 freq=5]{colorOpenTag}[b]{line}[/b]{colorCloseTag}[/wave]\n";
+					}
 					else if (rank == 1)
-						Result += $"[shake rate=20.0 level=3][color=RED][b]{line}[/b][/color][/shake]\n";
+						formattedLineEntry = $"[shake rate=20.0 level=3][color=RED][b]{line}[/b][/color][/shake]\n";
 					else if (rank == 2)
-						Result += $"[shake rate=15.0 level=2][color=GREEN][b]{line}[/b][/color][/shake]\n";
+						formattedLineEntry = $"[shake rate=15.0 level=2][color=GREEN][b]{line}[/b][/color][/shake]\n";
 					else if (rank == 3)
-						Result += $"[shake rate=10.0 level=1][color=BLUE][b]{line}[/b][/color][/shake]\n";
+						formattedLineEntry = $"[shake rate=10.0 level=1][color=BLUE][b]{line}[/b][/color][/shake]\n";
 					else
-						Result += $"{line}\n";
+						formattedLineEntry = $"{line}\n";
+
+					Result += formattedLineEntry;
 				}
 			}
 		}
