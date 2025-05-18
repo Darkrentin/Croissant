@@ -91,6 +91,7 @@ public partial class FinalLevel : Node3D
 	{
 		shaderMaterial.SetShaderParameter("u_color_tex", PaletteDeath);
 
+
 		if (enemyPosition == Vector3.Zero)
 		{
 			DeathTimer.WaitTime = 1f;
@@ -104,17 +105,18 @@ public partial class FinalLevel : Node3D
 		while (targetY > Mathf.Pi) targetY -= Mathf.Pi * 2;
 		while (targetY < -Mathf.Pi) targetY += Mathf.Pi * 2;
 
+		Player3D.Alive = false;
 		var tween = CreateTween();
 		tween.TweenProperty(Player3D, "rotation:y", targetY, 0.5f)
 			 .SetTrans(Tween.TransitionType.Linear)
 			 .SetEase(Tween.EaseType.InOut);
-		tween.TweenInterval(0.5);
 		tween.Finished += () =>
 		{
 			MeltShader.PrepareTransition();
 			shaderMaterial.SetShaderParameter("u_color_tex", PaletteMain);
 			MeltShader.Transition();
 			Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
+			Player3D.Alive = true;
 		};
 	}
 
@@ -134,9 +136,20 @@ public partial class FinalLevel : Node3D
 
 	public override void _Process(double delta)
 	{
-		
+
 		// Your existing code
 		if (Input.MouseMode == Input.MouseModeEnum.Visible)
 			Input.MouseMode = Input.MouseModeEnum.Captured;
+	}
+
+	public void End()
+	{
+		GameManager.State = GameManager.GameState.Dialogue4;
+		GetParent().RemoveChild(this);
+
+		GameManager.MainWindow.AlwaysOnTop = false;
+		GameManager.FixWindow.GrabFocus();
+
+        QueueFree();
 	}
 }

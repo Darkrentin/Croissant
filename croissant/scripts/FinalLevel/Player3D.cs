@@ -13,6 +13,7 @@ public partial class Player3D : CharacterBody3D
 	private string ShootAnimation = "ShootAndReload";
 	private float ShootCooldown = 0.9f;
 	[Export] private float Gravity = 9.8f;
+	public bool Alive = true;
 
 	public override void _Ready()
 	{
@@ -28,6 +29,8 @@ public partial class Player3D : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		if(!Alive)
+			return;
 		float z_movement = Input.GetActionStrength("Backward") - Input.GetActionStrength("Forward");
 		float rotate = Input.GetActionStrength("LeftRot") - Input.GetActionStrength("RightRot");
 

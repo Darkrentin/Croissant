@@ -14,12 +14,11 @@ shader_parameter/mult = 0.35
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="StaticPlateform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape", "Texture")]
+[node name="StaticPlateform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape")]
 collision_mask = 7
 script = ExtResource("1_paa4m")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
-Texture = NodePath("")
 
 [node name="Window" type="Window" parent="."]
 transparent_bg = true

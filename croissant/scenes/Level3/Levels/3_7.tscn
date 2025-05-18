@@ -113,9 +113,6 @@ position = Vector2(0, 160)
 [node name="Window" parent="StaticPlateform" index="0"]
 visible = false
 
-[node name="PlatformTexture" parent="StaticPlateform/Window" index="0"]
-visible = true
-
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(120, 60)
 shape = SubResource("RectangleShape2D_k7jy6")
@@ -212,9 +209,6 @@ position = Vector2(0, 944)
 [node name="Window" parent="StaticPlateform2" index="0"]
 visible = false
 
-[node name="PlatformTexture" parent="StaticPlateform2/Window" index="0"]
-visible = true
-
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
 position = Vector2(344, 36)
 shape = SubResource("RectangleShape2D_28ox6")
@@ -224,9 +218,6 @@ position = Vector2(848, 904)
 
 [node name="Window" parent="StaticPlateform3" index="0"]
 visible = false
-
-[node name="PlatformTexture" parent="StaticPlateform3/Window" index="0"]
-visible = true
 
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
 position = Vector2(536, 92)

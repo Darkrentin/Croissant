@@ -120,7 +120,7 @@ public partial class Level3 : FloatWindow
         FilesCollected++;
         if (FilesCollected >= MaxFiles)
         {
-            GameManager.State = GameManager.GameState.Void;
+            GameManager.State = GameManager.GameState.Dialogue3;
             GetParent().RemoveChild(this);
             QueueFree();
         }

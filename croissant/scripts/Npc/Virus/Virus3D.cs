@@ -94,6 +94,8 @@ public partial class Virus3D : StaticBody3D
 		Lib.Print("Virus took damage!");
 		if (Hp > 0)
 			Hp--;
+		else
+			FinalLevel.Instance.End();
 	}
 
 	public void StartGlitch()
