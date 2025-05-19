@@ -41,8 +41,16 @@ public abstract partial class Npc : FloatWindow
         RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);
         RightDown = new Vector2I(GameManager.ScreenSize.X - Size.X, GameManager.ScreenSize.Y - Size.Y);
         Title = NpcName;
+        if(AnimationTree != null)
+            AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
+    }
 
-        AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
+    public void PlayAnimation(string animationName)
+    {
+        if (AnimationTree != null)
+        {
+            AnimationScreen.Travel(animationName);
+        }
     }
 
     public override void _Process(double delta)

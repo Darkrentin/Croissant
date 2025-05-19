@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dy032f0nfm2vk"]
+[gd_scene load_steps=27 format=3 uid="uid://dy032f0nfm2vk"]
 
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
@@ -227,16 +227,6 @@ animations = [{
 "speed": 15.0
 }]
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_4jimj"]
-animation = &"Idle"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xau07"]
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_e0dbo"]
-states/Idle/node = SubResource("AnimationNodeAnimation_4jimj")
-states/Idle/position = Vector2(509, 100)
-transitions = ["Start", "Idle", SubResource("AnimationNodeStateMachineTransition_xau07")]
-
 [node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Dialogue", "AnimationTree")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
@@ -249,7 +239,7 @@ script = ExtResource("1_8cb3g")
 animationPlayer = NodePath("AnimationPlayer")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
-AnimationTree = NodePath("AnimationTree")
+AnimationTree = NodePath("")
 Draggable = false
 Minimizable = false
 
@@ -270,7 +260,3 @@ ParentWindow = NodePath("..")
 CanSkip = true
 Margin = Vector2i(30, -50)
 LeftSide = false
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_e0dbo")
-anim_player = NodePath("../AnimationPlayer")

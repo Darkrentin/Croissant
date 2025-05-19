@@ -172,6 +172,11 @@ public static class States
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
 
+        //remove the virus
+        GameManager.GameRoot.RemoveChild(GameManager.virus);
+        GameManager.virus.QueueFree();
+        GameManager.virus = null;
+
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
@@ -202,13 +207,12 @@ public static class States
 
     public static void FinalLevel()
     {
-
-        GameManager.GameRoot.RemoveChild(GameManager.helper);
-        GameManager.helper.QueueFree();
-        GameManager.GameRoot.RemoveChild(GameManager.virus);
-        GameManager.virus.QueueFree();
-        GameManager.helper = null;
-        GameManager.virus = null;
+        if(GameManager.virus != null)
+        {
+            GameManager.GameRoot.RemoveChild(GameManager.virus);
+            GameManager.virus.QueueFree();
+            GameManager.virus = null;
+        }
 
 
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();

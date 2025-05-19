@@ -109,7 +109,7 @@ public partial class DialogueWindow : FloatWindow
 			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
 			label.Text = "";
 			if (anim != "")
-				ParentWindow.AnimationScreen.Travel(anim);
+				ParentWindow.PlayAnimation(anim);
 			OnDialogueFinished(ActualDialogueName);
 			return;
 		}
@@ -117,7 +117,7 @@ public partial class DialogueWindow : FloatWindow
 		label.Text += "\n> ";
 		label.Text += text;
 		label.Text += " |";
-		ParentWindow.AnimationScreen.Travel(anim);
+		ParentWindow.PlayAnimation(anim);
 		index++;
 		ShowNextCharacter();
 		PlaceDialogueWindow();

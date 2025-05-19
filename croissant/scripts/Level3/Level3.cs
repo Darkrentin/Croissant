@@ -93,7 +93,9 @@ public partial class Level3 : FloatWindow
             Level3.Instance.actualScene.HideSubLevel();
         }
         nextScene.ShowSubLevel();
-        Vector2 playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
+        Vector2 playerTargetPosition = GameManager.ScreenSize / 2;
+        if(Portal.NextSceneId != 0)
+            playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
         Tween tween = GetTree().CreateTween();
         float distance = (player.GlobalPosition - playerTargetPosition).Length();
         float screenWidth = GameManager.ScreenSize.X;

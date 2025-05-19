@@ -15,6 +15,7 @@ public partial class FinalLevel : Node3D
 	[Export] public Area3D Area3D;
 	[Export] public SubViewport GameNode;
 	[Export] public StaticBody3D SafeZone;
+	[Export] public AnimationPlayer AnimationPlayer;
 	public Node3D BossLevel;
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
@@ -22,6 +23,7 @@ public partial class FinalLevel : Node3D
 	public int EnemyCount = 0;
 	public Timer DeathTimer;
 	public ShaderMaterial shaderMaterial;
+	[Export] public bool EndButton { get => false; set { if (value) End(); } }
 	public override void _Ready()
 	{
 		Instance = this;
@@ -149,6 +151,7 @@ public partial class FinalLevel : Node3D
 
 		GameManager.MainWindow.AlwaysOnTop = false;
 		GameManager.FixWindow.GrabFocus();
+		Input.MouseMode = Input.MouseModeEnum.Visible;	
 
         QueueFree();
 	}

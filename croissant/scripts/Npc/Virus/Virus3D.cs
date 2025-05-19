@@ -95,7 +95,10 @@ public partial class Virus3D : StaticBody3D
 		if (Hp > 0)
 			Hp--;
 		else
-			FinalLevel.Instance.End();
+		{
+			FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
+			FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
+		}
 	}
 
 	public void StartGlitch()
