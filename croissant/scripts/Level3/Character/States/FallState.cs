@@ -1,71 +1,42 @@
 using Godot;
 using System;
 
-public partial class FallState : State
+public partial class FallState : PlayerState
 {
-    public override void Enter()
-        {
-            //GD.Print("Falling");
-
-            var fsm = GetParent();
-            var player = fsm?.GetParent() as PlayerCharacter;
-            if (player == null)
-                return;
-            
-            player.AnimationPlayer.Play("Fall");
-        }
-
-        public override void Update(float delta)
-        {
-            var fsm = GetParent();
-            var player = fsm?.GetParent() as PlayerCharacter;
-            if (player == null)
-                return;
-
-            Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-
-            Vector2 velocity = player.Velocity;
-            velocity.X = direction.X * PlayerCharacter.Speed;
-            player.Velocity = velocity;
-            
-            if(velocity.X>0)
-            {
-                player.Sprite.FlipH = false;
-            }
-            else if(velocity.X<0)
-            {
-                player.Sprite.FlipH = true;
-            }
-
-            if (player.IsOnFloor())
-            {
-
-                if (Mathf.Abs(direction.X) > 0.1f)
-                    EmitSignal(SignalName.StateTransition, this, "WalkState");
-                else
-                    EmitSignal(SignalName.StateTransition, this, "IdleState");
-            }
+    public override void EnterState()
+    {
+        Name = "Fall";
         
-            if (!player.IsOnFloor() && player.IsOnWall())
-            {
-                if (player.GetSlideCollisionCount() > 0)
-                {
-                    KinematicCollision2D collision = player.GetSlideCollision(0);
-                    Vector2 normal = collision.GetNormal();
+        Player._fallEnterMsec = (int)Time.GetTicksMsec();
+    }
 
-                    if (normal.X > 0)
-                    {
-                        EmitSignal(SignalName.StateTransition, this, "WallSlideRight");
-                        return;
-                    }
-                    else
-                    {
-                        EmitSignal(SignalName.StateTransition, this, "WallSlideLeft");
-                        return;
-                    }
-                }
-            }
+    public override void Update(double delta)
+    {
+
+
+        Player.HandleGravity(delta, PlayerCharacter.GravityFall);
+        Player.HorizontalMovement(PlayerCharacter.AirAcceleration, PlayerCharacter.AirDeceleration);
+
+        
+        Player.HandleLanding();
+        Player.HandleJump();
+        Player.HandleJumpBuffer();
+        Player.HandleWallJump();
+
+        HandleAnimations();
+
+        
+        if (Player.IsOnWall() && !Player.IsOnFloor() && Player.Velocity.Y > 0)
+        {
+            Player.ChangeState((Node)States.Get("Locked"));
         }
+    }
 
-        public override void Exit() { }
+
+
+    private void HandleAnimations()
+    {
+        Player.Animator.Play("Fall");
+        Player.HandleFlipH();
+    }
 }

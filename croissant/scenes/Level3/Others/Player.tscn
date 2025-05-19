@@ -1,12 +1,13 @@
-[gd_scene load_steps=26 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=27 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
-[ext_resource type="Script" uid="uid://cenrt4boidy05" path="res://scripts/Level3/StateMachine/StateMachine.cs" id="3_n83g5"]
-[ext_resource type="Script" uid="uid://0cahh1ocw2s8" path="res://scripts/Level3/Character/States/WalkState.cs" id="4_j7gwp"]
+[ext_resource type="Script" uid="uid://b08swylcghmyx" path="res://scripts/Level3/StateMachine/PlayerStates.cs" id="2_b8m4g"]
+[ext_resource type="Script" uid="uid://dhvtp6h8qxthh" path="res://scripts/Level3/Character/States/RunState.cs" id="3_ae7sy"]
 [ext_resource type="Script" uid="uid://dv3cf7rfc5x2k" path="res://scripts/Level3/Character/States/IdleState.cs" id="5_46r6c"]
 [ext_resource type="Script" uid="uid://v3uhhhkv0kxc" path="res://scripts/Level3/Character/States/JumpState.cs" id="6_mt1tc"]
-[ext_resource type="Script" uid="uid://cxmpyfdmy0kno" path="res://scripts/Level3/Character/States/WallSlideLeft.cs" id="8_j7gwp"]
-[ext_resource type="Script" uid="uid://deq7vo7fx0nao" path="res://scripts/Level3/Character/States/WallSlideRight.cs" id="9_46r6c"]
+[ext_resource type="Script" uid="uid://dqsyw68v1xv1" path="res://scripts/Level3/Character/States/WallJumpState.cs" id="7_3tawa"]
+[ext_resource type="Script" uid="uid://dudfomsf8pgmy" path="res://scripts/Level3/Character/States/JumpPeakState.cs" id="8_wfwde"]
+[ext_resource type="Script" uid="uid://rms7yj0011u" path="res://scripts/Level3/Character/States/Locked.cs" id="9_ae7sy"]
 [ext_resource type="Script" uid="uid://c13ef5rxeeh2o" path="res://scripts/Level3/Character/States/FallState.cs" id="9_j7gwp"]
 [ext_resource type="Texture2D" uid="uid://cyjxx8wfaohhf" path="res://assets/sprites/Player/player run 48x48.png" id="9_mt1tc"]
 [ext_resource type="Texture2D" uid="uid://cmtti7jqmg1pe" path="res://assets/sprites/Player/Player Idle 48x48.png" id="10_mt1tc"]
@@ -446,13 +447,19 @@ _data = {
 &"WallSlideRight": SubResource("Animation_3tawa")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("AnimationPlayer", "Sprite", "area2D")]
-position = Vector2(1, 0)
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Sprite", "Animator", "Collider", "States", "CoyoteTimer", "JumpBufferTimer", "RCBottomLeft", "RCBottomRight", "area2D")]
+position = Vector2(2, 0)
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_45nm6")
-AnimationPlayer = NodePath("AnimationPlayer")
 Sprite = NodePath("Sprite2D")
+Animator = NodePath("AnimationPlayer")
+Collider = NodePath("CollisionShape2D")
+States = NodePath("PlayerStates")
+CoyoteTimer = NodePath("Timers/Coyotte")
+JumpBufferTimer = NodePath("Timers/Jump")
+RCBottomLeft = NodePath("Raycasts/WallJump/BottomLeft")
+RCBottomRight = NodePath("Raycasts/WallJump/BottomRight")
 area2D = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -464,29 +471,40 @@ position = Vector2(0, -32)
 scale = Vector2(3, 3)
 hframes = 8
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("InitialState")]
-script = ExtResource("3_n83g5")
-InitialState = NodePath("IdleState")
+[node name="PlayerStates" type="Node" parent="." node_paths=PackedStringArray("Locked", "Idle", "Run", "Jump", "JumpPeak", "WallJump", "Fall")]
+script = ExtResource("2_b8m4g")
+Locked = NodePath("Locked")
+Idle = NodePath("IdleState")
+Run = NodePath("RunState")
+Jump = NodePath("JumpState")
+JumpPeak = NodePath("JumpPeakState")
+WallJump = NodePath("WallJumpState")
+Fall = NodePath("FallState")
 
-[node name="WalkState" type="Node" parent="StateMachine"]
-script = ExtResource("4_j7gwp")
+[node name="RunState" type="Node" parent="PlayerStates"]
+script = ExtResource("3_ae7sy")
 
-[node name="IdleState" type="Node" parent="StateMachine"]
+[node name="IdleState" type="Node" parent="PlayerStates"]
 script = ExtResource("5_46r6c")
 
-[node name="JumpState" type="Node" parent="StateMachine"]
+[node name="JumpState" type="Node" parent="PlayerStates"]
 script = ExtResource("6_mt1tc")
 
-[node name="FallState" type="Node" parent="StateMachine"]
+[node name="FallState" type="Node" parent="PlayerStates"]
 script = ExtResource("9_j7gwp")
 
-[node name="WallSlideLeft" type="Node" parent="StateMachine"]
-script = ExtResource("8_j7gwp")
+[node name="WallJumpState" type="Node" parent="PlayerStates"]
+script = ExtResource("7_3tawa")
 
-[node name="WallSlideRight" type="Node" parent="StateMachine"]
-script = ExtResource("9_46r6c")
+[node name="JumpPeakState" type="Node" parent="PlayerStates"]
+script = ExtResource("8_wfwde")
+
+[node name="Locked" type="Node" parent="PlayerStates"]
+script = ExtResource("9_ae7sy")
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 7
+collision_mask = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, -1)
@@ -496,3 +514,27 @@ shape = SubResource("RectangleShape2D_xk4oe")
 libraries = {
 &"": SubResource("AnimationLibrary_b8m4g")
 }
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="WallJump" type="Node2D" parent="Raycasts"]
+
+[node name="BottomLeft" type="RayCast2D" parent="Raycasts/WallJump"]
+light_mask = 1023
+visibility_layer = 1023
+position = Vector2(-1, -13)
+target_position = Vector2(-35, 0)
+collision_mask = 65535
+collide_with_areas = true
+
+[node name="BottomRight" type="RayCast2D" parent="Raycasts/WallJump"]
+position = Vector2(-1, -13)
+target_position = Vector2(35, 0)
+collision_mask = 65535
+collide_with_areas = true
+
+[node name="Timers" type="Node" parent="."]
+
+[node name="Coyotte" type="Timer" parent="Timers"]
+
+[node name="Jump" type="Timer" parent="Timers"]

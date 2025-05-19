@@ -1,68 +1,50 @@
 using Godot;
 using System;
 
-public partial class JumpState : State
+public partial class JumpState : PlayerState
 {
-    private Vector2 initialVelocity;
-
-    public override void Enter()
+    public override void EnterState()
     {
-        GD.Print("Jumping");
-
-        var fsm = GetParent();
-        var player = fsm?.GetParent() as PlayerCharacter;
-        if (player == null)
-            return;
-
-        initialVelocity = player.Velocity;
-        initialVelocity.Y = PlayerCharacter.JumpVelocity;
-        player.Velocity = initialVelocity;
-        player.AnimationPlayer.Play("Jump");
+        Name = "Jump";
+        Player.Velocity = new Vector2(Player.Velocity.X, Player.jumpSpeed);
+        Player._hasJumped = true;
     }
 
-    public override void Update(float delta)
-    {
-        var fsm = GetParent();
-        var player = fsm?.GetParent() as PlayerCharacter;
-        if (player == null)
-            return;
-
-        Vector2 direction = Input.GetVector("ui_left", "ui_right", "ui_up", "ui_down");
-        Vector2 velocity = player.Velocity;
-
-        if (Mathf.Abs(direction.X) > 0.1f && !player.IsWallJumping())
-        {
-            velocity.X = direction.X * PlayerCharacter.Speed;
-        }
-        
-        player.Velocity = velocity;
-
-        if(velocity.X>0)
-        {
-            player.Sprite.FlipH = false;
-        }
-        else if(velocity.X<0)
-        {
-            player.Sprite.FlipH = true;
-        }
-
-        if (player.IsOnFloor())
-        {
-            if (Mathf.Abs(direction.X) > 0.1f)
-                EmitSignal(SignalName.StateTransition, this, "WalkState");
-            else
-                EmitSignal(SignalName.StateTransition, this, "IdleState");
-        }
-        
-
-        if (!player.IsOnFloor() && player.Velocity.Y > 0)
-        {
-            EmitSignal(SignalName.StateTransition, this, "FallState");
-        }
-
-    }
-
-    public override void Exit() 
+    public override void ExitState()
     {
     }
+
+    public override void Update(double delta)
+    {
+        Player.HandleGravity(delta);
+        Player.HorizontalMovement();
+        Player.HandleWallJump();
+        HandleJumpToFall();
+        HandleAnimations();
+
+        if (Player.IsOnWall() && !Player.IsOnFloor() && Player.Velocity.Y > 0)
+        {
+            Player.ChangeState((Node)States.Get("Locked"));
+        }
+    }
+
+    private void HandleAnimations()
+    {
+        Player.Animator.Play("Jump");
+        Player.HandleFlipH();
+    }
+
+    private void HandleJumpToFall()
+    {
+        if (Player.Velocity.Y >= 0)
+        {
+            Player.ChangeState((Node)States.Get("JumpPeak"));
+        }
+        else if (!Player.keyJump)
+        {
+            Player.Velocity = new Vector2(Player.Velocity.X, Player.Velocity.Y * PlayerCharacter.VariableJumpMultiplier);
+            Player.ChangeState((Node)States.Get("JumpPeak"));
+        }
+    }
+
 }
