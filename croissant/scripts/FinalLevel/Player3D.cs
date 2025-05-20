@@ -76,7 +76,7 @@ public partial class Player3D : CharacterBody3D
 			else if (Body is Virus3D Virus)
 				Virus.TakeDamage();
 			else if (Body is FloppyDisk floppyDisk)
-				floppyDisk.QueueFree();
+				floppyDisk.TakeDamage();
 		}
 	}
 }

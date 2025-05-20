@@ -89,6 +89,11 @@ public partial class FinalLevel : Node3D
 			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);
 	}
 
+	public void DeathBossLevel()
+	{
+		Death(Vector3.Zero);
+	}
+
 	public void Death(Vector3 enemyPosition)
 	{
 		shaderMaterial.SetShaderParameter("u_color_tex", PaletteDeath);

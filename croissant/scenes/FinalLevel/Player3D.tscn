@@ -402,4 +402,4 @@ anim_player = NodePath("../ShootAnimation")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 enabled = false
 target_position = Vector3(0, 0, -100)
-collision_mask = 3
+collision_mask = 11

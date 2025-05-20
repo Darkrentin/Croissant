@@ -45,4 +45,3 @@ Test
 Test"
 
 [node name="SpeedRunTimer" parent="." instance=ExtResource("4_cm0pq")]
-visible = false

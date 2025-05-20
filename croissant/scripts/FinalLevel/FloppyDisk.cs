@@ -5,6 +5,8 @@ public partial class FloppyDisk : CharacterBody3D
 {
     [Export]
     public float Speed { get; set; } = 5f;
+    [Export] public Area3D Area;
+    [Export] public AnimationPlayer AnimationPlayer;
 
     private Vector3 _direction = Vector3.Zero;
     private bool _isMoving = false;
@@ -15,6 +17,8 @@ public partial class FloppyDisk : CharacterBody3D
 
     public override void _Ready()
     {
+        Area.BodyEntered += OnBodyEntered;
+        AnimationPlayer.AnimationFinished += OnAnimationFinished;
     }
 
     public void StartMovement(Vector3 direction, float duration)
@@ -45,5 +49,27 @@ public partial class FloppyDisk : CharacterBody3D
         Vector3 velocity = _direction * Speed;
         Velocity = velocity;
         MoveAndSlide();
+    }
+    public void OnBodyEntered(Node body)
+    {
+        if (body is Player3D player)
+        {
+            FinalLevel.Instance.DeathBossLevel();
+            QueueFree();
+        }
+    }
+
+    public void TakeDamage()
+    {
+        AnimationPlayer.Play("Death");
+        Speed = 0f;
+    }
+
+    public void OnAnimationFinished(StringName animName)
+    {
+        if (animName == "Death")
+        {
+            QueueFree();
+        }
     }
 }

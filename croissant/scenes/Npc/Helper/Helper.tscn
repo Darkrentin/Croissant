@@ -227,7 +227,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Dialogue", "AnimationTree")]
+[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Dialogue")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 36)
@@ -239,7 +239,6 @@ script = ExtResource("1_8cb3g")
 animationPlayer = NodePath("AnimationPlayer")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
-AnimationTree = NodePath("")
 Draggable = false
 Minimizable = false
 

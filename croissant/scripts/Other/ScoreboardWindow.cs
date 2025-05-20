@@ -30,6 +30,9 @@ public partial class ScoreboardWindow : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
+
+		RunTime = SpeedRunTimer.Instance.Time;
+
 		Title = "Scoreboard";
 		EndResultsContainer.Visible = true;
 		ScoreboardContainer.Visible = false;

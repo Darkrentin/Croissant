@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c0ixtme6phwg7"]
+[gd_scene load_steps=34 format=3 uid="uid://c0ixtme6phwg7"]
 
 [ext_resource type="Script" uid="uid://bgshfq2ki3bqa" path="res://scripts/FinalLevel/BossFloor.cs" id="1_vtsjb"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="2_3b0w1"]
@@ -48,15 +48,133 @@ tracks/0/keys = {
 "values": [Vector3(1, -1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_v2u0f"]
+resource_name = "Up"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, -1, 1), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4vxqs"]
+resource_name = "LavaBack"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, -1.91, 1), Vector3(1, -1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_v06mv"]
+resource_name = "UpBack"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Floor:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1, -1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v2u0f"]
 _data = {
 &"Lava": SubResource("Animation_3b0w1"),
-&"RESET": SubResource("Animation_vtsjb")
+&"LavaBack": SubResource("Animation_4vxqs"),
+&"RESET": SubResource("Animation_vtsjb"),
+&"Up": SubResource("Animation_v2u0f"),
+&"UpBack": SubResource("Animation_v06mv")
 }
 
-[node name="BossFloor" type="Node3D" node_paths=PackedStringArray("animationPlayer")]
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_3b0w1"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_2atda"]
+animation = &"Lava"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v06mv"]
+animation = &"LavaBack"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_eg05t"]
+animation = &"RESET"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hjxcf"]
+animation = &"Up"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_awrxr"]
+animation = &"UpBack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_o3p5f"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ixkv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sakcb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sth34"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nlfag"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_04d7j"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_57hlt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3b0w1"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vtsjb"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v2u0f"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4vxqs"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v06mv"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2atda"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eg05t"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jrqrm"]
+states/Idle/node = SubResource("AnimationNodeStateMachine_3b0w1")
+states/Idle/position = Vector2(565, 100)
+states/Lava/node = SubResource("AnimationNodeAnimation_2atda")
+states/Lava/position = Vector2(313, -34)
+states/LavaBack/node = SubResource("AnimationNodeAnimation_v06mv")
+states/LavaBack/position = Vector2(486, -34)
+states/RESET/node = SubResource("AnimationNodeAnimation_eg05t")
+states/RESET/position = Vector2(399, 100)
+states/Up/node = SubResource("AnimationNodeAnimation_hjxcf")
+states/Up/position = Vector2(313, 227)
+states/UpBack/node = SubResource("AnimationNodeAnimation_awrxr")
+states/UpBack/position = Vector2(486, 227)
+transitions = ["Lava", "LavaBack", SubResource("AnimationNodeStateMachineTransition_o3p5f"), "RESET", "Lava", SubResource("AnimationNodeStateMachineTransition_3ixkv"), "LavaBack", "RESET", SubResource("AnimationNodeStateMachineTransition_sakcb"), "UpBack", "RESET", SubResource("AnimationNodeStateMachineTransition_sth34"), "RESET", "Up", SubResource("AnimationNodeStateMachineTransition_nlfag"), "Up", "UpBack", SubResource("AnimationNodeStateMachineTransition_04d7j"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_57hlt"), "RESET", "LavaBack", SubResource("AnimationNodeStateMachineTransition_3b0w1"), "RESET", "UpBack", SubResource("AnimationNodeStateMachineTransition_vtsjb"), "Lava", "RESET", SubResource("AnimationNodeStateMachineTransition_v2u0f"), "Up", "RESET", SubResource("AnimationNodeStateMachineTransition_4vxqs"), "Idle", "RESET", SubResource("AnimationNodeStateMachineTransition_v06mv"), "LavaBack", "Idle", SubResource("AnimationNodeStateMachineTransition_2atda"), "UpBack", "Idle", SubResource("AnimationNodeStateMachineTransition_eg05t")]
+graph_offset = Vector2(-204, -68)
+
+[node name="BossFloor" type="Node3D" node_paths=PackedStringArray("animationPlayer", "animationTree")]
 script = ExtResource("1_vtsjb")
 animationPlayer = NodePath("AnimationPlayer")
+animationTree = NodePath("AnimationTree")
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
@@ -71,3 +189,7 @@ shape = SubResource("BoxShape3D_3b0w1")
 libraries = {
 &"": SubResource("AnimationLibrary_v2u0f")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_jrqrm")
+anim_player = NodePath("../AnimationPlayer")

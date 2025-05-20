@@ -13,6 +13,7 @@ public partial class BossLevel : Node3D
 	public const int WallSize = 2;
 	public static BossLevel Instance;
 	[Export] public Node3D[] SpawnPoints;
+	[Export] public Virus3D Virus;
 	public override void _Ready()
 	{
 		Instance = this;
@@ -56,6 +57,36 @@ public partial class BossLevel : Node3D
 					BossFloors[i, j].animationPlayer.Play("Lava");
 			}
 		}
+	}
+
+	public void VirusAttack()
+	{
+		Virus.AnimationPlayer.Play("Atk");
+	}
+
+	public void LiftWalls()
+	{
+		for (int i = 0; i < MapSize; i++)
+		{
+			for (int j = 0; j < MapSize; j++)
+			{
+				if (Lib.rand.Next(0, 3) == 0 && !PlayerOnWall(BossFloors[i,j].GlobalPosition))
+					BossFloors[i, j].PlayAnimation("Up", 0.1f, false, true);
+			}
+		}
+	}
+
+	public bool PlayerOnWall(Vector3 WallPosition)
+	{
+		Vector3 playerPos = FinalLevel.Instance.Player3D.GlobalPosition;
+		
+		// Calculate the distance between player and wall directly in world space
+		float distanceX = Mathf.Abs(playerPos.X - WallPosition.X);
+		float distanceZ = Mathf.Abs(playerPos.Z - WallPosition.Z);
+		
+		// Consider the player to be on the wall if they're within WallSize units
+		// This covers the current wall and adjacent walls
+		return distanceX <= WallSize * 1.5f && distanceZ <= WallSize * 1.5f;
 	}
 
 	public void StartWave()
@@ -115,7 +146,7 @@ public partial class BossLevel : Node3D
 
 	public void OnBodyEnteredKillZone(Node3D body)
 	{
-		FinalLevel.Instance.Death(Vector3.Zero);
+		FinalLevel.Instance.DeathBossLevel();
 	}
 
 	public void ResetMap()
@@ -124,7 +155,7 @@ public partial class BossLevel : Node3D
 		{
 			for (int j = 0; j < MapSize; j++)
 			{
-				BossFloors[i, j].animationPlayer.Play("RESET");
+				BossFloors[i, j].animationStateMachine.Travel("RESET");
 				BossFloors[i, j].timer.Stop();
 			}
 		}

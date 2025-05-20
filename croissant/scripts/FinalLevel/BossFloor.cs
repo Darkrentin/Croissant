@@ -4,6 +4,8 @@ using System;
 public partial class BossFloor : Node3D
 {
     [Export] public AnimationPlayer animationPlayer;
+    [Export] public AnimationTree animationTree;
+    public AnimationNodeStateMachinePlayback animationStateMachine;
     public Timer timer;
     private Action currentCallback;
     // Called when the node enters the scene tree for the first time.
@@ -13,6 +15,7 @@ public partial class BossFloor : Node3D
         timer.WaitTime = 0.5f;
         timer.OneShot = true;
         AddChild(timer);
+        animationStateMachine = (AnimationNodeStateMachinePlayback)(animationTree.Get("parameters/playback"));
     }
 
     // Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -39,13 +42,13 @@ public partial class BossFloor : Node3D
         {
             if (PlayBackwards)
             {
-                animationPlayer.PlayBackwards(animation);
+                animationStateMachine.Travel(animation+"Back");
                 if (reset)
                     PlayAnimation(animation, ResetTime, false, false);
             }
             else
             {
-                animationPlayer.Play(animation);
+                animationStateMachine.Travel(animation);
                 if (reset)
                     PlayAnimation(animation, ResetTime, true, false);
             }

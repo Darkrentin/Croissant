@@ -1,4 +1,4 @@
-[gd_scene load_steps=119 format=4 uid="uid://btjmeghne5sev"]
+[gd_scene load_steps=121 format=4 uid="uid://btjmeghne5sev"]
 
 [ext_resource type="Script" uid="uid://bajo37lmcljy6" path="res://scripts/Npc/Virus/Virus3D.cs" id="1_t412l"]
 [ext_resource type="Texture2D" uid="uid://iw2dtuv2n4oc" path="res://assets/sprites/virus/computer3D/UX.001_base_color.png" id="1_wfy2c"]
@@ -602,6 +602,30 @@ tracks/3/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../Area3D/CollisionShape3D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_trv4f"]
 resource_name = "ShootA"
@@ -642,8 +666,36 @@ tracks/2/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_npe1l"]
+resource_name = "Atk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(1.5708, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Area3D/CollisionShape3D:disabled")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kbwjh"]
 _data = {
+&"Atk": SubResource("Animation_npe1l"),
 &"RESET": SubResource("Animation_dr6to"),
 &"ShootA": SubResource("Animation_trv4f")
 }
@@ -1611,13 +1663,17 @@ size = Vector3(5.71594, 6.70145, 5.20413)
 font = ExtResource("17_2v8wk")
 font_size = 50
 
-[node name="Virus" type="StaticBody3D" node_paths=PackedStringArray("Base", "ShootSpawnA", "ShootSpawnB", "AnimationTree", "AnimationPlayer", "HealthBar")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_npe1l"]
+size = Vector3(5.29742, 1, 4.21777)
+
+[node name="Virus" type="StaticBody3D" node_paths=PackedStringArray("Base", "ShootSpawnA", "ShootSpawnB", "AnimationTree", "AnimationPlayer", "Area", "HealthBar")]
 script = ExtResource("1_t412l")
 Base = NodePath("Computer/Base/Base")
 ShootSpawnA = NodePath("ShootSpawnA")
 ShootSpawnB = NodePath("ShootSpawnB")
 AnimationTree = NodePath("AnimationTree")
 AnimationPlayer = NodePath("AnimationScale")
+Area = NodePath("Area3D")
 HealthBar = NodePath("Control/Control/Sprite2D")
 
 [node name="Computer" type="Node3D" parent="."]
@@ -1897,3 +1953,10 @@ anchor_bottom = 37.0
 offset_right = -1.52588e-05
 text = "VIRUS"
 label_settings = SubResource("LabelSettings_lq3sf")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00991821, 0, 4.50603)
+shape = SubResource("BoxShape3D_npe1l")
+disabled = true

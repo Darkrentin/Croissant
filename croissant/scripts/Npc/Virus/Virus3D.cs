@@ -16,6 +16,7 @@ public partial class Virus3D : StaticBody3D
 	[Export] public AnimationTree AnimationTree;
 	public AnimationNodeStateMachinePlayback AnimationScreen;
 	[Export] public AnimationPlayer AnimationPlayer;
+	[Export] public Area3D Area;
 	[Export] Sprite2D HealthBar;
 
 	public int Hp = 10;
@@ -36,6 +37,8 @@ public partial class Virus3D : StaticBody3D
 		AddChild(GlitchTimer);
 
 		AnimationPlayer.AnimationFinished += OnAnimationFinished;
+		Area.BodyEntered += OnBodyEntered;
+		HealthBar.Frame = 10 - Hp;
 
 	}
 
@@ -43,7 +46,7 @@ public partial class Virus3D : StaticBody3D
 	public override void _Process(double delta)
 	{
 		//UpdateVirusMovement(delta);
-		HealthBar.Frame = 10 - Hp;
+		
 	}
 
 	public void UpdateVirusMovement(double delta)
@@ -90,14 +93,26 @@ public partial class Virus3D : StaticBody3D
 		// For example, reduce health or trigger an animation
 		StartGlitch();
 		//StartShoot();
-		BossLevel.Instance.LaunchFloppyDisk();
+		BossLevel.Instance.LiftWalls();
 		Lib.Print("Virus took damage!");
-		if (Hp > 0)
+		if (Hp > 1)
+		{
 			Hp--;
+			HealthBar.Frame = 10 - Hp;
+		}
 		else
 		{
-			FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
-			FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
+			Hp--;
+			HealthBar.Frame = 10 - Hp;
+			StartGlitch();
+			GlitchTimer.WaitTime = 10f;
+			GetTree().CreateTimer(1f).Timeout += () =>
+			{
+				FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
+				FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
+				SpeedRunTimer.Instance.StopTimer();
+				GlitchTimer.Stop();
+			};
 		}
 	}
 
@@ -113,6 +128,13 @@ public partial class Virus3D : StaticBody3D
 		ShaderMaterial shaderMaterial = (ShaderMaterial)Base.MaterialOverride;
 		shaderMaterial.SetShaderParameter("shake_rate", 0);
 		GlitchTimer.Stop();
+	}
+	public void OnBodyEntered(Node3D body)
+	{
+		if (body is Player3D player)
+		{
+			FinalLevel.Instance.DeathBossLevel();
+		}
 	}
 
 
