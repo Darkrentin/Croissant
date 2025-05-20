@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://c1s4mspfyfp22" path="res://assets/sprites/virus/eye/exclamation.png" id="10_g3po4"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
-[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
+[ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/angry.png" id="13_hlkw5"]
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 2

@@ -167,6 +167,22 @@ shadow_mesh = SubResource("ArrayMesh_4w728")
 [sub_resource type="BoxShape3D" id="BoxShape3D_nfjby"]
 size = Vector3(1.25787, 0.0482788, 1.33307)
 
+[sub_resource type="Animation" id="Animation_aj3nx"]
+resource_name = "Death"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Mesh:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector3(5, 5, 5), Vector3(0.1, 0.1, 0.1)]
+}
+
 [sub_resource type="Animation" id="Animation_87ldh"]
 length = 2.0
 tracks/0/type = "value"
@@ -255,22 +271,6 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_aj3nx"]
-resource_name = "Death"
-length = 0.5
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Mesh:scale")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5),
-"transitions": PackedFloat32Array(-2, -2),
-"update": 0,
-"values": [Vector3(5, 5, 5), Vector3(0.1, 0.1, 0.1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_87ldh"]
