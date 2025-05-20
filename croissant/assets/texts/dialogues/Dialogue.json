@@ -48,7 +48,7 @@
         },
         "tuto2": {
             "0": {
-                "text": "That's not enough?! [shake rate=18 level=4][color=#ff0000][b]Have THIS one![/b][/color][/shake]",
+                "text": "Not enough?! [shake rate=18 level=4][color=#ff0000][b]Have this one![/b][/color][/shake]",
                 "anim": "Angry"
             },
             "1": {
@@ -68,7 +68,7 @@
         },
         "tuto4": {
             "0": {
-                "text": "Ohh a [wave amp=10 freq=2.0][color=#ffaacc]cute little cat[/color][/wave], don't touch it!",
+                "text": "Ohh a [wave amp=10 freq=2.0][color=#ffaacc]cute little cat[/color][/wave], please don't hurt him!",
                 "anim": "Sad"
             },
             "1": {
@@ -112,7 +112,7 @@
                 "anim": "Angry"
             },
             "1": {
-                "text": "[b]I'm back![/b] Quarantine is not enough to hold me!",
+                "text": "[b]I'm back![/b] [color=GRAY]Quarantine[/color] is not enough to hold me!",
                 "anim": "Angry"
             },
             "2": {
@@ -122,10 +122,14 @@
         },
         "Virus/Helper Dialogue 3": {
             "0": {
-                "text": "Now that you are alone, nothing can stop me from [shake rate=18 level=4][color=#ff0000]DELETING THIS FOLDER![/color][/shake]",
+                "text": "[fade start=0.0 duration=1.0][color=DIM_GRAY]Oh...[/color][/fade]",
                 "anim": "Angry"
             },
             "1": {
+                "text": "You are alone now! Nothing can stop me from [shake rate=18 level=4][pulse freq=2.5 color=RED][b]DELETING THIS FOLDER![/b][/pulse][/shake]",
+                "anim": "Angry"
+            },
+            "2": {
                 "text": "",
                 "anim": "Angry"
             }
@@ -134,41 +138,37 @@
     "Helper": {
         "Restart": {
             "0": {
-                "text": "Hi, I'm [color=#00ccff]Helper.exe[/color], the Anti-virus of your computer.",
+                "text": "Hi, I am [pulse freq=0.8 color=WHITE][color=DODGER_BLUE]Helper.exe[/color][/pulse], your antivirus.",
                 "anim": "Idle"
             },
             "1": {
-                "text": "I've noticed a virus has infected your computer.",
+                "text": "I have noticed a [color=GREEN][shake rate=10 level=4]virus[/shake][/color] has infected your computer.",
                 "anim": "Idle"
             },
             "2": {
-                "text": "Luckily, the restart helped me to put it under quarantine.",
+                "text": "Luckily, the restart helped me to put it under [color=GRAY][i]quarantine[/i][/color].",
                 "anim": "Idle"
             },
             "3": {
-                "text": "However, that won't be enough to stop it for good.",
+                "text": "That won't be enough, I'll need to [color=RODGER_BLUE]update[/color] to figure out how to stop it.",
                 "anim": "Idle"
             },
             "4": {
-                "text": "I'll need to perform a system update to figure out how to stop it",
-                "anim": "Idle"
-            },
-            "5": {
                 "text": "",
                 "anim": "Idle"
             }
         },
         "HelperTuto": {
             "0": {
-                "text": "This is your System32 folder, the most important folder in your computer.",
+                "text": "This is [wave amp=15 freq=4][b]System32[/b][/wave], the [b]most important[/b] folder of your computer.",
                 "anim": "Idle"
             },
             "1": {
-                "text": "You can move this folder with mouse clicks",
+                "text": "You can move it with [color=SILVER]mouse clicks[/color].",
                 "anim": "Idle"
             },
             "2": {
-                "text": "I'm leaving it with you so you can protect it, keep it safe!",
+                "text": "I'm leaving it with you so you can [b]protect it[/b], keep it [pulse freq=1.0 color=SPRING_GREEN]safe[/pulse]!",
                 "anim": "Idle"
             },
             "3": {
@@ -178,47 +178,51 @@
         },
         "Virus/Helper Dialogue 2": {
             "0": {
-                "text": "[color=#ffaa00]The virus is already here![/color]",
+                "text": "Nooo! I need to start the update [shake rate=10 level=3][color=FIREBRICK][b]RIGHT NOW![/b][/color][/shake]",
                 "anim": "Idle"
             },
             "1": {
-                "text": "I need to start the update [b][color=#ff5555]RIGHT NOW![/color][/b]",
-                "anim": "Idle"
-            },
-            "2": {
                 "text": "",
                 "anim": "Idle"
             }
         },
         "EndLvl2": {
             "0": {
-                "text": "[color=#00ccff][b]I'm back![/b][/color]",
+                "text": "[wave amp=10 freq=2]Hey I'm back![/wave]",
                 "anim": "Idle"
             },
             "1": {
+                "text": "I've installed the [color=DODGER_BLUE]update[/color], now I need to go inside some files to modify them.",
+                "anim": "Idle"
+            },
+            "2": {
+                "text": "You need to help me to get me there, move me with [color=#33FFFF]W A S D[/color] or the [color=#33FFFF]arrow keys[/color]!",
+                "anim": "Idle"
+            },
+            "3": {
+                "text": "I don't know how it looks like there, so you will have to [i]learn by yourself[/i]...",
+                "anim": "Idle"
+            },
+            "4": {
+                "text": "[color=SPRING_GREEN]Good luck[/color], be ready for the [rainbow freq=0.8 sat=0.7 val=1.0][wave amp=15 freq=4]TeLePoRtAtIoN![/wave][/rainbow]",
+                "anim": "Idle"
+            },
+            "5": {
                 "text": "",
                 "anim": "Idle"
             }
         },
         "EndLvl3": {
             "0": {
-                "text": "EndLevel3",
-                "anim": "Idle"
-            },
-            "1": {
                 "text": "",
-                "anim": "Idle"
+                "anim": ""
             }
         },
         "EndFinalLevel": {
             "0": {
-                "text": "EndFinalLevel",
-                "anim": "Idle"
-            },
-            "1": {
                 "text": "",
-                "anim": "Idle"
-            }
+                "anim": ""
+            }   
         }
     }
 }
