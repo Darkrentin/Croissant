@@ -3,18 +3,23 @@ using System;
 
 public partial class FallState : PlayerState
 {
+    [Export] public float WallSlideGravityScale = 0.3f;
     public override void EnterState()
     {
         Name = "Fall";
-        
+
         Player._fallEnterMsec = (int)Time.GetTicksMsec();
     }
 
     public override void Update(double delta)
     {
+        float gravityScale = 1.0f;
 
-
-        Player.HandleGravity(delta, PlayerCharacter.GravityFall);
+        if (Player.IsOnWall())
+        {
+            gravityScale = WallSlideGravityScale;
+        }
+        Player.HandleGravity(delta, PlayerCharacter.GravityFall * gravityScale);
         Player.HorizontalMovement(PlayerCharacter.AirAcceleration, PlayerCharacter.AirDeceleration);
 
         
@@ -22,21 +27,10 @@ public partial class FallState : PlayerState
         Player.HandleJump();
         Player.HandleJumpBuffer();
         Player.HandleWallJump();
-
-        HandleAnimations();
-
-        
-        if (Player.IsOnWall() && !Player.IsOnFloor() && Player.Velocity.Y > 0)
-        {
-            Player.ChangeState((Node)States.Get("Locked"));
-        }
+        Player.HandleFallAnimations();
     }
 
 
 
-    private void HandleAnimations()
-    {
-        Player.Animator.Play("Fall");
-        Player.HandleFlipH();
-    }
+
 }

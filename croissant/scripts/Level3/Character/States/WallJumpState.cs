@@ -5,35 +5,17 @@ public partial class WallJumpState : PlayerState
 {
     private Vector2 lastWallDirection;
     private bool shouldEnableWallKick;
+    private bool HasJumped = false;
 
 
     public override void EnterState()
     {
         Name = "WallJump";
-
+        Player.Velocity = new Vector2(Player.Velocity.X * 1.5f, Player.WallJumpVelocity);
         lastWallDirection = Player.wallDirection;
-
-        // Est-ce que le joueur appuie sur la direction opposée ?
-        bool pushingAway = false;
-        if (lastWallDirection == Vector2.Left)
-            pushingAway = Player.keyRight || Player.IsDirectionBuffered();
-        else if (lastWallDirection == Vector2.Right)
-            pushingAway = Player.keyLeft || Player.IsDirectionBuffered();
-
-
-        if (pushingAway)
-        {
-            // Gros kick latéral, saut plus bas
-            Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -lastWallDirection.X,
-                                          PlayerCharacter.WallJumpVelocity * 0.5f);
-        }
-        else
-        {
-            // Saut plus vertical, moins de poussée latérale
-            Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * 0.7f * -lastWallDirection.X,
-                                          PlayerCharacter.WallJumpVelocity * 1.1f);
-        }
-        
+        HasJumped = false;
+        KickOut();
+        //GD.Print("Last wall direction: " + lastWallDirection);
     }
 
 
@@ -43,7 +25,6 @@ public partial class WallJumpState : PlayerState
 
     public override void Update(double delta)
     {
-        Player.GetWallDirection();
         Player.HandleGravity(delta, PlayerCharacter.GravityJump);
         HandleWallKickMovement();
         HandleWallJumpEnd(delta);
@@ -60,6 +41,7 @@ public partial class WallJumpState : PlayerState
     {
         if (Player.Velocity.Y >= PlayerCharacter.WallJumpYSpeedPeak)
         {
+            if (Player.Velocity.Y < 0) Player.Velocity = new Vector2(Player.Velocity.X, 0);
             Player.ChangeState((Node)States.Get("Fall"));
         }
 
@@ -67,51 +49,54 @@ public partial class WallJumpState : PlayerState
         {
             Player.ChangeState((Node)States.Get("Fall"));
         }
+
+        if (Player.IsOnWall())
+        {
+            if (Player.Velocity.Y < 0) Player.Velocity = new Vector2(Player.Velocity.X, 0);
+            Player.ChangeState((Node)States.Get("Fall"));
+            
+        }
+
+
     }
 
-    private void ShouldOnlyJumpButtonWallKick(bool shouldEnable)
+    private void KickOut()
     {
-        shouldEnableWallKick = shouldEnable;
-        if (shouldEnable)
+        if (lastWallDirection == Vector2.Left && Player.keyRight)
         {
-            if (Player.keyLeft || Player.keyRight)
-            {
-                Player._hasJumped = false;
-                Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y);
-            }
-            else
-            {
-                if (Player.jumps < PlayerCharacter.MaxJumps)
-                {
-                    Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y);
-                }
-                else
-                {
-                    Player.ChangeState((Node)States.Get("Fall"));
-                }
-            }
+            Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y / 2.0f);
+        }
+        else if (lastWallDirection == Vector2.Right && Player.keyLeft)
+        {
+            Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y / 2.0f);
         }
         else
         {
-            Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y);
+            HasJumped = true;
+            Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X / 2.8f, Player.jumpSpeed);
         }
     }
 
     private void HandleWallKickMovement()
     {
-        if (!Player.keyLeft && !Player.keyRight)
+        if (!HasJumped)
         {
-            Player.Velocity = Player.Velocity.MoveToward(new Vector2(0, Player.Velocity.Y), PlayerCharacter.WallJumpAcceleration);
+            if (Player.keyJump)
+            {
+                Player.Velocity = new Vector2(Player.Velocity.X / 1.5f, Player.jumpSpeed);
+                HasJumped = true;
+            }
         }
-        else
+
+        if (HasJumped)
         {
             if (lastWallDirection == Vector2.Left && Player.keyRight)
             {
-                Player.HorizontalMovement(PlayerCharacter.WallJumpAcceleration, PlayerCharacter.WallJumpAcceleration);
+                Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y);
             }
             else if (lastWallDirection == Vector2.Right && Player.keyLeft)
             {
-                Player.HorizontalMovement(PlayerCharacter.WallJumpAcceleration, PlayerCharacter.WallJumpAcceleration);
+                Player.Velocity = new Vector2(PlayerCharacter.WallJumpHSpeed * -Player.wallDirection.X, Player.Velocity.Y);
             }
         }
     }

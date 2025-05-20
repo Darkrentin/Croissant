@@ -23,7 +23,7 @@ public partial class IdleState : PlayerState
         Player.HorizontalMovement();
 
        
-        GD.Print($"[Idle] moveDirectionX: {Player.moveDirectionX}");
+        //GD.Print($"[Idle] moveDirectionX: {Player.moveDirectionX}");
 
         if (Player.moveDirectionX != 0)
         {

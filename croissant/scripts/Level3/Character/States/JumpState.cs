@@ -21,11 +21,6 @@ public partial class JumpState : PlayerState
         Player.HandleWallJump();
         HandleJumpToFall();
         HandleAnimations();
-
-        if (Player.IsOnWall() && !Player.IsOnFloor() && Player.Velocity.Y > 0)
-        {
-            Player.ChangeState((Node)States.Get("Locked"));
-        }
     }
 
     private void HandleAnimations()

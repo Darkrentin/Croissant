@@ -520,16 +520,14 @@ libraries = {
 [node name="WallJump" type="Node2D" parent="Raycasts"]
 
 [node name="BottomLeft" type="RayCast2D" parent="Raycasts/WallJump"]
-light_mask = 1023
-visibility_layer = 1023
-position = Vector2(-1, -13)
-target_position = Vector2(-35, 0)
+position = Vector2(-2, -13)
+target_position = Vector2(-28, 0)
 collision_mask = 65535
 collide_with_areas = true
 
 [node name="BottomRight" type="RayCast2D" parent="Raycasts/WallJump"]
-position = Vector2(-1, -13)
-target_position = Vector2(35, 0)
+position = Vector2(-2, -13)
+target_position = Vector2(28, 0)
 collision_mask = 65535
 collide_with_areas = true
 

@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Diagnostics;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
@@ -15,7 +16,7 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public Timer CoyoteTimer;
     [Export] public Timer JumpBufferTimer;
 
-    [Export] public RayCast2D RCBottomLeft;
+    [Export] public RayCast2D RCBottomLeft; // i removed them of the code because it had a lot of bugs
     [Export] public RayCast2D RCBottomRight;
 
     [Export] public Area2D area2D;
@@ -36,7 +37,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityFall = 700f * ScaleFactor;
     public const float MaxFallVelocity = 300f * ScaleFactor;
     public const float JumpVelocity = -240f * ScaleFactor;
-    public const float WallJumpVelocity = -190f * ScaleFactor;
+    public float WallJumpVelocity = -190f * ScaleFactor;
     public const float VariableJumpMultiplier = 0.5f;
     public const int MaxJumps = 1;
     public const float CoyoteTime = 0.1f;
@@ -58,6 +59,8 @@ public partial class PlayerCharacter : CharacterBody2D
     public Vector2 wallDirection = Vector2.Zero;
     public int facing = 1;
 
+    public Vector2 WallDirection { get; set; }
+
     // Input variables
     public bool keyUp = false;
     public bool keyDown = false;
@@ -65,7 +68,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public bool keyRight = false;
     public bool keyJump = false;
     public bool isDead = false;
-    public bool isInvincible = false;
+    public bool isInvincible = true;
     public bool keyJumpPressed = false;
 
     // State machine
@@ -74,14 +77,16 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public bool _hasJumped = false;
     public int _fallEnterMsec = -1;
+    
     public double TimeSinceFall => (_fallEnterMsec < 0)
         ? double.MaxValue
         : (((int)Time.GetTicksMsec() - _fallEnterMsec) / 1000.0);
 
+
     public override void _Ready()
     {
 
-        AddToGroup("player");
+        AddToGroup("PlayerCharacter");
         foreach (Node state in States.GetChildren())
         {
             state.Set("States", States);
@@ -103,7 +108,7 @@ public partial class PlayerCharacter : CharacterBody2D
         currentState.Call("Update", delta);
         HandleMaxFallVelocity();
         MoveAndSlide();
-        GD.Print($"Current State: {currentState.Name}");
+        //($"Current State: {currentState.Name}");
 
         if (isDead) return;
     }
@@ -185,8 +190,9 @@ public partial class PlayerCharacter : CharacterBody2D
     public void HandleWallJump()
     {
         GetWallDirection();
-        if ((keyJumpPressed || JumpBufferTimer.TimeLeft > 0) && wallDirection.X != 0)
+        if ((keyJumpPressed && wallDirection.X != 0)||(keyLeft && wallDirection.X == 1) || (keyRight && wallDirection.X == -1))
         {
+            //GD.Print("WallJump");
             ChangeState((Node)States.Get("WallJump"));
         }
     }
@@ -207,23 +213,45 @@ public partial class PlayerCharacter : CharacterBody2D
         return elapsed <= DirectionBufferTime * 1000;
     }
 
-public void GetWallDirection()
+    public void GetWallDirection()
     {
-        if (RCBottomLeft.IsColliding())
+        wallDirection = Vector2.Zero;
+        for (int i = 0; i < GetSlideCollisionCount(); i++)
         {
-            GD.Print("Mur à gauche");
-            wallDirection = Vector2.Left;
-        }
-        else if (RCBottomRight.IsColliding())
-        {
-            GD.Print("Mur à droite");
-            wallDirection = Vector2.Right;
-        }
-        else
-        {
-            wallDirection = Vector2.Zero;
+            var collision = GetSlideCollision(i);
+            if (collision != null)
+            {
+                Vector2 normal = collision.GetNormal();
+                if (normal.X > 0.5f)
+                {
+                    //GD.Print("Mur à gauche");
+                    wallDirection = Vector2.Left;
+                    break; 
+                }
+                else if (normal.X < -0.5f) 
+                {
+                    //GD.Print("Mur à droite");
+                    wallDirection = Vector2.Right;
+                    break; 
+                }
+            }
         }
     }
+
+
+        public void HandleFallAnimations()
+        {
+            if (IsOnWall())
+            {
+                Animator.Play("WallSlideRight");
+            }
+            else
+            {
+                Animator.Play("Fall");
+                HandleFlipH();
+            }
+
+        }
 
 
     public void GetInputStates()
