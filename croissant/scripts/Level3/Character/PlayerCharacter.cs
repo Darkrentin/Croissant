@@ -24,7 +24,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public bool FlipLock { get; set; } = false;
 
     // Physics constants (scaled for larger character)
-    public const float RunSpeed = 110f * ScaleFactor;
+    public const float RunSpeed = 125f * ScaleFactor;
     public const float WallJumpHSpeed = 120f * ScaleFactor;
     public const float GroundAcceleration = 20f * ScaleFactor;
     public const float GroundDeceleration = 25f * ScaleFactor;
@@ -36,6 +36,8 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityJump = 600f * ScaleFactor;
     public const float GravityFall = 700f * ScaleFactor;
     public const float MaxFallVelocity = 300f * ScaleFactor;
+
+    public const float MaxFallWallVelocity = 100f * ScaleFactor;
     public const float JumpVelocity = -240f * ScaleFactor;
     public float WallJumpVelocity = -190f * ScaleFactor;
     public const float VariableJumpMultiplier = 0.5f;
@@ -156,6 +158,13 @@ public partial class PlayerCharacter : CharacterBody2D
     public void HandleGravity(double delta, float gravity = GravityJump)
     {
         Velocity += new Vector2(0, gravity * (float)delta);
+    }
+
+    public void HandleGravityWallFall(double delta, float gravity = GravityJump)
+    {
+        if (Velocity.Y > MaxFallWallVelocity)
+            Velocity = new Vector2(Velocity.X, MaxFallWallVelocity);
+        Velocity += new Vector2(0, gravity/2.0f * (float)delta);
     }
 
     public void HandleJump()

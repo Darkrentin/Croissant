@@ -18,19 +18,18 @@ public partial class FallState : PlayerState
         if (Player.IsOnWall())
         {
             gravityScale = WallSlideGravityScale;
+            Player.HandleGravityWallFall(delta, PlayerCharacter.GravityFall * gravityScale);
         }
-        Player.HandleGravity(delta, PlayerCharacter.GravityFall * gravityScale);
+        else
+        {
+            Player.HandleGravity(delta, PlayerCharacter.GravityFall * gravityScale);
+        }
         Player.HorizontalMovement(PlayerCharacter.AirAcceleration, PlayerCharacter.AirDeceleration);
-
-        
         Player.HandleLanding();
         Player.HandleJump();
         Player.HandleJumpBuffer();
         Player.HandleWallJump();
         Player.HandleFallAnimations();
+        Player.HandleMaxFallVelocity();
     }
-
-
-
-
 }
