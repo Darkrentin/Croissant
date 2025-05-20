@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://hca4ftw22ecd"]
+[gd_scene load_steps=14 format=3 uid="uid://hca4ftw22ecd"]
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Others/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
@@ -11,6 +11,18 @@
 [ext_resource type="PackedScene" uid="uid://dccrepxu31kas" path="res://scenes/Level3/Levels/3_6.tscn" id="8_vvvan"]
 [ext_resource type="PackedScene" uid="uid://b3qpda3bvfsay" path="res://scenes/Level3/Levels/3_7.tscn" id="9_nhwkx"]
 [ext_resource type="PackedScene" uid="uid://c1fab22ik0j66" path="res://scenes/Level3/Levels/3_8.tscn" id="10_d33vg"]
+[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="12_n504q"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ufbxd"]
+shader = ExtResource("12_n504q")
+shader_parameter/r_displacement = Vector2(-2, -2)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(2, 2)
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 0.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [node name="Level3" type="Window" node_paths=PackedStringArray("player")]
 transparent_bg = true
@@ -26,3 +38,13 @@ player = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(960, 540)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_ufbxd")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
