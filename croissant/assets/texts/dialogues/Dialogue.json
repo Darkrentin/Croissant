@@ -133,6 +133,16 @@
                 "text": "",
                 "anim": "Angry"
             }
+        },
+        "EndLvl2": {
+            "0": {
+                "text": "EndLvl2",
+                "anim": "Angry"
+            },
+            "1": {
+                "text": "",
+                "anim": "Angry"
+            }
         }
     },
     "Helper": {

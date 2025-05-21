@@ -184,8 +184,8 @@ public static class States
 
     public static void Dialogue2()
     {
-        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
-        GameManager.helper.DialogueToPlayAfterTransition = "EndLvl2";
+        GameManager.virus.ShowNpc(GameManager.virus.RightDown);
+        GameManager.virus.DialogueToPlayAfterTransition = "EndLvl2";
         GameManager.State = GameManager.GameState.Void;
     }
 
