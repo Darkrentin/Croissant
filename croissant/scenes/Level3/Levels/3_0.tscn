@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://qkuoa8g4g2cl"]
+[gd_scene load_steps=16 format=3 uid="uid://qkuoa8g4g2cl"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
@@ -33,9 +33,17 @@ size = Vector2(320, 64)
 resource_local_to_scene = true
 size = Vector2(128, 320)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fgx1k"]
+resource_local_to_scene = true
+size = Vector2(128, 320)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_72i25"]
+resource_local_to_scene = true
+size = Vector2(128, 512)
+
 [node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
-windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window"), NodePath("DoorPlateform/Window")]
+windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window"), NodePath("DoorPlateform/Window"), NodePath("DoorPlateform2/Window"), NodePath("DoorPlateform3/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -106,12 +114,13 @@ NextSceneId = 2
 position = Vector2(64, 136)
 NextSceneId = 3
 
-[node name="4" parent="." instance=ExtResource("3_5q6or")]
+[node name="8" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(1736, 136)
-NextSceneId = 4
+NextSceneId = 8
 
 [node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(1472, 0)
+nbOfFilesToOpen = 3
 
 [node name="CollisionShape2D" parent="DoorPlateform" index="0"]
 position = Vector2(64, 160)
@@ -121,19 +130,33 @@ shape = SubResource("RectangleShape2D_5q6or")
 visible = false
 
 [node name="ConfigFile" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(272, 264)
+position = Vector2(840, 376)
 
 [node name="ConfigFile2" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(424, 264)
+position = Vector2(1080, 368)
 
 [node name="ConfigFile3" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(368, 272)
+position = Vector2(992, 360)
 
-[node name="ConfigFile4" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(320, 256)
+[node name="DoorPlateform2" parent="." instance=ExtResource("5_yrjvf")]
+position = Vector2(320, 0)
+nbOfFilesToOpen = 2
+
+[node name="CollisionShape2D" parent="DoorPlateform2" index="0"]
+position = Vector2(64, 160)
+shape = SubResource("RectangleShape2D_fgx1k")
+
+[node name="DoorPlateform3" parent="." instance=ExtResource("5_yrjvf")]
+position = Vector2(320, 448)
+
+[node name="CollisionShape2D" parent="DoorPlateform3" index="0"]
+position = Vector2(64, 256)
+shape = SubResource("RectangleShape2D_72i25")
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
 [editable path="StaticPlateform3"]
 [editable path="MovePlatform"]
 [editable path="DoorPlateform"]
+[editable path="DoorPlateform2"]
+[editable path="DoorPlateform3"]

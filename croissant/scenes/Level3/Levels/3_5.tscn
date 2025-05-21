@@ -62,9 +62,9 @@ shape = SubResource("RectangleShape2D_qulun")
 position = Vector2(960, 1152)
 shape = SubResource("RectangleShape2D_qulun")
 
-[node name="8" parent="." instance=ExtResource("2_qulun")]
+[node name="9" parent="." instance=ExtResource("2_qulun")]
 position = Vector2(55, 667)
-NextSceneId = 8
+NextSceneId = 9
 
 [node name="StaticPlateform" parent="." instance=ExtResource("3_6xv5l")]
 position = Vector2(0, 817)

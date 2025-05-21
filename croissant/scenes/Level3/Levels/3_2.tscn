@@ -118,9 +118,9 @@ shape = SubResource("RectangleShape2D_l81p5")
 position = Vector2(151, 185.5)
 shape = SubResource("RectangleShape2D_1wk2o")
 
-[node name="8" parent="." instance=ExtResource("2_s5xex")]
+[node name="9" parent="." instance=ExtResource("2_s5xex")]
 position = Vector2(1775, 221)
-NextSceneId = 8
+NextSceneId = 9
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

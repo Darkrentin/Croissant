@@ -93,9 +93,9 @@ position = Vector2(600, 296)
 position = Vector2(500, 60)
 shape = SubResource("RectangleShape2D_yosy6")
 
-[node name="2" parent="." instance=ExtResource("3_2j0nq")]
+[node name="0" parent="." instance=ExtResource("3_2j0nq")]
 position = Vector2(24, 920)
-NextSceneId = 2
+NextSceneId = 0
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_vgcwm")]
 position = Vector2(1000, 168)
@@ -126,9 +126,9 @@ shape = SubResource("RectangleShape2D_077t0")
 position = Vector2(64, 320)
 shape = SubResource("RectangleShape2D_q33r0")
 
-[node name="5" parent="." instance=ExtResource("3_2j0nq")]
+[node name="4" parent="." instance=ExtResource("3_2j0nq")]
 position = Vector2(1424, 496)
-NextSceneId = 5
+NextSceneId = 4
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
