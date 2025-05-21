@@ -4,6 +4,7 @@ public partial class CompressWindow : AttackWindow
 {
 	[Export] public AttackWindow ConnectedWindow;
 	public Vector2I ConnectedWindowPosition;
+	public int mode = -1;
 	public int side;
 	public int nsize = 0;
 
@@ -31,7 +32,14 @@ public partial class CompressWindow : AttackWindow
 
 	public override void Move()
 	{
-		side = Lib.rand.Next(0, 2);
+		if (mode == -1)
+		{
+			side = Lib.rand.Next(0, 2);
+		}
+		else
+		{
+			side = mode;
+		}
 		const float MoveTime = 0.5f;
 		const float MarginTime = 0.1f;
 

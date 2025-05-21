@@ -25,7 +25,7 @@ public partial class FollowWindow : AttackWindow
 	public override void Move()
 	{
 		HideVisualCollision();
-		const float MoveTime = 0.1f;
+		const float MoveTime = 0.2f;
 		//const float margin = 0.1f;
 
 		//windowPosition = TargetPosition;

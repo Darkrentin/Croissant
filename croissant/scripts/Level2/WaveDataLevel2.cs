@@ -128,7 +128,6 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave7()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, true);
 		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
 		F._Mode = 2;
 		F.RandomPosition = true;
@@ -146,14 +145,13 @@ public partial class WaveDataLevel2 : WaveData
 		AddWindow(windows, WindowType.Follow, true);
 		AddWindow(windows, WindowType.Follow, true);
 		AddWindow(windows, WindowType.Follow, true);
-		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, false);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave9()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Compress, true);
 		AddWindow(windows, WindowType.Compress, false);
 		AddWindow(windows, WindowType.Compress, true);
@@ -183,14 +181,33 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave12()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, false);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave13()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Wave, true);
+		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C._Mode = 0;
+		C.RandomPosition = true;
+		windows.Add(C);
+		WaveWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C2._Mode = 0;
+		C2.RandomPosition = true;
+		windows.Add(C2);
+		WaveWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C3._Mode = 0;
+		C3.RandomPosition = true;
+		windows.Add(C3);
 		return windows;
 	}
 
