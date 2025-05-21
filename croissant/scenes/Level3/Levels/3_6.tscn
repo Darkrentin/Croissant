@@ -14,25 +14,25 @@ size = Vector2(1920, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o6dj2"]
 resource_local_to_scene = true
-size = Vector2(128, 768)
+size = Vector2(152, 768)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vcfts"]
 resource_local_to_scene = true
-size = Vector2(128, 936)
+size = Vector2(160, 936)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5h5iw"]
 resource_local_to_scene = true
 size = Vector2(128, 544)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bkoxb"]
-size = Vector2(1144, 96)
+size = Vector2(1016, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v20lb"]
-size = Vector2(1143.5, 96)
+size = Vector2(1015.5, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_un7g4"]
 resource_local_to_scene = true
-size = Vector2(256, 64)
+size = Vector2(240, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_h3vn8"]
 resource_local_to_scene = true
@@ -48,13 +48,13 @@ size = Vector2(128, 256)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fsg7g"]
 resource_local_to_scene = true
-size = Vector2(1144, 128)
+size = Vector2(1016, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5q68r"]
-size = Vector2(1536, 96)
+size = Vector2(1408, 96)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5pqit"]
-size = Vector2(1536, 96)
+size = Vector2(1408, 96)
 
 [node name="3_6" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_f7mp5")
@@ -79,14 +79,14 @@ position = Vector2(960, 1152)
 shape = SubResource("RectangleShape2D_4h0dt")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("2_4h0dt")]
-position = Vector2(256, 320)
+position = Vector2(360, 320)
 
 [node name="Window" parent="StaticPlateform" index="0"]
 size = Vector2i(300, 120)
 visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
-position = Vector2(64, 384)
+position = Vector2(76, 384)
 shape = SubResource("RectangleShape2D_o6dj2")
 
 [node name="StaticPlateform2" parent="." instance=ExtResource("2_4h0dt")]
@@ -96,7 +96,7 @@ size = Vector2i(300, 120)
 visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
-position = Vector2(64, 468)
+position = Vector2(80, 468)
 shape = SubResource("RectangleShape2D_vcfts")
 
 [node name="StaticPlateform3" parent="." instance=ExtResource("2_4h0dt")]
@@ -115,28 +115,28 @@ position = Vector2(8, 952)
 NextSceneId = 5
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_vcfts")]
-position = Vector2(384, 576)
+position = Vector2(512, 576)
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="3"]
-position = Vector2(572, 48)
+position = Vector2(508, 48)
 shape = SubResource("RectangleShape2D_bkoxb")
 
 [node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
-position = Vector2(572.25, 48)
+position = Vector2(508.25, 48)
 shape = SubResource("RectangleShape2D_v20lb")
 
 [node name="MovePlatform" parent="." instance=ExtResource("5_5h5iw")]
-position = Vector2(408, 480)
+position = Vector2(544, 480)
 
 [node name="Window" parent="MovePlatform" index="0"]
 visible = false
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(128, 32)
+position = Vector2(120, 32)
 shape = SubResource("RectangleShape2D_un7g4")
 
 [node name="StaticPlateform6" parent="." instance=ExtResource("2_4h0dt")]
-position = Vector2(704, 72)
+position = Vector2(776, 80)
 
 [node name="Window" parent="StaticPlateform6" index="0"]
 visible = false
@@ -146,7 +146,7 @@ position = Vector2(64, 160)
 shape = SubResource("RectangleShape2D_h3vn8")
 
 [node name="StaticPlateform7" parent="." instance=ExtResource("2_4h0dt")]
-position = Vector2(960, 128)
+position = Vector2(1032, 128)
 
 [node name="Window" parent="StaticPlateform7" index="0"]
 visible = false
@@ -156,7 +156,7 @@ position = Vector2(64, 180)
 shape = SubResource("RectangleShape2D_y0b0w")
 
 [node name="StaticPlateform8" parent="." instance=ExtResource("2_4h0dt")]
-position = Vector2(1152, 320)
+position = Vector2(1272, 320)
 
 [node name="Window" parent="StaticPlateform8" index="0"]
 visible = false
@@ -166,28 +166,28 @@ position = Vector2(64, 128)
 shape = SubResource("RectangleShape2D_oqfrd")
 
 [node name="StaticPlateform4" parent="." instance=ExtResource("2_4h0dt")]
-position = Vector2(384, 672)
+position = Vector2(512, 672)
 
 [node name="Window" parent="StaticPlateform4" index="0"]
 visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform4" index="1"]
-position = Vector2(572, 64)
+position = Vector2(508, 64)
 shape = SubResource("RectangleShape2D_fsg7g")
 
 [node name="KillingPlatform2" parent="." instance=ExtResource("4_vcfts")]
-position = Vector2(384, 992)
+position = Vector2(512, 992)
 
 [node name="CollisionShape2D" parent="KillingPlatform2" index="3"]
-position = Vector2(768, 48)
+position = Vector2(704, 48)
 shape = SubResource("RectangleShape2D_5q68r")
 
 [node name="CollisionShape2D" parent="KillingPlatform2/Area2D" index="0"]
-position = Vector2(768, 48)
+position = Vector2(704, 48)
 shape = SubResource("RectangleShape2D_5pqit")
 
 [node name="7" parent="." instance=ExtResource("3_o6dj2")]
-position = Vector2(392, 808)
+position = Vector2(520, 832)
 NextSceneId = 7
 
 [editable path="StaticPlateform"]
