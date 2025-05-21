@@ -35,6 +35,7 @@ transparent = true
 script = ExtResource("1_pl275")
 level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg")])
 player = NodePath("Player")
+MaxFiles = 4
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(960, 540)

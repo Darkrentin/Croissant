@@ -3,19 +3,33 @@ using Godot;
 public partial class Helper : Npc
 {
 	[Export] public AnimationPlayer animationPlayer;
+	[Export] public AnimatedSprite2D Sprite2D;
+
+	public Vector2 BaseScale = new Vector2(10f, 10f);
+	public Vector2I BaseSize = new Vector2I(300, 300);
+	public Vector2 NewScale = new Vector2(1f, 1f);
 	public override void _Ready()
 	{
 		base._Ready();
+		Lib.Print($"Npc : {NpcName} initialized DialogueId :{Size}");
 		//Dialogue.StartDialogue(NpcName, "Restart");
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+		if (IsResizing)
+		{
+			NewScale = new Vector2(BaseScale.X * Size.X / BaseSize.X, BaseScale.Y * Size.Y / BaseSize.Y);
+			Sprite2D.Scale = NewScale;
+		}
+
 	}
 
 	public override void ShowNpc(Vector2I Position)
 	{
+		Size = BaseSize;
+		Sprite2D.Scale = BaseScale;
 		base.ShowNpc(Position);
 		animationPlayer.Play("Spawn");
 	}
@@ -56,5 +70,18 @@ public partial class Helper : Npc
 	public override void TransitionFinished()
 	{
 		base.TransitionFinished();
+		if (TransitionTag == "Level3Spawn")
+		{
+			TransitionTag = "";
+			Level3.Instance.ShowPlayer();
+
+			Size = BaseSize;
+			Lib.Print("Size: " + Size);
+			Sprite2D.Scale = BaseScale;
+			Position = -GameManager.ScreenSize / 2;
+
+
+		}
 	}
+	
 }

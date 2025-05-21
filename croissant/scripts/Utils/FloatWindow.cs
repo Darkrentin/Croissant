@@ -42,6 +42,8 @@ public partial class FloatWindow : Window
 
 	public Action DeleteWindow;
 
+	public string TransitionTag = "";
+
 	public override void _Ready()
 	{
 		Unresizable = true;

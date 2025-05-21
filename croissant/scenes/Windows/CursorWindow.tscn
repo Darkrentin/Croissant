@@ -4,23 +4,13 @@
 [ext_resource type="Shader" uid="uid://3y7dok8u22mm" path="res://assets/shaders/Disolve.gdshader" id="2_pcuog"]
 [ext_resource type="Texture2D" uid="uid://cmip8bqkeb0kf" path="res://assets/sprites/popups/system32.png" id="2_x0xi8"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ool83"]
-shader = ExtResource("2_pcuog")
-shader_parameter/dissolve_texture = ExtResource("2_x0xi8")
-shader_parameter/dissolve_value = 1.0
-
-[sub_resource type="LabelSettings" id="LabelSettings_x0xi8"]
-font_size = 21
-outline_size = 3
-outline_color = Color(0, 0, 0, 1)
-
 [sub_resource type="Animation" id="Animation_pcuog"]
 resource_name = "Disolve"
 length = 0.8
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/dissolve_value")
+tracks/0/path = NodePath("Control/TextureRect:material:shader_parameter/dissolve_value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -32,7 +22,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:visible")
+tracks/1/path = NodePath("Control/Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -47,7 +37,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("TextureRect:material:shader_parameter/dissolve_value")
+tracks/0/path = NodePath("Control/TextureRect:material:shader_parameter/dissolve_value")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -59,7 +49,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Label:visible")
+tracks/1/path = NodePath("Control/Label:visible")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -75,9 +65,19 @@ _data = {
 &"RESET": SubResource("Animation_ool83")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ool83"]
+shader = ExtResource("2_pcuog")
+shader_parameter/dissolve_texture = ExtResource("2_x0xi8")
+shader_parameter/dissolve_value = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_x0xi8"]
+font_size = 21
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
 [node name="CursorWindow" type="Window" node_paths=PackedStringArray("animationPlayer")]
 transparent_bg = true
-size = Vector2i(98, 140)
+size = Vector2i(98, 144)
 unresizable = true
 borderless = true
 always_on_top = true
@@ -88,32 +88,42 @@ Draggable = false
 Minimizable = false
 CollisionDisabled = false
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ttnhw")
+}
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
 material = SubResource("ShaderMaterial_ool83")
+layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.072
-anchor_right = 0.96
+anchor_left = 0.062
+anchor_right = 0.95
 anchor_bottom = 0.836
-offset_left = -0.984
-offset_right = -1.008
+offset_left = -0.00400066
+offset_right = -0.0280151
 offset_bottom = -0.0400009
 texture = ExtResource("2_x0xi8")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="."]
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 1
 anchors_preset = -1
-anchor_top = 0.796
-anchor_right = 1.0
-anchor_bottom = 1.01
-offset_top = -0.0520096
-offset_bottom = -0.0119934
+anchor_top = 0.778
+anchor_right = 0.99
+anchor_bottom = 1.0
+offset_top = -0.0320053
+offset_right = -0.0200043
 theme_override_font_sizes/font_size = 21
 text = "System32"
 label_settings = SubResource("LabelSettings_x0xi8")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-&"": SubResource("AnimationLibrary_ttnhw")
-}

@@ -214,15 +214,23 @@
         },
         "EndLvl3": {
             "0": {
+                "text": "EndLvl3",
+                "anim": ""
+            },
+            "1": {
                 "text": "",
                 "anim": ""
             }
         },
         "EndFinalLevel": {
             "0": {
+                "text": "EndFinalLevel",
+                "anim": ""
+            },
+            "1": {
                 "text": "",
                 "anim": ""
-            }   
+            }    
         }
     }
 }

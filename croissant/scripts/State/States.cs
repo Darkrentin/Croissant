@@ -190,9 +190,14 @@ public static class States
 
     public static void Level3()
     {
-        GameManager.helper.HideNpc(3);
         Window Level3 = SceneLoader.Level3Scene.Instantiate<Window>();
         GameManager.GameRoot.AddChild(Level3);
+
+        Vector2I newSize = new Vector2I(100,100);
+        GameManager.helper.GrabFocus();
+        GameManager.helper.StartTransition(GameManager.ScreenSize/2 - GameManager.helper.Size / 2, 1f);
+        GameManager.helper.StartResize(newSize, 1f);
+        GameManager.helper.TransitionTag = "Level3Spawn";
 
         //Change State condition
         GameManager.State = GameManager.GameState.Void;

@@ -20,6 +20,9 @@ public partial class Virus : Npc
 	public static Control Pause;
 	public bool On = false;
 
+	public Node2D VirusSplash;
+	public Timer SplashTimer;
+
 	public override void _Ready()
 	{
 		Size = new Vector2I(335, 400);
@@ -31,6 +34,17 @@ public partial class Virus : Npc
 		BlinkTimer.Start();
 
 		AnimationScreen.Travel("Off");
+
+		SplashTimer = new Timer();
+		SplashTimer.OneShot = true;
+		SplashTimer.Timeout += () =>
+		{
+			GameManager.GameRoot.RemoveChild(VirusSplash);
+			VirusSplash.QueueFree();
+			VirusSplash = null;
+		};
+		SplashTimer.WaitTime = 1f;
+		AddChild(SplashTimer);
 	}
 
 	public override void InitNpc()
@@ -151,11 +165,12 @@ public partial class Virus : Npc
 
 	public void Splash()
 	{
-		Node2D VirusSplash = States.VirusSplashScene.Instantiate<Node2D>();
+		VirusSplash = States.VirusSplashScene.Instantiate<Node2D>();
 		VirusSplash.Position = GameManager.virus.Position + new Vector2I(GameManager.virus.Size.X / 2, (int)(GameManager.virus.Size.Y * 0.9f));
 		GameManager.GameRoot.AddChild(VirusSplash);
 		VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
 		VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
+		SplashTimer.Start();
 	}
 
 }

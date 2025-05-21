@@ -13,6 +13,7 @@ public abstract partial class Npc : FloatWindow
     public Vector2I RightUp;
     public Vector2I RightDown;
     public string DialogueToPlayAfterTransition = "";
+    public Timer HideTimer;
     public AnimationNodeStateMachinePlayback AnimationScreen;
 
     public virtual void Skip()
@@ -28,6 +29,10 @@ public abstract partial class Npc : FloatWindow
         base._Ready();
         InitNpc();
         Visible = false;
+        HideTimer = new Timer();
+        HideTimer.OneShot = true;
+        HideTimer.Timeout += () => { Visible = false; };
+        AddChild(HideTimer);
     }
 
     public virtual void InitNpc()
@@ -58,7 +63,6 @@ public abstract partial class Npc : FloatWindow
         base._Process(delta);
         if (Input.IsActionJustPressed("LeftClick"))
             Skip();
-
     }
 
     public virtual void HideNpc(int side = -1)
@@ -71,7 +75,7 @@ public abstract partial class Npc : FloatWindow
             StartLinearTransition(HidePosition, 0.5f, reset: true);
         Dialogue.Visible = false;
         Dialogue.label.Text = "";
-        Visible = false;
+        HideTimer.Start(0.5f);
     }
 
     public virtual void ShowNpc(Vector2I Position)

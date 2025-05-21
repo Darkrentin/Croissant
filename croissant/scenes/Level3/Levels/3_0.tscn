@@ -121,7 +121,16 @@ shape = SubResource("RectangleShape2D_5q6or")
 visible = false
 
 [node name="ConfigFile" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(432, 248)
+position = Vector2(272, 264)
+
+[node name="ConfigFile2" parent="." instance=ExtResource("6_gijp6")]
+position = Vector2(424, 264)
+
+[node name="ConfigFile3" parent="." instance=ExtResource("6_gijp6")]
+position = Vector2(368, 272)
+
+[node name="ConfigFile4" parent="." instance=ExtResource("6_gijp6")]
+position = Vector2(320, 256)
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

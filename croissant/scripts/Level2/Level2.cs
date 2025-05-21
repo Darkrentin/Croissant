@@ -20,6 +20,8 @@ public partial class Level2 : Node2D
 	public void NextLvl()
 	{
 		GameManager.State = GameManager.GameState.Dialogue2;
+		CursorWindow.GetParent().RemoveChild(CursorWindow);
+		CursorWindow.QueueFree();
 		GetParent().RemoveChild(this);
 		QueueFree();
 	}

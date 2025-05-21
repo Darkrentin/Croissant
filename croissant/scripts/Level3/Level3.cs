@@ -38,11 +38,15 @@ public partial class Level3 : FloatWindow
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
         
-        GetTree().CreateTimer(0.2f).Timeout += () => {
-            player.Position = GameManager.ScreenSize / 2;
-        };
+
     }
-    
+
+    public void ShowPlayer()
+    {
+        player.Position = GameManager.ScreenSize / 2;
+        player.Visible = true;
+        player.ProcessMode = ProcessModeEnum.Pausable;
+    }
 
     private void OnInvincibleTimerTimeout()
     {

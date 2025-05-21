@@ -190,8 +190,10 @@ public partial class GameManager : Node2D
             AlwaysOnTop = true,
             Size = new Vector2I(1, 1),
             //Visible = false,
-            Borderless = true
+            Borderless = true,
+            Title = "FixWindow"
         };
+        FixWindow.Name = "FixWindow";
         AddChild(FixWindow);
     }
 

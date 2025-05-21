@@ -101,6 +101,9 @@ public partial class PlayerCharacter : CharacterBody2D
         JumpBufferTimer.OneShot = true;
 
         area2D.BodyEntered += OnBodyEntered;
+
+        ProcessMode = ProcessModeEnum.Disabled;
+        Visible = false;
     }
 
     public override void _PhysicsProcess(double delta)
