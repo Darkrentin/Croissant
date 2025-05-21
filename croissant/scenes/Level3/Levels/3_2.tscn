@@ -15,7 +15,7 @@ size = Vector2(1920, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73yxm"]
 resource_local_to_scene = true
-size = Vector2(440, 621)
+size = Vector2(465, 621)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ca8mj"]
 resource_local_to_scene = true
@@ -26,10 +26,10 @@ resource_local_to_scene = true
 size = Vector2(481, 698)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4nmph"]
-size = Vector2(300, 371)
+size = Vector2(275, 371)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i83aj"]
-size = Vector2(300, 371)
+size = Vector2(275, 371)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l81p5"]
 size = Vector2(302, 371)
@@ -66,7 +66,7 @@ position = Vector2(0, 467)
 visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
-position = Vector2(220, 310.5)
+position = Vector2(232.5, 310.5)
 shape = SubResource("RectangleShape2D_73yxm")
 
 [node name="0" parent="." instance=ExtResource("2_s5xex")]
@@ -94,14 +94,17 @@ position = Vector2(240.5, 349)
 shape = SubResource("RectangleShape2D_67ltn")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_nu3jg")]
-position = Vector2(440, 717)
+position = Vector2(465, 717)
+
+[node name="Window" parent="KillingPlatform" index="0"]
+visible = true
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="3"]
-position = Vector2(150, 185.5)
+position = Vector2(137.5, 185.5)
 shape = SubResource("RectangleShape2D_4nmph")
 
 [node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
-position = Vector2(150, 185.5)
+position = Vector2(137.5, 185.5)
 shape = SubResource("RectangleShape2D_i83aj")
 
 [node name="KillingPlatform2" parent="." instance=ExtResource("4_nu3jg")]
@@ -115,9 +118,9 @@ shape = SubResource("RectangleShape2D_l81p5")
 position = Vector2(151, 185.5)
 shape = SubResource("RectangleShape2D_1wk2o")
 
-[node name="5" parent="." instance=ExtResource("2_s5xex")]
+[node name="8" parent="." instance=ExtResource("2_s5xex")]
 position = Vector2(1775, 221)
-NextSceneId = 5
+NextSceneId = 8
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]
