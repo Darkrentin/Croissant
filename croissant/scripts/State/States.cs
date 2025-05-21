@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Godot;
 
 public static class States
@@ -188,7 +189,7 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void Level3()
+    public static void level3()
     {
         Window Level3 = SceneLoader.Level3Scene.Instantiate<Window>();
         GameManager.GameRoot.AddChild(Level3);
@@ -205,8 +206,15 @@ public static class States
 
     public static void Dialogue3()
     {
-        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
-        GameManager.helper.DialogueToPlayAfterTransition = "EndLvl3";
+        GameManager.GameRoot.GetTree().CreateTimer(1f).Timeout += () =>
+        {
+            GameManager.helper.Visible = true;
+            GameManager.helper.Position = -GameManager.ScreenSize;
+
+            GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "EndLvl3");
+            GameManager.helper.Dialogue.Position = GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4);
+            Level3.Instance.player.isDead = true;
+        };
         GameManager.State = GameManager.GameState.Void;
     }
 

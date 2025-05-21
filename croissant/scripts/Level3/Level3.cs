@@ -37,7 +37,7 @@ public partial class Level3 : FloatWindow
         AddChild(invincibleTimer);
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
-        
+
 
     }
 
@@ -77,19 +77,19 @@ public partial class Level3 : FloatWindow
 
     public override void _Process(double delta)
     {
-		if(!HasFocus()) GrabFocus();
+        if (!HasFocus()) GrabFocus();
     }
 
 
-    public void Transition(Portal Portal)
+    public void Transition(int NextSceneId)
     {
-        SubLevel3 nextScene = Level3.Instance.Level3Nodes[Portal.NextSceneId];
+        SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];
         player.ProcessMode = ProcessModeEnum.Disabled;
 
 
         player.isInvincible = true;
 
-  
+
         invincibleTimer.Start();
 
         if (Level3.Instance.actualScene != null)
@@ -98,7 +98,7 @@ public partial class Level3 : FloatWindow
         }
         nextScene.ShowSubLevel();
         Vector2 playerTargetPosition = GameManager.ScreenSize / 2;
-        if(Portal.NextSceneId != 0)
+        if (nextScene.HasNode($"{sceneid}"))
             playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
         Tween tween = GetTree().CreateTween();
         float distance = (player.GlobalPosition - playerTargetPosition).Length();
@@ -111,7 +111,7 @@ public partial class Level3 : FloatWindow
         {
             player.ProcessMode = ProcessModeEnum.Pausable;
         }));
-        sceneid = Portal.NextSceneId;
+        sceneid = NextSceneId;
         actualScene = nextScene;
         GD.Print("Level complete!");
 
@@ -127,8 +127,9 @@ public partial class Level3 : FloatWindow
         if (FilesCollected >= MaxFiles)
         {
             GameManager.State = GameManager.GameState.Dialogue3;
-            GetParent().RemoveChild(this);
-            QueueFree();
+            Transition(0);
+            player.ProcessMode = ProcessModeEnum.Disabled;
+
         }
     }
 	

@@ -153,7 +153,7 @@ public partial class GameManager : Node2D
                 States.Dialogue2();
                 break;
             case GameState.Level3:
-                States.Level3();
+                States.level3();
                 break;
             case GameState.Dialogue3:
                 States.Dialogue3();

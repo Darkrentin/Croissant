@@ -31,7 +31,7 @@ public partial class Portal : Area2D
 		if (body is PlayerCharacter player)
 		{
 			GD.Print("OnBoddyEntered");
-			Level3.Instance.Transition(this);
+			Level3.Instance.Transition(this.NextSceneId);
 			
 			
 		}

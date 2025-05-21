@@ -40,4 +40,5 @@ public partial class MovePlatform : Platform
     {
         base._Process(delta);
     }
+    
 }
