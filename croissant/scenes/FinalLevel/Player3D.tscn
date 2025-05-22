@@ -403,3 +403,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 enabled = false
 target_position = Vector3(0, 0, -100)
 collision_mask = 11
+
+[node name="FlashLamp" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+visible = false
+spot_range = 16.0
+spot_attenuation = 0.75
+spot_angle = 30.0
+spot_angle_attenuation = 0.784583

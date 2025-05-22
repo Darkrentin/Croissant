@@ -6,6 +6,7 @@ public partial class Player3D : CharacterBody3D
 	[Export] private AnimationTree AnimationTree;
 	[Export] private float MoveSpeed = 5.0f;
 	[Export] private float RotationSpeed = 2.0f;
+	[Export] public SpotLight3D Flashlight;
 	private PackedScene BulletHitScene;
 	private AnimationNodeStateMachinePlayback AnimationPlayer;
 	private Timer ShootTimer;

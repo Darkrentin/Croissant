@@ -9,6 +9,7 @@ public partial class Maze : Node3D
     [Export] public PackedScene LampScene;
     [Export] public PackedScene ObjectiveScene;
     [Export] public PackedScene EasterScene;
+    [Export] public PackedScene FlashLightScene;
     [Export] public int MazeSize = 31;
 
 
@@ -229,12 +230,26 @@ public partial class Maze : Node3D
                         Node3D easter = EasterScene.Instantiate<Node3D>();
                         easter.Position = new Vector3(nx, 0, nz) * WallSize;
                         AddChild(easter);
+                        PlaceFlashLight(easter.Position);
+
                         //EasterEggs.Add(easter);
                     }
                 }
             }
         }
 
+    }
+    public void PlaceFlashLight(Vector3 position)
+    {
+        // Calculate direction towards center (0,0,0)
+        Vector3 directionToCenter = -position.Normalized();
+        
+        // Position flashlight one block closer to center
+        Vector3 FlashLightPos = position + (directionToCenter * WallSize * new Vector3(1, 0, 1));
+
+        FlashLight flashLight = FlashLightScene.Instantiate<FlashLight>();
+        flashLight.Position = FlashLightPos;
+        AddChild(flashLight);
     }
 
     public void DisplayMaze()
