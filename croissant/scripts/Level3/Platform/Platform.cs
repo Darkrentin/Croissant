@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Security.Principal;
 
 public partial class Platform : CharacterBody2D
 {
@@ -49,7 +48,8 @@ public partial class Platform : CharacterBody2D
 
         currentAppliedSpeeds = BaseSpeeds;
         window.Title = "Platform";
-        
+        VisibilityChanged += VisibilityChange;
+
     }
 
     public override void _PhysicsProcess(double delta)
@@ -127,14 +127,19 @@ public partial class Platform : CharacterBody2D
             }
             window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
         }
-        
 
-        
+
+
+    }
+
+    public void VisibilityChange()
+    {
+        Pressed = false;
     }
 
     public virtual void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
-        if(!window.Visible)
+        if (!window.Visible)
             return;
         if (!IsInstanceValid(window) || window == null)
         {
@@ -168,8 +173,6 @@ public partial class Platform : CharacterBody2D
             }
             Pressed = false;
         }
-
-        
     }
 
     public bool MouseOnWindow()
@@ -210,7 +213,7 @@ public partial class Platform : CharacterBody2D
         {
             window.QueueFree();
         }
-        
+
         base._ExitTree();
     }
 }

@@ -25,8 +25,8 @@ public partial class MovePlatform : Platform
             else
                 Shader.SetShaderParameter("speed", 0.1f);
         }
-        
-        if((bool)Shader.GetShaderParameter("animate"))
+
+        if ((bool)Shader.GetShaderParameter("animate"))
         {
             float currentSpeed = (float)Shader.GetShaderParameter("speed");
             float timeIncrement = (float)delta * currentSpeed;
@@ -40,5 +40,7 @@ public partial class MovePlatform : Platform
     {
         base._Process(delta);
     }
-    
+
+
+
 }

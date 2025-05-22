@@ -342,12 +342,13 @@ states/StartRunLeft/position = Vector2(322, -87)
 transitions = ["Start", "RESET", SubResource("AnimationNodeStateMachineTransition_228hw"), "RESET", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_parfq"), "ShootAndReload", "RESET", SubResource("AnimationNodeStateMachineTransition_gf1pk"), "RunR", "RunR 2", SubResource("AnimationNodeStateMachineTransition_b6u1r"), "RunR 2", "RunL 2", SubResource("AnimationNodeStateMachineTransition_eoddy"), "RunL 2", "Run", SubResource("AnimationNodeStateMachineTransition_4opju"), "Run", "RunR", SubResource("AnimationNodeStateMachineTransition_o5en5"), "StartRunLeft", "Run", SubResource("AnimationNodeStateMachineTransition_y5a14"), "RunL 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_31ird"), "RunR 2", "StartMid", SubResource("AnimationNodeStateMachineTransition_oppu7"), "StartMid", "RESET", SubResource("AnimationNodeStateMachineTransition_ad7fj"), "Run", "StartMid", SubResource("AnimationNodeStateMachineTransition_3r0jc"), "RunR", "StartMid", SubResource("AnimationNodeStateMachineTransition_h7i27"), "ShootAndReload", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_ley8d"), "Shoot", "RESET", SubResource("AnimationNodeStateMachineTransition_o3k41"), "Shoot", "StartRunLeft", SubResource("AnimationNodeStateMachineTransition_8xvos")]
 graph_offset = Vector2(129, -127)
 
-[node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree")]
+[node name="Player3D" type="CharacterBody3D" node_paths=PackedStringArray("RayCast3D", "AnimationTree", "Flashlight")]
 collision_layer = 7
 collision_mask = 7
 script = ExtResource("1_rrt4f")
 RayCast3D = NodePath("RayCast3D")
 AnimationTree = NodePath("AnimationTree")
+Flashlight = NodePath("FlashLamp")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
