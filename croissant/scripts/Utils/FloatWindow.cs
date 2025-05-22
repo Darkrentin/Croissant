@@ -43,9 +43,12 @@ public partial class FloatWindow : Window
 
 	public override void _Ready()
 	{
-		Unresizable = true;
-		SharpCorners = true;
-		Minimizable = false;
+		if (!Borderless)
+		{
+			Unresizable = true;
+			SharpCorners = true;
+			Minimizable = false;
+		}
 
 		GetTree().AutoAcceptQuit = false;
 		CloseRequested += OnClose;
