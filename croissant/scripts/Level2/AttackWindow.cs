@@ -72,8 +72,8 @@ public partial class AttackWindow : FloatWindow
     {
         VisualCollision.duration = duration;
         VisualCollision.elapsedTime = 0f;
-        VisualCollision.Position = position - TitleBarSize;
-        VisualCollision.Size = size + TitleBarSize;
+        VisualCollision.Position = position - TitleBarSize + new Vector2I(1, 1);
+        VisualCollision.Size = size + TitleBarSize - new Vector2I(2, 2);
         VisualCollision.Visible = true;
     }
 

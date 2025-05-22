@@ -15,7 +15,6 @@ shader_parameter/line_thickness = 0.03
 
 [node name="LaserWindow" type="Window"]
 transparent_bg = true
-position = Vector2i(0, 36)
 transparent = true
 script = ExtResource("1_a1amo")
 ExportVisualCollisionScene = ExtResource("2_vm0ge")

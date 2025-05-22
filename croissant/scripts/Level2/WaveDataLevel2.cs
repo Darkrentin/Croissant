@@ -93,8 +93,7 @@ public partial class WaveDataLevel2 : WaveData
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 		AddWindow(windows, WindowType.Extend, true);
-		AddWindow(windows, WindowType.Extend, false);
-		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, false);
 		return windows;
 	}
 
@@ -103,7 +102,7 @@ public partial class WaveDataLevel2 : WaveData
 		List<FloatWindow> windows = new List<FloatWindow>();
 		AddWindow(windows, WindowType.Compress, true);
 		AddWindow(windows, WindowType.Compress, false);
-		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Spike, true);
 		return windows;
 	}
 
@@ -119,6 +118,7 @@ public partial class WaveDataLevel2 : WaveData
 		return windows;
 	}
 
+	// Wait wave
 	public List<FloatWindow> StartWave6()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
@@ -178,21 +178,29 @@ public partial class WaveDataLevel2 : WaveData
 		return windows;
 	}
 
+	// Wait wave
 	public List<FloatWindow> StartWave12()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
-		AddWindow(windows, WindowType.Spike, false);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave13()
+	{
+		List<FloatWindow> windows = new List<FloatWindow>();
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Follow, false);
+		return windows;
+	}
+
+	public List<FloatWindow> StartWave14()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
 		AddWindow(windows, WindowType.Wave, true);
@@ -211,76 +219,138 @@ public partial class WaveDataLevel2 : WaveData
 		return windows;
 	}
 
-	public List<FloatWindow> StartWave14()
-	{
-		List<FloatWindow> windows = new List<FloatWindow>();
-
-		return windows;
-	}
-
 	public List<FloatWindow> StartWave15()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Extend, true);
+		AddWindow(windows, WindowType.Extend, false);
+		AddWindow(windows, WindowType.Laser, true);
+		AddWindow(windows, WindowType.Compress, false);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave16()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Wave, true);
+		AddWindow(windows, WindowType.Extend, false);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave17()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Laser, true);
+		AddWindow(windows, WindowType.Laser, false);
+		AddWindow(windows, WindowType.Extend, true);
+		AddWindow(windows, WindowType.Extend, false);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Follow, false);
 		return windows;
 	}
 
+	// Wait wave
 	public List<FloatWindow> StartWave18()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave19()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C._Mode = 0;
+		C.RandomPosition = true;
+		windows.Add(C);
+		WaveWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C2._Mode = 0;
+		C2.RandomPosition = true;
+		windows.Add(C2);
+		WaveWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C3._Mode = 1;
+		C3.RandomPosition = true;
+		windows.Add(C3);
+		WaveWindow C4 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C4._Mode = 1;
+		C4.RandomPosition = true;
+		windows.Add(C4);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave20()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Extend, true);
+		AddWindow(windows, WindowType.Wave, true);
+		AddWindow(windows, WindowType.Follow, true);
+		AddWindow(windows, WindowType.Laser, true);
+		AddWindow(windows, WindowType.Wave, true);
+		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C._Mode = 0;
+		C.RandomPosition = true;
+		windows.Add(C);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave21()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C._Mode = 0;
+		C.RandomPosition = false;
+		windows.Add(C);
+		WaveWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C2._Mode = 0;
+		C2.RandomPosition = false;
+		windows.Add(C2);
+		WaveWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C3._Mode = 0;
+		C3.RandomPosition = false;
+		windows.Add(C3);
+		WaveWindow C4 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C4._Mode = 0;
+		C4.RandomPosition = false;
+		windows.Add(C4);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave22()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Spike, false);
+		AddWindow(windows, WindowType.Extend, false);
+		AddWindow(windows, WindowType.Wave, false);
+		AddWindow(windows, WindowType.Follow, false);
+		AddWindow(windows, WindowType.Laser, false);
+		AddWindow(windows, WindowType.Wave, false);
+		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C._Mode = 0;
+		C.RandomPosition = false;
+		windows.Add(C);
 		return windows;
 	}
 
 	public List<FloatWindow> StartWave23()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Extend, true);
+		AddWindow(windows, WindowType.Wave, false);
+		AddWindow(windows, WindowType.Follow, false);
+		AddWindow(windows, WindowType.Laser, true);
+		AddWindow(windows, WindowType.Wave, true);
+		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		C._Mode = 0;
+		C.RandomPosition = false;
+		windows.Add(C);
 		return windows;
 	}
 
+	// Wait wave
 	public List<FloatWindow> StartWave24()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
