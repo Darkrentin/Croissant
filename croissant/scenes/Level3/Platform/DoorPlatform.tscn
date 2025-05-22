@@ -1,16 +1,16 @@
 [gd_scene load_steps=7 format=3 uid="uid://dc2htikt7y016"]
 
-[ext_resource type="Script" uid="uid://dkd5x3mmy1xv3" path="res://scripts/Level3/Platform/DoorPlateform.cs" id="1_m32s8"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="1_owo7u"]
-[ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_m32s8"]
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="4_a3hxs"]
+[ext_resource type="Script" uid="uid://dkd5x3mmy1xv3" path="res://scripts/Level3/Platform/DoorPlatform.cs" id="1_b6lny"]
+[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_7qw3s"]
+[ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_aul5v"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_414ck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_a3hxs"]
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5t0ej"]
-shader = ExtResource("4_a3hxs")
+shader = ExtResource("4_414ck")
 shader_parameter/color1 = Color(1, 0, 0, 1)
 shader_parameter/color2 = Color(0, 0, 1, 0)
 shader_parameter/animate = false
@@ -21,8 +21,8 @@ shader_parameter/border_width = 15.0
 shader_parameter/window_size = Vector2(800, 600)
 shader_parameter/Time = 0.0
 
-[node name="DoorPlateform" type="CharacterBody2D" node_paths=PackedStringArray("label", "window", "collisionShape", "Texture")]
-script = ExtResource("1_m32s8")
+[node name="DoorPlatform" type="CharacterBody2D" node_paths=PackedStringArray("label", "window", "collisionShape", "Texture")]
+script = ExtResource("1_b6lny")
 label = NodePath("Window/Label")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
@@ -36,9 +36,9 @@ shape = SubResource("RectangleShape2D_a3hxs")
 auto_translate_mode = 1
 position = Vector2i(0, 36)
 size = Vector2i(120, 120)
-script = ExtResource("1_owo7u")
+script = ExtResource("2_7qw3s")
 
-[node name="PlatformTexture" parent="Window" instance=ExtResource("3_m32s8")]
+[node name="PlatformTexture" parent="Window" instance=ExtResource("3_aul5v")]
 material = SubResource("ShaderMaterial_5t0ej")
 anchors_preset = 15
 anchor_right = 1.0

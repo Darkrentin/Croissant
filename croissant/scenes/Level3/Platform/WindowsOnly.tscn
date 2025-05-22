@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://b606h66b1yv" path="res://scripts/Level3/Platform/WindowsOnly.cs" id="1_udtmp"]
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_yy41e"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_udtmp"]
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="4_yy41e"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_yy41e"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6tw0d"]
 shader = ExtResource("4_yy41e")

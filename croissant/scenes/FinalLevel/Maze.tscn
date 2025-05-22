@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dgq2j8vp8c72q" path="res://scenes/FinalLevel/Path.tscn" id="3_rlbri"]
 [ext_resource type="PackedScene" uid="uid://cjn4lukcecj37" path="res://scenes/FinalLevel/Objective.tscn" id="4_awxkg"]
 [ext_resource type="PackedScene" uid="uid://cwdiwawxk2qht" path="res://scenes/Other/Easter.tscn" id="6_xiqy0"]
-[ext_resource type="PackedScene" uid="uid://ra57k6d0onr4" path="res://scenes/FinalLevel/FlashLight.tscn" id="7_bqopv"]
+[ext_resource type="PackedScene" uid="uid://c4ef4mdmdeibp" path="res://scenes/FinalLevel/FlashLight.tscn" id="7_bqopv"]
 
 [node name="Maze" type="Node3D"]
 script = ExtResource("1_1hnml")

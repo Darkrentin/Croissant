@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c86vhmqirheox"]
 
-[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlateformHighlight.gdshader" id="1_sjotb"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="1_sjotb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0bq50"]
 shader = ExtResource("1_sjotb")
