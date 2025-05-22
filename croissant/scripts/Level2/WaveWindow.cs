@@ -8,11 +8,10 @@ public partial class WaveWindow : AttackWindow
 	public int nsizeB = 0;
 	[Export] public int _Mode = 0;
 
-	const float ShakeTime = 1.2f;
+	const float ShakeTime = 1.4f;
 
 	public override void _Ready()
 	{
-
 		base._Ready();
 		VisualCollision.Color = Colors.Cyan;
 		ConnectedWindow.VisualCollision.Color = Colors.Cyan;
@@ -74,7 +73,6 @@ public partial class WaveWindow : AttackWindow
 
 	public override void Prevent()
 	{
-
 		const int Margin = 150;
 		const float SizeMargin = 1.5f;
 

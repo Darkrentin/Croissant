@@ -15,7 +15,6 @@ public partial class WaveManager : Node
 	public static int WaveNum = 0;
 	public Action EndWave;
 
-
 	public override void _Ready()
 	{
 		WaveStartTimer = new Timer();
@@ -38,7 +37,6 @@ public partial class WaveManager : Node
 		{
 			UpdateLabel();
 			AnimationPlayer.Play("GoBackReverse");
-
 		}
 		if (anim == "GoBackReverse")
 		{
@@ -55,7 +53,6 @@ public partial class WaveManager : Node
 		WaveNum--;
 		Lib.Print($"WaveManager: GoBackToWave {WaveNum}");
 		AnimationPlayer.Play("GoBack");
-
 	}
 
 	public void AddWave()
@@ -63,7 +60,6 @@ public partial class WaveManager : Node
 		WaveNum++;
 		UpdateLabel();
 		Lib.Print($"WaveManager: AddWave {WaveNum}");
-
 	}
 
 	public void CleanUpWave(Wave w)

@@ -25,6 +25,4 @@ public partial class Level2 : Node2D
 		GetParent().RemoveChild(this);
 		QueueFree();
 	}
-
-
 }

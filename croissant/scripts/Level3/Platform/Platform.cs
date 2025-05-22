@@ -49,7 +49,6 @@ public partial class Platform : CharacterBody2D
         currentAppliedSpeeds = BaseSpeeds;
         window.Title = "Platform";
         VisibilityChanged += VisibilityChange;
-
     }
 
     public override void _PhysicsProcess(double delta)

@@ -23,7 +23,6 @@ public partial class Helper : Npc
 			NewScale = new Vector2(BaseScale.X * Size.X / BaseSize.X, BaseScale.Y * Size.Y / BaseSize.Y);
 			Sprite2D.Scale = NewScale;
 		}
-
 	}
 
 	public override void ShowNpc(Vector2I Position)
@@ -76,9 +75,6 @@ public partial class Helper : Npc
 			Lib.Print("Size: " + Size);
 			Sprite2D.Scale = BaseScale;
 			Position = -GameManager.ScreenSize / 2;
-
-
 		}
 	}
-	
 }

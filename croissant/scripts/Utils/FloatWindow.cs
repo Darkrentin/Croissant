@@ -38,9 +38,7 @@ public partial class FloatWindow : Window
 	}
 	public Vector2I TitleBarSize { get { return new Vector2I(0, TitleBarHeight); } }
 	public Rect2I WindowRect;
-
 	public Action DeleteWindow;
-
 	public string TransitionTag = "";
 
 	public override void _Ready()

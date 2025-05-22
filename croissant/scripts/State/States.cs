@@ -1,4 +1,3 @@
-using System.Runtime.InteropServices;
 using Godot;
 
 public static class States
@@ -67,7 +66,6 @@ public static class States
 
     public static void Dialogue1()
     {
-
         //Freeze the game
         if (IntroGameManager.Instance != null)
             IntroGameManager.Instance.GameNode.Visible = false;
@@ -184,9 +182,9 @@ public static class States
         Window Level3 = SceneLoader.Level3Scene.Instantiate<Window>();
         GameManager.GameRoot.AddChild(Level3);
 
-        Vector2I newSize = new Vector2I(100,100);
+        Vector2I newSize = new Vector2I(100, 100);
         GameManager.helper.GrabFocus();
-        GameManager.helper.StartTransition(GameManager.ScreenSize/2 - GameManager.helper.Size / 2, 1f);
+        GameManager.helper.StartTransition(GameManager.ScreenSize / 2 - GameManager.helper.Size / 2, 1f);
         GameManager.helper.StartResize(newSize, 1f);
         GameManager.helper.TransitionTag = "Level3Spawn";
 
@@ -210,13 +208,12 @@ public static class States
 
     public static void FinalLevel()
     {
-        if(GameManager.virus != null)
+        if (GameManager.virus != null)
         {
             GameManager.GameRoot.RemoveChild(GameManager.virus);
             GameManager.virus.QueueFree();
             GameManager.virus = null;
         }
-
 
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
         GameManager.GameRoot.AddChild(FinalLevel);
@@ -234,7 +231,6 @@ public static class States
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
-
 
     public static void IntroGame_Process(double delta)
     {

@@ -16,7 +16,6 @@ public partial class MovePlatform : Platform
         if (!Visible)
             return;
 
-
         if (window != null && IsInstanceValid(window) && window.Visible)
         {
             bool mouseOver = MouseOnWindow();
@@ -40,7 +39,4 @@ public partial class MovePlatform : Platform
     {
         base._Process(delta);
     }
-
-
-
 }

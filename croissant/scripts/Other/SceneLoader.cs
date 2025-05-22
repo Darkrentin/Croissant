@@ -30,11 +30,7 @@ public partial class SceneLoader : Node
 
 	public override void _Ready()
 	{
-		SceneLoader.Instance = this;
+		Instance = this;
 	}
 
-	public override void _Process(double delta)
-	{
-
-	}
 }

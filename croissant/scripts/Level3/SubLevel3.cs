@@ -14,20 +14,16 @@ public partial class SubLevel3 : Node2D
 		foreach (var window in windows)
 			window.Hide();
 
-
 		CurrentLevel = false;
-
 	}
 
 	public void ShowSubLevel()
 	{
-
 		foreach (var window in windows)
 			window.Show();
 
 		Position = new Vector2(0, 0);
 		CurrentLevel = true;
 		Visible = true;
-
 	}
 }
