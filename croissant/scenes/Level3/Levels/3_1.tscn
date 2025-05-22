@@ -76,9 +76,9 @@ visible = false
 position = Vector2(128, 480)
 shape = SubResource("RectangleShape2D_cjr8i")
 
-[node name="10" parent="." instance=ExtResource("1_brot1")]
+[node name="12" parent="." instance=ExtResource("1_brot1")]
 position = Vector2(1728, 40)
-NextSceneId = 10
+NextSceneId = 12
 
 [node name="WindowsOnly2" parent="." instance=ExtResource("6_l2671")]
 position = Vector2(1544, 0)
