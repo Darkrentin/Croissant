@@ -50,10 +50,10 @@ size = Vector2(368, 136)
 size = Vector2(368, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wtrsu"]
-size = Vector2(512, 152)
+size = Vector2(512, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngsil"]
-size = Vector2(512, 152)
+size = Vector2(512, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgk1t"]
 size = Vector2(552, 152)
@@ -182,14 +182,14 @@ position = Vector2(184, 68)
 shape = SubResource("RectangleShape2D_6qlwu")
 
 [node name="KillingPlatform5" parent="." instance=ExtResource("5_b3861")]
-position = Vector2(928, 552)
+position = Vector2(928, 520)
 
 [node name="CollisionShape2D" parent="KillingPlatform5" index="3"]
-position = Vector2(256, 76)
+position = Vector2(256, 92)
 shape = SubResource("RectangleShape2D_wtrsu")
 
 [node name="CollisionShape2D" parent="KillingPlatform5/Area2D" index="0"]
-position = Vector2(256, 76)
+position = Vector2(256, 92)
 shape = SubResource("RectangleShape2D_ngsil")
 
 [node name="KillingPlatform6" parent="." instance=ExtResource("5_b3861")]

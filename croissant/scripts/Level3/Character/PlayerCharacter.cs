@@ -24,7 +24,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public bool FlipLock { get; set; } = false;
 
     // Physics constants (scaled for larger character)
-    public const float RunSpeed = 125f * ScaleFactor;
+    public const float RunSpeed = 135f * ScaleFactor;
     public const float WallJumpHSpeed = 120f * ScaleFactor;
     public const float GroundAcceleration = 20f * ScaleFactor;
     public const float GroundDeceleration = 25f * ScaleFactor;
@@ -303,6 +303,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public void Death()
     {
+        if (isDead) return;
         Lib.Print("PlayerCharacter: Death");
         Animator.Play("Death");
         isDead = true;

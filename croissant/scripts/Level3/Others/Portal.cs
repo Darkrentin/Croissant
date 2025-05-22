@@ -27,10 +27,12 @@ public partial class Portal : Area2D
 	{
 		if(isChangingScene)
 			return;
-		
+
 		if (body is PlayerCharacter player)
 		{
 			GD.Print("OnBoddyEntered");
+			player.isInvincible = true;
+			player.isDead = true;
 			Level3.Instance.Transition(this.NextSceneId);
 			
 			

@@ -1,8 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://c5avgc26i0v58"]
+[gd_scene load_steps=13 format=3 uid="uid://c5avgc26i0v58"]
 
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_brot1"]
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_cjr8i"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="4_26hxk"]
+[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_uybjc"]
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="6_l2671"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26hxk"]
@@ -19,9 +20,19 @@ size = Vector2(256, 960)
 resource_local_to_scene = true
 size = Vector2(256, 960)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn2cc"]
+resource_local_to_scene = true
+size = Vector2(128, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_brot1"]
+size = Vector2(208, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l2671"]
+size = Vector2(208, 80)
+
 [node name="3_1" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_cjr8i")
-windows = [NodePath("MovePlatform/Window"), NodePath("WindowsOnly/Window")]
+windows = [NodePath("MovePlatform/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -46,7 +57,7 @@ position = Vector2(48, 928)
 NextSceneId = 0
 
 [node name="MovePlatform" parent="." instance=ExtResource("4_26hxk")]
-position = Vector2(1408, 128)
+position = Vector2(1216, 128)
 
 [node name="Window" parent="MovePlatform" index="0"]
 visible = false
@@ -56,7 +67,7 @@ position = Vector2(128, 480)
 shape = SubResource("RectangleShape2D_olxyy")
 
 [node name="WindowsOnly" parent="." instance=ExtResource("6_l2671")]
-position = Vector2(896, 128)
+position = Vector2(768, 128)
 
 [node name="Window" parent="WindowsOnly" index="0"]
 visible = false
@@ -66,8 +77,31 @@ position = Vector2(128, 480)
 shape = SubResource("RectangleShape2D_cjr8i")
 
 [node name="10" parent="." instance=ExtResource("1_brot1")]
-position = Vector2(1680, 40)
+position = Vector2(1728, 40)
 NextSceneId = 10
+
+[node name="WindowsOnly2" parent="." instance=ExtResource("6_l2671")]
+position = Vector2(1544, 0)
+
+[node name="CollisionShape2D" parent="WindowsOnly2" index="1"]
+position = Vector2(56, 128)
+shape = SubResource("RectangleShape2D_cn2cc")
+
+[node name="KillingPlatform" parent="." instance=ExtResource("5_uybjc")]
+
+[node name="KillingPlatform2" parent="." instance=ExtResource("5_uybjc")]
+position = Vector2(376, 1008)
+
+[node name="CollisionShape2D" parent="KillingPlatform2" index="3"]
+position = Vector2(104, 40)
+shape = SubResource("RectangleShape2D_brot1")
+
+[node name="CollisionShape2D" parent="KillingPlatform2/Area2D" index="0"]
+position = Vector2(104, 40)
+shape = SubResource("RectangleShape2D_l2671")
 
 [editable path="MovePlatform"]
 [editable path="WindowsOnly"]
+[editable path="WindowsOnly2"]
+[editable path="KillingPlatform"]
+[editable path="KillingPlatform2"]

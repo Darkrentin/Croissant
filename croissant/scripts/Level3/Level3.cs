@@ -86,7 +86,7 @@ public partial class Level3 : FloatWindow
         player.isInvincible = true;
         invincibleTimer.Start();
         SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];
-        player.ProcessMode = ProcessModeEnum.Disabled;
+
 
         if (Level3.Instance.actualScene != null)
         {
@@ -107,7 +107,7 @@ public partial class Level3 : FloatWindow
         tween.TweenProperty(player, "global_position", playerTargetPosition, duration);
         tween.TweenCallback(Callable.From(() =>
         {
-            player.ProcessMode = ProcessModeEnum.Pausable;
+            player.isDead = false;
         }));
         sceneid = NextSceneId;
         actualScene = nextScene;
