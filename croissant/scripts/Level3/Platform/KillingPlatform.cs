@@ -35,7 +35,7 @@ public partial class KillingPlatform : Platform
     private void OnBodyEntered(Node body)
     {
         
-        if (body is PlayerCharacter player)
+        if (body is PlayerCharacter player && !player.isInvincible)
         {
             Lib.Print("KillingPlatform: OnBodyEntered");
             player.Death();

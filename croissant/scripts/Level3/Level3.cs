@@ -83,14 +83,10 @@ public partial class Level3 : FloatWindow
 
     public void Transition(int NextSceneId)
     {
+        player.isInvincible = true;
+        invincibleTimer.Start();
         SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];
         player.ProcessMode = ProcessModeEnum.Disabled;
-
-
-        player.isInvincible = true;
-
-
-        invincibleTimer.Start();
 
         if (Level3.Instance.actualScene != null)
         {
@@ -103,6 +99,8 @@ public partial class Level3 : FloatWindow
         Tween tween = GetTree().CreateTween();
         float distance = (player.GlobalPosition - playerTargetPosition).Length();
         float screenWidth = GameManager.ScreenSize.X;
+
+        
         float duration = Math.Max(distance / (float)screenWidth, 0.1f);
         tween.SetTrans(Tween.TransitionType.Sine);
         tween.SetEase(Tween.EaseType.InOut);

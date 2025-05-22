@@ -115,9 +115,10 @@ public partial class PlayerCharacter : CharacterBody2D
         currentState.Call("Update", delta);
         HandleMaxFallVelocity();
         MoveAndSlide();
+        //GD.Print("player.Invincible" + isInvincible);
         //($"Current State: {currentState.Name}");
 
-       
+
     }
 
     public void OnBodyEntered(Node body)
