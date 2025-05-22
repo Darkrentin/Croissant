@@ -136,11 +136,11 @@
         },
         "EndLvl2": {
             "0": {
-                "text": "EndLvl2",
+                "text": "[shake rate=20 level=10]STOP PLAYING WITH ME![/shake]",
                 "anim": "Angry"
             },
             "1": {
-                "text": "",
+                "text": "[i]I have a better idea in mind...[/i]",
                 "anim": "Angry"
             }
         }
@@ -231,16 +231,6 @@
                 "text": "",
                 "anim": ""
             }
-        },
-        "EndFinalLevel": {
-            "0": {
-                "text": "EndFinalLevel",
-                "anim": ""
-            },
-            "1": {
-                "text": "",
-                "anim": ""
-            }    
         }
     }
 }
