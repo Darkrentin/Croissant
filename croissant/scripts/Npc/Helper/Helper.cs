@@ -61,9 +61,6 @@ public partial class Helper : Npc
 			case "EndLvl3":
 				GameManager.State = GameManager.GameState.FinalLevel;
 				break;
-			case "EndFinalLevel":
-				GameManager.State = GameManager.GameState.Scoreboard;
-				break;
 		}
 	}
 

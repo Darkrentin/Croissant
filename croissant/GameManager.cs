@@ -27,7 +27,6 @@ public partial class GameManager : Node2D
     {
         Virus,
         Helper,
-        Scoreboard,
         // Game state
         IntroGame,
         IntroVirus,
@@ -41,7 +40,7 @@ public partial class GameManager : Node2D
         Level3,
         Dialogue3,
         FinalLevel,
-        Dialogue4,
+        Scoreboard,
         // _Process state
         IntroGame_Process,
         // Buffer state
@@ -120,9 +119,7 @@ public partial class GameManager : Node2D
             case GameState.Helper:
                 States.Helper();
                 break;
-            case GameState.Scoreboard:
-                States.Scoreboard();
-                break;
+
 
             // Game state
             case GameState.IntroGame:
@@ -161,9 +158,10 @@ public partial class GameManager : Node2D
             case GameState.FinalLevel:
                 States.FinalLevel();
                 break;
-            case GameState.Dialogue4:
-                States.Dialogue4();
+            case GameState.Scoreboard:
+                States.Scoreboard();
                 break;
+
 
             // _Process state
             case GameState.IntroGame_Process:

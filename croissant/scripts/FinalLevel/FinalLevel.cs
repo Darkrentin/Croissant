@@ -114,9 +114,10 @@ public partial class FinalLevel : Node3D
 
 		Player3D.Alive = false;
 		var tween = CreateTween();
-		tween.TweenProperty(Player3D, "rotation:y", targetY, 0.5f)
+		tween.TweenProperty(Player3D, "rotation:y", targetY, 1f)
 			 .SetTrans(Tween.TransitionType.Linear)
 			 .SetEase(Tween.EaseType.InOut);
+		//tween.TweenInterval(0.5f);
 		tween.Finished += () =>
 		{
 			MeltShader.PrepareTransition();
@@ -151,7 +152,7 @@ public partial class FinalLevel : Node3D
 
 	public void End()
 	{
-		GameManager.State = GameManager.GameState.Dialogue4;
+		GameManager.State = GameManager.GameState.Scoreboard;
 		GetParent().RemoveChild(this);
 
 		GameManager.MainWindow.AlwaysOnTop = false;

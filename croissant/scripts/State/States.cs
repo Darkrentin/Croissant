@@ -44,16 +44,6 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void Scoreboard()
-    {
-        Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
-        Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
-        GameManager.GameRoot.AddChild(Scoreboard);
-
-        //Change State condition
-        GameManager.State = GameManager.GameState.Void;
-    }
-
     public static void IntroGame()
     {
         IntroLvl = IntroGameScene.Instantiate<Window>();
@@ -235,12 +225,16 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void Dialogue4()
+    public static void Scoreboard()
     {
-        GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
-        GameManager.helper.DialogueToPlayAfterTransition = "EndFinalLevel";
+        Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
+        Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
+        GameManager.GameRoot.AddChild(Scoreboard);
+
+        //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
+
 
     public static void IntroGame_Process(double delta)
     {

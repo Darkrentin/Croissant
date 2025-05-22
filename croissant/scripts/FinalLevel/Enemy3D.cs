@@ -93,7 +93,7 @@ public partial class Enemy3D : CharacterBody3D
 		if (rayCast.GetCollider() is Player3D player && rayCast.IsEnabled())
 		{
 			Agro = MaxAgro;
-			if (CanHarmPlayer && player.GlobalPosition.DistanceTo(GlobalPosition) < 1.3f)
+			if (CanHarmPlayer && player.GlobalPosition.DistanceTo(GlobalPosition) < 1.3f && player.Alive)
 				FinalLevel.Instance.Death(GlobalPosition);
 		}
 
