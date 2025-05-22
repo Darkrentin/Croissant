@@ -89,7 +89,7 @@ size = Vector2(272, 144)
 
 [node name="3_11" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_i4m83")
-windows = [NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("WindowsOnly/Window"), NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("MovePlatform3/Window"), NodePath("MovePlatform4/Window"), NodePath("StaticPlateform5/Window"), NodePath("StaticPlateform6/Window"), NodePath("StaticPlateform7/Window"), NodePath("KillingPlatform/Window"), NodePath("WindowsOnly2/Window"), NodePath("StaticPlateform8/Window"), NodePath("KillingPlatform3/Window")]
+windows = [NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("WindowsOnly/Window"), NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("MovePlatform3/Window"), NodePath("MovePlatform4/Window"), NodePath("StaticPlateform5/Window"), NodePath("StaticPlateform6/Window"), NodePath("StaticPlateform7/Window"), NodePath("KillingPlatform/Window"), NodePath("WindowsOnly2/Window"), NodePath("StaticPlateform8/Window"), NodePath("KillingPlatform3/Window"), NodePath("KillingPlatform2/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -205,9 +205,6 @@ shape = SubResource("RectangleShape2D_i5x6p")
 [node name="KillingPlatform" parent="." instance=ExtResource("6_tvhj5")]
 position = Vector2(904, 1024)
 
-[node name="Window" parent="KillingPlatform" index="0"]
-visible = true
-
 [node name="CollisionShape2D" parent="KillingPlatform" index="3"]
 position = Vector2(508, 32)
 shape = SubResource("RectangleShape2D_jbf2b")
@@ -236,9 +233,6 @@ shape = SubResource("RectangleShape2D_3lpkb")
 
 [node name="KillingPlatform3" parent="." instance=ExtResource("6_tvhj5")]
 position = Vector2(1736, 688)
-
-[node name="Window" parent="KillingPlatform3" index="0"]
-visible = true
 
 [node name="CollisionShape2D" parent="KillingPlatform3" index="3"]
 position = Vector2(92, 64)

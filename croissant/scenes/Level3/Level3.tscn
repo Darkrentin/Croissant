@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://hca4ftw22ecd"]
+[gd_scene load_steps=19 format=3 uid="uid://hca4ftw22ecd"]
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Others/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
@@ -16,6 +16,7 @@
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="12_n504q"]
 [ext_resource type="PackedScene" uid="uid://bpwo3b1mxppoa" path="res://scenes/Level3/Levels/3_11.tscn" id="13_6g7ie"]
 [ext_resource type="PackedScene" uid="uid://byb57u5a4ylpp" path="res://scenes/Level3/Levels/3_12.tscn" id="14_fa7ff"]
+[ext_resource type="PackedScene" uid="uid://v7jwtdleiqiw" path="res://scenes/Level3/Levels/3_13.tscn" id="15_6hjit"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ufbxd"]
 shader = ExtResource("12_n504q")
@@ -37,7 +38,7 @@ borderless = true
 always_on_top = true
 transparent = true
 script = ExtResource("1_pl275")
-level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg"), ExtResource("11_ufbxd"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("14_fa7ff")])
+level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg"), ExtResource("11_ufbxd"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("14_fa7ff"), ExtResource("15_6hjit")])
 player = NodePath("Player")
 MaxFiles = 4
 
