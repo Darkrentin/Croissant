@@ -34,8 +34,10 @@ public partial class KillingPlatform : Platform
 
     private void OnBodyEntered(Node body)
     {
+        
         if (body is PlayerCharacter player)
         {
+            Lib.Print("KillingPlatform: OnBodyEntered");
             player.Death();
         }
     }

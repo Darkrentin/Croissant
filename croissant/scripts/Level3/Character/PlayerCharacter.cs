@@ -70,7 +70,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public bool keyRight = false;
     public bool keyJump = false;
     public bool isDead = false;
-    public bool isInvincible = true;
+    public bool isInvincible = false;
     public bool keyJumpPressed = false;
 
     // State machine
@@ -104,10 +104,12 @@ public partial class PlayerCharacter : CharacterBody2D
 
         ProcessMode = ProcessModeEnum.Disabled;
         Visible = false;
+        Animator.AnimationFinished += OnAnimationFinished;
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();
         GetInputStates();
         currentState.Call("Update", delta);
@@ -115,7 +117,7 @@ public partial class PlayerCharacter : CharacterBody2D
         MoveAndSlide();
         //($"Current State: {currentState.Name}");
 
-        if (isDead) return;
+       
     }
 
     public void OnBodyEntered(Node body)
@@ -296,18 +298,21 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         Sprite.FlipH = (facing < 1);
     }
-    
+
 
     public void Death()
     {
+        Lib.Print("PlayerCharacter: Death");
         Animator.Play("Death");
         isDead = true;
+        Lib.Print("PlayerCharacter: Death Animation");
     }
 
     public void OnAnimationFinished(StringName animationName)
     {
         if (animationName == "Death")
         {
+            Lib.Print("PlayerCharacter: Death Animation Finished");
             Level3.Instance.actualScene.HideSubLevel();
             Level3.Instance.sceneid = 0;
             Level3.Instance.Level3Nodes[0].ShowSubLevel();
