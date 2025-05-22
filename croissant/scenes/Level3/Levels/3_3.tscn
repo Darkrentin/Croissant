@@ -46,8 +46,8 @@ visible = false
 position = Vector2(960, 64)
 shape = SubResource("RectangleShape2D_psbq6")
 
-[node name="0" parent="." instance=ExtResource("2_ft5q5")]
+[node name="13" parent="." instance=ExtResource("2_ft5q5")]
 position = Vector2(1736, 776)
-NextSceneId = 0
+NextSceneId = 13
 
 [editable path="StaticPlateform"]
