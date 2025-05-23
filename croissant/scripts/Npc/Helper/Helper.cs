@@ -1,4 +1,3 @@
-using System.Collections;
 using Godot;
 
 public partial class Helper : Npc
@@ -6,6 +5,7 @@ public partial class Helper : Npc
 	[Export] public AnimationPlayer animationPlayer;
 	[Export] public AnimatedSprite2D Sprite2D;
 	[Export] public PackedScene BloodScene;
+	[Export] public AudioStreamPlayer DeathSound;
 
 	public Vector2 BaseScale = new Vector2(10f, 10f);
 	public Vector2I BaseSize = new Vector2I(300, 300);
@@ -64,12 +64,17 @@ public partial class Helper : Npc
 				break;
 			case "HelperDeath":
 
-				//Play death sound
-				//...
+				DeathSound.Play();
 
 				GetTree().CreateTimer(1f).Timeout += () =>
 				{
 					Level3.Instance.player.Animator.Play("Helper_Death");
+					CpuParticles2D blood = BloodScene.Instantiate<CpuParticles2D>();
+					GameManager.GameRoot.AddChild(blood);
+					blood.GlobalPosition = Level3.Instance.player.GlobalPosition + new Vector2(-21, -62);
+					blood.Emitting = true;
+					Level3.Instance.player.Head.LinearVelocity = new Vector2(200, -600);
+					Level3.Instance.player.Head.AngularVelocity = 10;
 				};
 
 				CpuParticles2D blood = BloodScene.Instantiate<CpuParticles2D>();
