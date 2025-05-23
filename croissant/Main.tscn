@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=11 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://810np22fqce" path="res://scenes/Windows/MenuWindow.tscn" id="2_fos0i"]
@@ -9,7 +9,6 @@
 [ext_resource type="AudioStream" uid="uid://bf6xeuoqynhfq" path="res://assets/musics/level_3.mp3" id="7_wkp8b"]
 [ext_resource type="AudioStream" uid="uid://ctjjopkt8qu6s" path="res://assets/musics/level_4.mp3" id="8_20pc6"]
 [ext_resource type="AudioStream" uid="uid://clgqtcxoruwrp" path="res://assets/musics/scoreboard.mp3" id="9_5vvyt"]
-[ext_resource type="AudioStream" uid="uid://bkcb78b80t2nx" path="res://assets/sounds/click.wav" id="10_wkp8b"]
 
 [sub_resource type="AudioStreamInteractive" id="AudioStreamInteractive_03owx"]
 clip_count = 5
@@ -74,6 +73,3 @@ Test"
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamInteractive_03owx")
 bus = &"Music"
-
-[node name="ClickSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_wkp8b")

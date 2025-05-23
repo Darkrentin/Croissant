@@ -70,7 +70,7 @@ public partial class GameManager : Node2D
         AddChild(ShakeTimer);
 
         ClickSound = new AudioStreamPlayer();
-        ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/click.wav");
+        ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/click.mp3");
         AddChild(ClickSound);
 
         //MusicPlayer.Play();
