@@ -206,7 +206,7 @@
                 "anim": "Idle"
             },
             "1": {
-                "text": "I've installed the [color=DODGER_BLUE]update[/color], now I need to go inside some files to modify them.",
+                "text": "I've installed the [color=DODGER_BLUE]update[/color], now I need to go inside folders to find config files.",
                 "anim": "Idle"
             },
             "2": {
@@ -214,7 +214,7 @@
                 "anim": "Idle"
             },
             "3": {
-                "text": "I don't know how it looks like there, so you will have to [i]learn by yourself[/i]...",
+                "text": "I don't know how it looks like there, so you will have to [i]learn it by yourself[/i]...",
                 "anim": "Idle"
             },
             "4": {
@@ -228,11 +228,11 @@
         },
         "EndLvl3": {
             "0": {
-                "text": "EndLvl3",
+                "text": "Okay! Now that I have every config files I can compile the program!",
                 "anim": ""
             },
             "1": {
-                "text": "Oh no je vais mourir!",
+                "text": "Let me just...",
                 "anim": ""
             },
             "2": {
@@ -243,7 +243,7 @@
         "HelperDeath":
         {
             "0": {
-                "text": "HelperDeath",
+                "text": "[shake rate=10 level=3]Oh... I feel like something is wrong...[/shake]",
                 "anim": ""
             },
             "1": {

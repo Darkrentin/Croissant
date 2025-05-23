@@ -86,7 +86,6 @@ public partial class PlayerCharacter : CharacterBody2D
         ? double.MaxValue
         : (((int)Time.GetTicksMsec() - _fallEnterMsec) / 1000.0);
 
-
     public override void _Ready()
     {
         Head.Sleeping = true;
@@ -264,7 +263,6 @@ public partial class PlayerCharacter : CharacterBody2D
         }
     }
 
-
     public void HandleFallAnimations()
     {
         if (IsOnWall())
@@ -278,7 +276,6 @@ public partial class PlayerCharacter : CharacterBody2D
         }
 
     }
-
 
     public void GetInputStates()
     {
@@ -308,7 +305,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public void HandleFlipH()
     {
-        Sprite.FlipH = (facing < 1);
+        Sprite.FlipH = facing < 1;
     }
 
 

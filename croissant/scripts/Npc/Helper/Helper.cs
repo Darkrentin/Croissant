@@ -63,10 +63,17 @@ public partial class Helper : Npc
 				Level3.Instance.player.Animator.Play("Repair");
 				break;
 			case "HelperDeath":
-				Level3.Instance.player.Animator.Play("Helper_Death");
-				//Emit blood after 1.4 seconds
+
+				//Play death sound
+				//...
+
+				GetTree().CreateTimer(1f).Timeout += () =>
+				{
+					Level3.Instance.player.Animator.Play("Helper_Death");
+				};
+
 				CpuParticles2D blood = BloodScene.Instantiate<CpuParticles2D>();
-				GetTree().CreateTimer(1.4f).Timeout += () =>
+				GetTree().CreateTimer(2.4f).Timeout += () =>
 				{
 					GameManager.GameRoot.AddChild(blood);
 					blood.GlobalPosition = Level3.Instance.player.Head.GlobalPosition - new Vector2(13, 0);
@@ -75,7 +82,7 @@ public partial class Helper : Npc
 					Level3.Instance.player.Head.AngularVelocity = 10;
 				};
 
-				GetTree().CreateTimer(blood.Lifetime + 4f).Timeout += () =>
+				GetTree().CreateTimer(blood.Lifetime + 5f).Timeout += () =>
 				{
 					GameManager.GameRoot.RemoveChild(blood);
 					blood.QueueFree();
