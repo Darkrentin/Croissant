@@ -104,9 +104,6 @@ NextSceneId = 5
 [node name="KillingPlatform" parent="." instance=ExtResource("3_pcjdc")]
 position = Vector2(472, 232)
 
-[node name="Window" parent="KillingPlatform" index="0"]
-visible = true
-
 [node name="CollisionShape2D" parent="KillingPlatform" index="3"]
 position = Vector2(132, 76)
 shape = SubResource("RectangleShape2D_1d8pj")

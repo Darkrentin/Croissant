@@ -9,17 +9,20 @@ public partial class Level1 : Node2D
     [Export] private PackedScene DodgeWindowScene;
     [Export] private PackedScene TankWindowScene;
     [Export] private PackedScene BombWindowScene;
-    private Timer spawnTimer;
-    private Timer totalTimer;
 
+    public float StaticMultiplier = 0.7f;
+    public float TimerWindowMultiplier = 1.5f;
+    public float MoveWindowMultiplier = 1.5f;
+    public float DodgeWindowMultiplier = 4.1f;
+    public float TankWindowMultiplier = 3.5f;
+    public float BombWindowMultiplier = 2.0f;
+    public float TimerBasicTime = 0.41f;
+    public float TimerMultiplier = 1.0f;
+    private Timer spawnTimer;
     public static int WindowCount;
-    public int InitialWindowCount = 0;
-    public float TimerLimit = 0.025f;
-    public int TimerTic = 2;
+    public static int InitialWindowCount = 0;
     public static Level1 Instance;
     public List<FloatWindow> Windows = new List<FloatWindow>();
-
-
     public override void _Ready()
     {
         Instance = this;
@@ -27,90 +30,19 @@ public partial class Level1 : Node2D
 
         spawnTimer = new Timer();
         AddChild(spawnTimer);
-        spawnTimer.WaitTime = 1f;
-        spawnTimer.Timeout += OnSpawnTimerTimeout;
+        spawnTimer.WaitTime = TimerBasicTime;
+        spawnTimer.Timeout += AddNewWindow;
         spawnTimer.Start();
-
-        totalTimer = new Timer();
-        AddChild(totalTimer);
-        totalTimer.WaitTime = 3f;
-        totalTimer.Timeout += TotalSpawnerTimeout;
-        totalTimer.Start();
-
-        //Debug
-        /*
-        Timer debug = new Timer();
-        AddChild(debug);
-        debug.WaitTime = 5f;
-        debug.Timeout += () =>
-        {
-            GameManager.State = GameManager.GameState.BlueScreen;
-            debug.Stop();
-        };
-        debug.Start();
-        */
-
     }
-
-    public void OnSpawnTimerTimeout()
-    {
-        if (WindowCount < 20 && WindowCount > 0)
-        {
-            AddNewWindow();
-            spawnTimer.WaitTime = (Lib.rand.NextDouble() * 0.4f + 0.6f + TimerLimit);
-            //UpdateSpawnTimer();
-        }
-    }
-
-    public void TotalSpawnerTimeout()
-    {
-        if (TimerTic < 19)
-            TimerTic++;
-        else
-        {
-            //spawnTimer.WaitTime = 5f;
-        }
-        TimerLimit *= 1.06f;
-    }
-
-    /*private void UpdateSpawnTimer()
-    {
-        if (WindowCount >= 12)
-        {
-            spawnTimer.WaitTime = 3f;
-        }
-        else if (WindowCount >= 6)
-        {
-            spawnTimer.WaitTime = 1.5f;
-        }
-        else
-        {
-            spawnTimer.WaitTime = 1.3f;
-        }
-    }*/
 
     public override void _Process(double delta)
     {
-        /*if (WindowCount<15)
-		{
-			AddNewWindow();
-			WindowCount++;
-		}*/
-        //////Lib.Print($"timertic: {TimerTic}");
-        //////Lib.Print($"window: {WindowCount}");
-
-        if (InitialWindowCount < 22)
+        if (InitialWindowCount < 22) //game start
         {
-            AddNewWindow();
+            AddStaticWWindow();
             InitialWindowCount++;
         }
-        else if (InitialWindowCount == 22)
-        {
-            totalTimer.WaitTime = 1.5f;
-            InitialWindowCount++;
-        }
-
-        if (WindowCount == 0)
+        if (WindowCount == 0) //end game condition
         {
             Lib.Print("No windows left, ending game...");
             GameManager.State = GameManager.GameState.BlueScreen;
@@ -119,52 +51,62 @@ public partial class Level1 : Node2D
 
     }
 
-    public static void AddNewWindow()
+    public static void AddStaticWWindow()
     {
-        int i = Lib.rand.Next(1, Instance.TimerTic);
-        if (i == 1)
-        {
-            StaticWindow window = Instance.StaticWindowScene.Instantiate<StaticWindow>();
-            Instance.AddChild(window);
-            Instance.Windows.Add(window);
-        }
-        else if (i == 2 || i == 4 || i == 8 || i == 11)
-        {
-            MoveWindow window = Instance.MoveWindowScene.Instantiate<MoveWindow>();
-            Instance.AddChild(window);
-            Instance.Windows.Add(window);
-        }
-        else if (i == 3 || i == 6)
-        {
-            BombWindow window = Instance.BombWindowScene.Instantiate<BombWindow>();
-            Instance.AddChild(window);
-            Instance.Windows.Add(window);
-        }
-        else if (i == 5 || i == 10 || i == 16)
-        {
-            TankWindow window = Instance.TankWindowScene.Instantiate<TankWindow>();
-            Instance.AddChild(window);
-            Instance.Windows.Add(window);
-        }
-        else if (i == 7 || i == 12 || i == 13 || i == 17)
-        {
-            TimerWindow window = Instance.TimerWindowScene.Instantiate<TimerWindow>();
-            Instance.AddChild(window);
-            Instance.Windows.Add(window);
-        }
-        else if (i == 9 || i == 14 || i == 15 || i == 18)
-        {
-            DodgeWindow window = Instance.DodgeWindowScene.Instantiate<DodgeWindow>();
-            Instance.AddChild(window);
-            Instance.Windows.Add(window);
-        }
+        StaticWindow window = Instance.StaticWindowScene.Instantiate<StaticWindow>();
+        Instance.AddChild(window);
+        Instance.Windows.Add(window);
         WindowCount++;
         Lib.Print($"WindowAdd : count: {WindowCount}");
     }
 
+    public static void AddNewWindow()
+    {
+        if (WindowCount < 22 && WindowCount > 0 && InitialWindowCount >= 22)
+        {
+            var scenes = new PackedScene[]
+            {
+                Instance.StaticWindowScene,
+                Instance.MoveWindowScene,
+                Instance.BombWindowScene,
+                Instance.TankWindowScene,
+                Instance.TimerWindowScene,
+                Instance.DodgeWindowScene
+            };
+
+            var multipliers = new float[]
+            {
+                Instance.StaticMultiplier,
+                Instance.MoveWindowMultiplier,
+                Instance.BombWindowMultiplier,
+                Instance.TankWindowMultiplier,
+                Instance.TimerWindowMultiplier,
+                Instance.DodgeWindowMultiplier
+            };
+
+            int i = Lib.rand.Next(0, scenes.Length);
+            FloatWindow window = scenes[i].Instantiate<FloatWindow>();
+            Instance.AddChild(window);
+            Instance.Windows.Add(window);
+
+            Instance.spawnTimer.Stop();
+            Instance.spawnTimer.WaitTime = Instance.TimerBasicTime * multipliers[i] * Instance.TimerMultiplier;
+            Instance.spawnTimer.Start();
+
+            WindowCount++;
+            Instance.TimerMultiplier += 0.033f;
+
+            //Lib.Print($"WindowAdd : count: {WindowCount}");
+
+            Lib.Print($"TimerMultiplier: {Instance.TimerMultiplier}");
+            Lib.Print($"WaitTime: {Instance.spawnTimer.WaitTime}");
+        }
+    }
+
+
     public static void WindowKill()
     {
         WindowCount--;
-        Lib.Print($"WindowKill : count: {WindowCount}");
+        //Lib.Print($"WindowKill : count: {WindowCount}");
     }
 }
