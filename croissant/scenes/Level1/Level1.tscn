@@ -24,6 +24,8 @@ BombWindowScene = ExtResource("7_mg7kg")
 [node name="PopupEnter" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("8_x1okc")
 volume_db = -10.0
+bus = &"SFX"
 
 [node name="PopupClose" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("9_x1okc")
+bus = &"SFX"

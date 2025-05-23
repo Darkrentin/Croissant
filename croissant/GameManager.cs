@@ -71,6 +71,7 @@ public partial class GameManager : Node2D
 
         ClickSound = new AudioStreamPlayer();
         ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/click.mp3");
+        ClickSound.Bus = "SFX";
         AddChild(ClickSound);
 
         //MusicPlayer.Play();
@@ -124,13 +125,13 @@ public partial class GameManager : Node2D
 
         switch (State)
         {
+            // Dialogue states
             case GameState.Virus:
                 States.Virus();
                 break;
             case GameState.Helper:
                 States.Helper();
                 break;
-
 
             // Game state
             case GameState.IntroGame:
