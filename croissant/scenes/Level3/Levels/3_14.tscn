@@ -1,0 +1,124 @@
+[gd_scene load_steps=17 format=3 uid="uid://d24f78o7xiqit"]
+
+[ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_q5f1q"]
+[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_62ijf"]
+[ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="3_ik3i5"]
+[ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="4_w6s1o"]
+[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="5_wgq54"]
+[ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="6_jl1bk"]
+[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="7_75x13"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q5f1q"]
+size = Vector2(128, 1344)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_62ijf"]
+size = Vector2(1920, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w6s1o"]
+resource_local_to_scene = true
+size = Vector2(1088, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wgq54"]
+resource_local_to_scene = true
+size = Vector2(256, 640)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl1bk"]
+resource_local_to_scene = true
+size = Vector2(256, 56)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_75x13"]
+resource_local_to_scene = true
+size = Vector2(280, 264)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7h8to"]
+resource_local_to_scene = true
+size = Vector2(128, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvq6e"]
+size = Vector2(832, 80)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0abvq"]
+size = Vector2(832, 80)
+
+[node name="3_14" type="Node2D" node_paths=PackedStringArray("windows")]
+script = ExtResource("1_q5f1q")
+windows = [NodePath("PlayerOnly/Window"), NodePath("WindowsOnly/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("KillingPlatform/Window")]
+
+[node name="Limit" type="StaticBody2D" parent="."]
+
+[node name="L" type="CollisionShape2D" parent="Limit"]
+position = Vector2(-64, 544)
+shape = SubResource("RectangleShape2D_q5f1q")
+
+[node name="R" type="CollisionShape2D" parent="Limit"]
+position = Vector2(1984, 544)
+shape = SubResource("RectangleShape2D_q5f1q")
+
+[node name="U" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, -64)
+shape = SubResource("RectangleShape2D_62ijf")
+
+[node name="D" type="CollisionShape2D" parent="Limit"]
+position = Vector2(960, 1152)
+shape = SubResource("RectangleShape2D_62ijf")
+
+[node name="0" parent="." instance=ExtResource("2_62ijf")]
+position = Vector2(40, 904)
+NextSceneId = 0
+
+[node name="13" parent="." instance=ExtResource("2_62ijf")]
+position = Vector2(1720, 64)
+NextSceneId = 13
+
+[node name="PlayerOnly" parent="." instance=ExtResource("3_ik3i5")]
+position = Vector2(0, 192)
+
+[node name="CollisionShape2D" parent="PlayerOnly" index="1"]
+position = Vector2(544, 128)
+shape = SubResource("RectangleShape2D_w6s1o")
+
+[node name="WindowsOnly" parent="." instance=ExtResource("4_w6s1o")]
+position = Vector2(832, 448)
+
+[node name="CollisionShape2D" parent="WindowsOnly" index="1"]
+position = Vector2(128, 320)
+shape = SubResource("RectangleShape2D_wgq54")
+
+[node name="MovePlatform" parent="." instance=ExtResource("5_wgq54")]
+position = Vector2(432, 984)
+
+[node name="CollisionShape2D" parent="MovePlatform" index="1"]
+position = Vector2(128, 28)
+shape = SubResource("RectangleShape2D_jl1bk")
+
+[node name="StaticPlateform" parent="." instance=ExtResource("6_jl1bk")]
+position = Vector2(1640, 272)
+
+[node name="CollisionShape2D" parent="StaticPlateform" index="1"]
+position = Vector2(140, 132)
+shape = SubResource("RectangleShape2D_75x13")
+
+[node name="StaticPlateform2" parent="." instance=ExtResource("6_jl1bk")]
+position = Vector2(1288, 712)
+
+[node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_7h8to")
+
+[node name="KillingPlatform" parent="." instance=ExtResource("7_75x13")]
+position = Vector2(1088, 1008)
+
+[node name="CollisionShape2D" parent="KillingPlatform" index="3"]
+position = Vector2(416, 40)
+shape = SubResource("RectangleShape2D_gvq6e")
+
+[node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
+position = Vector2(416, 40)
+shape = SubResource("RectangleShape2D_0abvq")
+
+[editable path="PlayerOnly"]
+[editable path="WindowsOnly"]
+[editable path="MovePlatform"]
+[editable path="StaticPlateform"]
+[editable path="StaticPlateform2"]
+[editable path="KillingPlatform"]
