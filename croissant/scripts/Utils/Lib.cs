@@ -89,12 +89,18 @@ public static class Lib
         return new string(chars);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static float Distance(Vector2I a, Vector2I b)
     {
-        return (float)Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+        int dx = a.X - b.X;
+        int dy = a.Y - b.Y;
+        return Mathf.Sqrt(dx * dx + dy * dy);
     }
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static float Distance(Vector2 a, Vector2 b)
     {
-        return (float)Math.Sqrt(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2));
+        float dx = a.X - b.X;
+        float dy = a.Y - b.Y;
+        return Mathf.Sqrt(dx * dx + dy * dy);
     }
 }

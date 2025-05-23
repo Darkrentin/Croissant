@@ -20,11 +20,16 @@ public partial class GameManager : Node2D
     public static bool HaveFinishTheGameAtLeastOneTime = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
-    public static float ScreenScale => DisplayServer.ScreenGetDpi() / 96f; // 96 DPI is the default for most monitors
+    public static float ScreenScale => _cachedScreenScale;
+    private static float _cachedScreenScale;
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
     public static double PersonalBestTime;
+
+    private float _cleanupTimer = 0f;
+    private const float CleanupInterval = 0.5f;
+
     public enum GameState
     {
         Virus,
@@ -56,12 +61,12 @@ public partial class GameManager : Node2D
 
     public override void _Ready()
     {
+        _cachedScreenScale = DisplayServer.ScreenGetDpi() / 96f;
         Lib.Print($"ScreenScale: {ScreenScale}");
         GameRoot = this;
         LoadSave();
         AddFixWindow();
         InitMainWindow();
-        // Le reste du code _Ready existant
         MenuWindow = menuScene.Instantiate<MenuWindow>();
         AddChild(MenuWindow);
         InitializeNpc();
@@ -121,7 +126,13 @@ public partial class GameManager : Node2D
             ClickSound.Play();
 
         _ProcessShake();
-        CleanupWindowsList();
+
+        _cleanupTimer += (float)delta;
+        if (_cleanupTimer >= CleanupInterval)
+        {
+            CleanupWindowsList();
+            _cleanupTimer = 0f;
+        }
 
         switch (State)
         {
@@ -217,43 +228,34 @@ public partial class GameManager : Node2D
     // Remove invalid windows from the list
     public static void CleanupWindowsList()
     {
-        List<FloatWindow> validWindows = new List<FloatWindow>();
-        foreach (FloatWindow window in Windows)
+        for (int i = Windows.Count - 1; i >= 0; i--)
         {
-            if (window == null)
-                continue;
-            try
+            FloatWindow window = Windows[i];
+            if (!IsInstanceValid(window) || window.IsQueuedForDeletion() || !window.IsInsideTree())
             {
-                if (window.IsInsideTree() && !window.IsQueuedForDeletion())
-                    validWindows.Add(window);
-            }
-            catch (ObjectDisposedException)
-            {
-                ////Lib.Print("A window was already disposed and removed from the list.");
-            }
-            catch (Exception e)
-            {
-                GD.PushWarning($"Unexpected exception when checking window validity: {e.Message}");
+                Windows.RemoveAt(i);
             }
         }
-        Windows = validWindows;
     }
+
+    private Vector2I _shakeOffset = Vector2I.Zero;
+    private Vector2I _windowShakePos = Vector2I.Zero;
 
     public void _ProcessShake()
     {
-        if (!ShakeAllWindows)
-            return;
+        if (!ShakeAllWindows) return;
 
-        int offsetX = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
-        int offsetY = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
-        Vector2I offset = new Vector2I(offsetX, offsetY);
+        _shakeOffset.X = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+        _shakeOffset.Y = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
 
         foreach (FloatWindow window in Windows)
         {
-            if (window.IsTransitioning)
-                continue;
-            Vector2I shakePosition = window.BasePosition + offset;
-            window.SetWindowPosition(shakePosition);
+            if (window.IsTransitioning) continue;
+
+            _windowShakePos.X = window.BasePosition.X + _shakeOffset.X;
+            _windowShakePos.Y = window.BasePosition.Y + _shakeOffset.Y;
+
+            window.SetWindowPosition(_windowShakePos, true);
         }
     }
 

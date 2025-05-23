@@ -65,7 +65,7 @@ public partial class FloatWindow : Window
 		// Check if the window moved
 		if (WindowRect.Position != Position || WindowRect.Size != Size)
 		{
-			WindowRect = new Rect2I(Position, Size);
+			UpdateWindowRect();
 		}
 		// Only run necessary operations
 		if (Draggable == false && HasFocus())
@@ -86,6 +86,12 @@ public partial class FloatWindow : Window
 		// Only _Process shaking when active
 		if (Shaking)
 			_ProcessShake();
+	}
+
+	private void UpdateWindowRect()
+	{
+		WindowRect.Position = Position;
+		WindowRect.Size = Size;
 	}
 
 	// Start a transition to a target position with a given transition time
@@ -295,22 +301,21 @@ public partial class FloatWindow : Window
 
 	public virtual void ResizeFinished() { }
 
+	private Vector2I _shakeOffset = Vector2I.Zero;
+
 	public void _ProcessShake()
 	{
-		if (Shaking)
+		if (!Shaking) return;
+
+		if (IsTransitioning)
 		{
-			if (IsTransitioning)
-			{
-				BasePosition = Position;
-				return;
-			}
-
-			int offsetX = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
-			int offsetY = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
-
-			Vector2I ShakePosition = BasePosition + new Vector2I(offsetX, offsetY);
-			SetWindowPosition(ShakePosition);
+			BasePosition = Position;
+			return;
 		}
+
+		_shakeOffset.X = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+		_shakeOffset.Y = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
+		SetWindowPosition(BasePosition + _shakeOffset, true);
 	}
 
 	public void StartShake(float duration, int intensity)

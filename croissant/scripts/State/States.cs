@@ -165,7 +165,7 @@ public static class States
 
         //remove the virus
         GameManager.virus.HideNpc(1);
-    
+
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
@@ -200,7 +200,7 @@ public static class States
             GameManager.helper.Position = -GameManager.ScreenSize;
             Vector2I DialoguePosition = GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4);
             GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "EndLvl3", DialoguePosition);
-            
+
         };
         GameManager.State = GameManager.GameState.Void;
     }
