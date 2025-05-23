@@ -126,7 +126,11 @@ public partial class Level3 : FloatWindow
         {
             GameManager.State = GameManager.GameState.Dialogue3;
             Transition(0);
-            player.ProcessMode = ProcessModeEnum.Disabled;
+            GetTree().CreateTimer(0.5f).Timeout += () =>
+            {
+                player.LevelEnd = true;
+            };
+            
 
         }
     }

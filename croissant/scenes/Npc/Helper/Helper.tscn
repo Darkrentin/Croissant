@@ -1,7 +1,8 @@
-[gd_scene load_steps=27 format=3 uid="uid://dy032f0nfm2vk"]
+[gd_scene load_steps=28 format=3 uid="uid://dy032f0nfm2vk"]
 
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
+[ext_resource type="PackedScene" uid="uid://djlns0h4knjua" path="res://scenes/Level3/Others/Blood.tscn" id="2_xau07"]
 [ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/platformer/player/Player Idle 48x48.png" id="3_58gsr"]
 [ext_resource type="Texture2D" uid="uid://cf7m83acvsld1" path="res://assets/sprites/platformer/player/Player Roll 48x48.png" id="4_xau07"]
 
@@ -237,6 +238,7 @@ transparent = true
 script = ExtResource("1_8cb3g")
 animationPlayer = NodePath("AnimationPlayer")
 Sprite2D = NodePath("Control/AnimatedSprite2D")
+BloodScene = ExtResource("2_xau07")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
 Draggable = false

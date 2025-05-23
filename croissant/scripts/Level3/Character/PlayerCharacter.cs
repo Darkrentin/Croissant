@@ -71,6 +71,8 @@ public partial class PlayerCharacter : CharacterBody2D
     public bool keyJump = false;
     public bool isDead = false;
     public bool isInvincible = false;
+
+    public bool LevelEnd = false;
     public bool keyJumpPressed = false;
 
     // State machine
@@ -146,6 +148,13 @@ public partial class PlayerCharacter : CharacterBody2D
         {
             CoyoteTimer.Start(CoyoteTime);
             ChangeState((Node)States.Get("Fall"));
+        }
+        else
+        {
+            if (LevelEnd)
+            {
+                isDead = true;
+            }
         }
     }
 

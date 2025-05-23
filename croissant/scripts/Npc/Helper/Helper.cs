@@ -4,6 +4,7 @@ public partial class Helper : Npc
 {
 	[Export] public AnimationPlayer animationPlayer;
 	[Export] public AnimatedSprite2D Sprite2D;
+	[Export] public PackedScene BloodScene;
 
 	public Vector2 BaseScale = new Vector2(10f, 10f);
 	public Vector2I BaseSize = new Vector2I(300, 300);
@@ -58,7 +59,21 @@ public partial class Helper : Npc
 				GameManager.State = GameManager.GameState.Level3;
 				break;
 			case "EndLvl3":
-				GameManager.State = GameManager.GameState.FinalLevel;
+				CpuParticles2D blood = BloodScene.Instantiate<CpuParticles2D>();
+				GameManager.GameRoot.AddChild(blood);
+				blood.GlobalPosition = Level3.Instance.player.GlobalPosition;
+				blood.Emitting = true;
+				Level3.Instance.player.Visible = false;
+				GetTree().CreateTimer(blood.Lifetime + 0.5f).Timeout += () =>
+				{
+					GameManager.GameRoot.RemoveChild(blood);
+					blood.QueueFree();
+					GetParent().RemoveChild(this);
+					QueueFree();
+					GameManager.helper = null;
+
+					GameManager.State = GameManager.GameState.FinalLevel;
+				};
 				break;
 		}
 	}

@@ -165,14 +165,7 @@ public static class States
 
         //remove the virus
         GameManager.virus.HideNpc(1);
-        GameManager.virus.GetTree().CreateTimer(1f).Timeout += () =>
-        {
-            GameManager.GameRoot.RemoveChild(GameManager.virus);
-            GameManager.virus.QueueFree();
-            GameManager.virus = null;
-        };
-        
-
+    
         //Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
@@ -207,8 +200,7 @@ public static class States
             GameManager.helper.Position = -GameManager.ScreenSize;
 
             GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "EndLvl3");
-            GameManager.helper.Dialogue.Position = GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4);
-            Level3.Instance.player.isDead = true;
+            Vector2I DialoguePosition = GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4);
         };
         GameManager.State = GameManager.GameState.Void;
     }
