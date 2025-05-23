@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="2_gijp6"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="3_5q6or"]
-[ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
+[ext_resource type="PackedScene" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8j6u2"]
@@ -133,10 +133,13 @@ visible = false
 position = Vector2(840, 376)
 
 [node name="ConfigFile2" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(1080, 368)
+position = Vector2(1088, 376)
 
 [node name="ConfigFile3" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(992, 360)
+position = Vector2(952, 376)
+
+[node name="ConfigFile4" parent="." instance=ExtResource("6_gijp6")]
+position = Vector2(960, 40)
 
 [node name="DoorPlateform2" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(320, 0)

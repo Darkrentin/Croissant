@@ -67,21 +67,25 @@ public abstract partial class Npc : FloatWindow
 
     public virtual void HideNpc(int side = -1)
     {
+        const float HideTime = 0.5f;
         Vector2I HidePosition = Lib.GetRandomPositionOutsideScreen(side, Math.Max(Size.X, Size.Y) * 2);
         ForceDialoguePlacement = true;
         if (!OnScreen())
+        {
+            Lib.Print($"Npc : {NpcName} is not on screen, hiding it");
             Position = HidePosition;
+        }
         else
-            StartLinearTransition(HidePosition, 0.5f, reset: true);
+            StartLinearTransition(HidePosition, HideTime, reset: true);
         Dialogue.Visible = false;
         Dialogue.label.Text = "";
-        HideTimer.Start(0.5f);
+        HideTimer.Start(HideTime);
     }
 
-    public virtual void ShowNpc(Vector2I Position)
+    public virtual void ShowNpc(Vector2I Position, float time = 0.5f)
     {
         ForceDialoguePlacement = false;
-        StartLinearTransition(Position, 0.1f, reset: true);
+        StartLinearTransition(Position, time, reset: true);
         GrabFocus();
         Visible = true;
     }
@@ -98,6 +102,7 @@ public abstract partial class Npc : FloatWindow
 
     public bool OnScreen()
     {
-        return Position.X >= 0 && Position.Y >= 0 && Position.X <= GameManager.ScreenSize.X && Position.Y <= GameManager.ScreenSize.Y;
+        bool IsOnScreen = Position.X >= 0 && Position.Y >= 0 && Position.X <= GameManager.ScreenSize.X && Position.Y <= GameManager.ScreenSize.Y;
+        return IsOnScreen;
     }
 }

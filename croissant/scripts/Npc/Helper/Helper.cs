@@ -25,11 +25,11 @@ public partial class Helper : Npc
 		}
 	}
 
-	public override void ShowNpc(Vector2I Position)
+	public override void ShowNpc(Vector2I Position, float time = 0.5f)
 	{
 		Size = BaseSize;
 		Sprite2D.Scale = BaseScale;
-		base.ShowNpc(Position);
+		base.ShowNpc(Position,time);
 		animationPlayer.Play("Spawn");
 	}
 
@@ -47,7 +47,7 @@ public partial class Helper : Npc
 				Dialogue.StartDialogue(NpcName, "HelperTuto");
 				break;
 			case "HelperTuto":
-				GameManager.virus.ShowNpc(GameManager.virus.RightDown);
+				GameManager.virus.ShowNpc(GameManager.virus.RightDown, 0.3f);
 				GameManager.virus.DialogueToPlayAfterTransition = "Virus/Helper Dialogue 1";
 				break;
 			case "Virus/Helper Dialogue 2":

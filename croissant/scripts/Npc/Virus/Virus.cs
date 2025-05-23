@@ -82,6 +82,13 @@ public partial class Virus : Npc
 				GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
 				HideNpc(1);
 				GameManager.helper.DialogueToPlayAfterTransition = "EndLvl2";
+				//remove the virus
+				GameManager.virus.GetTree().CreateTimer(1f).Timeout += () =>
+				{
+					GameManager.GameRoot.RemoveChild(GameManager.virus);
+					GameManager.virus.QueueFree();
+					GameManager.virus = null;
+				};
 				break;
 		}
 		Lib.Print("Virus");

@@ -142,7 +142,11 @@
             "1": {
                 "text": "[i]I have a better idea in mind...[/i]",
                 "anim": "Angry"
-            }
+            },
+            "2": {
+                "text": "",
+                "anim": "Angry"
+            },
         }
     },
     "Helper": {
@@ -228,6 +232,10 @@
                 "anim": ""
             },
             "1": {
+                "text": "Oh no je vais mourir!",
+                "anim": ""
+            },
+            "2": {
                 "text": "",
                 "anim": ""
             }

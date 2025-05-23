@@ -59,7 +59,7 @@ public static class States
         ////Lib.Print(virus.Position.ToString());
         GameManager.virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y), 2f);
         GameManager.virus.On = false;
-
+        GameManager.virus.Visible = true;
         //change state condition
         GameManager.State = GameManager.GameState.IntroVirusBuffer;
     }
@@ -152,6 +152,8 @@ public static class States
         GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
         GameManager.helper.DialogueToPlayAfterTransition = "Restart";
 
+        GameManager.virus.Position = Lib.GetScreenPosition(1, -0.5f) - GameManager.virus.Size;
+
         //Change State condition
         GameManager.State = GameManager.GameState.IntroHelperBuffer;
     }
@@ -162,9 +164,14 @@ public static class States
         GameManager.GameRoot.AddChild(Level2);
 
         //remove the virus
-        GameManager.GameRoot.RemoveChild(GameManager.virus);
-        GameManager.virus.QueueFree();
-        GameManager.virus = null;
+        GameManager.virus.HideNpc(1);
+        GameManager.virus.GetTree().CreateTimer(1f).Timeout += () =>
+        {
+            GameManager.GameRoot.RemoveChild(GameManager.virus);
+            GameManager.virus.QueueFree();
+            GameManager.virus = null;
+        };
+        
 
         //Change State condition
         GameManager.State = GameManager.GameState.Void;

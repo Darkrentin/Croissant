@@ -19,7 +19,7 @@ public partial class MovePlatform : Platform
         if (window != null && IsInstanceValid(window) && window.Visible)
         {
             bool mouseOver = MouseOnWindow();
-            if (mouseOver)
+            if (mouseOver || Pressed)
                 Shader.SetShaderParameter("speed", 0.3f);
             else
                 Shader.SetShaderParameter("speed", 0.1f);
