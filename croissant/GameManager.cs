@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class GameManager : Node2D
 {
+    [Export] AudioStreamPlayer MusicPlayer;
     [Export] PackedScene menuScene;
     [Export] public GameState ExportState { get => _state; set => _state = value; }
     private static GameState _state = GameState.IntroGame;
@@ -18,7 +19,7 @@ public partial class GameManager : Node2D
     public static bool HaveFinishTheGameAtLeastOneTime = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
-    public static float ScreenScale => DisplayServer.ScreenGetDpi()/96f; // 96 DPI is the default for most monitors
+    public static float ScreenScale => DisplayServer.ScreenGetDpi() / 96f; // 96 DPI is the default for most monitors
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
@@ -66,6 +67,8 @@ public partial class GameManager : Node2D
         ShakeTimer = new Timer();
         ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
+
+        //MusicPlayer.Play();
     }
 
     private void InitializeNpc()
