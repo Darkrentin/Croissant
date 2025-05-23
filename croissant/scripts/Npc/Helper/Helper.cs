@@ -1,3 +1,4 @@
+using System.Collections;
 using Godot;
 
 public partial class Helper : Npc
@@ -30,7 +31,7 @@ public partial class Helper : Npc
 	{
 		Size = BaseSize;
 		Sprite2D.Scale = BaseScale;
-		base.ShowNpc(Position,time);
+		base.ShowNpc(Position, time);
 		animationPlayer.Play("Spawn");
 	}
 
@@ -59,22 +60,28 @@ public partial class Helper : Npc
 				GameManager.State = GameManager.GameState.Level3;
 				break;
 			case "EndLvl3":
-				Dialogue.StartDialogue(NpcName, "HelperDeath", GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4));
+				Level3.Instance.player.Animator.Play("Repair");
 				break;
 			case "HelperDeath":
+				Level3.Instance.player.Animator.Play("Helper_Death");
+				//Emit blood after 1.4 seconds
 				CpuParticles2D blood = BloodScene.Instantiate<CpuParticles2D>();
-				GameManager.GameRoot.AddChild(blood);
-				blood.GlobalPosition = Level3.Instance.player.GlobalPosition;
-				blood.Emitting = true;
-				Level3.Instance.player.Visible = false;
-				GetTree().CreateTimer(blood.Lifetime + 0.5f).Timeout += () =>
+				GetTree().CreateTimer(1.4f).Timeout += () =>
+				{
+					GameManager.GameRoot.AddChild(blood);
+					blood.GlobalPosition = Level3.Instance.player.Head.GlobalPosition - new Vector2(13, 0);
+					blood.Emitting = true;
+					Level3.Instance.player.Head.LinearVelocity = new Vector2(200, -600);
+					Level3.Instance.player.Head.AngularVelocity = 10;
+				};
+
+				GetTree().CreateTimer(blood.Lifetime + 4f).Timeout += () =>
 				{
 					GameManager.GameRoot.RemoveChild(blood);
 					blood.QueueFree();
 					GetParent().RemoveChild(this);
 					QueueFree();
 					GameManager.helper = null;
-
 					GameManager.State = GameManager.GameState.FinalLevel;
 				};
 				break;

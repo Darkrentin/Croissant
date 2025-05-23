@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
 [ext_resource type="PackedScene" uid="uid://djlns0h4knjua" path="res://scenes/Level3/Others/Blood.tscn" id="2_xau07"]
-[ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/platformer/player/Player Idle 48x48.png" id="3_58gsr"]
-[ext_resource type="Texture2D" uid="uid://cf7m83acvsld1" path="res://assets/sprites/platformer/player/Player Roll 48x48.png" id="4_xau07"]
+[ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/Player/Player Idle 48x48.png" id="3_58gsr"]
+[ext_resource type="Texture2D" uid="uid://cf7m83acvsld1" path="res://assets/sprites/Player/Player Roll 48x48.png" id="4_xau07"]
 
 [sub_resource type="Animation" id="Animation_8cb3g"]
 resource_name = "Idle"
@@ -47,6 +47,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Control/AnimatedSprite2D:speed_scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_58gsr"]
@@ -270,3 +282,4 @@ grow_vertical = 2
 scale = Vector2(10, 10)
 sprite_frames = SubResource("SpriteFrames_jthw1")
 autoplay = "default"
+speed_scale = 0.0

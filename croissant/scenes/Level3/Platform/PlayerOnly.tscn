@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_r5qs5"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_r5qs5"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_3po6g"]
-[ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/platformer/player/Player Idle 48x48.png" id="5_mehpu"]
+[ext_resource type="Texture2D" uid="uid://cmtti7jqmg1pe" path="res://assets/sprites/Player/Player Idle 48x48.png" id="5_mehpu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mehpu"]
 shader = ExtResource("4_3po6g")

@@ -1,6 +1,5 @@
 using Godot;
 using System;
-using System.Diagnostics;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
@@ -8,6 +7,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float ScaleFactor = 4f;
 
     // Nodes
+    [Export] public RigidBody2D Head;
     [Export] public Sprite2D Sprite;
     [Export] public AnimationPlayer Animator;
     [Export] public CollisionShape2D Collider;
@@ -81,7 +81,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public bool _hasJumped = false;
     public int _fallEnterMsec = -1;
-    
+
     public double TimeSinceFall => (_fallEnterMsec < 0)
         ? double.MaxValue
         : (((int)Time.GetTicksMsec() - _fallEnterMsec) / 1000.0);
@@ -89,7 +89,9 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public override void _Ready()
     {
-
+        Head.Sleeping = true;
+        Head.Visible = false;
+        Head.Freeze = true;
         AddToGroup("PlayerCharacter");
         foreach (Node state in States.GetChildren())
         {
@@ -179,7 +181,7 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         if (Velocity.Y > MaxFallWallVelocity)
             Velocity = new Vector2(Velocity.X, MaxFallWallVelocity);
-        Velocity += new Vector2(0, gravity/2.0f * (float)delta);
+        Velocity += new Vector2(0, gravity / 2.0f * (float)delta);
     }
 
     public void HandleJump()
@@ -214,7 +216,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public void HandleWallJump()
     {
         GetWallDirection();
-        if ((keyJumpPressed && wallDirection.X != 0)||(keyLeft && wallDirection.X == 1) || (keyRight && wallDirection.X == -1))
+        if ((keyJumpPressed && wallDirection.X != 0) || (keyLeft && wallDirection.X == 1) || (keyRight && wallDirection.X == -1))
         {
             //GD.Print("WallJump");
             ChangeState((Node)States.Get("WallJump"));
@@ -229,7 +231,7 @@ public partial class PlayerCharacter : CharacterBody2D
             ChangeState((Node)States.Get("Idle"));
         }
     }
-    
+
     public bool IsDirectionBuffered()
     {
         if (_lastDirPressMsec < 0) return false;
@@ -250,32 +252,32 @@ public partial class PlayerCharacter : CharacterBody2D
                 {
                     //GD.Print("Mur à gauche");
                     wallDirection = Vector2.Left;
-                    break; 
+                    break;
                 }
-                else if (normal.X < -0.5f) 
+                else if (normal.X < -0.5f)
                 {
                     //GD.Print("Mur à droite");
                     wallDirection = Vector2.Right;
-                    break; 
+                    break;
                 }
             }
         }
     }
 
 
-        public void HandleFallAnimations()
+    public void HandleFallAnimations()
+    {
+        if (IsOnWall())
         {
-            if (IsOnWall())
-            {
-                Animator.Play("WallSlideRight");
-            }
-            else
-            {
-                Animator.Play("Fall");
-                HandleFlipH();
-            }
-
+            Animator.Play("WallSlideRight");
         }
+        else
+        {
+            Animator.Play("Fall");
+            HandleFlipH();
+        }
+
+    }
 
 
     public void GetInputStates()
@@ -350,6 +352,10 @@ public partial class PlayerCharacter : CharacterBody2D
             {
                 Velocity = new Vector2(Velocity.X, 0);
             }
+        }
+        if (animationName == "Repair")
+        {
+            GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "HelperDeath", GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4));
         }
     }
 }
