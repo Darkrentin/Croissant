@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://byx4pasf2ymxd"
-path="res://.godot/imported/player new jump 48x48.png-10625b7a8f49c029b8f2d962643b82e9.ctex"
+uid="uid://ck3t7n7j0l5uf"
+path="res://.godot/imported/Player Hurt 48x48.png-79e1dabdf0aa241e2487443d7e11cd99.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/player/player new jump 48x48.png"
-dest_files=["res://.godot/imported/player new jump 48x48.png-10625b7a8f49c029b8f2d962643b82e9.ctex"]
+source_file="res://assets/sprites/Player/Player Hurt 48x48.png"
+dest_files=["res://.godot/imported/Player Hurt 48x48.png-79e1dabdf0aa241e2487443d7e11cd99.ctex"]
 
 [params]
 

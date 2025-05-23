@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jswfsemspta6"
-path="res://.godot/imported/player land 48x48.png-6e6deec8da05a8012a396dd51c67ed03.ctex"
+uid="uid://w8o8fmltqv3v"
+path="res://.godot/imported/PlayerWalk 48x48.png-94f795dfd9c1dc23b1469cc36ca8e588.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/player/player land 48x48.png"
-dest_files=["res://.godot/imported/player land 48x48.png-6e6deec8da05a8012a396dd51c67ed03.ctex"]
+source_file="res://assets/sprites/Player/PlayerWalk 48x48.png"
+dest_files=["res://.godot/imported/PlayerWalk 48x48.png-94f795dfd9c1dc23b1469cc36ca8e588.ctex"]
 
 [params]
 

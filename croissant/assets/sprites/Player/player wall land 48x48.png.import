@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://0wdacq2qc21t"
-path="res://.godot/imported/Player Death 64x64.png-92f68d7f8179b2db2fae6e4edf037384.ctex"
+uid="uid://dc8dtjey6jfbc"
+path="res://.godot/imported/player wall land 48x48.png-cccbb078689df66631d07d51f25a5c4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/player/Player Death 64x64.png"
-dest_files=["res://.godot/imported/Player Death 64x64.png-92f68d7f8179b2db2fae6e4edf037384.ctex"]
+source_file="res://assets/sprites/Player/player wall land 48x48.png"
+dest_files=["res://.godot/imported/player wall land 48x48.png-cccbb078689df66631d07d51f25a5c4a.ctex"]
 
 [params]
 

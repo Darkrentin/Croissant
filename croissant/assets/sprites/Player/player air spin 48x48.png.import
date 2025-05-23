@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b513s463earp7"
-path="res://.godot/imported/player wall slide (left) 48x48.png-3c4d95e0d3c5c2bdbd26ee9b33f4df59.ctex"
+uid="uid://ce6qq8bt2w4ao"
+path="res://.godot/imported/player air spin 48x48.png-99b3c3bee5f7453d6483574a40cf0b33.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/player/player wall slide (left) 48x48.png"
-dest_files=["res://.godot/imported/player wall slide (left) 48x48.png-3c4d95e0d3c5c2bdbd26ee9b33f4df59.ctex"]
+source_file="res://assets/sprites/Player/player air spin 48x48.png"
+dest_files=["res://.godot/imported/player air spin 48x48.png-99b3c3bee5f7453d6483574a40cf0b33.ctex"]
 
 [params]
 

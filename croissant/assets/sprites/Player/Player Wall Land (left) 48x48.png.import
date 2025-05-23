@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cf7m83acvsld1"
-path="res://.godot/imported/Player Roll 48x48.png-a47d82368734bd8ddfc1f3174a005975.ctex"
+uid="uid://cyv32ohkf3m6e"
+path="res://.godot/imported/Player Wall Land (left) 48x48.png-f7c9b3556341b06df52d7da3e67123bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/player/Player Roll 48x48.png"
-dest_files=["res://.godot/imported/Player Roll 48x48.png-a47d82368734bd8ddfc1f3174a005975.ctex"]
+source_file="res://assets/sprites/Player/Player Wall Land (left) 48x48.png"
+dest_files=["res://.godot/imported/Player Wall Land (left) 48x48.png-f7c9b3556341b06df52d7da3e67123bd.ctex"]
 
 [params]
 
