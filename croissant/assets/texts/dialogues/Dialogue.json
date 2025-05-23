@@ -146,7 +146,7 @@
             "2": {
                 "text": "",
                 "anim": "Angry"
-            },
+            }
         }
     },
     "Helper": {
@@ -236,6 +236,17 @@
                 "anim": ""
             },
             "2": {
+                "text": "",
+                "anim": ""
+            }
+        },
+        "HelperDeath":
+        {
+            "0": {
+                "text": "HelperDeath",
+                "anim": ""
+            },
+            "1": {
                 "text": "",
                 "anim": ""
             }

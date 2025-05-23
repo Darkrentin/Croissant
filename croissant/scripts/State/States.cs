@@ -198,9 +198,9 @@ public static class States
         {
             GameManager.helper.Visible = true;
             GameManager.helper.Position = -GameManager.ScreenSize;
-
-            GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "EndLvl3");
             Vector2I DialoguePosition = GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4);
+            GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "EndLvl3", DialoguePosition);
+            
         };
         GameManager.State = GameManager.GameState.Void;
     }

@@ -27,6 +27,8 @@ public partial class DialogueWindow : FloatWindow
 
 	[Export] public bool LeftSide = true;
 
+	public Vector2I? FixedPosition = null;
+
 	public override void _Ready()
 	{
 		const string dialoguePath = "res://assets/texts/dialogues/Dialogue.json";
@@ -111,6 +113,7 @@ public partial class DialogueWindow : FloatWindow
 			if (anim != "")
 				ParentWindow.PlayAnimation(anim);
 			OnDialogueFinished(ActualDialogueName);
+			FixedPosition = null;
 			return;
 		}
 		label.Text = label.Text.Replace("|", "");
@@ -138,8 +141,9 @@ public partial class DialogueWindow : FloatWindow
 		return (Dictionary)((Dictionary)DialogueData[character])[id];
 	}
 
-	public void StartDialogue(string character, string id)
+	public void StartDialogue(string character, string id, Vector2I? fixedPosition = null)
 	{
+		FixedPosition = fixedPosition;
 		ActualDialogue = GetDialogue(character, id);
 		ActualDialogueName = id;
 		index = 0;
@@ -156,11 +160,21 @@ public partial class DialogueWindow : FloatWindow
 	public void PlaceDialogueWindow(bool force = false)
 	{
 		Size = (Vector2I)Lib.GetScreenRatio() * Size;
-		int side = 3;
-		if (LeftSide)
-			side = 1;
-		SetWindowPosition(new Vector2I(ParentWindow.Position.X + (ParentWindow.Size.X / 2) * side - (Size.X / 2), ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
+
+		if (FixedPosition != null)
+		{
+			SetWindowPosition(FixedPosition.Value, skipVerification: true);
+		}
+		else
+		{
+			int side = 3;
+			if (LeftSide)
+				side = 1;
+			SetWindowPosition(new Vector2I(ParentWindow.Position.X + (ParentWindow.Size.X / 2) * side - (Size.X / 2),
+										ParentWindow.Position.Y - Size.Y / 2) + Margin, skipVerification: force);
+		}
+
 		Visible = true;
-		Lib.Print($"Place dialogue window: {ParentWindow.Position} id: {Dialogueid}");
+
 	}
 }

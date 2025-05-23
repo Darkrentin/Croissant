@@ -59,6 +59,9 @@ public partial class Helper : Npc
 				GameManager.State = GameManager.GameState.Level3;
 				break;
 			case "EndLvl3":
+				Dialogue.StartDialogue(NpcName, "HelperDeath", GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4));
+				break;
+			case "HelperDeath":
 				CpuParticles2D blood = BloodScene.Instantiate<CpuParticles2D>();
 				GameManager.GameRoot.AddChild(blood);
 				blood.GlobalPosition = Level3.Instance.player.GlobalPosition;
