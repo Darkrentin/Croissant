@@ -69,10 +69,15 @@ public partial class FloatWindow : Window
 		}
 		// Only run necessary operations
 		if (Draggable == false && HasFocus())
+		{
 			GameManager.FixWindow.GrabFocus();
+		}
 
 		if (!Minimizable && Mode == ModeEnum.Minimized)
+		{
 			Mode = ModeEnum.Windowed;
+			GameManager.ClickSound.Play();
+		}
 
 		// Only _Process transitions when active
 		if (IsTransitioning || IsResizing)

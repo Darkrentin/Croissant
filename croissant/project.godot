@@ -20,10 +20,6 @@ boot_splash/show_image=false
 boot_splash/use_filter=false
 config/icon="res://icon.svg"
 
-[autoload]
-
-AudioController="*res://scenes/Other/AudioController.tscn"
-
 [display]
 
 window/size/viewport_width=1920

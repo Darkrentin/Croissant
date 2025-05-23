@@ -32,6 +32,7 @@ public partial class StaticWindow : PopUpWindow
 
     public override void OnClose()
     {
+        GameManager.ClickSound.Play();
         Level1.WindowKill();
         QueueFree();
     }

@@ -26,6 +26,7 @@ public partial class DodgeWindow : PopUpWindow
 
     public override void OnClose()
     {
+        GameManager.ClickSound.Play();
         Level1.WindowKill();
         QueueFree();
     }

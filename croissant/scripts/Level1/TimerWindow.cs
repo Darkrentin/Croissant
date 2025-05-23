@@ -34,6 +34,7 @@ public partial class TimerWindow : PopUpWindow
 
     public override void OnClose()
     {
+        GameManager.ClickSound.Play();
         Level1.WindowKill();
         QueueFree();
     }

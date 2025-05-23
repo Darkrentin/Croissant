@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public partial class Level1 : Node2D
 {
+    [Export] private AudioStreamPlayer PopupEnter;
+    [Export] private AudioStreamPlayer PopupClose;
     [Export] private PackedScene StaticWindowScene;
     [Export] private PackedScene TimerWindowScene;
     [Export] private PackedScene MoveWindowScene;
@@ -88,6 +90,7 @@ public partial class Level1 : Node2D
             FloatWindow window = scenes[i].Instantiate<FloatWindow>();
             Instance.AddChild(window);
             Instance.Windows.Add(window);
+            Instance.PopupEnter.Play();
 
             Instance.spawnTimer.Stop();
             Instance.spawnTimer.WaitTime = Instance.TimerBasicTime * multipliers[i] * Instance.TimerMultiplier;
@@ -104,8 +107,10 @@ public partial class Level1 : Node2D
     }
 
 
+
     public static void WindowKill()
     {
+        Instance.PopupClose.Play();
         WindowCount--;
         //Lib.Print($"WindowKill : count: {WindowCount}");
     }

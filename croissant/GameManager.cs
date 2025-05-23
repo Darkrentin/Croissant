@@ -4,9 +4,10 @@ using System.Collections.Generic;
 
 public partial class GameManager : Node2D
 {
-    [Export] AudioStreamPlayer MusicPlayer;
+    [Export] public AudioStreamPlayer MusicPlayer;
     [Export] PackedScene menuScene;
     [Export] public GameState ExportState { get => _state; set => _state = value; }
+    public static AudioStreamPlayer ClickSound;
     private static GameState _state = GameState.IntroGame;
     public static Node2D GameRoot;
     public static GameState State { get => _state; set { _state = value; StateChange(_state); } }
@@ -68,6 +69,10 @@ public partial class GameManager : Node2D
         ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
 
+        ClickSound = new AudioStreamPlayer();
+        ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/click.wav");
+        AddChild(ClickSound);
+
         //MusicPlayer.Play();
     }
 
@@ -111,6 +116,9 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
+        if (Input.IsActionJustPressed("LeftClick"))
+            ClickSound.Play();
+
         _ProcessShake();
         CleanupWindowsList();
 

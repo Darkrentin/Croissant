@@ -17,6 +17,7 @@ public partial class MoveWindow : PopUpWindow
 
     public override void OnClose()
     {
+        GameManager.ClickSound.Play();
         Level1.WindowKill();
         QueueFree();
     }

@@ -35,6 +35,7 @@ public partial class TankWindow : PopUpWindow
                 Title += "☻   ";
         }
 
+        GameManager.ClickSound.Play();
         Image.Texture = GD.Load<Texture2D>($"res://assets/sprites/popups/yaai_{HPs}_{state}.png");
         StartShake(0.15f, 10);
     }

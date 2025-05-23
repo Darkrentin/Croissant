@@ -45,6 +45,7 @@ public partial class BombWindow : PopUpWindow
 
     public override void OnClose()
     {
+        GameManager.ClickSound.Play();
         Level1.WindowKill();
         for (int i = 0; i < 3; i++)
             Level1.AddNewWindow();
