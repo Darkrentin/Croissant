@@ -196,6 +196,9 @@ public partial class WaveDataLevel2 : WaveData
 		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Spike, true);
+		AddWindow(windows, WindowType.Follow, false);
 		AddWindow(windows, WindowType.Follow, false);
 		return windows;
 	}
@@ -203,16 +206,19 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave14()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Wave, true);
-		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+		F._Mode = 2;
+		F.RandomPosition = true;
+		windows.Add(F);
+		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = true;
 		windows.Add(C);
-		WaveWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C2._Mode = 0;
 		C2.RandomPosition = true;
 		windows.Add(C2);
-		WaveWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C3._Mode = 0;
 		C3.RandomPosition = true;
 		windows.Add(C3);
@@ -235,6 +241,7 @@ public partial class WaveDataLevel2 : WaveData
 		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Spike, false);
 		AddWindow(windows, WindowType.Wave, true);
+		AddWindow(windows, WindowType.Extend, false);
 		AddWindow(windows, WindowType.Extend, false);
 		return windows;
 	}
@@ -261,19 +268,19 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave19()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = true;
 		windows.Add(C);
-		WaveWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C2._Mode = 0;
 		C2.RandomPosition = true;
 		windows.Add(C2);
-		WaveWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C3._Mode = 1;
 		C3.RandomPosition = true;
 		windows.Add(C3);
-		WaveWindow C4 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C4 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C4._Mode = 1;
 		C4.RandomPosition = true;
 		windows.Add(C4);
@@ -299,19 +306,19 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave21()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = false;
 		windows.Add(C);
-		WaveWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C2._Mode = 0;
 		C2.RandomPosition = false;
 		windows.Add(C2);
-		WaveWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C3 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C3._Mode = 0;
 		C3.RandomPosition = false;
 		windows.Add(C3);
-		WaveWindow C4 = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C4 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C4._Mode = 0;
 		C4.RandomPosition = false;
 		windows.Add(C4);
@@ -327,7 +334,7 @@ public partial class WaveDataLevel2 : WaveData
 		AddWindow(windows, WindowType.Follow, false);
 		AddWindow(windows, WindowType.Laser, false);
 		AddWindow(windows, WindowType.Wave, false);
-		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = false;
 		windows.Add(C);
@@ -343,7 +350,7 @@ public partial class WaveDataLevel2 : WaveData
 		AddWindow(windows, WindowType.Follow, false);
 		AddWindow(windows, WindowType.Laser, true);
 		AddWindow(windows, WindowType.Wave, true);
-		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = false;
 		windows.Add(C);
