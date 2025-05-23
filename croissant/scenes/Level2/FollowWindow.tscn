@@ -33,5 +33,5 @@ grow_vertical = 2
 
 [node name="FollowSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_c68na")
-volume_db = -5.0
+volume_db = -8.0
 bus = &"SFX"

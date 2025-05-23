@@ -1,10 +1,15 @@
 using Godot;
+using System.Text;
 
 public partial class MainWindow : FloatWindow
 {
     public static TextureRect FakeBackground;
     public static CanvasLayer DebugInfo;
     public Label DebugLabel;
+
+    private StringBuilder StringBuffer = new StringBuilder(256);
+    private float DebugUpdateTimer = 0f;
+    private const float DebugUpdateInterval = 0.1f;
 
     public override void _Ready()
     {
@@ -13,18 +18,22 @@ public partial class MainWindow : FloatWindow
         FakeBackground.Size = DisplayServer.ScreenGetUsableRect().Size;
 
         DebugInfo = GetNode<CanvasLayer>("Main/DebugInfo");
-
         DebugLabel = GetNode<Label>("Main/DebugInfo/DebugLabel");
 
         Size = GameManager.ScreenSize;
-        //Set the main window properties
-        Position = new Vector2I(0, 0);
+        Position = Vector2I.Zero;
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        UpdateDebugLabel();
+
+        DebugUpdateTimer += (float)delta;
+        if (DebugUpdateTimer >= DebugUpdateInterval)
+        {
+            UpdateDebugLabel();
+            DebugUpdateTimer = 0f;
+        }
     }
 
     public override void OnClose()
@@ -34,12 +43,19 @@ public partial class MainWindow : FloatWindow
 
     void UpdateDebugLabel()
     {
-        DebugLabel.Text = $"FPS: {Engine.GetFramesPerSecond()}\n";
-        DebugLabel.Text += $"Mouse Position: {Lib.GetCursorPosition()}\n";
-        DebugLabel.Text += $"Game State: {GameManager.State}\n";
-        DebugLabel.Text += $"Memory Usage: {Godot.OS.GetStaticMemoryUsage() / 1024 / 1024}MB\n";
-        DebugLabel.Text += $"Uptime: {Time.GetTicksMsec() / 1000.0f}s\n";
+        StringBuffer.Clear();
+        StringBuffer.Append("FPS: ");
+        StringBuffer.Append(Engine.GetFramesPerSecond());
+        StringBuffer.Append("\nMouse Position: ");
+        StringBuffer.Append(Lib.GetCursorPosition());
+        StringBuffer.Append("\nGame State: ");
+        StringBuffer.Append(GameManager.State);
+        StringBuffer.Append("\nMemory Usage: ");
+        StringBuffer.Append(Godot.OS.GetStaticMemoryUsage() / 1048576);
+        StringBuffer.Append("MB\nUptime: ");
+        StringBuffer.Append((Time.GetTicksMsec() / 1000.0f).ToString("F1"));
+        StringBuffer.Append("s\n");
 
-
+        DebugLabel.Text = StringBuffer.ToString();
     }
 }
