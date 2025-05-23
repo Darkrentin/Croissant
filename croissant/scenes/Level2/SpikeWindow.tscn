@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://blu5tcq0yepaj"]
+[gd_scene load_steps=6 format=3 uid="uid://blu5tcq0yepaj"]
 
 [ext_resource type="Script" uid="uid://740i6d8eo1cy" path="res://scripts/Level2/SpikeWindow.cs" id="1_xnfaj"]
 [ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_54jmc"]
 [ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="3_54jmc"]
+[ext_resource type="AudioStream" uid="uid://b6nixm4xtdfh0" path="res://assets/sounds/level_2/spike_window.mp3" id="4_a16pk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a16pk"]
 shader = ExtResource("3_54jmc")
@@ -13,10 +14,11 @@ shader_parameter/speed = 3.0
 shader_parameter/radius = 1.0
 shader_parameter/line_thickness = 0.03
 
-[node name="SpikeWindow" type="Window"]
+[node name="SpikeWindow" type="Window" node_paths=PackedStringArray("AttackSound")]
 transparent_bg = true
 transparent = true
 script = ExtResource("1_xnfaj")
+AttackSound = NodePath("SpikeSound")
 ExportVisualCollisionScene = ExtResource("2_54jmc")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -28,3 +30,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="SpikeSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_a16pk")
+volume_db = -5.0
+bus = &"SFX"

@@ -1,7 +1,8 @@
 using Godot;
 
-public partial class WaveWindow : AttackWindow
+public partial class FlappyWindow : AttackWindow
 {
+	[Export] public AudioStreamPlayer AttackSound;
 	[Export] AttackWindow ConnectedWindow;
 	public Vector2I ConnectedWindowPosition;
 	public int nsizeA = 0;
@@ -115,6 +116,7 @@ public partial class WaveWindow : AttackWindow
 
 	public override void Attack()
 	{
+		AttackSound.Play();
 		const float MoveTime = 0.3f;
 		const float AttackDuration = 0.3f;
 		int TargetX = 0;

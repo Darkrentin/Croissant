@@ -32,7 +32,7 @@ clip_4/auto_advance = 0
 script = ExtResource("1_uu6xs")
 MusicPlayer = NodePath("Music")
 menuScene = ExtResource("2_fos0i")
-ExportState = 6
+ExportState = 9
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
 visible = false

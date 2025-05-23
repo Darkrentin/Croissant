@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://baual4txy33sp"]
+
+[ext_resource type="Script" uid="uid://sfxpvdxwqnp1" path="res://scripts/Level2/WaveData.cs" id="1_8d0la"]
+
+[node name="WaveData" type="Node"]
+script = ExtResource("1_8d0la")

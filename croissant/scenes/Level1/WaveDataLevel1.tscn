@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://crhdve71cdt34"]
-
-[sub_resource type="Resource" id="Resource_utjvi"]
-metadata/__load_path__ = "res://scripts/Level1/WaveDataLevel1.cs"
-
-[node name="WaveDataLevel1" type="Node"]
-script = SubResource("Resource_utjvi")

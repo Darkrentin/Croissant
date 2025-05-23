@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://qiac3wawneng"]
+[gd_scene load_steps=7 format=3 uid="uid://qiac3wawneng"]
 
 [ext_resource type="Script" uid="uid://dk62vn1atnd43" path="res://scripts/Level2/CompressWindow.cs" id="1_bpm5o"]
 [ext_resource type="Script" uid="uid://6mob1yhk5kfe" path="res://scripts/Level2/AttackWindow.cs" id="2_b7jvd"]
 [ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_ure8x"]
 [ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="4_1y5u6"]
+[ext_resource type="AudioStream" uid="uid://xsraisnljkr1" path="res://assets/sounds/level_2/compress_window.mp3" id="5_xlxhb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xlxhb"]
 shader = ExtResource("4_1y5u6")
@@ -14,10 +15,11 @@ shader_parameter/speed = 3.0
 shader_parameter/radius = 1.0
 shader_parameter/line_thickness = 0.03
 
-[node name="CompressWindow" type="Window" node_paths=PackedStringArray("ConnectedWindow")]
+[node name="CompressWindow" type="Window" node_paths=PackedStringArray("AttackSound", "ConnectedWindow")]
 transparent_bg = true
 transparent = true
 script = ExtResource("1_bpm5o")
+AttackSound = NodePath("CompressSound")
 ConnectedWindow = NodePath("SubWindow")
 ExportVisualCollisionScene = ExtResource("2_ure8x")
 
@@ -47,3 +49,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="CompressSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_xlxhb")
+volume_db = -5.0
+bus = &"SFX"

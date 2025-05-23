@@ -19,7 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://bh5bvmpmfbmfs" path="res://scenes/Level2/LaserWindow.tscn" id="17_dafyj"]
 [ext_resource type="PackedScene" uid="uid://wmn0s55jslit" path="res://scenes/Level2/ExtendWindow.tscn" id="18_djw06"]
 [ext_resource type="PackedScene" uid="uid://qiac3wawneng" path="res://scenes/Level2/CompressWindow.tscn" id="19_2mdes"]
-[ext_resource type="PackedScene" uid="uid://c5djekulorxqs" path="res://scenes/Level2/WaveWindow.tscn" id="20_ccpnw"]
+[ext_resource type="PackedScene" uid="uid://c5djekulorxqs" path="res://scenes/Level2/FlappyWindow.tscn" id="20_ccpnw"]
 [ext_resource type="PackedScene" uid="uid://c28b6pj5bujn3" path="res://scenes/Level2/FollowWindow.tscn" id="21_djw06"]
 [ext_resource type="PackedScene" uid="uid://blu5tcq0yepaj" path="res://scenes/Level2/SpikeWindow.tscn" id="22_2mdes"]
 [ext_resource type="PackedScene" uid="uid://pus1csxsvyfw" path="res://scenes/FinalLevel/FinalLevel.tscn" id="23_ccpnw"]

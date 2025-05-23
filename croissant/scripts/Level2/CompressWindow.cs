@@ -2,6 +2,7 @@ using Godot;
 
 public partial class CompressWindow : AttackWindow
 {
+	[Export] public AudioStreamPlayer AttackSound;
 	[Export] public AttackWindow ConnectedWindow;
 	public Vector2I ConnectedWindowPosition;
 	public int _Mode = -1;
@@ -72,7 +73,6 @@ public partial class CompressWindow : AttackWindow
 
 	public override void Prevent()
 	{
-
 		Position = windowPosition;
 		ConnectedWindow.Position = ConnectedWindowPosition;
 
@@ -112,6 +112,7 @@ public partial class CompressWindow : AttackWindow
 
 	public override void Attack()
 	{
+		AttackSound.Play();
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 

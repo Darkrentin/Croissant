@@ -3,11 +3,11 @@ using System;
 
 public partial class SpikeWindow : AttackWindow
 {
+	[Export] public AudioStreamPlayer AttackSound;
 	public Vector2I TargetPosition;
 
 	public override void _Ready()
 	{
-
 		base._Ready();
 		VisualCollision.Color = Colors.Blue;
 	}
@@ -47,6 +47,7 @@ public partial class SpikeWindow : AttackWindow
 
 	public override void Attack()
 	{
+		AttackSound.Play();
 		const float ResizeTime = 0.1f;
 		const float AttackDuration = 5f;
 
@@ -56,8 +57,8 @@ public partial class SpikeWindow : AttackWindow
 
 	public override void Reload()
 	{
+		AttackSound.Stop();
 		HideVisualCollision();
-
 		Timer.WaitTime = 0.1f; // time to wait before restarting
 		base.Reload();
 	}

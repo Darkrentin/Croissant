@@ -3,6 +3,7 @@ using System;
 
 public partial class FollowWindow : AttackWindow
 {
+	[Export] public AudioStreamPlayer AttackSound;
 	public Vector2I TargetPosition;
 
 	public override void _Ready()
@@ -48,6 +49,7 @@ public partial class FollowWindow : AttackWindow
 
 	public override void Attack()
 	{
+		AttackSound.Play();
 		const float ResizeTime = 0.1f;
 		const float AttackDuration = 0.1f;
 

@@ -3,13 +3,13 @@ using System;
 
 public partial class LaserWindow : AttackWindow
 {
+	[Export] public AudioStreamPlayer AttackSound;
 	protected int side;
 	public Vector2I TargetPosition;
 	private int nsize = 0;
 
 	public override void _Ready()
 	{
-
 		base._Ready();
 		VisualCollision.Color = Colors.Magenta;
 	}
@@ -115,6 +115,7 @@ public partial class LaserWindow : AttackWindow
 
 	public override void Attack()
 	{
+		AttackSound.Play();
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 		CallResize(nsize, ResizeTime);

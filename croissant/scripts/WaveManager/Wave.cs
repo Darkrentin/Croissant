@@ -1,11 +1,10 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class Wave : Node
 {
 	[Export] public bool WaitWave = false;
-	[Export] public float duration = 10f;
+	[Export] public float duration = 12f;
 	[Export] public int id = 0;
 	[Export] public Wave NextWave;
 	public WaveManager WaveManager;

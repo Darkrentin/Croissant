@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://wmn0s55jslit"]
+[gd_scene load_steps=6 format=3 uid="uid://wmn0s55jslit"]
 
 [ext_resource type="Script" uid="uid://ct5vvq21h0ypf" path="res://scripts/Level2/ExtendWindow.cs" id="1_31ov5"]
 [ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_yhh70"]
 [ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="3_onh8b"]
+[ext_resource type="AudioStream" uid="uid://ds5uj61j20xx6" path="res://assets/sounds/level_2/extend_window.mp3" id="4_5s4up"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5s4up"]
 shader = ExtResource("3_onh8b")
@@ -13,12 +14,12 @@ shader_parameter/speed = 3.0
 shader_parameter/radius = 1.0
 shader_parameter/line_thickness = 0.03
 
-[node name="ExtendWindow" type="Window"]
+[node name="ExtendWindow" type="Window" node_paths=PackedStringArray("AttackSound")]
 transparent_bg = true
-position = Vector2i(0, 36)
 transparent = true
 sharp_corners = true
 script = ExtResource("1_31ov5")
+AttackSound = NodePath("ExtendSound")
 ExportVisualCollisionScene = ExtResource("2_yhh70")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -30,3 +31,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="ExtendSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_5s4up")
+volume_db = -10.0
+bus = &"SFX"

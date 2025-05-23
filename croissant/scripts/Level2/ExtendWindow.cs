@@ -2,6 +2,7 @@ using Godot;
 
 public partial class ExtendWindow : AttackWindow
 {
+	[Export] public AudioStreamPlayer AttackSound;
 	public Vector2I TargetPosition;
 	public Vector2I TargetSize;
 
@@ -69,6 +70,7 @@ public partial class ExtendWindow : AttackWindow
 
 	public override void Attack()
 	{
+		AttackSound.Play();
 		const float ResizeTime = 0.2f;
 		const float AttackDuration = 0.3f;
 		StartResize(TargetSize, ResizeTime, KeepCenter: true);

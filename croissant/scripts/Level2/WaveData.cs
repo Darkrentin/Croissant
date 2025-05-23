@@ -2,8 +2,10 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
-public partial class WaveDataLevel2 : WaveData
+public partial class WaveData : Node
 {
+	[Export] public int NbOFWaves;
+	public Func<List<FloatWindow>>[] WaveStart;
 	public enum WindowType { Laser, Extend, Follow, Spike, Compress, Wave }
 
 	public override void _Ready()
@@ -65,7 +67,7 @@ public partial class WaveDataLevel2 : WaveData
 				windows.Add(c);
 				break;
 			case WindowType.Wave:
-				WaveWindow w = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+				FlappyWindow w = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
 				w.RandomPosition = random;
 				windows.Add(w);
 				break;
@@ -109,7 +111,7 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave5()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
 		F._Mode = 1;
 		F.RandomPosition = true;
 		windows.Add(F);
@@ -128,7 +130,7 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave7()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
 		F._Mode = 2;
 		F.RandomPosition = true;
 		windows.Add(F);
@@ -206,7 +208,7 @@ public partial class WaveDataLevel2 : WaveData
 	public List<FloatWindow> StartWave14()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		WaveWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<WaveWindow>();
+		FlappyWindow F = States.SceneLoader.FlappyWindowScene.Instantiate<FlappyWindow>();
 		F._Mode = 2;
 		F.RandomPosition = true;
 		windows.Add(F);
@@ -296,7 +298,7 @@ public partial class WaveDataLevel2 : WaveData
 		AddWindow(windows, WindowType.Follow, true);
 		AddWindow(windows, WindowType.Laser, true);
 		AddWindow(windows, WindowType.Wave, true);
-		WaveWindow C = States.SceneLoader.CompressWindowScene.Instantiate<WaveWindow>();
+		FlappyWindow C = States.SceneLoader.CompressWindowScene.Instantiate<FlappyWindow>();
 		C._Mode = 0;
 		C.RandomPosition = true;
 		windows.Add(C);
