@@ -91,7 +91,7 @@ public partial class Helper : Npc
 					Level3.Instance.player.Head.AngularVelocity = 10;
 				};
 
-				GetTree().CreateTimer(blood.Lifetime + 5f).Timeout += () =>
+				GetTree().CreateTimer(blood.Lifetime + 2.5f).Timeout += () =>
 				{
 					GameManager.GameRoot.RemoveChild(blood);
 					blood.QueueFree();

@@ -10,6 +10,7 @@ public partial class Maze : Node3D
     [Export] public PackedScene ObjectiveScene;
     [Export] public PackedScene EasterScene;
     [Export] public PackedScene FlashLightScene;
+    [Export] public PackedScene HelperBodyScene;
     [Export] public int MazeSize = 31;
 
 
@@ -72,7 +73,7 @@ public partial class Maze : Node3D
         if (MazeSize > 2)
             GenerateMazeDFS(1, 1);
 
-        PlaceRoom(MazeSize / 2, MazeSize / 2, 3, 3, true);
+        PlaceRoom(MazeSize / 2, MazeSize / 2, 5, 5, true);
         const int SafeZone = 11;
         ReplaceLabel(MazeSize / 2, MazeSize / 2, SafeZone, SafeZone, Floor, CantSpawn, true);
 
@@ -100,9 +101,9 @@ public partial class Maze : Node3D
         PlaceRoom(cornerToRemove.X, cornerToRemove.Y, 3, 3, true);
         MazeData[cornerToRemove.X, cornerToRemove.Y] = EasterEgg;
 
-        MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
-        MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
-        MazeData[MazeSize / 2, MazeSize / 2 - 1] = ObjectiveLabel;
+        //MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
+        //MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
+        //MazeData[MazeSize / 2, MazeSize / 2 - 1] = ObjectiveLabel;
 
         CalculateDistancesFromCenter();
     }
@@ -237,6 +238,10 @@ public partial class Maze : Node3D
                 }
             }
         }
+
+        Node3D HelperBody = HelperBodyScene.Instantiate<Node3D>();
+        HelperBody.Position = new Vector3(0, 0, -WallSize*2);
+        AddChild(HelperBody);
 
     }
     public void PlaceFlashLight(Vector3 position)

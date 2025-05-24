@@ -264,4 +264,3 @@ color = Color(1, 1, 1, 0)
 libraries = {
 &"": SubResource("AnimationLibrary_d5vjr")
 }
-autoplay = "Start"

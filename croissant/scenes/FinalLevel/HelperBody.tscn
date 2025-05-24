@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://by53uaaufbpyx"]
+
+[ext_resource type="Texture2D" uid="uid://da4l57rdlbio5" path="res://assets/sprites/Player/Helper Body.png" id="1_7t3ja"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7t3ja"]
+radius = 0.2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7t3ja"]
+albedo_color = Color(0, 1, 1, 1)
+emission_enabled = true
+emission = Color(0.227451, 1, 1, 1)
+emission_energy_multiplier = 0.5
+
+[sub_resource type="SphereMesh" id="SphereMesh_ulgu4"]
+material = SubResource("StandardMaterial3D_7t3ja")
+radius = 0.2
+height = 0.4
+
+[node name="HelperBody" type="Node3D"]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(6.53, 0, 0, 0, -2.85435e-07, 6.53, 0, -6.53, -2.85435e-07, 1, 0.01, 1)
+texture_filter = 0
+texture = ExtResource("1_7t3ja")
+
+[node name="RigidBody3D" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06999, 0.5, 0.39233)
+mass = 0.01
+linear_velocity = Vector3(1, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
+shape = SubResource("SphereShape3D_7t3ja")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="RigidBody3D"]
+mesh = SubResource("SphereMesh_ulgu4")
