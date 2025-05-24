@@ -12,15 +12,17 @@ public partial class Level1 : Node2D
     [Export] private PackedScene TankWindowScene;
     [Export] private PackedScene BombWindowScene;
 
-    public float StaticMultiplier = 0.7f;
+    public float StaticWindowMultiplier = 0.7f;
     public float TimerWindowMultiplier = 1.5f;
     public float MoveWindowMultiplier = 1.5f;
     public float DodgeWindowMultiplier = 4.1f;
     public float TankWindowMultiplier = 3.5f;
     public float BombWindowMultiplier = 2.0f;
     public float TimerBasicTime = 0.41f;
-    public float TimerMultiplier = 1.0f;
+    public float TimerMultiplier = 0.85f;
+    public static bool HasBombWindow = false;
     private Timer spawnTimer;
+    private Timer MultiplierTimer;
     public static int WindowCount;
     public static int InitialWindowCount = 0;
     public static Level1 Instance;
@@ -35,6 +37,13 @@ public partial class Level1 : Node2D
         spawnTimer.WaitTime = TimerBasicTime;
         spawnTimer.Timeout += AddNewWindow;
         spawnTimer.Start();
+
+
+        MultiplierTimer = new Timer();
+        AddChild(MultiplierTimer);
+        MultiplierTimer.WaitTime = 1.0f;
+        MultiplierTimer.Timeout += AddMultiplier;
+        MultiplierTimer.Start();
     }
 
     public override void _Process(double delta)
@@ -61,32 +70,48 @@ public partial class Level1 : Node2D
         WindowCount++;
         Lib.Print($"WindowAdd : count: {WindowCount}");
     }
+    
+    public static void AddMultiplier()
+    {
+        Instance.TimerMultiplier += 0.011f;
+        Lib.Print($"TimerMultiplier: {Instance.TimerMultiplier}");
+    }
 
     public static void AddNewWindow()
     {
         if (WindowCount < 22 && WindowCount > 0 && InitialWindowCount >= 22)
         {
+            int i;
             var scenes = new PackedScene[]
             {
                 Instance.StaticWindowScene,
                 Instance.MoveWindowScene,
-                Instance.BombWindowScene,
                 Instance.TankWindowScene,
                 Instance.TimerWindowScene,
-                Instance.DodgeWindowScene
+                Instance.DodgeWindowScene,
+                Instance.BombWindowScene
             };
 
             var multipliers = new float[]
             {
-                Instance.StaticMultiplier,
+                Instance.StaticWindowMultiplier,
                 Instance.MoveWindowMultiplier,
-                Instance.BombWindowMultiplier,
                 Instance.TankWindowMultiplier,
                 Instance.TimerWindowMultiplier,
-                Instance.DodgeWindowMultiplier
+                Instance.DodgeWindowMultiplier,
+                Instance.BombWindowMultiplier
             };
 
-            int i = Lib.rand.Next(0, scenes.Length);
+            if (HasBombWindow)
+            {
+                i = Lib.rand.Next(0, scenes.Length - 1);
+                HasBombWindow = false;
+            }
+            else
+            {
+                i = Lib.rand.Next(0, scenes.Length);
+            }
+
             FloatWindow window = scenes[i].Instantiate<FloatWindow>();
             Instance.AddChild(window);
             Instance.Windows.Add(window);
@@ -97,7 +122,11 @@ public partial class Level1 : Node2D
             Instance.spawnTimer.Start();
 
             WindowCount++;
-            Instance.TimerMultiplier += 0.033f;
+
+            if (i == 5 && WindowCount < 3) // To avoid too much bomb windows when few windows are present
+            {
+                HasBombWindow = true;
+            }
 
             //Lib.Print($"WindowAdd : count: {WindowCount}");
 
