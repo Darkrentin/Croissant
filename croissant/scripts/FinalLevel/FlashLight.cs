@@ -21,8 +21,12 @@ public partial class FlashLight : Node3D
 		if (body is Player3D player)
 		{
 			player.Flashlight.Visible = true;
-			GetParent().RemoveChild(this);
-			QueueFree();
+			CallDeferred(nameof(Delete));
 		}
+	}
+	public void Delete()
+	{
+		GetParent().RemoveChild(this);
+		QueueFree();
 	}
 }
