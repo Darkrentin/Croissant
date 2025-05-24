@@ -10,7 +10,7 @@ uniform float emission_intensity : hint_range(0.0, 10.0);
 uniform float normal_strength : hint_range(0.0, 20.0) = 5.0;
 uniform float roughness_value : hint_range(0.0, 1.0) = 0.3;
 uniform float roughness_variation : hint_range(0.0, 1.0) = 0.4;
-uniform float displacement_strength : hint_range(0.0, 2.0) = 0.2; // Contrôle la hauteur physique
+uniform float displacement_strength : hint_range(0.0, 2.0) = 0.2; // Controls physical height
 
 vec2 random2D(vec2 p) {
     return fract(sin(vec2(dot(p, vec2(127.1, 311.7)), dot(p, vec2(269.5, 183.3)))) * 43758.5453);
@@ -67,21 +67,17 @@ void vertex() {
 
 void fragment() {
     vec2 uv = UV * scale;
-    float voronoi_value = voronoiIQ(uv);
-
-    // Calculer la couleur en fonction du motif voronoi
+    float voronoi_value = voronoiIQ(uv);    // Calculate color based on voronoi pattern
     vec4 final_color = mix(dark_lava_color, light_lava_color, voronoi_value);
 
-    // Calculer la carte des normales pour donner du relief
+    // Calculate normal map to add relief
     vec3 normal_map = calculateNormal(uv, voronoi_value);
 
-    // Simuler des variations de hauteur
-    float height = voronoi_value * 0.2;
-
-    // Variation de rugosité basée sur le motif (les zones claires sont plus lisses)
+    // Simulate height variations
+    float height = voronoi_value * 0.2;    // Roughness variation based on pattern (bright areas are smoother)
     float material_roughness = roughness_value - roughness_variation * voronoi_value;
 
-    // Appliquer les propriétés de surface
+    // Apply surface properties
     ALBEDO = final_color.rgb;
     NORMAL = normal_map;
     ROUGHNESS = material_roughness;
