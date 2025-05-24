@@ -40,6 +40,7 @@ public partial class Wave : Node
 				window.ParentWave = this;
 				NbOfEnemies++;
 				WaveManager.SpawnNode.AddChild(window);
+				Lib.Print("Enemy spawned: " + NbOfEnemies);
 			}
 		}
 		else

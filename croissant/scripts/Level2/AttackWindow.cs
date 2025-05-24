@@ -16,6 +16,8 @@ public partial class AttackWindow : FloatWindow
     public int Lives = 3;
     public Phase CurrentPhase { get => _phase; set { _phase = value; } }
     public Wave ParentWave;
+    public static int nbOfAttackWindows = 0;
+    public int id;
     public Vector2I CursorPosition
     {
         get
@@ -35,6 +37,10 @@ public partial class AttackWindow : FloatWindow
         Draggable = false;
         Minimizable = false;
         base._Ready();
+
+        id = nbOfAttackWindows;
+        nbOfAttackWindows++;
+        Title = id.ToString();
 
         const int WindowSizeX = 160;
         int newSize = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX)).X;
@@ -94,6 +100,10 @@ public partial class AttackWindow : FloatWindow
         if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Level2.CursorWindow))
         {
             Level2.CursorWindow.TakeDamage();
+            Lib.Print($"AttackWindow: {Title} collided with CursorWindow");
+            GetParent().RemoveChild(this);
+            GameManager.GameRoot.AddChild(this);
+            ProcessMode = ProcessModeEnum.Disabled;
             CurrentPhase = Phase.Dammage;
         }
         if (CurrentPhase == Phase.Dammage && !IsCollided(Level2.CursorWindow))
