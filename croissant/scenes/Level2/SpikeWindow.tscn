@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://740i6d8eo1cy" path="res://scripts/Level2/SpikeWindow.cs" id="1_xnfaj"]
 [ext_resource type="PackedScene" uid="uid://chuegp025s2xl" path="res://scenes/Level2/VisualCollision.tscn" id="2_54jmc"]
 [ext_resource type="Shader" uid="uid://cto0wgamksgw6" path="res://assets/shaders/Indicator.gdshader" id="3_54jmc"]
-[ext_resource type="AudioStream" uid="uid://b6nixm4xtdfh0" path="res://assets/sounds/level_2/spike_window.mp3" id="4_a16pk"]
+[ext_resource type="AudioStream" uid="uid://o4aw1ld8t2el" path="res://assets/sounds/level_2/alternative_spike_window.mp3" id="4_a16pk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a16pk"]
 shader = ExtResource("3_54jmc")
