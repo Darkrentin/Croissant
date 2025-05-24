@@ -1841,7 +1841,6 @@ tree_root = SubResource("AnimationNodeStateMachine_6qkuw")
 anim_player = NodePath("../AnimationScreen")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-bus = &"sfx"
 
 [editable path="SubViewport/eye/L"]
 [editable path="SubViewport/eye/R"]

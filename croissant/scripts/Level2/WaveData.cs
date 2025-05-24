@@ -298,7 +298,7 @@ public partial class WaveData : Node
 		AddWindow(windows, WindowType.Follow, true);
 		AddWindow(windows, WindowType.Laser, true);
 		AddWindow(windows, WindowType.Wave, true);
-		FlappyWindow C = States.SceneLoader.CompressWindowScene.Instantiate<FlappyWindow>();
+		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = true;
 		windows.Add(C);

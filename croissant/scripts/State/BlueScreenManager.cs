@@ -7,9 +7,21 @@ public static class BlueScreenManager
     public const int MaxWindows = 25;
     public static int NbOfFakeWindow = 0;
     public static int state = 0;
+    public static AudioStreamPlayer PopupEnter;
+    public static bool NotInstancied = true;
 
     public static void ManageBlueScreen()
     {
+        if (NotInstancied)
+        {
+            PopupEnter = new AudioStreamPlayer();
+            PopupEnter.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/level_1/popup_enter.mp3");
+            PopupEnter.Bus = "SFX";
+            PopupEnter.VolumeDb = -10f;
+            GameManager.GameRoot.AddChild(PopupEnter);
+            NotInstancied = false;
+        }
+
         if (state == 0)
         {
             if (NbOfFakeWindow > MaxWindows)
@@ -17,6 +29,7 @@ public static class BlueScreenManager
                 state = 1;
                 return;
             }
+            PopupEnter.Play();
             StaticWindow window = States.StaticWindowScene.Instantiate<StaticWindow>();
             window.AlwaysOnTop = false;
             GameManager.GameRoot.AddChild(window);

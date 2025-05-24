@@ -157,6 +157,7 @@ public static class States
         //Change State condition
         GameManager.State = GameManager.GameState.IntroHelperBuffer;
     }
+
     public static void Level2()
     {
         GameManager.helper.HideNpc(3);
