@@ -63,8 +63,12 @@ public partial class Helper : Npc
 				Level3.Instance.player.Animator.Play("Repair");
 				break;
 			case "HelperDeath":
-
 				DeathSound.Play();
+				GetTree().CreateTimer(0.535f).Timeout += () =>
+				{
+					Level3.Instance.player.Animator.Play("Slice");
+				};
+				
 
 				GetTree().CreateTimer(1f).Timeout += () =>
 				{

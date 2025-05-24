@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=17 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="5_b7rdj"]
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
+[ext_resource type="Texture2D" uid="uid://d1gjr6yxhl2kj" path="res://assets/sprites/Placeholder.png" id="8_125ny"]
 [ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="9_fwmwi"]
 
 [sub_resource type="Animation" id="Animation_b7rdj"]
@@ -158,6 +159,17 @@ libraries = {
 &"": SubResource("AnimationLibrary_fwmwi")
 }
 autoplay = "Start"
+
+[node name="Tuto" type="TextureRect" parent="UI"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 8.0
+anchor_right = 0.75
+anchor_bottom = 8.437
+offset_right = 3.05176e-05
+offset_bottom = 0.0639648
+texture = ExtResource("8_125ny")
+expand_mode = 1
 
 [node name="Shader effects" type="ColorRect" parent="."]
 top_level = true

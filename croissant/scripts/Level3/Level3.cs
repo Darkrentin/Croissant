@@ -130,7 +130,6 @@ public partial class Level3 : FloatWindow
             {
                 player.LevelEnd = true;
             };
-            player.Sprite.FlipH = false;
         }
     }
 

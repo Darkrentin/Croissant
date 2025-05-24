@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=35 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
 [ext_resource type="Script" uid="uid://b08swylcghmyx" path="res://scripts/Level3/StateMachine/PlayerStates.cs" id="2_b8m4g"]
@@ -15,9 +15,10 @@
 [ext_resource type="Texture2D" uid="uid://dm6sershhsix" path="res://assets/sprites/Player/Death Body.png" id="12_wfwde"]
 [ext_resource type="Texture2D" uid="uid://bjtwtlj371ww3" path="res://assets/sprites/Player/player wall slide 48x48.png" id="12_ww2r1"]
 [ext_resource type="Texture2D" uid="uid://bt55aporf2mpi" path="res://assets/sprites/Player/player jump left 48x48-sheet.png" id="13_b8m4g"]
-[ext_resource type="Texture2D" uid="uid://bu5df1lsnofv0" path="res://assets/sprites/Player/player push 48x48.png" id="16_wfwde"]
+[ext_resource type="Texture2D" uid="uid://danmonlrf3j3e" path="res://assets/sprites/Player/Player Punch 64x64.png" id="14_lxi5e"]
 [ext_resource type="Texture2D" uid="uid://0wdacq2qc21t" path="res://assets/sprites/Player/Player Death 64x64.png" id="17_vw511"]
 [ext_resource type="Texture2D" uid="uid://ciw6nwll2s7js" path="res://assets/sprites/Player/Death Head.png" id="18_vw511"]
+[ext_resource type="PackedScene" uid="uid://c3lpo1ao4ge4f" path="res://scenes/Level3/Others/Program.tscn" id="19_r7lop"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
 radius = 18.0
@@ -121,7 +122,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_7p5e8"]
 resource_name = "Helper_Death"
-length = 3.0
+length = 5.0
 step = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -130,10 +131,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(5.96046e-08, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "update": 1,
-"values": [ExtResource("12_wfwde")]
+"values": [ExtResource("12_wfwde"), ExtResource("12_wfwde")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -142,7 +143,7 @@ tracks/1/path = NodePath("Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(5.96046e-08),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [10]
@@ -154,7 +155,7 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
+"times": PackedFloat32Array(5.96046e-08, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -166,7 +167,7 @@ tracks/3/path = NodePath("Sprite2D:position")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(5.96046e-08),
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -48)]
@@ -238,7 +239,7 @@ tracks/9/path = NodePath("Sprite2D:flip_h")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(5.96046e-08),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -472,10 +473,22 @@ tracks/9/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Program/AnimationPlayer:current_animation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"[stop]"]
+}
 
 [sub_resource type="Animation" id="Animation_lxi5e"]
 resource_name = "Repair"
-length = 3.1
+length = 5.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -484,10 +497,10 @@ tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 3.1),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.5, 1.3, 1.69749, 2.5, 2.9, 3.7, 4.1, 4.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("16_wfwde"), ExtResource("17_vw511")]
+"values": [ExtResource("10_mt1tc"), ExtResource("14_lxi5e"), ExtResource("10_mt1tc"), ExtResource("14_lxi5e"), ExtResource("10_mt1tc"), ExtResource("14_lxi5e"), ExtResource("10_mt1tc"), ExtResource("14_lxi5e"), ExtResource("10_mt1tc")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -496,10 +509,10 @@ tracks/1/path = NodePath("Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.5, 1.3, 1.69749, 2.5, 2.9, 3.7, 4.1, 4.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [10]
+"values": [10, 8, 10, 8, 10, 8, 10, 8, 10]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -508,10 +521,46 @@ tracks/2/path = NodePath("Sprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 3.9, 4, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 4.9, 4.9001),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+"values": [0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 0, 1, 2, 3, 4, 5, 6, 7, 0, 0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Program/AnimationPlayer:current_animation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Build"]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -48), Vector2(0, -48)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_lvl74"]
@@ -676,6 +725,22 @@ tracks/3/keys = {
 "values": [Vector2(0, -48)]
 }
 
+[sub_resource type="Animation" id="Animation_4qqll"]
+resource_name = "Slice"
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Program/AnimationPlayer:current_animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"Slice"]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_b8m4g"]
 _data = {
 &"Death": SubResource("Animation_r7lop"),
@@ -686,6 +751,7 @@ _data = {
 &"RESET": SubResource("Animation_ww2r1"),
 &"Repair": SubResource("Animation_lxi5e"),
 &"Run": SubResource("Animation_lvl74"),
+&"Slice": SubResource("Animation_4qqll"),
 &"WallSlideLeft": SubResource("Animation_ae7sy"),
 &"WallSlideRight": SubResource("Animation_3tawa")
 }
@@ -800,3 +866,8 @@ position = Vector2(29, -7)
 rotation = 1.5708
 scale = Vector2(3, 3)
 texture = ExtResource("18_vw511")
+
+[node name="Program" parent="." instance=ExtResource("19_r7lop")]
+position = Vector2(135, -50)
+
+[editable path="Program"]

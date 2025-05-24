@@ -1,0 +1,206 @@
+[gd_scene load_steps=7 format=3 uid="uid://c3lpo1ao4ge4f"]
+
+[ext_resource type="Texture2D" uid="uid://ctcsleqq7biy5" path="res://assets/sprites/platformer/Exe.svg" id="1_icm6f"]
+[ext_resource type="Texture2D" uid="uid://cfqvpinpt8grv" path="res://assets/sprites/platformer/ConfigFile.png" id="2_5ruqo"]
+
+[sub_resource type="Animation" id="Animation_icm6f"]
+resource_name = "Build"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExeFile:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.9, 1, 1.1, 1.2, 2.1, 2.2, 2.3, 2.4, 3.3, 3.4, 3.5, 3.6, 4.5, 4.6, 4.7, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.4, 0.4), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.4, 0.4), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.4, 0.4), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.3, 0.3), Vector2(0.4, 0.4), Vector2(0.3, 0.3), Vector2(0.3, 0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ConfigFile:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.5, 1, 1.2, 1.4, 1.7, 2.2, 2.4, 2.6, 2.9, 3.4, 3.6, 3.8, 4.1, 4.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.01, 0.01), Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(0.1, 0.1), Vector2(0.01, 0.01), Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(0.1, 0.1), Vector2(0.01, 0.01), Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(0.1, 0.1), Vector2(0.01, 0.01), Vector2(0.4, 0.4), Vector2(0.4, 0.4), Vector2(0.1, 0.1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ConfigFile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1, 1.2, 2.2, 2.4, 3.4, 3.6, 4.6),
+"transitions": PackedFloat32Array(0.5, 1.5, 0.5, 1.5, 0.5, 1.5, 0.5, 1.5),
+"update": 0,
+"values": [Vector2(-100, -100), Vector2(0, 0), Vector2(100, -100), Vector2(0, 0), Vector2(100, 100), Vector2(0, 0), Vector2(-100, 100), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ConfigFile:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 1.23333, 2.23333, 2.4, 3.4, 3.63333, 4.63333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExeFile:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_5ruqo"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExeFile:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.3, 0.3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ConfigFile:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ConfigFile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ConfigFile:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ExeFile:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ExeFile:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_oc45c"]
+resource_name = "Slice"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ExeFile:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ExeFile:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0.3), Vector2(0.3, 0.02)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ExeFile:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 0), Vector2(-2000, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oc45c"]
+_data = {
+&"Build": SubResource("Animation_icm6f"),
+&"RESET": SubResource("Animation_5ruqo"),
+&"Slice": SubResource("Animation_oc45c")
+}
+
+[node name="Program" type="Node2D"]
+
+[node name="ExeFile" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_icm6f")
+
+[node name="ConfigFile" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_5ruqo")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_oc45c")
+}
