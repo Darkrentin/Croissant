@@ -7,21 +7,22 @@ uniform float mult = 1.0;
 
 const float bayer[16] = float[]
 (
-    0.0/16.0,  8.0/16.0,  2.0/16.0, 10.0/16.0,
-   12.0/16.0,  4.0/16.0, 14.0/16.0,  6.0/16.0,
-    3.0/16.0, 11.0/16.0,  1.0/16.0,  9.0/16.0,
-   15.0/16.0,  7.0/16.0, 13.0/16.0,  5.0/16.0
+    0.0, 0.5, 0.125, 0.625,
+    0.75, 0.25, 0.875, 0.375,
+    0.1875, 0.6875, 0.0625, 0.5625,
+    0.9375, 0.4375, 0.8125, 0.3125
 );
 
 void fragment()
 {
-    ivec2 coords = ivec2(floor(FRAGCOORD.xy / scale));
-    int index = (coords.x % 4) + (coords.y % 4) * 4;
-    float threshold = bayer[index];
+    vec2 scaled_coords = FRAGCOORD.xy / scale;
+    ivec2 coords = ivec2(scaled_coords);
+    int index = (coords.x & 3) + ((coords.y & 3) << 2);
+    float threshold = bayer[index] * mult;
 
-    float value = dot(col.rgb, vec3(0.3333));
+    float value = dot(col.rgb, vec3(0.333333));
 
-    if (value < threshold*mult) {discard;}
+    if (value < threshold) {discard;}
 
     COLOR = col;
 }

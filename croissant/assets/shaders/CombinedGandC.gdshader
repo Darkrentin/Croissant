@@ -13,37 +13,36 @@ uniform float shake_color_rate : hint_range(0.0, 1.0) = 0.01; //0.01
 
 float random(float seed)
 {
-    return fract(543.2543 * sin(dot(vec2(seed, seed), vec2(3525.46, -54.3415))));
+    return fract(543.2543 * sin(dot(vec2(seed), vec2(3525.46, -54.3415))));
 }
 
 void fragment()
 {
-    float enable_shift = float(random(trunc(TIME * shake_speed)) < shake_rate);
-
+    float time_seed = trunc(TIME * shake_speed);
+    float enable_shift = float(random(time_seed) < shake_rate);
+    
+    vec2 pixel_offset = SCREEN_PIXEL_SIZE;
     vec2 base_uv = SCREEN_UV;
-    base_uv.x += (random((trunc(SCREEN_UV.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
+    base_uv.x += (random((trunc(base_uv.y * shake_block_size) / shake_block_size) + TIME) - 0.5) * shake_power * enable_shift;
 
-    float r = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement), 0.0).r;
-    float g = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * g_displacement), 0.0).g;
-    float b = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * b_displacement), 0.0).b;
-
-    float a_r = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement), 0.0).a;
-    float a_g = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * g_displacement), 0.0).a;
-    float a_b = texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * b_displacement), 0.0).a;
-
-    float final_alpha = max(max(a_r * r, a_g * g), a_b * b);
+    vec2 r_uv = base_uv + pixel_offset * r_displacement;
+    vec2 g_uv = base_uv + pixel_offset * g_displacement;
+    vec2 b_uv = base_uv + pixel_offset * b_displacement;
+    
+    vec4 r_sample = texture(SCREEN_TEXTURE, r_uv);
+    vec4 g_sample = texture(SCREEN_TEXTURE, g_uv);
+    vec4 b_sample = texture(SCREEN_TEXTURE, b_uv);
+    
+    vec3 rgb = vec3(r_sample.r, g_sample.g, b_sample.b);
+    vec3 alpha_weights = vec3(r_sample.a * rgb.r, g_sample.a * rgb.g, b_sample.a * rgb.b);
+    float final_alpha = max(alpha_weights.r, max(alpha_weights.g, alpha_weights.b));
 
     if (enable_shift > 0.5)
     {
-        r = mix
-        (
-            r,
-            texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * r_displacement) + vec2(shake_color_rate, 0.0), 0.0).r,
-            enable_shift
-        );
-
-        b = mix(b, texture(SCREEN_TEXTURE, base_uv + vec2(SCREEN_PIXEL_SIZE * b_displacement) + vec2(-shake_color_rate, 0.0), 0.0).b,enable_shift);
+        vec2 shake_offset = vec2(shake_color_rate, 0.0);
+        rgb.r = mix(rgb.r, texture(SCREEN_TEXTURE, r_uv + shake_offset).r, enable_shift);
+        rgb.b = mix(rgb.b, texture(SCREEN_TEXTURE, b_uv - shake_offset).b, enable_shift);
     }
 
-    COLOR = vec4(r, g, b, final_alpha);
+    COLOR = vec4(rgb, final_alpha);
 }

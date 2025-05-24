@@ -24,7 +24,7 @@ sky_material = SubResource("ProceduralSkyMaterial_56we2")
 [sub_resource type="Environment" id="Environment_56we2"]
 background_mode = 2
 background_color = Color(0.0768358, 0.0768358, 0.0768358, 1)
-background_energy_multiplier = 1.2
+background_energy_multiplier = 1.1
 sky = SubResource("Sky_knvm8")
 reflected_light_source = 2
 tonemap_mode = 1
@@ -204,8 +204,12 @@ environment = SubResource("Environment_56we2")
 
 [node name="ViewportWithShader" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_wf7iu")
-offset_right = 1920.0
-offset_bottom = 1200.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="ViewportWithShader"]
 handle_input_locally = false
@@ -243,13 +247,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ViewportWithShader/SubViewport/Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_x2utw")
-
-[node name="ViewportWithoutShader" type="SubViewportContainer" parent="."]
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="."]
 visible = false
