@@ -249,9 +249,9 @@ position = Vector2(1352, 960)
 position = Vector2(284, 32)
 shape = SubResource("RectangleShape2D_3b5ir")
 
-[node name="0" parent="." instance=ExtResource("2_t4m8w")]
+[node name="15" parent="." instance=ExtResource("2_t4m8w")]
 position = Vector2(1784, 824)
-NextSceneId = 0
+NextSceneId = 15
 
 [node name="WindowsOnly" parent="." instance=ExtResource("4_7oi64")]
 position = Vector2(256, 416)
