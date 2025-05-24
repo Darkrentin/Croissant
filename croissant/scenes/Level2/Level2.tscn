@@ -4,8 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://b4i4iwr3qk44x" path="res://scenes/WaveManager/WaveManager.tscn" id="2_qsvqe"]
 [ext_resource type="PackedScene" uid="uid://baual4txy33sp" path="res://scenes/Level2/WaveData.tscn" id="3_eyjwi"]
 [ext_resource type="PackedScene" uid="uid://bjgcj0eb3671" path="res://scenes/WaveManager/Wave.tscn" id="4_8crk8"]
-[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_s1ih2"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="6_s1ih2"]
+[ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="6_wgxlr"]
 [ext_resource type="AudioStream" uid="uid://ctykvvvlmtrc7" path="res://assets/sounds/level_2/begin_wave.mp3" id="7_wgxlr"]
 [ext_resource type="AudioStream" uid="uid://yddlid4fsyxd" path="res://assets/sounds/level_2/next_wave.mp3" id="8_4axc7"]
 [ext_resource type="AudioStream" uid="uid://0pupw4lmj33r" path="res://assets/sounds/level_2/end_wave.mp3" id="9_otsul"]
@@ -94,15 +94,10 @@ _data = {
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qsvqe"]
-shader = ExtResource("5_s1ih2")
+shader = ExtResource("6_wgxlr")
 shader_parameter/r_displacement = Vector2(-2, -2)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(2, 2)
-shader_parameter/shake_power = 0.0
-shader_parameter/shake_rate = 0.0
-shader_parameter/shake_speed = 0.0
-shader_parameter/shake_block_size = 30.5
-shader_parameter/shake_color_rate = 0.01
 
 [node name="Level2" type="Node2D" node_paths=PackedStringArray("WaveManager")]
 script = ExtResource("1_u87iq")
