@@ -3,51 +3,45 @@ using System;
 
 public partial class Locked : PlayerState
 {
-    // Mémoire de la direction du mur (nue)
     private Vector2 stuckWallDir;
 
     public override void EnterState()
     {
         Name = "Locked";
-
         Player._hasJumped = false;
 
-        // Arrêt horizontal + petite poussée pour rester collé
-        Player.Velocity = new Vector2(0, PlayerCharacter.GravityWallSlide*3);
+        // Stop horizontal movement and apply a small push to stay attached
+        Player.Velocity = new Vector2(0, PlayerCharacter.GravityWallSlide * 3);
 
         Player.jumps = PlayerCharacter.MaxJumps;
 
-        // On enregistre immédiatement la direction du mur
+        // Record the wall direction immediately
         Player.GetWallDirection();
         stuckWallDir = Player.wallDirection;
 
-        // **On vide les états « just pressed » pour ne pas déclencher**
-        // Godot ne permet pas de réinitialiser Input, mais on peut
-        // consommer le prochain appui en ignorant tout IsActionPressed()
-        // jusqu’à un nouveau JustPressed().
+        // Clear 'just pressed' states to prevent immediate trigger
+        // Godot doesn't allow resetting Input directly, but we can
+        // consume the next press by ignoring all IsActionPressed()
+        // until a new JustPressed().
     }
 
     public override void ExitState()
     {
-        // Rien à faire
     }
 
     public override void Update(double delta)
     {
-        // Mise à jour de la direction murale
+        // Update wall direction
         Player.GetWallDirection();
         var dir = Player.wallDirection;
 
-        // Descente lente
+        // Slow descent
         Player.HandleGravity(delta, PlayerCharacter.GravityWallSlide);
 
         // Animation
         Player.Animator.Play("WallSlideLeft");
         Player.Sprite.FlipH = (dir == Vector2.Right);
 
-        // **Wall jump sur NOUVELLE pression** :
-        // - Nouvelle pression SAUT
-        // - Nouvelle pression de direction opposée
         if (Input.IsActionJustPressed("ui_up"))
         {
             Player.ChangeState((Node)States.Get("WallJump"));
@@ -64,7 +58,7 @@ public partial class Locked : PlayerState
             return;
         }
 
-        // Dès qu’on touche un sol ou qu’on lâche le mur, on tombe
+        // As soon as the floor is touched or the wall is released, switch to falling
         if (dir == Vector2.Zero || Player.IsOnFloor())
         {
             Player.ChangeState((Node)States.Get("Fall"));

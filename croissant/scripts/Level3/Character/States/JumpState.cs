@@ -41,5 +41,4 @@ public partial class JumpState : PlayerState
             Player.ChangeState((Node)States.Get("JumpPeak"));
         }
     }
-
 }

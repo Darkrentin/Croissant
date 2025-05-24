@@ -18,11 +18,6 @@ public partial class WallJumpState : PlayerState
         //GD.Print("Last wall direction: " + lastWallDirection);
     }
 
-
-    public override void ExitState()
-    {
-    }
-
     public override void Update(double delta)
     {
         Player.HandleGravity(delta, PlayerCharacter.GravityJump);
@@ -54,10 +49,7 @@ public partial class WallJumpState : PlayerState
         {
             if (Player.Velocity.Y < 0) Player.Velocity = new Vector2(Player.Velocity.X, 0);
             Player.ChangeState((Node)States.Get("Fall"));
-            
         }
-
-
     }
 
     private void KickOut()

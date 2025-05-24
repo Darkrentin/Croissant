@@ -16,15 +16,15 @@
 [ext_resource type="PackedScene" uid="uid://bpwo3b1mxppoa" path="res://scenes/Level3/Levels/3_11.tscn" id="13_6g7ie"]
 [ext_resource type="PackedScene" uid="uid://byb57u5a4ylpp" path="res://scenes/Level3/Levels/3_12.tscn" id="14_fa7ff"]
 [ext_resource type="PackedScene" uid="uid://v7jwtdleiqiw" path="res://scenes/Level3/Levels/3_13.tscn" id="15_6hjit"]
-[ext_resource type="PackedScene" path="res://scenes/Level3/Levels/3_14.tscn" id="16_scmle"]
+[ext_resource type="PackedScene" uid="uid://ch85yot11aosi" path="res://scenes/Level3/Levels/3_14.tscn" id="16_scmle"]
 [ext_resource type="PackedScene" uid="uid://crihighbgs4le" path="res://scenes/Level3/Levels/3_15.tscn" id="17_8o4oi"]
 [ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="19_8o4oi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v1qwp"]
 shader = ExtResource("19_8o4oi")
-shader_parameter/r_displacement = Vector2(-1, -1)
+shader_parameter/r_displacement = Vector2(-2, -2)
 shader_parameter/g_displacement = Vector2(0, 0)
-shader_parameter/b_displacement = Vector2(1, 1)
+shader_parameter/b_displacement = Vector2(2, 2)
 
 [node name="Level3" type="Window" node_paths=PackedStringArray("player")]
 transparent_bg = true
@@ -37,7 +37,6 @@ transparent = true
 script = ExtResource("1_pl275")
 level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg"), ExtResource("11_ufbxd"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("14_fa7ff"), ExtResource("15_6hjit"), ExtResource("16_scmle"), ExtResource("17_8o4oi")])
 player = NodePath("Player")
-MaxFiles = 4
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(960, 540)

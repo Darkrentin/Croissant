@@ -15,120 +15,101 @@ public partial class Platform : CharacterBody2D
     public float SpeedReductionFactor = 0.75f;
     public Vector2 SpeedRecoveryAmounts = new Vector2(200f, 200f);
 
-    private Vector2 currentAppliedSpeeds;
+    private Vector2 CurrentAppliedSpeeds;
 
     [Export] public bool Freeze = true;
     [Export] public ColorRect Texture;
     public ShaderMaterial Shader;
 
+    public Vector2I CachedTitleBarSize;
+    public bool WindowValid;
+    public const float CollisionThreshold = 0.1f;
+    public const float CollisionDotThreshold = -0.01f;
+
     public override void _Ready()
     {
-        // First get the shape from collisionShape
-        shape = collisionShape?.Shape as RectangleShape2D;
-        if (shape == null)
+        shape = collisionShape.Shape as RectangleShape2D;
+
+        WindowValid = window != null && IsInstanceValid(window);
+        if (WindowValid)
         {
-            //GD.PrintErr("No valid RectangleShape2D found on collisionShape");
-            return;
+            CachedTitleBarSize = window.TitleBarSize;
+            window.Size = (Vector2I)shape.Size - CachedTitleBarSize;
+            window.Position = (Vector2I)GlobalPosition + CachedTitleBarSize;
+            window.Title = "Platform";
         }
 
-        // Then initialize the window if it exists
-        if (window != null && IsInstanceValid(window))
-        {
-            //window.Visible = true;
-            window.Size = (Vector2I)shape.Size - window.TitleBarSize;
-            window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
-        }
-
-        // Get Level3 instance and subscribe to events
         level3 = Level3.Instance;
         if (level3 != null)
         {
             level3.MouseEvent += MouseEvent;
         }
 
-        currentAppliedSpeeds = BaseSpeeds;
-        window.Title = "Platform";
+        CurrentAppliedSpeeds = BaseSpeeds;
         VisibilityChanged += VisibilityChange;
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        if (Freeze) return;
 
-        //Shader.SetShaderParameter("window_size", window.Size);
-
-
-        if (!Freeze)
+        if (Pressed)
         {
-            if (Pressed)
+            if (!Visible)
             {
-                if (!Visible)
+                Pressed = false;
+                return;
+            }
+
+            Vector2 targetGlobalPosition = (Vector2)Lib.GetCursorPosition() - MouseOffset;
+            Vector2 directionToTarget = targetGlobalPosition - GlobalPosition;
+
+            Velocity = directionToTarget * CurrentAppliedSpeeds;
+            MoveAndSlide();
+
+            var collision = GetLastSlideCollision();
+            bool reduceX = false;
+            bool reduceY = false;
+
+            if (collision != null)
+            {
+                Vector2 collisionNormal = collision.GetNormal();
+                float absNormalX = Mathf.Abs(collisionNormal.X);
+                float absNormalY = Mathf.Abs(collisionNormal.Y);
+
+                if (absNormalX > CollisionThreshold)
                 {
-                    Pressed = false;
-                    return;
-                }
-                Vector2 targetGlobalPosition = (Vector2)Lib.GetCursorPosition() - MouseOffset;
-                Vector2 directionToTarget = targetGlobalPosition - GlobalPosition;
-
-                Velocity = new Vector2(directionToTarget.X * currentAppliedSpeeds.X,
-                                    directionToTarget.Y * currentAppliedSpeeds.Y);
-
-                MoveAndSlide();
-
-                var collision = GetLastSlideCollision();
-
-                bool reduceX = false;
-                bool reduceY = false;
-
-                if (collision != null)
-                {
-                    Vector2 collisionNormal = collision.GetNormal();
-
-                    if (Mathf.Abs(collisionNormal.X) > 0.1f)
-                    {
-                        if ((directionToTarget.X * currentAppliedSpeeds.X * collisionNormal.X) < -0.01f)
-                        {
-                            reduceX = true;
-                        }
-                    }
-
-                    if (Mathf.Abs(collisionNormal.Y) > 0.1f)
-                    {
-                        if ((directionToTarget.Y * currentAppliedSpeeds.Y * collisionNormal.Y) < -0.01f)
-                        {
-                            reduceY = true;
-                        }
-                    }
+                    reduceX = (directionToTarget.X * CurrentAppliedSpeeds.X * collisionNormal.X) < CollisionDotThreshold;
                 }
 
-                if (reduceX)
+                if (absNormalY > CollisionThreshold)
                 {
-                    currentAppliedSpeeds.X = Mathf.Max(MinSpeedsWhenBlocked.X, currentAppliedSpeeds.X * SpeedReductionFactor);
-                }
-                else
-                {
-                    currentAppliedSpeeds.X = Mathf.Min(BaseSpeeds.X, currentAppliedSpeeds.X + SpeedRecoveryAmounts.X * (float)delta);
-                }
-
-                if (reduceY)
-                {
-                    currentAppliedSpeeds.Y = Mathf.Max(MinSpeedsWhenBlocked.Y, currentAppliedSpeeds.Y * SpeedReductionFactor);
-                }
-                else
-                {
-                    currentAppliedSpeeds.Y = Mathf.Min(BaseSpeeds.Y, currentAppliedSpeeds.Y + SpeedRecoveryAmounts.Y * (float)delta);
+                    reduceY = (directionToTarget.Y * CurrentAppliedSpeeds.Y * collisionNormal.Y) < CollisionDotThreshold;
                 }
             }
-            else
-            {
-                Velocity = Vector2.Zero;
-                currentAppliedSpeeds.X = Mathf.Min(BaseSpeeds.X, currentAppliedSpeeds.X + SpeedRecoveryAmounts.X * (float)delta);
-                currentAppliedSpeeds.Y = Mathf.Min(BaseSpeeds.Y, currentAppliedSpeeds.Y + SpeedRecoveryAmounts.Y * (float)delta);
-            }
-            window.Position = (Vector2I)GlobalPosition + window.TitleBarSize;
+
+            float deltaFloat = (float)delta;
+
+            CurrentAppliedSpeeds.X = reduceX
+                ? Mathf.Max(MinSpeedsWhenBlocked.X, CurrentAppliedSpeeds.X * SpeedReductionFactor)
+                : Mathf.Min(BaseSpeeds.X, CurrentAppliedSpeeds.X + SpeedRecoveryAmounts.X * deltaFloat);
+
+            CurrentAppliedSpeeds.Y = reduceY
+                ? Mathf.Max(MinSpeedsWhenBlocked.Y, CurrentAppliedSpeeds.Y * SpeedReductionFactor)
+                : Mathf.Min(BaseSpeeds.Y, CurrentAppliedSpeeds.Y + SpeedRecoveryAmounts.Y * deltaFloat);
+        }
+        else
+        {
+            Velocity = Vector2.Zero;
+            float deltaFloat = (float)delta;
+            CurrentAppliedSpeeds.X = Mathf.Min(BaseSpeeds.X, CurrentAppliedSpeeds.X + SpeedRecoveryAmounts.X * deltaFloat);
+            CurrentAppliedSpeeds.Y = Mathf.Min(BaseSpeeds.Y, CurrentAppliedSpeeds.Y + SpeedRecoveryAmounts.Y * deltaFloat);
         }
 
-
-
+        if (WindowValid)
+        {
+            window.Position = (Vector2I)GlobalPosition + CachedTitleBarSize;
+        }
     }
 
     public void VisibilityChange()
@@ -138,67 +119,35 @@ public partial class Platform : CharacterBody2D
 
     public virtual void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
-        if (!window.Visible)
-            return;
-        if (!IsInstanceValid(window) || window == null)
-        {
-            if (level3 != null)
-            {
-                level3.MouseEvent -= MouseEvent;
-            }
-            return;
-        }
+        if (!WindowValid || !window.Visible) return;
 
-        try
+        if (!Freeze && mouseButtonEvent.ButtonIndex == MouseButton.Left)
         {
-            if (!Freeze && mouseButtonEvent.ButtonIndex == MouseButton.Left)
+            if (mouseButtonEvent.Pressed && MouseOnWindow())
             {
-                if (mouseButtonEvent.Pressed && MouseOnWindow())
-                {
-                    Pressed = true;
-                    MouseOffset = (Vector2)Lib.GetCursorPosition() - GlobalPosition;
-                }
-                else if (!mouseButtonEvent.Pressed && Pressed)
-                {
-                    Pressed = false;
-                }
+                Pressed = true;
+                MouseOffset = (Vector2)Lib.GetCursorPosition() - GlobalPosition;
             }
-        }
-        catch (ObjectDisposedException)
-        {
-            if (level3 != null)
+            else if (!mouseButtonEvent.Pressed && Pressed)
             {
-                level3.MouseEvent -= MouseEvent;
+                Pressed = false;
             }
-            Pressed = false;
         }
     }
 
     public bool MouseOnWindow()
     {
-        // Check if window is valid before accessing it
-        if (window == null || window.IsQueuedForDeletion())
-        {
-            return false;
-        }
+        if (!WindowValid) return false;
 
-        try
-        {
-            Vector2I mousePos = Lib.GetCursorPosition();
-            Vector2I windowPos = window.Position;
-            Vector2I windowSize = window.Size;
-            int titleBarHeight = window.TitleBarHeight;
+        Vector2I mousePos = Lib.GetCursorPosition();
+        Vector2I windowPos = window.Position;
+        Vector2I windowSize = window.Size;
+        int titleBarHeight = window.TitleBarHeight;
 
-            return mousePos.X >= windowPos.X &&
-                   mousePos.X <= windowPos.X + windowSize.X &&
-                   mousePos.Y >= windowPos.Y - titleBarHeight &&
-                   mousePos.Y < windowPos.Y;// + windowSize.Y;
-        }
-        catch (ObjectDisposedException)
-        {
-            // Window has been disposed, return false
-            return false;
-        }
+        return mousePos.X >= windowPos.X &&
+               mousePos.X <= windowPos.X + windowSize.X &&
+               mousePos.Y >= windowPos.Y - titleBarHeight &&
+               mousePos.Y < windowPos.Y;
     }
 
     public override void _ExitTree()
@@ -208,11 +157,10 @@ public partial class Platform : CharacterBody2D
             level3.MouseEvent -= MouseEvent;
         }
 
-        if (IsInstanceValid(window))
+        if (WindowValid)
         {
             window.QueueFree();
         }
-
         base._ExitTree();
     }
 }

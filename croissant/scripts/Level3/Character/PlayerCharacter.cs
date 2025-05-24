@@ -12,19 +12,14 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public AnimationPlayer Animator;
     [Export] public CollisionShape2D Collider;
     [Export] public Node States;
-
     [Export] public Timer CoyoteTimer;
     [Export] public Timer JumpBufferTimer;
-
-    [Export] public RayCast2D RCBottomLeft; // i removed them of the code because it had a lot of bugs
-    [Export] public RayCast2D RCBottomRight;
-
     [Export] public Area2D area2D;
 
     public bool FlipLock { get; set; } = false;
 
     // Physics constants (scaled for larger character)
-    public const float RunSpeed = 135f * ScaleFactor;
+    public const float RunSpeed = 140f * ScaleFactor;
     public const float WallJumpHSpeed = 120f * ScaleFactor;
     public const float GroundAcceleration = 20f * ScaleFactor;
     public const float GroundDeceleration = 25f * ScaleFactor;
@@ -36,7 +31,6 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float GravityJump = 600f * ScaleFactor;
     public const float GravityFall = 700f * ScaleFactor;
     public const float MaxFallVelocity = 300f * ScaleFactor;
-
     public const float MaxFallWallVelocity = 100f * ScaleFactor;
     public const float JumpVelocity = -240f * ScaleFactor;
     public float WallJumpVelocity = -190f * ScaleFactor;
@@ -45,7 +39,6 @@ public partial class PlayerCharacter : CharacterBody2D
     public const float CoyoteTime = 0.1f;
     public const float JumpBufferTime = 0.15f;
     public static float GravityWallSlide = 20f; // chute lente
-
     public const float DirectionBufferTime = 0.2f;
     private int _lastDirPressTime = -1;
     private int _lastDirPressMsec = -1;
@@ -294,13 +287,10 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public void ChangeState(Node nextState)
     {
-        if (nextState != null)
-        {
-            previousState = currentState;
-            currentState = nextState;
-            previousState.Call("ExitState");
-            currentState.Call("EnterState");
-        }
+        previousState = currentState;
+        currentState = nextState;
+        previousState.Call("ExitState");
+        currentState.Call("EnterState");
     }
 
     public void HandleFlipH()

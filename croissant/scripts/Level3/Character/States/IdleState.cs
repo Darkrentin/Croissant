@@ -15,14 +15,11 @@ public partial class IdleState : PlayerState
 
     public override void Update(double delta)
     {
-       
         Player.GetInputStates();
-
         Player.HandleFalling();
         Player.HandleJump();
         Player.HorizontalMovement();
 
-       
         //GD.Print($"[Idle] moveDirectionX: {Player.moveDirectionX}");
 
         if (Player.moveDirectionX != 0)

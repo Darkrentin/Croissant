@@ -18,7 +18,7 @@
 [ext_resource type="Texture2D" uid="uid://danmonlrf3j3e" path="res://assets/sprites/Player/Player Punch 64x64.png" id="14_lxi5e"]
 [ext_resource type="Texture2D" uid="uid://0wdacq2qc21t" path="res://assets/sprites/Player/Player Death 64x64.png" id="17_vw511"]
 [ext_resource type="Texture2D" uid="uid://ciw6nwll2s7js" path="res://assets/sprites/Player/Death Head.png" id="18_vw511"]
-[ext_resource type="PackedScene" uid="uid://c3lpo1ao4ge4f" path="res://scenes/Level3/Others/Program.tscn" id="19_r7lop"]
+[ext_resource type="PackedScene" uid="uid://bdyk7lc7jde7" path="res://scenes/Level3/Others/Program.tscn" id="19_r7lop"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
 radius = 18.0
@@ -759,7 +759,7 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_vw511"]
 radius = 13.0
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Head", "Sprite", "Animator", "Collider", "States", "CoyoteTimer", "JumpBufferTimer", "RCBottomLeft", "RCBottomRight", "area2D")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Head", "Sprite", "Animator", "Collider", "States", "CoyoteTimer", "JumpBufferTimer", "area2D")]
 texture_filter = 1
 position = Vector2(2, 0)
 collision_layer = 2
@@ -772,8 +772,6 @@ Collider = NodePath("CollisionShape2D")
 States = NodePath("PlayerStates")
 CoyoteTimer = NodePath("Timers/Coyotte")
 JumpBufferTimer = NodePath("Timers/Jump")
-RCBottomLeft = NodePath("Raycasts/WallJump/BottomLeft")
-RCBottomRight = NodePath("Raycasts/WallJump/BottomRight")
 area2D = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -828,22 +826,6 @@ shape = SubResource("RectangleShape2D_xk4oe")
 libraries = {
 &"": SubResource("AnimationLibrary_b8m4g")
 }
-
-[node name="Raycasts" type="Node2D" parent="."]
-
-[node name="WallJump" type="Node2D" parent="Raycasts"]
-
-[node name="BottomLeft" type="RayCast2D" parent="Raycasts/WallJump"]
-position = Vector2(-2, -13)
-target_position = Vector2(-28, 0)
-collision_mask = 65535
-collide_with_areas = true
-
-[node name="BottomRight" type="RayCast2D" parent="Raycasts/WallJump"]
-position = Vector2(-2, -13)
-target_position = Vector2(28, 0)
-collision_mask = 65535
-collide_with_areas = true
 
 [node name="Timers" type="Node" parent="."]
 

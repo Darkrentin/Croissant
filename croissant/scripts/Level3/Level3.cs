@@ -4,15 +4,14 @@ using System;
 public partial class Level3 : FloatWindow
 {
     [Export] public PackedScene[] level3Scenes;
+    [Export] public PlayerCharacter player;
+    [Export] public int MaxFiles = 4;
     public SubLevel3[] Level3Nodes;
     public int sceneid = 0;
     public static Level3 Instance;
     public SubLevel3 actualScene;
     public Action<InputEventMouseButton> MouseEvent;
-    [Export] public PlayerCharacter player;
-    [Export] public int MaxFiles = 5;
     public int FilesCollected = 0;
-
     private Timer invincibleTimer;
 
     public override void _Ready()
@@ -37,8 +36,6 @@ public partial class Level3 : FloatWindow
         AddChild(invincibleTimer);
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
-
-
     }
 
     public void ShowPlayer()
@@ -52,7 +49,6 @@ public partial class Level3 : FloatWindow
     {
         player.isInvincible = false;
     }
-
 
     public override void _Input(InputEvent @event)
     {
@@ -86,7 +82,6 @@ public partial class Level3 : FloatWindow
         player.isInvincible = true;
         invincibleTimer.Start();
         SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];
-
 
         if (Level3.Instance.actualScene != null)
         {

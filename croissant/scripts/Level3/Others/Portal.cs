@@ -1,4 +1,3 @@
-using System.Runtime.Intrinsics.Wasm;
 using Godot;
 
 public partial class Portal : Area2D
@@ -20,12 +19,11 @@ public partial class Portal : Area2D
 		};
 		VisibilityChanged += OnVisibilityChange;
 		AddChild(timer);
-
 	}
 
 	public void OnBoddyEntered(Node body)
 	{
-		if(isChangingScene)
+		if (isChangingScene)
 			return;
 
 		if (body is PlayerCharacter player)
@@ -34,20 +32,15 @@ public partial class Portal : Area2D
 			player.isInvincible = true;
 			player.isDead = true;
 			Level3.Instance.Transition(this.NextSceneId);
-			
-			
 		}
 	}
 
 	public void OnVisibilityChange()
 	{
-		if(Visible)
+		if (Visible)
 		{
 			timer.Start();
 			isChangingScene = true;
 		}
 	}
-
-	
-
 }

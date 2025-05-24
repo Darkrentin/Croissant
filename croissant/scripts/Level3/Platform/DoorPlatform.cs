@@ -5,26 +5,36 @@ public partial class DoorPlatform : Platform
     [Export] public Label label;
     public bool isOpen = false;
     [Export] public int nbOfFilesToOpen = 1;
+
+    private Vector2 HiddenPosition;
+    private string LabelFormat;
+    private int LastFilesCollected = -1;
+
     public override void _Ready()
     {
         base._Ready();
         Shader = Texture.Material as ShaderMaterial;
         Shader.SetShaderParameter("window_size", window.Size);
-    }
-
-    public override void _PhysicsProcess(double delta)
-    {
-        base._PhysicsProcess(delta);
+        HiddenPosition = GameManager.ScreenSize * 3;
+        LabelFormat = $"{{0}}/{nbOfFilesToOpen}";
     }
 
     public override void _Process(double delta)
     {
         base._Process(delta);
-        label.Text = $"{Level3.Instance.FilesCollected}/{nbOfFilesToOpen}";
-        if (Level3.Instance.FilesCollected >= nbOfFilesToOpen)
+
+        int currentFiles = Level3.Instance.FilesCollected;
+        if (currentFiles != LastFilesCollected)
         {
-            Position = GameManager.ScreenSize * 3;
-            window.Position = (Vector2I)Position;
+            LastFilesCollected = currentFiles;
+            label.Text = string.Format(LabelFormat, currentFiles);
+
+            if (currentFiles >= nbOfFilesToOpen && !isOpen)
+            {
+                isOpen = true;
+                Position = HiddenPosition;
+                window.Position = (Vector2I)Position;
+            }
         }
     }
 }

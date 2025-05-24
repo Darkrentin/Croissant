@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3lpo1ao4ge4f"]
+[gd_scene load_steps=7 format=3 uid="uid://bdyk7lc7jde7"]
 
 [ext_resource type="Texture2D" uid="uid://ctcsleqq7biy5" path="res://assets/sprites/platformer/Exe.svg" id="1_icm6f"]
 [ext_resource type="Texture2D" uid="uid://cfqvpinpt8grv" path="res://assets/sprites/platformer/ConfigFile.png" id="2_5ruqo"]
