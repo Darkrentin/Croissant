@@ -97,13 +97,10 @@ public partial class AttackWindow : FloatWindow
 			Parent.CursorWindow.TakeDamage();
 		}
         */
-        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Level2.CursorWindow))
+        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Level2.CursorWindow) && Visible && IsInsideTree())
         {
             Level2.CursorWindow.TakeDamage();
             Lib.Print($"AttackWindow: {Title} collided with CursorWindow");
-            GetParent().RemoveChild(this);
-            GameManager.GameRoot.AddChild(this);
-            ProcessMode = ProcessModeEnum.Disabled;
             CurrentPhase = Phase.Dammage;
         }
         if (CurrentPhase == Phase.Dammage && !IsCollided(Level2.CursorWindow))
