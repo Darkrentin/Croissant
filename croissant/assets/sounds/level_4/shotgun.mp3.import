@@ -13,7 +13,7 @@ dest_files=["res://.godot/imported/shotgun.mp3-3a8d1dc0a29d53825de2e7e0e41fabba.
 [params]
 
 loop=false
-loop_offset=0
-bpm=0
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

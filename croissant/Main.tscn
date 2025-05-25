@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c2f4mqkrcs2ea"]
+[gd_scene load_steps=13 format=3 uid="uid://c2f4mqkrcs2ea"]
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://810np22fqce" path="res://scenes/Windows/MenuWindow.tscn" id="2_fos0i"]
@@ -6,14 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://cmio7f2l6htgy" path="res://scenes/Other/SpeedRunTimer.tscn" id="4_cm0pq"]
 [ext_resource type="AudioStream" uid="uid://clo716yukn5vw" path="res://assets/musics/idle_music.mp3" id="5_fos0i"]
 [ext_resource type="AudioStream" uid="uid://bimk8wel6u47d" path="res://assets/musics/level_2.mp3" id="6_03owx"]
+[ext_resource type="AudioStream" uid="uid://bgiy0q75f2fws" path="res://assets/musics/intro_level.mp3" id="6_20pc6"]
+[ext_resource type="AudioStream" uid="uid://la0dt07dw6b5" path="res://assets/musics/level_1.mp3" id="7_5vvyt"]
 [ext_resource type="AudioStream" uid="uid://bf6xeuoqynhfq" path="res://assets/musics/level_3.mp3" id="7_wkp8b"]
 [ext_resource type="AudioStream" uid="uid://ctjjopkt8qu6s" path="res://assets/musics/level_4.mp3" id="8_20pc6"]
 [ext_resource type="AudioStream" uid="uid://clgqtcxoruwrp" path="res://assets/musics/scoreboard.mp3" id="9_5vvyt"]
+[ext_resource type="AudioStream" uid="uid://bm1mql02odvf0" path="res://assets/musics/level_boss.mp3" id="9_wkp8b"]
 
 [node name="Main" type="Node2D" node_paths=PackedStringArray("Musics")]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_fos0i")
-ExportState = 10
+ExportState = 11
 Musics = [NodePath("Music/IdleMusic"), NodePath("Music/IntroGame"), NodePath("Music/Level1"), NodePath("Music/Level2"), NodePath("Music/Level3"), NodePath("Music/Level4"), NodePath("Music/FinalBoss"), NodePath("Music/Scoreboard")]
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
@@ -59,9 +62,11 @@ stream = ExtResource("5_fos0i")
 bus = &"Music"
 
 [node name="IntroGame" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("6_20pc6")
 bus = &"Music"
 
 [node name="Level1" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("7_5vvyt")
 bus = &"Music"
 
 [node name="Level2" type="AudioStreamPlayer" parent="Music"]
@@ -77,6 +82,7 @@ stream = ExtResource("8_20pc6")
 bus = &"Music"
 
 [node name="FinalBoss" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("9_wkp8b")
 
 [node name="Scoreboard" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("9_5vvyt")
