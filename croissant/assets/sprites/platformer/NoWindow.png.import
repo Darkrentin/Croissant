@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dqfo1oymeb7ha"
-path="res://.godot/imported/stickman.png-bdc2893c0c7f72bdc9b7f82fa655531a.ctex"
+uid="uid://c5nxl1hv03hpb"
+path="res://.godot/imported/NoWindow.png-51743d55723cc20a18eea730a62524ee.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/stickman.png"
-dest_files=["res://.godot/imported/stickman.png-bdc2893c0c7f72bdc9b7f82fa655531a.ctex"]
+source_file="res://assets/sprites/platformer/NoWindow.png"
+dest_files=["res://.godot/imported/NoWindow.png-51743d55723cc20a18eea730a62524ee.ctex"]
 
 [params]
 

@@ -1,29 +1,41 @@
-[gd_scene load_steps=7 format=3 uid="uid://uhnhsc4jvdgm"]
+[gd_scene load_steps=9 format=3 uid="uid://uhnhsc4jvdgm"]
 
 [ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="1_p3h6d"]
 [ext_resource type="Script" uid="uid://ug8rmjlf4rth" path="res://scripts/Level3/Platform/MovePlatform.cs" id="1_xf3iu"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_xf3iu"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_70k7n"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_oty2a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oty2a"]
+resource_local_to_scene = true
 shader = ExtResource("4_70k7n")
-shader_parameter/color1 = Color(0.173887, 0.368972, 0.853614, 1)
+shader_parameter/color1 = Color(0, 1, 1, 1)
 shader_parameter/color2 = Color(0, 0, 1, 0)
 shader_parameter/animate = true
 shader_parameter/direction = -1.0
-shader_parameter/frequency = 10.0
+shader_parameter/frequency = 32.0
 shader_parameter/speed = 0.3
-shader_parameter/border_width = 10.0
+shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
 shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6sxne"]
+shader = ExtResource("5_oty2a")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3h6d"]
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape", "Texture")]
+[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("ShaderRect", "window", "collisionShape", "Texture")]
 collision_mask = 5
 script = ExtResource("1_xf3iu")
+MinMult = 10.0
+MaxMult = 1.1
+Color = Color(0, 1, 1, 1)
+ShaderRect = NodePath("Window/ShaderRect")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
 Texture = NodePath("Window/PlatformTexture")
@@ -31,6 +43,7 @@ Texture = NodePath("Window/PlatformTexture")
 [node name="Window" type="Window" parent="."]
 auto_translate_mode = 1
 transparent_bg = true
+position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 transparent = true
 sharp_corners = true
@@ -43,6 +56,18 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 offset_right = 0.0
 offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ShaderRect" type="ColorRect" parent="Window"]
+material = SubResource("ShaderMaterial_6sxne")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -1.0
+offset_right = -2.0
+offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 

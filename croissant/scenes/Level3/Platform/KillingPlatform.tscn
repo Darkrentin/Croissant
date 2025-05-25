@@ -8,10 +8,10 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.692308, 0.735054), -1.10736, -
 point_count = 3
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k3r00"]
-size = Vector2(207.5, 244.5)
+size = Vector2(120, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ylwtk"]
-size = Vector2(207, 244.5)
+size = Vector2(120, 120)
 
 [node name="KillingPlatform" type="CharacterBody2D" node_paths=PackedStringArray("area2D", "cpuParticles2D_Black", "cpuParticles2D_R", "window", "collisionShape", "Texture")]
 collision_layer = 4
@@ -25,7 +25,6 @@ Texture = NodePath("Window/ColorRect")
 
 [node name="Window" type="Window" parent="."]
 transparent_bg = true
-position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 transparent = true
 sharp_corners = true
@@ -78,12 +77,12 @@ scale_amount_max = 2.0
 color = Color(1, 0, 0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(103.75, 122.25)
+position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_k3r00")
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(103.5, 122.25)
+position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_ylwtk")

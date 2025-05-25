@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://yci2uoxhn1pk"
-path="res://.godot/imported/WindowIcon.png-51b5b7ac2dd7527e16cc7877df5b6bf8.ctex"
+uid="uid://dv5vcpvln3cak"
+path="res://.godot/imported/NoPlayer.png-9a8a349b71fd76277f21c5378668f15c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/platformer/WindowIcon.png"
-dest_files=["res://.godot/imported/WindowIcon.png-51b5b7ac2dd7527e16cc7877df5b6bf8.ctex"]
+source_file="res://assets/sprites/platformer/NoPlayer.png"
+dest_files=["res://.godot/imported/NoPlayer.png-9a8a349b71fd76277f21c5378668f15c.ctex"]
 
 [params]
 

@@ -30,7 +30,7 @@ unfocusable = true
 sharp_corners = true
 script = ExtResource("2_l0hd8")
 
-[node name="ColorRect" type="ColorRect" parent="Window"]
+[node name="ShaderRect" type="ColorRect" parent="Window"]
 material = SubResource("ShaderMaterial_kkcy4")
 anchors_preset = 15
 anchor_right = 1.0
