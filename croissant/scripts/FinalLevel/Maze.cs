@@ -13,9 +13,13 @@ public partial class Maze : Node3D
     [Export] public PackedScene HelperBodyScene;
     [Export] public int MazeSize = 31;
 
+    public Node3D HelperBody;
+    public Easter EasterEggs;
+    public Node3D FlashLight;
+
 
     public int WallSize = 2;
-    public const int LampSpacing = 6;
+    public const int LampSpacing = 8;
 
     public const int Lamp = -2;
     public const int CantSpawn = -1;
@@ -101,9 +105,9 @@ public partial class Maze : Node3D
         PlaceRoom(cornerToRemove.X, cornerToRemove.Y, 3, 3, true);
         MazeData[cornerToRemove.X, cornerToRemove.Y] = EasterEgg;
 
-        //MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
-        //MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
-        //MazeData[MazeSize / 2, MazeSize / 2 - 1] = ObjectiveLabel;
+        MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
+        MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
+        MazeData[MazeSize / 2, MazeSize / 2 - 1] = ObjectiveLabel;
 
         CalculateDistancesFromCenter();
     }
@@ -228,10 +232,10 @@ public partial class Maze : Node3D
                     }
                     if (MazeData[i, j] == EasterEgg)
                     {
-                        Node3D easter = EasterScene.Instantiate<Node3D>();
-                        easter.Position = new Vector3(nx, 0, nz) * WallSize;
-                        AddChild(easter);
-                        PlaceFlashLight(easter.Position);
+                        EasterEggs = EasterScene.Instantiate<Easter>();
+                        EasterEggs.Position = new Vector3(nx, 0, nz) * WallSize;
+                        AddChild(EasterEggs);
+                        PlaceFlashLight(EasterEggs.Position);
 
                         //EasterEggs.Add(easter);
                     }
@@ -239,7 +243,7 @@ public partial class Maze : Node3D
             }
         }
 
-        Node3D HelperBody = HelperBodyScene.Instantiate<Node3D>();
+        HelperBody = HelperBodyScene.Instantiate<Node3D>();
         HelperBody.Position = new Vector3(0, 0, -WallSize*2);
         AddChild(HelperBody);
 
@@ -252,9 +256,9 @@ public partial class Maze : Node3D
         // Position flashlight one block closer to center
         Vector3 FlashLightPos = position + (directionToCenter * WallSize * new Vector3(1, 0, 1));
 
-        FlashLight flashLight = FlashLightScene.Instantiate<FlashLight>();
-        flashLight.Position = FlashLightPos;
-        AddChild(flashLight);
+        FlashLight = FlashLightScene.Instantiate<FlashLight>();
+        FlashLight.Position = FlashLightPos;
+        AddChild(FlashLight);
     }
 
     public void DisplayMaze()
@@ -375,9 +379,25 @@ public partial class Maze : Node3D
         Lamp Lamp = LampScene.Instantiate<Lamp>();
         Lamp.Position = new Vector3(0, 0, 0);
         Lamp.RenderDistance = 100;
-        Lamp.Light.OmniRange = 15;
-        Lamp.Light.LightIntensityLumens = 1500;
+        Lamp.Light.OmniRange = 30;
+        Lamp.Light.LightIntensityLumens = 3000;
+        Lamp.Light.LightEnergy = 100f;
         AddChild(Lamp);
+        Lamp.timer.Stop();
         FinalLevel.Instance.Area3D.Position = new Vector3(0, 0, 0);
+        RemoveChild(HelperBody);
+        RemoveChild(EasterEggs);
+        HelperBody.QueueFree();
+        EasterEggs.QueueFree();
+
+        if (FlashLight != null && FlashLight.IsInsideTree())
+        {
+            RemoveChild(FlashLight);
+            FlashLight.QueueFree();
+            FlashLight = null;
+        }
+
+        FinalLevel.Instance.Player3D.Flashlight.Visible = false;
+
     }
 }

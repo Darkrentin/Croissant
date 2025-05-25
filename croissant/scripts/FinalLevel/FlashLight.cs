@@ -26,6 +26,7 @@ public partial class FlashLight : Node3D
 	}
 	public void Delete()
 	{
+		FinalLevel.Instance.maze.FlashLight = null;
 		GetParent().RemoveChild(this);
 		QueueFree();
 	}

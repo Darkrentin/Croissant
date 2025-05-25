@@ -57,8 +57,8 @@ filter_ledge_spans = true
 filter_walkable_low_height_spans = true
 filter_baking_aabb = AABB(-50, 0, -50, 100, 1, 100)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ml31f"]
-size = Vector3(2, 2, 2)
+[sub_resource type="BoxShape3D" id="BoxShape3D_cun7r"]
+size = Vector3(4, 1, 4)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ml31f"]
 shader = ExtResource("9_cun7r")
@@ -229,7 +229,7 @@ navigation_mesh = SubResource("NavigationMesh_d5vjr")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ViewportWithShader/SubViewport/Map/SafeZone"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, 1)
-shape = SubResource("BoxShape3D_ml31f")
+shape = SubResource("BoxShape3D_cun7r")
 
 [node name="MeltShader" type="ColorRect" parent="ViewportWithShader/SubViewport"]
 material = SubResource("ShaderMaterial_ml31f")
