@@ -17,8 +17,7 @@ public partial class AttackWindow : FloatWindow
     public Phase CurrentPhase { get => _phase; set { _phase = value; } }
     public Wave ParentWave;
     public static int nbOfAttackWindows = 0;
-    public int id;
-    public Vector2I CursorPosition
+    public int id;    public Vector2I CursorPosition
     {
         get
         {
@@ -28,6 +27,24 @@ public partial class AttackWindow : FloatWindow
                 return Level2.CursorWindow.Position + Level2.CursorWindow.Size / 2;
         }
         set { Level2.CursorWindow.Position = value; }
+    }
+
+    // Ensure target position stays within screen bounds
+    protected Vector2I ClampToScreen(Vector2I position)
+    {
+        return new Vector2I(
+            Mathf.Clamp(position.X, 0, GameManager.ScreenSize.X - Size.X),
+            Mathf.Clamp(position.Y, 0, GameManager.ScreenSize.Y - Size.Y)
+        );
+    }
+
+    // Ensure target position with specific size stays within screen bounds
+    protected Vector2I ClampToScreen(Vector2I position, Vector2I windowSize)
+    {
+        return new Vector2I(
+            Mathf.Clamp(position.X, 0, GameManager.ScreenSize.X - windowSize.X),
+            Mathf.Clamp(position.Y, 0, GameManager.ScreenSize.Y - windowSize.Y)
+        );
     }
 
     public override void _Ready()

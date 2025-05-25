@@ -75,7 +75,7 @@ font_size = 21
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CursorWindow" type="Window"]
+[node name="CursorWindow" type="Window" node_paths=PackedStringArray("animationPlayer")]
 transparent_bg = true
 size = Vector2i(98, 144)
 unresizable = true
@@ -83,6 +83,7 @@ borderless = true
 always_on_top = true
 transparent = true
 script = ExtResource("1_x0xi8")
+animationPlayer = NodePath("AnimationPlayer")
 Draggable = false
 Minimizable = false
 CollisionDisabled = false

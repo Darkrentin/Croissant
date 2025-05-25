@@ -21,12 +21,11 @@ public partial class SpikeWindow : AttackWindow
 	{
 		base.Start();
 	}
-
 	public override void Move()
 	{
 		const float MoveTime = 0.2f;
 		//const float margin = 0.1f;
-		TargetPosition = CursorPosition - Level2.CursorWindow.Size / 2;
+		TargetPosition = ClampToScreen(CursorPosition - Level2.CursorWindow.Size / 2);
 		StartExponentialTransition(TargetPosition, MoveTime, reset: true);
 		//windowPosition = TargetPosition;
 

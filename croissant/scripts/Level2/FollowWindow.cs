@@ -34,13 +34,12 @@ public partial class FollowWindow : AttackWindow
 		Timer.WaitTime = MoveTime;
 		base.Move();
 	}
-
 	public override void Prevent()
 	{
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5); //FIND WHY THE WINDOWS DISEAPPEAR WHEN I DON'T USE THE SHAKE !
 
-		TargetPosition = CursorPosition - Level2.CursorWindow.Size / 2;
+		TargetPosition = ClampToScreen(CursorPosition - Level2.CursorWindow.Size / 2);
 		ShowVisualCollision(Size, TargetPosition, ShakeTime);
 
 		Timer.WaitTime = ShakeTime;

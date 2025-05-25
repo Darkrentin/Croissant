@@ -30,7 +30,6 @@ public partial class CompressWindow : AttackWindow
 	{
 		base._Process(delta);
 	}
-
 	public override void Move()
 	{
 		if (_Mode == -1)
@@ -50,14 +49,14 @@ public partial class CompressWindow : AttackWindow
 		if (side == 0)
 		{
 			int targetX = CursorPosition.X;
-			targetPosition = new Vector2I(targetX, 0);
-			OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
+			targetPosition = ClampToScreen(new Vector2I(targetX, 0));
+			OtherTargetPosition = ClampToScreen(new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), ConnectedWindow.Size);
 		}
 		else
 		{
 			int targetY = CursorPosition.Y;
-			targetPosition = new Vector2I(0, targetY);
-			OtherTargetPosition = new Vector2I(GameManager.ScreenSize.X - ConnectedWindow.Size.X, targetY);
+			targetPosition = ClampToScreen(new Vector2I(0, targetY));
+			OtherTargetPosition = ClampToScreen(new Vector2I(GameManager.ScreenSize.X - ConnectedWindow.Size.X, targetY), ConnectedWindow.Size);
 		}
 
 		StartTransition(targetPosition, MoveTime - MarginTime);

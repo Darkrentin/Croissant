@@ -16,7 +16,6 @@ public partial class ExtendWindow : AttackWindow
 	{
 		base._Process(delta);
 	}
-
 	public override void Move()
 	{
 		const float MoveTime = 0.5f;
@@ -44,7 +43,7 @@ public partial class ExtendWindow : AttackWindow
 		else
 			randomPosY = Lib.rand.Next(minY, maxY);
 
-		TargetPosition = new Vector2I(randomPosX, randomPosY) - Level2.CursorWindow.Size / 2;
+		TargetPosition = ClampToScreen(new Vector2I(randomPosX, randomPosY) - Level2.CursorWindow.Size / 2);
 		windowPosition = TargetPosition;
 		windowSize = Size;
 		StartTransition(TargetPosition, MoveTime - MarginTime);

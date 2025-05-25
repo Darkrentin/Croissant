@@ -42,7 +42,6 @@ public partial class FlappyWindow : AttackWindow
 	{
 		base._Process(delta);
 	}
-
 	public override void Move()
 	{
 		const float MoveTime = 0.5f;
@@ -56,13 +55,13 @@ public partial class FlappyWindow : AttackWindow
 			targetX = GameManager.ScreenSize.X - Size.X;
 		if (Visible)
 		{
-			targetPosition = new Vector2I(targetX, 0);
+			targetPosition = ClampToScreen(new Vector2I(targetX, 0));
 			StartTransition(targetPosition, MoveTime - MarginTime);
 			windowPosition = targetPosition;
 		}
 		if (ConnectedWindow.Visible)
 		{
-			OtherTargetPosition = new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y);
+			OtherTargetPosition = ClampToScreen(new Vector2I(targetX, GameManager.ScreenSize.Y - ConnectedWindow.Size.Y), ConnectedWindow.Size);
 			ConnectedWindow.StartTransition(OtherTargetPosition, MoveTime - MarginTime);
 			ConnectedWindowPosition = OtherTargetPosition;
 		}
