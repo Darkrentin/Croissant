@@ -6,6 +6,7 @@ public partial class MenuWindow : FloatWindow
 	[Export] public CheckButton FakeDesktopButton;
 	[Export] public CheckButton DebugButton;
 	[Export] public Button StuckButton;
+	[Export] public Slider MasterVolumeSlider;
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
@@ -14,17 +15,17 @@ public partial class MenuWindow : FloatWindow
 		ProcessMode = ProcessModeEnum.Always;
 		base._Ready();
 
-		Vector2I windowSize = Lib.GetScreenSize(0.1f, 0.2f);
-		SetDeferred("size", windowSize);
+		Vector2I windowSize = Lib.GetAspectFactor(Size);
+		Size = windowSize;
 		Position = Lib.GetScreenPosition(0.5f, 0.5f) - windowSize / 2;
 		Visible = false;
-
-		SetDeferred("custom_minimum_size", windowSize);
-		Menu.SetDeferred("size", windowSize);
 
 		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
 		DebugButton.Toggled += DebugButtonToggled;
 		StuckButton.Pressed += StuckButtonPressed;
+		
+		// Connect master volume slider
+		MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
 
 		FakeDesktop = GameManager.SaveData.FakeDesktop;
 		DebugMode = GameManager.SaveData.DebugMode;
@@ -32,6 +33,10 @@ public partial class MenuWindow : FloatWindow
 		FakeDesktopButton.ButtonPressed = FakeDesktop;
 		DebugButton.ButtonPressed = DebugMode;
 		
+		// Set initial volume slider value (load from save data or default to 100)
+		MasterVolumeSlider.Value = 100.0f;
+		// Apply the initial volume
+		OnMasterVolumeChanged(MasterVolumeSlider.Value);
 
 		Minimizable = true;
 
@@ -122,6 +127,31 @@ public partial class MenuWindow : FloatWindow
 	{
 		Close();
 		Level3.Instance.Transition(-1);
+	}
+
+	private void OnMasterVolumeChanged(double value)
+	{
+		// Convert slider value (0-100) to decibels
+		float volumePercent = (float)value / 100.0f;
+		float volumeDb;
+		
+		if (volumePercent <= 0.0f)
+		{
+			// Mute if slider is at 0
+			volumeDb = -80.0f;
+		}
+		else
+		{
+			// Convert percentage to dB (logarithmic scale)
+			// Range from -40dB (at 1%) to 0dB (at 100%)
+			volumeDb = Mathf.LinearToDb(volumePercent);
+		}
+		
+		// Apply to master bus
+		AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), volumeDb);
+		
+		// Save the setting
+		//GameManager.SaveData.MasterVolume = (float)value;
 	}
 
 }

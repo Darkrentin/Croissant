@@ -3,8 +3,7 @@
 [ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/Windows/MenuWindow.cs" id="1_ak1ko"]
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_wvpbs"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton")]
-position = Vector2i(0, 36)
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton", "MasterVolumeSlider")]
 size = Vector2i(200, 300)
 unresizable = true
 always_on_top = true
@@ -15,6 +14,7 @@ Menu = NodePath("Control")
 FakeDesktopButton = NodePath("Control/FakeDesktop")
 DebugButton = NodePath("Control/DebugMode")
 StuckButton = NodePath("Control/Stuck")
+MasterVolumeSlider = NodePath("Control/Master/HSlider")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -26,7 +26,6 @@ color = Color(0.764706, 0.780392, 0.796078, 1)
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
@@ -68,11 +67,40 @@ text = "Quit"
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.04
-anchor_top = 0.627
+anchor_top = 0.88
 anchor_right = 0.96
-anchor_bottom = 0.743
-offset_top = -0.100006
-offset_bottom = 0.0999908
+anchor_bottom = 0.997
+offset_top = -3.05176e-05
+offset_bottom = -0.100006
 text = "I'm Stuck"
+
+[node name="Master" type="Control" parent="Control"]
+layout_mode = 1
+anchor_top = 0.613
+anchor_right = 1.0
+anchor_bottom = 0.767
+offset_top = 0.0999908
+offset_bottom = -0.100006
+
+[node name="HSlider" type="HSlider" parent="Control/Master"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.04
+anchor_top = 0.522
+anchor_right = 0.96
+anchor_bottom = 1.0
+offset_top = -0.012001
+value = 100.0
+
+[node name="Label" type="Label" parent="Control/Master"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_right = 0.92
+anchor_bottom = 0.511
+offset_bottom = 0.493998
+text = "Master Volume"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_quit_button_pressed"]

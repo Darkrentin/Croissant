@@ -56,19 +56,26 @@ Test"
 
 [node name="IdleMusic" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("5_fos0i")
+bus = &"Music"
 
 [node name="IntroGame" type="AudioStreamPlayer" parent="Music"]
+bus = &"Music"
 
 [node name="Level1" type="AudioStreamPlayer" parent="Music"]
+bus = &"Music"
 
 [node name="Level2" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("6_03owx")
+bus = &"Music"
 
 [node name="Level3" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("7_wkp8b")
+bus = &"Music"
 
 [node name="Level4" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("8_20pc6")
+bus = &"Music"
 
 [node name="Scoreboard" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("9_5vvyt")
+bus = &"Music"
