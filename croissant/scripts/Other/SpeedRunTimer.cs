@@ -5,7 +5,7 @@ public partial class SpeedRunTimer : CanvasLayer
 {
 	[Export] public Label timer;
 	[Export] public AnimationPlayer animationPlayer;
-	public int Level = 10;
+	public int Level = 60;
 	public double Time = 0;
 	public bool RecordTime = true;
 	public static SpeedRunTimer Instance;
@@ -23,7 +23,7 @@ public partial class SpeedRunTimer : CanvasLayer
 		if (Time > Level)
 		{
 			animationPlayer.Play("LevelReach");
-			Level += 10;
+			Level += 60;
 		}
 		timer.Text = FormatTime(Time);
 	}
@@ -38,7 +38,7 @@ public partial class SpeedRunTimer : CanvasLayer
 
 		return string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, twoDigitMilliseconds);
 	}
-	
+
 	public void StopTimer()
 	{
 		RecordTime = false;
