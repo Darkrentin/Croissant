@@ -190,7 +190,7 @@ public static class States
         GameManager.helper.TransitionTag = "Level3Spawn";
 
         //Change State condition
-        GameManager.State = GameManager.GameState.Void;
+        GameManager.State = GameManager.GameState.Level3Buffer;
     }
 
     public static void Dialogue3()

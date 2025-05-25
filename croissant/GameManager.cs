@@ -56,6 +56,7 @@ public partial class GameManager : Node2D
         IntroHelperBuffer,
         Dialogue1Buffer,
         TutoBuffer,
+        Level3Buffer,
         Void
     }
 

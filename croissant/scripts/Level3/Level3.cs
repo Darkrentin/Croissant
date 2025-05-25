@@ -79,9 +79,12 @@ public partial class Level3 : FloatWindow
 
     public void Transition(int NextSceneId)
     {
+        int nextSceneId = NextSceneId;
+        if (NextSceneId == -1)
+            nextSceneId = 0;
         player.isInvincible = true;
         invincibleTimer.Start();
-        SubLevel3 nextScene = Level3.Instance.Level3Nodes[NextSceneId];
+        SubLevel3 nextScene = Level3.Instance.Level3Nodes[nextSceneId];
 
         if (Level3.Instance.actualScene != null)
         {
@@ -89,7 +92,7 @@ public partial class Level3 : FloatWindow
         }
         nextScene.ShowSubLevel();
         Vector2 playerTargetPosition = GameManager.ScreenSize / 2;
-        if (nextScene.HasNode($"{sceneid}"))
+        if (nextScene.HasNode($"{sceneid}") && NextSceneId!=-1)
             playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
         Tween tween = GetTree().CreateTween();
         float distance = (player.GlobalPosition - playerTargetPosition).Length();
@@ -104,7 +107,7 @@ public partial class Level3 : FloatWindow
         {
             player.isDead = false;
         }));
-        sceneid = NextSceneId;
+        sceneid = nextSceneId;
         actualScene = nextScene;
         GD.Print("Level complete!");
 

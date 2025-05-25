@@ -5,6 +5,7 @@ public partial class MenuWindow : FloatWindow
 	[Export] private Control Menu;
 	[Export] public CheckButton FakeDesktopButton;
 	[Export] public CheckButton DebugButton;
+	[Export] public Button StuckButton;
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
@@ -23,18 +24,31 @@ public partial class MenuWindow : FloatWindow
 
 		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
 		DebugButton.Toggled += DebugButtonToggled;
+		StuckButton.Pressed += StuckButtonPressed;
+
 		FakeDesktop = GameManager.SaveData.FakeDesktop;
 		DebugMode = GameManager.SaveData.DebugMode;
 
 		FakeDesktopButton.ButtonPressed = FakeDesktop;
 		DebugButton.ButtonPressed = DebugMode;
+		
 
 		Minimizable = true;
+
 	}
 
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
+
+		if (GameManager.State == GameManager.GameState.Level3Buffer && StuckButton.Visible == false)
+		{
+			StuckButton.Visible = true;
+		}
+		else if (GameManager.State!= GameManager.GameState.Level3Buffer && StuckButton.Visible == true)
+		{
+			StuckButton.Visible = false;
+		}
 
 		if (Input.IsActionJustPressed("Exit"))
 		{
@@ -102,6 +116,12 @@ public partial class MenuWindow : FloatWindow
 		if (MainWindow.DebugInfo == null)
 			return;
 		MainWindow.DebugInfo.Visible = DebugMode;
+	}
+
+	public void StuckButtonPressed()
+	{
+		Close();
+		Level3.Instance.Transition(-1);
 	}
 
 }
