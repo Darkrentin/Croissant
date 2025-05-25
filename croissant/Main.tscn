@@ -13,8 +13,8 @@
 [node name="Main" type="Node2D" node_paths=PackedStringArray("Musics")]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_fos0i")
-ExportState = 9
-Musics = [NodePath("Music/IdleMusic"), NodePath("Music/IntroGame"), NodePath("Music/Level1"), NodePath("Music/Level2"), NodePath("Music/Level3"), NodePath("Music/Level4"), NodePath("Music/Scoreboard")]
+ExportState = 10
+Musics = [NodePath("Music/IdleMusic"), NodePath("Music/IntroGame"), NodePath("Music/Level1"), NodePath("Music/Level2"), NodePath("Music/Level3"), NodePath("Music/Level4"), NodePath("Music/FinalBoss"), NodePath("Music/Scoreboard")]
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
 visible = false
@@ -75,6 +75,8 @@ bus = &"Music"
 [node name="Level4" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("8_20pc6")
 bus = &"Music"
+
+[node name="FinalBoss" type="AudioStreamPlayer" parent="Music"]
 
 [node name="Scoreboard" type="AudioStreamPlayer" parent="Music"]
 stream = ExtResource("9_5vvyt")

@@ -68,6 +68,7 @@ public static class States
 
     public static void Dialogue1()
     {
+        GameManager.PlayMusic(GameManager.Music.Idle);
         //Freeze the game
         if (IntroGameManager.Instance != null)
             IntroGameManager.Instance.GameNode.Visible = false;
@@ -146,6 +147,7 @@ public static class States
 
     public static void BlueScreen()
     {
+        
         BlueScreenManager.ManageBlueScreen();
     }
 
@@ -178,6 +180,7 @@ public static class States
 
     public static void Dialogue2()
     {
+        GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.virus.ShowNpc(GameManager.virus.RightDown);
         GameManager.virus.DialogueToPlayAfterTransition = "EndLvl2";

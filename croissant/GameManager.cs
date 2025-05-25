@@ -17,9 +17,11 @@ public partial class GameManager : Node2D
         Level2,
         Level3,
         FinalLevel,
+        FinalBoss,
         Scoreboard,
+        NoMusic,
     }
-    public static Music CurrentMusic = Music.Idle;
+    public static Music CurrentMusic = Music.NoMusic;
 
     public static AudioStreamPlayer ClickSound;
     private static GameState _state = GameState.IntroGame;
@@ -90,12 +92,22 @@ public partial class GameManager : Node2D
         InitializeNpc();
         ShakeTimer = new Timer();
         ShakeTimer.Timeout += StopShakeAllWindows;
-        AddChild(ShakeTimer);
-
-        ClickSound = new AudioStreamPlayer();
+        AddChild(ShakeTimer);        ClickSound = new AudioStreamPlayer();
         ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/click.mp3");
         ClickSound.Bus = "SFX";
         AddChild(ClickSound);
+
+        // Set music players to ProcessModeEnum.Always so they continue playing during freeze frames
+        if (Musics != null)
+        {
+            for (int i = 0; i < Musics.Length; i++)
+            {
+                if (Musics[i] != null)
+                {
+                    Musics[i].ProcessMode = ProcessModeEnum.Always;
+                }
+            }
+        }
 
         //MusicPlayer.Play();
     }
@@ -297,32 +309,103 @@ public partial class GameManager : Node2D
             window.Position = window.BasePosition;
     }
 
-    public static void StateChange(GameState state) { }
-
-    public void _PlayMusic(Music music)
+    public static void StateChange(GameState state) { }    public void _PlayMusic(Music music)
     {
         if (CurrentMusic == music) return;
 
-        Musics[(int)CurrentMusic].Stop();
+        // Skip if trying to play NoMusic
+        if (music == Music.NoMusic)
+        {
+            _StopMusic();
+            return;
+        }
 
-        CurrentMusic = music;
-        Musics[(int)CurrentMusic].Play();
+        // Check if indices are valid
+        int newMusicIndex = (int)music;
+        int currentMusicIndex = (int)CurrentMusic;
+        
+        if (newMusicIndex >= Musics.Length)
+        {
+            GD.PrintErr($"Music index {newMusicIndex} is out of bounds. Array length: {Musics.Length}");
+            return;
+        }
+
+        var newMusicPlayer = Musics[newMusicIndex];
+        
+        // Only fade out current music if it's not NoMusic and index is valid
+        if (CurrentMusic != Music.NoMusic && currentMusicIndex < Musics.Length)
+        {
+            var currentMusicPlayer = Musics[currentMusicIndex];
+              if (currentMusicPlayer != null && currentMusicPlayer.Playing)
+            {
+                var fadeOutTween = CreateTween();
+                fadeOutTween.TweenProperty(currentMusicPlayer, "volume_db", -80.0f, 1.5f);
+                fadeOutTween.TweenCallback(Callable.From(() =>
+                {
+                    currentMusicPlayer.Stop();
+                    currentMusicPlayer.VolumeDb = 0.0f; // Reset volume for next time
+                }));
+            }
+        }
+
+        CurrentMusic = music;        // Start new music with fade in
+        if (newMusicPlayer != null)
+        {
+            newMusicPlayer.VolumeDb = -80.0f; // Start silent
+            newMusicPlayer.Play();
+
+            var fadeInTween = CreateTween();
+            fadeInTween.TweenProperty(newMusicPlayer, "volume_db", 0.0f, 1.5f);
+        }
     }
 
     public static void PlayMusic(Music music)
     {
         if (Instance != null)
             Instance._PlayMusic(music);
+    }    public void _StopMusic(bool instant = false)
+    {
+        // Check if CurrentMusic is valid and within bounds
+        if (CurrentMusic == Music.NoMusic) 
+        {
+            return; // Already stopped
+        }
+        
+        int currentMusicIndex = (int)CurrentMusic;
+        if (currentMusicIndex >= Musics.Length)
+        {
+            GD.PrintErr($"Current music index {currentMusicIndex} is out of bounds. Array length: {Musics.Length}");
+            CurrentMusic = Music.NoMusic;
+            return;
+        }
+        
+        var currentMusicPlayer = Musics[currentMusicIndex];
+          if (currentMusicPlayer != null && currentMusicPlayer.Playing)
+        {
+            if (instant)
+            {
+                // Stop immediately without fade
+                currentMusicPlayer.Stop();
+                currentMusicPlayer.VolumeDb = 0.0f; // Reset volume for next time
+            }
+            else
+            {
+                // Stop with fade
+                var fadeOutTween = CreateTween();
+                fadeOutTween.TweenProperty(currentMusicPlayer, "volume_db", -80.0f, 1.5f);
+                fadeOutTween.TweenCallback(Callable.From(() => {
+                    currentMusicPlayer.Stop();
+                    currentMusicPlayer.VolumeDb = 0.0f; // Reset volume for next time
+                }));
+            }
+        }
+        
+        CurrentMusic = Music.NoMusic;
     }
 
-    public void _StopMusic()
+    public static void StopMusic(bool instant = false)
     {
-        Musics[(int)CurrentMusic].Stop();
-        CurrentMusic = Music.Idle;
-    }
-
-    public static void StopMusic()
-    {
-            Instance._StopMusic();
+        if (Instance != null)
+            Instance._StopMusic(instant);
     }
 }

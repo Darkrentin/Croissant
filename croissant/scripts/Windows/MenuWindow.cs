@@ -7,6 +7,8 @@ public partial class MenuWindow : FloatWindow
 	[Export] public CheckButton DebugButton;
 	[Export] public Button StuckButton;
 	[Export] public Slider MasterVolumeSlider;
+	[Export] public Slider MusicVolumeSlider;
+	[Export] public Slider SFXVolumeSlider;
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
@@ -24,8 +26,10 @@ public partial class MenuWindow : FloatWindow
 		DebugButton.Toggled += DebugButtonToggled;
 		StuckButton.Pressed += StuckButtonPressed;
 		
-		// Connect master volume slider
+		// Connect all volume sliders
 		MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
+		MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
+		SFXVolumeSlider.ValueChanged += OnSFXVolumeChanged;
 
 		FakeDesktop = GameManager.SaveData.FakeDesktop;
 		DebugMode = GameManager.SaveData.DebugMode;
@@ -33,10 +37,15 @@ public partial class MenuWindow : FloatWindow
 		FakeDesktopButton.ButtonPressed = FakeDesktop;
 		DebugButton.ButtonPressed = DebugMode;
 		
-		// Set initial volume slider value (load from save data or default to 100)
+		// Set initial volume slider values (load from save data or default to 100)
 		MasterVolumeSlider.Value = 100.0f;
-		// Apply the initial volume
+		MusicVolumeSlider.Value = 100.0f;
+		SFXVolumeSlider.Value = 100.0f;
+		
+		// Apply the initial volumes
 		OnMasterVolumeChanged(MasterVolumeSlider.Value);
+		OnMusicVolumeChanged(MusicVolumeSlider.Value);
+		OnSFXVolumeChanged(SFXVolumeSlider.Value);
 
 		Minimizable = true;
 
@@ -131,6 +140,21 @@ public partial class MenuWindow : FloatWindow
 
 	private void OnMasterVolumeChanged(double value)
 	{
+		SetBusVolume("Master", value);
+	}
+	
+	private void OnMusicVolumeChanged(double value)
+	{
+		SetBusVolume("Music", value);
+	}
+	
+	private void OnSFXVolumeChanged(double value)
+	{
+		SetBusVolume("SFX", value);
+	}
+	
+	private void SetBusVolume(string busName, double value)
+	{
 		// Convert slider value (0-100) to decibels
 		float volumePercent = (float)value / 100.0f;
 		float volumeDb;
@@ -143,15 +167,19 @@ public partial class MenuWindow : FloatWindow
 		else
 		{
 			// Convert percentage to dB (logarithmic scale)
-			// Range from -40dB (at 1%) to 0dB (at 100%)
 			volumeDb = Mathf.LinearToDb(volumePercent);
 		}
 		
-		// Apply to master bus
-		AudioServer.SetBusVolumeDb(AudioServer.GetBusIndex("Master"), volumeDb);
-		
-		// Save the setting
-		//GameManager.SaveData.MasterVolume = (float)value;
+		// Get bus index and apply volume
+		int busIndex = AudioServer.GetBusIndex(busName);
+		if (busIndex != -1)
+		{
+			AudioServer.SetBusVolumeDb(busIndex, volumeDb);
+		}
+		else
+		{
+			GD.PrintErr($"Audio bus '{busName}' not found!");
+		}
 	}
 
 }
