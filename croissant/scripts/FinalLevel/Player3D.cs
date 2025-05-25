@@ -7,6 +7,7 @@ public partial class Player3D : CharacterBody3D
 	[Export] private float MoveSpeed = 5.0f;
 	[Export] private float RotationSpeed = 2.0f;
 	[Export] public SpotLight3D Flashlight;
+	[Export] AudioStreamPlayer ShootSound;
 	private PackedScene BulletHitScene;
 	private AnimationNodeStateMachinePlayback AnimationPlayer;
 	private Timer ShootTimer;
@@ -61,6 +62,8 @@ public partial class Player3D : CharacterBody3D
 	private void Shoot()
 	{
 		AnimationPlayer.Start(ShootAnimation, reset: true);
+		ShootSound.PitchScale = Lib.GetRandomNormal(0.8f, 1.1f);
+		ShootSound.Play();
 
 		RayCast3D.ForceRaycastUpdate();
 		var collider = RayCast3D.GetCollider();

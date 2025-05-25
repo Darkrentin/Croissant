@@ -214,6 +214,7 @@ grow_vertical = 2
 [node name="SubViewport" type="SubViewport" parent="ViewportWithShader"]
 handle_input_locally = false
 canvas_item_default_texture_filter = 0
+audio_listener_enable_3d = true
 size = Vector2i(1920, 1200)
 render_target_update_mode = 4
 
