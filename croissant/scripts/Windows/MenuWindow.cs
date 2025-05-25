@@ -38,9 +38,9 @@ public partial class MenuWindow : FloatWindow
 		DebugButton.ButtonPressed = DebugMode;
 		
 		// Set initial volume slider values (load from save data or default to 100)
-		MasterVolumeSlider.Value = 100.0f;
-		MusicVolumeSlider.Value = 100.0f;
-		SFXVolumeSlider.Value = 100.0f;
+		MasterVolumeSlider.Value = GameManager.SaveData.MainVolume;
+		MusicVolumeSlider.Value = GameManager.SaveData.MusicVolume;
+		SFXVolumeSlider.Value = GameManager.SaveData.SfxVolume;
 		
 		// Apply the initial volumes
 		OnMasterVolumeChanged(MasterVolumeSlider.Value);

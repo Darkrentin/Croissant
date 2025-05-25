@@ -7,6 +7,9 @@ public partial class SaveData : Resource
     [Export] public bool DebugMode = false;
     [Export] public bool HaveFinishTheGameAtLeastOneTime = false;
     [Export] public double PersonalBestTime = 21387599f;
+    [Export] public double MainVolume = 100;
+    [Export] public double MusicVolume = 100;
+    [Export] public double SfxVolume = 100;
     private const string SaveFolderName = "ShapeGlitch";
     private string GetSaveFilePath(string fileName = "Save.tres")
     {
@@ -19,6 +22,9 @@ public partial class SaveData : Resource
         DebugMode = GameManager.MenuWindow.DebugMode;
         HaveFinishTheGameAtLeastOneTime = GameManager.HaveFinishTheGameAtLeastOneTime;
         PersonalBestTime = GameManager.PersonalBestTime;
+        MainVolume = GameManager.MenuWindow.MasterVolumeSlider.Value;
+        MusicVolume = GameManager.MenuWindow.MusicVolumeSlider.Value;
+        SfxVolume = GameManager.MenuWindow.SFXVolumeSlider.Value;
         Lib.Print("Successfully retrieved general game settings for SaveData instance");
     }
 
