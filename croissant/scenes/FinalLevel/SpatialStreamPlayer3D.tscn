@@ -8,3 +8,5 @@ RayCast = NodePath("RayCast3D")
 Sounds = []
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
+collision_mask = 16
+debug_shape_custom_color = Color(0, 1, 0, 1)

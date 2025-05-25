@@ -52,12 +52,17 @@ public partial class SpatialStreamPlayer3D : AudioStreamPlayer3D
         // Configure raycast towards the player
         Vector3 directionToPlayer = FinalLevel.Instance.Player3D.GlobalPosition - GlobalPosition;
         RayCast.TargetPosition = RayCast.ToLocal(GlobalPosition + directionToPlayer);
+
+        // Check if there's a wall between player and audio source
+        // Only muffle if raycast hits something that is NOT the player (i.e., a wall)
+        bool hasObstacle = RayCast.IsColliding() && !(RayCast.GetCollider() is Player3D);
         
-        // Don't force update, let it update naturally in physics process
-        // RayCast.ForceRaycastUpdate(); // Remove this line
-        
-        // Check if there's a collision (wall between player and audio source)
-        bool hasObstacle = RayCast.IsColliding();
+        // Debug to see what we're hitting
+        if (RayCast.IsColliding())
+        {
+            var collider = RayCast.GetCollider();
+            GD.Print($"Raycast hit: {collider?.GetType().Name}");
+        }
         
         // Adjust volume of all sounds
         for (int i = 0; i < Sounds.Length; i++)
