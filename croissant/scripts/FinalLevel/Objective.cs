@@ -1,6 +1,7 @@
 using Godot;
 using System.Collections.Generic;
 using System.Numerics;
+using System.Threading.Tasks;
 
 public partial class Objective : StaticBody3D
 {
@@ -12,6 +13,9 @@ public partial class Objective : StaticBody3D
 	[Export] public Color PixelColor;
 	[Export] public MeshInstance3D Center;
 	[Export] public ObjectiveExplosion Explosion;
+
+	[Export] public AudioStreamPlayer3D HeartSound;
+	[Export] public AudioStreamPlayer3D DeathSound;
 	public bool _isBreaking = false;
 	public Timer timer;
 	public override void _Ready()
@@ -23,7 +27,6 @@ public partial class Objective : StaticBody3D
 		{
 			ObjectiveList.Remove(this);
 			ResetOtherObjectives();
-			QueueFree();
 		};
 		ObjectiveList.Add(this);
 		AddChild(timer);
@@ -50,8 +53,11 @@ public partial class Objective : StaticBody3D
 			AnimationPlayer.Play("Idle");
 	}
 
-	public void Break()
+	public async Task Break()
 	{
+		HeartSound.Stop();
+		DeathSound.Play();
+		DeathSound.Finished += () => { QueueFree(); };
 		Godot.Vector3 tmp = (GlobalPosition - FinalLevel.Instance.Player3D.GlobalPosition).Normalized();
 		_isBreaking = true;
 		Lib.Print("Break");

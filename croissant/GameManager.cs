@@ -4,9 +4,23 @@ using System.Collections.Generic;
 
 public partial class GameManager : Node2D
 {
-    [Export] public AudioStreamPlayer MusicPlayer;
     [Export] PackedScene menuScene;
     [Export] public GameState ExportState { get => _state; set => _state = value; }
+
+    //Music
+    [Export] public AudioStreamPlayer[] Musics;
+    public enum Music
+    {
+        Idle,
+        IntroGame,
+        Level1,
+        Level2,
+        Level3,
+        FinalLevel,
+        Scoreboard,
+    }
+    public static Music CurrentMusic = Music.Idle;
+
     public static AudioStreamPlayer ClickSound;
     private static GameState _state = GameState.IntroGame;
     public static Node2D GameRoot;
@@ -29,6 +43,8 @@ public partial class GameManager : Node2D
 
     private float _cleanupTimer = 0f;
     private const float CleanupInterval = 0.5f;
+
+    public static GameManager Instance;
 
     public enum GameState
     {
@@ -65,6 +81,7 @@ public partial class GameManager : Node2D
         _cachedScreenScale = DisplayServer.ScreenGetDpi() / 96f;
         Lib.Print($"ScreenScale: {ScreenScale}");
         GameRoot = this;
+        Instance = this;
         LoadSave();
         AddFixWindow();
         InitMainWindow();
@@ -281,4 +298,31 @@ public partial class GameManager : Node2D
     }
 
     public static void StateChange(GameState state) { }
+
+    public void _PlayMusic(Music music)
+    {
+        if (CurrentMusic == music) return;
+
+        Musics[(int)CurrentMusic].Stop();
+
+        CurrentMusic = music;
+        Musics[(int)CurrentMusic].Play();
+    }
+
+    public static void PlayMusic(Music music)
+    {
+        if (Instance != null)
+            Instance._PlayMusic(music);
+    }
+
+    public void _StopMusic()
+    {
+        Musics[(int)CurrentMusic].Stop();
+        CurrentMusic = Music.Idle;
+    }
+
+    public static void StopMusic()
+    {
+            Instance._StopMusic();
+    }
 }

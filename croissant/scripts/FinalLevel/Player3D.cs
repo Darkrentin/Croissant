@@ -8,6 +8,7 @@ public partial class Player3D : CharacterBody3D
 	[Export] private float RotationSpeed = 2.0f;
 	[Export] public SpotLight3D Flashlight;
 	[Export] AudioStreamPlayer ShootSound;
+	[Export] AudioStreamPlayer FootstepSound;
 	private PackedScene BulletHitScene;
 	private AnimationNodeStateMachinePlayback AnimationPlayer;
 	private Timer ShootTimer;
@@ -16,6 +17,8 @@ public partial class Player3D : CharacterBody3D
 	private float ShootCooldown = 0.9f;
 	[Export] private float Gravity = 9.8f;
 	public bool Alive = true;
+
+	public Timer StepTimer;
 
 	public override void _Ready()
 	{
@@ -27,6 +30,19 @@ public partial class Player3D : CharacterBody3D
 		Input.MouseMode = Input.MouseModeEnum.Captured;
 		BulletHitScene = GD.Load<PackedScene>("res://scenes/FinalLevel/Particles/BulletHit.tscn");
 		AddChild(ShootTimer);
+
+		StepTimer = new Timer();
+		StepTimer.WaitTime = 0.4f;
+		StepTimer.OneShot = false;
+		StepTimer.Timeout += () =>
+		{
+			if (Velocity.LengthSquared() > 0)
+			{
+				FootstepSound.Play();
+			}
+		};
+		AddChild(StepTimer);
+		StepTimer.Start();
 	}
 
 	public override void _PhysicsProcess(double delta)

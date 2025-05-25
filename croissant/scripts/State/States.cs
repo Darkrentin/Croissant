@@ -45,6 +45,7 @@ public static class States
 
     public static void IntroGame()
     {
+        //GameManager.PlayMusic(GameManager.Music.IntroGame);
         IntroLvl = IntroGameScene.Instantiate<Window>();
         IntroLvl.Position = new Vector2I(1, 0);
         GameManager.GameRoot.AddChild(IntroLvl);
@@ -55,6 +56,7 @@ public static class States
 
     public static void IntroVirus()
     {
+        GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - GameManager.virus.Size / 2;
         ////Lib.Print(virus.Position.ToString());
         GameManager.virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y), 2f);
@@ -133,6 +135,7 @@ public static class States
 
     public static void Level1()
     {
+        //GameManager.PlayMusic(GameManager.Music.Level1);
         GameManager.virus.HideNpc(1);
         Lvl1 = Level1Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Lvl1);
@@ -148,6 +151,7 @@ public static class States
 
     public static void IntroHelper()
     {
+        GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.helper.Position = Lib.GetScreenPosition(-0.5f, 1);
         GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
         GameManager.helper.DialogueToPlayAfterTransition = "Restart";
@@ -160,6 +164,7 @@ public static class States
 
     public static void Level2()
     {
+        GameManager.PlayMusic(GameManager.Music.Level2);
         GameManager.helper.HideNpc(3);
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
@@ -173,6 +178,7 @@ public static class States
 
     public static void Dialogue2()
     {
+        GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.virus.ShowNpc(GameManager.virus.RightDown);
         GameManager.virus.DialogueToPlayAfterTransition = "EndLvl2";
         GameManager.State = GameManager.GameState.Void;
@@ -180,6 +186,7 @@ public static class States
 
     public static void level3()
     {
+        GameManager.PlayMusic(GameManager.Music.Level3);
         Window Level3 = SceneLoader.Level3Scene.Instantiate<Window>();
         GameManager.GameRoot.AddChild(Level3);
 
@@ -195,6 +202,7 @@ public static class States
 
     public static void Dialogue3()
     {
+        GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.GameRoot.GetTree().CreateTimer(1f).Timeout += () =>
         {
             GameManager.helper.Visible = true;
@@ -208,6 +216,7 @@ public static class States
 
     public static void FinalLevel()
     {
+        GameManager.PlayMusic(GameManager.Music.FinalLevel);
         if (GameManager.virus != null)
         {
             GameManager.GameRoot.RemoveChild(GameManager.virus);
@@ -224,6 +233,7 @@ public static class States
 
     public static void Scoreboard()
     {
+        GameManager.PlayMusic(GameManager.Music.Scoreboard);
         Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
         Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
         GameManager.GameRoot.AddChild(Scoreboard);
