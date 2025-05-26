@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bsvg7n4ll3xg7"]
+[gd_scene load_steps=11 format=3 uid="uid://bsvg7n4ll3xg7"]
 
 [ext_resource type="Script" uid="uid://eatayns1skwp" path="res://scripts/FinalLevel/BossLevel.cs" id="1_chkxq"]
 [ext_resource type="PackedScene" uid="uid://c0ixtme6phwg7" path="res://scenes/FinalLevel/BossFloor.tscn" id="2_yady8"]
@@ -30,11 +30,15 @@ size = Vector3(0.1, 2, 20)
 [sub_resource type="BoxShape3D" id="BoxShape3D_chkxq"]
 size = Vector3(20, 1, 20)
 
-[node name="BossLevel" type="Node3D" node_paths=PackedStringArray("KillZone", "SpawnPoints", "Virus")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_yady8"]
+size = Vector3(6, 2, 2)
+
+[node name="BossLevel" type="Node3D" node_paths=PackedStringArray("KillZone", "NearZone", "SpawnPoints", "Virus")]
 script = ExtResource("1_chkxq")
 BossFloorScene = ExtResource("2_yady8")
 FloppyDiskScene = ExtResource("3_yady8")
 KillZone = NodePath("KillZone")
+NearZone = NodePath("NearBoss")
 SpawnPoints = [NodePath("SpwanNode/1"), NodePath("SpwanNode/2"), NodePath("SpwanNode/3"), NodePath("SpwanNode/4"), NodePath("SpwanNode/5"), NodePath("SpwanNode/6"), NodePath("SpwanNode/7"), NodePath("SpwanNode/8"), NodePath("SpwanNode/9"), NodePath("SpwanNode/10")]
 Virus = NodePath("Virus")
 
@@ -103,3 +107,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 0, 0)
 
 [node name="10" type="Node3D" parent="SpwanNode"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9, 0, 0)
+
+[node name="NearBoss" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NearBoss"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -9)
+shape = SubResource("BoxShape3D_yady8")

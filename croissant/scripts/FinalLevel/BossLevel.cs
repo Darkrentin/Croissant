@@ -9,6 +9,7 @@ public partial class BossLevel : Node3D
 	[Export] public PackedScene BossFloorScene;
 	[Export] public PackedScene FloppyDiskScene;
 	[Export] Area3D KillZone;
+	[Export] Area3D NearZone;
 	public int MapSize = 10;
 	public const int WallSize = 2;
 	public static BossLevel Instance;
@@ -19,6 +20,7 @@ public partial class BossLevel : Node3D
 		Instance = this;
 		initMap();
 		KillZone.BodyEntered += OnBodyEnteredKillZone;
+		NearZone.BodyEntered += (body) => { VirusAttack(); };
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -46,7 +48,7 @@ public partial class BossLevel : Node3D
 	}
 
 	//Attack
-
+	//Atk: FloorAttack
 	public void FloorAttack()
 	{
 		for (int i = 0; i < MapSize; i++)
@@ -58,19 +60,19 @@ public partial class BossLevel : Node3D
 			}
 		}
 	}
-
+	//Atk: MeleeAttack
 	public void VirusAttack()
 	{
 		Virus.AnimationPlayer.Play("Atk");
 	}
-
+	//Atk: LiftWalls
 	public void LiftWalls()
 	{
 		for (int i = 0; i < MapSize; i++)
 		{
 			for (int j = 0; j < MapSize; j++)
 			{
-				if (Lib.rand.Next(0, 3) == 0 && !PlayerOnWall(BossFloors[i,j].GlobalPosition))
+				if (Lib.rand.Next(0, 3) == 0 && !PlayerOnWall(BossFloors[i, j].GlobalPosition))
 					BossFloors[i, j].PlayAnimation("Up", 0.1f, false, true);
 			}
 		}
@@ -79,16 +81,16 @@ public partial class BossLevel : Node3D
 	public bool PlayerOnWall(Vector3 WallPosition)
 	{
 		Vector3 playerPos = FinalLevel.Instance.Player3D.GlobalPosition;
-		
+
 		// Calculate the distance between player and wall directly in world space
 		float distanceX = Mathf.Abs(playerPos.X - WallPosition.X);
 		float distanceZ = Mathf.Abs(playerPos.Z - WallPosition.Z);
-		
+
 		// Consider the player to be on the wall if they're within WallSize units
 		// This covers the current wall and adjacent walls
 		return distanceX <= WallSize * 1.5f && distanceZ <= WallSize * 1.5f;
 	}
-
+	//Atk: WaveAttack
 	public void StartWave()
 	{
 		bool Wave = Lib.rand.Next(0, 2) == 0;
@@ -160,7 +162,7 @@ public partial class BossLevel : Node3D
 			}
 		}
 	}
-
+	//Atk: LaunchFloppyDisk
 	public void LaunchFloppyDisk()
 	{
 		int SpawnId = Lib.rand.Next(0, SpawnPoints.Length);
@@ -169,5 +171,23 @@ public partial class BossLevel : Node3D
 		AddChild(floppyDisk);
 		floppyDisk.GlobalPosition = SpawnPosition;
 
+	}
+	
+	public void LaunchNFloppyDisks(int n, float delayBetweenDisks = 0.0f)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			if (i == 0 || delayBetweenDisks <= 0)
+			{
+				// Launch first disk immediately or if no delay is specified
+				LaunchFloppyDisk();
+			}
+			else
+			{
+				// Launch subsequent disks with delay
+				var timer = GetTree().CreateTimer(i * delayBetweenDisks);
+				timer.Timeout += LaunchFloppyDisk;
+			}
+		}
 	}
 }

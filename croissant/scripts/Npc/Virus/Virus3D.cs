@@ -18,12 +18,15 @@ public partial class Virus3D : StaticBody3D
 	[Export] public AnimationPlayer AnimationPlayer;
 	[Export] public Area3D Area;
 	[Export] Sprite2D HealthBar;
+	public static Virus3D Instance;
 
 	public int Hp = 10;
 
 
+
 	public override void _Ready()
 	{
+		Instance = this;
 		AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
 		AnimationScreen.Travel("Angry");
 
@@ -92,8 +95,6 @@ public partial class Virus3D : StaticBody3D
 		// Handle damage logic here
 		// For example, reduce health or trigger an animation
 		StartGlitch();
-		//StartShoot();
-		BossLevel.Instance.LiftWalls();
 		Lib.Print("Virus took damage!");
 		if (Hp > 1)
 		{
@@ -113,6 +114,15 @@ public partial class Virus3D : StaticBody3D
 				SpeedRunTimer.Instance.StopTimer();
 				GlitchTimer.Stop();
 			};
+		}
+	}
+
+	public void HealVirus()
+	{
+		if (Hp < 10)
+		{
+			Hp++;
+			HealthBar.Frame = 10 - Hp;
 		}
 	}
 

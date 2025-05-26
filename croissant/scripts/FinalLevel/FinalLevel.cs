@@ -49,6 +49,7 @@ public partial class FinalLevel : Node3D
 			MeltShader.Transition();
 			Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
 			(BossLevel as BossLevel).ResetMap();
+			Player3D.Alive = true;
 			return;
 		};
 
@@ -97,10 +98,11 @@ public partial class FinalLevel : Node3D
 	public void Death(Vector3 enemyPosition)
 	{
 		shaderMaterial.SetShaderParameter("u_color_tex", PaletteDeath);
-
+		Player3D.Alive = false;
 
 		if (enemyPosition == Vector3.Zero)
 		{
+			Virus3D.Instance.HealVirus();
 			DeathTimer.WaitTime = 1f;
 			DeathTimer.Start();
 			return;
@@ -112,7 +114,7 @@ public partial class FinalLevel : Node3D
 		while (targetY > Mathf.Pi) targetY -= Mathf.Pi * 2;
 		while (targetY < -Mathf.Pi) targetY += Mathf.Pi * 2;
 
-		Player3D.Alive = false;
+		
 		var tween = CreateTween();
 		tween.TweenProperty(Player3D, "rotation:y", targetY, 1f)
 			 .SetTrans(Tween.TransitionType.Linear)
