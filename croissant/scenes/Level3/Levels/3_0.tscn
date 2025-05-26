@@ -1,10 +1,11 @@
-[gd_scene load_steps=16 format=3 uid="uid://qkuoa8g4g2cl"]
+[gd_scene load_steps=18 format=3 uid="uid://qkuoa8g4g2cl"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="2_gijp6"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="3_5q6or"]
-[ext_resource type="PackedScene" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_5q6or"]
+[ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8j6u2"]
@@ -24,6 +25,19 @@ size = Vector2(512, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yrjvf"]
 resource_local_to_scene = true
 size = Vector2(512, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8j6u2"]
+resource_local_to_scene = true
+shader = ExtResource("4_5q6or")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/color2 = Color(0, 0, 1, 0)
+shader_parameter/animate = true
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 32.0
+shader_parameter/speed = 0.3
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gijp6"]
 resource_local_to_scene = true
@@ -98,6 +112,9 @@ position = Vector2(800, 128)
 
 [node name="Window" parent="MovePlatform" index="0"]
 visible = false
+
+[node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
+material = SubResource("ShaderMaterial_8j6u2")
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(160, 32)

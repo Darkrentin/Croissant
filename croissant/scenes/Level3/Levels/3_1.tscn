@@ -1,8 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://c5avgc26i0v58"]
+[gd_scene load_steps=19 format=3 uid="uid://c5avgc26i0v58"]
 
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_brot1"]
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_cjr8i"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="4_26hxk"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_l2671"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="5_uybjc"]
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="6_l2671"]
 
@@ -12,13 +13,100 @@ size = Vector2(128, 1344)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_uybjc"]
 size = Vector2(1920, 128)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjr8i"]
+resource_local_to_scene = true
+shader = ExtResource("4_l2671")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/color2 = Color(0, 0, 1, 0)
+shader_parameter/animate = true
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 32.0
+shader_parameter/speed = 0.3
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_olxyy"]
 resource_local_to_scene = true
 size = Vector2(256, 960)
 
+[sub_resource type="Shader" id="Shader_26hxk"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uybjc"]
+resource_local_to_scene = true
+shader = SubResource("Shader_26hxk")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjr8i"]
 resource_local_to_scene = true
 size = Vector2(256, 960)
+
+[sub_resource type="Shader" id="Shader_wxmef"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oeyy3"]
+resource_local_to_scene = true
+shader = SubResource("Shader_wxmef")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cn2cc"]
 resource_local_to_scene = true
@@ -62,6 +150,9 @@ position = Vector2(1216, 128)
 [node name="Window" parent="MovePlatform" index="0"]
 visible = false
 
+[node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
+material = SubResource("ShaderMaterial_cjr8i")
+
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(128, 480)
 shape = SubResource("RectangleShape2D_olxyy")
@@ -71,6 +162,9 @@ position = Vector2(768, 128)
 
 [node name="Window" parent="WindowsOnly" index="0"]
 visible = false
+
+[node name="PlatformTexture" parent="WindowsOnly/Window" index="0"]
+material = SubResource("ShaderMaterial_uybjc")
 
 [node name="CollisionShape2D" parent="WindowsOnly" index="1"]
 position = Vector2(128, 480)
@@ -82,6 +176,9 @@ NextSceneId = 12
 
 [node name="WindowsOnly2" parent="." instance=ExtResource("6_l2671")]
 position = Vector2(1544, 0)
+
+[node name="PlatformTexture" parent="WindowsOnly2/Window" index="0"]
+material = SubResource("ShaderMaterial_oeyy3")
 
 [node name="CollisionShape2D" parent="WindowsOnly2" index="1"]
 position = Vector2(56, 128)
