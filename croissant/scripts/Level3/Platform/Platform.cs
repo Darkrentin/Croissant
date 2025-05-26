@@ -31,14 +31,14 @@ public partial class Platform : CharacterBody2D
         if (WindowValid)
         {
             CachedTitleBarSize = window.TitleBarSize;
-            window.Size = (Vector2I)Shape.Size - CachedTitleBarSize;
+            window.Size = (Vector2I)((Shape.Size - CachedTitleBarSize) * Lib.GetScreenRatio());
             window.Position = (Vector2I)GlobalPosition + CachedTitleBarSize;
-            window.Title = "Platform";
         }
 
         Level3Instance = Level3.Instance;
         CurrentAppliedSpeeds = BaseSpeeds;
         VisibilityChanged += VisibilityChange;
+        window.Title = "";
     }
 
     public override void _PhysicsProcess(double delta)
@@ -51,7 +51,7 @@ public partial class Platform : CharacterBody2D
                 return;
             }
 
-            Vector2 targetGlobalPosition = (Vector2)Lib.GetCursorPosition() - MouseOffset;
+            Vector2 targetGlobalPosition = ((Vector2)(Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - MouseOffset;
             Vector2 directionToTarget = targetGlobalPosition - GlobalPosition;
 
             Velocity = directionToTarget * CurrentAppliedSpeeds;
@@ -98,7 +98,7 @@ public partial class Platform : CharacterBody2D
 
         if (WindowValid)
         {
-            window.Position = (Vector2I)GlobalPosition + CachedTitleBarSize;
+            window.Position = (Vector2I)((GlobalPosition + CachedTitleBarSize) * Lib.GetScreenRatio());
         }
     }
 

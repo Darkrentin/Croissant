@@ -120,7 +120,7 @@ public partial class MovePlatform : Platform
             if (mouseButtonEvent.Pressed && MouseOnTitle())
             {
                 Pressed = true;
-                MouseOffset = (Vector2)Lib.GetCursorPosition() - GlobalPosition;
+                MouseOffset = (((Vector2)Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - GlobalPosition;
                 Shader.SetShaderParameter("frequency", 0.1f);
             }
             else if (!mouseButtonEvent.Pressed && Pressed)

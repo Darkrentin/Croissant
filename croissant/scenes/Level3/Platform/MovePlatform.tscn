@@ -34,7 +34,6 @@ collision_mask = 5
 script = ExtResource("1_xf3iu")
 MinMult = 10.0
 MaxMult = 1.1
-Color = Color(0, 1, 1, 1)
 ShaderRect = NodePath("Window/ShaderRect")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=36 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
 [ext_resource type="Script" uid="uid://b08swylcghmyx" path="res://scripts/Level3/StateMachine/PlayerStates.cs" id="2_b8m4g"]
@@ -759,6 +759,10 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_vw511"]
 radius = 13.0
 
+[sub_resource type="Curve" id="Curve_r7lop"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Head", "Sprite", "Animator", "Collider", "States", "CoyoteTimer", "JumpBufferTimer", "area2D")]
 texture_filter = 1
 position = Vector2(2, 0)
@@ -851,5 +855,20 @@ texture = ExtResource("18_vw511")
 
 [node name="Program" parent="." instance=ExtResource("19_r7lop")]
 position = Vector2(135, -50)
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 10
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(15, 1)
+direction = Vector2(0, -1)
+spread = 90.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 80.0
+initial_velocity_max = 100.0
+damping_min = 100.0
+damping_max = 100.0
+scale_amount_max = 12.0
+scale_amount_curve = SubResource("Curve_r7lop")
 
 [editable path="Program"]

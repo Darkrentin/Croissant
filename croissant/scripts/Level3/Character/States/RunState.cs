@@ -35,4 +35,4 @@ public partial class RunState : PlayerState
             Player.ChangeState((Node)States.Get("Idle"));
         }
     }
-} 
+}
