@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://v7jwtdleiqiw"]
+[gd_scene load_steps=37 format=3 uid="uid://v7jwtdleiqiw"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_tva5v"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="2_lmyvb"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="4_lx710"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="5_vwnpx"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="6_3n8fb"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_hvpnd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnpx"]
 size = Vector2(1664, 192)
@@ -26,6 +27,19 @@ size = Vector2(1344, 320)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvpnd"]
 resource_local_to_scene = true
 size = Vector2(1600, 64)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8vfn1"]
+resource_local_to_scene = true
+shader = ExtResource("7_hvpnd")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/color2 = Color(0, 0, 1, 0)
+shader_parameter/animate = true
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 32.0
+shader_parameter/speed = 0.3
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vfn1"]
 resource_local_to_scene = true
@@ -144,15 +158,15 @@ position = Vector2(0, 256)
 position = Vector2(800, 32)
 shape = SubResource("RectangleShape2D_hvpnd")
 
-[node name="14" parent="." instance=ExtResource("5_vwnpx")]
+[node name="3" parent="." instance=ExtResource("5_vwnpx")]
 position = Vector2(64, 344)
-NextSceneId = 14
+NextSceneId = 3
 
 [node name="MovePlatform" parent="." instance=ExtResource("6_3n8fb")]
 position = Vector2(48, 544)
 
-[node name="Window" parent="MovePlatform" index="0"]
-position = Vector2i(0, 36)
+[node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
+material = SubResource("ShaderMaterial_8vfn1")
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(80, 32)
@@ -270,9 +284,9 @@ shape = SubResource("RectangleShape2D_cffq3")
 position = Vector2(36, 120)
 shape = SubResource("RectangleShape2D_uk7mw")
 
-[node name="3" parent="." instance=ExtResource("5_vwnpx")]
+[node name="0" parent="." instance=ExtResource("5_vwnpx")]
 position = Vector2(64, 24)
-NextSceneId = 3
+NextSceneId = 0
 
 [node name="KillingPlatform10" parent="." instance=ExtResource("2_lmyvb")]
 position = Vector2(512, 0)

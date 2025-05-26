@@ -3,10 +3,8 @@ using System;
 
 public partial class PlayerCharacter : CharacterBody2D
 {
-    // Scale factor
     public const float ScaleFactor = 4f;
 
-    // Nodes
     [Export] public RigidBody2D Head;
     [Export] public Sprite2D Sprite;
     [Export] public AnimationPlayer Animator;
@@ -18,7 +16,6 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public bool FlipLock { get; set; } = false;
 
-    // Physics constants (scaled for larger character)
     public const float RunSpeed = 140f * ScaleFactor;
     public const float WallJumpHSpeed = 120f * ScaleFactor;
     public const float GroundAcceleration = 20f * ScaleFactor;
@@ -38,13 +35,11 @@ public partial class PlayerCharacter : CharacterBody2D
     public const int MaxJumps = 1;
     public const float CoyoteTime = 0.1f;
     public const float JumpBufferTime = 0.15f;
-    public static float GravityWallSlide = 20f; // chute lente
+    public static float GravityWallSlide = 20f;
     public const float DirectionBufferTime = 0.2f;
     private int _lastDirPressTime = -1;
     private int _lastDirPressMsec = -1;
 
-
-    // Physics variables
     public float moveSpeed = RunSpeed;
     public float Acceleration = GroundAcceleration;
     public float Deceleration = GroundDeceleration;
@@ -56,7 +51,6 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public Vector2 WallDirection { get; set; }
 
-    // Input variables
     public bool keyUp = false;
     public bool keyDown = false;
     public bool keyLeft = false;
@@ -64,11 +58,12 @@ public partial class PlayerCharacter : CharacterBody2D
     public bool keyJump = false;
     public bool isDead = false;
     public bool isInvincible = false;
-
     public bool LevelEnd = false;
     public bool keyJumpPressed = false;
 
-    // State machine
+    private bool isLeftPressed = false;
+    private bool isRightPressed = false;
+
     public Node currentState = null;
     public Node previousState = null;
 
@@ -111,16 +106,17 @@ public partial class PlayerCharacter : CharacterBody2D
         currentState.Call("Update", delta);
         HandleMaxFallVelocity();
         MoveAndSlide();
-        //GD.Print("player.Invincible" + isInvincible);
-        //($"Current State: {currentState.Name}");
-
-
     }
 
-    public void OnBodyEntered(Node body)
+    public override void _Input(InputEvent @event)
     {
-
+        if (@event.IsAction("ui_left"))
+            isLeftPressed = @event.IsPressed();
+        if (@event.IsAction("ui_right"))
+            isRightPressed = @event.IsPressed();
     }
+
+    public void OnBodyEntered(Node body) { }
 
     public void HorizontalMovement(float acceleration = -1f, float deceleration = -1f)
     {
@@ -128,12 +124,19 @@ public partial class PlayerCharacter : CharacterBody2D
         if (deceleration < 0) deceleration = Deceleration;
 
         moveDirectionX = 0;
-        if (Input.IsActionPressed("ui_left")) moveDirectionX -= 1;
-        if (Input.IsActionPressed("ui_right")) moveDirectionX += 1;
+        if (isLeftPressed) moveDirectionX -= 1;
+        if (isRightPressed) moveDirectionX += 1;
+
         if (moveDirectionX != 0)
+        {
+            //GD.Print($"HorizontalMovement: moveDirectionX: {moveDirectionX}");
             Velocity = Velocity.MoveToward(new Vector2(moveDirectionX * moveSpeed, Velocity.Y), acceleration);
+        }
         else
+        {
+            //GD.Print($"HorizontalMovement: moveDirectionX: {moveDirectionX} - Decelerating");
             Velocity = Velocity.MoveToward(new Vector2(0, Velocity.Y), deceleration);
+        }
     }
 
     public void HandleFalling()
@@ -143,12 +146,9 @@ public partial class PlayerCharacter : CharacterBody2D
             CoyoteTimer.Start(CoyoteTime);
             ChangeState((Node)States.Get("Fall"));
         }
-        else
+        else if (LevelEnd)
         {
-            if (LevelEnd)
-            {
-                isDead = true;
-            }
+            isDead = true;
         }
     }
 
@@ -180,13 +180,10 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         if (IsOnFloor())
         {
-            if (jumps < MaxJumps)
+            if (jumps < MaxJumps && keyJumpPressed)
             {
-                if (keyJumpPressed)
-                {
-                    jumps++;
-                    ChangeState((Node)States.Get("Jump"));
-                }
+                jumps++;
+                ChangeState((Node)States.Get("Jump"));
             }
         }
         else
@@ -210,7 +207,6 @@ public partial class PlayerCharacter : CharacterBody2D
         GetWallDirection();
         if ((keyJumpPressed && wallDirection.X != 0) || (keyLeft && wallDirection.X == 1) || (keyRight && wallDirection.X == -1))
         {
-            //GD.Print("WallJump");
             ChangeState((Node)States.Get("WallJump"));
         }
     }
@@ -242,13 +238,11 @@ public partial class PlayerCharacter : CharacterBody2D
                 Vector2 normal = collision.GetNormal();
                 if (normal.X > 0.5f)
                 {
-                    //GD.Print("Mur à gauche");
                     wallDirection = Vector2.Left;
                     break;
                 }
                 else if (normal.X < -0.5f)
                 {
-                    //GD.Print("Mur à droite");
                     wallDirection = Vector2.Right;
                     break;
                 }
@@ -267,15 +261,14 @@ public partial class PlayerCharacter : CharacterBody2D
             Animator.Play("Fall");
             HandleFlipH();
         }
-
     }
 
     public void GetInputStates()
     {
         keyUp = Input.IsActionPressed("ui_up");
         keyDown = Input.IsActionPressed("ui_down");
-        keyLeft = Input.IsActionPressed("ui_left");
-        keyRight = Input.IsActionPressed("ui_right");
+        keyLeft = isLeftPressed;
+        keyRight = isRightPressed;
         keyJump = Input.IsActionPressed("ui_up");
         keyJumpPressed = Input.IsActionJustPressed("ui_up");
 
@@ -297,7 +290,6 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         Sprite.FlipH = facing < 1;
     }
-
 
     public void Death()
     {

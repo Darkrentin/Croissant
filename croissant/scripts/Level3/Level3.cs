@@ -43,6 +43,7 @@ public partial class Level3 : FloatWindow
         player.Position = GameManager.ScreenSize / 2;
         player.Visible = true;
         player.ProcessMode = ProcessModeEnum.Pausable;
+        GrabFocus();
     }
 
     private void OnInvincibleTimerTimeout()
@@ -91,6 +92,7 @@ public partial class Level3 : FloatWindow
             Level3.Instance.actualScene.HideSubLevel();
         }
         nextScene.ShowSubLevel();
+        
         Vector2 playerTargetPosition = GameManager.ScreenSize / 2;
         if (nextScene.HasNode($"{sceneid}") && NextSceneId!=-1)
             playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
@@ -110,11 +112,7 @@ public partial class Level3 : FloatWindow
         sceneid = nextSceneId;
         actualScene = nextScene;
         GD.Print("Level complete!");
-
-        if (player.Velocity.Y > 0)
-        {
-            player.Velocity = new Vector2(player.Velocity.X, 0);
-        }
+        GrabFocus();
     }
 
     public void CollectFile()
