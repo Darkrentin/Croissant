@@ -45,7 +45,7 @@ public static class States
 
     public static void IntroGame()
     {
-        //GameManager.PlayMusic(GameManager.Music.IntroGame);
+        GameManager.PlayMusic(GameManager.Music.IntroGame);
         IntroLvl = IntroGameScene.Instantiate<Window>();
         IntroLvl.Position = new Vector2I(1, 0);
         GameManager.GameRoot.AddChild(IntroLvl);
@@ -136,7 +136,7 @@ public static class States
 
     public static void Level1()
     {
-        //GameManager.PlayMusic(GameManager.Music.Level1);
+        GameManager.PlayMusic(GameManager.Music.Level1);
         GameManager.virus.HideNpc(1);
         Lvl1 = Level1Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Lvl1);

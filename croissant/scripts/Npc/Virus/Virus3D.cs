@@ -49,7 +49,7 @@ public partial class Virus3D : StaticBody3D
 	public override void _Process(double delta)
 	{
 		//UpdateVirusMovement(delta);
-		
+
 	}
 
 	public void UpdateVirusMovement(double delta)
@@ -95,6 +95,7 @@ public partial class Virus3D : StaticBody3D
 		// Handle damage logic here
 		// For example, reduce health or trigger an animation
 		StartGlitch();
+		Rotate(Lib.rand.Next(-180, 180), 60f, BossLevel.Instance.LaunchFloppyDisk);
 		Lib.Print("Virus took damage!");
 		if (Hp > 1)
 		{
@@ -147,9 +148,40 @@ public partial class Virus3D : StaticBody3D
 		}
 	}
 
-
 	public void OnAnimationFinished(StringName anim)
 	{
+	}	public void Rotate(float targetAngleDegrees, float rotationSpeed, Action onCompleteCallback = null)
+	{
+		float targetAngleRadians = Mathf.DegToRad(targetAngleDegrees);
+		Vector3 targetRotation = new Vector3(Rotation.X, targetAngleRadians, Rotation.Z);
+		
+		float currentAngleRadians = Rotation.Y;
+		float angleDifference = targetAngleRadians - currentAngleRadians;
+		
+		while (angleDifference > Mathf.Pi)
+		{
+			angleDifference -= 2 * Mathf.Pi;
+		}
+		while (angleDifference < -Mathf.Pi)
+		{
+			angleDifference += 2 * Mathf.Pi;
+		}
+		
+		float rotationSpeedRadians = Mathf.DegToRad(rotationSpeed);
+		float duration = Mathf.Abs(angleDifference) / rotationSpeedRadians;
+
+		duration = Mathf.Max(duration, 0.1f);
+		
+		Tween rotationTween = CreateTween();
+		rotationTween.SetTrans(Tween.TransitionType.Linear); 
+		rotationTween.SetEase(Tween.EaseType.InOut);
+		
+		rotationTween.TweenProperty(this, "rotation", targetRotation, duration);
+		
+		if (onCompleteCallback != null)
+		{
+			rotationTween.Finished += () => onCompleteCallback.Invoke();
+		}
 	}
 
 }

@@ -13,7 +13,7 @@ public partial class BossLevel : Node3D
 	public int MapSize = 10;
 	public const int WallSize = 2;
 	public static BossLevel Instance;
-	[Export] public Node3D[] SpawnPoints;
+	[Export] public Node3D SpawnPoints;
 	[Export] public Virus3D Virus;
 	public override void _Ready()
 	{
@@ -46,6 +46,12 @@ public partial class BossLevel : Node3D
 	{
 		return new Vector3(i - MapSize / 2, 0, j - MapSize / 2) * WallSize;
 	}
+
+
+
+
+
+
 
 	//Attack
 	//Atk: FloorAttack
@@ -165,8 +171,7 @@ public partial class BossLevel : Node3D
 	//Atk: LaunchFloppyDisk
 	public void LaunchFloppyDisk()
 	{
-		int SpawnId = Lib.rand.Next(0, SpawnPoints.Length);
-		Vector3 SpawnPosition = SpawnPoints[SpawnId].GlobalPosition;
+		Vector3 SpawnPosition = SpawnPoints.GlobalPosition;
 		FloppyDisk floppyDisk = (FloppyDisk)FloppyDiskScene.Instantiate();
 		AddChild(floppyDisk);
 		floppyDisk.GlobalPosition = SpawnPosition;

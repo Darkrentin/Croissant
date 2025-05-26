@@ -13,24 +13,56 @@ public partial class FloppyDisk : CharacterBody3D
     private float _timeToLive = 0f;
     private float _currentTime = 0f;
 
-    [Export] public bool StartMovementButton { get => false; set { if (value) StartMovement(new Vector3(0, 0, 1), 10f); } }
-
-    public override void _Ready()
+    [Export] public bool StartMovementButton { get => false; set { if (value) StartMovement(10f); } }    public override void _Ready()
     {
         Area.BodyEntered += OnBodyEntered;
         AnimationPlayer.AnimationFinished += OnAnimationFinished;
-    }
-
-    public void StartMovement(Vector3 direction, float duration)
+        
+        // Look at player when spawning
+        if (FinalLevel.Instance?.Player3D != null)
+        {
+            Vector3 playerPosition = FinalLevel.Instance.Player3D.GlobalPosition;
+            Vector3 directionToPlayer = playerPosition - GlobalPosition;
+            directionToPlayer.Y = 0; // Keep rotation on horizontal plane
+            
+            if (directionToPlayer.LengthSquared() > 0.001f)
+            {
+                LookAt(GlobalPosition + directionToPlayer.Normalized(), Vector3.Up);
+                GlobalRotation *= new Vector3(0, 1, 0);
+                GlobalRotation += new Vector3(0, (float)Math.PI, 0);
+            }
+        }
+        
+        AnimationPlayer.Play("Spawn");
+    }    public void StartMovement(float duration)
     {
-        _direction = direction.Normalized();
+        // Set direction towards the player
+        if (FinalLevel.Instance?.Player3D != null)
+        {
+            Vector3 playerPosition = FinalLevel.Instance.Player3D.GlobalPosition;
+            Vector3 directionToPlayer = playerPosition - GlobalPosition;
+            directionToPlayer.Y = 0; // Keep movement on the horizontal plane
+            _direction = directionToPlayer.Normalized();
+        }
+        else
+        {
+            // Fallback: Set direction away from the center (0,0,0)
+            Vector3 directionFromCenter = -GlobalPosition;
+            directionFromCenter.Y = 0; // Keep movement on the horizontal plane
+            _direction = directionFromCenter.Normalized();
+        }
+        
         _isMoving = true;
         _timeToLive = duration;
         _currentTime = 0f;
 
-        LookAt(GlobalPosition + _direction, Vector3.Up);
-        GlobalRotation *= new Vector3(0, 1, 0);
-        GlobalRotation += new Vector3(0, (float)Math.PI, 0);
+        // Look in the direction of movement
+        if (_direction.LengthSquared() > 0.001f)
+        {
+            LookAt(GlobalPosition + _direction, Vector3.Up);
+            GlobalRotation *= new Vector3(0, 1, 0);
+            GlobalRotation += new Vector3(0, (float)Math.PI, 0);
+        }
     }
 
     public override void _PhysicsProcess(double delta)

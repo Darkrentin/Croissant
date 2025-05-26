@@ -137,6 +137,7 @@ public partial class FinalLevel : Node3D
 	}
 	public void TransitionToBossLevel()
 	{
+		GameManager.PlayMusic(GameManager.Music.FinalBoss);
 		GameNode.RemoveChild(Area3D);
 		GameNode.RemoveChild(NavigationRegion);
 		NavigationRegion.QueueFree();
