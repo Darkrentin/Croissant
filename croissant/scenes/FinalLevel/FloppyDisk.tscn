@@ -334,7 +334,7 @@ tracks/2/keys = {
 }
 tracks/3/type = "value"
 tracks/3/imported = false
-tracks/3/enabled = true
+tracks/3/enabled = false
 tracks/3/path = NodePath("Mesh:rotation")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
@@ -353,8 +353,8 @@ _data = {
 }
 
 [node name="FloppyDisk" type="CharacterBody3D" node_paths=PackedStringArray("Area", "AnimationPlayer")]
-collision_layer = 8
-collision_mask = 0
+collision_layer = 264
+collision_mask = 256
 script = ExtResource("1_cgo7u")
 Area = NodePath("Area3D")
 AnimationPlayer = NodePath("AnimationPlayer")

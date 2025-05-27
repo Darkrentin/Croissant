@@ -9,8 +9,7 @@ public partial class BossLevel : Node3D
 	[Export] public PackedScene BossFloorScene;
 	[Export] public PackedScene FloppyDiskScene;
 	[Export] Area3D KillZone;
-	[Export] Area3D NearZone;
-	public int MapSize = 10;
+	public int MapSize = 12;
 	public const int WallSize = 2;
 	public static BossLevel Instance;
 	[Export] public Node3D SpawnPoints;
@@ -20,7 +19,6 @@ public partial class BossLevel : Node3D
 		Instance = this;
 		initMap();
 		KillZone.BodyEntered += OnBodyEnteredKillZone;
-		NearZone.BodyEntered += (body) => { VirusAttack(); };
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -47,12 +45,6 @@ public partial class BossLevel : Node3D
 		return new Vector3(i - MapSize / 2, 0, j - MapSize / 2) * WallSize;
 	}
 
-
-
-
-
-
-
 	//Attack
 	//Atk: FloorAttack
 	public void FloorAttack()
@@ -66,11 +58,7 @@ public partial class BossLevel : Node3D
 			}
 		}
 	}
-	//Atk: MeleeAttack
-	public void VirusAttack()
-	{
-		Virus.AnimationPlayer.Play("Atk");
-	}
+
 	//Atk: LiftWalls
 	public void LiftWalls()
 	{
@@ -79,9 +67,13 @@ public partial class BossLevel : Node3D
 			for (int j = 0; j < MapSize; j++)
 			{
 				if (Lib.rand.Next(0, 3) == 0 && !PlayerOnWall(BossFloors[i, j].GlobalPosition))
-					BossFloors[i, j].PlayAnimation("Up", 0.1f, false, true);
+					BossFloors[i, j].animationStateMachine.Travel("Up");
 			}
 		}
+		GetTree().CreateTimer(3f).Timeout += () =>
+		{
+			IdleMap();
+		};
 	}
 
 	public bool PlayerOnWall(Vector3 WallPosition)
@@ -89,68 +81,30 @@ public partial class BossLevel : Node3D
 		Vector3 playerPos = FinalLevel.Instance.Player3D.GlobalPosition;
 
 		// Calculate the distance between player and wall directly in world space
-		float distanceX = Mathf.Abs(playerPos.X - WallPosition.X);
-		float distanceZ = Mathf.Abs(playerPos.Z - WallPosition.Z);
+		float distanceX = Mathf.Abs(playerPos.X - WallPosition.X - 1);
+		float distanceZ = Mathf.Abs(playerPos.Z - WallPosition.Z - 1);
 
 		// Consider the player to be on the wall if they're within WallSize units
 		// This covers the current wall and adjacent walls
-		return distanceX <= WallSize * 1.5f && distanceZ <= WallSize * 1.5f;
+		return distanceX <= WallSize * 1f && distanceZ <= WallSize * 1f;
 	}
-	//Atk: WaveAttack
-	public void StartWave()
+	//Atk: Lava
+	public void Lava()
 	{
-		bool Wave = Lib.rand.Next(0, 2) == 0;
-		LaunchWaves(Wave, !Wave);
-	}
-
-	// LaunchWaves method to create waves with appropriate safe zones
-	public void LaunchWaves(bool launchXWave = true, bool launchZWave = true)
-	{
-		// Safe coordinates - only generate what's needed
-		int? SafeX = launchXWave ? Lib.rand.Next(0, MapSize) : null;
-		int? SafeY = launchZWave ? Lib.rand.Next(0, MapSize) : null;
-
-		// Configure wave timing
-		float time = 0.5f;
-		float timeStep = 0.7f;
-
-		// Animate both axes simultaneously with appropriate safe zones
 		for (int i = 0; i < MapSize; i++)
 		{
-			// X-axis wave (columns)
-			if (launchXWave)
+			for (int j = 0; j < MapSize; j++)
 			{
-				for (int j = 0; j < MapSize; j++)
-				{
-					// Skip only the safe column if we're using X axis
-					if (j == SafeX) continue;
-
-					// Skip safe Y point only if Z axis is also active
-					if (launchZWave && i == SafeY) continue;
-
-					BossFloors[i, j].PlayAnimation("Lava", time);
-				}
+				if (!PlayerOnWall(BossFloors[i, j].GlobalPosition))
+					BossFloors[i, j].animationStateMachine.Travel("Lava");
 			}
-
-			// Z-axis wave (rows)
-			if (launchZWave)
-			{
-				for (int j = 0; j < MapSize; j++)
-				{
-					// Skip only the safe row if we're using Z axis
-					if (j == SafeY) continue;
-
-					// Skip safe X point only if X axis is also active
-					if (launchXWave && i == SafeX) continue;
-
-					BossFloors[j, i].PlayAnimation("Lava", time);
-				}
-			}
-
-			// Increase time for the wave effect
-			time += timeStep;
 		}
+		GetTree().CreateTimer(5f).Timeout += () =>
+		{
+			IdleMap();
+		};
 	}
+
 
 	public void OnBodyEnteredKillZone(Node3D body)
 	{
@@ -168,6 +122,17 @@ public partial class BossLevel : Node3D
 			}
 		}
 	}
+	public void IdleMap()
+	{
+		for (int i = 0; i < MapSize; i++)
+		{
+			for (int j = 0; j < MapSize; j++)
+			{
+				BossFloors[i, j].animationStateMachine.Travel("Idle");
+				BossFloors[i, j].timer.Stop();
+			}
+		}
+	}
 	//Atk: LaunchFloppyDisk
 	public void LaunchFloppyDisk()
 	{
@@ -177,22 +142,27 @@ public partial class BossLevel : Node3D
 		floppyDisk.GlobalPosition = SpawnPosition;
 
 	}
-	
-	public void LaunchNFloppyDisks(int n, float delayBetweenDisks = 0.0f)
+
+	public void LaunchNFloppyDisk(int n, float delay = 0.3f)
 	{
 		for (int i = 0; i < n; i++)
 		{
-			if (i == 0 || delayBetweenDisks <= 0)
+			GetTree().CreateTimer(i * delay).Timeout += () =>
 			{
-				// Launch first disk immediately or if no delay is specified
 				LaunchFloppyDisk();
-			}
-			else
-			{
-				// Launch subsequent disks with delay
-				var timer = GetTree().CreateTimer(i * delayBetweenDisks);
-				timer.Timeout += LaunchFloppyDisk;
-			}
+			};
 		}
+	}
+
+	public void LaunchNFloppyDiskAndRotate(int n, float angle, float RotationSpeed, float delay = 0.3f)
+	{
+		for (int i = 0; i < n; i++)
+		{
+			GetTree().CreateTimer(i * delay).Timeout += () =>
+			{
+				LaunchFloppyDisk();
+			};
+		}
+		Virus3D.Instance.Rotate(angle, RotationSpeed);
 	}
 }

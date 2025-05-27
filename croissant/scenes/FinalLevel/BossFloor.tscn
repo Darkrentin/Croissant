@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://c0ixtme6phwg7"]
+[gd_scene load_steps=33 format=3 uid="uid://c0ixtme6phwg7"]
 
 [ext_resource type="Script" uid="uid://bgshfq2ki3bqa" path="res://scripts/FinalLevel/BossFloor.cs" id="1_vtsjb"]
 [ext_resource type="Shader" uid="uid://kr2f7nlpliis" path="res://assets/shaders/TriplanarNoise.gdshader" id="2_3b0w1"]
@@ -126,34 +126,32 @@ switch_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3ixkv"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sakcb"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sth34"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nlfag"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_04d7j"]
 switch_mode = 1
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_57hlt"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3b0w1"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vtsjb"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v2u0f"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4vxqs"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v06mv"]
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2atda"]
 switch_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_eg05t"]
 switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_57hlt"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v2u0f"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4vxqs"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v06mv"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_awrxr"]
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_jrqrm"]
 states/Idle/node = SubResource("AnimationNodeStateMachine_3b0w1")
@@ -168,8 +166,8 @@ states/Up/node = SubResource("AnimationNodeAnimation_hjxcf")
 states/Up/position = Vector2(313, 227)
 states/UpBack/node = SubResource("AnimationNodeAnimation_awrxr")
 states/UpBack/position = Vector2(486, 227)
-transitions = ["Lava", "LavaBack", SubResource("AnimationNodeStateMachineTransition_o3p5f"), "RESET", "Lava", SubResource("AnimationNodeStateMachineTransition_3ixkv"), "LavaBack", "RESET", SubResource("AnimationNodeStateMachineTransition_sakcb"), "UpBack", "RESET", SubResource("AnimationNodeStateMachineTransition_sth34"), "RESET", "Up", SubResource("AnimationNodeStateMachineTransition_nlfag"), "Up", "UpBack", SubResource("AnimationNodeStateMachineTransition_04d7j"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_57hlt"), "RESET", "LavaBack", SubResource("AnimationNodeStateMachineTransition_3b0w1"), "RESET", "UpBack", SubResource("AnimationNodeStateMachineTransition_vtsjb"), "Lava", "RESET", SubResource("AnimationNodeStateMachineTransition_v2u0f"), "Up", "RESET", SubResource("AnimationNodeStateMachineTransition_4vxqs"), "Idle", "RESET", SubResource("AnimationNodeStateMachineTransition_v06mv"), "LavaBack", "Idle", SubResource("AnimationNodeStateMachineTransition_2atda"), "UpBack", "Idle", SubResource("AnimationNodeStateMachineTransition_eg05t")]
-graph_offset = Vector2(-204, -68)
+transitions = ["Lava", "LavaBack", SubResource("AnimationNodeStateMachineTransition_o3p5f"), "RESET", "Lava", SubResource("AnimationNodeStateMachineTransition_3ixkv"), "RESET", "Up", SubResource("AnimationNodeStateMachineTransition_nlfag"), "Up", "UpBack", SubResource("AnimationNodeStateMachineTransition_04d7j"), "RESET", "LavaBack", SubResource("AnimationNodeStateMachineTransition_3b0w1"), "RESET", "UpBack", SubResource("AnimationNodeStateMachineTransition_vtsjb"), "LavaBack", "Idle", SubResource("AnimationNodeStateMachineTransition_2atda"), "UpBack", "Idle", SubResource("AnimationNodeStateMachineTransition_eg05t"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_57hlt"), "Idle", "RESET", SubResource("AnimationNodeStateMachineTransition_v2u0f"), "RESET", "Idle", SubResource("AnimationNodeStateMachineTransition_4vxqs"), "LavaBack", "RESET", SubResource("AnimationNodeStateMachineTransition_v06mv"), "UpBack", "RESET", SubResource("AnimationNodeStateMachineTransition_awrxr")]
+graph_offset = Vector2(-153, -75)
 
 [node name="BossFloor" type="Node3D" node_paths=PackedStringArray("animationPlayer", "animationTree")]
 script = ExtResource("1_vtsjb")
@@ -181,6 +179,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)
 mesh = SubResource("BoxMesh_re8sb")
 
 [node name="Coll" type="StaticBody3D" parent="Floor"]
+collision_layer = 257
+collision_mask = 257
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Coll"]
 shape = SubResource("BoxShape3D_3b0w1")

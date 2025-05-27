@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class FloppyDisk : CharacterBody3D
 {
@@ -13,28 +14,41 @@ public partial class FloppyDisk : CharacterBody3D
     private float _timeToLive = 0f;
     private float _currentTime = 0f;
 
-    [Export] public bool StartMovementButton { get => false; set { if (value) StartMovement(10f); } }    public override void _Ready()
+    public static List<FloppyDisk> FloppyDisks = new List<FloppyDisk>();
+
+    [Export] public bool StartMovementButton { get => false; set { if (value) StartMovement(10f); } }
+    public override void _Ready()
     {
+        FloppyDisks.Add(this);
         Area.BodyEntered += OnBodyEntered;
         AnimationPlayer.AnimationFinished += OnAnimationFinished;
-        
+
         // Look at player when spawning
         if (FinalLevel.Instance?.Player3D != null)
         {
             Vector3 playerPosition = FinalLevel.Instance.Player3D.GlobalPosition;
             Vector3 directionToPlayer = playerPosition - GlobalPosition;
-            directionToPlayer.Y = 0; // Keep rotation on horizontal plane
-            
-            if (directionToPlayer.LengthSquared() > 0.001f)
-            {
-                LookAt(GlobalPosition + directionToPlayer.Normalized(), Vector3.Up);
-                GlobalRotation *= new Vector3(0, 1, 0);
-                GlobalRotation += new Vector3(0, (float)Math.PI, 0);
-            }
+            directionToPlayer.Y = 0; // Keep movement on the horizontal plane
+            _direction = directionToPlayer.Normalized();
+
+            LookAt(GlobalPosition + _direction, Vector3.Up);
+            GlobalRotation *= new Vector3(0, 1, 0);
+            GlobalRotation += new Vector3(0, (float)Math.PI, 0);
         }
-        
+
         AnimationPlayer.Play("Spawn");
-    }    public void StartMovement(float duration)
+    }
+
+    public static void ResetFloppyDisks()
+    {
+        foreach (FloppyDisk floppyDisk in FloppyDisks)
+        {
+            floppyDisk.QueueFree();
+        }
+        FloppyDisks.Clear();
+    }
+
+    public void StartMovement(float duration)
     {
         // Set direction towards the player
         if (FinalLevel.Instance?.Player3D != null)
@@ -51,7 +65,7 @@ public partial class FloppyDisk : CharacterBody3D
             directionFromCenter.Y = 0; // Keep movement on the horizontal plane
             _direction = directionFromCenter.Normalized();
         }
-        
+
         _isMoving = true;
         _timeToLive = duration;
         _currentTime = 0f;
@@ -74,7 +88,7 @@ public partial class FloppyDisk : CharacterBody3D
 
         if (_currentTime >= _timeToLive)
         {
-            QueueFree();
+            Kill();
             return;
         }
 
@@ -87,7 +101,8 @@ public partial class FloppyDisk : CharacterBody3D
         if (body is Player3D player)
         {
             FinalLevel.Instance.DeathBossLevel();
-            QueueFree();
+
+            ResetFloppyDisks();
         }
     }
 
@@ -101,7 +116,13 @@ public partial class FloppyDisk : CharacterBody3D
     {
         if (animName == "Death")
         {
-            QueueFree();
+            Kill();
         }
+    }
+
+    public void Kill()
+    {
+        FloppyDisks.Remove(this);
+        QueueFree();
     }
 }
