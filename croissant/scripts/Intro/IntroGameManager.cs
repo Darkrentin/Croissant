@@ -12,6 +12,7 @@ public partial class IntroGameManager : Node2D
 	[Export] private Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
 	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
 	[Export] public int MaxScore = 30;
+	[Export] private TextureRect IntroRect;
 	private static ColorRect ShaderRect;
 	private static PackedScene GameExplosionScene;
 	private static Label ScoreLabel;
@@ -29,10 +30,12 @@ public partial class IntroGameManager : Node2D
 	public override void _Ready()
 	{
 		GetWindow().Size = GameManager.ScreenSize + new Vector2I(1, 1);
+		IntroRect.Position = new Vector2(0, GetViewportRect().Size.Y - IntroRect.Size.Y);
 		Instance = this;
 
 		Camera = GetNode<Camera2D>("Camera");
-		Player.Position = windowSize / 2;
+
+		Player.Position = GameManager.ScreenSize / 2;
 
 		ShootTimer.Timeout += () => CanShoot = true;
 		ShootTimer.WaitTime = 0.15f;

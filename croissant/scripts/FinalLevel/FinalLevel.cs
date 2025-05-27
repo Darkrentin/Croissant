@@ -114,7 +114,7 @@ public partial class FinalLevel : Node3D
 		while (targetY > Mathf.Pi) targetY -= Mathf.Pi * 2;
 		while (targetY < -Mathf.Pi) targetY += Mathf.Pi * 2;
 
-		
+
 		var tween = CreateTween();
 		tween.TweenProperty(Player3D, "rotation:y", targetY, 1f)
 			 .SetTrans(Tween.TransitionType.Linear)
@@ -160,8 +160,8 @@ public partial class FinalLevel : Node3D
 
 		GameManager.MainWindow.AlwaysOnTop = false;
 		GameManager.FixWindow.GrabFocus();
-		Input.MouseMode = Input.MouseModeEnum.Visible;	
+		Input.MouseMode = Input.MouseModeEnum.Visible;
 
-        QueueFree();
+		QueueFree();
 	}
 }

@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="5_b7rdj"]
 [ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
-[ext_resource type="Texture2D" uid="uid://d1gjr6yxhl2kj" path="res://assets/sprites/Placeholder.png" id="8_125ny"]
+[ext_resource type="Texture2D" uid="uid://tr0myr2uos3n" path="res://assets/sprites/intro_tuto.png" id="8_125ny"]
 [ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="9_fwmwi"]
 
 [sub_resource type="Animation" id="Animation_b7rdj"]
@@ -67,7 +67,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.7),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [0.0, 0.66]
+"values": [0.0, 1.0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fwmwi"]
@@ -106,7 +106,7 @@ content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 1
 content_scale_aspect = 4
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer", "GameNode")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer", "IntroRect", "GameNode")]
 script = ExtResource("1_8rhfo")
 Player = NodePath("GameNode/Player")
 BulletScene = ExtResource("2_g36va")
@@ -116,6 +116,7 @@ ExportShaderRect = NodePath("../Shader effects")
 ExportGameExplosion = ExtResource("5_b7rdj")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
+IntroRect = NodePath("../UI/Tuto")
 GameNode = NodePath("GameNode")
 
 [node name="Camera" type="Camera2D" parent="Game"]
@@ -162,12 +163,13 @@ autoplay = "Start"
 
 [node name="Tuto" type="TextureRect" parent="UI"]
 layout_mode = 1
-anchors_preset = -1
-anchor_top = 8.0
-anchor_right = 0.75
-anchor_bottom = 8.437
-offset_right = 3.05176e-05
-offset_bottom = 0.0639648
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = 744.0
+offset_right = 290.0
+offset_bottom = 952.0
+grow_vertical = 0
 texture = ExtResource("8_125ny")
 expand_mode = 1
 

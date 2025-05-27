@@ -9,14 +9,10 @@ Lvl 1 :
 - Faire des vagues
 
 Lvl 2 :
-- Rendre la ExtendWindow carrée, ainsi que son explosion, pas rectangulaire @done
-- Faire un système de vagues où on peut choisir les fenetres qui vont pop @done
-- Ajouter un shader sur la visualisation des hitboxes pour qu'ils ondulent un peu en mode ondulations de perlin noise @done
 - Ajouter 2 nouveaux types de fenêtres pour arriver à 6
 - Parmis les deux fenetres, en ajouter une qui suit lentement la fenetre à l'infini constament (elle n'a pas d'attaque juste elle suis la position du joueur où il était il y a 2 secondes)
 - Trouver une dissotiation logique pour les 3 fenetres de couleurs primaires (R,G,B) et les 3 fenetres de couleurs additive
 - Ajouter des particules pour chaque fenetres qui sont cohérentes à l'attaque
-- Rendre la couleur des fenetres de la couleur de leur attaque mais foncées avec un effet de shader stylé, puis lorsque leur hitbox est active mettre la couleur à la couleur de l'attaque @done
 
 Lvl 3 :
 -probleme d'emplacement de la moving platform en changeant de scène (dans des murs parfois)
@@ -29,9 +25,6 @@ Lvl 3 :
 Autres :
 - Faire le Helper
 - Vérifier le texte du Helper de Corentin
-- Ajouter un système de timer pour l'entièreté du jeu, avec un nouvelle scène de fin du jeu et le temps qu'on a mis pour le finir @done
-- Ajouter un système de variables globales qui se stockent sur l'ordinateur : volume des sons, volume de la musique, si le joueur à terminé une fois le jeu, son meilleur temps @done
-- Ajouter le timer dans la main window en haut à droite mais seulement quand il a terminé le jeu une fois @done
 - Ajouter des sons au jeu
 - Ajouter des musiques au jeu
 - Ajouter un son à la Undertale quand le virus et le Helper parle, avec des voix différentes en faisant varier légèrement le pitch
@@ -76,6 +69,3 @@ Boss :
 Menu :
 - son de mise en pause
 - son de démise en pause
-- son quitter le jeu
-- son clic sur UI
-- Bouton desactiver le timer qui apparait que la deuxième fois
