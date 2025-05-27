@@ -159,9 +159,9 @@ position = Vector2(0, 256)
 position = Vector2(800, 32)
 shape = SubResource("RectangleShape2D_hvpnd")
 
-[node name="16" parent="." instance=ExtResource("5_vwnpx")]
+[node name="17" parent="." instance=ExtResource("5_vwnpx")]
 position = Vector2(64, 344)
-NextSceneId = 16
+NextSceneId = 17
 
 [node name="MovePlatform" parent="." instance=ExtResource("6_3n8fb")]
 position = Vector2(48, 544)

@@ -97,9 +97,9 @@ shape = SubResource("RectangleShape2D_fo6cm")
 position = Vector2(24, 64)
 NextSceneId = 3
 
-[node name="13" parent="." instance=ExtResource("2_fo6cm")]
+[node name="17" parent="." instance=ExtResource("2_fo6cm")]
 position = Vector2(1672, 600)
-NextSceneId = 13
+NextSceneId = 17
 
 [node name="StaticPlateform" parent="." instance=ExtResource("3_dfmgp")]
 position = Vector2(0, 376)
