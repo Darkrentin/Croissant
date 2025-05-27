@@ -19,7 +19,7 @@ public partial class Maze : Node3D
 
 
     public int WallSize = 2;
-    public const int LampSpacing = 8;
+    public const int LampSpacing = 5;
 
     public const int Lamp = -2;
     public const int CantSpawn = -1;
@@ -244,7 +244,7 @@ public partial class Maze : Node3D
         }
 
         HelperBody = HelperBodyScene.Instantiate<Node3D>();
-        HelperBody.Position = new Vector3(0, 0, -WallSize*2);
+        HelperBody.Position = new Vector3(0, 0, -WallSize * 2);
         AddChild(HelperBody);
 
     }
@@ -252,7 +252,7 @@ public partial class Maze : Node3D
     {
         // Calculate direction towards center (0,0,0)
         Vector3 directionToCenter = -position.Normalized();
-        
+
         // Position flashlight one block closer to center
         Vector3 FlashLightPos = position + (directionToCenter * WallSize * new Vector3(1, 0, 1));
 

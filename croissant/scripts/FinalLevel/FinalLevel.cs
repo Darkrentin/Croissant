@@ -26,6 +26,8 @@ public partial class FinalLevel : Node3D
 	[Export] public bool EndButton { get => false; set { if (value) End(); } }
 	public override void _Ready()
 	{
+		GameManager.MainWindow.ContentScaleMode = Window.ContentScaleModeEnum.CanvasItems;
+		GameManager.MainWindow.ContentScaleAspect = Window.ContentScaleAspectEnum.Ignore;
 		Instance = this;
 		maze.CreateMaze();
 		//NavigationRegion.NavigationMesh = new NavigationMesh();
