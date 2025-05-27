@@ -43,3 +43,39 @@ Autres :
 - Faire une version infinie du intro game à la fin du jeu
 - Commenter le code
 - Optimiser le code
+
+Sons :
+Intro :
+- son demmarage du jeu
+- son piou piou de tir
+- son ennemi touché + tué prendre lvl 4
+- Implem son de glitch
+- gros glitch à l'explosion de l'intro
+- land du virus à l'atterissage
+- son de mise en couleur de pixel
+Dialogue :
+- son EE EEE E EEEE à la Undertale
+Level 1 :
+- son et sprite DodgeWindow shape?
+Level 2 :
+- Enlever les 3 sons de vague, mettre petit son de jeu à la place comme Cinnamon
+- Apparition du Sys32 -> son windows
+Level 3 :
+- son saut
+- son land
+- son mort
+- son portail (fichier ?)
+- son select move platform
+- son unselect move platform
+- son move move platform 
+- (modifier shaders quand plateform dans platform only et quand joueur dans joueur only)
+Level 4 :
+- son mort du player
+Boss :
+- à venir
+Menu :
+- son de mise en pause
+- son de démise en pause
+- son quitter le jeu
+- son clic sur UI
+- Bouton desactiver le timer qui apparait que la deuxième fois
