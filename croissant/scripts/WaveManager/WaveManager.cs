@@ -5,7 +5,7 @@ public partial class WaveManager : Node
 {
 	[Export] public AudioStreamPlayer WaveBeginSound;
 	[Export] public AudioStreamPlayer WavePrevious;
-	[Export] public AudioStreamPlayer DeathSound;
+	
 	[Export] public Node SpawnNode;
 	[Export] public Wave FirstWave;
 	[Export] public WaveData WaveData;
@@ -16,6 +16,7 @@ public partial class WaveManager : Node
 	public Wave LastWave;
 	public Timer WaveStartTimer;
 	public static int WaveNum = 0;
+	public bool IsWaveGoBack = false;
 	public Action EndWave;
 
 	public override void _Ready()
@@ -38,8 +39,9 @@ public partial class WaveManager : Node
 	{
 		if (anim == "GoBack")
 		{
-			UpdateLabel();
+			UpdateLabel((WaveNum + 1).ToString());
 			AnimationPlayer.Play("GoBackReverse");
+			WavePrevious.Play();
 		}
 		if (anim == "GoBackReverse")
 		{
@@ -50,11 +52,14 @@ public partial class WaveManager : Node
 
 	public void GoBackToWave()
 	{
-		DeathSound.Play();
+		
 		CurrentWaveId = LastWave.id;
 		CurrentWave.WaveTimer.Stop();
 		CleanUpAllWave(CurrentWave);
+		UpdateLabel(" ");
 		WaveNum--;
+		IsWaveGoBack = true;
+
 		AnimationPlayer.Play("GoBack");
 	}
 
@@ -62,6 +67,14 @@ public partial class WaveManager : Node
 	{
 		WaveNum++;
 		UpdateLabel();
+		if (IsWaveGoBack)
+		{
+			IsWaveGoBack = false;
+		}
+		else
+		{
+			WaveBeginSound.Play();
+		}
 	}
 
 	public void CleanUpWave(Wave w)
@@ -87,9 +100,16 @@ public partial class WaveManager : Node
 		Wave.NbOfEnemies = 0;
 	}
 
-	public void UpdateLabel()
+	public void UpdateLabel(string text = "")
 	{
-		ScoreLabel.Text = WaveNum.ToString();
+		if (text != "")
+		{
+			ScoreLabel.Text = text;
+		}
+		else
+		{
+			ScoreLabel.Text = WaveNum.ToString();
+		}
 		AnimationPlayer.Play("ScoreUp");
 	}
 }

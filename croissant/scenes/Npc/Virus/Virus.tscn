@@ -17,7 +17,6 @@
 [ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
 [ext_resource type="AudioStream" uid="uid://c4mc8junhhtq6" path="res://assets/sounds/others/dialogue_virus.mp3" id="16_stpki"]
 
-
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 2
 ambient_light_color = Color(1, 0.863965, 0.790846, 1)

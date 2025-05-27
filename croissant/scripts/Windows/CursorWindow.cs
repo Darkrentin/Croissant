@@ -2,6 +2,7 @@ using Godot;
 
 public partial class CursorWindow : FloatWindow
 {
+	[Export] public AudioStreamPlayer DeathSound;
 	public CollisionShape2D collision;
 	public Area2D area;
 	public bool Freeze = false;
@@ -41,6 +42,8 @@ public partial class CursorWindow : FloatWindow
 			return;
 		FreezFrameStart();
 		animationPlayer.Play("Disolve");
+		DeathSound.Play();
+		
 	}
 
 	public void FreezFrameStart()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d13xxxigq3m7y"]
+[gd_scene load_steps=15 format=3 uid="uid://d13xxxigq3m7y"]
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
 [ext_resource type="PackedScene" uid="uid://b4i4iwr3qk44x" path="res://scenes/WaveManager/WaveManager.tscn" id="2_qsvqe"]
@@ -7,7 +7,6 @@
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="6_s1ih2"]
 [ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="6_wgxlr"]
 [ext_resource type="AudioStream" uid="uid://c5m26fwo7gxbu" path="res://assets/sounds/level_2/wave_start.mp3" id="7_ldj83"]
-[ext_resource type="AudioStream" uid="uid://llxoifjn2w85" path="res://assets/sounds/level_2/death.mp3" id="8_ldj83"]
 [ext_resource type="AudioStream" uid="uid://bqn87kl1w33t4" path="res://assets/sounds/level_2/wave_previous.mp3" id="9_wgxlr"]
 
 [sub_resource type="Animation" id="Animation_s1ih2"]
@@ -103,10 +102,9 @@ shader_parameter/b_displacement = Vector2(2, 2)
 script = ExtResource("1_u87iq")
 WaveManager = NodePath("WaveManager")
 
-[node name="WaveManager" parent="." node_paths=PackedStringArray("WaveBeginSound", "WavePrevious", "DeathSound", "SpawnNode", "FirstWave", "WaveData", "ScoreLabel", "AnimationPlayer") instance=ExtResource("2_qsvqe")]
+[node name="WaveManager" parent="." node_paths=PackedStringArray("WaveBeginSound", "WavePrevious", "SpawnNode", "FirstWave", "WaveData", "ScoreLabel", "AnimationPlayer") instance=ExtResource("2_qsvqe")]
 WaveBeginSound = NodePath("../WaveBegin")
 WavePrevious = NodePath("../WavePrevious")
-DeathSound = NodePath("../Death")
 SpawnNode = NodePath("../SpawnNode")
 FirstWave = NodePath("WaitWave")
 WaveData = NodePath("WaveDataLevel2")
@@ -282,11 +280,6 @@ grow_vertical = 2
 [node name="WaveBegin" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_ldj83")
 volume_db = -10.0
-bus = &"SFX"
-
-[node name="Death" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_ldj83")
-volume_db = -20.0
 bus = &"SFX"
 
 [node name="WavePrevious" type="AudioStreamPlayer" parent="."]
