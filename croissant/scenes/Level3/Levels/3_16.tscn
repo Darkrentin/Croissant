@@ -24,7 +24,7 @@ size = Vector2(128, 248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lstuu"]
 resource_local_to_scene = true
-size = Vector2(120, 200)
+size = Vector2(128, 200)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u47c1"]
 size = Vector2(552, 56)
@@ -119,7 +119,7 @@ shape = SubResource("RectangleShape2D_kyd2w")
 position = Vector2(1672, 760)
 
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
-position = Vector2(60, 100)
+position = Vector2(64, 100)
 shape = SubResource("RectangleShape2D_lstuu")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_lstuu")]

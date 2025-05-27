@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cu58hpxb2ekmm"]
+[gd_scene load_steps=24 format=3 uid="uid://cu58hpxb2ekmm"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_8hfnw"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_psbq6"]
@@ -34,7 +34,7 @@ size = Vector2(128, 320)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pq31m"]
 resource_local_to_scene = true
-size = Vector2(192, 640)
+size = Vector2(408, 392)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_n8pw1"]
 size = Vector2(128, 376)
@@ -47,10 +47,10 @@ resource_local_to_scene = true
 size = Vector2(192, 504)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xsb3w"]
-size = Vector2(344, 200)
+size = Vector2(576, 248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bpmg0"]
-size = Vector2(344, 200)
+size = Vector2(576, 248)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pq31m"]
 resource_local_to_scene = true
@@ -69,9 +69,13 @@ shader_parameter/Time = 0.0
 resource_local_to_scene = true
 size = Vector2(384, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jh265"]
+resource_local_to_scene = true
+size = Vector2(128, 128)
+
 [node name="3_3" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_8hfnw")
-windows = [NodePath("StaticPlateform/Window"), NodePath("KillingPlatform/Window"), NodePath("PlayerOnly/Window"), NodePath("StaticPlateform2/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("KillingPlatform3/Window"), NodePath("MovePlatform/Window")]
+windows = [NodePath("StaticPlateform/Window"), NodePath("KillingPlatform/Window"), NodePath("PlayerOnly/Window"), NodePath("StaticPlateform2/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("KillingPlatform3/Window"), NodePath("MovePlatform/Window"), NodePath("PlayerOnly3/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -138,10 +142,10 @@ position = Vector2(64, 160)
 shape = SubResource("RectangleShape2D_viq7f")
 
 [node name="PlayerOnly2" parent="." instance=ExtResource("5_lb8pi")]
-position = Vector2(808, 0)
+position = Vector2(384, 0)
 
 [node name="CollisionShape2D" parent="PlayerOnly2" index="1"]
-position = Vector2(96, 320)
+position = Vector2(204, 196)
 shape = SubResource("RectangleShape2D_pq31m")
 
 [node name="KillingPlatform2" parent="." instance=ExtResource("4_d4csu")]
@@ -163,18 +167,18 @@ position = Vector2(96, 252)
 shape = SubResource("RectangleShape2D_f1i6i")
 
 [node name="KillingPlatform3" parent="." instance=ExtResource("4_d4csu")]
-position = Vector2(1168, 712)
+position = Vector2(512, 392)
 
 [node name="CollisionShape2D" parent="KillingPlatform3" index="3"]
-position = Vector2(172, 100)
+position = Vector2(288, 124)
 shape = SubResource("RectangleShape2D_xsb3w")
 
 [node name="CollisionShape2D" parent="KillingPlatform3/Area2D" index="0"]
-position = Vector2(172, 100)
+position = Vector2(288, 124)
 shape = SubResource("RectangleShape2D_bpmg0")
 
 [node name="MovePlatform" parent="." instance=ExtResource("6_cmssg")]
-position = Vector2(1424, 544)
+position = Vector2(1496, 576)
 
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_pq31m")
@@ -182,6 +186,13 @@ material = SubResource("ShaderMaterial_pq31m")
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(192, 32)
 shape = SubResource("RectangleShape2D_17g1n")
+
+[node name="PlayerOnly3" parent="." instance=ExtResource("5_lb8pi")]
+position = Vector2(1328, 560)
+
+[node name="CollisionShape2D" parent="PlayerOnly3" index="1"]
+position = Vector2(64, 64)
+shape = SubResource("RectangleShape2D_jh265")
 
 [editable path="StaticPlateform"]
 [editable path="KillingPlatform"]
@@ -192,3 +203,4 @@ shape = SubResource("RectangleShape2D_17g1n")
 [editable path="StaticPlateform3"]
 [editable path="KillingPlatform3"]
 [editable path="MovePlatform"]
+[editable path="PlayerOnly3"]
