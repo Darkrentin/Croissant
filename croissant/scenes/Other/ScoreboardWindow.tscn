@@ -43,7 +43,7 @@ _data = {
 &"RESET": SubResource("Animation_poncd")
 }
 
-[node name="ScoreboardWindow" type="Window" node_paths=PackedStringArray("HttpRequest", "TimeLabel", "PersonalBestLabel", "UsernameEntry", "ScoreboardText", "SubmitButton", "ShowScoreboardButton", "EndResultsContainer", "ScoreboardContainer", "WaitingScreenContainer", "SubmitLabel")]
+[node name="ScoreboardWindow" type="Window" node_paths=PackedStringArray("HttpRequest", "TimeLabel", "PersonalBestLabel", "UsernameEntry", "ScoreboardText", "SubmitButton", "ShowScoreboardButton", "EndResultsContainer", "ScoreboardContainer", "WaitingScreenContainer", "SubmitLabel", "EndlessModeButton")]
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 24)
 size = Vector2i(500, 500)
@@ -60,6 +60,7 @@ EndResultsContainer = NodePath("EndResult")
 ScoreboardContainer = NodePath("Scoreboard")
 WaitingScreenContainer = NodePath("WaitingScreen")
 SubmitLabel = NodePath("EndResult/VBoxContainer/Submit you time!")
+EndlessModeButton = NodePath("Scoreboard/VBoxContainer/Button")
 metadata/_custom_type_script = "uid://kuhg0kaqg182"
 
 [node name="ColorRect" type="ColorRect" parent="."]

@@ -20,7 +20,7 @@ public static class States
     public static PackedScene CursorWindowScene = SceneLoader.CursorWindowScene;
     public static PackedScene ScoreboardScene = SceneLoader.ScoreboardScene;
     public static Window Bsod;
-    public static Window IntroLvl;
+    public static Node2D IntroLvl;
     public static Node Lvl1;
     public static Node Lvl2;
     public static int LevelOfTuto = 0;
@@ -46,7 +46,7 @@ public static class States
     public static void IntroGame()
     {
         GameManager.PlayMusic(GameManager.Music.IntroGame);
-        IntroLvl = IntroGameScene.Instantiate<Window>();
+        IntroLvl = IntroGameScene.Instantiate<Node2D>();
         IntroLvl.Position = new Vector2I(1, 0);
         GameManager.GameRoot.AddChild(IntroLvl);
 
@@ -240,6 +240,16 @@ public static class States
         Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
         Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
         GameManager.GameRoot.AddChild(Scoreboard);
+
+        //Change State condition
+        GameManager.State = GameManager.GameState.Void;
+    }
+
+    public static void IntroGameEndless()
+    {
+        GameManager.PlayMusic(GameManager.Music.IntroGame);
+        Node2D IntroGameEndless = SceneLoader.IntroGameEndlessScene.Instantiate<Node2D>();
+        GameManager.GameRoot.AddChild(IntroGameEndless);
 
         //Change State condition
         GameManager.State = GameManager.GameState.Void;

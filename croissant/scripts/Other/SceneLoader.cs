@@ -27,6 +27,7 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene SpikeWindowScene;
 	[Export] public PackedScene FinalLevelScene;
 	[Export] public PackedScene ScoreboardScene;
+	[Export] public PackedScene IntroGameEndlessScene;
 
 	public override void _Ready()
 	{
