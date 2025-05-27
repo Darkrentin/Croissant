@@ -21,6 +21,7 @@ public partial class DialogueWindow : FloatWindow
 	public Action<string> OnDialogueFinished;
 	public int index = 0;
 	public bool isDialogue = false;
+	public int CharacterBetweenSounds = 1;
 
 	public static int DialogueCount = 0;
 	public static int Dialogueid = 0;
@@ -59,11 +60,20 @@ public partial class DialogueWindow : FloatWindow
 	{
 		if (label.GetTotalCharacterCount() - 1 > label.GetVisibleCharacters())
 		{
-			ParentWindow.DialogueSound.PitchScale = Lib.GetRandomNormal(0.8f, 1.2f);
-			ParentWindow.DialogueSound.Play();
+			if (CharacterBetweenSounds == 0)
+			{
+				ParentWindow.DialogueSound.PitchScale = Lib.GetRandomNormal(0.9f, 1.1f);
+				ParentWindow.DialogueSound.Play();
+				CharacterBetweenSounds = 1;
+			}
+			else
+			{
+				CharacterBetweenSounds--;
+			}
+
 			isTyping = true;
 			label.VisibleCharacters++;
-			timer.WaitTime = Lib.rand.NextDouble() / 16f;
+			timer.WaitTime = Lib.rand.NextDouble() / 11f;
 			timer.Start();
 		}
 		else

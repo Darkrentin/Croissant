@@ -15,7 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="10_k1eiq"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="10_oq100"]
 [ext_resource type="Texture2D" uid="uid://btow5hxusyoqf" path="res://assets/sprites/virus/eye/Angry.png" id="13_hlkw5"]
-[ext_resource type="AudioStream" uid="uid://c4mc8junhhtq6" path="res://assets/sounds/dialogue_virus.mp3" id="16_stpki"]
+[ext_resource type="AudioStream" uid="uid://c4mc8junhhtq6" path="res://assets/sounds/others/dialogue_virus.mp3" id="16_stpki"]
+
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 2

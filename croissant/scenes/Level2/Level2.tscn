@@ -6,9 +6,9 @@
 [ext_resource type="PackedScene" uid="uid://bjgcj0eb3671" path="res://scenes/WaveManager/Wave.tscn" id="4_8crk8"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="6_s1ih2"]
 [ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="6_wgxlr"]
-[ext_resource type="AudioStream" uid="uid://ctykvvvlmtrc7" path="res://assets/sounds/level_2/begin_wave.mp3" id="7_wgxlr"]
-[ext_resource type="AudioStream" uid="uid://yddlid4fsyxd" path="res://assets/sounds/level_2/next_wave.mp3" id="8_4axc7"]
-[ext_resource type="AudioStream" uid="uid://0pupw4lmj33r" path="res://assets/sounds/level_2/end_wave.mp3" id="9_otsul"]
+[ext_resource type="AudioStream" uid="uid://c5m26fwo7gxbu" path="res://assets/sounds/level_2/wave_start.mp3" id="7_ldj83"]
+[ext_resource type="AudioStream" uid="uid://llxoifjn2w85" path="res://assets/sounds/level_2/death.mp3" id="8_ldj83"]
+[ext_resource type="AudioStream" uid="uid://bqn87kl1w33t4" path="res://assets/sounds/level_2/wave_previous.mp3" id="9_wgxlr"]
 
 [sub_resource type="Animation" id="Animation_s1ih2"]
 resource_name = "GoBack"
@@ -103,10 +103,10 @@ shader_parameter/b_displacement = Vector2(2, 2)
 script = ExtResource("1_u87iq")
 WaveManager = NodePath("WaveManager")
 
-[node name="WaveManager" parent="." node_paths=PackedStringArray("WaveStartSound", "WaveTransitionSound", "WaveEndSound", "SpawnNode", "FirstWave", "WaveData", "ScoreLabel", "AnimationPlayer") instance=ExtResource("2_qsvqe")]
-WaveStartSound = NodePath("../WaveStart")
-WaveTransitionSound = NodePath("../WaveTransition")
-WaveEndSound = NodePath("../WaveEnd")
+[node name="WaveManager" parent="." node_paths=PackedStringArray("WaveBeginSound", "WavePrevious", "DeathSound", "SpawnNode", "FirstWave", "WaveData", "ScoreLabel", "AnimationPlayer") instance=ExtResource("2_qsvqe")]
+WaveBeginSound = NodePath("../WaveBegin")
+WavePrevious = NodePath("../WavePrevious")
+DeathSound = NodePath("../Death")
 SpawnNode = NodePath("../SpawnNode")
 FirstWave = NodePath("WaitWave")
 WaveData = NodePath("WaveDataLevel2")
@@ -208,18 +208,22 @@ id = 18
 NextWave = NodePath("../Wave19")
 
 [node name="Wave19" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
+duration = 14.0
 id = 19
 NextWave = NodePath("../Wave20")
 
 [node name="Wave20" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
+duration = 14.0
 id = 20
 NextWave = NodePath("../Wave21")
 
 [node name="Wave21" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
+duration = 14.0
 id = 21
 NextWave = NodePath("../Wave22")
 
 [node name="Wave22" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
+duration = 14.0
 id = 22
 NextWave = NodePath("../Wave23")
 
@@ -228,10 +232,9 @@ duration = 0.0
 id = 23
 NextWave = NodePath("../WaitWave24")
 
-[node name="WaitWave24" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
+[node name="WaitWave24" parent="WaveManager" instance=ExtResource("4_8crk8")]
 duration = 2.0
 id = 24
-NextWave = NodePath(".")
 
 [node name="SpawnNode" type="Node2D" parent="."]
 
@@ -276,12 +279,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="WaveStart" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("7_wgxlr")
+[node name="WaveBegin" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_ldj83")
+volume_db = -10.0
+bus = &"SFX"
 
-[node name="WaveTransition" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("8_4axc7")
-volume_db = -15.0
+[node name="Death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_ldj83")
+volume_db = -20.0
+bus = &"SFX"
 
-[node name="WaveEnd" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_otsul")
+[node name="WavePrevious" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_wgxlr")
+volume_db = -10.0
+bus = &"SFX"

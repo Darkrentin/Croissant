@@ -196,11 +196,7 @@ public partial class WaveData : Node
 		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Spike, true);
-		AddWindow(windows, WindowType.Spike, true);
-		AddWindow(windows, WindowType.Spike, true);
-		AddWindow(windows, WindowType.Spike, true);
-		AddWindow(windows, WindowType.Spike, true);
-		AddWindow(windows, WindowType.Follow, false);
+		AddWindow(windows, WindowType.Follow, true);
 		AddWindow(windows, WindowType.Follow, false);
 		return windows;
 	}
@@ -346,7 +342,6 @@ public partial class WaveData : Node
 	public List<FloatWindow> StartWave23()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Extend, true);
 		AddWindow(windows, WindowType.Wave, false);
 		AddWindow(windows, WindowType.Follow, false);

@@ -3,9 +3,9 @@ using Godot;
 
 public partial class WaveManager : Node
 {
-	[Export] public AudioStreamPlayer WaveStartSound;
-	[Export] public AudioStreamPlayer WaveTransitionSound;
-	[Export] public AudioStreamPlayer WaveEndSound;
+	[Export] public AudioStreamPlayer WaveBeginSound;
+	[Export] public AudioStreamPlayer WavePrevious;
+	[Export] public AudioStreamPlayer DeathSound;
 	[Export] public Node SpawnNode;
 	[Export] public Wave FirstWave;
 	[Export] public WaveData WaveData;
@@ -27,12 +27,10 @@ public partial class WaveManager : Node
 		AddChild(WaveStartTimer);
 		WaveStartTimer.Start();
 		AnimationPlayer.AnimationFinished += OnAnimationFinished;
-		EndWave += () => WaveEndSound.Play();
 	}
 
 	public void StartWave()
 	{
-		WaveStartSound.Play();
 		FirstWave.StartWave();
 	}
 
@@ -52,11 +50,11 @@ public partial class WaveManager : Node
 
 	public void GoBackToWave()
 	{
+		DeathSound.Play();
 		CurrentWaveId = LastWave.id;
 		CurrentWave.WaveTimer.Stop();
 		CleanUpAllWave(CurrentWave);
 		WaveNum--;
-		Lib.Print($"WaveManager: GoBackToWave {WaveNum}");
 		AnimationPlayer.Play("GoBack");
 	}
 
@@ -64,7 +62,6 @@ public partial class WaveManager : Node
 	{
 		WaveNum++;
 		UpdateLabel();
-		Lib.Print($"WaveManager: AddWave {WaveNum}");
 	}
 
 	public void CleanUpWave(Wave w)
@@ -92,7 +89,6 @@ public partial class WaveManager : Node
 
 	public void UpdateLabel()
 	{
-		WaveTransitionSound.Play();
 		ScoreLabel.Text = WaveNum.ToString();
 		AnimationPlayer.Play("ScoreUp");
 	}

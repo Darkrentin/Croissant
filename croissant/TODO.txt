@@ -46,8 +46,6 @@ Intro :
 - gros glitch à l'explosion de l'intro
 - land du virus à l'atterissage
 - son de mise en couleur de pixel
-Dialogue :
-- son EE EEE E EEEE à la Undertale
 Level 1 :
 - son et sprite DodgeWindow shape?
 Level 2 :
@@ -66,6 +64,3 @@ Level 4 :
 - son mort du player
 Boss :
 - à venir
-Menu :
-- son de mise en pause
-- son de démise en pause
