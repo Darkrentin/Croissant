@@ -167,7 +167,7 @@ states/Up/position = Vector2(313, 227)
 states/UpBack/node = SubResource("AnimationNodeAnimation_awrxr")
 states/UpBack/position = Vector2(486, 227)
 transitions = ["Lava", "LavaBack", SubResource("AnimationNodeStateMachineTransition_o3p5f"), "RESET", "Lava", SubResource("AnimationNodeStateMachineTransition_3ixkv"), "RESET", "Up", SubResource("AnimationNodeStateMachineTransition_nlfag"), "Up", "UpBack", SubResource("AnimationNodeStateMachineTransition_04d7j"), "RESET", "LavaBack", SubResource("AnimationNodeStateMachineTransition_3b0w1"), "RESET", "UpBack", SubResource("AnimationNodeStateMachineTransition_vtsjb"), "LavaBack", "Idle", SubResource("AnimationNodeStateMachineTransition_2atda"), "UpBack", "Idle", SubResource("AnimationNodeStateMachineTransition_eg05t"), "Start", "RESET", SubResource("AnimationNodeStateMachineTransition_57hlt"), "Idle", "RESET", SubResource("AnimationNodeStateMachineTransition_v2u0f"), "RESET", "Idle", SubResource("AnimationNodeStateMachineTransition_4vxqs"), "LavaBack", "RESET", SubResource("AnimationNodeStateMachineTransition_v06mv"), "UpBack", "RESET", SubResource("AnimationNodeStateMachineTransition_awrxr")]
-graph_offset = Vector2(-153, -75)
+graph_offset = Vector2(-162, -36)
 
 [node name="BossFloor" type="Node3D" node_paths=PackedStringArray("animationPlayer", "animationTree")]
 script = ExtResource("1_vtsjb")

@@ -54,14 +54,19 @@ public partial class BossLevel : Node3D
 			for (int j = 0; j < MapSize; j++)
 			{
 				if (Lib.rand.Next(0, 3) == 0)
-					BossFloors[i, j].animationPlayer.Play("Lava");
+					BossFloors[i, j].animationStateMachine.Travel("Lava");
 			}
 		}
+		GetTree().CreateTimer(5f).Timeout += () =>
+		{
+			IdleMap();
+		};
 	}
 
 	//Atk: LiftWalls
 	public void LiftWalls()
 	{
+		FloppyDisk.ResetFloppyDisks();
 		for (int i = 0; i < MapSize; i++)
 		{
 			for (int j = 0; j < MapSize; j++)
@@ -99,7 +104,7 @@ public partial class BossLevel : Node3D
 					BossFloors[i, j].animationStateMachine.Travel("Lava");
 			}
 		}
-		GetTree().CreateTimer(5f).Timeout += () =>
+		GetTree().CreateTimer(10f).Timeout += () =>
 		{
 			IdleMap();
 		};

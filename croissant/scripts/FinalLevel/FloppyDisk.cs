@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class FloppyDisk : CharacterBody3D
 {
     [Export]
-    public float Speed { get; set; } = 5f;
+    public float Speed { get; set; } = 2f;
     [Export] public Area3D Area;
     [Export] public AnimationPlayer AnimationPlayer;
 

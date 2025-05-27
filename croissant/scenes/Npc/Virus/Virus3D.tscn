@@ -1650,7 +1650,7 @@ AnimationPlayer = NodePath("AnimationScale")
 HealthBar = NodePath("Control/Control/Sprite2D")
 
 [node name="Computer" type="Node3D" parent="."]
-transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, -17)
+transform = Transform3D(0.05, 0, 0, 0, 0.05, 0, 0, 0, 0.05, 0, 0, -20)
 
 [node name="Base" type="Node3D" parent="Computer"]
 transform = Transform3D(100, 0, 0, 0, -1.62921e-05, 100, 0, -100, -1.62921e-05, 0, 0, 0)
@@ -1886,7 +1886,7 @@ tree_root = SubResource("AnimationNodeStateMachine_7w5cu")
 anim_player = NodePath("../AnimationScreen")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.34, -19.01)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03, 3.34, -22.139)
 shape = SubResource("BoxShape3D_t412l")
 
 [node name="ShootSpawnA" type="Node3D" parent="."]
