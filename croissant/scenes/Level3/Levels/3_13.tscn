@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://v7jwtdleiqiw"]
+[gd_scene load_steps=38 format=3 uid="uid://v7jwtdleiqiw"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_tva5v"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="2_lmyvb"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="5_vwnpx"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="6_3n8fb"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_hvpnd"]
+[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="8_8vfn1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnpx"]
 size = Vector2(1664, 192)
@@ -158,9 +159,9 @@ position = Vector2(0, 256)
 position = Vector2(800, 32)
 shape = SubResource("RectangleShape2D_hvpnd")
 
-[node name="3" parent="." instance=ExtResource("5_vwnpx")]
+[node name="16" parent="." instance=ExtResource("5_vwnpx")]
 position = Vector2(64, 344)
-NextSceneId = 3
+NextSceneId = 16
 
 [node name="MovePlatform" parent="." instance=ExtResource("6_3n8fb")]
 position = Vector2(48, 544)
@@ -298,6 +299,9 @@ shape = SubResource("RectangleShape2D_6qk7i")
 [node name="CollisionShape2D" parent="KillingPlatform10/Area2D" index="0"]
 position = Vector2(220, 32)
 shape = SubResource("RectangleShape2D_k1v3w")
+
+[node name="ConfigFile" parent="." instance=ExtResource("8_8vfn1")]
+position = Vector2(384, 128)
 
 [editable path="KillingPlatform"]
 [editable path="PlayerOnly"]
