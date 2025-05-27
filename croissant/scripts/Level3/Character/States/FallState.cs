@@ -19,10 +19,12 @@ public partial class FallState : PlayerState
         {
             gravityScale = WallSlideGravityScale;
             Player.HandleGravityWallFall(delta, PlayerCharacter.GravityFall * gravityScale);
+            Player.HandleWallSlideParticles();
         }
         else
         {
             Player.HandleGravity(delta, PlayerCharacter.GravityFall * gravityScale);
+            Player.WalkParticles.Emitting = false;
         }
         Player.HorizontalMovement(PlayerCharacter.AirAcceleration, PlayerCharacter.AirDeceleration);
         Player.HandleLanding();

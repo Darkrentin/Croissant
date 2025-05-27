@@ -3,14 +3,20 @@ using System;
 
 public partial class RunState : PlayerState
 {
+    private Vector2 lastPosition = Vector2.Zero;
+
     public override void EnterState()
     {
         Name = "Run";
         Player._hasJumped = false;
+        Player.WalkParticles.Position = Vector2.Zero;
+        lastPosition = Player.GlobalPosition;
+        Player.WalkParticles.Emitting = true;
     }
 
     public override void ExitState()
     {
+        Player.WalkParticles.Emitting = false;
     }
 
     public override void Update(double delta)
@@ -18,8 +24,18 @@ public partial class RunState : PlayerState
         Player.HorizontalMovement();
         Player.HandleJump();
         Player.HandleFalling();
+        HandleParticles();
         HandleAnimations();
         HandleIdle();
+    }
+
+    private void HandleParticles()
+    {
+        Vector2 currentPosition = Player.GlobalPosition;
+        bool isActuallyMoving = (currentPosition - lastPosition).LengthSquared() > 0.1f;
+        Player.WalkParticles.Emitting = Player.IsOnFloor() && isActuallyMoving && Player.moveDirectionX != 0;
+
+        lastPosition = currentPosition;
     }
 
     private void HandleAnimations()

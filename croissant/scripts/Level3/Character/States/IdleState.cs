@@ -7,6 +7,7 @@ public partial class IdleState : PlayerState
     {
         Name = "Idle";
         Player._hasJumped = false;
+        Player.WalkParticles.Emitting = false;
     }
 
     public override void ExitState()

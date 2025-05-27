@@ -13,6 +13,8 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public Timer CoyoteTimer;
     [Export] public Timer JumpBufferTimer;
     [Export] public Area2D area2D;
+    [Export] public PackedScene JumpParticlesScene;
+    [Export] public CpuParticles2D WalkParticles;
 
     public bool FlipLock { get; set; } = false;
 
@@ -216,6 +218,8 @@ public partial class PlayerCharacter : CharacterBody2D
         if (IsOnFloor())
         {
             jumps = 0;
+            SpawnJumpParticles(Vector2.Up);
+            WalkParticles.Emitting = false;
             ChangeState((Node)States.Get("Idle"));
         }
     }
@@ -335,6 +339,70 @@ public partial class PlayerCharacter : CharacterBody2D
         if (animationName == "Repair")
         {
             GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "HelperDeath", GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4));
+        }
+    }
+
+    public void SpawnJumpParticles(Vector2 direction)
+    {
+        CpuParticles2D particles = JumpParticlesScene.Instantiate() as CpuParticles2D;
+        GetParent().AddChild(particles);
+        particles.GlobalPosition = GlobalPosition;
+
+        if (direction == Vector2.Up)
+        {
+            particles.Rotation = 0;
+        }
+        else if (direction == Vector2.Right)
+        {
+            particles.Rotation = Mathf.Pi / 2;
+            particles.Position += new Vector2(-20, -20);
+        }
+        else if (direction == Vector2.Left)
+        {
+            particles.Rotation = -Mathf.Pi / 2;
+            particles.Position += new Vector2(20, -20);
+        }
+
+        particles.Emitting = true;
+
+        Timer timer = new Timer();
+        AddChild(timer);
+        timer.WaitTime = 2.0f;
+        timer.OneShot = true;
+        timer.Timeout += () =>
+        {
+            if (IsInstanceValid(particles))
+                particles.QueueFree();
+            timer.QueueFree();
+        };
+        timer.Start();
+    }
+
+    public void SpawnWallJumpParticles(Vector2 wallDirection)
+    {
+        Vector2 particleDirection = wallDirection == Vector2.Left ? Vector2.Right : Vector2.Left;
+        SpawnJumpParticles(particleDirection);
+    }
+
+    public void HandleWallSlideParticles()
+    {
+        if (IsOnWall() && wallDirection != Vector2.Zero)
+        {
+            WalkParticles.Emitting = true;
+
+            if (wallDirection == Vector2.Left)
+            {
+                WalkParticles.Position = new Vector2(-20, -80);
+            }
+            else if (wallDirection == Vector2.Right)
+            {
+                WalkParticles.Position = new Vector2(20, -80);
+            }
+        }
+        else
+        {
+            WalkParticles.Emitting = false;
+            WalkParticles.Position = Vector2.Zero;
         }
     }
 }

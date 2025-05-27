@@ -14,6 +14,9 @@ public partial class WallJumpState : PlayerState
         Player.Velocity = new Vector2(Player.Velocity.X * 1.5f, Player.WallJumpVelocity);
         lastWallDirection = Player.wallDirection;
         HasJumped = false;
+        Player.WalkParticles.Emitting = false;
+        Player.WalkParticles.Position = Vector2.Zero;
+        Player.SpawnWallJumpParticles(Player.wallDirection);
         KickOut();
         //GD.Print("Last wall direction: " + lastWallDirection);
     }

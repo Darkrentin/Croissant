@@ -8,6 +8,8 @@ public partial class JumpState : PlayerState
         Name = "Jump";
         Player.Velocity = new Vector2(Player.Velocity.X, Player.jumpSpeed);
         Player._hasJumped = true;
+        Player.WalkParticles.Emitting = false;
+        Player.SpawnJumpParticles(Vector2.Up);
     }
 
     public override void ExitState()
