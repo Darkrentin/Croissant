@@ -59,6 +59,8 @@ public partial class DialogueWindow : FloatWindow
 	{
 		if (label.GetTotalCharacterCount() - 1 > label.GetVisibleCharacters())
 		{
+			ParentWindow.DialogueSound.PitchScale = Lib.GetRandomNormal(0.8f, 1.2f);
+			ParentWindow.DialogueSound.Play();
 			isTyping = true;
 			label.VisibleCharacters++;
 			timer.WaitTime = Lib.rand.NextDouble() / 16f;

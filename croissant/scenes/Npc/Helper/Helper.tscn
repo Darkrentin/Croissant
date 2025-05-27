@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://dy032f0nfm2vk"]
+[gd_scene load_steps=30 format=3 uid="uid://dy032f0nfm2vk"]
 
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://fqermoax7pjr" path="res://assets/sprites/Player/Player Idle 48x48.png" id="3_58gsr"]
 [ext_resource type="Texture2D" uid="uid://cf7m83acvsld1" path="res://assets/sprites/Player/Player Roll 48x48.png" id="4_xau07"]
 [ext_resource type="AudioStream" uid="uid://c34o2ew3khn4c" path="res://assets/sounds/level_3/helper_death.mp3" id="6_e0dbo"]
+[ext_resource type="AudioStream" uid="uid://deeidvufdondy" path="res://assets/sounds/dialogue_helper.mp3" id="7_7nx6g"]
 
 [sub_resource type="Animation" id="Animation_8cb3g"]
 resource_name = "Idle"
@@ -241,7 +242,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Sprite2D", "DeathSound", "Dialogue")]
+[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Sprite2D", "DeathSound", "Dialogue", "DialogueSound")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(300, 300)
@@ -255,6 +256,7 @@ BloodScene = ExtResource("2_xau07")
 DeathSound = NodePath("DeathSound")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
+DialogueSound = NodePath("DialogueSound")
 Draggable = false
 Minimizable = false
 
@@ -289,4 +291,8 @@ speed_scale = 0.0
 [node name="DeathSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_e0dbo")
 volume_db = -5.0
+bus = &"SFX"
+
+[node name="DialogueSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_7nx6g")
 bus = &"SFX"

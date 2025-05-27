@@ -16,7 +16,7 @@
 [node name="Main" type="Node2D" node_paths=PackedStringArray("Musics")]
 script = ExtResource("1_uu6xs")
 menuScene = ExtResource("2_fos0i")
-ExportState = 14
+ExportState = 7
 Musics = [NodePath("Music/IdleMusic"), NodePath("Music/IntroGame"), NodePath("Music/Level1"), NodePath("Music/Level2"), NodePath("Music/Level3"), NodePath("Music/Level4"), NodePath("Music/FinalBoss"), NodePath("Music/Scoreboard")]
 
 [node name="FakeDesktop" type="TextureRect" parent="."]

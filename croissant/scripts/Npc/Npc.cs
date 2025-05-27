@@ -7,6 +7,7 @@ public abstract partial class Npc : FloatWindow
 
     [Export] public DialogueWindow Dialogue { get; set; }
     [Export] public AnimationTree AnimationTree;
+    [Export] public AudioStreamPlayer DialogueSound;
     public bool ForceDialoguePlacement = false;
     public Vector2I LeftUp = Vector2I.Zero;
     public Vector2I LeftDown;
