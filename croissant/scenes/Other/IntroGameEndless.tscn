@@ -1,15 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=15 format=3 uid="uid://b64jckb33yohk"]
 
-[ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
-[ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
-[ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="3_g36va"]
-[ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_id677"]
-[ext_resource type="PackedScene" uid="uid://cbd8iklbee2ig" path="res://scenes/Npc/Virus/Virus.tscn" id="4_id677"]
-[ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="5_b7rdj"]
-[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="5_id677"]
-[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
-[ext_resource type="Texture2D" uid="uid://tr0myr2uos3n" path="res://assets/sprites/intro_tuto.png" id="8_125ny"]
-[ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="9_fwmwi"]
+[ext_resource type="Script" uid="uid://c7dj2j5v543km" path="res://scripts/Other/IntroGameEndless.cs" id="1_qm56q"]
+[ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_dbyfh"]
+[ext_resource type="PackedScene" uid="uid://37mav66th0um" path="res://scenes/Intro/Enemy.tscn" id="3_67he7"]
+[ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="5_fmuuy"]
+[ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="6_v1xaf"]
+[ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_3au2h"]
+[ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="7_wl5n8"]
+[ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="10_7d31s"]
 
 [sub_resource type="Animation" id="Animation_b7rdj"]
 length = 0.001
@@ -77,36 +75,28 @@ _data = {
 &"Start": SubResource("Animation_fwmwi")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_g0ua5"]
-shader = ExtResource("5_id677")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ofmpt"]
+shader = ExtResource("7_wl5n8")
 shader_parameter/r_displacement = Vector2(-3, -3)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(3, 3)
-shader_parameter/shake_power = 0.0
-shader_parameter/shake_rate = 0.0
-shader_parameter/shake_speed = 0.0
-shader_parameter/shake_block_size = 30.5
-shader_parameter/shake_color_rate = 0.01
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_b7rdj"]
-shader = ExtResource("9_fwmwi")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4b33f"]
+shader = ExtResource("10_7d31s")
 shader_parameter/progress = 0.0
 shader_parameter/color = Color(1, 1, 1, 0.560784)
 shader_parameter/center = Vector2(0.5, 0.5)
 
-[node name="GameWindow" type="Node2D"]
+[node name="IntroGameEndless" type="Node2D"]
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer", "IntroRect", "GameNode")]
-script = ExtResource("1_8rhfo")
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportScoreLabel", "ExportAnimationPlayer", "GameNode")]
+script = ExtResource("1_qm56q")
 Player = NodePath("GameNode/Player")
-BulletScene = ExtResource("2_g36va")
-EnemyScene = ExtResource("3_id677")
-VirusScene = ExtResource("4_id677")
-ExportShaderRect = NodePath("../Shader effects")
-ExportGameExplosion = ExtResource("5_b7rdj")
+BulletScene = ExtResource("2_dbyfh")
+EnemyScene = ExtResource("3_67he7")
+ExportGameExplosion = ExtResource("5_fmuuy")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
-IntroRect = NodePath("../UI/Tuto")
 GameNode = NodePath("GameNode")
 
 [node name="Camera" type="Camera2D" parent="Game"]
@@ -114,7 +104,7 @@ anchor_mode = 0
 
 [node name="GameNode" type="Node2D" parent="Game"]
 
-[node name="Player" parent="Game/GameNode" instance=ExtResource("3_g36va")]
+[node name="Player" parent="Game/GameNode" instance=ExtResource("6_v1xaf")]
 
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
@@ -129,7 +119,7 @@ anchors_preset = -1
 anchor_right = 0.625
 anchor_bottom = 1.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_k45nk")
+theme_override_fonts/font = ExtResource("7_3au2h")
 theme_override_font_sizes/font_size = 54
 text = "Score:"
 
@@ -141,7 +131,7 @@ anchor_bottom = 1.0
 offset_left = 160.0
 offset_right = -123.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_fonts/font = ExtResource("7_k45nk")
+theme_override_fonts/font = ExtResource("7_3au2h")
 theme_override_font_sizes/font_size = 54
 text = "0"
 
@@ -151,27 +141,15 @@ libraries = {
 }
 autoplay = "Start"
 
-[node name="Tuto" type="TextureRect" parent="UI"]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_top = 744.0
-offset_right = 290.0
-offset_bottom = 952.0
-grow_vertical = 0
-texture = ExtResource("8_125ny")
-expand_mode = 1
-
 [node name="Shader effects" type="ColorRect" parent="."]
 top_level = true
-material = SubResource("ShaderMaterial_g0ua5")
+material = SubResource("ShaderMaterial_ofmpt")
 offset_right = 3840.0
 offset_bottom = 2160.0
 scale = Vector2(1.02206, 1.22984)
 
 [node name="Start" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_b7rdj")
+material = SubResource("ShaderMaterial_4b33f")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

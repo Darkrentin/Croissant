@@ -22,6 +22,7 @@ public partial class ScoreboardWindow : FloatWindow
 	[Export] private Control ScoreboardContainer;
 	[Export] private Control WaitingScreenContainer;
 	[Export] private Label SubmitLabel;
+	[Export] private Button EndlessModeButton;
 	private string EntryPlayerName = "";
 	private double RunTime;
 	private string FormattedScoreboard = "";
@@ -55,6 +56,8 @@ public partial class ScoreboardWindow : FloatWindow
 			PersonalBestLabel.Text = $"Personal best time : {FormatTime(GameManager.PersonalBestTime)}";
 			TimeLabel.Text = $"[wave amp=15 freq=5]{formattedCurrentRunTime}[/wave]\n";
 		}
+
+		EndlessModeButton.Pressed += OnEndlessModeButtonPressed;
 	}
 
 	public override void OnClose()
@@ -226,5 +229,12 @@ public partial class ScoreboardWindow : FloatWindow
 		if (string.IsNullOrWhiteSpace(input))
 			return "NullProPlayer";
 		return Regex.Replace(input, @"[\.\$#\[\]\/ ]", "_");
+	}
+
+	public void OnEndlessModeButtonPressed()
+	{
+		GetParent().RemoveChild(this);
+		GameManager.State = GameManager.GameState.IntroGameEndless;
+		QueueFree();
 	}
 }

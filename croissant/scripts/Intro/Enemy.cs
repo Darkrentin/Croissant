@@ -11,6 +11,7 @@ public partial class Enemy : StaticBody2D
 	private Vector2 velocity;
 	private int SpriteFrames = 4;
 	private bool Alive = true;
+	public bool Endless = false;
 
 	public override void _Ready()
 	{
@@ -57,10 +58,16 @@ public partial class Enemy : StaticBody2D
 			}
 			else
 			{
-				IntroGameManager.AddScore();
-
-				// Explodes when it is in the triangle shape
-				IntroGameManager.CameraShake(8, 0.35f);
+				if (Endless)
+				{
+					IntroGameEndless.AddScore();
+					IntroGameEndless.CameraShake(8, 0.35f);
+				}
+				else{
+					// Adds score when the enemy is destroyed
+					IntroGameManager.AddScore();
+					IntroGameManager.CameraShake(8, 0.35f);
+				}
 				bullet.EnemyExplosion.Emitting = true;
 				Collision.Visible = false;
 				velocity = Vector2.Zero;
@@ -76,7 +83,10 @@ public partial class Enemy : StaticBody2D
 		else if (body is Player player)
 		{
 			// Bounces back on collision with the player
-			IntroGameManager.CameraShake(8, 0.35f);
+			if(Endless)
+				IntroGameEndless.CameraShake(8, 0.35f);
+			else
+				IntroGameManager.CameraShake(8, 0.35f);
 			velocity = -velocity * 2f;
 			int rand = Lib.rand.Next(0, 3);
 

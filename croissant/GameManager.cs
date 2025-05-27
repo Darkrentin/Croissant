@@ -66,6 +66,7 @@ public partial class GameManager : Node2D
         Dialogue3,
         FinalLevel,
         Scoreboard,
+        IntroGameEndless,
         // _Process state
         IntroGame_Process,
         // Buffer state
@@ -213,6 +214,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.Scoreboard:
                 States.Scoreboard();
+                break;
+            case GameState.IntroGameEndless:
+                States.IntroGameEndless();
                 break;
 
 
