@@ -9,6 +9,10 @@ public partial class MenuWindow : FloatWindow
 	[Export] public Slider MasterVolumeSlider;
 	[Export] public Slider MusicVolumeSlider;
 	[Export] public Slider SFXVolumeSlider;
+
+	[Export] public AudioStreamPlayer MenuEnter;
+	[Export] public AudioStreamPlayer MenuExit;
+	[Export] public AudioStreamPlayer MenuClick;
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
@@ -87,6 +91,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void Close()
 	{
+		MenuExit.Play();
 		Visible = false;
 		if (GameManager.virus != null)
 			Virus.SetPause(false);
@@ -95,6 +100,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void Open()
 	{
+		MenuEnter.Play();
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Visible = true;
 		ProcessMode = ProcessModeEnum.Always;
@@ -106,6 +112,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void _on_quit_button_pressed()
 	{
+		MenuClick.Play();
 		GameManager.SaveData.Save();
 		GetTree().Quit();
 	}
@@ -118,6 +125,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void FakeDesktopButtonToggled(bool toggled)
 	{
+		MenuClick.Play();
 		FakeDesktop = toggled;
 		if (MainWindow.FakeBackground == null)
 			return;
@@ -126,6 +134,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void DebugButtonToggled(bool toggled)
 	{
+		MenuClick.Play();
 		DebugMode = toggled;
 		if (MainWindow.DebugInfo == null)
 			return;
@@ -134,6 +143,7 @@ public partial class MenuWindow : FloatWindow
 
 	public void StuckButtonPressed()
 	{
+		MenuClick.Play();
 		Close();
 		Level3.Instance.Transition(-1);
 	}

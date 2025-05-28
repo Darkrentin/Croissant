@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://810np22fqce"]
+[gd_scene load_steps=6 format=3 uid="uid://810np22fqce"]
 
 [ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/Windows/MenuWindow.cs" id="1_ak1ko"]
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_wvpbs"]
+[ext_resource type="AudioStream" uid="uid://d0jh8hsnra8el" path="res://assets/sounds/others/menu_enter.mp3" id="3_0od4v"]
+[ext_resource type="AudioStream" uid="uid://dup76efh60mxj" path="res://assets/sounds/others/menu_exit.mp3" id="4_qlxr2"]
+[ext_resource type="AudioStream" uid="uid://d4ui6on83baa" path="res://assets/sounds/others/menu_click.mp3" id="5_x3wrm"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider")]
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
 position = Vector2i(0, 24)
 size = Vector2i(300, 300)
 unresizable = true
@@ -18,6 +21,9 @@ StuckButton = NodePath("Control/Stuck")
 MasterVolumeSlider = NodePath("Control/Main/HSlider")
 MusicVolumeSlider = NodePath("Control/Music/HSlider")
 SFXVolumeSlider = NodePath("Control/Sfx/HSlider")
+MenuEnter = NodePath("Sound/MenuEnter")
+MenuExit = NodePath("Sound/MenuExit")
+MenuClick = NodePath("Sound/MenuClick")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -161,5 +167,16 @@ anchor_bottom = 1.0
 offset_right = -0.100006
 text = "SFX"
 vertical_alignment = 1
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="MenuEnter" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("3_0od4v")
+
+[node name="MenuExit" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("4_qlxr2")
+
+[node name="MenuClick" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("5_x3wrm")
 
 [connection signal="pressed" from="Control/Button" to="." method="_on_quit_button_pressed"]
