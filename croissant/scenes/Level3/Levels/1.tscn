@@ -37,7 +37,7 @@ size = Vector2(302, 371)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1wk2o"]
 size = Vector2(302, 371)
 
-[node name="3_2" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="1" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_6my4b")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window")]
 
@@ -115,9 +115,9 @@ shape = SubResource("RectangleShape2D_l81p5")
 position = Vector2(151, 185.5)
 shape = SubResource("RectangleShape2D_1wk2o")
 
-[node name="9" parent="." instance=ExtResource("2_s5xex")]
+[node name="2" parent="." instance=ExtResource("2_s5xex")]
 position = Vector2(1775, 221)
-NextSceneId = 9
+NextSceneId = 2
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

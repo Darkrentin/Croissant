@@ -140,7 +140,7 @@ size = Vector2(216, 64)
 resource_local_to_scene = true
 size = Vector2(248, 224)
 
-[node name="3_16" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="12" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_khr5f")
 windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window")]
 
@@ -162,13 +162,13 @@ shape = SubResource("RectangleShape2D_fo6cm")
 position = Vector2(960, 1152)
 shape = SubResource("RectangleShape2D_fo6cm")
 
-[node name="14" parent="." instance=ExtResource("2_fo6cm")]
+[node name="11" parent="." instance=ExtResource("2_fo6cm")]
 position = Vector2(16, 16)
-NextSceneId = 14
+NextSceneId = 11
 
-[node name="3" parent="." instance=ExtResource("2_fo6cm")]
+[node name="13" parent="." instance=ExtResource("2_fo6cm")]
 position = Vector2(1760, 16)
-NextSceneId = 3
+NextSceneId = 13
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_lstuu")]
 position = Vector2(504, 0)

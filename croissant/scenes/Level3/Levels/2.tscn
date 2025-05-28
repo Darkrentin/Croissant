@@ -37,7 +37,7 @@ size = Vector2(264, 152)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fql7s"]
 size = Vector2(264, 152)
 
-[node name="3_9" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="2" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_1d8pj")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("StaticPlateform5/Window"), NodePath("KillingPlatform/Window")]
 
@@ -59,9 +59,8 @@ shape = SubResource("RectangleShape2D_2v404")
 position = Vector2(960, 1152)
 shape = SubResource("RectangleShape2D_2v404")
 
-[node name="2" parent="." instance=ExtResource("1_2v404")]
+[node name="1" parent="." instance=ExtResource("1_2v404")]
 position = Vector2(17, 870)
-NextSceneId = 2
 
 [node name="StaticPlateform" parent="." instance=ExtResource("2_j3oy1")]
 position = Vector2(736, 160)
@@ -97,9 +96,9 @@ position = Vector2(1584, 376)
 position = Vector2(168, 356)
 shape = SubResource("RectangleShape2D_oo2a6")
 
-[node name="5" parent="." instance=ExtResource("1_2v404")]
+[node name="3" parent="." instance=ExtResource("1_2v404")]
 position = Vector2(1768, 208)
-NextSceneId = 5
+NextSceneId = 3
 
 [node name="KillingPlatform" parent="." instance=ExtResource("3_pcjdc")]
 position = Vector2(472, 232)

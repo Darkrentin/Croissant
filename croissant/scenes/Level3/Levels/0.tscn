@@ -55,7 +55,7 @@ size = Vector2(128, 320)
 resource_local_to_scene = true
 size = Vector2(128, 512)
 
-[node name="3_0" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window"), NodePath("DoorPlateform/Window"), NodePath("DoorPlateform2/Window"), NodePath("DoorPlateform3/Window")]
 
@@ -120,20 +120,20 @@ material = SubResource("ShaderMaterial_8j6u2")
 position = Vector2(160, 32)
 shape = SubResource("RectangleShape2D_gijp6")
 
-[node name="1" parent="." instance=ExtResource("3_5q6or")]
+[node name="6" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(64, 776)
+NextSceneId = 6
 
-[node name="2" parent="." instance=ExtResource("3_5q6or")]
+[node name="1" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(1736, 776)
-NextSceneId = 2
 
-[node name="14" parent="." instance=ExtResource("3_5q6or")]
+[node name="11" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(64, 136)
-NextSceneId = 14
+NextSceneId = 11
 
-[node name="8" parent="." instance=ExtResource("3_5q6or")]
+[node name="16" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(1736, 136)
-NextSceneId = 8
+NextSceneId = 16
 
 [node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(1472, 0)

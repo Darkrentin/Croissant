@@ -14,7 +14,7 @@ size = Vector2(1920, 128)
 resource_local_to_scene = true
 size = Vector2(1920, 128)
 
-[node name="3_4" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="17" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_ah0vo")
 windows = [NodePath("StaticPlateform/Window")]
 
@@ -47,8 +47,12 @@ visible = false
 position = Vector2(960, 64)
 shape = SubResource("RectangleShape2D_2083c")
 
-[node name="8" parent="." instance=ExtResource("2_ah0vo")]
+[node name="16" parent="." instance=ExtResource("2_ah0vo")]
 position = Vector2(64, 776)
-NextSceneId = 8
+NextSceneId = 16
+
+[node name="18" parent="." instance=ExtResource("2_ah0vo")]
+position = Vector2(1728, 768)
+NextSceneId = 18
 
 [editable path="StaticPlateform"]

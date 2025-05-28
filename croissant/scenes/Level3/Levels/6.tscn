@@ -118,7 +118,7 @@ size = Vector2(208, 80)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_l2671"]
 size = Vector2(208, 80)
 
-[node name="3_1" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="6" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_cjr8i")
 windows = [NodePath("MovePlatform/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform/Window")]
 
@@ -170,9 +170,9 @@ material = SubResource("ShaderMaterial_uybjc")
 position = Vector2(128, 480)
 shape = SubResource("RectangleShape2D_cjr8i")
 
-[node name="12" parent="." instance=ExtResource("1_brot1")]
+[node name="7" parent="." instance=ExtResource("1_brot1")]
 position = Vector2(1728, 40)
-NextSceneId = 12
+NextSceneId = 7
 
 [node name="WindowsOnly2" parent="." instance=ExtResource("6_l2671")]
 position = Vector2(1544, 0)
