@@ -19,7 +19,6 @@ public partial class Virus : Npc
 	public Vector3 targetRotation;
 	public static Control Pause;
 	public bool On = false;
-
 	public Node2D VirusSplash;
 	public Timer SplashTimer;
 
@@ -50,7 +49,6 @@ public partial class Virus : Npc
 	public override void InitNpc()
 	{
 		base.InitNpc();
-		
 	}
 
 	public override void DialogueFinished(string name)
@@ -73,7 +71,10 @@ public partial class Virus : Npc
 				GameManager.State = GameManager.GameState.Level1;
 				break;
 			case "Virus/Helper Dialogue 1":
-				GameManager.helper.Dialogue.StartDialogue("Helper", "Virus/Helper Dialogue 2");
+				GetTree().CreateTimer(0.1f).Timeout += () =>
+				{
+					GameManager.helper.Dialogue.StartDialogue("Helper", "Virus/Helper Dialogue 2");
+				};
 				break;
 			case "Virus/Helper Dialogue 3":
 				GameManager.State = GameManager.GameState.Level2;
@@ -127,7 +128,6 @@ public partial class Virus : Npc
 		float rotationY = -normalizedX * MaxRotation.Y; // Negative because right is positive X but negative Y rotation
 		float rotationX = -normalizedY * MaxRotation.X;   // Negative because down is positive Y but negative X rotation
 
-
 		float positionX = -normalizedX * MaxEyeDistance.X;
 		float positionY = -normalizedY * MaxEyeDistance.Y;
 
@@ -144,8 +144,7 @@ public partial class Virus : Npc
 
 	public static void SetPause(bool Visible)
 	{
-		if (Pause != null)
-			Pause.Visible = Visible;
+		Pause.Visible = Visible;
 	}
 
 	public override void TransitionFinished()
@@ -184,5 +183,4 @@ public partial class Virus : Npc
 		VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
 		SplashTimer.Start();
 	}
-
 }

@@ -9,7 +9,6 @@ public partial class MenuWindow : FloatWindow
 	[Export] public Slider MasterVolumeSlider;
 	[Export] public Slider MusicVolumeSlider;
 	[Export] public Slider SFXVolumeSlider;
-
 	[Export] public AudioStreamPlayer MenuEnter;
 	[Export] public AudioStreamPlayer MenuExit;
 	[Export] public AudioStreamPlayer MenuClick;
@@ -18,6 +17,7 @@ public partial class MenuWindow : FloatWindow
 
 	public override void _Ready()
 	{
+		Title = "Menu";
 		ProcessMode = ProcessModeEnum.Always;
 		base._Ready();
 
@@ -29,8 +29,7 @@ public partial class MenuWindow : FloatWindow
 		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
 		DebugButton.Toggled += DebugButtonToggled;
 		StuckButton.Pressed += StuckButtonPressed;
-		
-		// Connect all volume sliders
+
 		MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
 		MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
 		SFXVolumeSlider.ValueChanged += OnSFXVolumeChanged;
@@ -40,13 +39,11 @@ public partial class MenuWindow : FloatWindow
 
 		FakeDesktopButton.ButtonPressed = FakeDesktop;
 		DebugButton.ButtonPressed = DebugMode;
-		
-		// Set initial volume slider values (load from save data or default to 100)
+
+		// Set initial volume slider values
 		MasterVolumeSlider.Value = GameManager.SaveData.MainVolume;
 		MusicVolumeSlider.Value = GameManager.SaveData.MusicVolume;
 		SFXVolumeSlider.Value = GameManager.SaveData.SfxVolume;
-		
-		// Apply the initial volumes
 		OnMasterVolumeChanged(MasterVolumeSlider.Value);
 		OnMusicVolumeChanged(MusicVolumeSlider.Value);
 		OnSFXVolumeChanged(SFXVolumeSlider.Value);
@@ -63,7 +60,7 @@ public partial class MenuWindow : FloatWindow
 		{
 			StuckButton.Visible = true;
 		}
-		else if (GameManager.State!= GameManager.GameState.Level3Buffer && StuckButton.Visible == true)
+		else if (GameManager.State != GameManager.GameState.Level3Buffer && StuckButton.Visible == true)
 		{
 			StuckButton.Visible = false;
 		}
@@ -107,7 +104,6 @@ public partial class MenuWindow : FloatWindow
 		if (GameManager.virus != null)
 			Virus.SetPause(true);
 		GetTree().Paused = true;
-
 	}
 
 	public void _on_quit_button_pressed()
@@ -127,8 +123,6 @@ public partial class MenuWindow : FloatWindow
 	{
 		MenuClick.Play();
 		FakeDesktop = toggled;
-		if (MainWindow.FakeBackground == null)
-			return;
 		MainWindow.FakeBackground.Visible = FakeDesktop;
 	}
 
@@ -152,44 +146,35 @@ public partial class MenuWindow : FloatWindow
 	{
 		SetBusVolume("Master", value);
 	}
-	
+
 	private void OnMusicVolumeChanged(double value)
 	{
 		SetBusVolume("Music", value);
 	}
-	
+
 	private void OnSFXVolumeChanged(double value)
 	{
 		SetBusVolume("SFX", value);
 	}
-	
+
 	private void SetBusVolume(string busName, double value)
 	{
-		// Convert slider value (0-100) to decibels
 		float volumePercent = (float)value / 100.0f;
 		float volumeDb;
-		
+
 		if (volumePercent <= 0.0f)
 		{
-			// Mute if slider is at 0
 			volumeDb = -80.0f;
 		}
 		else
 		{
-			// Convert percentage to dB (logarithmic scale)
 			volumeDb = Mathf.LinearToDb(volumePercent);
 		}
-		
-		// Get bus index and apply volume
+
 		int busIndex = AudioServer.GetBusIndex(busName);
 		if (busIndex != -1)
 		{
 			AudioServer.SetBusVolumeDb(busIndex, volumeDb);
 		}
-		else
-		{
-			GD.PrintErr($"Audio bus '{busName}' not found!");
-		}
 	}
-
 }

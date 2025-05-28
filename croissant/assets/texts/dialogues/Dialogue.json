@@ -108,11 +108,11 @@
         },
         "Virus/Helper Dialogue 1": {
             "0": {
-                "text": "[shake rate=20 level=6][color=RED]AAAAAAAAH![/color][/shake]",
+                "text": "[shake rate=20 level=6][color=RED]AAAAARHGLH![/color][/shake]",
                 "anim": "Angry"
             },
             "1": {
-                "text": "[b]I'm back![/b] [color=GRAY]Quarantine[/color] is not enough to hold me!",
+                "text": "[b]I'm back![/b] [color=GRAY]quarantine[/color] is not enough to hold me!",
                 "anim": "Angry"
             },
             "2": {
@@ -122,7 +122,7 @@
         },
         "Virus/Helper Dialogue 3": {
             "0": {
-                "text": "[fade start=0.0 duration=1.0][color=DIM_GRAY]Oh...[/color][/fade]",
+                "text": "[fade start=0.0 duration=1.0][color=GRAY]Oh...[/color][/fade]",
                 "anim": "Angry"
             },
             "1": {
@@ -160,7 +160,7 @@
                 "anim": "Idle"
             },
             "2": {
-                "text": "Luckily, the restart helped me to put it under [color=GRAY][i]quarantine[/i][/color].",
+                "text": "Luckily, the restart helped me to put it under [color=GRAY]quarantine[/color].",
                 "anim": "Idle"
             },
             "3": {
@@ -174,7 +174,7 @@
         },
         "HelperTuto": {
             "0": {
-                "text": "This is [wave amp=15 freq=4][b]System32[/b][/wave], the [b]most important[/b] folder of your computer.",
+                "text": "This is [wave amp=15 freq=4][b]System32[/b][/wave], [b]a very important[/b] folder in your computer.",
                 "anim": "Idle"
             },
             "1": {
@@ -182,7 +182,7 @@
                 "anim": "Idle"
             },
             "2": {
-                "text": "I'm leaving it with you so you can [b]protect it[/b], keep it [pulse freq=1.0 color=SPRING_GREEN]safe[/pulse]!",
+                "text": "I'm leaving it with you so you can [b]protect[/b] it from the [color=GREEN][shake rate=10 level=4]virus[/shake][/color], keep it [pulse freq=1.0 color=SPRING_GREEN]safe[/pulse]!",
                 "anim": "Idle"
             },
             "3": {
@@ -192,7 +192,7 @@
         },
         "Virus/Helper Dialogue 2": {
             "0": {
-                "text": "Nooo! I need to start the update [shake rate=10 level=3][color=FIREBRICK][b]RIGHT NOW![/b][/color][/shake]",
+                "text": "Nooo! I need to start the update [shake rate=10 level=3][color=RED][b]RIGHT NOW![/b][/color][/shake]",
                 "anim": "Idle"
             },
             "1": {

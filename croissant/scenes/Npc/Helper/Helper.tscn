@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dy032f0nfm2vk"]
+[gd_scene load_steps=32 format=3 uid="uid://dy032f0nfm2vk"]
 
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
@@ -7,10 +7,36 @@
 [ext_resource type="Texture2D" uid="uid://cf7m83acvsld1" path="res://assets/sprites/Player/Player Roll 48x48.png" id="4_xau07"]
 [ext_resource type="AudioStream" uid="uid://c34o2ew3khn4c" path="res://assets/sounds/level_3/helper_death.mp3" id="6_e0dbo"]
 [ext_resource type="AudioStream" uid="uid://deeidvufdondy" path="res://assets/sounds/others/dialogue_helper.mp3" id="7_7nx6g"]
+[ext_resource type="AudioStream" uid="uid://ctykvvvlmtrc7" path="res://assets/sounds/others/helper_enter.mp3" id="8_b02x2"]
+[ext_resource type="AudioStream" uid="uid://cjehjfif53hmk" path="res://assets/sounds/others/helper_exit.mp3" id="9_1u7gj"]
 
 [sub_resource type="Animation" id="Animation_8cb3g"]
 resource_name = "Idle"
 length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Control/AnimatedSprite2D:speed_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Control/AnimatedSprite2D:animation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
 
 [sub_resource type="Animation" id="Animation_xau07"]
 length = 0.001
@@ -110,43 +136,43 @@ _data = {
 &"Spawn": SubResource("Animation_58gsr")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_4jimj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b02x2"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(0, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xau07"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_1u7gj"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(48, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_e0dbo"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b3bd0"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(96, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_7nx6g"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_op81s"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(144, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_kfd1f"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tqk5q"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(192, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b02x2"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_jthw1"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(240, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_1u7gj"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1x3l"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(288, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b3bd0"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rng0r"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(336, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_op81s"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_leg47"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(384, 0, 48, 48)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tqk5q"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4au4"]
 atlas = ExtResource("3_58gsr")
 region = Rect2(432, 0, 48, 48)
 
@@ -182,21 +208,6 @@ region = Rect2(288, 0, 48, 48)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_4jimj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_xau07")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_e0dbo")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_7nx6g")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_kfd1f")
-}, {
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_b02x2")
 }, {
 "duration": 1.0,
@@ -210,6 +221,21 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_tqk5q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jthw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1x3l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rng0r")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_leg47")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4au4")
 }],
 "loop": true,
 "name": &"default",
@@ -242,7 +268,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Sprite2D", "DeathSound", "Dialogue", "DialogueSound")]
+[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Sprite2D", "DeathSound", "EnterSound", "ExitSound", "Dialogue", "DialogueSound")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(300, 300)
@@ -254,6 +280,8 @@ animationPlayer = NodePath("AnimationPlayer")
 Sprite2D = NodePath("Control/AnimatedSprite2D")
 BloodScene = ExtResource("2_xau07")
 DeathSound = NodePath("DeathSound")
+EnterSound = NodePath("EnterSound")
+ExitSound = NodePath("ExitSound")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
 DialogueSound = NodePath("DialogueSound")
@@ -279,6 +307,8 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
+offset_top = -10.0
+offset_bottom = -10.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -295,4 +325,12 @@ bus = &"SFX"
 
 [node name="DialogueSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("7_7nx6g")
+bus = &"SFX"
+
+[node name="EnterSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_b02x2")
+bus = &"SFX"
+
+[node name="ExitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("9_1u7gj")
 bus = &"SFX"

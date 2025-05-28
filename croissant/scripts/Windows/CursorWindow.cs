@@ -22,7 +22,7 @@ public partial class CursorWindow : FloatWindow
 		AddChild(FreezeTimer);
 
 		dotContainer = new Node();
-		Level2.Instance.WaveManager.AddChild(dotContainer);
+		GameManager.MainWindow.AddChild(dotContainer);
 	}
 
 	public override void _Process(double delta)
@@ -33,9 +33,9 @@ public partial class CursorWindow : FloatWindow
 		{
 			ClearAllDots();
 
-			var clickParticles = WaveManager.Instance.ClickParticlesScene.Instantiate<ClickParticles>();
+			var clickParticles = States.SceneLoader.ClickParticlesScene.Instantiate<ClickParticles>();
 			clickParticles.GlobalPosition = Lib.GetCursorPosition();
-			Level2.Instance.WaveManager.AddChild(clickParticles);
+			GameManager.MainWindow.AddChild(clickParticles);
 			clickParticles.Emitting = true;
 			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 0.9f, reset: true);
 
@@ -43,7 +43,6 @@ public partial class CursorWindow : FloatWindow
 			var cursorPos = Lib.GetCursorPosition();
 			var distance = windowCenter.DistanceTo(cursorPos);
 			var direction = ((Vector2)(cursorPos - windowCenter)).Normalized();
-
 			var dotSpacing = 20.0f;
 			var dotRadius = 2.0f;
 			var numDots = (int)(distance / dotSpacing);

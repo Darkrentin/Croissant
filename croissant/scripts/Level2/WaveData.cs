@@ -163,8 +163,10 @@ public partial class WaveData : Node
 	public List<FloatWindow> StartWave10()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
+		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Compress, false);
 		AddWindow(windows, WindowType.Extend, true);
+		AddWindow(windows, WindowType.Extend, false);
 		AddWindow(windows, WindowType.Follow, true);
 		return windows;
 	}

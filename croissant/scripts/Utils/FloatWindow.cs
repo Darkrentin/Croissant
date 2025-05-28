@@ -55,7 +55,7 @@ public partial class FloatWindow : Window
 		ShakeTimer = new Timer();
 		AddChild(ShakeTimer);
 		ShakeTimer.Timeout += StopShake;
-		Title = "Window Added";
+		Title = "";
 		WindowRect = new Rect2I(Position, Size);
 		KeepTitleVisible = false;
 	}

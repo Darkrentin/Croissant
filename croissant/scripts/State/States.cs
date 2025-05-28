@@ -31,15 +31,16 @@ public static class States
         GameManager.virus.AnimationScreen.Travel("PowerOn");
         GameManager.virus.On = true;
 
-        //change state condition
+        // Change state condition
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void Helper()
+    public static void HelperInit()
     {
         GameManager.helper.Position = Lib.GetScreenPosition(0.5f, 0.5f) - GameManager.helper.Size / 2;
         GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
-        //Change State condition
+
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
@@ -50,7 +51,7 @@ public static class States
         IntroLvl.Position = new Vector2I(1, 0);
         GameManager.GameRoot.AddChild(IntroLvl);
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.IntroGame_Process;
     }
 
@@ -58,31 +59,29 @@ public static class States
     {
         GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - GameManager.virus.Size / 2;
-        ////Lib.Print(virus.Position.ToString());
         GameManager.virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y), 2f);
         GameManager.virus.On = false;
         GameManager.virus.Visible = true;
-        //change state condition
+
+        // Change State condition
         GameManager.State = GameManager.GameState.IntroVirusBuffer;
     }
 
     public static void Dialogue1()
     {
         GameManager.PlayMusic(GameManager.Music.Idle);
-        //Freeze the game
-        if (IntroGameManager.Instance != null)
-            IntroGameManager.Instance.GameNode.Visible = false;
+        // Freeze the game
+        IntroGameManager.Instance.GameNode.Visible = false;
 
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y);
 
-        ////Lib.Print("First Virus Dialogue");
         GameManager.virus.Dialogue.StartDialogue("Virus", "sleep");
 
         GameManager.virus.Splash();
 
         GameManager.virus.StartShake(0.5f, 10);
 
-        //change state condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Dialogue1Buffer;
     }
 
@@ -141,18 +140,19 @@ public static class States
         Lvl1 = Level1Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Lvl1);
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
     public static void BlueScreen()
     {
-        
+
         BlueScreenManager.ManageBlueScreen();
     }
 
     public static void IntroHelper()
     {
+        Helper.Instance.EnterSound.Play();
         GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.helper.Position = Lib.GetScreenPosition(-0.5f, 1);
         GameManager.helper.ShowNpc(GameManager.helper.LeftDown);
@@ -160,7 +160,7 @@ public static class States
 
         GameManager.virus.Position = Lib.GetScreenPosition(1, -0.5f) - GameManager.virus.Size;
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.IntroHelperBuffer;
     }
 
@@ -171,10 +171,10 @@ public static class States
         Node2D Level2 = Level2Scene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(Level2);
 
-        //remove the virus
+        // Remove the virus
         GameManager.virus.HideNpc(1);
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
@@ -199,7 +199,7 @@ public static class States
         GameManager.helper.StartResize(newSize, 1f);
         GameManager.helper.TransitionTag = "Level3Spawn";
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Level3Buffer;
     }
 
@@ -212,7 +212,6 @@ public static class States
             GameManager.helper.Position = -GameManager.ScreenSize;
             Vector2I DialoguePosition = GameManager.ScreenSize / 2 - GameManager.helper.Dialogue.Size / 2 + new Vector2I(0, GameManager.ScreenSize.Y / 4);
             GameManager.helper.Dialogue.StartDialogue(GameManager.helper.NpcName, "EndLvl3", DialoguePosition);
-
         };
         GameManager.State = GameManager.GameState.Void;
     }
@@ -220,17 +219,17 @@ public static class States
     public static void FinalLevel()
     {
         GameManager.PlayMusic(GameManager.Music.FinalLevel);
-        if (GameManager.virus != null)
-        {
-            GameManager.GameRoot.RemoveChild(GameManager.virus);
-            GameManager.virus.QueueFree();
-            GameManager.virus = null;
-        }
+        GameManager.GameRoot.RemoveChild(GameManager.virus);
+        GameManager.virus.QueueFree();
+        GameManager.virus = null;
+        GameManager.GameRoot.RemoveChild(GameManager.helper);
+        GameManager.helper.QueueFree();
+        GameManager.helper = null;
 
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
         GameManager.GameRoot.AddChild(FinalLevel);
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
@@ -241,7 +240,7 @@ public static class States
         Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
         GameManager.GameRoot.AddChild(Scoreboard);
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
@@ -251,13 +250,13 @@ public static class States
         Node2D IntroGameEndless = SceneLoader.IntroGameEndlessScene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(IntroGameEndless);
 
-        //Change State condition
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
-    public static void IntroGame_Process(double delta)
+    public static void IntroGame_Process()
     {
-        //Change State condition
+        // Change State condition
         if (IntroGameManager.score >= IntroGameManager.Instance.MaxScore)
         {
             IntroGameManager.EndActions();
