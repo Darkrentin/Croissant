@@ -1,5 +1,4 @@
 using Godot;
-using System;
 using System.Collections.Generic;
 
 public partial class GameManager : Node2D
@@ -26,7 +25,7 @@ public partial class GameManager : Node2D
     public static AudioStreamPlayer ClickSound;
     private static GameState _state = GameState.IntroGame;
     public static Node2D GameRoot;
-    public static GameState State { get => _state; set { _state = value; StateChange(_state); } }
+    public static GameState State { get => _state; set { _state = value; } }
     public static MainWindow MainWindow;
     public static Window FixWindow;
     public static MenuWindow MenuWindow;
@@ -50,6 +49,7 @@ public partial class GameManager : Node2D
 
     public enum GameState
     {
+        // Dialogue states
         Virus,
         Helper,
         // Game state
@@ -67,7 +67,7 @@ public partial class GameManager : Node2D
         FinalLevel,
         Scoreboard,
         IntroGameEndless,
-        // _Process state
+        // Process state
         IntroGame_Process,
         // Buffer state
         Debug,
@@ -101,20 +101,7 @@ public partial class GameManager : Node2D
         var shaderLoaderScene = GD.Load<PackedScene>("res://scenes/Other/ShaderLoader.tscn");
         var shaderLoader = shaderLoaderScene.Instantiate<ShaderLoader>();
         AddChild(shaderLoader);
-
-        // Set music players to ProcessModeEnum.Always so they continue playing during freeze frames
-        if (Musics != null)
-        {
-            for (int i = 0; i < Musics.Length; i++)
-            {
-                if (Musics[i] != null)
-                {
-                    Musics[i].ProcessMode = ProcessModeEnum.Always;
-                }
-            }
-        }
-
-        //MusicPlayer.Play();
+        
     }
 
     private void InitializeNpc()
@@ -141,7 +128,6 @@ public partial class GameManager : Node2D
         {
             SaveData = new SaveData();
             //SaveData.Save();
-            Lib.Print("SaveData is null, creating a new one.");
         }
         else
         {
@@ -176,7 +162,7 @@ public partial class GameManager : Node2D
                 States.Virus();
                 break;
             case GameState.Helper:
-                States.Helper();
+                States.HelperInit();
                 break;
 
             // Game state
@@ -223,10 +209,9 @@ public partial class GameManager : Node2D
                 States.IntroGameEndless();
                 break;
 
-
             // _Process state
             case GameState.IntroGame_Process:
-                States.IntroGame_Process(delta);
+                States.IntroGame_Process();
                 break;
 
             // Buffer state
@@ -317,106 +302,86 @@ public partial class GameManager : Node2D
             window.Position = window.BasePosition;
     }
 
-    public static void StateChange(GameState state) { }
+
     public void _PlayMusic(Music music)
     {
         if (CurrentMusic == music) return;
 
-        // Skip if trying to play NoMusic
         if (music == Music.NoMusic)
         {
             _StopMusic();
             return;
         }
 
-        // Check if indices are valid
         int newMusicIndex = (int)music;
         int currentMusicIndex = (int)CurrentMusic;
 
-        if (newMusicIndex >= Musics.Length)
-        {
-            GD.PrintErr($"Music index {newMusicIndex} is out of bounds. Array length: {Musics.Length}");
-            return;
-        }
-
         var newMusicPlayer = Musics[newMusicIndex];
 
-        // Only fade out current music if it's not NoMusic and index is valid
         if (CurrentMusic != Music.NoMusic && currentMusicIndex < Musics.Length)
         {
             var currentMusicPlayer = Musics[currentMusicIndex];
-            if (currentMusicPlayer != null && currentMusicPlayer.Playing)
+            if (currentMusicPlayer.Playing)
             {
                 var fadeOutTween = CreateTween();
-                fadeOutTween.TweenProperty(currentMusicPlayer, "volume_db", -80.0f, 1.5f);
+                fadeOutTween.TweenProperty(currentMusicPlayer, "volume_db", -40.0f, 0.5f);
                 fadeOutTween.TweenCallback(Callable.From(() =>
                 {
                     currentMusicPlayer.Stop();
-                    currentMusicPlayer.VolumeDb = 0.0f; // Reset volume for next time
+                    currentMusicPlayer.VolumeDb = 0.0f;
                 }));
             }
         }
 
-        CurrentMusic = music;        // Start new music with fade in
-        if (newMusicPlayer != null)
-        {
-            newMusicPlayer.VolumeDb = -80.0f; // Start silent
-            newMusicPlayer.Play();
+        CurrentMusic = music;
+        newMusicPlayer.VolumeDb = -40.0f;
+        newMusicPlayer.Play();
 
-            var fadeInTween = CreateTween();
-            fadeInTween.TweenProperty(newMusicPlayer, "volume_db", 0.0f, 1.5f);
-        }
+        var fadeInTween = CreateTween();
+        fadeInTween.TweenProperty(newMusicPlayer, "volume_db", 0.0f, 0.5f);
     }
 
     public static void PlayMusic(Music music)
     {
-        if (Instance != null)
-            Instance._PlayMusic(music);
+        Instance._PlayMusic(music);
     }
     public void _StopMusic(bool instant = false)
     {
-        // Check if CurrentMusic is valid and within bounds
-        if (CurrentMusic == Music.NoMusic)
-        {
-            return; // Already stopped
-        }
+        if (CurrentMusic == Music.NoMusic) return;
 
         int currentMusicIndex = (int)CurrentMusic;
         if (currentMusicIndex >= Musics.Length)
         {
-            GD.PrintErr($"Current music index {currentMusicIndex} is out of bounds. Array length: {Musics.Length}");
             CurrentMusic = Music.NoMusic;
             return;
         }
 
         var currentMusicPlayer = Musics[currentMusicIndex];
-        if (currentMusicPlayer != null && currentMusicPlayer.Playing)
+        if (currentMusicPlayer.Playing)
         {
             if (instant)
             {
-                // Stop immediately without fade
+                // Stop without fade
                 currentMusicPlayer.Stop();
-                currentMusicPlayer.VolumeDb = 0.0f; // Reset volume for next time
+                currentMusicPlayer.VolumeDb = 0.0f;
             }
             else
             {
                 // Stop with fade
                 var fadeOutTween = CreateTween();
-                fadeOutTween.TweenProperty(currentMusicPlayer, "volume_db", -80.0f, 1.5f);
+                fadeOutTween.TweenProperty(currentMusicPlayer, "volume_db", -40.0f, 0.5f);
                 fadeOutTween.TweenCallback(Callable.From(() =>
                 {
                     currentMusicPlayer.Stop();
-                    currentMusicPlayer.VolumeDb = 0.0f; // Reset volume for next time
+                    currentMusicPlayer.VolumeDb = 0.0f;
                 }));
             }
         }
-
         CurrentMusic = Music.NoMusic;
     }
 
     public static void StopMusic(bool instant = false)
     {
-        if (Instance != null)
-            Instance._StopMusic(instant);
+        Instance._StopMusic(instant);
     }
 }

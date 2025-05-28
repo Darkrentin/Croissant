@@ -6,12 +6,16 @@ public partial class Helper : Npc
 	[Export] public AnimatedSprite2D Sprite2D;
 	[Export] public PackedScene BloodScene;
 	[Export] public AudioStreamPlayer DeathSound;
-
+	[Export] public AudioStreamPlayer EnterSound;
+	[Export] public AudioStreamPlayer ExitSound;
 	public Vector2 BaseScale = new Vector2(10f, 10f);
 	public Vector2I BaseSize = new Vector2I(300, 300);
 	public Vector2 NewScale = new Vector2(1f, 1f);
+	public static Helper Instance;
+
 	public override void _Ready()
 	{
+		Instance = this;
 		base._Ready();
 		Lib.Print($"Npc : {NpcName} initialized DialogueId :{Size}");
 		//Dialogue.StartDialogue(NpcName, "Restart");
@@ -37,9 +41,6 @@ public partial class Helper : Npc
 
 	public override void DialogueFinished(string name)
 	{
-		// Implement the logic for when the dialogue is finished
-		// For example, you can call a method to start a new dialogue or perform some action
-		// Example: StartNewDialogue();
 		switch (name)
 		{
 			case "Restart":
@@ -68,7 +69,6 @@ public partial class Helper : Npc
 				{
 					Level3.Instance.player.Animator.Play("Slice");
 				};
-				
 
 				GetTree().CreateTimer(1f).Timeout += () =>
 				{
@@ -89,6 +89,7 @@ public partial class Helper : Npc
 					blood.Emitting = true;
 					Level3.Instance.player.Head.LinearVelocity = new Vector2(200, -600);
 					Level3.Instance.player.Head.AngularVelocity = 10;
+					ExitSound.Play();
 				};
 
 				GetTree().CreateTimer(blood.Lifetime + 2.5f).Timeout += () =>

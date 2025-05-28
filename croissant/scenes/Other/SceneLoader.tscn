@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://ckx6m1bn0k11e"]
+[gd_scene load_steps=29 format=3 uid="uid://ckx6m1bn0k11e"]
 
 [ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
 [ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="3_rvotm"]
@@ -24,7 +24,8 @@
 [ext_resource type="PackedScene" uid="uid://blu5tcq0yepaj" path="res://scenes/Level2/SpikeWindow.tscn" id="22_2mdes"]
 [ext_resource type="PackedScene" uid="uid://pus1csxsvyfw" path="res://scenes/FinalLevel/FinalLevel.tscn" id="23_ccpnw"]
 [ext_resource type="PackedScene" uid="uid://carai6dnhfx5a" path="res://scenes/Other/ScoreboardWindow.tscn" id="24_1v343"]
-[ext_resource type="PackedScene" uid="uid://b64jckb33yohk" path="res://scenes/Other/IntroGameEndless.tscn" id="25_vdxpo"]
+[ext_resource type="PackedScene" path="res://scenes/Other/IntroGameEndless.tscn" id="25_vdxpo"]
+[ext_resource type="PackedScene" uid="uid://d3xlikbll0i4p" path="res://scenes/Level2/ClickParticles.tscn" id="26_hjhek"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_ccpnw"]
 script/source = "using Godot;
@@ -104,3 +105,4 @@ SpikeWindowScene = ExtResource("22_2mdes")
 FinalLevelScene = ExtResource("23_ccpnw")
 ScoreboardScene = ExtResource("24_1v343")
 IntroGameEndlessScene = ExtResource("25_vdxpo")
+ClickParticlesScene = ExtResource("26_hjhek")
