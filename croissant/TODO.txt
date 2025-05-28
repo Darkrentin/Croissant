@@ -49,7 +49,6 @@ Intro :
 Level 1 :
 - son et sprite DodgeWindow shape?
 Level 2 :
-- Enlever les 3 sons de vague, mettre petit son de jeu à la place comme Cinnamon
 - Apparition du Sys32 -> son windows
 Level 3 :
 - son saut

@@ -1,0 +1,30 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3xlikbll0i4p"]
+
+[ext_resource type="Script" uid="uid://cd8wclp0pdqry" path="res://scripts/Level2/ClickParticles.cs" id="1_2y0d5"]
+
+[sub_resource type="Curve" id="Curve_ayu1j"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.503106, 0), -0.0174034, 0.0, 0, 0]
+point_count = 2
+
+[node name="ClickParticles" type="CPUParticles2D"]
+emitting = false
+amount = 4
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 200.0
+initial_velocity_max = 200.0
+damping_min = 400.0
+damping_max = 400.0
+scale_amount_min = 8.0
+scale_amount_max = 8.0
+scale_amount_curve = SubResource("Curve_ayu1j")
+script = ExtResource("1_2y0d5")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -5,12 +5,13 @@ public partial class WaveManager : Node
 {
 	[Export] public AudioStreamPlayer WaveBeginSound;
 	[Export] public AudioStreamPlayer WavePrevious;
-	
+
 	[Export] public Node SpawnNode;
 	[Export] public Wave FirstWave;
 	[Export] public WaveData WaveData;
 	[Export] public Label ScoreLabel;
 	[Export] public AnimationPlayer AnimationPlayer;
+	[Export] public PackedScene ClickParticlesScene;
 	public int CurrentWaveId = 1;
 	public Wave CurrentWave;
 	public Wave LastWave;
@@ -18,9 +19,11 @@ public partial class WaveManager : Node
 	public static int WaveNum = 0;
 	public bool IsWaveGoBack = false;
 	public Action EndWave;
+	public static WaveManager Instance;
 
 	public override void _Ready()
 	{
+		Instance = this;
 		WaveStartTimer = new Timer();
 		WaveStartTimer.WaitTime = 1f;
 		WaveStartTimer.OneShot = true;
@@ -52,7 +55,7 @@ public partial class WaveManager : Node
 
 	public void GoBackToWave()
 	{
-		
+
 		CurrentWaveId = LastWave.id;
 		CurrentWave.WaveTimer.Stop();
 		CleanUpAllWave(CurrentWave);

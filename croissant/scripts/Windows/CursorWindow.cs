@@ -9,6 +9,7 @@ public partial class CursorWindow : FloatWindow
 	public bool Invisible = false;
 	public Timer FreezeTimer;
 	[Export] public AnimationPlayer animationPlayer;
+	private Node dotContainer;
 
 	public override void _Ready()
 	{
@@ -19,6 +20,9 @@ public partial class CursorWindow : FloatWindow
 		FreezeTimer.OneShot = true;
 		FreezeTimer.Timeout += FreezFrameStop;
 		AddChild(FreezeTimer);
+
+		dotContainer = new Node();
+		Level2.Instance.WaveManager.AddChild(dotContainer);
 	}
 
 	public override void _Process(double delta)
@@ -26,7 +30,48 @@ public partial class CursorWindow : FloatWindow
 		base._Process(delta);
 
 		if (!Freeze && Input.IsActionJustPressed("LeftClick"))
+		{
+			ClearAllDots();
+
+			var clickParticles = WaveManager.Instance.ClickParticlesScene.Instantiate<ClickParticles>();
+			clickParticles.GlobalPosition = Lib.GetCursorPosition();
+			Level2.Instance.WaveManager.AddChild(clickParticles);
+			clickParticles.Emitting = true;
 			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 0.9f, reset: true);
+
+			var windowCenter = Position + Size / 2;
+			var cursorPos = Lib.GetCursorPosition();
+			var distance = windowCenter.DistanceTo(cursorPos);
+			var direction = ((Vector2)(cursorPos - windowCenter)).Normalized();
+
+			var dotSpacing = 20.0f;
+			var dotRadius = 2.0f;
+			var numDots = (int)(distance / dotSpacing);
+
+			for (int i = 0; i < numDots; i++)
+			{
+				var dotPosition = windowCenter + direction * (i * dotSpacing);
+				var dot = new ColorRect();
+				dot.Size = new Vector2(dotRadius * 2, dotRadius * 2);
+				dot.Position = dotPosition - dot.Size / 2;
+				dot.Color = Colors.White;
+				dotContainer.AddChild(dot);
+				var tween = CreateTween();
+				var distanceFromStart = i * dotSpacing;
+				var progressRatio = distanceFromStart / distance;
+				var timeToReach = progressRatio == 0 ? 0 : (-Mathf.Log(1 - progressRatio) / Mathf.Log(2) / 10) * 0.9f;
+				tween.TweenInterval(timeToReach);
+				tween.TweenCallback(new Callable(dot, "queue_free"));
+			}
+		}
+	}
+
+	private void ClearAllDots()
+	{
+		foreach (Node child in dotContainer.GetChildren())
+		{
+			child.QueueFree();
+		}
 	}
 
 	public override void OnClose()
@@ -43,7 +88,7 @@ public partial class CursorWindow : FloatWindow
 		FreezFrameStart();
 		animationPlayer.Play("Disolve");
 		DeathSound.Play();
-		
+
 	}
 
 	public void FreezFrameStart()

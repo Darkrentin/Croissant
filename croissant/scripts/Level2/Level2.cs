@@ -27,18 +27,15 @@ public partial class Level2 : Node2D
 		GetParent().RemoveChild(this);
 		QueueFree();
 	}
-	// Freeze only Level2 content, not the entire game
+
 	public void FreezeLevel2()
 	{
 		isFrozen = true;
-		// Don't change process modes, just use the frozen flag
-		// Each child should check IsFrozen in their _Process methods
 	}
 
 	public void UnfreezeLevel2()
 	{
 		isFrozen = false;
-		// Simply unset the frozen flag
 	}
 
 	public bool IsFrozen => isFrozen;

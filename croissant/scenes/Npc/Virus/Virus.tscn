@@ -19,8 +19,8 @@
 
 [sub_resource type="Environment" id="Environment_hbnjr"]
 ambient_light_source = 2
-ambient_light_color = Color(1, 0.863965, 0.790846, 1)
-tonemap_exposure = 0.6
+ambient_light_color = Color(1, 0.808059, 0.675214, 1)
+tonemap_exposure = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_c0v8p"]
 resource_name = ".007"
