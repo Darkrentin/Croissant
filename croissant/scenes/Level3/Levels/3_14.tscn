@@ -121,9 +121,9 @@ shape = SubResource("RectangleShape2D_62ijf")
 position = Vector2(40, 904)
 NextSceneId = 0
 
-[node name="3" parent="." instance=ExtResource("2_62ijf")]
+[node name="16" parent="." instance=ExtResource("2_62ijf")]
 position = Vector2(1720, 64)
-NextSceneId = 3
+NextSceneId = 16
 
 [node name="PlayerOnly" parent="." instance=ExtResource("3_ik3i5")]
 position = Vector2(0, 192)

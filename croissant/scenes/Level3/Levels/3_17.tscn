@@ -152,9 +152,9 @@ shape = SubResource("RectangleShape2D_dwhl5")
 position = Vector2(960, 1152)
 shape = SubResource("RectangleShape2D_dwhl5")
 
-[node name="16" parent="." instance=ExtResource("2_i8vnu")]
+[node name="3" parent="." instance=ExtResource("2_i8vnu")]
 position = Vector2(24, 840)
-NextSceneId = 16
+NextSceneId = 3
 
 [node name="13" parent="." instance=ExtResource("2_i8vnu")]
 position = Vector2(1752, 208)
