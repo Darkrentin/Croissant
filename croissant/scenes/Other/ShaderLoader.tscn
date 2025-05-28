@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b2j8vn4qx7k5m"]
+
+[ext_resource type="Script" path="res://scripts/Other/ShaderLoader.cs" id="1_abc123"]
+
+[node name="ShaderLoader" type="Node"]
+script = ExtResource("1_abc123")

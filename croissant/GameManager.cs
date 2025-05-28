@@ -98,6 +98,10 @@ public partial class GameManager : Node2D
         ClickSound.Bus = "SFX";
         AddChild(ClickSound);
 
+        var shaderLoaderScene = GD.Load<PackedScene>("res://scenes/Other/ShaderLoader.tscn");
+        var shaderLoader = shaderLoaderScene.Instantiate<ShaderLoader>();
+        AddChild(shaderLoader);
+
         // Set music players to ProcessModeEnum.Always so they continue playing during freeze frames
         if (Musics != null)
         {

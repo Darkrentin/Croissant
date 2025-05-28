@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkwbhy2q0g55u"]
+
+[ext_resource type="Script" path="res://scripts/Other/SimpleAutoScene.cs" id="1_1x8y2"]
+
+[node name="SimpleAutoScene" type="Node"]
+script = ExtResource("1_1x8y2")
