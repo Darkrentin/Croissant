@@ -205,7 +205,7 @@ public static class States
 
     public static void Dialogue3()
     {
-        GameManager.PlayMusic(GameManager.Music.Idle);
+        GameManager.StopMusic();
         GameManager.GameRoot.GetTree().CreateTimer(1f).Timeout += () =>
         {
             GameManager.helper.Visible = true;
@@ -222,9 +222,6 @@ public static class States
         GameManager.GameRoot.RemoveChild(GameManager.virus);
         GameManager.virus.QueueFree();
         GameManager.virus = null;
-        GameManager.GameRoot.RemoveChild(GameManager.helper);
-        GameManager.helper.QueueFree();
-        GameManager.helper = null;
 
         Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
         GameManager.GameRoot.AddChild(FinalLevel);

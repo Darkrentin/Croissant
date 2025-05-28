@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="6_rwhr5"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mehpu"]
+resource_local_to_scene = true
 shader = ExtResource("4_rwhr5")
 shader_parameter/border_color = Color(0, 1, 0, 1)
 shader_parameter/border_width = 4.0

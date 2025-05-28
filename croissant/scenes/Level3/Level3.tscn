@@ -2,25 +2,25 @@
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Others/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
-[ext_resource type="PackedScene" uid="uid://qkuoa8g4g2cl" path="res://scenes/Level3/Levels/0.tscn" id="2_apgcq"]
-[ext_resource type="PackedScene" uid="uid://c5avgc26i0v58" path="res://scenes/Level3/Levels/6.tscn" id="3_pl275"]
-[ext_resource type="PackedScene" uid="uid://lryqgy5js16r" path="res://scenes/Level3/Levels/1.tscn" id="4_k31tl"]
-[ext_resource type="PackedScene" uid="uid://cu58hpxb2ekmm" path="res://scenes/Level3/Levels/13.tscn" id="5_k0j7d"]
-[ext_resource type="PackedScene" uid="uid://cmg2wx0jx04xs" path="res://scenes/Level3/Levels/17.tscn" id="6_5olmw"]
-[ext_resource type="PackedScene" uid="uid://b4hh5c2vwkj84" path="res://scenes/Level3/Levels/3.tscn" id="7_tnjh3"]
-[ext_resource type="PackedScene" uid="uid://dccrepxu31kas" path="res://scenes/Level3/Levels/4.tscn" id="8_vvvan"]
-[ext_resource type="PackedScene" uid="uid://b3qpda3bvfsay" path="res://scenes/Level3/Levels/5.tscn" id="9_nhwkx"]
-[ext_resource type="PackedScene" uid="uid://c1fab22ik0j66" path="res://scenes/Level3/Levels/16.tscn" id="10_d33vg"]
-[ext_resource type="PackedScene" uid="uid://cpn3yvtucq587" path="res://scenes/Level3/Levels/2.tscn" id="11_ufbxd"]
-[ext_resource type="PackedScene" uid="uid://da7rmkd35wkqj" path="res://scenes/Level3/Levels/8.tscn" id="12_f03sd"]
-[ext_resource type="PackedScene" uid="uid://bpwo3b1mxppoa" path="res://scenes/Level3/Levels/9.tscn" id="13_6g7ie"]
-[ext_resource type="PackedScene" uid="uid://byb57u5a4ylpp" path="res://scenes/Level3/Levels/7.tscn" id="14_fa7ff"]
-[ext_resource type="PackedScene" uid="uid://v7jwtdleiqiw" path="res://scenes/Level3/Levels/15.tscn" id="15_6hjit"]
-[ext_resource type="PackedScene" uid="uid://ch85yot11aosi" path="res://scenes/Level3/Levels/11.tscn" id="16_scmle"]
-[ext_resource type="PackedScene" uid="uid://crihighbgs4le" path="res://scenes/Level3/Levels/10.tscn" id="17_8o4oi"]
-[ext_resource type="PackedScene" uid="uid://d0i1il0vuqntt" path="res://scenes/Level3/Levels/12.tscn" id="18_v1qwp"]
+[ext_resource type="PackedScene" uid="uid://bflx07hg5rj6h" path="res://scenes/Level3/Levels/0.tscn" id="2_apgcq"]
+[ext_resource type="PackedScene" uid="uid://bmu8kn83q82h5" path="res://scenes/Level3/Levels/1.tscn" id="3_pl275"]
+[ext_resource type="PackedScene" uid="uid://degf6giq1au2a" path="res://scenes/Level3/Levels/2.tscn" id="4_k31tl"]
+[ext_resource type="PackedScene" uid="uid://c68p7n5wfded1" path="res://scenes/Level3/Levels/3.tscn" id="5_k0j7d"]
+[ext_resource type="PackedScene" uid="uid://qwwqc0twna4c" path="res://scenes/Level3/Levels/4.tscn" id="6_5olmw"]
+[ext_resource type="PackedScene" uid="uid://bp2do2h10yp3w" path="res://scenes/Level3/Levels/5.tscn" id="7_tnjh3"]
+[ext_resource type="PackedScene" uid="uid://b0rgxgj70s3sd" path="res://scenes/Level3/Levels/6.tscn" id="8_vvvan"]
+[ext_resource type="PackedScene" uid="uid://kscnid6txu3f" path="res://scenes/Level3/Levels/7.tscn" id="9_nhwkx"]
+[ext_resource type="PackedScene" uid="uid://b7egm36f0ge06" path="res://scenes/Level3/Levels/8.tscn" id="10_d33vg"]
+[ext_resource type="PackedScene" uid="uid://dgnydadrpnp3t" path="res://scenes/Level3/Levels/9.tscn" id="11_ufbxd"]
+[ext_resource type="PackedScene" uid="uid://buv6lguu5rc7u" path="res://scenes/Level3/Levels/10.tscn" id="12_f03sd"]
+[ext_resource type="PackedScene" uid="uid://dvyj1ybcrhel4" path="res://scenes/Level3/Levels/11.tscn" id="13_6g7ie"]
+[ext_resource type="PackedScene" uid="uid://bhbpb2xmjfosj" path="res://scenes/Level3/Levels/12.tscn" id="14_fa7ff"]
+[ext_resource type="PackedScene" uid="uid://dffelt7a4am5d" path="res://scenes/Level3/Levels/13.tscn" id="15_6hjit"]
+[ext_resource type="PackedScene" uid="uid://btj83jbmdhmwf" path="res://scenes/Level3/Levels/14.tscn" id="16_scmle"]
+[ext_resource type="PackedScene" uid="uid://b4e11u540cpvm" path="res://scenes/Level3/Levels/15.tscn" id="17_8o4oi"]
+[ext_resource type="PackedScene" uid="uid://653nx0sdx0ku" path="res://scenes/Level3/Levels/16.tscn" id="18_v1qwp"]
 [ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="19_8o4oi"]
-[ext_resource type="PackedScene" uid="uid://b8p7kk7uxcxub" path="res://scenes/Level3/Levels/14.tscn" id="19_kebxc"]
+[ext_resource type="PackedScene" uid="uid://bu5seira0djs4" path="res://scenes/Level3/Levels/17.tscn" id="19_kebxc"]
 [ext_resource type="PackedScene" uid="uid://cjhxp6chvkb8y" path="res://scenes/Level3/Levels/18.tscn" id="20_shehq"]
 [ext_resource type="PackedScene" uid="uid://bw30pg1fbbvb2" path="res://scenes/Level3/Levels/19.tscn" id="21_yi0hh"]
 [ext_resource type="PackedScene" uid="uid://dcw0fjn2wtog7" path="res://scenes/Level3/Levels/20.tscn" id="22_6oc02"]
@@ -42,7 +42,7 @@ transparent = true
 content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 2
 script = ExtResource("1_pl275")
-level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("4_k31tl"), ExtResource("11_ufbxd"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("3_pl275"), ExtResource("14_fa7ff"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("17_8o4oi"), ExtResource("16_scmle"), ExtResource("18_v1qwp"), ExtResource("5_k0j7d"), ExtResource("19_kebxc"), ExtResource("15_6hjit"), ExtResource("10_d33vg"), ExtResource("6_5olmw"), ExtResource("20_shehq"), ExtResource("21_yi0hh"), ExtResource("22_6oc02")])
+level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg"), ExtResource("11_ufbxd"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("14_fa7ff"), ExtResource("15_6hjit"), ExtResource("16_scmle"), ExtResource("17_8o4oi"), ExtResource("18_v1qwp"), ExtResource("19_kebxc"), ExtResource("20_shehq"), ExtResource("21_yi0hh"), ExtResource("22_6oc02")])
 player = NodePath("Player")
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]

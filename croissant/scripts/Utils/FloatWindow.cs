@@ -55,20 +55,17 @@ public partial class FloatWindow : Window
 		ShakeTimer = new Timer();
 		AddChild(ShakeTimer);
 		ShakeTimer.Timeout += StopShake;
-		Title = "";
 		WindowRect = new Rect2I(Position, Size);
 		KeepTitleVisible = false;
 	}
-
 	public override void _Process(double delta)
 	{
-		// Check if the window moved
 		if (WindowRect.Position != Position || WindowRect.Size != Size)
 		{
 			UpdateWindowRect();
 		}
-		// Only run necessary operations
-		if (Draggable == false && HasFocus())
+
+		if (!Draggable && HasFocus())
 		{
 			GameManager.FixWindow.GrabFocus();
 		}
@@ -79,11 +76,9 @@ public partial class FloatWindow : Window
 			GameManager.ClickSound.Play();
 		}
 
-		// Only _Process transitions when active
 		if (IsTransitioning || IsResizing)
 			TransitionWindow(delta);
 
-		// Only _Process shaking when active
 		if (Shaking)
 			_ProcessShake();
 	}
@@ -209,13 +204,14 @@ public partial class FloatWindow : Window
 		StartTransition(newPosition, resizeTime);
 		return (newSize, newPosition);
 	}
-
 	private void TransitionWindow(double delta)
 	{
+		float deltaFloat = (float)delta;
+
 		if (IsTransitioning)
 		{
-			elapsedTimeTransition += (float)delta;
-			float progress = Mathf.Clamp(elapsedTimeTransition / TransitionTime, 0f, 1f);
+			elapsedTimeTransition += deltaFloat;
+			float progress = elapsedTimeTransition / TransitionTime;
 
 			if (progress >= 1.0f)
 			{
@@ -226,14 +222,14 @@ public partial class FloatWindow : Window
 			}
 
 			float adjustedProgress = CalculateProgress(progress, transitionMode);
-			Vector2I newPosition = (Vector2I)((Vector2)StartPosition).Lerp(TargetPosition, adjustedProgress);
-			SetWindowPosition(newPosition, true);
+			Vector2 lerpedPos = ((Vector2)StartPosition).Lerp(TargetPosition, adjustedProgress);
+			SetWindowPosition((Vector2I)lerpedPos, true);
 		}
 
 		if (IsResizing)
 		{
-			elapsedTimeResize += (float)delta;
-			float progress = Mathf.Clamp(elapsedTimeResize / ResizeTime, 0f, 1f);
+			elapsedTimeResize += deltaFloat;
+			float progress = elapsedTimeResize / ResizeTime;
 
 			if (progress >= 1.0f)
 			{
@@ -244,7 +240,8 @@ public partial class FloatWindow : Window
 			}
 
 			float adjustedProgress = CalculateProgress(progress, resizeMode);
-			Size = (Vector2I)((Vector2)StartSize).Lerp(TargetSize, adjustedProgress);
+			Vector2 lerpedSize = ((Vector2)StartSize).Lerp(TargetSize, adjustedProgress);
+			Size = (Vector2I)lerpedSize;
 		}
 	}
 
@@ -315,7 +312,8 @@ public partial class FloatWindow : Window
 
 		_shakeOffset.X = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
 		_shakeOffset.Y = Lib.rand.Next(-ShakeIntensity, ShakeIntensity + 1);
-		SetWindowPosition(BasePosition + _shakeOffset, true);
+		Vector2I shakePosition = BasePosition + _shakeOffset;
+		SetWindowPosition(shakePosition, true);
 	}
 
 	public void StartShake(float duration, int intensity)

@@ -6,31 +6,37 @@ public static class Lib
 {
     public static Random rand = new Random();
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2I GetCursorPosition()
     {
         return (Vector2I)GameManager.FixWindow.GetMousePosition();
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static float GetRandomNormal(float min = 0, float max = 1)
     {
         return (float)rand.NextDouble() * (max - min) + min;
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2I GetScreenPosition(float relativeX, float relativeY)
     {
         return new Vector2I((int)(GameManager.ScreenSize.X * relativeX), (int)(GameManager.ScreenSize.Y * relativeY));
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2I GetScreenPosition(Vector2 relativePosition)
     {
         return new Vector2I((int)(GameManager.ScreenSize.X * relativePosition.X), (int)(GameManager.ScreenSize.Y * relativePosition.Y));
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2I GetScreenSize(float relativeWidth, float relativeHeight)
     {
         return new Vector2I((int)(GameManager.ScreenSize.X * relativeWidth), (int)(GameManager.ScreenSize.Y * relativeHeight));
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2I GetScreenSize(Vector2 relativeSize)
     {
         return new Vector2I((int)(GameManager.ScreenSize.X * relativeSize.X), (int)(GameManager.ScreenSize.Y * relativeSize.Y));
@@ -52,6 +58,7 @@ public static class Lib
         };
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2I GetAspectFactor(Vector2I originalSize)
     {
         const float referenceWidth = 1920f;
@@ -62,6 +69,7 @@ public static class Lib
         return (Vector2I)((Vector2)originalSize * scaleFactor);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2 GetScreenRatio()
     {
         const float referenceWidth = 1920f;

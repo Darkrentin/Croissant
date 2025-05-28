@@ -27,7 +27,6 @@ public partial class Wave : Node
 
 	public void StartWave()
 	{
-		Lib.Print("Starting wave " + id);
 		CurrentWave = true;
 		WaveManager.CurrentWave = this;
 		WaveManager.CurrentWaveId = id;
@@ -40,7 +39,6 @@ public partial class Wave : Node
 				window.ParentWave = this;
 				NbOfEnemies++;
 				WaveManager.SpawnNode.AddChild(window);
-				Lib.Print("Enemy spawned: " + NbOfEnemies);
 			}
 		}
 		else
@@ -75,6 +73,5 @@ public partial class Wave : Node
 		if (NbOfEnemies <= 0 && !WaitWave)
 			StartNextWave();
 
-		GD.Print("Enemies left: " + NbOfEnemies);
 	}
 }
