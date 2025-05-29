@@ -16,7 +16,6 @@ public partial class Virus3D : StaticBody3D
 	// Boss attack timers
 	public Timer FloppyDiskTimer;
 	public Timer MovementTimer;
-	public Timer FloorAttackTimer;
 	
 	// Attack state tracking
 	public bool IsLavaActive = false;
@@ -28,187 +27,274 @@ public partial class Virus3D : StaticBody3D
 	[Export] Sprite2D HealthBar;
 	public static Virus3D Instance;
 
-	public int Hp = 10;
+	public int MaxHp = 30; // 3 fois plus d'HP
+	public int Hp = 30;
 
 	public bool Phase = false;
 
+// Ajout pour gérer LiftWalls aléatoirement
+public Timer LiftWallTimer;
+public bool IsLiftWallOnCooldown = false;
+
+public override void _Ready()
+{
+    Instance = this;
+    AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
+    AnimationScreen.Travel("Angry");
+
+    GlitchTimer = new Timer();
+    GlitchTimer.Timeout += () =>
+    {
+        StopGlitch();
+    };
+    GlitchTimer.WaitTime = 0.5f;
+    GlitchTimer.OneShot = true;
+    AddChild(GlitchTimer);
+
+    // Initialize boss attack timers
+    FloppyDiskTimer = new Timer();
+    FloppyDiskTimer.Timeout += LaunchFloppyDiskAttack;
+    FloppyDiskTimer.OneShot = false;
+    AddChild(FloppyDiskTimer);
+
+    MovementTimer = new Timer();
+    MovementTimer.Timeout += () =>
+    {
+        if (Phase) // Phase 2
+        {
+            // Phase 2: Bouge moins mais plus agressivement
+            float rotationAngle = Lib.rand.Next(-120, 120);
+            float rotationSpeed = Lib.rand.Next(80, 120);
+            Rotate(rotationAngle, rotationSpeed);
+        }
+        else // Phase 1
+        {
+            // Phase 1: Bouge beaucoup
+            float rotationAngle = Lib.rand.Next(-180, 180);
+            float rotationSpeed = Lib.rand.Next(60, 100);
+            Rotate(rotationAngle, rotationSpeed);
+        }
+    };
+    MovementTimer.OneShot = false;
+    AddChild(MovementTimer);
 
 
-	public override void _Ready()
+    // Nouveau timer pour LiftWalls aléatoire
+    LiftWallTimer = new Timer();
+    LiftWallTimer.Timeout += TryLaunchLiftWall;
+    LiftWallTimer.OneShot = false;
+    AddChild(LiftWallTimer);
+
+    AnimationPlayer.AnimationFinished += OnAnimationFinished;
+    UpdateHealthBar();
+    
+    // Start with Phase 1
+    BossAtkPhase1();
+    
+    // Démarrer le timer pour LiftWalls aléatoire
+    LiftWallTimer.WaitTime = Lib.GetRandomNormal(8.0f, 15.0f);
+    LiftWallTimer.Start();
+}
+
+// Called every frame. 'delta' is the elapsed time since the previous frame.
+public override void _Process(double delta)
+{
+    // Check phase transition based on HP
+    bool shouldBePhase2 = (float)Hp / (float)MaxHp <= 0.5f; // 50% HP or less
+    
+    if (shouldBePhase2 != Phase)
+    {
+        Phase = shouldBePhase2;
+        if (Phase)
+        {
+            Lib.Print("Boss entering Phase 2!");
+            BossAtkPhase2();
+        }
+        else
+        {
+            Lib.Print("Boss back to Phase 1!");
+            BossAtkPhase1();
+        }
+    }
+    
+    // Debug: Check if timers are running (remove this after debugging)
+    if (Input.IsActionJustPressed("ui_accept")) // Press Enter to debug
+    {
+        DebugTimerStatus();
+    }
+}
+
+private void UpdateHealthBar()
+{
+    // Convertir les HP sur 30 en affichage sur 10
+    int displayHp = Mathf.RoundToInt((float)Hp / (float)MaxHp * 10f);
+    displayHp = Mathf.Clamp(displayHp, 0, 10);
+    HealthBar.Frame = 10 - displayHp;
+}
+
+private void LaunchFloppyDiskAttack()
+{
+    // Calculer le nombre de disquettes selon les HP restants
+    float hpPercentage = (float)Hp / (float)MaxHp;
+    int baseFloppyCount;
+    
+    if (Phase) // Phase 2
+    {
+        if (IsLavaActive)
+        {
+            // Pendant la lave, tire forcément mais peu
+            baseFloppyCount = 2;
+        }
+        else
+        {
+            // Phase 2 sans lave: commence à 3 et augmente
+            baseFloppyCount = 3 + Mathf.RoundToInt((1f - hpPercentage) * 5f); // 3-8 disquettes
+        }
+    }
+    else // Phase 1
+    {
+        // Phase 1: commence à 1 et augmente progressivement
+        baseFloppyCount = 1 + Mathf.RoundToInt((1f - hpPercentage) * 4f); // 1-5 disquettes
+    }
+    
+    // Ajouter un peu d'aléatoire
+    int floppyCount = Mathf.Max(1, baseFloppyCount + Lib.rand.Next(-1, 2));
+    
+    float launchSpeed = Phase ? 0.3f : 0.4f;
+    
+    BossLevel.Instance.LaunchNFloppyDisk(floppyCount, launchSpeed);
+    Lib.Print($"Launched {floppyCount} floppies (HP: {Hp}/{MaxHp}, Phase: {(Phase ? 2 : 1)})");
+}
+
+private void TryLaunchLiftWall()
+{
+    // Ne pas lancer LiftWall si la lave est active ou si on est en cooldown
+    if (!IsLavaActive && !IsLiftWallOnCooldown)
+    {
+        IsLiftWallActive = true;
+        IsLiftWallOnCooldown = true;
+        BossLevel.Instance.LiftWalls();
+        Lib.Print("Random LiftWall attack launched!");
+        
+        // Programmer la fin de LiftWalls après 3 secondes
+        GetTree().CreateTimer(3.0f).Timeout += () =>
+        {
+            IsLiftWallActive = false;
+        };
+        
+        // Cooldown de 5 secondes avant de pouvoir relancer
+        GetTree().CreateTimer(5.0f).Timeout += () =>
+        {
+            IsLiftWallOnCooldown = false;
+        };
+    }
+    
+    // Programmer le prochain essai
+    LiftWallTimer.WaitTime = Lib.GetRandomNormal(8.0f, 15.0f);
+    LiftWallTimer.Start();
+}
+
+	public void BossAtkPhase1()
 	{
-		Instance = this;
-		AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
-		AnimationScreen.Travel("Angry");
-
-		GlitchTimer = new Timer();
-		GlitchTimer.Timeout += () =>
-		{
-			StopGlitch();
-		};
-		GlitchTimer.WaitTime = 0.5f;
-		GlitchTimer.OneShot = true;
-		AddChild(GlitchTimer);
-
-		// Initialize boss attack timers
-		FloppyDiskTimer = new Timer();
-		FloppyDiskTimer.Timeout += () =>
-		{
-			if (Phase) // Phase 2
-			{
-				if (!IsLavaActive)
-				{
-					// Phase 2: Tire beaucoup de disquettes
-					BossLevel.Instance.LaunchNFloppyDisk(Lib.rand.Next(5, 10), 0.3f);
-				}
-				else
-				{
-					// Phase 2: Tire moins mais avec lava active
-					BossLevel.Instance.LaunchNFloppyDisk(Lib.rand.Next(4, 8), 0.3f);
-				}
-			}
-			else // Phase 1
-			{
-				// Phase 1: Tire modérément
-				BossLevel.Instance.LaunchNFloppyDisk(Lib.rand.Next(2, 8), 0.4f);
-			}
-		};
-		FloppyDiskTimer.OneShot = false;
-		AddChild(FloppyDiskTimer);
-
-		MovementTimer = new Timer();
-		MovementTimer.Timeout += () =>
-		{
-			if (Phase) // Phase 2
-			{
-				// Phase 2: Bouge moins mais plus agressivement
-				float rotationAngle = Lib.rand.Next(-120, 120);
-				float rotationSpeed = Lib.rand.Next(80, 120);
-				Rotate(rotationAngle, rotationSpeed);
-			}
-			else // Phase 1
-			{
-				// Phase 1: Bouge beaucoup
-				float rotationAngle = Lib.rand.Next(-180, 180);
-				float rotationSpeed = Lib.rand.Next(60, 100);
-				Rotate(rotationAngle, rotationSpeed);
-			}
-		};
-		MovementTimer.OneShot = false;
-		AddChild(MovementTimer);
-
-		FloorAttackTimer = new Timer();
-		FloorAttackTimer.Timeout += () =>
-		{
-			if (!IsLavaActive && !IsLiftWallActive)
-			{
-				BossLevel.Instance.FloorAttack();
-			}
-		};
-		FloorAttackTimer.OneShot = false;
-		AddChild(FloorAttackTimer);
-
-		AnimationPlayer.AnimationFinished += OnAnimationFinished;
-		HealthBar.Frame = 10 - Hp;
-		
-		// Start the boss attack patterns
-		StartBossAttacks();
-	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		// Check phase transition based on HP
-		bool shouldBePhase2 = (float)Hp / 10.0f <= 0.5f; // 50% HP or less
-		
-		if (shouldBePhase2 != Phase)
-		{
-			Phase = shouldBePhase2;
-			if (Phase)
-			{
-				Lib.Print("Boss entering Phase 2!");
-				BossAtkPhase2();
-			}
-			else
-			{
-				Lib.Print("Boss back to Phase 1!");
-				BossAtkPhase1();
-			}
-		}
-	}
-
-	public void StartBossAttacks()
-	{
-		if (Phase)
-		{
-			BossAtkPhase2();
-		}
-		else
-		{
-			BossAtkPhase1();
-		}
-	}	public void BossAtkPhase1()
-	{
-		// Phase 1: Beaucoup de mouvement, tir modéré de disquettes + FloorAttack fréquent
+		// Phase 1: Beaucoup de mouvement, tir modéré de disquettes
 		
 		Lib.Print("Boss Phase 1 activated - FLOOR ATTACK FOCUS");
 		
-		// Tir de disquettes toutes les 4-7 secondes (moins fréquent)
-		FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(2.0f, 4.0f);
+		// Stop all timers first to avoid conflicts
+		FloppyDiskTimer.Stop();
+		MovementTimer.Stop();
+		
+		// Tir de disquettes toutes les 3-5 secondes
+		FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(3.0f, 5.0f);
 		FloppyDiskTimer.Start();
+		Lib.Print($"FloppyDisk timer started with {FloppyDiskTimer.WaitTime}s");
 		
 		// Mouvement fréquent toutes les 2-4 secondes
 		MovementTimer.WaitTime = Lib.GetRandomNormal(2.0f, 4.0f);
 		MovementTimer.Start();
-		
-		// FloorAttack TRÈS fréquent en Phase 1 toutes les 3-5 secondes
-		FloorAttackTimer.WaitTime = Lib.GetRandomNormal(3.0f, 5.0f);
-		FloorAttackTimer.Start();
-		Lib.Print("Phase 1: FloorAttack timer set to 3-5 seconds");
-	}	public void BossAtkPhase2()
+		Lib.Print($"Movement timer started with {MovementTimer.WaitTime}s");
+			}
+
+	public void BossAtkPhase2()
 	{
 		// Phase 2: Focus sur l'attaque Lava + tir intensif
-		
+
 		Lib.Print("Boss Phase 2 activated - LAVA ATTACK FOCUS");
-		
+
+		// Stop all timers first
+		FloppyDiskTimer.Stop();
+		MovementTimer.Stop();
+
 		// Mode simple : Tir intensif + Attaque Lava fréquente
 		IsLavaActive = true;
-		
-		// Tir plus fréquent de disquettes toutes les 1.5-3 secondes
-		FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(1.5f, 3.0f);
+
+		// Tir plus fréquent pendant la lave
+		FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(1.0f, 2.0f);
 		FloppyDiskTimer.Start();
-		
+
 		// Mouvement modéré toutes les 3-5 secondes
 		MovementTimer.WaitTime = Lib.GetRandomNormal(3.0f, 5.0f);
 		MovementTimer.Start();
-		
+
 		// Attaque Lava immédiate et répétée
 		BossLevel.Instance.Lava();
 		Lib.Print("Phase 2: Lava attack launched!");
+
+		// Programmer la fin de la lave après 6 secondes
+		GetTree().CreateTimer(6.0f).Timeout += () =>
+		{
+			IsLavaActive = false;
+			// Retour à un tir normal après la lave
+			FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(2.0f, 4.0f);
+		};
+
 		
 		// Répéter l'attaque Lava toutes les 8-12 secondes
 		GetTree().CreateTimer(Lib.GetRandomNormal(8.0f, 12.0f)).Timeout += () =>
 		{
-			if (Phase && IsLavaActive) // Si on est toujours en Phase 2
+			if (Phase) // Si on est toujours en Phase 2
 			{
+				IsLavaActive = true;
 				BossLevel.Instance.Lava();
 				Lib.Print("Phase 2: Repeated Lava attack!");
-				
+
+				// Programmer la fin de cette lave
+				GetTree().CreateTimer(6.0f).Timeout += () =>
+				{
+					IsLavaActive = false;
+					FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(2.0f, 4.0f);
+				};
+
 				// Programmer la prochaine attaque
 				GetTree().CreateTimer(Lib.GetRandomNormal(8.0f, 12.0f)).Timeout += () =>
 				{
-					if (Phase && IsLavaActive)
+					if (Phase)
 					{
+						IsLavaActive = true;
 						BossLevel.Instance.Lava();
 						Lib.Print("Phase 2: Another Lava attack!");
+
+						GetTree().CreateTimer(6.0f).Timeout += () =>
+						{
+							IsLavaActive = false;
+							FloppyDiskTimer.WaitTime = Lib.GetRandomNormal(2.0f, 4.0f);
+						};
 					}
 				};
 			}
 		};
-		
-		// FloorAttack moins fréquent en Phase 2 toutes les 8-15 secondes
-		FloorAttackTimer.WaitTime = Lib.GetRandomNormal(8.0f, 15.0f);
-		FloorAttackTimer.Start();
+
 		Lib.Print("Phase 2: Lava priority mode activated");
+	}
+
+	// Add a debug method to check timer status
+	public void DebugTimerStatus()
+	{
+		Lib.Print("=== Timer Status Debug ===");
+		Lib.Print($"FloppyDiskTimer - Stopped: {FloppyDiskTimer.IsStopped()}, WaitTime: {FloppyDiskTimer.WaitTime}, TimeLeft: {FloppyDiskTimer.TimeLeft}");
+		Lib.Print($"MovementTimer - Stopped: {MovementTimer.IsStopped()}, WaitTime: {MovementTimer.WaitTime}, TimeLeft: {MovementTimer.TimeLeft}");
+		Lib.Print($"Current Phase: {(Phase ? 2 : 1)}, HP: {Hp}/{MaxHp}");
+		Lib.Print($"BossLevel.Instance exists: {BossLevel.Instance != null}");
 	}
 
 	public void ShakeNode(Node3D nodeToShake, float intensity = 0.3f, float duration = 0.5f)
@@ -243,39 +329,30 @@ public partial class Virus3D : StaticBody3D
 	}	public void TakeDamage()
 	{
 		// Handle damage logic here
-		// For example, reduce health or trigger an animation
 		StartGlitch();
 		
-		// Toujours appeler LiftWalls quand le boss se fait tirer dessus
-		IsLiftWallActive = true;
-		BossLevel.Instance.LiftWalls();
+		// Ne plus lancer LiftWalls automatiquement quand on prend des dégâts
+		// (c'est maintenant géré par le timer aléatoire)
 		
-		// Programmer la fin de LiftWalls
-		GetTree().CreateTimer(3.0f).Timeout += () =>
-		{
-			IsLiftWallActive = false;
-		};
-		
-		//Rotate(Lib.rand.Next(-180, 180), 60f, BossLevel.Instance.LaunchFloppyDisk);
 		Lib.Print("Virus took damage!");
 		if (Hp > 1)
 		{
 			Hp--;
-			HealthBar.Frame = 10 - Hp;
+			UpdateHealthBar();
 		}
 		else
 		{
 			Hp--;
-			HealthBar.Frame = 10 - Hp;
+			UpdateHealthBar();
 			StartGlitch();
 			GlitchTimer.WaitTime = 10f;
 			
 			// Stop all attack timers when boss dies
 			FloppyDiskTimer.Stop();
 			MovementTimer.Stop();
-			FloorAttackTimer.Stop();
+			LiftWallTimer.Stop();
 			
-			GetTree().CreateTimer(1f).Timeout += () =>
+			GetTree().CreateTimer(0.1f).Timeout += () =>
 			{
 				FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
 				FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
@@ -287,10 +364,10 @@ public partial class Virus3D : StaticBody3D
 
 	public void HealVirus()
 	{
-		if (Hp < 10)
+		if (Hp < MaxHp)
 		{
 			Hp++;
-			HealthBar.Frame = 10 - Hp;
+			UpdateHealthBar();
 		}
 	}
 

@@ -126,6 +126,8 @@ public partial class MenuWindow : FloatWindow
 	{
 		MenuClick.Play();
 		FakeDesktop = toggled;
+		if(MainWindow.FakeBackground == null)
+			return;
 		MainWindow.FakeBackground.Visible = FakeDesktop;
 	}
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public partial class FloppyDisk : CharacterBody3D
 {
     [Export]
-    public float Speed { get; set; } = 2f;
+    public float Speed { get; set; } = 6f;
     [Export] public Area3D Area;
     [Export] public AnimationPlayer AnimationPlayer;
 
@@ -16,27 +16,15 @@ public partial class FloppyDisk : CharacterBody3D
 
     public static List<FloppyDisk> FloppyDisks = new List<FloppyDisk>();
 
-    [Export] public bool StartMovementButton { get => false; set { if (value) StartMovement(10f); } }
     public override void _Ready()
     {
         FloppyDisks.Add(this);
         Area.BodyEntered += OnBodyEntered;
-        AnimationPlayer.AnimationFinished += OnAnimationFinished;
 
-        // Look at player when spawning
-        if (FinalLevel.Instance?.Player3D != null)
+        GetTree().CreateTimer(0.1f).Timeout += () =>
         {
-            Vector3 playerPosition = FinalLevel.Instance.Player3D.GlobalPosition;
-            Vector3 directionToPlayer = playerPosition - GlobalPosition;
-            directionToPlayer.Y = 0; // Keep movement on the horizontal plane
-            _direction = directionToPlayer.Normalized();
-
-            LookAt(GlobalPosition + _direction, Vector3.Up);
-            GlobalRotation *= new Vector3(0, 1, 0);
-            GlobalRotation += new Vector3(0, (float)Math.PI, 0);
-        }
-
-        AnimationPlayer.Play("Spawn");
+            StartMovement(5f);
+        };
     }
 
     public static void ResetFloppyDisks()
