@@ -1,12 +1,9 @@
 Intro :
-- Remettre la limite à 30 vu qu'on peut se mettre sur n'importe quel niveau avec le main
 - Revoir les particules à l'apparition du virus
 
 Lvl 1 :
 - Faire la dodge window
 - Ajouter plus de static windows
-- Faire un système de vagues où on peut choisir les fenetres qui vont pop et le temps entre chaque fenetre de la vague
-- Faire des vagues
 
 Lvl 2 :
 - Ajouter 2 nouveaux types de fenêtres pour arriver à 6
@@ -14,21 +11,9 @@ Lvl 2 :
 - Trouver une dissotiation logique pour les 3 fenetres de couleurs primaires (R,G,B) et les 3 fenetres de couleurs additive
 - Ajouter des particules pour chaque fenetres qui sont cohérentes à l'attaque
 
-Lvl 3 :
--probleme d'emplacement de la moving platform en changeant de scène (dans des murs parfois)
--quand on arrive sur un scène parfois les movings platforms suivent notre souris alors qu'on a pas intéragit avec elle
--la door platform active sa hitbox dans toutes les scènes quand on ramasse un config file
--comprendre pourquoi y'a un mur invisible en bas à droite dans la scène 3_6
--faire minis 4 scene par niveaux
 
 
 Autres :
-- Faire le Helper
-- Vérifier le texte du Helper de Corentin
-- Ajouter des sons au jeu
-- Ajouter des musiques au jeu
-- Ajouter un son à la Undertale quand le virus et le Helper parle, avec des voix différentes en faisant varier légèrement le pitch
-- Rendre le menu de selection de difficulté plus beau
 - Rentre le menu d'options plus beau
 - Ajouter un slider pour le volume du son sur le menu des options
 - Ajouter un slider pour le volume de la musique sur le menu des options
@@ -36,30 +21,3 @@ Autres :
 - Faire une version infinie du intro game à la fin du jeu
 - Commenter le code
 - Optimiser le code
-
-Sons :
-Intro :
-- son demmarage du jeu
-- son piou piou de tir
-- son ennemi touché + tué prendre lvl 4
-- Implem son de glitch
-- gros glitch à l'explosion de l'intro
-- land du virus à l'atterissage
-- son de mise en couleur de pixel
-Level 1 :
-- son et sprite DodgeWindow shape?
-Level 2 :
-- Apparition du Sys32 -> son windows
-Level 3 :
-- son saut
-- son land
-- son mort
-- son portail (fichier ?)
-- son select move platform
-- son unselect move platform
-- son move move platform 
-- (modifier shaders quand plateform dans platform only et quand joueur dans joueur only)
-Level 4 :
-- son mort du player
-Boss :
-- à venir
