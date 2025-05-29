@@ -58,7 +58,7 @@ shader_parameter/Time = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhys1"]
 resource_local_to_scene = true
-size = Vector2(824, 128)
+size = Vector2(816, 128)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_7asgn"]
 resource_local_to_scene = true
@@ -330,13 +330,13 @@ position = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_dmaji")
 
 [node name="MovePlatform2" parent="." instance=ExtResource("5_c7kun")]
-position = Vector2(264, 208)
+position = Vector2(272, 208)
 
 [node name="PlatformTexture" parent="MovePlatform2/Window" index="0"]
 material = SubResource("ShaderMaterial_dmaji")
 
 [node name="CollisionShape2D" parent="MovePlatform2" index="1"]
-position = Vector2(412, 64)
+position = Vector2(408, 64)
 shape = SubResource("RectangleShape2D_lhys1")
 
 [node name="PlayerOnly6" parent="." instance=ExtResource("3_p2dy3")]
@@ -430,6 +430,9 @@ shape = SubResource("RectangleShape2D_lf67y")
 [node name="KillingPlatform3" parent="." instance=ExtResource("8_xvj50")]
 position = Vector2(192, 472)
 
+[node name="Window" parent="KillingPlatform3" index="0"]
+position = Vector2i(0, 36)
+
 [node name="CollisionShape2D" parent="KillingPlatform3" index="3"]
 position = Vector2(248, 84)
 shape = SubResource("RectangleShape2D_rhxrf")
@@ -460,6 +463,9 @@ shape = SubResource("RectangleShape2D_wucev")
 
 [node name="KillingPlatform4" parent="." instance=ExtResource("8_xvj50")]
 position = Vector2(1176, 608)
+
+[node name="Window" parent="KillingPlatform4" index="0"]
+position = Vector2i(0, 36)
 
 [node name="CollisionShape2D" parent="KillingPlatform4" index="3"]
 position = Vector2(84, 92)
