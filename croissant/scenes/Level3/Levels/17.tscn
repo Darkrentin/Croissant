@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bu5seira0djs4"]
+[gd_scene load_steps=46 format=3 uid="uid://bu5seira0djs4"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ah0vo"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_ah0vo"]
@@ -80,7 +80,7 @@ shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kdf5f"]
 resource_local_to_scene = true
-size = Vector2(968, 128)
+size = Vector2(960, 128)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yr5fu"]
 resource_local_to_scene = true
@@ -233,14 +233,55 @@ resource_local_to_scene = true
 size = Vector2(192, 168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlg7k"]
-size = Vector2(384, 184)
+size = Vector2(168, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_37q86"]
-size = Vector2(384, 184)
+size = Vector2(168, 184)
+
+[sub_resource type="Shader" id="Shader_lhys1"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h0762"]
+resource_local_to_scene = true
+shader = SubResource("Shader_lhys1")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x7e43"]
+resource_local_to_scene = true
+size = Vector2(168, 128)
 
 [node name="17" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_ah0vo")
-windows = [NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("PlayerOnly6/Window"), NodePath("PlayerOnly7/Window"), NodePath("MovePlatform3/Window"), NodePath("PlayerOnly2/Window"), NodePath("WindowsOnly/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("WindowsOnly2/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly3/Window"), NodePath("PlayerOnly4/Window"), NodePath("KillingPlatform4/Window")]
+windows = [NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("PlayerOnly6/Window"), NodePath("PlayerOnly7/Window"), NodePath("MovePlatform3/Window"), NodePath("PlayerOnly2/Window"), NodePath("WindowsOnly/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("WindowsOnly2/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly3/Window"), NodePath("PlayerOnly4/Window"), NodePath("KillingPlatform4/Window"), NodePath("WindowsOnly3/Window")]
 
 [node name="Limit" type="StaticBody2D" parent="."]
 
@@ -265,7 +306,7 @@ position = Vector2(16, 8)
 NextSceneId = 16
 
 [node name="18" parent="." instance=ExtResource("2_ah0vo")]
-position = Vector2(1768, 728)
+position = Vector2(1776, 664)
 NextSceneId = 18
 
 [node name="PlayerOnly" parent="." instance=ExtResource("3_p2dy3")]
@@ -279,7 +320,7 @@ position = Vector2(480, 64)
 shape = SubResource("RectangleShape2D_yr5fu")
 
 [node name="MovePlatform" parent="." instance=ExtResource("5_c7kun")]
-position = Vector2(264, 0)
+position = Vector2(968, 88)
 
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_xvj50")
@@ -289,7 +330,7 @@ position = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_dmaji")
 
 [node name="MovePlatform2" parent="." instance=ExtResource("5_c7kun")]
-position = Vector2(272, 208)
+position = Vector2(264, 208)
 
 [node name="PlatformTexture" parent="MovePlatform2/Window" index="0"]
 material = SubResource("ShaderMaterial_dmaji")
@@ -299,7 +340,7 @@ position = Vector2(412, 64)
 shape = SubResource("RectangleShape2D_lhys1")
 
 [node name="PlayerOnly6" parent="." instance=ExtResource("3_p2dy3")]
-position = Vector2(824, 336)
+position = Vector2(832, 336)
 
 [node name="PlatformTexture" parent="PlayerOnly6/Window" index="0"]
 material = SubResource("ShaderMaterial_7asgn")
@@ -309,13 +350,13 @@ position = Vector2(64, 136)
 shape = SubResource("RectangleShape2D_p07xo")
 
 [node name="PlayerOnly7" parent="." instance=ExtResource("3_p2dy3")]
-position = Vector2(952, 480)
+position = Vector2(960, 480)
 
 [node name="PlatformTexture" parent="PlayerOnly7/Window" index="0"]
 material = SubResource("ShaderMaterial_p07xo")
 
 [node name="CollisionShape2D" parent="PlayerOnly7" index="1"]
-position = Vector2(484, 64)
+position = Vector2(480, 64)
 shape = SubResource("RectangleShape2D_kdf5f")
 
 [node name="MovePlatform3" parent="." instance=ExtResource("5_c7kun")]
@@ -418,15 +459,25 @@ position = Vector2(96, 84)
 shape = SubResource("RectangleShape2D_wucev")
 
 [node name="KillingPlatform4" parent="." instance=ExtResource("8_xvj50")]
-position = Vector2(1232, 608)
+position = Vector2(1176, 608)
 
 [node name="CollisionShape2D" parent="KillingPlatform4" index="3"]
-position = Vector2(192, 92)
+position = Vector2(84, 92)
 shape = SubResource("RectangleShape2D_nlg7k")
 
 [node name="CollisionShape2D" parent="KillingPlatform4/Area2D" index="0"]
-position = Vector2(192, 92)
+position = Vector2(84, 92)
 shape = SubResource("RectangleShape2D_37q86")
+
+[node name="WindowsOnly3" parent="." instance=ExtResource("7_yr5fu")]
+position = Vector2(1752, 848)
+
+[node name="PlatformTexture" parent="WindowsOnly3/Window" index="0"]
+material = SubResource("ShaderMaterial_h0762")
+
+[node name="CollisionShape2D" parent="WindowsOnly3" index="1"]
+position = Vector2(84, 64)
+shape = SubResource("RectangleShape2D_x7e43")
 
 [editable path="PlayerOnly"]
 [editable path="MovePlatform"]
@@ -443,3 +494,4 @@ shape = SubResource("RectangleShape2D_37q86")
 [editable path="PlayerOnly3"]
 [editable path="PlayerOnly4"]
 [editable path="KillingPlatform4"]
+[editable path="WindowsOnly3"]
