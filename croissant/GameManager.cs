@@ -79,6 +79,13 @@ public partial class GameManager : Node2D
         Void
     }
 
+    public static bool IsRefocusingWindows = false;
+    private static int RefocusIndex = 0;
+    private static Timer RefocusTimer;
+    private static bool _wasMainWindowFocused = false;
+    private static float _refocusDelay = 0f;
+    private static bool _needsRefocus = false;
+
     public override void _Ready()
     {
         _cachedScreenScale = DisplayServer.ScreenGetDpi() / 96f;
@@ -93,7 +100,15 @@ public partial class GameManager : Node2D
         InitializeNpc();
         ShakeTimer = new Timer();
         ShakeTimer.Timeout += StopShakeAllWindows;
-        AddChild(ShakeTimer); ClickSound = new AudioStreamPlayer();
+        AddChild(ShakeTimer);
+
+        // Initialize refocus timer
+        RefocusTimer = new Timer();
+        RefocusTimer.WaitTime = 0.05f; // Grab focus every 100ms
+        RefocusTimer.Timeout += RefocusNextWindow;
+        AddChild(RefocusTimer);
+
+        ClickSound = new AudioStreamPlayer();
         ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/others/click.mp3");
         ClickSound.Bus = "SFX";
         AddChild(ClickSound);
@@ -101,6 +116,9 @@ public partial class GameManager : Node2D
         var shaderLoaderScene = GD.Load<PackedScene>("res://scenes/Other/ShaderLoader.tscn");
         var shaderLoader = shaderLoaderScene.Instantiate<ShaderLoader>();
         AddChild(shaderLoader);
+
+        // Initialize focus state
+        _wasMainWindowFocused = MainWindow.HasFocus();
         
     }
 
@@ -224,6 +242,7 @@ public partial class GameManager : Node2D
         }
     }
 
+
     // Create FixWindow, to get the focus, the right mouse position, and particles
     public void AddFixWindow()
     {
@@ -246,6 +265,7 @@ public partial class GameManager : Node2D
         // Load the FloatWindow script to the main window
         GetWindow().SetScript(ResourceLoader.Load("uid://ipb8ki64ej0u") as Script);
         MainWindow = GetWindow() as MainWindow;
+        MainWindow.Title = "Main Window";
     }
 
     // Remove invalid windows from the list
@@ -384,4 +404,66 @@ public partial class GameManager : Node2D
     {
         Instance._StopMusic(instant);
     }
+
+    public static void StartRefocusAllWindows()
+    {
+        if (Windows.Count == 0 || IsRefocusingWindows) 
+        {
+            Lib.Print($"Cannot start refocus: Windows.Count={Windows.Count}, IsRefocusingWindows={IsRefocusingWindows}");
+            return;
+        }
+        
+        CleanupWindowsList();
+        MainWindow.GrabWindowFocus();
+        Lib.Print($"MainWindow has focus: {MainWindow.HasFocus()}");
+        IsRefocusingWindows = true;
+        RefocusIndex = 0;
+        RefocusTimer.Start();
+        
+        Lib.Print($"Starting refocus process for {Windows.Count} windows");
+    }
+
+    private static void RefocusNextWindow()
+    {
+        if (!IsRefocusingWindows || RefocusIndex >= Windows.Count)
+        {
+            StopRefocusProcess();
+            return;
+        }
+
+        if (RefocusIndex < Windows.Count)
+        {
+            FloatWindow window = Windows[RefocusIndex];
+            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && window.IsInsideTree() && window.Visible)
+            {
+                window.GrabWindowFocus();
+                Lib.Print($"Refocused window {RefocusIndex}: {window.Title}");
+            }
+            RefocusIndex++;
+        }
+        else
+        {
+            StopRefocusProcess();
+        }
+    }
+
+    private static void StopRefocusProcess()
+    {
+        IsRefocusingWindows = false;
+        RefocusTimer.Stop();
+        RefocusIndex = 0;
+        
+        // Finally, give focus back to the main window or fix window
+        if (IsInstanceValid(FixWindow))
+            FixWindow.GrabFocus();
+            
+        Lib.Print("Refocus process completed");
+    }
+
+    // Public method to manually trigger refocus if needed
+    public static void ForceRefocusAllWindows()
+    {
+        StartRefocusAllWindows();
+    }
+
 }

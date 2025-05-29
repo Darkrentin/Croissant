@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://dyjib31ak5lxc"]
 
 [ext_resource type="Script" uid="uid://dl8bhkrsc3ujq" path="res://scripts/Level3/Platform/StaticPlatform.cs" id="1_paa4m"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_l0hd8"]
+[ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_paa4m"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_hfmd4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kkcy4"]
@@ -24,11 +24,8 @@ collisionShape = NodePath("CollisionShape2D")
 transparent_bg = true
 position = Vector2i(0, 36)
 size = Vector2i(120, 120)
-unresizable = true
 transparent = true
-unfocusable = true
-sharp_corners = true
-script = ExtResource("2_l0hd8")
+script = ExtResource("2_paa4m")
 
 [node name="ShaderRect" type="ColorRect" parent="Window"]
 material = SubResource("ShaderMaterial_kkcy4")

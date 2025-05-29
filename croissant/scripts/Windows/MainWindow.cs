@@ -58,4 +58,11 @@ public partial class MainWindow : FloatWindow
 
         DebugLabel.Text = StringBuffer.ToString();
     }
+
+    public override void GrabWindowFocus()
+    {
+        Unfocusable = false;
+        base.GrabWindowFocus();
+        Unfocusable = true;
+    }
 }

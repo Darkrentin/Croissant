@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bch7nv4v14u6c"]
 
 [ext_resource type="Script" uid="uid://bnwu55cl17dby" path="res://scripts/Level3/Platform/KillingPlatform.cs" id="1_k3r00"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_ylwtk"]
+[ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_15cni"]
 
 [sub_resource type="Curve" id="Curve_ylwtk"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.692308, 0.735054), -1.10736, -1.10736, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -28,7 +28,7 @@ transparent_bg = true
 size = Vector2i(120, 120)
 transparent = true
 sharp_corners = true
-script = ExtResource("2_ylwtk")
+script = ExtResource("2_15cni")
 
 [node name="ColorRect" type="ColorRect" parent="Window"]
 anchors_preset = 15

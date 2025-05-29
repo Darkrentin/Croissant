@@ -6,12 +6,14 @@ public partial class MenuWindow : FloatWindow
 	[Export] public CheckButton FakeDesktopButton;
 	[Export] public CheckButton DebugButton;
 	[Export] public Button StuckButton;
+	[Export] public Button GrabFocusButton;
 	[Export] public Slider MasterVolumeSlider;
 	[Export] public Slider MusicVolumeSlider;
 	[Export] public Slider SFXVolumeSlider;
 	[Export] public AudioStreamPlayer MenuEnter;
 	[Export] public AudioStreamPlayer MenuExit;
 	[Export] public AudioStreamPlayer MenuClick;
+
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
@@ -29,6 +31,7 @@ public partial class MenuWindow : FloatWindow
 		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
 		DebugButton.Toggled += DebugButtonToggled;
 		StuckButton.Pressed += StuckButtonPressed;
+		GrabFocusButton.Pressed += OnGrabFocusButtonPressed;
 
 		MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
 		MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
@@ -176,5 +179,19 @@ public partial class MenuWindow : FloatWindow
 		{
 			AudioServer.SetBusVolumeDb(busIndex, volumeDb);
 		}
+	}
+
+	private void OnGrabFocusButtonPressed()
+	{
+		MenuClick.Play();
+		Close();
+		GetTree().CreateTimer(0.1f).Timeout += () =>
+		{
+			// Test both methods
+			Lib.Print("=== Debug Refocus Info ===");
+			GameManager.StartRefocusAllWindows();
+		};
+		
+		
 	}
 }

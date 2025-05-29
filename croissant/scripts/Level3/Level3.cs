@@ -17,6 +17,7 @@ public partial class Level3 : FloatWindow
 
     public override void _Ready()// Track which paths have been completed (1-5, 6-10, 11-15, 16-20)public override void _Ready()
     {
+        base._Ready();
         GameManager.MainWindow.ContentScaleMode = ContentScaleModeEnum.CanvasItems;
         GameManager.MainWindow.ContentScaleAspect = ContentScaleAspectEnum.Ignore;
         GrabFocus();
@@ -79,6 +80,7 @@ public partial class Level3 : FloatWindow
     }    public override void _Process(double delta)
     {
         if (!HasFocus()) GrabFocus();
+        base._Process(delta);
     }
 
     // Load a single scene if not already loaded

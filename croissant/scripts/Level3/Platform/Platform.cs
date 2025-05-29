@@ -2,7 +2,7 @@ using Godot;
 
 public partial class Platform : CharacterBody2D
 {
-    [Export] public FloatWindow window;
+    [Export] public WindowPlatform window;
     [Export] public CollisionShape2D collisionShape;
     [Export] public Vector2 BaseSpeeds = new Vector2(20f, 20f);
     [Export] public bool Freeze = true;
@@ -33,12 +33,25 @@ public partial class Platform : CharacterBody2D
             CachedTitleBarSize = window.TitleBarSize;
             window.Size = (Vector2I)((Shape.Size - CachedTitleBarSize) * Lib.GetScreenRatio());
             window.Position = (Vector2I)GlobalPosition + CachedTitleBarSize;
+
+            // Add platform window to global list
+            if (!GameManager.Windows.Contains(window))
+            {
+                GameManager.Windows.Add(window);
+            }
+
+            // Set up deletion callback for platform windows
+            window.DeleteWindow = () =>
+            {
+                GameManager.Windows.Remove(window);
+            };
         }
 
         Level3Instance = Level3.Instance;
         CurrentAppliedSpeeds = BaseSpeeds;
         VisibilityChanged += VisibilityChange;
         window.Title = "";
+        base._Ready();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -100,6 +113,11 @@ public partial class Platform : CharacterBody2D
         {
             window.Position = (Vector2I)((GlobalPosition + CachedTitleBarSize) * Lib.GetScreenRatio());
         }
+        base._PhysicsProcess(delta);
+    }
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
     }
 
     public void VisibilityChange()
@@ -111,6 +129,8 @@ public partial class Platform : CharacterBody2D
     {
         if (WindowValid)
         {
+            // Remove from global list before freeing
+            GameManager.Windows.Remove(window);
             window.QueueFree();
         }
         base._ExitTree();

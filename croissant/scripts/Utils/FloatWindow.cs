@@ -57,6 +57,7 @@ public partial class FloatWindow : Window
 		ShakeTimer.Timeout += StopShake;
 		WindowRect = new Rect2I(Position, Size);
 		KeepTitleVisible = false;
+		GameManager.Windows.Add(this);
 	}
 	public override void _Process(double delta)
 	{
@@ -344,5 +345,10 @@ public partial class FloatWindow : Window
 	public bool IsCollided(FloatWindow other)
 	{
 		return WindowRect.Intersects(other.WindowRect);
+	}
+
+	public virtual void GrabWindowFocus()
+	{
+		GrabFocus();
 	}
 }

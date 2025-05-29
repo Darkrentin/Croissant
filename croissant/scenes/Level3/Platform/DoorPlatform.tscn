@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://dc2htikt7y016"]
 
 [ext_resource type="Script" uid="uid://dkd5x3mmy1xv3" path="res://scripts/Level3/Platform/DoorPlatform.cs" id="1_b6lny"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_7qw3s"]
+[ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_b6lny"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="4_b6lny"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_7qw3s"]
 
@@ -32,7 +32,7 @@ transparent_bg = true
 position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 transparent = true
-script = ExtResource("2_7qw3s")
+script = ExtResource("2_b6lny")
 
 [node name="ShaderRect" type="ColorRect" parent="Window"]
 material = SubResource("ShaderMaterial_aul5v")

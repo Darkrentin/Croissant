@@ -6,7 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://dup76efh60mxj" path="res://assets/sounds/others/menu_exit.mp3" id="4_qlxr2"]
 [ext_resource type="AudioStream" uid="uid://d4ui6on83baa" path="res://assets/sounds/others/menu_click.mp3" id="5_x3wrm"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton", "GrabFocusButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
 position = Vector2i(0, 24)
 size = Vector2i(300, 300)
 unresizable = true
@@ -18,6 +18,7 @@ Menu = NodePath("Control")
 FakeDesktopButton = NodePath("Control/FakeDesktop")
 DebugButton = NodePath("Control/DebugMode")
 StuckButton = NodePath("Control/Stuck")
+GrabFocusButton = NodePath("Control/Focus")
 MasterVolumeSlider = NodePath("Control/Main/HSlider")
 MusicVolumeSlider = NodePath("Control/Music/HSlider")
 SFXVolumeSlider = NodePath("Control/Sfx/HSlider")
@@ -64,13 +65,14 @@ offset_bottom = -0.100006
 text = "Debug Mode"
 clip_text = true
 
-[node name="Button" type="Button" parent="Control"]
+[node name="QuitButton" type="Button" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.08
 anchor_top = 0.04
 anchor_right = 0.92
-anchor_bottom = 0.32
+anchor_bottom = 0.187
+offset_bottom = -0.100002
 text = "Quit"
 
 [node name="Stuck" type="Button" parent="Control"]
@@ -168,6 +170,18 @@ offset_right = -0.100006
 text = "SFX"
 vertical_alignment = 1
 
+[node name="Focus" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.08
+anchor_top = 0.213
+anchor_right = 0.907
+anchor_bottom = 0.347
+offset_top = 0.0999947
+offset_right = 3.89999
+offset_bottom = -0.0999985
+text = "Grab Focus"
+
 [node name="Sound" type="Node" parent="."]
 
 [node name="MenuEnter" type="AudioStreamPlayer" parent="Sound"]
@@ -179,4 +193,4 @@ stream = ExtResource("4_qlxr2")
 [node name="MenuClick" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("5_x3wrm")
 
-[connection signal="pressed" from="Control/Button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="Control/QuitButton" to="." method="_on_quit_button_pressed"]
