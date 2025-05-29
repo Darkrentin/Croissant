@@ -1,13 +1,13 @@
 [gd_scene load_steps=10 format=3 uid="uid://b6ci8vrbwflc5"]
 
 [ext_resource type="Script" uid="uid://bs2soqlm0dbss" path="res://scripts/Level3/Platform/PlayerOnly.cs" id="1_ysnk1"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_r5qs5"]
+[ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_rwhr5"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_r5qs5"]
 [ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="4_rwhr5"]
 [ext_resource type="Texture2D" uid="uid://c5nxl1hv03hpb" path="res://assets/sprites/platformer/NoWindow.png" id="6_dyb7s"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="6_rwhr5"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mehpu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6a6id"]
 resource_local_to_scene = true
 shader = ExtResource("4_rwhr5")
 shader_parameter/border_color = Color(0, 1, 0, 1)
@@ -40,10 +40,10 @@ position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 transparent = true
 sharp_corners = true
-script = ExtResource("2_r5qs5")
+script = ExtResource("2_rwhr5")
 
 [node name="PlatformTexture" parent="Window" instance=ExtResource("3_r5qs5")]
-material = SubResource("ShaderMaterial_mehpu")
+material = SubResource("ShaderMaterial_6a6id")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

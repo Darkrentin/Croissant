@@ -1,12 +1,12 @@
 [gd_scene load_steps=10 format=3 uid="uid://bq4mxmqbe2wau"]
 
 [ext_resource type="Script" uid="uid://b606h66b1yv" path="res://scripts/Level3/Platform/WindowsOnly.cs" id="1_udtmp"]
-[ext_resource type="Script" uid="uid://kuhg0kaqg182" path="res://scripts/Utils/FloatWindow.cs" id="2_yy41e"]
+[ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_6tw0d"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_udtmp"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_6tw0d"]
 [ext_resource type="Texture2D" uid="uid://dv5vcpvln3cak" path="res://assets/sprites/platformer/NoPlayer.png" id="6_jl265"]
 
-[sub_resource type="Shader" id="Shader_6tw0d"]
+[sub_resource type="Shader" id="Shader_jl265"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -38,7 +38,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ci38t"]
 resource_local_to_scene = true
-shader = SubResource("Shader_6tw0d")
+shader = SubResource("Shader_jl265")
 shader_parameter/border_color = Color(1, 1, 0, 1)
 shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
@@ -69,7 +69,7 @@ position = Vector2i(0, 36)
 size = Vector2i(120, 120)
 transparent = true
 sharp_corners = true
-script = ExtResource("2_yy41e")
+script = ExtResource("2_6tw0d")
 
 [node name="PlatformTexture" parent="Window" instance=ExtResource("3_udtmp")]
 material = SubResource("ShaderMaterial_ci38t")
