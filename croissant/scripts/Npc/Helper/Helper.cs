@@ -8,6 +8,7 @@ public partial class Helper : Npc
 	[Export] public AudioStreamPlayer DeathSound;
 	[Export] public AudioStreamPlayer EnterSound;
 	[Export] public AudioStreamPlayer ExitSound;
+	[Export] public AudioStreamPlayer PrezSound;
 	public Vector2 BaseScale = new Vector2(10f, 10f);
 	public Vector2I BaseSize = new Vector2I(300, 300);
 	public Vector2 NewScale = new Vector2(1f, 1f);
@@ -48,6 +49,7 @@ public partial class Helper : Npc
 				GameManager.GameRoot.AddChild(cursorWindow);
 				Level2.CursorWindow = cursorWindow;
 				Dialogue.StartDialogue(NpcName, "HelperTuto");
+				PrezSound.Play();
 				break;
 			case "HelperTuto":
 				GameManager.virus.ShowNpc(GameManager.virus.RightDown, 0.3f);

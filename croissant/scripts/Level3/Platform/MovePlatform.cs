@@ -6,6 +6,10 @@ public partial class MovePlatform : Platform
     [Export] public float MaxMult = 3;
     [Export] public float OscillationTime = 0.8f;
     [Export] public ColorRect ShaderRect;
+
+    [Export] public AudioStreamPlayer MoveSound;
+    [Export] public AudioStreamPlayer PressedSound;
+    [Export] public AudioStreamPlayer ReleaseSound;
     public ShaderMaterial ShaderRectShader;
     private float LerpTimer = 0.0f;
     private bool IsLerping = false;
@@ -15,6 +19,11 @@ public partial class MovePlatform : Platform
     private float CurrentSpeed = 0.5f;
     private const float FastSpeed = 6f;
     private const float SlowSpeed = 0.5f;
+    
+    // Ajout pour le système de son de mouvement
+    private Vector2 _lastSoundPosition;
+    private float _totalDistanceTraveled = 0f;
+    private const float SOUND_DISTANCE_THRESHOLD = 300f;
 
     public override void _Ready()
     {
@@ -25,12 +34,42 @@ public partial class MovePlatform : Platform
         Shader.SetShaderParameter("window_size", window.Size);
         ShaderRectShader.SetShaderParameter("mult", MinMult);
         Freeze = false;
+        
+        // Initialiser la position de départ pour le calcul de distance
+        _lastSoundPosition = GlobalPosition;
+        
+        // Configurer le son de mouvement pour éviter les coupures
+        MoveSound.MaxPolyphony = 4;
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        Vector2 previousPosition = GlobalPosition;
+        
         base._PhysicsProcess(delta);
         if (!Visible) return;
+
+        // Calculer la distance parcourue depuis la dernière frame
+        if (Pressed)
+        {
+            Vector2 currentPosition = GlobalPosition;
+            float distanceThisFrame = _lastSoundPosition.DistanceTo(currentPosition);
+            _totalDistanceTraveled += distanceThisFrame;
+            
+            // Jouer le son tous les 100 pixels
+            if (_totalDistanceTraveled >= SOUND_DISTANCE_THRESHOLD)
+            {
+                MoveSound.Play();
+                _totalDistanceTraveled = 0f;
+                _lastSoundPosition = currentPosition;
+            }
+        }
+        else
+        {
+            // Reset quand on ne bouge plus
+            _lastSoundPosition = GlobalPosition;
+            _totalDistanceTraveled = 0f;
+        }
 
         if (WindowValid && window.Visible)
         {
@@ -119,12 +158,17 @@ public partial class MovePlatform : Platform
         {
             if (mouseButtonEvent.Pressed && MouseOnTitle())
             {
+                if(!Pressed)
+                {
+                    JustPressed();
+                }
                 Pressed = true;
                 MouseOffset = (((Vector2)Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - GlobalPosition;
                 Shader.SetShaderParameter("frequency", 0.1f);
             }
             else if (!mouseButtonEvent.Pressed && Pressed)
             {
+                JustReleased();
                 Pressed = false;
                 Shader.SetShaderParameter("frequency", 32f);
             }
@@ -150,5 +194,20 @@ public partial class MovePlatform : Platform
         {
             MouseEvent(mouseButtonEvent);
         }
+    }
+
+    public void JustPressed()
+    {
+        PressedSound.Play();
+        // Reset la position de référence quand on commence à presser
+        _lastSoundPosition = GlobalPosition;
+        _totalDistanceTraveled = 0f;
+    }
+
+    public void JustReleased()
+    {
+        ReleaseSound.Play();
+        // Reset quand on relâche
+        _totalDistanceTraveled = 0f;
     }
 }

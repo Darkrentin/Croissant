@@ -16,6 +16,8 @@ public partial class FinalLevel : Node3D
 	[Export] public SubViewport GameNode;
 	[Export] public StaticBody3D SafeZone;
 	[Export] public AnimationPlayer AnimationPlayer;
+	[Export] public AudioStreamPlayer DeathSound;
+	[Export] public AudioStreamPlayer TransitionSound;
 	public Node3D BossLevel;
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
@@ -87,6 +89,7 @@ public partial class FinalLevel : Node3D
 		{
 			Lib.Print("All objectives destroyed");
 			maze.RemoveAllWall();
+			TransitionSound.Play();
 		}
 		else
 			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);
@@ -101,6 +104,7 @@ public partial class FinalLevel : Node3D
 	{
 		shaderMaterial.SetShaderParameter("u_color_tex", PaletteDeath);
 		Player3D.Alive = false;
+		
 
 		if (enemyPosition == Vector3.Zero)
 		{
@@ -127,6 +131,7 @@ public partial class FinalLevel : Node3D
 			MeltShader.PrepareTransition();
 			shaderMaterial.SetShaderParameter("u_color_tex", PaletteMain);
 			MeltShader.Transition();
+			DeathSound.Play();
 			Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
 			Player3D.Alive = true;
 		};

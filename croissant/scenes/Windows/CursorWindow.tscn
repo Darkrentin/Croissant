@@ -1,9 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://byd00eniliv1s"]
+[gd_scene load_steps=11 format=3 uid="uid://byd00eniliv1s"]
 
 [ext_resource type="Script" uid="uid://dv0ljmt2eh375" path="res://scripts/Windows/CursorWindow.cs" id="1_x0xi8"]
 [ext_resource type="Shader" uid="uid://3y7dok8u22mm" path="res://assets/shaders/Disolve.gdshader" id="2_pcuog"]
 [ext_resource type="Texture2D" uid="uid://cmip8bqkeb0kf" path="res://assets/sprites/popups/system32.png" id="2_x0xi8"]
 [ext_resource type="AudioStream" uid="uid://llxoifjn2w85" path="res://assets/sounds/level_2/death.mp3" id="4_ool83"]
+[ext_resource type="AudioStream" uid="uid://np3mjx3g0ai6" path="res://assets/sounds/level_2/sys32_death.mp3" id="5_ttnhw"]
 
 [sub_resource type="Animation" id="Animation_pcuog"]
 resource_name = "Disolve"
@@ -76,7 +77,7 @@ font_size = 21
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
-[node name="CursorWindow" type="Window" node_paths=PackedStringArray("DeathSound", "animationPlayer")]
+[node name="CursorWindow" type="Window" node_paths=PackedStringArray("DeathSound", "RecycleSound", "animationPlayer")]
 transparent_bg = true
 size = Vector2i(98, 144)
 unresizable = true
@@ -85,6 +86,7 @@ always_on_top = true
 transparent = true
 script = ExtResource("1_x0xi8")
 DeathSound = NodePath("Death")
+RecycleSound = NodePath("Recycle")
 animationPlayer = NodePath("AnimationPlayer")
 Draggable = false
 Minimizable = false
@@ -133,4 +135,8 @@ vertical_alignment = 1
 [node name="Death" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_ool83")
 volume_db = -20.0
+bus = &"SFX"
+
+[node name="Recycle" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ttnhw")
 bus = &"SFX"

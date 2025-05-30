@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=20 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
@@ -10,17 +10,8 @@
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
 [ext_resource type="Texture2D" uid="uid://tr0myr2uos3n" path="res://assets/sprites/intro_tuto.png" id="8_125ny"]
 [ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="9_fwmwi"]
-[ext_resource type="AudioStream" uid="uid://dr518b8y1o8up" path="res://assets/sounds/level_0/pew/pew_1.mp3" id="11_a8gxf"]
-[ext_resource type="AudioStream" uid="uid://krlupi4k7dpw" path="res://assets/sounds/level_0/pew/pew_2.mp3" id="12_m8mbq"]
-[ext_resource type="AudioStream" uid="uid://dbfrrb5yvf5do" path="res://assets/sounds/level_0/pew/pew_3.mp3" id="13_wbqr8"]
-[ext_resource type="AudioStream" uid="uid://cwneeapx6ogcw" path="res://assets/sounds/level_0/pew/pew_4.mp3" id="14_2sovk"]
-[ext_resource type="AudioStream" uid="uid://m2mokr3xn3pb" path="res://assets/sounds/level_0/pew/pew_5.mp3" id="15_rqc2a"]
-[ext_resource type="AudioStream" uid="uid://berxf5beqj7in" path="res://assets/sounds/level_0/pew/pew_6.mp3" id="16_8830j"]
-[ext_resource type="AudioStream" uid="uid://xelcw2kebuio" path="res://assets/sounds/level_0/pew/pew_7.mp3" id="17_fwq21"]
-[ext_resource type="AudioStream" uid="uid://bksyf0f7xkuh3" path="res://assets/sounds/level_0/pew/pew_8.mp3" id="18_3na5q"]
-[ext_resource type="AudioStream" uid="uid://7jxd24yykbsf" path="res://assets/sounds/level_0/pew/pew_9.mp3" id="19_oq6jl"]
+[ext_resource type="AudioStream" uid="uid://bu6y20obqj0lh" path="res://assets/sounds/level_0/pew.mp3" id="11_r4prw"]
 [ext_resource type="AudioStream" uid="uid://bptivfus3fn63" path="res://assets/sounds/level_0/game_explosion.mp3" id="20_m8mbq"]
-[ext_resource type="AudioStream" uid="uid://u88t23w3tx7i" path="res://assets/sounds/level_0/shader_glitch.mp3" id="21_wbqr8"]
 
 [sub_resource type="Animation" id="Animation_b7rdj"]
 length = 0.001
@@ -106,16 +97,9 @@ shader_parameter/color = Color(1, 1, 1, 0.560784)
 shader_parameter/center = Vector2(0.5, 0.5)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_dxf3v"]
-streams_count = 9
-stream_0/stream = ExtResource("11_a8gxf")
-stream_1/stream = ExtResource("12_m8mbq")
-stream_2/stream = ExtResource("13_wbqr8")
-stream_3/stream = ExtResource("14_2sovk")
-stream_4/stream = ExtResource("15_rqc2a")
-stream_5/stream = ExtResource("16_8830j")
-stream_6/stream = ExtResource("17_fwq21")
-stream_7/stream = ExtResource("18_3na5q")
-stream_8/stream = ExtResource("19_oq6jl")
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("11_r4prw")
 
 [node name="GameWindow" type="Node2D"]
 
@@ -132,7 +116,7 @@ ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
 IntroRect = NodePath("../UI/Tuto")
 PewPewSound = NodePath("../Sound/Pew")
 GameExplosionSound = NodePath("../Sound/GameExplosion")
-GlitchSound = NodePath("../Sound/ShaderGlitch")
+GlitchSound = NodePath("")
 GameNode = NodePath("GameNode")
 
 [node name="Camera" type="Camera2D" parent="Game"]
@@ -209,14 +193,9 @@ color = Color(1, 1, 1, 0)
 
 [node name="Pew" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_dxf3v")
-volume_db = -50.0
 max_polyphony = 10
 bus = &"SFX"
 
 [node name="GameExplosion" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("20_m8mbq")
-bus = &"SFX"
-
-[node name="ShaderGlitch" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("21_wbqr8")
 bus = &"SFX"

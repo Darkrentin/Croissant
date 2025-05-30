@@ -10,6 +10,7 @@ public partial class JumpState : PlayerState
         Player._hasJumped = true;
         Player.WalkParticles.Emitting = false;
         Player.SpawnJumpParticles(Vector2.Up);
+        Player.JumpSound.Play();
     }
 
     public override void ExitState()

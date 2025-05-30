@@ -34,6 +34,14 @@ public partial class RunState : PlayerState
         Vector2 currentPosition = Player.GlobalPosition;
         bool isActuallyMoving = (currentPosition - lastPosition).LengthSquared() > 0.1f;
         Player.WalkParticles.Emitting = Player.IsOnFloor() && isActuallyMoving && Player.moveDirectionX != 0;
+        if(Player.WalkParticles.Emitting && Player.StepTimer.IsStopped())
+        {
+            Player.StepTimer.Start();
+        }
+        else
+        {
+            Player.StepTimer.Stop();
+        }
 
         lastPosition = currentPosition;
     }

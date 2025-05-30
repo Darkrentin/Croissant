@@ -16,6 +16,13 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public PackedScene JumpParticlesScene;
     [Export] public CpuParticles2D WalkParticles;
 
+    [Export] public AudioStreamPlayer FootstepSound;
+    [Export] public AudioStreamPlayer JumpSound;
+    [Export] public AudioStreamPlayer LandingSound;
+    [Export] public AudioStreamPlayer DeathSound;
+
+    public Timer StepTimer;
+
     public bool FlipLock { get; set; } = false;
 
     public const float RunSpeed = 140f * ScaleFactor;
@@ -98,6 +105,15 @@ public partial class PlayerCharacter : CharacterBody2D
         ProcessMode = ProcessModeEnum.Disabled;
         Visible = false;
         Animator.AnimationFinished += OnAnimationFinished;
+
+        StepTimer = new Timer();
+        StepTimer.WaitTime = 0.3f;
+        StepTimer.OneShot = false;
+        StepTimer.Timeout += () =>
+        {
+            FootstepSound.Play();
+        };
+        AddChild(StepTimer);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -300,6 +316,7 @@ public partial class PlayerCharacter : CharacterBody2D
         if (isDead) return;
         Lib.Print("PlayerCharacter: Death");
         Animator.Play("Death");
+        DeathSound.Play();
         isDead = true;
         Lib.Print("PlayerCharacter: Death Animation");
     }

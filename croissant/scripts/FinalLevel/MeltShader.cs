@@ -76,6 +76,7 @@ public partial class MeltShader : ColorRect
 	{
 		if (Material is ShaderMaterial SM)
 			SM.SetShaderParameter("melting", true);
+		
 		_melting = true;
 	}
 }

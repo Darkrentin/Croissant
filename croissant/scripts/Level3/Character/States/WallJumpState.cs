@@ -32,6 +32,7 @@ public partial class WallJumpState : PlayerState
     private void HandleAnimations()
     {
         Player.Animator.Play("Jump");
+        Player.JumpSound.Play();
         Player.Sprite.FlipH = Player.Velocity.X < 1;
     }
 

@@ -11,6 +11,7 @@ public partial class Bullet : StaticBody2D
 	[Export] public CpuParticles2D WallExplosion;
 	[Export] public CpuParticles2D EnemyHit;
 	[Export] public CpuParticles2D EnemyExplosion;
+	[Export] public AudioStreamPlayer WallHit;
 	public bool Alive = true;
 
 	public override void _Ready()
@@ -30,6 +31,7 @@ public partial class Bullet : StaticBody2D
 		{
 			BulletCollide();
 			WallExplosion.Emitting = true;
+			WallHit.Play();
 		}
 	}
 

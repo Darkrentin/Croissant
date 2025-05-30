@@ -6,6 +6,12 @@ public partial class Level3 : FloatWindow
     [Export] public PackedScene[] level3Scenes;
     [Export] public PlayerCharacter player;
     [Export] public int MaxFiles = 4;
+
+    [Export] public AudioStreamPlayer ConfigFileGatheredSound;
+    [Export] public AudioStreamPlayer PortalEnterSound;
+    [Export] public AudioStreamPlayer PortalExitSound;
+
+
     public SubLevel3[] Level3Nodes;
     public int sceneid = 0;
     public static Level3 Instance;
@@ -161,7 +167,7 @@ public partial class Level3 : FloatWindow
         int nextSceneId = NextSceneId;
         if (NextSceneId == -1)
             nextSceneId = 0;
-        
+        PortalEnterSound.Play();
         // Load the target scene if not already loaded
         LoadScene(nextSceneId);
         
@@ -196,6 +202,7 @@ public partial class Level3 : FloatWindow
         tween.TweenCallback(Callable.From(() =>
         {
             player.isDead = false;
+            PortalExitSound.Play();
         }));
         sceneid = nextSceneId;
         actualScene = nextScene;
@@ -210,6 +217,7 @@ public partial class Level3 : FloatWindow
     public void CollectFile()
     {
         FilesCollected++;
+        ConfigFileGatheredSound.Play();
         if (FilesCollected >= MaxFiles)
         {
             GameManager.State = GameManager.GameState.Dialogue3;

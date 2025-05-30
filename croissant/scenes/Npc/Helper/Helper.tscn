@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://dy032f0nfm2vk"]
+[gd_scene load_steps=33 format=3 uid="uid://dy032f0nfm2vk"]
 
 [ext_resource type="Script" uid="uid://d2yd4mu6qfdx7" path="res://scripts/Npc/Helper/Helper.cs" id="1_8cb3g"]
 [ext_resource type="PackedScene" uid="uid://k8kqvfq14xtp" path="res://scenes/Windows/DialogueWindow.tscn" id="2_4ql8l"]
@@ -9,6 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://deeidvufdondy" path="res://assets/sounds/others/dialogue_helper.mp3" id="7_7nx6g"]
 [ext_resource type="AudioStream" uid="uid://ctykvvvlmtrc7" path="res://assets/sounds/others/helper_enter.mp3" id="8_b02x2"]
 [ext_resource type="AudioStream" uid="uid://cjehjfif53hmk" path="res://assets/sounds/others/helper_exit.mp3" id="9_1u7gj"]
+[ext_resource type="AudioStream" uid="uid://dwuvgwlcuoxyq" path="res://assets/sounds/level_2/sys32_entrance.mp3" id="10_1u7gj"]
 
 [sub_resource type="Animation" id="Animation_8cb3g"]
 resource_name = "Idle"
@@ -268,7 +269,7 @@ animations = [{
 "speed": 15.0
 }]
 
-[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Sprite2D", "DeathSound", "EnterSound", "ExitSound", "Dialogue", "DialogueSound")]
+[node name="Helper" type="Window" node_paths=PackedStringArray("animationPlayer", "Sprite2D", "DeathSound", "EnterSound", "ExitSound", "PrezSound", "Dialogue", "DialogueSound")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 size = Vector2i(300, 300)
@@ -282,6 +283,7 @@ BloodScene = ExtResource("2_xau07")
 DeathSound = NodePath("Node/DeathSound")
 EnterSound = NodePath("Node/EnterSound")
 ExitSound = NodePath("Node/ExitSound")
+PrezSound = NodePath("Node/PrezSound")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
 DialogueSound = NodePath("Node/DialogueSound")
@@ -335,4 +337,8 @@ bus = &"SFX"
 
 [node name="ExitSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("9_1u7gj")
+bus = &"SFX"
+
+[node name="PrezSound" type="AudioStreamPlayer" parent="Node"]
+stream = ExtResource("10_1u7gj")
 bus = &"SFX"

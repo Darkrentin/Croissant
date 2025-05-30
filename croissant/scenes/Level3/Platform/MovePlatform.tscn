@@ -1,10 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://uhnhsc4jvdgm"]
+[gd_scene load_steps=12 format=3 uid="uid://uhnhsc4jvdgm"]
 
 [ext_resource type="Script" uid="uid://ug8rmjlf4rth" path="res://scripts/Level3/Platform/MovePlatform.cs" id="1_xf3iu"]
 [ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_oty2a"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_xf3iu"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_70k7n"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_oty2a"]
+[ext_resource type="AudioStream" uid="uid://bpl3lcwupi47m" path="res://assets/sounds/level_3/move_platform_select.mp3" id="6_tir0a"]
+[ext_resource type="AudioStream" uid="uid://bl2c1m7sr748u" path="res://assets/sounds/level_3/move_platform_unselect.mp3" id="7_6o0bx"]
+[ext_resource type="AudioStream" uid="uid://dqveouaj18rt1" path="res://assets/sounds/level_3/move_platform_move.mp3" id="8_1dogx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oty2a"]
 resource_local_to_scene = true
@@ -29,12 +32,15 @@ shader_parameter/mult = 10.0
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("ShaderRect", "window", "collisionShape", "Texture")]
+[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("ShaderRect", "MoveSound", "PressedSound", "ReleaseSound", "window", "collisionShape", "Texture")]
 collision_mask = 5
 script = ExtResource("1_xf3iu")
 MinMult = 10.0
 MaxMult = 1.1
 ShaderRect = NodePath("Window/ShaderRect")
+MoveSound = NodePath("Sound/Move")
+PressedSound = NodePath("Sound/Select")
+ReleaseSound = NodePath("Sound/UnSelect")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
 Texture = NodePath("Window/PlatformTexture")
@@ -90,3 +96,17 @@ scale = Vector2(0.04, 0.04)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 60)
 shape = SubResource("RectangleShape2D_p3h6d")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="Select" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("6_tir0a")
+bus = &"SFX"
+
+[node name="UnSelect" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("7_6o0bx")
+bus = &"SFX"
+
+[node name="Move" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("8_1dogx")
+bus = &"SFX"
