@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class RunState : PlayerState
 {
@@ -16,6 +15,7 @@ public partial class RunState : PlayerState
 
     public override void ExitState()
     {
+        Player.StepTimer.Stop();
         Player.WalkParticles.Emitting = false;
     }
 
@@ -27,6 +27,7 @@ public partial class RunState : PlayerState
         HandleParticles();
         HandleAnimations();
         HandleIdle();
+        Player.HandleGravity(delta);
     }
 
     private void HandleParticles()
@@ -34,9 +35,9 @@ public partial class RunState : PlayerState
         Vector2 currentPosition = Player.GlobalPosition;
         bool isActuallyMoving = (currentPosition - lastPosition).LengthSquared() > 0.1f;
         Player.WalkParticles.Emitting = Player.IsOnFloor() && isActuallyMoving && Player.moveDirectionX != 0;
-        if(Player.IsOnFloor())
+        if (Player.IsOnFloor())
         {
-            if(Player.StepTimer.IsStopped())
+            if (Player.StepTimer.IsStopped())
                 Player.StepTimer.Start();
         }
         else

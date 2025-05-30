@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Locked : PlayerState
 {
@@ -23,10 +22,6 @@ public partial class Locked : PlayerState
         // Godot doesn't allow resetting Input directly, but we can
         // consume the next press by ignoring all IsActionPressed()
         // until a new JustPressed().
-    }
-
-    public override void ExitState()
-    {
     }
 
     public override void Update(double delta)

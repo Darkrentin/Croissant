@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class ConfigFile : Area2D
 {
@@ -23,10 +22,10 @@ public partial class ConfigFile : Area2D
     private void CheckForPlayerCollision()
     {
         var overlappingBodies = GetOverlappingBodies();
-        
+
         foreach (var body in overlappingBodies)
         {
-            if (body is PlayerCharacter player)
+            if (body is PlayerCharacter)
             {
                 count++;
                 Level3.Instance.CollectFile();

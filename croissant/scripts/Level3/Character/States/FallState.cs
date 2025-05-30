@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class FallState : PlayerState
 {
@@ -27,10 +26,11 @@ public partial class FallState : PlayerState
             Player.HandleGravity(delta, PlayerCharacter.GravityFall * gravityScale);
             Player.StopWalkingEffects();
         }
+
         Player.HorizontalMovement(PlayerCharacter.AirAcceleration, PlayerCharacter.AirDeceleration);
+        Player.HandleJumpBuffer();
         Player.HandleLanding();
         Player.HandleJump();
-        Player.HandleJumpBuffer();
         Player.HandleWallJump();
         Player.HandleFallAnimations();
         Player.HandleMaxFallVelocity();

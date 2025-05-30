@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class IdleState : PlayerState
 {
@@ -11,18 +10,12 @@ public partial class IdleState : PlayerState
         Player.StepTimer.Stop();
     }
 
-    public override void ExitState()
-    {
-    }
-
     public override void Update(double delta)
     {
         Player.GetInputStates();
         Player.HandleFalling();
         Player.HandleJump();
         Player.HorizontalMovement();
-
-        //GD.Print($"[Idle] moveDirectionX: {Player.moveDirectionX}");
 
         if (Player.moveDirectionX != 0)
         {

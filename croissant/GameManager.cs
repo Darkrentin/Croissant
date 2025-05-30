@@ -8,18 +8,7 @@ public partial class GameManager : Node2D
 
     //Music
     [Export] public AudioStreamPlayer[] Musics;
-    public enum Music
-    {
-        Idle,
-        IntroGame,
-        Level1,
-        Level2,
-        Level3,
-        FinalLevel,
-        FinalBoss,
-        Scoreboard,
-        NoMusic,
-    }
+    public enum Music { Idle, IntroGame, Level1, Level2, Level3, FinalLevel, FinalBoss, Scoreboard, NoMusic, }
     [Export] public AudioStreamPlayer BossExplosionSound;
     public static Music CurrentMusic = Music.NoMusic;
 
@@ -42,9 +31,8 @@ public partial class GameManager : Node2D
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
     public static double PersonalBestTime;
-
     private float _cleanupTimer = 0f;
-    private const float CleanupInterval = 0.5f;
+    private const float CleanupInterval = 0.4f;
 
     public static GameManager Instance;
 
@@ -83,9 +71,6 @@ public partial class GameManager : Node2D
     public static bool IsRefocusingWindows = false;
     private static int RefocusIndex = 0;
     private static Timer RefocusTimer;
-    private static bool _wasMainWindowFocused = false;
-    private static float _refocusDelay = 0f;
-    private static bool _needsRefocus = false;
 
     public override void _Ready()
     {
@@ -117,10 +102,6 @@ public partial class GameManager : Node2D
         var shaderLoaderScene = GD.Load<PackedScene>("res://scenes/Other/ShaderLoader.tscn");
         var shaderLoader = shaderLoaderScene.Instantiate<ShaderLoader>();
         AddChild(shaderLoader);
-
-        // Initialize focus state
-        _wasMainWindowFocused = MainWindow.HasFocus();
-        
     }
 
     private void InitializeNpc()
@@ -242,7 +223,6 @@ public partial class GameManager : Node2D
                 break;
         }
     }
-
 
     // Create FixWindow, to get the focus, the right mouse position, and particles
     public void AddFixWindow()
@@ -408,20 +388,13 @@ public partial class GameManager : Node2D
 
     public static void StartRefocusAllWindows()
     {
-        if (Windows.Count == 0 || IsRefocusingWindows) 
-        {
-            Lib.Print($"Cannot start refocus: Windows.Count={Windows.Count}, IsRefocusingWindows={IsRefocusingWindows}");
-            return;
-        }
-        
+        if (Windows.Count == 0 || IsRefocusingWindows) return;
+
         CleanupWindowsList();
         MainWindow.GrabWindowFocus();
-        Lib.Print($"MainWindow has focus: {MainWindow.HasFocus()}");
         IsRefocusingWindows = true;
         RefocusIndex = 0;
         RefocusTimer.Start();
-        
-        Lib.Print($"Starting refocus process for {Windows.Count} windows");
     }
 
     private static void RefocusNextWindow()
@@ -453,18 +426,14 @@ public partial class GameManager : Node2D
         IsRefocusingWindows = false;
         RefocusTimer.Stop();
         RefocusIndex = 0;
-        
-        // Finally, give focus back to the main window or fix window
+
+        // Give focus back to the main window or fix window
         if (IsInstanceValid(FixWindow))
             FixWindow.GrabFocus();
-            
-        Lib.Print("Refocus process completed");
     }
 
-    // Public method to manually trigger refocus if needed
     public static void ForceRefocusAllWindows()
     {
         StartRefocusAllWindows();
     }
-
 }

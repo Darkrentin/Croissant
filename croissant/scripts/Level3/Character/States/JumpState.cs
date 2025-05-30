@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class JumpState : PlayerState
 {
@@ -11,10 +10,6 @@ public partial class JumpState : PlayerState
         Player.StopWalkingEffects();
         Player.SpawnJumpParticles(Vector2.Up);
         Player.JumpSound.Play();
-    }
-
-    public override void ExitState()
-    {
     }
 
     public override void Update(double delta)

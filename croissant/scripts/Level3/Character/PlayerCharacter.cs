@@ -111,7 +111,8 @@ public partial class PlayerCharacter : CharacterBody2D
         StepTimer.OneShot = false;
         StepTimer.Timeout += () =>
         {
-            FootstepSound.Play();
+            if (IsOnFloor())
+                FootstepSound.Play();
         };
         AddChild(StepTimer);
     }
@@ -236,10 +237,7 @@ public partial class PlayerCharacter : CharacterBody2D
     public void StopWalkingEffects()
     {
         WalkParticles.Emitting = false;
-        if (!StepTimer.IsStopped())
-        {
-            StepTimer.Stop();
-        }
+        StepTimer.Stop();
     }
 
     public void StartWalkingEffects()
@@ -258,10 +256,28 @@ public partial class PlayerCharacter : CharacterBody2D
             jumps = 0;
             SpawnJumpParticles(Vector2.Up);
             WalkParticles.Emitting = false;
+
+            if (JumpBufferTimer.TimeLeft > 0)
+            {
+                JumpBufferTimer.Stop();
+                jumps++;
+                StopWalkingEffects();
+                ChangeState((Node)States.Get("Jump"));
+                return;
+            }
+            if (keyJump && jumps < MaxJumps)
+            {
+                jumps++;
+                StopWalkingEffects();
+                ChangeState((Node)States.Get("Jump"));
+                return;
+            }
+
             ChangeState((Node)States.Get("Idle"));
             LandingSound.Play();
         }
     }
+
 
     public bool IsDirectionBuffered()
     {

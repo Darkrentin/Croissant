@@ -11,6 +11,7 @@ public partial class WallJumpState : PlayerState
     public override void EnterState()
     {
         Name = "WallJump";
+        Player.JumpSound.Play();
         Player.Velocity = new Vector2(Player.Velocity.X * 1.5f, Player.WallJumpVelocity);
         lastWallDirection = Player.wallDirection;
         HasJumped = false;
@@ -32,7 +33,6 @@ public partial class WallJumpState : PlayerState
     private void HandleAnimations()
     {
         Player.Animator.Play("Jump");
-        Player.JumpSound.Play();
         Player.Sprite.FlipH = Player.Velocity.X < 1;
     }
 

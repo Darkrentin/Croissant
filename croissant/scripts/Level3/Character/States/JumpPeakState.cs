@@ -8,10 +8,6 @@ public partial class JumpPeakState : PlayerState
         Name = "JumpPeak";
     }
 
-    public override void ExitState()
-    {
-    }
-
     public override void Update(double delta)
     {
         Player.HorizontalMovement();

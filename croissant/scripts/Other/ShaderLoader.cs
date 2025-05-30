@@ -8,7 +8,6 @@ public partial class ShaderLoader : Node
 
     public override void _Ready()
     {
-        Lib.Print("Démarrage du chargement des shaders et particules...");
         LoadAllShadersAndParticles();
     }
 
@@ -17,7 +16,7 @@ public partial class ShaderLoader : Node
         var shaderPaths = new List<string>
         {
             "res://assets/shaders/3DDithering.gdshader",
-            "res://assets/shaders/ChromaticAberration.gdshader", 
+            "res://assets/shaders/ChromaticAberration.gdshader",
             "res://assets/shaders/CombinedGandC.gdshader",
             "res://assets/shaders/Disolve.gdshader",
             "res://assets/shaders/Dithering.gdshader",
@@ -42,9 +41,6 @@ public partial class ShaderLoader : Node
             "res://scenes/Npc/Virus/VirusSplash.tscn"
         };
 
-        Lib.Print($"Chargement de {shaderPaths.Count} shaders...");
-
-        // Charger les shaders
         foreach (string shaderPath in shaderPaths)
         {
             try
@@ -52,32 +48,23 @@ public partial class ShaderLoader : Node
                 var shader = GD.Load<Shader>(shaderPath);
                 if (shader != null)
                 {
-                    // Forcer la compilation en créant un matériau temporaire
                     var material = new ShaderMaterial();
                     material.Shader = shader;
-                    
-                    // Créer un mesh temporaire pour forcer la compilation
+
                     var meshInstance = new MeshInstance3D();
                     var quadMesh = new QuadMesh();
                     meshInstance.Mesh = quadMesh;
                     meshInstance.MaterialOverride = material;
-                    
-                    // Ajouter temporairement à la scène pour forcer la compilation
                     AddChild(meshInstance);
                     tempObjects.Add(meshInstance);
-                    
-                    Lib.Print($"Shader chargé: {shaderPath}");
                 }
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                Lib.Print($"Erreur lors du chargement du shader {shaderPath}: {e.Message}");
+
             }
         }
 
-        Lib.Print($"Chargement de {particlePaths.Count} particules...");
-
-        // Charger les particules
         foreach (string particlePath in particlePaths)
         {
             try
@@ -85,30 +72,22 @@ public partial class ShaderLoader : Node
                 var particleScene = GD.Load<PackedScene>(particlePath);
                 if (particleScene != null)
                 {
-                    // Instancier temporairement pour initialiser
                     var particleInstance = particleScene.Instantiate();
                     AddChild(particleInstance);
                     tempObjects.Add(particleInstance);
-                    
-                    Lib.Print($"Particule chargée: {particlePath}");
                 }
             }
-            catch (System.Exception e)
+            catch (System.Exception)
             {
-                Lib.Print($"Erreur lors du chargement de la particule {particlePath}: {e.Message}");
+
             }
         }
-
         loadingComplete = true;
-        Lib.Print("Chargement des shaders et particules terminé !");
-        
-        // Se supprimer après un frame pour laisser le temps aux objets de s'initialiser
         CallDeferred(nameof(CleanupAndDestroy));
     }
 
     private void CleanupAndDestroy()
     {
-        // Nettoyer tous les objets temporaires
         foreach (Node obj in tempObjects)
         {
             if (IsInstanceValid(obj))
@@ -117,10 +96,6 @@ public partial class ShaderLoader : Node
             }
         }
         tempObjects.Clear();
-
-        Lib.Print("ShaderLoader supprimé après chargement complet");
-        
-        // Se supprimer
         QueueFree();
     }
 }
