@@ -17,7 +17,7 @@ public partial class AttackWindow : FloatWindow
     public Phase CurrentPhase { get => _phase; set { _phase = value; } }
     public Wave ParentWave;
     public static int nbOfAttackWindows = 0;
-    public int id;    public Vector2I CursorPosition
+    public int id; public Vector2I CursorPosition
     {
         get
         {
@@ -114,13 +114,12 @@ public partial class AttackWindow : FloatWindow
 			Parent.CursorWindow.TakeDamage();
 		}
         */
-        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Level2.CursorWindow) && Visible && IsInsideTree())
+        if (CurrentPhase == Phase.Attack && !Shaking && IsCollided(Level2.CursorWindow.GetCollisionRect()) && Visible && IsInsideTree())
         {
             Level2.CursorWindow.TakeDamage();
-            Lib.Print($"AttackWindow: {Title} collided with CursorWindow");
             CurrentPhase = Phase.Dammage;
         }
-        if (CurrentPhase == Phase.Dammage && !IsCollided(Level2.CursorWindow))
+        if (CurrentPhase == Phase.Dammage && !IsCollided(Level2.CursorWindow.GetCollisionRect()))
             CurrentPhase = Phase.Attack;
     }
 

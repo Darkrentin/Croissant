@@ -11,12 +11,18 @@ public partial class CursorWindow : FloatWindow
 	public Timer FreezeTimer;
 	[Export] public AnimationPlayer animationPlayer;
 	private Node dotContainer;
+	public Vector2I Margin = new Vector2I(10, 10);
+	public Rect2I CollisionRect;
 
 	public override void _Ready()
 	{
 		base._Ready();
 		Size = Lib.GetAspectFactor(Size);
 		SetWindowPosition(Lib.GetScreenPosition(0.5f, 0.5f) - Size / 2);
+
+		CollisionRect = new Rect2I();
+		CollisionRect.Size = WindowRect.Size - Margin;
+
 		FreezeTimer = new Timer();
 		FreezeTimer.OneShot = true;
 		FreezeTimer.Timeout += FreezFrameStop;
@@ -112,5 +118,11 @@ public partial class CursorWindow : FloatWindow
 		GetTree().Paused = false;
 		Level2.Instance.WaveManager.GoBackToWave();
 		Invisible = false;
+	}
+
+	public Rect2I GetCollisionRect()
+	{
+		CollisionRect.Position = WindowRect.Position + Margin / 2;
+		return CollisionRect;
 	}
 }
