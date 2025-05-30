@@ -144,7 +144,7 @@ public partial class MenuWindow : FloatWindow
 	{
 		MenuClick.Play();
 		Close();
-		Level3.Instance.Transition(-1);
+		Level3.Instance.TransitionStuck();
 	}
 
 	private void OnMasterVolumeChanged(double value)

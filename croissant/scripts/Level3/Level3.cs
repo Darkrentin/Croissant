@@ -18,6 +18,7 @@ public partial class Level3 : FloatWindow
     public Action<InputEventMouseButton> MouseEvent; public int FilesCollected = 0;
     private Timer invincibleTimer;
     private bool[] loadedScenes;
+    public bool End = false;
 
     public override void _Ready()
     {
@@ -149,23 +150,37 @@ public partial class Level3 : FloatWindow
         }
     }
 
-    public void Transition(int NextSceneId)
+    public void Transition(int NextSceneId, Portal portal)
     {
-        int nextSceneId = NextSceneId;
-        if (NextSceneId == -1)
-            nextSceneId = 0;
         PortalEnterSound.Play();
-        LoadScene(nextSceneId);
+        LoadScene(NextSceneId);
 
         player.isInvincible = true;
         invincibleTimer.Start();
 
-        CallDeferred(nameof(TransitionDeferred), nextSceneId, NextSceneId);
+        portal.AnimationPlayer.Play("Close");
+        player.Animator2.Play("Hide");
+
+
+        GetTree().CreateTimer(0.31f).Timeout += () =>
+        {
+            player.Visible = false;
+            CallDeferred(nameof(TransitionDeferred), NextSceneId, portal);
+        };
     }
 
-    private void TransitionDeferred(int nextSceneId, int originalNextSceneId)
+    private void TransitionDeferred(int nextSceneId, Portal portal)
     {
         SubLevel3 nextScene = Level3.Instance.Level3Nodes[nextSceneId];
+
+        Portal NextPortal = null;
+        if (!portal.PortalToSpawn)
+        {
+            NextPortal = nextScene.GetNode<Portal>($"{sceneid}");
+            NextPortal.AnimationPlayer.Play("CloseInit");
+        }
+
+        
 
         if (Level3.Instance.actualScene != null)
         {
@@ -174,28 +189,85 @@ public partial class Level3 : FloatWindow
         nextScene.ShowSubLevel();
 
         Vector2 playerTargetPosition = GameManager.ScreenSize / 2;
-        if (nextScene.HasNode($"{sceneid}") && originalNextSceneId != -1)
-            playerTargetPosition = nextScene.GetNode<Portal>($"{sceneid}").GlobalPosition + new Vector2(60, 60);
-        Tween tween = GetTree().CreateTween();
-        float distance = (player.GlobalPosition - playerTargetPosition).Length();
-        float screenWidth = GameManager.ScreenSize.X;
 
-        float duration = Math.Max(distance / (float)screenWidth, 0.1f);
-        tween.SetTrans(Tween.TransitionType.Sine);
-        tween.SetEase(Tween.EaseType.InOut);
-        tween.TweenProperty(player, "global_position", playerTargetPosition, duration);
-        tween.TweenCallback(Callable.From(() =>
+        if (!portal.PortalToSpawn)
         {
-            player.isDead = false;
-            PortalExitSound.Play();
-            GameManager.StartRefocusAllWindows();
 
-        }));
+            playerTargetPosition = NextPortal.GlobalPosition + new Vector2(60, 60);
+            player.GlobalPosition = playerTargetPosition;
+            player.Animator2.PlayBackwards("Hide");
+            NextPortal.AnimationPlayer.PlayBackwards("Close");
+
+
+            GetTree().CreateTimer(0.3f).Timeout += () =>
+            {
+                player.isDead = false;
+                player.Visible = true;
+                PortalExitSound.Play();
+                GameManager.StartRefocusAllWindows();
+            };
+
+        }
+        else
+        {
+            Tween tween = GetTree().CreateTween();
+            float distance = (player.GlobalPosition - playerTargetPosition).Length();
+            float screenWidth = GameManager.ScreenSize.X;
+
+            float duration = Math.Max(distance / (float)screenWidth, 0.1f);
+            tween.SetTrans(Tween.TransitionType.Sine);
+            tween.SetEase(Tween.EaseType.InOut);
+            tween.TweenProperty(player, "global_position", playerTargetPosition, duration);
+            tween.TweenCallback(Callable.From(() =>
+            {
+                player.isDead = false;
+                PortalExitSound.Play();
+                player.Visible = true;
+                player.Animator2.PlayBackwards("Hide");
+                GameManager.StartRefocusAllWindows();
+
+            }));
+        }
+        if (End)
+        {
+            EndLevel();
+        }
+
         sceneid = nextSceneId;
         actualScene = nextScene;
 
         LoadAdjacentScenes(nextSceneId);
+    }
 
+    public void TransitionStuck()
+    {
+        player.isDead = true;
+        player.Visible = false;
+        SubLevel3 nextScene = Level3.Instance.Level3Nodes[0];
+        if (Level3.Instance.actualScene != null)
+        {
+            Level3.Instance.actualScene.HideSubLevel();
+        }
+        nextScene.ShowSubLevel();
+
+        GetTree().CreateTimer(0.3f).Timeout += () =>
+        {
+            player.isDead = false;
+            player.Visible = true;
+            player.GlobalPosition = GameManager.ScreenSize / 2;
+            GameManager.StartRefocusAllWindows();
+        };  
+        
+
+        if (End)
+        {
+            EndLevel();
+        }
+
+        sceneid = 0;
+        actualScene = nextScene;
+
+        LoadAdjacentScenes(0);
     }
 
     public void CollectFile()
@@ -204,12 +276,17 @@ public partial class Level3 : FloatWindow
         ConfigFileGatheredSound.Play();
         if (FilesCollected >= MaxFiles)
         {
-            GameManager.State = GameManager.GameState.Dialogue3;
-            Transition(0);
-            GetTree().CreateTimer(0.5f).Timeout += () =>
-            {
-                player.LevelEnd = true;
-            };
+            End = true;
+
         }
+    }
+
+    public void EndLevel()
+    {
+        GameManager.State = GameManager.GameState.Dialogue3;
+        GetTree().CreateTimer(0.5f).Timeout += () =>
+        {
+            player.LevelEnd = true;
+        };
     }
 }

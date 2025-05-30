@@ -3,6 +3,8 @@ using Godot;
 public partial class Portal : Area2D
 {
 	[Export] public int NextSceneId = 1;
+	[Export] public AnimationPlayer AnimationPlayer;
+	[Export] public bool PortalToSpawn = false;
 	public Timer timer;
 	public bool isChangingScene = false;
 	public override void _Ready()
@@ -31,7 +33,8 @@ public partial class Portal : Area2D
 			GD.Print("OnBoddyEntered");
 			player.isInvincible = true;
 			player.isDead = true;
-			Level3.Instance.Transition(this.NextSceneId);
+			Level3.Instance.Transition(this.NextSceneId, this);
+			
 		}
 	}
 

@@ -8,6 +8,7 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public RigidBody2D Head;
     [Export] public Sprite2D Sprite;
     [Export] public AnimationPlayer Animator;
+    [Export] public AnimationPlayer Animator2;
     [Export] public CollisionShape2D Collider;
     [Export] public Node States;
     [Export] public Timer CoyoteTimer;
@@ -20,6 +21,7 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public AudioStreamPlayer JumpSound;
     [Export] public AudioStreamPlayer LandingSound;
     [Export] public AudioStreamPlayer DeathSound;
+    [Export] public TextureRect FolderIcon;
 
     public Timer StepTimer;
 
@@ -119,6 +121,7 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        base._PhysicsProcess(delta);
         if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();
         GetInputStates();
