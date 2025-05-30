@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://b64jckb33yohk"]
+[gd_scene load_steps=17 format=3 uid="uid://b64jckb33yohk"]
 
 [ext_resource type="Script" uid="uid://c7dj2j5v543km" path="res://scripts/Other/IntroGameEndless.cs" id="1_qm56q"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_dbyfh"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://rulw2wcwtdo" path="res://scenes/Intro/Player.tscn" id="6_v1xaf"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_3au2h"]
 [ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="7_wl5n8"]
+[ext_resource type="AudioStream" uid="uid://bu6y20obqj0lh" path="res://assets/sounds/level_0/pew.mp3" id="9_7hh7j"]
 [ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="10_7d31s"]
 
 [sub_resource type="Animation" id="Animation_b7rdj"]
@@ -87,9 +88,14 @@ shader_parameter/progress = 0.0
 shader_parameter/color = Color(1, 1, 1, 0.560784)
 shader_parameter/center = Vector2(0.5, 0.5)
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_67he7"]
+random_pitch = 1.3
+streams_count = 1
+stream_0/stream = ExtResource("9_7hh7j")
+
 [node name="IntroGameEndless" type="Node2D"]
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportScoreLabel", "ExportAnimationPlayer", "GameNode")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportScoreLabel", "ExportAnimationPlayer", "PewPewSound", "GameNode")]
 script = ExtResource("1_qm56q")
 Player = NodePath("GameNode/Player")
 BulletScene = ExtResource("2_dbyfh")
@@ -97,6 +103,7 @@ EnemyScene = ExtResource("3_67he7")
 ExportGameExplosion = ExtResource("5_fmuuy")
 ExportScoreLabel = NodePath("../UI/ScoreNum")
 ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
+PewPewSound = NodePath("../Sound/Pew")
 GameNode = NodePath("GameNode")
 
 [node name="Camera" type="Camera2D" parent="Game"]
@@ -156,3 +163,10 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(1, 1, 1, 0)
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="Pew" type="AudioStreamPlayer" parent="Sound"]
+stream = SubResource("AudioStreamRandomizer_67he7")
+max_polyphony = 10
+bus = &"SFX"

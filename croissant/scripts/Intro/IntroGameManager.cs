@@ -16,7 +16,6 @@ public partial class IntroGameManager : Node2D
 	[Export] public AudioStreamPlayer PewPewSound;
 	public static AudioStreamPlayer StaticGameExplosionSound;
 	[Export] public AudioStreamPlayer GameExplosionSound { get => StaticGameExplosionSound; set => StaticGameExplosionSound = value; }
-	[Export] public AudioStreamPlayer GlitchSound;
 	private static ColorRect ShaderRect;
 	private static PackedScene GameExplosionScene;
 	private static Label ScoreLabel;

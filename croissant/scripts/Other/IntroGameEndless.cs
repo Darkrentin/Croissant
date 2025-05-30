@@ -9,6 +9,7 @@ public partial class IntroGameEndless : Node2D
 	[Export] private PackedScene ExportGameExplosion { get => GameExplosionScene; set => GameExplosionScene = value; }
 	[Export] private Label ExportScoreLabel { get => ScoreLabel; set => ScoreLabel = value; }
 	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
+	[Export] public AudioStreamPlayer PewPewSound;
 	private static PackedScene GameExplosionScene;
 	private static Label ScoreLabel;
 	private static AnimationPlayer AnimationPlayer;
@@ -114,6 +115,7 @@ public partial class IntroGameEndless : Node2D
 		Bullet.Position = BulletPosition.GlobalPosition;
 		Bullet.Rotation = Bullet.Position.AngleToPoint(GetGlobalMousePosition());
 		GameNode.AddChild(Bullet);
+		PewPewSound.Play();
 	}
 
 	public static void CameraShake(float intensity, float duration)
