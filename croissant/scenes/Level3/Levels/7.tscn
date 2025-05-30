@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://kscnid6txu3f"]
+[gd_scene load_steps=32 format=3 uid="uid://kscnid6txu3f"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_p3eu8"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_nrgi1"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_8cq1w"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="4_cku26"]
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="5_i0iy2"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_md5xu"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="6_rq5dm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3eu8"]
@@ -18,14 +19,15 @@ size = Vector2(1920, 128)
 resource_local_to_scene = true
 shader = ExtResource("4_8cq1w")
 shader_parameter/color1 = Color(0, 1, 1, 1)
-shader_parameter/color2 = Color(0, 0, 1, 0)
-shader_parameter/animate = true
-shader_parameter/direction = -1.0
 shader_parameter/frequency = 32.0
-shader_parameter/speed = 0.3
-shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ftwb"]
+resource_local_to_scene = true
+shader = ExtResource("5_md5xu")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i0iy2"]
 resource_local_to_scene = true
@@ -277,6 +279,9 @@ position = Vector2(0, 448)
 
 [node name="PlatformTexture" parent="MovePlatform3/Window" index="0"]
 material = SubResource("ShaderMaterial_sx3wf")
+
+[node name="ShaderRect" parent="MovePlatform3/Window" index="1"]
+material = SubResource("ShaderMaterial_7ftwb")
 
 [node name="CollisionShape2D" parent="MovePlatform3" index="1"]
 position = Vector2(576, 320)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=46 format=3 uid="uid://bu5seira0djs4"]
+[gd_scene load_steps=50 format=3 uid="uid://bu5seira0djs4"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ah0vo"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_ah0vo"]
@@ -6,6 +6,7 @@
 [ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="4_hr1iu"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="5_c7kun"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="6_yr5fu"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="7_dmaji"]
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="7_yr5fu"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="8_xvj50"]
 
@@ -30,14 +31,15 @@ size = Vector2(960, 128)
 resource_local_to_scene = true
 shader = ExtResource("6_yr5fu")
 shader_parameter/color1 = Color(0, 1, 1, 1)
-shader_parameter/color2 = Color(0, 0, 1, 0)
-shader_parameter/animate = true
-shader_parameter/direction = -1.0
 shader_parameter/frequency = 32.0
-shader_parameter/speed = 0.3
-shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ewymq"]
+resource_local_to_scene = true
+shader = ExtResource("7_dmaji")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dmaji"]
 resource_local_to_scene = true
@@ -47,14 +49,15 @@ size = Vector2(128, 64)
 resource_local_to_scene = true
 shader = ExtResource("6_yr5fu")
 shader_parameter/color1 = Color(0, 1, 1, 1)
-shader_parameter/color2 = Color(0, 0, 1, 0)
-shader_parameter/animate = true
-shader_parameter/direction = -1.0
 shader_parameter/frequency = 32.0
-shader_parameter/speed = 0.3
-shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5n7ab"]
+resource_local_to_scene = true
+shader = ExtResource("7_dmaji")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lhys1"]
 resource_local_to_scene = true
@@ -86,14 +89,15 @@ size = Vector2(960, 128)
 resource_local_to_scene = true
 shader = ExtResource("6_yr5fu")
 shader_parameter/color1 = Color(0, 1, 1, 1)
-shader_parameter/color2 = Color(0, 0, 1, 0)
-shader_parameter/animate = true
-shader_parameter/direction = -1.0
 shader_parameter/frequency = 32.0
-shader_parameter/speed = 0.3
-shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lf67y"]
+resource_local_to_scene = true
+shader = ExtResource("7_dmaji")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xvj50"]
 resource_local_to_scene = true
@@ -325,6 +329,9 @@ position = Vector2(968, 88)
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_xvj50")
 
+[node name="ShaderRect" parent="MovePlatform/Window" index="1"]
+material = SubResource("ShaderMaterial_ewymq")
+
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(64, 32)
 shape = SubResource("RectangleShape2D_dmaji")
@@ -334,6 +341,9 @@ position = Vector2(272, 208)
 
 [node name="PlatformTexture" parent="MovePlatform2/Window" index="0"]
 material = SubResource("ShaderMaterial_dmaji")
+
+[node name="ShaderRect" parent="MovePlatform2/Window" index="1"]
+material = SubResource("ShaderMaterial_5n7ab")
 
 [node name="CollisionShape2D" parent="MovePlatform2" index="1"]
 position = Vector2(408, 64)
@@ -364,6 +374,9 @@ position = Vector2(1096, 208)
 
 [node name="PlatformTexture" parent="MovePlatform3/Window" index="0"]
 material = SubResource("ShaderMaterial_yr5fu")
+
+[node name="ShaderRect" parent="MovePlatform3/Window" index="1"]
+material = SubResource("ShaderMaterial_lf67y")
 
 [node name="CollisionShape2D" parent="MovePlatform3" index="1"]
 position = Vector2(64, 136)
