@@ -103,7 +103,7 @@ stream_0/stream = ExtResource("11_r4prw")
 
 [node name="GameWindow" type="Node2D"]
 
-[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer", "IntroRect", "PewPewSound", "GameExplosionSound", "GlitchSound", "GameNode")]
+[node name="Game" type="Node2D" parent="." node_paths=PackedStringArray("Player", "ExportShaderRect", "ExportScoreLabel", "ExportAnimationPlayer", "IntroRect", "PewPewSound", "GameExplosionSound", "GameNode")]
 script = ExtResource("1_8rhfo")
 Player = NodePath("GameNode/Player")
 BulletScene = ExtResource("2_g36va")
@@ -116,7 +116,6 @@ ExportAnimationPlayer = NodePath("../UI/AnimationPlayer")
 IntroRect = NodePath("../UI/Tuto")
 PewPewSound = NodePath("../Sound/Pew")
 GameExplosionSound = NodePath("../Sound/GameExplosion")
-GlitchSound = NodePath("")
 GameNode = NodePath("GameNode")
 
 [node name="Camera" type="Camera2D" parent="Game"]

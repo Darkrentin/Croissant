@@ -98,11 +98,11 @@ public partial class Enemy : StaticBody2D
 			int rand = Lib.rand.Next(0, 3);
 
 			if (rand == 0)
-				EnemySprite.Modulate = new Color(1, 0, 0);
+				EnemySprite.Modulate = Colors.Red;
 			else if (rand == 1)
-				EnemySprite.Modulate = new Color(0, 1, 0);
+				EnemySprite.Modulate = Colors.Green;
 			else
-				EnemySprite.Modulate = new Color(0, 0, 1);
+				EnemySprite.Modulate = Colors.Blue;
 			ShapeCollorationSound.Play();
 
 		}

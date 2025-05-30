@@ -13,9 +13,7 @@ public partial class IntroGameManager : Node2D
 	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
 	[Export] public int MaxScore = 30;
 	[Export] private TextureRect IntroRect;
-
 	[Export] public AudioStreamPlayer PewPewSound;
-	
 	public static AudioStreamPlayer StaticGameExplosionSound;
 	[Export] public AudioStreamPlayer GameExplosionSound { get => StaticGameExplosionSound; set => StaticGameExplosionSound = value; }
 	[Export] public AudioStreamPlayer GlitchSound;
