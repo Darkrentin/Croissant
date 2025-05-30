@@ -1,10 +1,11 @@
-[gd_scene load_steps=18 format=3 uid="uid://bflx07hg5rj6h"]
+[gd_scene load_steps=20 format=3 uid="uid://bflx07hg5rj6h"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="2_gijp6"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="3_5q6or"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_5q6or"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_v5qpy"]
 [ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
 
@@ -38,6 +39,13 @@ shader_parameter/speed = 0.3
 shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
 shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hq7uh"]
+resource_local_to_scene = true
+shader = ExtResource("5_v5qpy")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gijp6"]
 resource_local_to_scene = true
@@ -116,6 +124,9 @@ visible = false
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_8j6u2")
 
+[node name="ShaderRect" parent="MovePlatform/Window" index="1"]
+material = SubResource("ShaderMaterial_hq7uh")
+
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(160, 32)
 shape = SubResource("RectangleShape2D_gijp6")
@@ -131,9 +142,9 @@ position = Vector2(1736, 776)
 position = Vector2(64, 136)
 NextSceneId = 11
 
-[node name="16" parent="." instance=ExtResource("3_5q6or")]
+[node name="20" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(1736, 136)
-NextSceneId = 16
+NextSceneId = 20
 
 [node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(1472, 0)
