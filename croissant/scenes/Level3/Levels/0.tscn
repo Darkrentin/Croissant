@@ -142,9 +142,9 @@ position = Vector2(1736, 776)
 position = Vector2(64, 136)
 NextSceneId = 11
 
-[node name="20" parent="." instance=ExtResource("3_5q6or")]
+[node name="16" parent="." instance=ExtResource("3_5q6or")]
 position = Vector2(1736, 136)
-NextSceneId = 20
+NextSceneId = 16
 
 [node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(1472, 0)
