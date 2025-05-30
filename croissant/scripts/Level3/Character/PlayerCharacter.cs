@@ -21,7 +21,6 @@ public partial class PlayerCharacter : CharacterBody2D
     [Export] public AudioStreamPlayer JumpSound;
     [Export] public AudioStreamPlayer LandingSound;
     [Export] public AudioStreamPlayer DeathSound;
-    [Export] public TextureRect FolderIcon;
 
     public Timer StepTimer;
 

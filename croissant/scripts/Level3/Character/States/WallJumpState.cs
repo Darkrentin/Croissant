@@ -10,8 +10,8 @@ public partial class WallJumpState : PlayerState
 
     public override void EnterState()
     {
-        Name = "WallJump";
         Player.JumpSound.Play();
+        Name = "WallJump";
         Player.Velocity = new Vector2(Player.Velocity.X * 1.5f, Player.WallJumpVelocity);
         lastWallDirection = Player.wallDirection;
         HasJumped = false;
@@ -26,7 +26,7 @@ public partial class WallJumpState : PlayerState
     {
         Player.HandleGravity(delta, PlayerCharacter.GravityJump);
         HandleWallKickMovement();
-        HandleWallJumpEnd(delta);
+        HandleWallJumpEnd();
         HandleAnimations();
     }
 
@@ -36,7 +36,7 @@ public partial class WallJumpState : PlayerState
         Player.Sprite.FlipH = Player.Velocity.X < 1;
     }
 
-    private void HandleWallJumpEnd(double delta)
+    private void HandleWallJumpEnd()
     {
         if (Player.Velocity.Y >= PlayerCharacter.WallJumpYSpeedPeak)
         {

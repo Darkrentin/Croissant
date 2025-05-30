@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=57 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
 [ext_resource type="Script" uid="uid://b08swylcghmyx" path="res://scripts/Level3/StateMachine/PlayerStates.cs" id="2_b8m4g"]
@@ -890,7 +890,12 @@ random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("32_nckji")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Head", "Sprite", "Animator", "Animator2", "Collider", "States", "CoyoteTimer", "JumpBufferTimer", "area2D", "WalkParticles", "FootstepSound", "JumpSound", "LandingSound", "DeathSound", "FolderIcon")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_8xuck"]
+random_pitch = 1.2
+streams_count = 1
+stream_0/stream = ExtResource("33_185rk")
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("Head", "Sprite", "Animator", "Animator2", "Collider", "States", "CoyoteTimer", "JumpBufferTimer", "area2D", "WalkParticles", "FootstepSound", "JumpSound", "LandingSound", "DeathSound")]
 texture_filter = 1
 position = Vector2(2, 0)
 collision_layer = 2
@@ -911,7 +916,6 @@ FootstepSound = NodePath("Sound/FootStep")
 JumpSound = NodePath("Sound/Jump")
 LandingSound = NodePath("Sound/Land")
 DeathSound = NodePath("Sound/Death")
-FolderIcon = NodePath("")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -44)
@@ -1025,7 +1029,7 @@ stream = SubResource("AudioStreamRandomizer_nckji")
 bus = &"SFX"
 
 [node name="Land" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("33_185rk")
+stream = SubResource("AudioStreamRandomizer_8xuck")
 bus = &"SFX"
 
 [node name="Death" type="AudioStreamPlayer" parent="Sound"]

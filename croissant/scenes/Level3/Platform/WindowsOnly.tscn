@@ -53,10 +53,11 @@ shader_parameter/mult = 10.0
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="WindowsOnly" type="CharacterBody2D" node_paths=PackedStringArray("window", "collisionShape", "Texture")]
+[node name="WindowsOnly" type="CharacterBody2D" node_paths=PackedStringArray("HighlightRect", "window", "collisionShape", "Texture")]
 collision_layer = 8
 collision_mask = 2
 script = ExtResource("1_udtmp")
+HighlightRect = NodePath("Window/PlatformTexture")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
 Texture = NodePath("Window/PlatformTexture")

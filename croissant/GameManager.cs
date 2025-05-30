@@ -410,7 +410,7 @@ public partial class GameManager : Node2D
             FloatWindow window = Windows[RefocusIndex];
             if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && window.IsInsideTree() && window.Visible)
             {
-                window.GrabWindowFocus();
+                window.GrabFocus();
                 Lib.Print($"Refocused window {RefocusIndex}: {window.Title}");
             }
             RefocusIndex++;

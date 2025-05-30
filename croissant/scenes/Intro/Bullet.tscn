@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://1jqgd3hgljd8"]
 
 [ext_resource type="Script" uid="uid://d4bitcpch6jw2" path="res://scripts/Intro/Bullet.cs" id="1_cpucv"]
-[ext_resource type="AudioStream" uid="uid://nf5ob6mvbt0p" path="res://assets/sounds/level_0/wall_hit.mp3" id="2_iixcw"]
+[ext_resource type="AudioStream" uid="uid://ldsc18eq88od" path="res://assets/sounds/level_0/wall_hit.mp3" id="2_iixcw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cpucv"]
 size = Vector2(24, 14)
@@ -25,7 +25,7 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_qdpbp"]
-random_pitch = 1.3
+random_pitch = 1.2
 streams_count = 1
 stream_0/stream = ExtResource("2_iixcw")
 

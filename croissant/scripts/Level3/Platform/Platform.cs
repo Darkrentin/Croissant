@@ -23,6 +23,8 @@ public partial class Platform : CharacterBody2D
     private const float CollisionThreshold = 0.1f;
     private const float CollisionDotThreshold = -0.01f;
 
+    public static bool Moving = false;
+
     public override void _Ready()
     {
         Shape = collisionShape.Shape as RectangleShape2D;

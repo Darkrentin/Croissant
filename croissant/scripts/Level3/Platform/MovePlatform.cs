@@ -2,9 +2,9 @@ using Godot;
 
 public partial class MovePlatform : Platform
 {
-    [Export] public float MinMult = 1;
-    [Export] public float MaxMult = 3;
-    [Export] public float OscillationTime = 0.8f;
+    [Export] public float MinMult = 1.5f;
+    [Export] public float MaxMult = 3f;
+    [Export] public float OscillationTime = 0.6f;
     [Export] public ColorRect ShaderRect;
 
     [Export] public AudioStreamPlayer MoveSound;
@@ -17,10 +17,9 @@ public partial class MovePlatform : Platform
     private bool CurrentlyActive = false;
     private float CurrentTime;
     private float CurrentSpeed = 0.5f;
-    private const float FastSpeed = 6f;
+    private const float FastSpeed = 8f;
     private const float SlowSpeed = 0.5f;
 
-    // Ajout pour le système de son de mouvement
     private Vector2 _lastSoundPosition;
     private float _totalDistanceTraveled = 0f;
     private const float SOUND_DISTANCE_THRESHOLD = 800f;
@@ -32,31 +31,24 @@ public partial class MovePlatform : Platform
         Shader = Texture.Material as ShaderMaterial;
 
         Shader.SetShaderParameter("window_size", window.Size);
-        ShaderRectShader.SetShaderParameter("mult", MinMult);
+        ShaderRectShader.SetShaderParameter("mult", MaxMult);
         Freeze = false;
-
-        // Initialiser la position de départ pour le calcul de distance
         _lastSoundPosition = GlobalPosition;
 
-        // Configurer le son de mouvement pour éviter les coupures
-        MoveSound.MaxPolyphony = 4;
+        MoveSound.MaxPolyphony = 8;
     }
 
     public override void _PhysicsProcess(double delta)
     {
-        Vector2 previousPosition = GlobalPosition;
-
         base._PhysicsProcess(delta);
         if (!Visible) return;
 
-        // Calculer la distance parcourue depuis la dernière frame
         if (Pressed)
         {
             Vector2 currentPosition = GlobalPosition;
             float distanceThisFrame = _lastSoundPosition.DistanceTo(currentPosition);
             _totalDistanceTraveled += distanceThisFrame;
 
-            // Jouer le son tous les 100 pixels
             if (_totalDistanceTraveled >= SOUND_DISTANCE_THRESHOLD)
             {
                 MoveSound.Play();
@@ -66,7 +58,6 @@ public partial class MovePlatform : Platform
         }
         else
         {
-            // Reset quand on ne bouge plus
             _lastSoundPosition = GlobalPosition;
             _totalDistanceTraveled = 0f;
         }
@@ -75,6 +66,7 @@ public partial class MovePlatform : Platform
         {
             bool mouseOnTitle = MouseOnTitle();
             bool shouldBeActive = mouseOnTitle || Pressed;
+            Moving = shouldBeActive;
 
             if (shouldBeActive && !CurrentlyActive && !IsLerping)
             {
@@ -129,6 +121,10 @@ public partial class MovePlatform : Platform
                 Shader.SetShaderParameter("speed", CurrentSpeed);
             }
         }
+        else
+        {
+            Moving = false;
+        }
 
         if ((bool)Shader.GetShaderParameter("animate"))
         {
@@ -175,19 +171,6 @@ public partial class MovePlatform : Platform
         }
     }
 
-    public bool MouseOnWindow()
-    {
-        Vector2I mousePos = Lib.GetCursorPosition();
-        Vector2I windowPos = window.Position;
-        Vector2I windowSize = window.Size;
-        int titleBarHeight = window.TitleBarHeight;
-
-        return mousePos.X >= windowPos.X &&
-               mousePos.X <= windowPos.X + windowSize.X &&
-               mousePos.Y >= windowPos.Y - titleBarHeight &&
-               mousePos.Y <= windowPos.Y + windowSize.Y;
-    }
-
     public override void _Input(InputEvent @event)
     {
         if (@event is InputEventMouseButton mouseButtonEvent)
@@ -212,7 +195,7 @@ public partial class MovePlatform : Platform
     public override void VisibilityChange()
     {
         base.VisibilityChange();
-        //ShaderRectShader.SetShaderParameter("mult", MaxMult);
-        //Shader.SetShaderParameter("frequency", 32f);
+        ShaderRectShader.SetShaderParameter("mult", MaxMult);
+        Shader.SetShaderParameter("frequency", 32f);
     }
 }
