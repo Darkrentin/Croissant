@@ -20,6 +20,7 @@ public partial class GameManager : Node2D
         Scoreboard,
         NoMusic,
     }
+    [Export] public AudioStreamPlayer BossExplosionSound;
     public static Music CurrentMusic = Music.NoMusic;
 
     public static AudioStreamPlayer ClickSound;

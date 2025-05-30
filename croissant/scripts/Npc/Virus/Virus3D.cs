@@ -11,6 +11,10 @@ public partial class Virus3D : StaticBody3D
 
 	[Export] public Node3D ShootSpawnA;
 	[Export] public Node3D ShootSpawnB;
+
+	[Export] public AudioStreamPlayer BossExplosion1Sound;
+	[Export] public AudioStreamPlayer BossExplosion2Sound;
+	[Export] public AudioStreamPlayer BossHitSound;
 	public Timer GlitchTimer;
 	
 	// Boss attack timers
@@ -330,10 +334,11 @@ private void TryLaunchLiftWall()
 	{
 		// Handle damage logic here
 		StartGlitch();
+		BossHitSound.Play();
 		
 		// Ne plus lancer LiftWalls automatiquement quand on prend des dégâts
 		// (c'est maintenant géré par le timer aléatoire)
-		
+
 		Lib.Print("Virus took damage!");
 		if (Hp > 1)
 		{
@@ -355,6 +360,9 @@ private void TryLaunchLiftWall()
 			GetTree().CreateTimer(0.1f).Timeout += () =>
 			{
 				FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
+				BossExplosion1Sound.Play();
+				BossExplosion2Sound.Play();
+				GameManager.Instance.BossExplosionSound.Play();
 				FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
 				SpeedRunTimer.Instance.StopTimer();
 				GlitchTimer.Stop();

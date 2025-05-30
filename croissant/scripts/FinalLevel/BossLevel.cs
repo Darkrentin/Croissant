@@ -104,9 +104,11 @@ public partial class BossLevel : Node3D
 					BossFloors[i, j].animationStateMachine.Travel("Lava");
 			}
 		}
+		FinalLevel.Instance.LavaSound.Play();
 		GetTree().CreateTimer(10f).Timeout += () =>
 		{
 			IdleMap();
+			FinalLevel.Instance.LavaSound.Stop();
 		};
 	}
 
@@ -114,6 +116,7 @@ public partial class BossLevel : Node3D
 	public void OnBodyEnteredKillZone(Node3D body)
 	{
 		FinalLevel.Instance.DeathBossLevel();
+		FinalLevel.Instance.DeathLavaSound.Play();
 	}
 
 	public void ResetMap()
