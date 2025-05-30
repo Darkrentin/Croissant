@@ -105,7 +105,7 @@ public partial class GameManager : Node2D
 
         // Initialize refocus timer
         RefocusTimer = new Timer();
-        RefocusTimer.WaitTime = 0.05f; // Grab focus every 100ms
+        RefocusTimer.WaitTime = 0.01f; // Grab focus every 100ms
         RefocusTimer.Timeout += RefocusNextWindow;
         AddChild(RefocusTimer);
 

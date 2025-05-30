@@ -22,6 +22,7 @@ public partial class Level3 : FloatWindow
     public override void _Ready()
     {
         base._Ready();
+        Title = "Level 3";
         GameManager.MainWindow.ContentScaleMode = ContentScaleModeEnum.CanvasItems;
         GameManager.MainWindow.ContentScaleAspect = ContentScaleAspectEnum.Ignore;
         GrabFocus();
@@ -187,6 +188,7 @@ public partial class Level3 : FloatWindow
         {
             player.isDead = false;
             PortalExitSound.Play();
+            GameManager.StartRefocusAllWindows();
 
         }));
         sceneid = nextSceneId;
@@ -194,7 +196,6 @@ public partial class Level3 : FloatWindow
 
         LoadAdjacentScenes(nextSceneId);
 
-        GrabFocus();
     }
 
     public void CollectFile()
