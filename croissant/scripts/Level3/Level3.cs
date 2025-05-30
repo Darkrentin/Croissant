@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 public partial class Level3 : FloatWindow
 {
@@ -16,8 +18,9 @@ public partial class Level3 : FloatWindow
     public static Level3 Instance;
     public SubLevel3 actualScene;
     public Action<InputEventMouseButton> MouseEvent; public int FilesCollected = 0;
-    private Timer invincibleTimer;
-    private bool[] loadedScenes;
+    private Timer invincibleTimer;    private bool[] loadedScenes;
+    private Dictionary<int, ResourceLoader.ThreadLoadStatus> loadingStatus;
+    private HashSet<int> requestedLoads;
     public bool End = false;
 
     public override void _Ready()
@@ -27,10 +30,10 @@ public partial class Level3 : FloatWindow
         GameManager.MainWindow.ContentScaleMode = ContentScaleModeEnum.CanvasItems;
         GameManager.MainWindow.ContentScaleAspect = ContentScaleAspectEnum.Ignore;
         GrabFocus();
-        Instance = this;
-
-        Level3Nodes = new SubLevel3[level3Scenes.Length];
+        Instance = this;        Level3Nodes = new SubLevel3[level3Scenes.Length];
         loadedScenes = new bool[level3Scenes.Length];
+        loadingStatus = new Dictionary<int, ResourceLoader.ThreadLoadStatus>();
+        requestedLoads = new HashSet<int>();
         LoadSceneImmediate(0);
         actualScene = Level3Nodes[sceneid];
         actualScene.ShowSubLevel();
@@ -73,37 +76,105 @@ public partial class Level3 : FloatWindow
             {
                 MouseEvent = null;
             }
-        }
-    }
-
+        }    }
+    
     public override void _ExitTree()
     {
         base._ExitTree();
         MouseEvent = null;
     }
-    public override void _Process(double delta)
-    {
-        if (!HasFocus()) GrabFocus();
-        base._Process(delta);
-    }
 
     private void LoadScene(int sceneIndex)
     {
-        if (sceneIndex < 0 || sceneIndex >= level3Scenes.Length || loadedScenes[sceneIndex])
+        if (sceneIndex < 0 || sceneIndex >= level3Scenes.Length || 
+            loadedScenes[sceneIndex] || requestedLoads.Contains(sceneIndex))
             return;
 
-        CallDeferred(nameof(LoadSceneDeferred), sceneIndex);
+        requestedLoads.Add(sceneIndex);
+        
+        // Start threaded loading
+        string scenePath = level3Scenes[sceneIndex].ResourcePath;
+        ResourceLoader.LoadThreadedRequest(scenePath);
+        loadingStatus[sceneIndex] = ResourceLoader.ThreadLoadStatus.InProgress;
+        
+        Lib.Print($"Started threaded loading for scene {sceneIndex}: {scenePath}");
     }
 
-    private void LoadSceneDeferred(int sceneIndex)
+    public override void _Process(double delta)
     {
-        if (loadedScenes[sceneIndex])
-            return;
+        if (!HasFocus()) GrabFocus();
+        
+        // Check threaded loading progress
+        CheckThreadedLoading();
+        
+        base._Process(delta);
+    }
 
-        Level3Nodes[sceneIndex] = level3Scenes[sceneIndex].Instantiate<SubLevel3>();
-        AddChild(Level3Nodes[sceneIndex]);
-        Level3Nodes[sceneIndex].HideSubLevel();
-        loadedScenes[sceneIndex] = true;
+    private void CheckThreadedLoading()
+    {
+        var completedLoads = new List<int>();
+        
+        foreach (var kvp in loadingStatus.ToArray())
+        {
+            int sceneIndex = kvp.Key;
+            var status = kvp.Value;
+            
+            if (status == ResourceLoader.ThreadLoadStatus.InProgress)
+            {
+                string scenePath = level3Scenes[sceneIndex].ResourcePath;
+                var currentStatus = ResourceLoader.LoadThreadedGetStatus(scenePath);
+                loadingStatus[sceneIndex] = currentStatus;
+                
+                if (currentStatus == ResourceLoader.ThreadLoadStatus.Loaded)
+                {
+                    completedLoads.Add(sceneIndex);
+                }
+                else if (currentStatus == ResourceLoader.ThreadLoadStatus.Failed)
+                {
+                    Lib.Print($"Failed to load scene {sceneIndex}: {scenePath}");
+                    requestedLoads.Remove(sceneIndex);
+                    loadingStatus.Remove(sceneIndex);
+                }
+            }
+        }
+        
+        // Process completed loads
+        foreach (int sceneIndex in completedLoads)
+        {
+            CompleteSceneLoad(sceneIndex);
+        }
+    }
+
+    private void CompleteSceneLoad(int sceneIndex)
+    {
+        try
+        {
+            string scenePath = level3Scenes[sceneIndex].ResourcePath;
+            var loadedResource = ResourceLoader.LoadThreadedGet(scenePath);
+            
+            if (loadedResource is PackedScene packedScene)
+            {
+                Level3Nodes[sceneIndex] = packedScene.Instantiate<SubLevel3>();
+                AddChild(Level3Nodes[sceneIndex]);
+                Level3Nodes[sceneIndex].HideSubLevel();
+                loadedScenes[sceneIndex] = true;
+                
+                Lib.Print($"Successfully loaded scene {sceneIndex} via threading");
+            }
+            else
+            {
+                Lib.Print($"Scene {sceneIndex} loaded but is not a PackedScene");
+            }
+        }
+        catch (Exception ex)
+        {
+            Lib.Print($"Error completing load for scene {sceneIndex}: {ex.Message}");
+        }
+        finally
+        {
+            requestedLoads.Remove(sceneIndex);
+            loadingStatus.Remove(sceneIndex);
+        }
     }
 
     // Load a single scene immediately
