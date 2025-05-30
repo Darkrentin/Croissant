@@ -8,6 +8,7 @@ public partial class FloppyDisk : CharacterBody3D
     public float Speed { get; set; } = 6f;
     [Export] public Area3D Area;
     [Export] public AnimationPlayer AnimationPlayer;
+    [Export] public AudioStreamPlayer3D HitSound;
 
     private Vector3 _direction = Vector3.Zero;
     private bool _isMoving = false;
@@ -97,6 +98,7 @@ public partial class FloppyDisk : CharacterBody3D
     public void TakeDamage()
     {
         AnimationPlayer.Play("Death");
+        HitSound.Play();
         Speed = 0f;
     }
 
