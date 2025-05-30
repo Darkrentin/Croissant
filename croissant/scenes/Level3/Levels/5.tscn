@@ -26,7 +26,8 @@ shader_parameter/color1 = Color(0, 1, 1, 1)
 shader_parameter/frequency = 32.0
 shader_parameter/window_size = Vector2(800, 600)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ut6fl"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5masu"]
+
 resource_local_to_scene = true
 shader = ExtResource("6_ut6fl")
 shader_parameter/scale = 4.0
@@ -35,7 +36,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r8du1"]
 resource_local_to_scene = true
-size = Vector2(256, 64)
+size = Vector2(184, 64)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cgk1t"]
 resource_local_to_scene = true
@@ -44,7 +45,9 @@ shader_parameter/color1 = Color(0, 1, 1, 1)
 shader_parameter/frequency = 32.0
 shader_parameter/window_size = Vector2(800, 600)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_5masu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yfx7m"]
+
 resource_local_to_scene = true
 shader = ExtResource("6_ut6fl")
 shader_parameter/scale = 4.0
@@ -56,10 +59,10 @@ resource_local_to_scene = true
 size = Vector2(184, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjyep"]
-size = Vector2(496, 352)
+size = Vector2(424, 352)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k6p7a"]
-size = Vector2(496, 352)
+size = Vector2(424, 352)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_myr6g"]
 size = Vector2(560, 272)
@@ -80,10 +83,10 @@ size = Vector2(368, 136)
 size = Vector2(368, 136)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wtrsu"]
-size = Vector2(512, 184)
+size = Vector2(448, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ngsil"]
-size = Vector2(512, 184)
+size = Vector2(448, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cgk1t"]
 size = Vector2(552, 152)
@@ -148,7 +151,7 @@ position = Vector2(120, 60)
 shape = SubResource("RectangleShape2D_k7jy6")
 
 [node name="MovePlatform" parent="." instance=ExtResource("4_b3861")]
-position = Vector2(256, 160)
+position = Vector2(288, 160)
 
 [node name="Window" parent="MovePlatform" index="0"]
 visible = false
@@ -157,10 +160,12 @@ visible = false
 material = SubResource("ShaderMaterial_4gugs")
 
 [node name="ShaderRect" parent="MovePlatform/Window" index="1"]
+
 material = SubResource("ShaderMaterial_ut6fl")
 
+
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(128, 32)
+position = Vector2(92, 32)
 shape = SubResource("RectangleShape2D_r8du1")
 
 [node name="MovePlatform2" parent="." instance=ExtResource("4_b3861")]
@@ -173,6 +178,7 @@ visible = false
 material = SubResource("ShaderMaterial_cgk1t")
 
 [node name="ShaderRect" parent="MovePlatform2/Window" index="1"]
+
 material = SubResource("ShaderMaterial_5masu")
 
 [node name="CollisionShape2D" parent="MovePlatform2" index="1"]
@@ -183,11 +189,11 @@ shape = SubResource("RectangleShape2D_4gugs")
 position = Vector2(0, 280)
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="3"]
-position = Vector2(248, 176)
+position = Vector2(212, 176)
 shape = SubResource("RectangleShape2D_pjyep")
 
 [node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
-position = Vector2(248, 176)
+position = Vector2(212, 176)
 shape = SubResource("RectangleShape2D_k6p7a")
 
 [node name="KillingPlatform2" parent="." instance=ExtResource("5_b3861")]
@@ -224,14 +230,14 @@ position = Vector2(184, 68)
 shape = SubResource("RectangleShape2D_6qlwu")
 
 [node name="KillingPlatform5" parent="." instance=ExtResource("5_b3861")]
-position = Vector2(928, 520)
+position = Vector2(984, 520)
 
 [node name="CollisionShape2D" parent="KillingPlatform5" index="3"]
-position = Vector2(256, 92)
+position = Vector2(224, 92)
 shape = SubResource("RectangleShape2D_wtrsu")
 
 [node name="CollisionShape2D" parent="KillingPlatform5/Area2D" index="0"]
-position = Vector2(256, 92)
+position = Vector2(224, 92)
 shape = SubResource("RectangleShape2D_ngsil")
 
 [node name="KillingPlatform6" parent="." instance=ExtResource("5_b3861")]
