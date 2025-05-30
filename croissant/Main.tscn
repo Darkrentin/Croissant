@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://d4ftxhxrx2cte" path="res://GameManager.cs" id="1_uu6xs"]
 [ext_resource type="PackedScene" uid="uid://810np22fqce" path="res://scenes/Windows/MenuWindow.tscn" id="2_fos0i"]
-[ext_resource type="Texture2D" uid="uid://xohxql204o5v" path="res://assets/sprites/virus/wall.jpg" id="3_r0du0"]
+[ext_resource type="Texture2D" uid="uid://c8f447d0y6l7u" path="res://assets/sprites/virus/bliss.png" id="3_5vvyt"]
 [ext_resource type="PackedScene" uid="uid://cmio7f2l6htgy" path="res://scenes/Other/SpeedRunTimer.tscn" id="4_cm0pq"]
 [ext_resource type="AudioStream" uid="uid://clo716yukn5vw" path="res://assets/musics/idle_music.mp3" id="5_fos0i"]
 [ext_resource type="AudioStream" uid="uid://bimk8wel6u47d" path="res://assets/musics/level_2.mp3" id="6_03owx"]
@@ -19,10 +19,9 @@ menuScene = ExtResource("2_fos0i")
 Musics = [NodePath("Music/IdleMusic"), NodePath("Music/IntroGame"), NodePath("Music/Level1"), NodePath("Music/Level2"), NodePath("Music/Level3"), NodePath("Music/Level4"), NodePath("Music/FinalBoss"), NodePath("Music/Scoreboard")]
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
-visible = false
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("3_r0du0")
+texture = ExtResource("3_5vvyt")
 expand_mode = 1
 
 [node name="DebugInfo" type="CanvasLayer" parent="."]

@@ -18,7 +18,7 @@ void fragment() {
     blend_weights /= max(dot(blend_weights, vec3(1.0)), 0.0001);
 
     vec3 scaled_pos = v_world_position * noise_scale;
-    
+
     vec3 normal_x = texture(world_noise_normal_texture, scaled_pos.yz).rgb;
     vec3 normal_y = texture(world_noise_normal_texture, scaled_pos.xz).rgb;
     vec3 normal_z = texture(world_noise_normal_texture, scaled_pos.xy).rgb;

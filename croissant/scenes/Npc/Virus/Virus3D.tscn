@@ -14,9 +14,10 @@
 [ext_resource type="PackedScene" uid="uid://lxid8bikpdli" path="res://scenes/Npc/Virus/Eye.tscn" id="11_rm7xc"]
 [ext_resource type="Texture2D" uid="uid://bou4wbucgmaui" path="res://assets/sprites/virus/eye/black.png" id="12_7jibh"]
 [ext_resource type="Texture2D" uid="uid://cofcs48nnvt7k" path="res://assets/sprites/virus/pause.svg" id="13_oxg54"]
-[ext_resource type="Shader" uid="uid://bqa4jolexy42y" path="res://scenes/Npc/Virus/Virus3D.gdshader" id="15_0c86s"]
+[ext_resource type="Shader" path="res://scenes/Npc/Virus/Virus3D.gdshader" id="15_0c86s"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="17_2v8wk"]
-[ext_resource type="Texture2D" uid="uid://dov4uvj5o52rq" path="res://assets/sprites/virus/barra de vida (bateria) 192X480.png" id="17_npe1l"]
+[ext_resource type="Texture2D" uid="uid://dov4uvj5o52rq" path="res://assets/sprites/virus/health_bar.png" id="17_npe1l"]
+
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8qbw1"]
 render_priority = 0

@@ -31,17 +31,17 @@ void fragment()
 	// --- 1. SAMPLE ORIGINAL PIXEL (from the node's own texture/appearance) ---
 	// TEXTURE here refers to the built-in texture of the CanvasItem.
 	vec2 source_texture_true_size = vec2(textureSize(TEXTURE, 0));
-	
+
 	// Ensure u_dither_size is at least 1 to avoid division by zero or unexpected behavior.
 	float dither_size_clamped = float(max(1, u_dither_size));
-	
+
 	// Calculate the number of "pixel blocks" across the source texture.
 	vec2 pixelated_block_count = source_texture_true_size / dither_size_clamped;
-	
+
 	// UV for sampling the input TEXTURE at the "pixelated" resolution.
 	// This effectively "pixelates" the source texture based on u_dither_size.
 	vec2 screen_sample_uv = floor(UV * pixelated_block_count) / pixelated_block_count;
-	
+
 	vec3 screen_col = texture(TEXTURE, screen_sample_uv).rgb;
 	float original_alpha = texture(TEXTURE, screen_sample_uv).a;
 
@@ -60,7 +60,7 @@ void fragment()
 	if (can_dither)
 	{
 		// --- 3. DITHERING LOGIC (applied to screen_col from node's TEXTURE) ---
-		
+
 		// Calculate pixel luminosity
 		float lum = (screen_col.r * 0.299) + (screen_col.g * 0.587) + (screen_col.b * 0.114);
 
@@ -87,7 +87,7 @@ void fragment()
 		}
 
 		lum = max(lum - 0.00001, 0.0); // Nudge lum slightly for floor() behavior at 1.0
-		
+
 		// lum_scaled: How far lum is into its current quantized band [0,1)
 		float lum_scaled = lum * col_x - floor(lum * col_x);
 		// If col_x is 0 (single color palette), lum_scaled becomes 0.
@@ -140,7 +140,7 @@ void fragment()
 	} else {
 		COLOR.rgb = processed_color; // Use dithered color (or fallback if dithering failed)
 	}
-	
+
 	// --- 5. APPLY ORIGINAL ALPHA (from the node's own texture/appearance) ---
 	COLOR.a = original_alpha;
 }

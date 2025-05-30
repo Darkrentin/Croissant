@@ -24,7 +24,7 @@
                 "anim": "Surprise"
             },
             "3": {
-                "text": "[tornado radius=3.0 freq=2.0]Anyways.[/tornado] [color=#6b6b6b][i]what am I supposed to do now?[/i][/color]",
+                "text": "Anyways. [color=GRAY][i]What am I supposed to do now?[/i][/color]",
                 "anim": "Surprise"
             },
             "4": {

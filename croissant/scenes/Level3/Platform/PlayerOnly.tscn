@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://b6ci8vrbwflc5"]
 
 [ext_resource type="Script" uid="uid://bs2soqlm0dbss" path="res://scripts/Level3/Platform/PlayerOnly.cs" id="1_ysnk1"]
-[ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_rwhr5"]
+[ext_resource type="Script" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_rwhr5"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_r5qs5"]
 [ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="4_rwhr5"]
 [ext_resource type="Texture2D" uid="uid://c5nxl1hv03hpb" path="res://assets/sprites/platformer/NoWindow.png" id="6_dyb7s"]
