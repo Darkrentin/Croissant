@@ -342,9 +342,9 @@ public partial class FloatWindow : Window
 		ShakeFinished();
 	}
 
-	public bool IsCollided(FloatWindow other)
+	public bool IsCollided(Rect2I other)
 	{
-		return WindowRect.Intersects(other.WindowRect);
+		return WindowRect.Intersects(other);
 	}
 
 	public virtual void GrabWindowFocus()
