@@ -19,6 +19,7 @@ menuScene = ExtResource("2_fos0i")
 Musics = [NodePath("Music/IdleMusic"), NodePath("Music/IntroGame"), NodePath("Music/Level1"), NodePath("Music/Level2"), NodePath("Music/Level3"), NodePath("Music/Level4"), NodePath("Music/FinalBoss"), NodePath("Music/Scoreboard")]
 
 [node name="FakeDesktop" type="TextureRect" parent="."]
+visible = false
 offset_right = 40.0
 offset_bottom = 40.0
 texture = ExtResource("3_5vvyt")
