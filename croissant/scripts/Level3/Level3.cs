@@ -161,11 +161,9 @@ public partial class Level3 : FloatWindow
         portal.AnimationPlayer.Play("Close");
         player.Animator2.Play("Hide");
 
-
         GetTree().CreateTimer(0.31f).Timeout += () =>
         {
-            player.Visible = false;
-            CallDeferred(nameof(TransitionDeferred), NextSceneId, portal);
+            TransitionDeferred(NextSceneId, portal);
         };
     }
 
@@ -180,8 +178,6 @@ public partial class Level3 : FloatWindow
             NextPortal.AnimationPlayer.Play("CloseInit");
         }
 
-        
-
         if (Level3.Instance.actualScene != null)
         {
             Level3.Instance.actualScene.HideSubLevel();
@@ -192,12 +188,10 @@ public partial class Level3 : FloatWindow
 
         if (!portal.PortalToSpawn)
         {
-
             playerTargetPosition = NextPortal.GlobalPosition + new Vector2(60, 60);
             player.GlobalPosition = playerTargetPosition;
             player.Animator2.PlayBackwards("Hide");
             NextPortal.AnimationPlayer.PlayBackwards("Close");
-
 
             GetTree().CreateTimer(0.3f).Timeout += () =>
             {
@@ -206,10 +200,12 @@ public partial class Level3 : FloatWindow
                 PortalExitSound.Play();
                 GameManager.StartRefocusAllWindows();
             };
-
         }
         else
         {
+            // Portal PortalToSpawn : supprimer le portail et le chemin du niveau 0
+            CleanupPathAndPortal(sceneid);
+
             Tween tween = GetTree().CreateTween();
             float distance = (player.GlobalPosition - playerTargetPosition).Length();
             float screenWidth = GameManager.ScreenSize.X;
@@ -225,9 +221,9 @@ public partial class Level3 : FloatWindow
                 player.Visible = true;
                 player.Animator2.PlayBackwards("Hide");
                 GameManager.StartRefocusAllWindows();
-
             }));
         }
+
         if (End)
         {
             EndLevel();
@@ -238,7 +234,7 @@ public partial class Level3 : FloatWindow
 
         LoadAdjacentScenes(nextSceneId);
     }
-
+    
     public void TransitionStuck()
     {
         player.isDead = true;
@@ -268,6 +264,105 @@ public partial class Level3 : FloatWindow
         actualScene = nextScene;
 
         LoadAdjacentScenes(0);
+    }
+
+    private void CleanupPathAndPortal(int currentSceneId)
+    {
+        // Déterminer quel portail du niveau 0 doit être supprimé
+        string portalToRemove = "";
+        int[] pathToClean = null;
+
+        if (currentSceneId >= 1 && currentSceneId <= 5)
+        {
+            portalToRemove = "1";
+            pathToClean = new int[] { 1, 2, 3, 4, 5 };
+            Lib.Print("Cleaning path 1-5");
+        }
+        else if (currentSceneId >= 6 && currentSceneId <= 10)
+        {
+            portalToRemove = "6";
+            pathToClean = new int[] { 6, 7, 8, 9, 10 };
+            Lib.Print("Cleaning path 6-10");
+        }
+        else if (currentSceneId >= 11 && currentSceneId <= 15)
+        {
+            portalToRemove = "11";
+            pathToClean = new int[] { 11, 12, 13, 14, 15 };
+            Lib.Print("Cleaning path 11-15");
+        }
+        else if (currentSceneId >= 16 && currentSceneId <= 20)
+        {
+            portalToRemove = "16";
+            pathToClean = new int[] { 16, 17, 18, 19, 20 };
+            Lib.Print("Cleaning path 16-20");
+        }
+
+        if (portalToRemove != "" && pathToClean != null)
+        {
+            // Supprimer le portail du niveau 0
+            RemovePortalFromLevel0(portalToRemove);
+
+            // Libérer tous les niveaux du chemin
+            FreePathLevels(pathToClean);
+        }
+    }
+
+    private void RemovePortalFromLevel0(string portalName)
+    {
+        if (loadedScenes[0] && Level3Nodes[0] != null)
+        {
+            try
+            {
+                Portal portalToRemove = Level3Nodes[0].GetNode<Portal>(portalName);
+                if (portalToRemove != null)
+                {
+                    Lib.Print($"Removing portal {portalName} from level 0");
+                    portalToRemove.GetParent().RemoveChild(portalToRemove);
+                    portalToRemove.QueueFree();
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Lib.Print($"Portal {portalName} not found in level 0: {ex.Message}");
+            }
+        }
+    }
+
+    private void FreePathLevels(int[] pathLevels)
+    {
+        foreach (int levelIndex in pathLevels)
+        {
+            if (levelIndex >= 0 && levelIndex < Level3Nodes.Length && 
+                loadedScenes[levelIndex] && Level3Nodes[levelIndex] != null)
+            {
+                Lib.Print($"Freeing level {levelIndex}");
+                
+                // Marquer comme non chargé
+                loadedScenes[levelIndex] = false;
+                
+                // Retirer de la scène et libérer
+                Level3Nodes[levelIndex].GetParent().RemoveChild(Level3Nodes[levelIndex]);
+                Level3Nodes[levelIndex].QueueFree();
+                Level3Nodes[levelIndex] = null;
+            }
+        }
+    }
+
+    // Optionnel : méthode pour vérifier l'état des niveaux chargés
+    public void DebugLoadedScenes()
+    {
+        Lib.Print("=== Loaded Scenes Status ===");
+        for (int i = 0; i < loadedScenes.Length; i++)
+        {
+            if (loadedScenes[i])
+            {
+                Lib.Print($"Level {i}: LOADED");
+            }
+            else
+            {
+                Lib.Print($"Level {i}: FREE");
+            }
+        }
     }
 
     public void CollectFile()

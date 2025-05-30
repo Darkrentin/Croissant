@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b4e11u540cpvm"]
+[gd_scene load_steps=41 format=3 uid="uid://b4e11u540cpvm"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_tva5v"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="2_lmyvb"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="6_3n8fb"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_hvpnd"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="8_8vfn1"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="8_wc1sb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnpx"]
 size = Vector2(1664, 192)
@@ -21,6 +22,13 @@ size = Vector2(128, 1344)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tva5v"]
 size = Vector2(1920, 128)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qmbsx"]
+resource_local_to_scene = true
+shader = ExtResource("7_hvpnd")
+shader_parameter/color1 = Color(0, 1, 0, 1)
+shader_parameter/frequency = 15.0
+shader_parameter/window_size = Vector2(800, 600)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmyvb"]
 resource_local_to_scene = true
 size = Vector2(1344, 320)
@@ -33,14 +41,15 @@ size = Vector2(1600, 64)
 resource_local_to_scene = true
 shader = ExtResource("7_hvpnd")
 shader_parameter/color1 = Color(0, 1, 1, 1)
-shader_parameter/color2 = Color(0, 0, 1, 0)
-shader_parameter/animate = true
-shader_parameter/direction = -1.0
 shader_parameter/frequency = 32.0
-shader_parameter/speed = 0.3
-shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
-shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xoy43"]
+resource_local_to_scene = true
+shader = ExtResource("8_wc1sb")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8vfn1"]
 resource_local_to_scene = true
@@ -148,6 +157,9 @@ shape = SubResource("RectangleShape2D_tva5v")
 [node name="PlayerOnly" parent="." instance=ExtResource("3_lx710")]
 position = Vector2(256, 320)
 
+[node name="PlatformTexture" parent="PlayerOnly/Window" index="0"]
+material = SubResource("ShaderMaterial_qmbsx")
+
 [node name="CollisionShape2D" parent="PlayerOnly" index="1"]
 position = Vector2(672, 160)
 shape = SubResource("RectangleShape2D_lmyvb")
@@ -168,6 +180,9 @@ position = Vector2(48, 544)
 
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_8vfn1")
+
+[node name="ShaderRect" parent="MovePlatform/Window" index="1"]
+material = SubResource("ShaderMaterial_xoy43")
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(80, 32)
@@ -288,6 +303,7 @@ shape = SubResource("RectangleShape2D_uk7mw")
 [node name="0" parent="." instance=ExtResource("5_vwnpx")]
 position = Vector2(64, 24)
 NextSceneId = 0
+PortalToSpawn = true
 
 [node name="KillingPlatform10" parent="." instance=ExtResource("2_lmyvb")]
 position = Vector2(512, 0)
