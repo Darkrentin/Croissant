@@ -199,7 +199,7 @@ shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xr5wh"]
 resource_local_to_scene = true
-size = Vector2(384, 128)
+size = Vector2(456, 128)
 
 [sub_resource type="Shader" id="Shader_xr5wh"]
 resource_local_to_scene = true
@@ -594,7 +594,7 @@ position = Vector2(504, 392)
 material = SubResource("ShaderMaterial_cax68")
 
 [node name="CollisionShape2D" parent="WindowsOnly2" index="1"]
-position = Vector2(192, 64)
+position = Vector2(228, 64)
 shape = SubResource("RectangleShape2D_xr5wh")
 
 [node name="WindowsOnly3" parent="." instance=ExtResource("6_q6xmu")]
