@@ -19,7 +19,7 @@ public partial class MovePlatform : Platform
     private float CurrentSpeed = 0.5f;
     private const float FastSpeed = 6f;
     private const float SlowSpeed = 0.5f;
-    
+
     // Ajout pour le système de son de mouvement
     private Vector2 _lastSoundPosition;
     private float _totalDistanceTraveled = 0f;
@@ -34,10 +34,10 @@ public partial class MovePlatform : Platform
         Shader.SetShaderParameter("window_size", window.Size);
         ShaderRectShader.SetShaderParameter("mult", MinMult);
         Freeze = false;
-        
+
         // Initialiser la position de départ pour le calcul de distance
         _lastSoundPosition = GlobalPosition;
-        
+
         // Configurer le son de mouvement pour éviter les coupures
         MoveSound.MaxPolyphony = 4;
     }
@@ -45,7 +45,7 @@ public partial class MovePlatform : Platform
     public override void _PhysicsProcess(double delta)
     {
         Vector2 previousPosition = GlobalPosition;
-        
+
         base._PhysicsProcess(delta);
         if (!Visible) return;
 
@@ -55,7 +55,7 @@ public partial class MovePlatform : Platform
             Vector2 currentPosition = GlobalPosition;
             float distanceThisFrame = _lastSoundPosition.DistanceTo(currentPosition);
             _totalDistanceTraveled += distanceThisFrame;
-            
+
             // Jouer le son tous les 100 pixels
             if (_totalDistanceTraveled >= SOUND_DISTANCE_THRESHOLD)
             {
@@ -158,7 +158,7 @@ public partial class MovePlatform : Platform
         {
             if (mouseButtonEvent.Pressed && MouseOnTitle())
             {
-                if(!Pressed)
+                if (!Pressed)
                 {
                     JustPressed();
                 }
@@ -199,7 +199,6 @@ public partial class MovePlatform : Platform
     public void JustPressed()
     {
         PressedSound.Play();
-        // Reset la position de référence quand on commence à presser
         _lastSoundPosition = GlobalPosition;
         _totalDistanceTraveled = 0f;
     }
@@ -207,7 +206,13 @@ public partial class MovePlatform : Platform
     public void JustReleased()
     {
         ReleaseSound.Play();
-        // Reset quand on relâche
         _totalDistanceTraveled = 0f;
+    }
+
+    public override void VisibilityChange()
+    {
+        base.VisibilityChange();
+        //ShaderRectShader.SetShaderParameter("mult", MaxMult);
+        //Shader.SetShaderParameter("frequency", 32f);
     }
 }

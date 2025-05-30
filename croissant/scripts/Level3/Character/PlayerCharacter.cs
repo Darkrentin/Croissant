@@ -201,6 +201,7 @@ public partial class PlayerCharacter : CharacterBody2D
             if (jumps < MaxJumps && keyJumpPressed)
             {
                 jumps++;
+                StopWalkingEffects();
                 ChangeState((Node)States.Get("Jump"));
             }
         }
@@ -209,12 +210,14 @@ public partial class PlayerCharacter : CharacterBody2D
             if (jumps < MaxJumps && jumps > 0 && keyJumpPressed)
             {
                 jumps++;
+                StopWalkingEffects();
                 ChangeState((Node)States.Get("Jump"));
             }
             if (CoyoteTimer.TimeLeft > 0 && keyJumpPressed && jumps < MaxJumps)
             {
                 CoyoteTimer.Stop();
                 jumps++;
+                StopWalkingEffects();
                 ChangeState((Node)States.Get("Jump"));
             }
         }
@@ -225,7 +228,26 @@ public partial class PlayerCharacter : CharacterBody2D
         GetWallDirection();
         if ((keyJumpPressed && wallDirection.X != 0) || (keyLeft && wallDirection.X == 1) || (keyRight && wallDirection.X == -1))
         {
+            StopWalkingEffects();
             ChangeState((Node)States.Get("WallJump"));
+        }
+    }
+
+    public void StopWalkingEffects()
+    {
+        WalkParticles.Emitting = false;
+        if (!StepTimer.IsStopped())
+        {
+            StepTimer.Stop();
+        }
+    }
+
+    public void StartWalkingEffects()
+    {
+        WalkParticles.Emitting = true;
+        if (StepTimer.IsStopped())
+        {
+            StepTimer.Start();
         }
     }
 

@@ -8,7 +8,7 @@ public partial class JumpState : PlayerState
         Name = "Jump";
         Player.Velocity = new Vector2(Player.Velocity.X, Player.jumpSpeed);
         Player._hasJumped = true;
-        Player.WalkParticles.Emitting = false;
+        Player.StopWalkingEffects();
         Player.SpawnJumpParticles(Vector2.Up);
         Player.JumpSound.Play();
     }

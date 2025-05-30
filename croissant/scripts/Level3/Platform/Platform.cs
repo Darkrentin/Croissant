@@ -120,7 +120,7 @@ public partial class Platform : CharacterBody2D
         base._Process(delta);
     }
 
-    public void VisibilityChange()
+    public virtual void VisibilityChange()
     {
         Pressed = false;
     }

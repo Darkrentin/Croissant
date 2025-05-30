@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bl2c1m7sr748u" path="res://assets/sounds/level_3/move_platform_unselect.mp3" id="7_6o0bx"]
 [ext_resource type="AudioStream" uid="uid://dqveouaj18rt1" path="res://assets/sounds/level_3/move_platform_move.mp3" id="8_1dogx"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_oty2a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tir0a"]
 resource_local_to_scene = true
 shader = ExtResource("4_70k7n")
 shader_parameter/color1 = Color(0, 1, 1, 1)
@@ -23,6 +23,7 @@ shader_parameter/window_size = Vector2(800, 600)
 shader_parameter/Time = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6sxne"]
+resource_local_to_scene = true
 shader = ExtResource("5_oty2a")
 shader_parameter/scale = 4.0
 shader_parameter/col = Color(0, 1, 1, 1)
@@ -55,7 +56,7 @@ sharp_corners = true
 script = ExtResource("2_oty2a")
 
 [node name="PlatformTexture" parent="Window" instance=ExtResource("3_xf3iu")]
-material = SubResource("ShaderMaterial_oty2a")
+material = SubResource("ShaderMaterial_tir0a")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

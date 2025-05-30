@@ -37,8 +37,8 @@
 [ext_resource type="AudioStream" uid="uid://ndop4dyswn0v" path="res://assets/sounds/level_3/body_fall.mp3" id="35_8xuck"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
-radius = 18.0
-height = 96.0
+radius = 17.0
+height = 88.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xk4oe"]
 size = Vector2(48.875, 8.25)
@@ -81,6 +81,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sound/BodyFall:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_vw511"]
@@ -259,18 +271,6 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
-}
-tracks/10/type = "value"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("Sound/BodyFall:playing")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_b8m4g"]
@@ -867,7 +867,7 @@ LandingSound = NodePath("Sound/Land")
 DeathSound = NodePath("Sound/Death")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -48)
+position = Vector2(0, -44)
 shape = SubResource("CapsuleShape2D_hnbnl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -945,6 +945,7 @@ texture = ExtResource("18_vw511")
 position = Vector2(135, -50)
 
 [node name="WalkParticles" type="CPUParticles2D" parent="."]
+emitting = false
 randomness = 1.0
 direction = Vector2(0, -1)
 spread = 180.0

@@ -9,6 +9,7 @@ public partial class FallState : PlayerState
         Name = "Fall";
 
         Player._fallEnterMsec = (int)Time.GetTicksMsec();
+        Player.StopWalkingEffects();
     }
 
     public override void Update(double delta)
@@ -24,7 +25,7 @@ public partial class FallState : PlayerState
         else
         {
             Player.HandleGravity(delta, PlayerCharacter.GravityFall * gravityScale);
-            Player.WalkParticles.Emitting = false;
+            Player.StopWalkingEffects();
         }
         Player.HorizontalMovement(PlayerCharacter.AirAcceleration, PlayerCharacter.AirDeceleration);
         Player.HandleLanding();
