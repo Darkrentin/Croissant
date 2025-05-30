@@ -28,11 +28,11 @@ public partial class Level3 : FloatWindow
         GameManager.MainWindow.ContentScaleAspect = ContentScaleAspectEnum.Ignore;
         GrabFocus();
         Instance = this;
-        
+
         // Initialize arrays
         Level3Nodes = new SubLevel3[level3Scenes.Length];
         loadedScenes = new bool[level3Scenes.Length];
-        
+
         // Load scene 0 immediately (synchronously) since we need it right away
         LoadSceneImmediate(0);
         actualScene = Level3Nodes[sceneid];
@@ -49,6 +49,8 @@ public partial class Level3 : FloatWindow
         AddChild(invincibleTimer);
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
+
+        GameManager.StartRefocusAllWindows();
     }
 
     public void ShowPlayer()
@@ -203,6 +205,10 @@ public partial class Level3 : FloatWindow
         {
             player.isDead = false;
             PortalExitSound.Play();
+            GetTree().CreateTimer(0.2f).Timeout += () =>
+            {
+                GrabFocus();
+            };
         }));
         sceneid = nextSceneId;
         actualScene = nextScene;

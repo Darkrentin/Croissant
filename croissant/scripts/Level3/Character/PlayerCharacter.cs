@@ -237,6 +237,7 @@ public partial class PlayerCharacter : CharacterBody2D
             SpawnJumpParticles(Vector2.Up);
             WalkParticles.Emitting = false;
             ChangeState((Node)States.Get("Idle"));
+            LandingSound.Play();
         }
     }
 

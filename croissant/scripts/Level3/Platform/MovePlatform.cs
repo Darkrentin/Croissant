@@ -23,7 +23,7 @@ public partial class MovePlatform : Platform
     // Ajout pour le système de son de mouvement
     private Vector2 _lastSoundPosition;
     private float _totalDistanceTraveled = 0f;
-    private const float SOUND_DISTANCE_THRESHOLD = 300f;
+    private const float SOUND_DISTANCE_THRESHOLD = 800f;
 
     public override void _Ready()
     {

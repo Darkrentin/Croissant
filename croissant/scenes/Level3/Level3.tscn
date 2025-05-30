@@ -37,7 +37,6 @@ shader_parameter/b_displacement = Vector2(2, 2)
 [node name="Level3" type="Window" node_paths=PackedStringArray("player", "ConfigFileGatheredSound", "PortalEnterSound", "PortalExitSound")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
-mode = 4
 size = Vector2i(1920, 1080)
 borderless = true
 always_on_top = true
