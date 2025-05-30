@@ -13,6 +13,12 @@ public partial class IntroGameManager : Node2D
 	[Export] private AnimationPlayer ExportAnimationPlayer { get => AnimationPlayer; set => AnimationPlayer = value; }
 	[Export] public int MaxScore = 30;
 	[Export] private TextureRect IntroRect;
+
+	[Export] public AudioStreamPlayer PewPewSound;
+	
+	public static AudioStreamPlayer StaticGameExplosionSound;
+	[Export] public AudioStreamPlayer GameExplosionSound { get => StaticGameExplosionSound; set => StaticGameExplosionSound = value; }
+	[Export] public AudioStreamPlayer GlitchSound;
 	private static ColorRect ShaderRect;
 	private static PackedScene GameExplosionScene;
 	private static Label ScoreLabel;
@@ -65,6 +71,7 @@ public partial class IntroGameManager : Node2D
 				ShootTimer.Start();
 			}
 		}
+
 		// Creates an enemy every 0.8 to 1 seconds
 		if (enemySpawnTimer == null)
 		{
@@ -116,6 +123,7 @@ public partial class IntroGameManager : Node2D
 		Instance.AddChild(GameExplosion);
 		GameExplosion.Emitting = true;
 		Instance.ExplosionTimer.Start();
+		StaticGameExplosionSound.Play();
 	}
 
 	private void SpawnEnemy()
@@ -131,6 +139,7 @@ public partial class IntroGameManager : Node2D
 
 	private void Shoot()
 	{
+		PewPewSound.Play();
 		// Shoots a bullet in direction of the mouse cursor
 		Bullet Bullet = BulletScene.Instantiate<Bullet>();
 		Node2D BulletPosition = Player.GetNode<Node2D>("BulletPosition");

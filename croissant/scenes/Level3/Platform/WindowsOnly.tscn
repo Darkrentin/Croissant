@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_6tw0d"]
 [ext_resource type="Texture2D" uid="uid://dv5vcpvln3cak" path="res://assets/sprites/platformer/NoPlayer.png" id="6_jl265"]
 
-[sub_resource type="Shader" id="Shader_jl265"]
+[sub_resource type="Shader" id="Shader_6tw0d"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -38,7 +38,7 @@ void fragment() {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ci38t"]
 resource_local_to_scene = true
-shader = SubResource("Shader_jl265")
+shader = SubResource("Shader_6tw0d")
 shader_parameter/border_color = Color(1, 1, 0, 1)
 shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)

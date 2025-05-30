@@ -6,7 +6,7 @@
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_70k7n"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_oty2a"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_1ex6h"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oty2a"]
 resource_local_to_scene = true
 shader = ExtResource("4_70k7n")
 shader_parameter/color1 = Color(0, 1, 1, 1)
@@ -49,7 +49,7 @@ sharp_corners = true
 script = ExtResource("2_oty2a")
 
 [node name="PlatformTexture" parent="Window" instance=ExtResource("3_xf3iu")]
-material = SubResource("ShaderMaterial_1ex6h")
+material = SubResource("ShaderMaterial_oty2a")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

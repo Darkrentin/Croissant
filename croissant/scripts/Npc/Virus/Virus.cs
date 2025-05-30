@@ -14,6 +14,7 @@ public partial class Virus : Npc
 	[Export] public Control ExportPause { get => Pause; set => Pause = value; }
 	[Export] public Timer BlinkTimer;
 	[Export] public AnimationPlayer AnimationScale;
+	[Export] public AudioStreamPlayer SplashSound;
 
 	public Vector2I CenterOfScreen = new Vector2I(600 / 2, 480 / 2);
 	public Vector3 targetRotation;
@@ -182,5 +183,6 @@ public partial class Virus : Npc
 		VirusSplash.GetNode<CpuParticles2D>("VirusSplashLeft").Emitting = true;
 		VirusSplash.GetNode<CpuParticles2D>("VirusSplashRight").Emitting = true;
 		SplashTimer.Start();
+		SplashSound.Play();
 	}
 }

@@ -1,10 +1,23 @@
-[gd_scene load_steps=11 format=3 uid="uid://37mav66th0um"]
+[gd_scene load_steps=26 format=3 uid="uid://37mav66th0um"]
 
 [ext_resource type="Script" uid="uid://l8b0b3aiky2v" path="res://scripts/Intro/Enemy.cs" id="1_fm0q0"]
 [ext_resource type="Texture2D" uid="uid://sv2rs5w7mq2s" path="res://assets/sprites/shapes/hexagon.png" id="2_n1hot"]
 [ext_resource type="Texture2D" uid="uid://da5i0d0h47amb" path="res://assets/sprites/shapes/pentagon.png" id="3_t3wft"]
 [ext_resource type="Texture2D" uid="uid://bl6juy6yo51wo" path="res://assets/sprites/shapes/square.png" id="4_ioq1s"]
 [ext_resource type="Texture2D" uid="uid://2lxtwa4m3jne" path="res://assets/sprites/shapes/triangle.png" id="5_lednf"]
+[ext_resource type="AudioStream" uid="uid://blkx4xclyao2c" path="res://assets/sounds/level_0/shape_coloration.mp3" id="6_t3wft"]
+[ext_resource type="AudioStream" uid="uid://nkjl8auyuoje" path="res://assets/sounds/level_4/shape_hit/shape_hit_1.mp3" id="7_iqq5w"]
+[ext_resource type="AudioStream" uid="uid://bahsrycbavrlm" path="res://assets/sounds/level_4/shape_death/shape_death_1.mp3" id="7_stb6e"]
+[ext_resource type="AudioStream" uid="uid://dvba12vo6fucj" path="res://assets/sounds/level_4/shape_death/shape_death_2.mp3" id="8_cp21a"]
+[ext_resource type="AudioStream" uid="uid://dhd8qa5bokjuv" path="res://assets/sounds/level_4/shape_hit/shape_hit_2.mp3" id="8_uam7c"]
+[ext_resource type="AudioStream" uid="uid://bewsxi0aic0lq" path="res://assets/sounds/level_4/shape_death/shape_death_3.mp3" id="9_3jiky"]
+[ext_resource type="AudioStream" uid="uid://cdyb7frw63p31" path="res://assets/sounds/level_4/shape_hit/shape_hit_3.mp3" id="9_lnsjy"]
+[ext_resource type="AudioStream" uid="uid://8ej1r7xwnkw7" path="res://assets/sounds/level_4/shape_hit/shape_hit_4.mp3" id="10_6yfvy"]
+[ext_resource type="AudioStream" uid="uid://ciowet2n8elrs" path="res://assets/sounds/level_4/shape_death/shape_death_4.mp3" id="10_vxb3w"]
+[ext_resource type="AudioStream" uid="uid://bkoyh6efrm0na" path="res://assets/sounds/level_4/shape_hit/shape_hit_5.mp3" id="11_3ne30"]
+[ext_resource type="AudioStream" uid="uid://cf8daqvunxxol" path="res://assets/sounds/level_4/shape_hit/shape_hit_6.mp3" id="12_5kjup"]
+[ext_resource type="AudioStream" uid="uid://1af6ykjb1b7b" path="res://assets/sounds/level_4/shape_hit/shape_hit_7.mp3" id="13_u13ve"]
+[ext_resource type="AudioStream" uid="uid://b0voseavabggn" path="res://assets/sounds/level_4/shape_hit/shape_hit_8.mp3" id="14_deeio"]
 
 [sub_resource type="Animation" id="Animation_n1hot"]
 resource_name = "Depop"
@@ -66,13 +79,34 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_stb6e"]
 radius = 473.083
 
-[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("AnimationPlayer", "EnemySprite", "Collision")]
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0qvkv"]
+streams_count = 8
+stream_0/stream = ExtResource("7_iqq5w")
+stream_1/stream = ExtResource("8_uam7c")
+stream_2/stream = ExtResource("9_lnsjy")
+stream_3/stream = ExtResource("10_6yfvy")
+stream_4/stream = ExtResource("11_3ne30")
+stream_5/stream = ExtResource("12_5kjup")
+stream_6/stream = ExtResource("13_u13ve")
+stream_7/stream = ExtResource("14_deeio")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_42lid"]
+streams_count = 4
+stream_0/stream = ExtResource("7_stb6e")
+stream_1/stream = ExtResource("8_cp21a")
+stream_2/stream = ExtResource("9_3jiky")
+stream_3/stream = ExtResource("10_vxb3w")
+
+[node name="Enemy" type="StaticBody2D" node_paths=PackedStringArray("AnimationPlayer", "EnemySprite", "Collision", "ShapeCollorationSound", "ShapeHitSound", "ShapeDeathSound")]
 scale = Vector2(0.14, 0.14)
 script = ExtResource("1_fm0q0")
 AnimationPlayer = NodePath("AnimationPlayer")
 EnemySprite = NodePath("AnimatedSprite")
 Collision = NodePath("Area2D/CollisionShape")
 Speed = 120.0
+ShapeCollorationSound = NodePath("Sound/ShapeColoration")
+ShapeHitSound = NodePath("Sound/ShapeHit")
+ShapeDeathSound = NodePath("Sound/ShapeDeath")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -86,6 +120,21 @@ sprite_frames = SubResource("SpriteFrames_h5027")
 
 [node name="CollisionShape" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_stb6e")
+
+[node name="Sound" type="Node" parent="."]
+
+[node name="ShapeColoration" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("6_t3wft")
+bus = &"SFX"
+
+[node name="ShapeHit" type="AudioStreamPlayer" parent="Sound"]
+stream = SubResource("AudioStreamRandomizer_0qvkv")
+max_polyphony = 5
+bus = &"SFX"
+
+[node name="ShapeDeath" type="AudioStreamPlayer" parent="Sound"]
+stream = SubResource("AudioStreamRandomizer_42lid")
+bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]
 [connection signal="body_entered" from="Area2D" to="." method="OnBodyEntered"]

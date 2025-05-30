@@ -279,12 +279,12 @@ script = ExtResource("1_8cb3g")
 animationPlayer = NodePath("AnimationPlayer")
 Sprite2D = NodePath("Control/AnimatedSprite2D")
 BloodScene = ExtResource("2_xau07")
-DeathSound = NodePath("DeathSound")
-EnterSound = NodePath("EnterSound")
-ExitSound = NodePath("ExitSound")
+DeathSound = NodePath("Node/DeathSound")
+EnterSound = NodePath("Node/EnterSound")
+ExitSound = NodePath("Node/ExitSound")
 NpcName = "Helper"
 Dialogue = NodePath("DialogueWindow")
-DialogueSound = NodePath("DialogueSound")
+DialogueSound = NodePath("Node/DialogueSound")
 Draggable = false
 Minimizable = false
 
@@ -318,19 +318,21 @@ sprite_frames = SubResource("SpriteFrames_jthw1")
 autoplay = "default"
 speed_scale = 0.0
 
-[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+[node name="Node" type="Node" parent="."]
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("6_e0dbo")
 volume_db = -5.0
 bus = &"SFX"
 
-[node name="DialogueSound" type="AudioStreamPlayer" parent="."]
+[node name="DialogueSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("7_7nx6g")
 bus = &"SFX"
 
-[node name="EnterSound" type="AudioStreamPlayer" parent="."]
+[node name="EnterSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("8_b02x2")
 bus = &"SFX"
 
-[node name="ExitSound" type="AudioStreamPlayer" parent="."]
+[node name="ExitSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("9_1u7gj")
 bus = &"SFX"

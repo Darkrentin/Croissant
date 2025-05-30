@@ -6,6 +6,10 @@ public partial class Enemy : StaticBody2D
 	[Export] private AnimatedSprite2D EnemySprite;
 	[Export] private CollisionShape2D Collision;
 	[Export] private float Speed = 110.0f;
+
+	[Export] public AudioStreamPlayer ShapeCollorationSound;
+	[Export] public AudioStreamPlayer ShapeHitSound;
+	[Export] public AudioStreamPlayer ShapeDeathSound;
 	private Player Player;
 	private float RotationSpeed;
 	private Vector2 velocity;
@@ -55,6 +59,7 @@ public partial class Enemy : StaticBody2D
 				// Decreases the shape on collision with the bullet
 				EnemySprite.Frame++;
 				bullet.EnemyHit.Emitting = true;
+				ShapeHitSound.Play();
 			}
 			else
 			{
@@ -63,12 +68,14 @@ public partial class Enemy : StaticBody2D
 					IntroGameEndless.AddScore();
 					IntroGameEndless.CameraShake(8, 0.35f);
 				}
-				else{
+				else
+				{
 					// Adds score when the enemy is destroyed
 					IntroGameManager.AddScore();
 					IntroGameManager.CameraShake(8, 0.35f);
 				}
 				bullet.EnemyExplosion.Emitting = true;
+				ShapeDeathSound.Play();
 				Collision.Visible = false;
 				velocity = Vector2.Zero;
 				Alive = false;
@@ -83,7 +90,7 @@ public partial class Enemy : StaticBody2D
 		else if (body is Player player)
 		{
 			// Bounces back on collision with the player
-			if(Endless)
+			if (Endless)
 				IntroGameEndless.CameraShake(8, 0.35f);
 			else
 				IntroGameManager.CameraShake(8, 0.35f);
@@ -96,6 +103,7 @@ public partial class Enemy : StaticBody2D
 				EnemySprite.Modulate = new Color(0, 1, 0);
 			else
 				EnemySprite.Modulate = new Color(0, 0, 1);
+			ShapeCollorationSound.Play();
 
 		}
 	}
