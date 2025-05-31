@@ -300,8 +300,10 @@ shape = SubResource("RectangleShape2D_k1v3w")
 position = Vector2(384, 128)
 
 [node name="Label" parent="ConfigFile" index="1"]
-offset_left = -37.395
-offset_right = 39.605
+offset_left = -40.0
+offset_top = 40.0
+offset_right = 37.0
+offset_bottom = 63.0
 text = "lKeom.cfg"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]

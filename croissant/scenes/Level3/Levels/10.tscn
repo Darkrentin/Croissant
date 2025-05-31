@@ -300,10 +300,10 @@ size = Vector2(184, 400)
 size = Vector2(256, 184)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdr3u"]
-size = Vector2(112, 104)
+size = Vector2(96, 104)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kjer0"]
-size = Vector2(112, 104)
+size = Vector2(96, 104)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7ylu"]
 size = Vector2(128, 128)
@@ -383,7 +383,7 @@ position = Vector2(96, 320)
 shape = SubResource("RectangleShape2D_ppky5")
 
 [node name="MovePlatform" parent="." instance=ExtResource("5_s7sgx")]
-position = Vector2(968, 432)
+position = Vector2(960, 424)
 
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_apcfp")
@@ -530,8 +530,10 @@ shape = SubResource("RectangleShape2D_1mm30")
 position = Vector2(352, 1000)
 
 [node name="Label" parent="ConfigFile" index="1"]
-offset_left = -31.34
-offset_right = 32.66
+offset_left = -32.0
+offset_top = 40.0
+offset_right = 32.0
+offset_bottom = 63.0
 text = "erlra.cfg"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
@@ -539,17 +541,17 @@ position = Vector2(-96, -12)
 shape = SubResource("RectangleShape2D_qycog")
 
 [node name="KillingPlatform11" parent="." instance=ExtResource("2_px2a8")]
-position = Vector2(976, 696)
+position = Vector2(1032, 696)
 
 [node name="Window" parent="KillingPlatform11" index="0"]
 position = Vector2i(0, 36)
 
 [node name="CollisionShape2D" parent="KillingPlatform11" index="3"]
-position = Vector2(56, 52)
+position = Vector2(48, 52)
 shape = SubResource("RectangleShape2D_cdr3u")
 
 [node name="CollisionShape2D" parent="KillingPlatform11/Area2D" index="0"]
-position = Vector2(56, 52)
+position = Vector2(48, 52)
 shape = SubResource("RectangleShape2D_kjer0")
 
 [node name="KillingPlatform12" parent="." instance=ExtResource("2_px2a8")]

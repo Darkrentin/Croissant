@@ -68,7 +68,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u506k"]
 resource_local_to_scene = true
-size = Vector2(128, 832)
+size = Vector2(128, 824)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nhn6i"]
 resource_local_to_scene = true
@@ -306,7 +306,7 @@ material = SubResource("ShaderMaterial_a3s1b")
 material = SubResource("ShaderMaterial_xuiov")
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(64, 416)
+position = Vector2(64, 412)
 shape = SubResource("RectangleShape2D_u506k")
 
 [node name="PlayerOnly" parent="." instance=ExtResource("6_u506k")]
