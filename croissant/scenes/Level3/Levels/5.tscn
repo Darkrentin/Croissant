@@ -27,7 +27,6 @@ shader_parameter/frequency = 32.0
 shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5masu"]
-
 resource_local_to_scene = true
 shader = ExtResource("6_ut6fl")
 shader_parameter/scale = 4.0
@@ -45,9 +44,7 @@ shader_parameter/color1 = Color(0, 1, 1, 1)
 shader_parameter/frequency = 32.0
 shader_parameter/window_size = Vector2(800, 600)
 
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfx7m"]
-
 resource_local_to_scene = true
 shader = ExtResource("6_ut6fl")
 shader_parameter/scale = 4.0
@@ -160,9 +157,7 @@ visible = false
 material = SubResource("ShaderMaterial_4gugs")
 
 [node name="ShaderRect" parent="MovePlatform/Window" index="1"]
-
-material = SubResource("ShaderMaterial_ut6fl")
-
+material = SubResource("ShaderMaterial_5masu")
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
 position = Vector2(92, 32)
@@ -178,8 +173,7 @@ visible = false
 material = SubResource("ShaderMaterial_cgk1t")
 
 [node name="ShaderRect" parent="MovePlatform2/Window" index="1"]
-
-material = SubResource("ShaderMaterial_5masu")
+material = SubResource("ShaderMaterial_yfx7m")
 
 [node name="CollisionShape2D" parent="MovePlatform2" index="1"]
 position = Vector2(92, 32)
@@ -304,7 +298,6 @@ shape = SubResource("RectangleShape2D_7myqj")
 [node name="0" parent="." instance=ExtResource("2_g6not")]
 position = Vector2(1768, 16)
 NextSceneId = 0
-PortalToSpawn = true
 
 [node name="ConfigFile" parent="." instance=ExtResource("6_k7jy6")]
 position = Vector2(1840, 400)
