@@ -55,12 +55,12 @@ public partial class Level1 : Node2D
         }
         if (WindowCount == 0) //end game condition
         {
-            EndGame();
+            EndActions();
         }
 
     }
 
-    public void EndGame()
+    public void EndActions()
     {
         Lib.Print("No windows left, ending game...");
         GameManager.State = GameManager.GameState.BlueScreen;

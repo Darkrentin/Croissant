@@ -12,6 +12,8 @@ public partial class Level3 : FloatWindow
     [Export] public AudioStreamPlayer ConfigFileGatheredSound;
     [Export] public AudioStreamPlayer PortalEnterSound;
     [Export] public AudioStreamPlayer PortalExitSound;
+    [Export] public AnimationPlayer PortalAnimationPlayer;
+    [Export] public Node2D PortalSpawn;
 
     public SubLevel3[] Level3Nodes;
     public int sceneid = 0;
@@ -278,7 +280,8 @@ public partial class Level3 : FloatWindow
         {
             // Portal PortalToSpawn : supprimer le portail et le chemin du niveau 0
             CleanupPathAndPortal(sceneid);
-
+            PortalAnimationPlayer.Play("RESET");
+            PortalSpawn.Visible = true;
             Tween tween = GetTree().CreateTween();
             float distance = (player.GlobalPosition - playerTargetPosition).Length();
             float screenWidth = GameManager.ScreenSize.X;
@@ -293,6 +296,11 @@ public partial class Level3 : FloatWindow
                 PortalExitSound.Play();
                 player.Visible = true;
                 player.Animator2.PlayBackwards("Hide");
+                PortalAnimationPlayer.Play("Open");
+                GetTree().CreateTimer(1f).Timeout += () =>
+                {
+                    PortalSpawn.Visible = false;
+                };
                 //CallDeferred(nameof(GrabFocus));
             }));
         }
@@ -440,6 +448,7 @@ public partial class Level3 : FloatWindow
 
     public void CollectFile()
     {
+        Lib.Print($"File collected! Total files: {FilesCollected + 1}/{MaxFiles}");
         FilesCollected++;
         ConfigFileGatheredSound.Play();
         if (FilesCollected >= MaxFiles)

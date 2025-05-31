@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://kscnid6txu3f"]
+[gd_scene load_steps=31 format=3 uid="uid://kscnid6txu3f"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_p3eu8"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_nrgi1"]
@@ -8,12 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="5_i0iy2"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_md5xu"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="6_rq5dm"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p3eu8"]
-size = Vector2(128, 1344)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nrgi1"]
-size = Vector2(1920, 128)
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="9_7ftwb"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sx3wf"]
 resource_local_to_scene = true
@@ -252,24 +247,6 @@ size = Vector2(192, 248)
 script = ExtResource("1_p3eu8")
 windows = [NodePath("MovePlatform3/Window"), NodePath("KillingPlatform/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("WindowsOnly3/Window"), NodePath("WindowsOnly5/Window"), NodePath("StaticPlateform/Window"), NodePath("WindowsOnly4/Window")]
 
-[node name="Limit" type="StaticBody2D" parent="."]
-
-[node name="L" type="CollisionShape2D" parent="Limit"]
-position = Vector2(-64, 544)
-shape = SubResource("RectangleShape2D_p3eu8")
-
-[node name="R" type="CollisionShape2D" parent="Limit"]
-position = Vector2(1984, 544)
-shape = SubResource("RectangleShape2D_p3eu8")
-
-[node name="U" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, -64)
-shape = SubResource("RectangleShape2D_nrgi1")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, 1152)
-shape = SubResource("RectangleShape2D_nrgi1")
-
 [node name="6" parent="." instance=ExtResource("2_nrgi1")]
 position = Vector2(16, 32)
 NextSceneId = 6
@@ -358,6 +335,8 @@ position = Vector2(1536, 192)
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
 position = Vector2(96, 124)
 shape = SubResource("RectangleShape2D_dvger")
+
+[node name="Limit" parent="." instance=ExtResource("9_7ftwb")]
 
 [editable path="MovePlatform3"]
 [editable path="KillingPlatform"]

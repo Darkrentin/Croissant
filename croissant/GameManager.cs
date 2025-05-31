@@ -11,6 +11,7 @@ public partial class GameManager : Node2D
     [Export] public AudioStreamPlayer[] Musics;
     public enum Music { Idle, IntroGame, Level1, Level2, Level3, FinalLevel, FinalBoss, Scoreboard, NoMusic, }
     [Export] public AudioStreamPlayer BossExplosionSound;
+    [Export] public bool DebugMode = false;
     public static Music CurrentMusic = Music.NoMusic;
 
     public static AudioStreamPlayer ClickSound;
@@ -141,8 +142,14 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("LeftClick"))
+        if (Input.IsActionJustPressed("LeftClick") && State != GameState.FinalLevel)
             ClickSound.Play();
+
+        if(DebugMode && Input.IsActionJustPressed("SkipLevel"))
+        {
+            if (SkipLevel != null)
+                SkipLevel.Invoke();
+        }
 
         _ProcessShake();
 

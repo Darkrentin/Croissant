@@ -3,9 +3,6 @@
 [ext_resource type="Script" uid="uid://dwoxfvrhewmea" path="res://scripts/Level3/Others/ConfigFile.cs" id="1_j5ubr"]
 [ext_resource type="Texture2D" uid="uid://cfqvpinpt8grv" path="res://assets/sprites/platformer/ConfigFile.png" id="2_eb6lh"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_eb6lh"]
-size = Vector2(39, 45)
-
 [sub_resource type="Animation" id="Animation_eb6lh"]
 resource_name = "Idle"
 loop_mode = 2
@@ -19,7 +16,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0.365, 0.365), Vector2(0.4, 0.4)]
+"values": [Vector2(0.5, 0.5), Vector2(0.7, 0.7)]
 }
 
 [sub_resource type="Animation" id="Animation_x0rm7"]
@@ -36,25 +33,64 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0.365, 0.365)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_e0boy"]
+resource_name = "Collect"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(1, 1), Vector2(0.001, 0.001)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x0rm7"]
 _data = {
+&"Collect": SubResource("Animation_e0boy"),
 &"Idle": SubResource("Animation_eb6lh"),
 &"RESET": SubResource("Animation_x0rm7")
 }
 
-[node name="ConfigFile" type="Area2D"]
+[node name="ConfigFile" type="Area2D" node_paths=PackedStringArray("FileName", "AnimationPlayer")]
 collision_mask = 2
 script = ExtResource("1_j5ubr")
+FileName = NodePath("Label")
+AnimationPlayer = NodePath("AnimationPlayer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-2, 0)
 scale = Vector2(0.365, 0.365)
 texture = ExtResource("2_eb6lh")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, -1)
-shape = SubResource("RectangleShape2D_eb6lh")
 
 [node name="Label" type="Label" parent="."]
 offset_left = -24.0

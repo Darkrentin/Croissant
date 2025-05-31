@@ -21,8 +21,8 @@ public static class States
     public static PackedScene ScoreboardScene = SceneLoader.ScoreboardScene;
     public static Window Bsod;
     public static Node2D IntroLvl;
-    public static Node Lvl1;
-    public static Node Lvl2;
+    public static Level1 Lvl1;
+    public static Level2 Lvl2;
     public static int LevelOfTuto = 0;
 
     public static void Virus()
@@ -138,8 +138,9 @@ public static class States
     {
         GameManager.PlayMusic(GameManager.Music.Level1);
         GameManager.virus.HideNpc(1);
-        Lvl1 = Level1Scene.Instantiate<Node2D>();
+        Lvl1 = Level1Scene.Instantiate<Level1>();
         GameManager.GameRoot.AddChild(Lvl1);
+        GameManager.SkipLevel = Lvl1.EndActions;
 
         // Change State condition
         GameManager.State = GameManager.GameState.Void;
@@ -169,9 +170,9 @@ public static class States
     {
         GameManager.PlayMusic(GameManager.Music.Level2);
         GameManager.helper.HideNpc(3);
-        Node2D Level2 = Level2Scene.Instantiate<Node2D>();
-        GameManager.GameRoot.AddChild(Level2);
-
+        Lvl2 = Level2Scene.Instantiate<Level2>();
+        GameManager.GameRoot.AddChild(Lvl2);
+        GameManager.SkipLevel = Lvl2.EndActions;
         // Remove the virus
         GameManager.virus.HideNpc(1);
 
@@ -191,8 +192,10 @@ public static class States
     public static void level3()
     {
         GameManager.PlayMusic(GameManager.Music.Level3);
-        Window Level3 = SceneLoader.Level3Scene.Instantiate<Window>();
+        Level3 Level3 = SceneLoader.Level3Scene.Instantiate<Level3>();
         GameManager.GameRoot.AddChild(Level3);
+
+        GameManager.SkipLevel = Level3.EndLevel;
 
         Vector2I newSize = new Vector2I(100, 100);
         GameManager.helper.GrabFocus();
@@ -220,12 +223,16 @@ public static class States
     public static void FinalLevel()
     {
         GameManager.PlayMusic(GameManager.Music.FinalLevel);
-        GameManager.GameRoot.RemoveChild(GameManager.virus);
-        GameManager.virus.QueueFree();
-        GameManager.virus = null;
-
-        Node3D FinalLevel = SceneLoader.FinalLevelScene.Instantiate<Node3D>();
+        if (GameManager.virus != null)
+        {
+            GameManager.GameRoot.RemoveChild(GameManager.virus);
+            GameManager.virus.QueueFree();
+            GameManager.virus = null;
+        }
+    
+        FinalLevel FinalLevel = SceneLoader.FinalLevelScene.Instantiate<FinalLevel>();
         GameManager.GameRoot.AddChild(FinalLevel);
+        GameManager.SkipLevel = FinalLevel.TransitionToBossLevel;
 
         // Change State condition
         GameManager.State = GameManager.GameState.Void;
@@ -237,6 +244,7 @@ public static class States
         Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
         Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;
         GameManager.GameRoot.AddChild(Scoreboard);
+        GameManager.SkipLevel = () => { Lib.Print("Skip Scoreboard"); };
 
         // Change State condition
         GameManager.State = GameManager.GameState.Void;
@@ -258,7 +266,7 @@ public static class States
         if (IntroGameManager.score >= IntroGameManager.Instance.MaxScore)
         {
             IntroGameManager.EndActions();
-            GameManager.State = GameManager.GameState.IntroVirus;
+            
         }
     }
 

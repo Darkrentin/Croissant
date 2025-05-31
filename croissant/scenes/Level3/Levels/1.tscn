@@ -1,17 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bmu8kn83q82h5"]
+[gd_scene load_steps=13 format=3 uid="uid://bmu8kn83q82h5"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_6my4b"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_w0pfg"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_s5xex"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="4_nu3jg"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_6my4b"]
-resource_local_to_scene = true
-size = Vector2(128, 1344)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nu3jg"]
-resource_local_to_scene = true
-size = Vector2(1920, 128)
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="5_qfkls"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_73yxm"]
 resource_local_to_scene = true
@@ -40,24 +33,6 @@ size = Vector2(302, 371)
 [node name="1" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_6my4b")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window")]
-
-[node name="Limit" type="StaticBody2D" parent="."]
-
-[node name="L" type="CollisionShape2D" parent="Limit"]
-position = Vector2(-64, 544)
-shape = SubResource("RectangleShape2D_6my4b")
-
-[node name="R" type="CollisionShape2D" parent="Limit"]
-position = Vector2(1984, 544)
-shape = SubResource("RectangleShape2D_6my4b")
-
-[node name="U" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, -64)
-shape = SubResource("RectangleShape2D_nu3jg")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, 1152)
-shape = SubResource("RectangleShape2D_nu3jg")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_w0pfg")]
 position = Vector2(0, 467)
@@ -118,6 +93,8 @@ shape = SubResource("RectangleShape2D_1wk2o")
 [node name="2" parent="." instance=ExtResource("2_s5xex")]
 position = Vector2(1775, 221)
 NextSceneId = 2
+
+[node name="Limit" parent="." instance=ExtResource("5_qfkls")]
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

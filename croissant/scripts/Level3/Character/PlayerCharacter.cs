@@ -371,6 +371,8 @@ public partial class PlayerCharacter : CharacterBody2D
             Level3.Instance.sceneid = 0;
             Level3.Instance.Level3Nodes[0].ShowSubLevel();
             Level3.Instance.actualScene = Level3.Instance.Level3Nodes[0];
+            Level3.Instance.PortalAnimationPlayer.Play("RESET");
+            Level3.Instance.PortalSpawn.Visible = true;
 
             Animator.Play("Idle");
             isDead = false;
@@ -386,12 +388,22 @@ public partial class PlayerCharacter : CharacterBody2D
             tween.TweenCallback(Callable.From(() =>
             {
                 ProcessMode = ProcessModeEnum.Pausable;
+                Level3.Instance.PortalAnimationPlayer.Play("Open");
+                GetTree().CreateTimer(1f).Timeout += () =>
+                {
+                    Level3.Instance.PortalSpawn.Visible = false;
+                };
             }));
             ProcessMode = ProcessModeEnum.Disabled;
 
             if (Velocity.Y > 0)
             {
                 Velocity = new Vector2(Velocity.X, 0);
+            }
+
+            if (Level3.Instance.End)
+            {
+                Level3.Instance.EndLevel();
             }
         }
         if (animationName == "Repair")

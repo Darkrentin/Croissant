@@ -9,12 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="7_8rwei"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_pqqv7"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="8_qycog"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8ackp"]
-size = Vector2(128, 1344)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_xc7k3"]
-size = Vector2(1920, 128)
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="10_4uxt5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_465vx"]
 size = Vector2(128, 896)
@@ -301,6 +296,9 @@ shader_parameter/window_size = Vector2(800, 600)
 resource_local_to_scene = true
 size = Vector2(184, 400)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qycog"]
+size = Vector2(256, 184)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cdr3u"]
 size = Vector2(112, 104)
 
@@ -316,24 +314,6 @@ size = Vector2(128, 128)
 [node name="10" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_81td5")
 windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform3/Window"), NodePath("WindowsOnly/Window"), NodePath("StaticPlateform/Window"), NodePath("MovePlatform/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("KillingPlatform6/Window"), NodePath("WindowsOnly2/Window"), NodePath("WindowsOnly3/Window"), NodePath("StaticPlateform2/Window"), NodePath("WindowsOnly4/Window"), NodePath("KillingPlatform7/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("WindowsOnly5/Window"), NodePath("KillingPlatform11/Window"), NodePath("KillingPlatform12/Window")]
-
-[node name="Limit" type="StaticBody2D" parent="."]
-
-[node name="L" type="CollisionShape2D" parent="Limit"]
-position = Vector2(-64, 544)
-shape = SubResource("RectangleShape2D_8ackp")
-
-[node name="R" type="CollisionShape2D" parent="Limit"]
-position = Vector2(1984, 544)
-shape = SubResource("RectangleShape2D_8ackp")
-
-[node name="U" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, -64)
-shape = SubResource("RectangleShape2D_xc7k3")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, 1152)
-shape = SubResource("RectangleShape2D_xc7k3")
 
 [node name="0" parent="." instance=ExtResource("1_xc7k3")]
 position = Vector2(176, 936)
@@ -547,7 +527,11 @@ position = Vector2(92, 200)
 shape = SubResource("RectangleShape2D_1mm30")
 
 [node name="ConfigFile" parent="." instance=ExtResource("7_8rwei")]
-position = Vector2(464, 1008)
+position = Vector2(352, 1000)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
+position = Vector2(-96, -12)
+shape = SubResource("RectangleShape2D_qycog")
 
 [node name="KillingPlatform11" parent="." instance=ExtResource("2_px2a8")]
 position = Vector2(976, 696)
@@ -576,6 +560,8 @@ shape = SubResource("RectangleShape2D_d7ylu")
 [node name="CollisionShape2D" parent="KillingPlatform12/Area2D" index="0"]
 position = Vector2(64, 64)
 shape = SubResource("RectangleShape2D_nwsto")
+
+[node name="Limit" parent="." instance=ExtResource("10_4uxt5")]
 
 [editable path="KillingPlatform"]
 [editable path="KillingPlatform2"]

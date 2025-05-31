@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://hca4ftw22ecd"]
+[gd_scene load_steps=34 format=3 uid="uid://hca4ftw22ecd"]
 
 [ext_resource type="PackedScene" uid="uid://yaacwup8xpjj" path="res://scenes/Level3/Others/Player.tscn" id="1_7smpx"]
 [ext_resource type="Script" uid="uid://co7t23txus36e" path="res://scripts/Level3/Level3.cs" id="1_pl275"]
@@ -27,6 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://dvo4qldeach6e" path="res://assets/sounds/level_3/config_file_gather.mp3" id="25_yi0hh"]
 [ext_resource type="AudioStream" uid="uid://cfoe4pwq8ffx5" path="res://assets/sounds/level_3/portal_enter.mp3" id="26_3octb"]
 [ext_resource type="AudioStream" uid="uid://qakholntwpg3" path="res://assets/sounds/level_3/portal_exit.mp3" id="27_4kg8h"]
+[ext_resource type="Texture2D" uid="uid://bxxsv4s2tyly2" path="res://assets/sprites/platformer/EmptyFolrder.png" id="28_4kg8h"]
+[ext_resource type="Texture2D" uid="uid://b1uqh6kf5rci7" path="res://assets/sprites/platformer/ClosedFolder.png" id="29_ct77d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v1qwp"]
 shader = ExtResource("19_8o4oi")
@@ -34,7 +36,92 @@ shader_parameter/r_displacement = Vector2(-2, -2)
 shader_parameter/g_displacement = Vector2(0, 0)
 shader_parameter/b_displacement = Vector2(2, 2)
 
-[node name="Level3" type="Window" node_paths=PackedStringArray("player", "ConfigFileGatheredSound", "PortalEnterSound", "PortalExitSound")]
+[sub_resource type="Animation" id="Animation_4kg8h"]
+resource_name = "Open"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portal/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("29_ct77d"), ExtResource("28_4kg8h")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Portal:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 1.3), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Portal:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_w3tu5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Portal/TextureRect:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("29_ct77d")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Portal:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Portal:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ct77d"]
+_data = {
+&"Open": SubResource("Animation_4kg8h"),
+&"RESET": SubResource("Animation_w3tu5")
+}
+
+[node name="Level3" type="Window" node_paths=PackedStringArray("player", "ConfigFileGatheredSound", "PortalEnterSound", "PortalExitSound", "PortalAnimationPlayer", "PortalSpawn")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 mode = 4
@@ -50,6 +137,8 @@ player = NodePath("Player")
 ConfigFileGatheredSound = NodePath("Sound/ConfigFileGather")
 PortalEnterSound = NodePath("Sound/PortalEnter")
 PortalExitSound = NodePath("Sound/PortalExit")
+PortalAnimationPlayer = NodePath("AnimationPlayer")
+PortalSpawn = NodePath("Portal")
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(960, 540)
@@ -77,3 +166,21 @@ bus = &"SFX"
 [node name="PortalExit" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("27_4kg8h")
 bus = &"SFX"
+
+[node name="Portal" type="Node2D" parent="."]
+visible = false
+position = Vector2(960, 540)
+
+[node name="TextureRect" type="TextureRect" parent="Portal"]
+offset_left = -48.0
+offset_top = -56.0
+offset_right = 79.0
+offset_bottom = 67.0
+texture = ExtResource("29_ct77d")
+expand_mode = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ct77d")
+}

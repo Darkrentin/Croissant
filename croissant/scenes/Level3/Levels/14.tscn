@@ -1,21 +1,16 @@
-[gd_scene load_steps=36 format=3 uid="uid://btj83jbmdhmwf"]
+[gd_scene load_steps=35 format=3 uid="uid://btj83jbmdhmwf"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_dwhl5"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_i8vnu"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="3_e4mtb"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="4_vshls"]
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="5_vue7d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iblhu"]
 size = Vector2(128, 608)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wo7j5"]
 size = Vector2(128, 608)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ptfil"]
-size = Vector2(128, 1344)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dwhl5"]
-size = Vector2(1920, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vshls"]
 resource_local_to_scene = true
@@ -126,24 +121,6 @@ shape = SubResource("RectangleShape2D_iblhu")
 [node name="CollisionShape2D" parent="KillingPlatform6/Area2D" index="0"]
 position = Vector2(64, 304)
 shape = SubResource("RectangleShape2D_wo7j5")
-
-[node name="Limit" type="StaticBody2D" parent="."]
-
-[node name="L" type="CollisionShape2D" parent="Limit"]
-position = Vector2(-64, 544)
-shape = SubResource("RectangleShape2D_ptfil")
-
-[node name="R" type="CollisionShape2D" parent="Limit"]
-position = Vector2(1984, 544)
-shape = SubResource("RectangleShape2D_ptfil")
-
-[node name="U" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, -64)
-shape = SubResource("RectangleShape2D_dwhl5")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, 1152)
-shape = SubResource("RectangleShape2D_dwhl5")
 
 [node name="13" parent="." instance=ExtResource("2_i8vnu")]
 position = Vector2(24, 840)
@@ -340,6 +317,8 @@ shape = SubResource("RectangleShape2D_gaask")
 [node name="CollisionShape2D" parent="KillingPlatform10/Area2D" index="0"]
 position = Vector2(64, 88)
 shape = SubResource("RectangleShape2D_qiyvy")
+
+[node name="Limit" parent="." instance=ExtResource("5_vue7d")]
 
 [editable path="KillingPlatform6"]
 [editable path="StaticPlateform"]

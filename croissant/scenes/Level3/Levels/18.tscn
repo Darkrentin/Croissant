@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://cjhxp6chvkb8y"]
+[gd_scene load_steps=41 format=3 uid="uid://cjhxp6chvkb8y"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ipvvp"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_5xhin"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="5_bjita"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="6_bo8m0"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="8_qqi26"]
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="10_uwv76"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bo8m0"]
 resource_local_to_scene = true
@@ -86,12 +87,6 @@ shader_parameter/window_size = Vector2(800, 600)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o5f23"]
 resource_local_to_scene = true
 size = Vector2(1408, 192)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ipvvp"]
-size = Vector2(128, 1344)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5xhin"]
-size = Vector2(1920, 128)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bjita"]
 resource_local_to_scene = true
@@ -258,24 +253,6 @@ material = SubResource("ShaderMaterial_cfiq4")
 position = Vector2(704, 96)
 shape = SubResource("RectangleShape2D_o5f23")
 
-[node name="Limit" type="StaticBody2D" parent="."]
-
-[node name="L" type="CollisionShape2D" parent="Limit"]
-position = Vector2(-64, 544)
-shape = SubResource("RectangleShape2D_ipvvp")
-
-[node name="R" type="CollisionShape2D" parent="Limit"]
-position = Vector2(1984, 544)
-shape = SubResource("RectangleShape2D_ipvvp")
-
-[node name="U" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, -64)
-shape = SubResource("RectangleShape2D_5xhin")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, 1152)
-shape = SubResource("RectangleShape2D_5xhin")
-
 [node name="17" parent="." instance=ExtResource("2_5xhin")]
 position = Vector2(40, 32)
 NextSceneId = 17
@@ -389,6 +366,8 @@ material = SubResource("ShaderMaterial_0y1ln")
 [node name="CollisionShape2D" parent="PlayerOnly6" index="1"]
 position = Vector2(64, 352)
 shape = SubResource("RectangleShape2D_u75s7")
+
+[node name="Limit" parent="." instance=ExtResource("10_uwv76")]
 
 [editable path="MovePlatform2"]
 [editable path="MovePlatform"]

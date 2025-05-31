@@ -4,6 +4,7 @@ public partial class ConfigFile : Area2D
 {
     public static int count = 0;
     [Export] public Label FileName;
+    [Export] public AnimationPlayer AnimationPlayer;
 
     public override void _Ready()
     {
@@ -11,27 +12,27 @@ public partial class ConfigFile : Area2D
         {
             count = 0;
         }
+        BodyEntered += OnCollision;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        CheckForPlayerCollision();
     }
 
-    private void CheckForPlayerCollision()
+    public void OnCollision(Node body)
     {
-        var overlappingBodies = GetOverlappingBodies();
-
-        foreach (var body in overlappingBodies)
+        if (body is PlayerCharacter)
         {
-            if (body is PlayerCharacter)
+            count++;
+            Level3.Instance.CollectFile();
+            AnimationPlayer.Play("Collect");
+
+            GetTree().CreateTimer(0.5f).Timeout += () =>
             {
-                count++;
-                Level3.Instance.CollectFile();
+                GetParent().RemoveChild(this);
                 QueueFree();
-                break;
-            }
+            };
         }
     }
 }

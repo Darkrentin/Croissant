@@ -349,25 +349,33 @@ private void TryLaunchLiftWall()
 		{
 			Hp--;
 			UpdateHealthBar();
-			StartGlitch();
-			GlitchTimer.WaitTime = 10f;
+			EndActions();
 			
-			// Stop all attack timers when boss dies
-			FloppyDiskTimer.Stop();
-			MovementTimer.Stop();
-			LiftWallTimer.Stop();
-			
-			GetTree().CreateTimer(0.1f).Timeout += () =>
-			{
-				FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
-				BossExplosion1Sound.Play();
-				BossExplosion2Sound.Play();
-				GameManager.Instance.BossExplosionSound.Play();
-				FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
-				SpeedRunTimer.Instance.StopTimer();
-				GlitchTimer.Stop();
-			};
 		}
+	}
+
+	public void EndActions()
+	{
+		StartGlitch();
+		GlitchTimer.WaitTime = 10f;
+			
+		// Stop all attack timers when boss dies
+		FloppyDiskTimer.Stop();
+		MovementTimer.Stop();
+		LiftWallTimer.Stop();
+			
+		GetTree().CreateTimer(0.1f).Timeout += () =>
+		{
+			FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
+			BossExplosion1Sound.Play();
+			BossExplosion2Sound.Play();
+			GameManager.Instance.BossExplosionSound.Play();
+			FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
+			SpeedRunTimer.Instance.StopTimer();
+			GlitchTimer.Stop();
+			GameManager.SaveData.HaveFinishTheGameAtLeastOneTime = true;
+			GameManager.SaveData.Save();
+		};
 	}
 
 	public void HealVirus()

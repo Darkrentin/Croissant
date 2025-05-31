@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://bflx07hg5rj6h"]
+[gd_scene load_steps=18 format=3 uid="uid://bflx07hg5rj6h"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
@@ -7,13 +7,7 @@
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_5q6or"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_v5qpy"]
 [ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
-[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="6_gijp6"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8j6u2"]
-size = Vector2(128, 1344)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnnv"]
-size = Vector2(1920, 128)
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="8_v5qpy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkapc"]
 resource_local_to_scene = true
@@ -60,24 +54,6 @@ size = Vector2(128, 512)
 [node name="0" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_5q6or")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window"), NodePath("DoorPlateform/Window"), NodePath("DoorPlateform2/Window"), NodePath("DoorPlateform3/Window")]
-
-[node name="Limit" type="StaticBody2D" parent="."]
-
-[node name="L" type="CollisionShape2D" parent="Limit"]
-position = Vector2(-64, 544)
-shape = SubResource("RectangleShape2D_8j6u2")
-
-[node name="R" type="CollisionShape2D" parent="Limit"]
-position = Vector2(1984, 544)
-shape = SubResource("RectangleShape2D_8j6u2")
-
-[node name="U" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, -64)
-shape = SubResource("RectangleShape2D_vwnnv")
-
-[node name="D" type="CollisionShape2D" parent="Limit"]
-position = Vector2(960, 1152)
-shape = SubResource("RectangleShape2D_vwnnv")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 960)
@@ -151,18 +127,6 @@ shape = SubResource("RectangleShape2D_5q6or")
 [node name="Window" parent="DoorPlateform" index="1"]
 visible = false
 
-[node name="ConfigFile" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(840, 376)
-
-[node name="ConfigFile2" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(1088, 376)
-
-[node name="ConfigFile3" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(952, 376)
-
-[node name="ConfigFile4" parent="." instance=ExtResource("6_gijp6")]
-position = Vector2(960, 40)
-
 [node name="DoorPlateform2" parent="." instance=ExtResource("5_yrjvf")]
 position = Vector2(320, 0)
 nbOfFilesToOpen = 2
@@ -177,6 +141,8 @@ position = Vector2(320, 448)
 [node name="CollisionShape2D" parent="DoorPlateform3" index="0"]
 position = Vector2(64, 256)
 shape = SubResource("RectangleShape2D_72i25")
+
+[node name="Limit" parent="." instance=ExtResource("8_v5qpy")]
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

@@ -121,6 +121,8 @@ public partial class IntroGameManager : Node2D
 		GameExplosion.Emitting = true;
 		Instance.ExplosionTimer.Start();
 		StaticGameExplosionSound.Play();
+
+		GameManager.State = GameManager.GameState.IntroVirus;
 	}
 
 	private void SpawnEnemy()

@@ -16,10 +16,10 @@ public partial class Level2 : Node2D
 			CursorWindow = States.CursorWindowScene.Instantiate<CursorWindow>();
 			GameManager.GameRoot.AddChild(CursorWindow);
 		}
-		WaveManager.EndWave += NextLvl;
+		WaveManager.EndWave += EndActions;
 	}
 
-	public void NextLvl()
+	public void EndActions()
 	{
 		GameManager.State = GameManager.GameState.Dialogue2;
 		CursorWindow.GetParent().RemoveChild(CursorWindow);

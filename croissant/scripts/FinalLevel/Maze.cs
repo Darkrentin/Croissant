@@ -44,6 +44,7 @@ public partial class Maze : Node3D
     public List<Enemy3D> Enemies = new List<Enemy3D>();
     public List<StaticBody3D> Paths = new List<StaticBody3D>();
     public List<Objective> Objectives = new List<Objective>();
+    public bool WallRemove = false;
     [Export(PropertyHint.Range, "0.0,1.0,0.01")] public float LoopCreationProbability = 0.1f;
 
     public override void _Ready()
@@ -346,6 +347,7 @@ public partial class Maze : Node3D
 
     public void RemoveAllWall()
     {
+        WallRemove = true;
         for (int i = 1; i < MazeSize - 1; i++)
         {
             for (int j = 1; j < MazeSize - 1; j++)
@@ -357,7 +359,7 @@ public partial class Maze : Node3D
                     var tween = GetTree().CreateTween();
                     tween.TweenProperty(MazeTiles[i, j], "position", MazeTiles[i, j].Position + new Vector3(0, -2, 0), 1.8f);
                     tween.TweenCallback(Callable.From(() => MazeTiles[i, j].QueueFree()));
-                    
+
                     StaticBody3D floor = FloorScene.Instantiate<StaticBody3D>();
                     int nx = i - MazeSize / 2;
                     int nz = j - MazeSize / 2;

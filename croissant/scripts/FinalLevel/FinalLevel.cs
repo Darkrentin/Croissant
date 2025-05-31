@@ -146,12 +146,16 @@ public partial class FinalLevel : Node3D
 	}
 	public void TransitionToBossLevel()
 	{
+		if (!maze.WallRemove)
+			maze.RemoveAllWall();
 		GameManager.PlayMusic(GameManager.Music.FinalBoss);
 		GameNode.RemoveChild(Area3D);
 		GameNode.RemoveChild(NavigationRegion);
 		NavigationRegion.QueueFree();
 		BossLevel = BossLevelScene.Instantiate<Node3D>();
 		GameNode.AddChild(BossLevel);
+		GameManager.SkipLevel = Virus3D.Instance.EndActions;
+		Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
 	}
 
 	public override void _Process(double delta)
