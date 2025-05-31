@@ -70,7 +70,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qhlrt"]
 resource_local_to_scene = true
-size = Vector2(280, 584)
+size = Vector2(280, 576)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qhlrt"]
 resource_local_to_scene = true
@@ -88,7 +88,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hukr0"]
 resource_local_to_scene = true
-size = Vector2(840, 128)
+size = Vector2(840, 120)
 
 [sub_resource type="Shader" id="Shader_cax68"]
 resource_local_to_scene = true
@@ -558,7 +558,7 @@ material = SubResource("ShaderMaterial_5e8jk")
 material = SubResource("ShaderMaterial_srp00")
 
 [node name="CollisionShape2D" parent="MovePlatform3" index="1"]
-position = Vector2(140, 292)
+position = Vector2(140, 288)
 shape = SubResource("RectangleShape2D_qhlrt")
 
 [node name="MovePlatform4" parent="." instance=ExtResource("3_6v3s2")]
@@ -571,7 +571,7 @@ material = SubResource("ShaderMaterial_qhlrt")
 material = SubResource("ShaderMaterial_025ye")
 
 [node name="CollisionShape2D" parent="MovePlatform4" index="1"]
-position = Vector2(420, 64)
+position = Vector2(420, 60)
 shape = SubResource("RectangleShape2D_hukr0")
 
 [node name="WindowsOnly" parent="." instance=ExtResource("6_q6xmu")]
@@ -775,8 +775,10 @@ shape = SubResource("RectangleShape2D_04sxb")
 position = Vector2(1720, 128)
 
 [node name="Label" parent="ConfigFile" index="1"]
-offset_left = -27.925
-offset_right = 30.075
+offset_left = -32.0
+offset_top = 40.0
+offset_right = 26.0
+offset_bottom = 63.0
 text = "pirg.cfg"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]

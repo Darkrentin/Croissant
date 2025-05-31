@@ -101,7 +101,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4o1v8"]
 resource_local_to_scene = true
-size = Vector2(216, 64)
+size = Vector2(200, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cjc3c"]
 size = Vector2(384, 56)
@@ -227,7 +227,7 @@ material = SubResource("ShaderMaterial_j865x")
 material = SubResource("ShaderMaterial_ao3kh")
 
 [node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(108, 32)
+position = Vector2(100, 32)
 shape = SubResource("RectangleShape2D_4o1v8")
 
 [node name="KillingPlatform4" parent="." instance=ExtResource("4_e1334")]
