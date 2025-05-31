@@ -25,7 +25,9 @@ public partial class Level3 : FloatWindow
     private HashSet<int> requestedLoads;
     public bool End = false;
 
-    public bool MovingHovered = false;
+    public bool MovingHovered {get => NbPressedWindows > 0;}
+    public int NbPressedWindows { get {return _NbPressedWindows; } set {_NbPressedWindows.ToString(); _NbPressedWindows = value; } }
+    public int _NbPressedWindows = 0;
 
     public override void _Ready()
     {

@@ -121,7 +121,7 @@ public partial class MovePlatform : Platform
         {
             bool mouseOnTitle = MouseOnTitle();
             bool shouldBeActive = mouseOnTitle || Pressed;
-            Level3.Instance.MovingHovered = shouldBeActive;
+
 
             if (shouldBeActive && !CurrentlyActive && !IsLerping)
             {
@@ -241,18 +241,24 @@ public partial class MovePlatform : Platform
         PressedSound.Play();
         _lastSoundPosition = GlobalPosition;
         _totalDistanceTraveled = 0f;
+        Level3.Instance.NbPressedWindows++;
     }
 
     public void JustReleased()
     {
         ReleaseSound.Play();
         _totalDistanceTraveled = 0f;
+        Level3.Instance.NbPressedWindows--;
     }
 
     public void VisibilityChange()
     {
-        Level3.Instance.MovingHovered = false;
-        Pressed = false;
+        if (Pressed)
+        {
+            Level3.Instance.NbPressedWindows--;
+            Pressed = false;
+        }
+        
         ShaderRectShader.SetShaderParameter("mult", MaxMult);
         Shader.SetShaderParameter("frequency", 32f);
     }
