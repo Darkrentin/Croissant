@@ -20,10 +20,12 @@ public partial class Level3 : FloatWindow
     public static Level3 Instance;
     public SubLevel3 actualScene;
     public Action<InputEventMouseButton> MouseEvent; public int FilesCollected = 0;
-    private Timer invincibleTimer;    private bool[] loadedScenes;
+    private Timer invincibleTimer; private bool[] loadedScenes;
     private Dictionary<int, ResourceLoader.ThreadLoadStatus> loadingStatus;
     private HashSet<int> requestedLoads;
     public bool End = false;
+
+    public bool MovingHovered = false;
 
     public override void _Ready()
     {
@@ -32,7 +34,7 @@ public partial class Level3 : FloatWindow
         GameManager.MainWindow.ContentScaleMode = ContentScaleModeEnum.CanvasItems;
         GameManager.MainWindow.ContentScaleAspect = ContentScaleAspectEnum.Ignore;
         GrabFocus();
-        Instance = this;        Level3Nodes = new SubLevel3[level3Scenes.Length];
+        Instance = this; Level3Nodes = new SubLevel3[level3Scenes.Length];
         loadedScenes = new bool[level3Scenes.Length];
         loadingStatus = new Dictionary<int, ResourceLoader.ThreadLoadStatus>();
         requestedLoads = new HashSet<int>();
@@ -78,8 +80,9 @@ public partial class Level3 : FloatWindow
             {
                 MouseEvent = null;
             }
-        }    }
-    
+        }
+    }
+
     public override void _ExitTree()
     {
         base._ExitTree();
@@ -88,58 +91,55 @@ public partial class Level3 : FloatWindow
 
     private void LoadScene(int sceneIndex)
     {
-        if (sceneIndex < 0 || sceneIndex >= level3Scenes.Length || 
+        if (sceneIndex < 0 || sceneIndex >= level3Scenes.Length ||
             loadedScenes[sceneIndex] || requestedLoads.Contains(sceneIndex))
             return;
 
         requestedLoads.Add(sceneIndex);
-        
+
         // Start threaded loading
         string scenePath = level3Scenes[sceneIndex].ResourcePath;
         ResourceLoader.LoadThreadedRequest(scenePath);
         loadingStatus[sceneIndex] = ResourceLoader.ThreadLoadStatus.InProgress;
-        
-        Lib.Print($"Started threaded loading for scene {sceneIndex}: {scenePath}");
     }
 
     public override void _Process(double delta)
     {
         if (!HasFocus()) GrabFocus();
-        
+
         // Check threaded loading progress
         CheckThreadedLoading();
-        
+
         base._Process(delta);
     }
 
     private void CheckThreadedLoading()
     {
         var completedLoads = new List<int>();
-        
+
         foreach (var kvp in loadingStatus.ToArray())
         {
             int sceneIndex = kvp.Key;
             var status = kvp.Value;
-            
+
             if (status == ResourceLoader.ThreadLoadStatus.InProgress)
             {
                 string scenePath = level3Scenes[sceneIndex].ResourcePath;
                 var currentStatus = ResourceLoader.LoadThreadedGetStatus(scenePath);
                 loadingStatus[sceneIndex] = currentStatus;
-                
+
                 if (currentStatus == ResourceLoader.ThreadLoadStatus.Loaded)
                 {
                     completedLoads.Add(sceneIndex);
                 }
                 else if (currentStatus == ResourceLoader.ThreadLoadStatus.Failed)
                 {
-                    Lib.Print($"Failed to load scene {sceneIndex}: {scenePath}");
                     requestedLoads.Remove(sceneIndex);
                     loadingStatus.Remove(sceneIndex);
                 }
             }
         }
-        
+
         // Process completed loads
         foreach (int sceneIndex in completedLoads)
         {
@@ -153,24 +153,17 @@ public partial class Level3 : FloatWindow
         {
             string scenePath = level3Scenes[sceneIndex].ResourcePath;
             var loadedResource = ResourceLoader.LoadThreadedGet(scenePath);
-            
+
             if (loadedResource is PackedScene packedScene)
             {
                 Level3Nodes[sceneIndex] = packedScene.Instantiate<SubLevel3>();
                 AddChild(Level3Nodes[sceneIndex]);
                 Level3Nodes[sceneIndex].HideSubLevel();
                 loadedScenes[sceneIndex] = true;
-                
-                Lib.Print($"Successfully loaded scene {sceneIndex} via threading");
-            }
-            else
-            {
-                Lib.Print($"Scene {sceneIndex} loaded but is not a PackedScene");
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
-            Lib.Print($"Error completing load for scene {sceneIndex}: {ex.Message}");
         }
         finally
         {
@@ -266,7 +259,7 @@ public partial class Level3 : FloatWindow
             player.GlobalPosition = playerTargetPosition;
             player.Animator2.PlayBackwards("Hide");
             NextPortal.AnimationPlayer.PlayBackwards("Close");
-            
+
 
             GetTree().CreateTimer(0.3f).Timeout += () =>
             {
@@ -278,7 +271,6 @@ public partial class Level3 : FloatWindow
         }
         else
         {
-            // Portal PortalToSpawn : supprimer le portail et le chemin du niveau 0
             CleanupPathAndPortal(sceneid);
             PortalAnimationPlayer.Play("RESET");
             PortalSpawn.Visible = true;
@@ -315,7 +307,7 @@ public partial class Level3 : FloatWindow
 
         LoadAdjacentScenes(nextSceneId);
     }
-    
+
     public void TransitionStuck()
     {
         player.isDead = true;
@@ -333,8 +325,8 @@ public partial class Level3 : FloatWindow
             player.Visible = true;
             player.GlobalPosition = GameManager.ScreenSize / 2;
             //CallDeferred(nameof(GrabFocus));
-        };  
-        
+        };
+
 
         if (End)
         {
@@ -349,7 +341,6 @@ public partial class Level3 : FloatWindow
 
     private void CleanupPathAndPortal(int currentSceneId)
     {
-        // Déterminer quel portail du niveau 0 doit être supprimé
         string portalToRemove = "";
         int[] pathToClean = null;
 
@@ -357,33 +348,27 @@ public partial class Level3 : FloatWindow
         {
             portalToRemove = "1";
             pathToClean = new int[] { 1, 2, 3, 4, 5 };
-            Lib.Print("Cleaning path 1-5");
         }
         else if (currentSceneId >= 6 && currentSceneId <= 10)
         {
             portalToRemove = "6";
             pathToClean = new int[] { 6, 7, 8, 9, 10 };
-            Lib.Print("Cleaning path 6-10");
         }
         else if (currentSceneId >= 11 && currentSceneId <= 15)
         {
             portalToRemove = "11";
             pathToClean = new int[] { 11, 12, 13, 14, 15 };
-            Lib.Print("Cleaning path 11-15");
         }
         else if (currentSceneId >= 16 && currentSceneId <= 20)
         {
             portalToRemove = "16";
             pathToClean = new int[] { 16, 17, 18, 19, 20 };
-            Lib.Print("Cleaning path 16-20");
         }
 
         if (portalToRemove != "" && pathToClean != null)
         {
-            // Supprimer le portail du niveau 0
             RemovePortalFromLevel0(portalToRemove);
 
-            // Libérer tous les niveaux du chemin
             FreePathLevels(pathToClean);
         }
     }
@@ -397,14 +382,12 @@ public partial class Level3 : FloatWindow
                 Portal portalToRemove = Level3Nodes[0].GetNode<Portal>(portalName);
                 if (portalToRemove != null)
                 {
-                    Lib.Print($"Removing portal {portalName} from level 0");
                     portalToRemove.GetParent().RemoveChild(portalToRemove);
                     portalToRemove.QueueFree();
                 }
             }
-            catch (System.Exception ex)
+            catch (Exception)
             {
-                Lib.Print($"Portal {portalName} not found in level 0: {ex.Message}");
             }
         }
     }
@@ -413,15 +396,11 @@ public partial class Level3 : FloatWindow
     {
         foreach (int levelIndex in pathLevels)
         {
-            if (levelIndex >= 0 && levelIndex < Level3Nodes.Length && 
+            if (levelIndex >= 0 && levelIndex < Level3Nodes.Length &&
                 loadedScenes[levelIndex] && Level3Nodes[levelIndex] != null)
             {
-                Lib.Print($"Freeing level {levelIndex}");
-                
-                // Marquer comme non chargé
                 loadedScenes[levelIndex] = false;
-                
-                // Retirer de la scène et libérer
+
                 Level3Nodes[levelIndex].GetParent().RemoveChild(Level3Nodes[levelIndex]);
                 Level3Nodes[levelIndex].QueueFree();
                 Level3Nodes[levelIndex] = null;
@@ -429,32 +408,13 @@ public partial class Level3 : FloatWindow
         }
     }
 
-    // Optionnel : méthode pour vérifier l'état des niveaux chargés
-    public void DebugLoadedScenes()
-    {
-        Lib.Print("=== Loaded Scenes Status ===");
-        for (int i = 0; i < loadedScenes.Length; i++)
-        {
-            if (loadedScenes[i])
-            {
-                Lib.Print($"Level {i}: LOADED");
-            }
-            else
-            {
-                Lib.Print($"Level {i}: FREE");
-            }
-        }
-    }
-
     public void CollectFile()
     {
-        Lib.Print($"File collected! Total files: {FilesCollected + 1}/{MaxFiles}");
         FilesCollected++;
         ConfigFileGatheredSound.Play();
         if (FilesCollected >= MaxFiles)
         {
             End = true;
-
         }
     }
 

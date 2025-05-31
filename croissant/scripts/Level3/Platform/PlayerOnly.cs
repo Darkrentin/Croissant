@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class PlayerOnly : Platform
 {
@@ -18,7 +17,7 @@ public partial class PlayerOnly : Platform
         platformHighlightShader = GD.Load<Shader>("res://assets/shaders/PlatformHighlight.gdshader");
         plainHighlightShader = GD.Load<Shader>("res://assets/shaders/PlainHighlight.gdshader");
         Shader.SetShaderParameter("color1", Colors.Green);
-        Shader.SetShaderParameter("frequency", 25f);
+        Shader.SetShaderParameter("frequency", 32f);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -30,7 +29,7 @@ public partial class PlayerOnly : Platform
     {
         base._Process(delta);
 
-        if (Moving)
+        if (Level3.Instance.MovingHovered)
         {
             highlightShader.Shader = plainHighlightShader;
         }

@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class WindowsOnly : Platform
 {
@@ -18,7 +17,7 @@ public partial class WindowsOnly : Platform
         platformHighlightShader = GD.Load<Shader>("res://assets/shaders/PlatformHighlight.gdshader");
         plainHighlightShader = GD.Load<Shader>("res://assets/shaders/PlainHighlight.gdshader");
         Shader.SetShaderParameter("color1", Colors.Yellow);
-        Shader.SetShaderParameter("frequency", 25f);
+        Shader.SetShaderParameter("frequency", 32f);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -29,7 +28,8 @@ public partial class WindowsOnly : Platform
     public override void _Process(double delta)
     {
         base._Process(delta);
-        if (Moving)
+
+        if (Level3.Instance.MovingHovered)
         {
             highlightShader.Shader = platformHighlightShader;
         }

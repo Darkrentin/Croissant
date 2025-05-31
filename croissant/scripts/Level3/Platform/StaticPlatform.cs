@@ -1,5 +1,3 @@
-using Godot;
-
 public partial class StaticPlatform : Platform
 {
     public override void _Ready()
@@ -17,4 +15,3 @@ public partial class StaticPlatform : Platform
         base._Process(delta);
     }
 }
-    
