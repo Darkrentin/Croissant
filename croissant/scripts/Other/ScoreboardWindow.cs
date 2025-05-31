@@ -33,6 +33,7 @@ public partial class ScoreboardWindow : FloatWindow
 		base._Ready();
 
 		RunTime = SpeedRunTimer.Instance.Time;
+		SpeedRunTimer.Instance.Visible = false;
 
 		Title = "Scoreboard";
 		EndResultsContainer.Visible = true;

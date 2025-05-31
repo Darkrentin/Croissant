@@ -373,7 +373,7 @@ private void TryLaunchLiftWall()
 			FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
 			SpeedRunTimer.Instance.StopTimer();
 			GlitchTimer.Stop();
-			GameManager.SaveData.HaveFinishTheGameAtLeastOneTime = true;
+			GameManager.HaveFinishTheGameAtLeastOneTime = true;
 			GameManager.SaveData.Save();
 		};
 	}
