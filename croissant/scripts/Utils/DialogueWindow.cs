@@ -43,10 +43,7 @@ public partial class DialogueWindow : FloatWindow
 
 		OnDialogueFinished += ParentWindow.DialogueFinished;
 		DialogueCount++;
-		Lib.Print($"Dialogue count: {DialogueCount}");
 		Dialogueid = DialogueCount;
-		Lib.Print("Dialogue id: " + Dialogueid + "has the parent: " + ParentWindow.NpcName);
-
 		//StartDialogue("Virus", "sleep");
 	}
 
@@ -103,7 +100,6 @@ public partial class DialogueWindow : FloatWindow
 
 	public void NextLine()
 	{
-		Lib.Print($"Next line: {index} id: {Dialogueid}");
 		if (isTyping && !CanSkip)
 		{
 			return;
@@ -119,7 +115,6 @@ public partial class DialogueWindow : FloatWindow
 		if (text == "")
 		{
 			isDialogue = false;
-			Lib.Print($"Dialogue finished: {ActualDialogueName} id: {Dialogueid} Parent: {ParentWindow.NpcName}");
 			text = ((Dictionary)ActualDialogue[$"{index - 1}"])["text"].ToString();
 			label.Text = "";
 			if (anim != "")
@@ -164,7 +159,6 @@ public partial class DialogueWindow : FloatWindow
 		isDialogue = true;
 		isTyping = false;
 		cursorVisible = false;
-		Lib.Print($"Start dialogue: {character} id: {id} Parent: {ParentWindow.NpcName}");
 		NextLine();
 	}
 

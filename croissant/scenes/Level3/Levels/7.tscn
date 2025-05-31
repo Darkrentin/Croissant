@@ -271,7 +271,7 @@ position = Vector2(960, 1152)
 shape = SubResource("RectangleShape2D_nrgi1")
 
 [node name="6" parent="." instance=ExtResource("2_nrgi1")]
-position = Vector2(64, 64)
+position = Vector2(16, 32)
 NextSceneId = 6
 
 [node name="MovePlatform3" parent="." instance=ExtResource("3_xy65v")]
