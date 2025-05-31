@@ -332,6 +332,7 @@ public partial class GameManager : Node2D
         int currentMusicIndex = (int)CurrentMusic;
 
         var newMusicPlayer = Musics[newMusicIndex];
+        float originalVolumeDb = newMusicPlayer.VolumeDb;
 
         if (CurrentMusic != Music.NoMusic && currentMusicIndex < Musics.Length)
         {
@@ -353,7 +354,7 @@ public partial class GameManager : Node2D
         newMusicPlayer.Play();
 
         var fadeInTween = CreateTween();
-        fadeInTween.TweenProperty(newMusicPlayer, "volume_db", 0.0f, 0.5f);
+        fadeInTween.TweenProperty(newMusicPlayer, "volume_db", originalVolumeDb, 0.5f);
     }
 
     public static void PlayMusic(Music music)

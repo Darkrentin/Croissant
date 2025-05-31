@@ -164,12 +164,15 @@ shape = SubResource("RectangleShape2D_p3h6d")
 
 [node name="Select" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("6_tir0a")
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="UnSelect" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("7_6o0bx")
+volume_db = -1.0
 bus = &"SFX"
 
 [node name="Move" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("8_1dogx")
+volume_db = -10.0
 bus = &"SFX"

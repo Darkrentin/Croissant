@@ -21,7 +21,7 @@ public partial class MovePlatform : Platform
 
     private Vector2 _lastSoundPosition;
     private float _totalDistanceTraveled = 0f;
-    private const float SOUND_DISTANCE_THRESHOLD = 800f;
+    private const float SOUND_DISTANCE_THRESHOLD = 700f;
 
     public bool Pressed = false;
     private Vector2 MinSpeedsWhenBlocked = new Vector2(1f, 1f);

@@ -108,7 +108,7 @@ public partial class PlayerCharacter : CharacterBody2D
         Animator.AnimationFinished += OnAnimationFinished;
 
         StepTimer = new Timer();
-        StepTimer.WaitTime = 0.3f;
+        StepTimer.WaitTime = 0.26f;
         StepTimer.OneShot = false;
         StepTimer.Timeout += () =>
         {
@@ -258,6 +258,7 @@ public partial class PlayerCharacter : CharacterBody2D
             jumps = 0;
             SpawnJumpParticles(Vector2.Up);
             WalkParticles.Emitting = false;
+            LandingSound.Play();
 
             if (JumpBufferTimer.TimeLeft > 0)
             {
@@ -276,7 +277,6 @@ public partial class PlayerCharacter : CharacterBody2D
             }
 
             ChangeState((Node)States.Get("Idle"));
-            LandingSound.Play();
         }
     }
 

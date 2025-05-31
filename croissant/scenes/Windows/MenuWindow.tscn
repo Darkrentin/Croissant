@@ -155,9 +155,11 @@ layout_mode = 2
 
 [node name="MenuEnter" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("3_0od4v")
+volume_db = -2.0
 
 [node name="MenuExit" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("4_qlxr2")
+volume_db = -2.0
 
 [node name="MenuClick" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("5_x3wrm")

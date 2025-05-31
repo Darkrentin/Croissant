@@ -22,7 +22,7 @@ public partial class ConfigFile : Area2D
 
     public void OnCollision(Node body)
     {
-        if (body is PlayerCharacter)
+        if (body is PlayerCharacter p && !p.isDead)
         {
             count++;
             Level3.Instance.CollectFile();
