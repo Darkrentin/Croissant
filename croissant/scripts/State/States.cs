@@ -231,7 +231,7 @@ public static class States
 
         FinalLevel FinalLevel = SceneLoader.FinalLevelScene.Instantiate<FinalLevel>();
         GameManager.GameRoot.AddChild(FinalLevel);
-        GameManager.SkipLevel = FinalLevel.TransitionToBossLevel;
+        GameManager.SkipLevel = FinalLevel.TransitionToEnd;
 
         // Change State condition
         GameManager.State = GameManager.GameState.Void;

@@ -120,6 +120,21 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
+        // Limit horizontal velocity to movement speed
+        if (Math.Abs(Velocity.X) > moveSpeed)
+        {
+            Velocity = new Vector2(Math.Sign(Velocity.X) * moveSpeed, Velocity.Y);
+        }
+
+
+        if (Velocity.Y < 0)
+        {
+            // Limit upward velocity (jump)
+            if (Velocity.Y < jumpSpeed)
+            {
+                Velocity = new Vector2(Velocity.X, jumpSpeed);
+            }
+            }
         base._PhysicsProcess(delta);
         if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();

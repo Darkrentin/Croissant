@@ -159,6 +159,16 @@ public partial class FinalLevel : Node3D
 		Player3D.GlobalPosition = Vector3.Zero + new Vector3(1, 0, 1);
 	}
 
+	public void TransitionToEnd()
+	{
+		FinalLevel.Instance.AnimationPlayer.Play("BossDeath");
+		GameManager.Instance.BossExplosionSound.Play();
+		FinalLevel.Instance.Player3D.ProcessMode = ProcessModeEnum.Disabled;
+		SpeedRunTimer.Instance.StopTimer();
+		GameManager.HaveFinishTheGameAtLeastOneTime = true;
+		GameManager.SaveData.Save();
+	}
+
 	public override void _Process(double delta)
 	{
 
