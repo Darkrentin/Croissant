@@ -58,7 +58,7 @@ public static class States
 
     public static void IntroVirus()
     {
-        GameManager.PlayMusic(GameManager.Music.Idle);
+        GameManager.StopMusic();
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - GameManager.virus.Size / 2;
         GameManager.virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y), 2f);
         GameManager.virus.On = false;
@@ -70,7 +70,6 @@ public static class States
 
     public static void Dialogue1()
     {
-        GameManager.PlayMusic(GameManager.Music.Idle);
         // Freeze the game
         IntroGameManager.Instance.GameNode.Visible = false;
 
@@ -229,7 +228,7 @@ public static class States
             GameManager.virus.QueueFree();
             GameManager.virus = null;
         }
-    
+
         FinalLevel FinalLevel = SceneLoader.FinalLevelScene.Instantiate<FinalLevel>();
         GameManager.GameRoot.AddChild(FinalLevel);
         GameManager.SkipLevel = FinalLevel.TransitionToBossLevel;
@@ -266,7 +265,7 @@ public static class States
         if (IntroGameManager.score >= IntroGameManager.Instance.MaxScore)
         {
             IntroGameManager.EndActions();
-            
+
         }
     }
 
