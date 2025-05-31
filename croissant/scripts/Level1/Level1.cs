@@ -55,11 +55,16 @@ public partial class Level1 : Node2D
         }
         if (WindowCount == 0) //end game condition
         {
-            Lib.Print("No windows left, ending game...");
-            GameManager.State = GameManager.GameState.BlueScreen;
-            QueueFree();
+            EndGame();
         }
 
+    }
+
+    public void EndGame()
+    {
+        Lib.Print("No windows left, ending game...");
+        GameManager.State = GameManager.GameState.BlueScreen;
+        QueueFree();
     }
 
     public static void AddStaticWWindow()

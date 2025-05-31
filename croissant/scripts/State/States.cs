@@ -50,6 +50,7 @@ public static class States
         IntroLvl = IntroGameScene.Instantiate<Node2D>();
         IntroLvl.Position = new Vector2I(1, 0);
         GameManager.GameRoot.AddChild(IntroLvl);
+        GameManager.SkipLevel = IntroGameManager.EndActions;
 
         // Change State condition
         GameManager.State = GameManager.GameState.IntroGame_Process;

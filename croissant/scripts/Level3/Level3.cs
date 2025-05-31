@@ -247,6 +247,7 @@ public partial class Level3 : FloatWindow
         {
             NextPortal = nextScene.GetNode<Portal>($"{sceneid}");
             NextPortal.AnimationPlayer.Play("CloseInit");
+            portal.AnimationPlayer.Play("OpenInit");
         }
 
         if (Level3.Instance.actualScene != null)
@@ -263,13 +264,14 @@ public partial class Level3 : FloatWindow
             player.GlobalPosition = playerTargetPosition;
             player.Animator2.PlayBackwards("Hide");
             NextPortal.AnimationPlayer.PlayBackwards("Close");
+            
 
             GetTree().CreateTimer(0.3f).Timeout += () =>
             {
                 player.isDead = false;
                 player.Visible = true;
                 PortalExitSound.Play();
-                GameManager.StartRefocusAllWindows();
+                //CallDeferred(nameof(GrabFocus));
             };
         }
         else
@@ -291,7 +293,7 @@ public partial class Level3 : FloatWindow
                 PortalExitSound.Play();
                 player.Visible = true;
                 player.Animator2.PlayBackwards("Hide");
-                GameManager.StartRefocusAllWindows();
+                //CallDeferred(nameof(GrabFocus));
             }));
         }
 
@@ -322,7 +324,7 @@ public partial class Level3 : FloatWindow
             player.isDead = false;
             player.Visible = true;
             player.GlobalPosition = GameManager.ScreenSize / 2;
-            GameManager.StartRefocusAllWindows();
+            //CallDeferred(nameof(GrabFocus));
         };  
         
 

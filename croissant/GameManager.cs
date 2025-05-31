@@ -1,4 +1,5 @@
 using Godot;
+using System;
 using System.Collections.Generic;
 
 public partial class GameManager : Node2D
@@ -33,6 +34,8 @@ public partial class GameManager : Node2D
     public static double PersonalBestTime;
     private float _cleanupTimer = 0f;
     private const float CleanupInterval = 0.4f;
+
+    public static Action SkipLevel;
 
     public static GameManager Instance;
 
@@ -88,11 +91,6 @@ public partial class GameManager : Node2D
         ShakeTimer.Timeout += StopShakeAllWindows;
         AddChild(ShakeTimer);
 
-        // Initialize refocus timer
-        RefocusTimer = new Timer();
-        RefocusTimer.WaitTime = 0.01f; // Grab focus every 100ms
-        RefocusTimer.Timeout += RefocusNextWindow;
-        AddChild(RefocusTimer);
 
         ClickSound = new AudioStreamPlayer();
         ClickSound.Stream = ResourceLoader.Load<AudioStream>("res://assets/sounds/others/click.mp3");
@@ -147,6 +145,8 @@ public partial class GameManager : Node2D
             ClickSound.Play();
 
         _ProcessShake();
+
+        ProcessRefocusWindows();
 
         _cleanupTimer += (float)delta;
         if (_cleanupTimer >= CleanupInterval)
@@ -386,6 +386,32 @@ public partial class GameManager : Node2D
         Instance._StopMusic(instant);
     }
 
+    private static void ProcessRefocusWindows()
+{
+    if (!IsRefocusingWindows) 
+        return;
+
+    // Si on a fini toutes les fenêtres
+    if (RefocusIndex >= Windows.Count)
+    {
+        StopRefocusProcess();
+        return;
+    }
+
+    // Refocus une fenêtre par frame
+    if (RefocusIndex < Windows.Count)
+    {
+        FloatWindow window = Windows[RefocusIndex];
+        if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && window.IsInsideTree() && window.Visible)
+        {
+            window.GrabFocus();
+            Lib.Print($"Refocused window {RefocusIndex}: {window.Title}");
+        }
+        
+        RefocusIndex++;
+    }
+}
+
     public static void StartRefocusAllWindows()
     {
         if (Windows.Count == 0 || IsRefocusingWindows) return;
@@ -394,44 +420,21 @@ public partial class GameManager : Node2D
         MainWindow.GrabWindowFocus();
         IsRefocusingWindows = true;
         RefocusIndex = 0;
-        RefocusTimer.Start();
-    }
-
-    private static void RefocusNextWindow()
-    {
-        if (!IsRefocusingWindows || RefocusIndex >= Windows.Count)
-        {
-            StopRefocusProcess();
-            return;
-        }
-
-        if (RefocusIndex < Windows.Count)
-        {
-            FloatWindow window = Windows[RefocusIndex];
-            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && window.IsInsideTree() && window.Visible)
-            {
-                window.GrabFocus();
-                Lib.Print($"Refocused window {RefocusIndex}: {window.Title}");
-            }
-            RefocusIndex++;
-        }
-        else
-        {
-            StopRefocusProcess();
-        }
+        
+        Lib.Print($"Starting refocus process for {Windows.Count} windows");
     }
 
     private static void StopRefocusProcess()
     {
         IsRefocusingWindows = false;
-        RefocusTimer.Stop();
         RefocusIndex = 0;
+
+        Lib.Print("Refocus process completed");
 
         // Give focus back to the main window or fix window
         if (IsInstanceValid(FixWindow))
             FixWindow.GrabFocus();
     }
-
     public static void ForceRefocusAllWindows()
     {
         StartRefocusAllWindows();
