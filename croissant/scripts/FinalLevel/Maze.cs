@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.IO;
 using Godot;
 
 public partial class Maze : Node3D
@@ -106,10 +105,6 @@ public partial class Maze : Node3D
         }
         PlaceRoom(cornerToRemove.X, cornerToRemove.Y, 3, 3, true);
         MazeData[cornerToRemove.X, cornerToRemove.Y] = EasterEgg;
-
-        MazeData[MazeSize / 2 - 1, MazeSize / 2 - 1] = ObjectiveLabel;
-        MazeData[MazeSize / 2 - 1, MazeSize / 2] = ObjectiveLabel;
-        MazeData[MazeSize / 2, MazeSize / 2 - 1] = ObjectiveLabel;
 
         CalculateDistancesFromCenter();
     }

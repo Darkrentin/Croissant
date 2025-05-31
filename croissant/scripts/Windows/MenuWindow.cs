@@ -1,3 +1,4 @@
+using System.Numerics;
 using Godot;
 
 public partial class MenuWindow : FloatWindow
@@ -17,13 +18,16 @@ public partial class MenuWindow : FloatWindow
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
+	public Vector2I SizeWithout = new Vector2I(300, 335);
+	public Vector2I SizeWith = new Vector2I(300, 380);
+
 	public override void _Ready()
 	{
 		Title = "Menu";
 		ProcessMode = ProcessModeEnum.Always;
 		base._Ready();
 
-		Vector2I windowSize = Lib.GetAspectFactor(Size);
+		Vector2I windowSize = Lib.GetAspectFactor(SizeWithout);
 		Size = windowSize;
 		Position = Lib.GetScreenPosition(0.5f, 0.5f) - windowSize / 2;
 		Visible = false;
@@ -62,10 +66,12 @@ public partial class MenuWindow : FloatWindow
 		if (GameManager.State == GameManager.GameState.Level3Buffer && StuckButton.Visible == false)
 		{
 			StuckButton.Visible = true;
+			Size = Lib.GetAspectFactor(SizeWith);
 		}
 		else if (GameManager.State != GameManager.GameState.Level3Buffer && StuckButton.Visible == true)
 		{
 			StuckButton.Visible = false;
+			Size = Lib.GetAspectFactor(SizeWithout);
 		}
 
 		if (Input.IsActionJustPressed("Exit"))
@@ -126,7 +132,7 @@ public partial class MenuWindow : FloatWindow
 	{
 		MenuClick.Play();
 		FakeDesktop = toggled;
-		if(MainWindow.FakeBackground == null)
+		if (MainWindow.FakeBackground == null)
 			return;
 		MainWindow.FakeBackground.Visible = FakeDesktop;
 	}
@@ -193,7 +199,7 @@ public partial class MenuWindow : FloatWindow
 			Lib.Print("=== Debug Refocus Info ===");
 			GameManager.StartRefocusAllWindows();
 		};
-		
-		
+
+
 	}
 }

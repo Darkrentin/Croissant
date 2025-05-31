@@ -46,12 +46,10 @@ public partial class MainWindow : FloatWindow
         StringBuffer.Clear();
         StringBuffer.Append("FPS: ");
         StringBuffer.Append(Engine.GetFramesPerSecond());
-        StringBuffer.Append("\nMouse Position: ");
-        StringBuffer.Append(Lib.GetCursorPosition());
         StringBuffer.Append("\nGame State: ");
         StringBuffer.Append(GameManager.State);
         StringBuffer.Append("\nMemory Usage: ");
-        StringBuffer.Append(Godot.OS.GetStaticMemoryUsage() / 1048576);
+        StringBuffer.Append(OS.GetStaticMemoryUsage() / 1048576);
         StringBuffer.Append("MB\nUptime: ");
         StringBuffer.Append((Time.GetTicksMsec() / 1000.0f).ToString("F1"));
         StringBuffer.Append("s\n");

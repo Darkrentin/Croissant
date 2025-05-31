@@ -145,7 +145,7 @@ public partial class GameManager : Node2D
         if (Input.IsActionJustPressed("LeftClick") && State != GameState.FinalLevel)
             ClickSound.Play();
 
-        if(DebugMode && Input.IsActionJustPressed("SkipLevel"))
+        if (DebugMode && Input.IsActionJustPressed("SkipLevel"))
         {
             if (SkipLevel != null)
                 SkipLevel.Invoke();
@@ -394,30 +394,29 @@ public partial class GameManager : Node2D
     }
 
     private static void ProcessRefocusWindows()
-{
-    if (!IsRefocusingWindows) 
-        return;
-
-    // Si on a fini toutes les fenêtres
-    if (RefocusIndex >= Windows.Count)
     {
-        StopRefocusProcess();
-        return;
-    }
+        if (!IsRefocusingWindows)
+            return;
 
-    // Refocus une fenêtre par frame
-    if (RefocusIndex < Windows.Count)
-    {
-        FloatWindow window = Windows[RefocusIndex];
-        if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && window.IsInsideTree() && window.Visible)
+        // Si on a fini toutes les fenêtres
+        if (RefocusIndex >= Windows.Count)
         {
-            window.GrabFocus();
-            Lib.Print($"Refocused window {RefocusIndex}: {window.Title}");
+            StopRefocusProcess();
+            return;
         }
-        
-        RefocusIndex++;
+
+        // Refocus une fenêtre par frame
+        if (RefocusIndex < Windows.Count)
+        {
+            FloatWindow window = Windows[RefocusIndex];
+            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && window.IsInsideTree() && window.Visible)
+            {
+                window.GrabFocus();
+            }
+
+            RefocusIndex++;
+        }
     }
-}
 
     public static void StartRefocusAllWindows()
     {
@@ -427,16 +426,12 @@ public partial class GameManager : Node2D
         MainWindow.GrabWindowFocus();
         IsRefocusingWindows = true;
         RefocusIndex = 0;
-        
-        Lib.Print($"Starting refocus process for {Windows.Count} windows");
     }
 
     private static void StopRefocusProcess()
     {
         IsRefocusingWindows = false;
         RefocusIndex = 0;
-
-        Lib.Print("Refocus process completed");
 
         // Give focus back to the main window or fix window
         if (IsInstanceValid(FixWindow))

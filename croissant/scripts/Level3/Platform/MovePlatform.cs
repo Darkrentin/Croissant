@@ -4,7 +4,7 @@ public partial class MovePlatform : Platform
 {
     [Export] public float MinMult = 1.5f;
     [Export] public float MaxMult = 3f;
-    [Export] public float OscillationTime = 0.2f;
+    [Export] public float OscillationTime = 0.5f;
     [Export] public ColorRect ShaderRect;
     [Export] public AudioStreamPlayer MoveSound;
     [Export] public AudioStreamPlayer PressedSound;
@@ -251,6 +251,7 @@ public partial class MovePlatform : Platform
 
     public void VisibilityChange()
     {
+        Level3.Instance.MovingHovered = false;
         Pressed = false;
         ShaderRectShader.SetShaderParameter("mult", MaxMult);
         Shader.SetShaderParameter("frequency", 32f);

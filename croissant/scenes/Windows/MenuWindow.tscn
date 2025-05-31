@@ -1,27 +1,27 @@
-[gd_scene load_steps=6 format=3 uid="uid://810np22fqce"]
+[gd_scene load_steps=8 format=3 uid="uid://810np22fqce"]
 
 [ext_resource type="Script" uid="uid://oytnc3o18v1e" path="res://scripts/Windows/MenuWindow.cs" id="1_ak1ko"]
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_wvpbs"]
 [ext_resource type="AudioStream" uid="uid://d0jh8hsnra8el" path="res://assets/sounds/others/menu_enter.mp3" id="3_0od4v"]
+[ext_resource type="FontFile" uid="uid://obbkukv56e3r" path="res://assets/texts/fonts/CourierPrime-Regular.ttf" id="3_x3wrm"]
 [ext_resource type="AudioStream" uid="uid://dup76efh60mxj" path="res://assets/sounds/others/menu_exit.mp3" id="4_qlxr2"]
+[ext_resource type="LabelSettings" uid="uid://ck3vmkntl28ed" path="res://assets/texts/MenuLabelSettings.tres" id="4_thh65"]
 [ext_resource type="AudioStream" uid="uid://d4ui6on83baa" path="res://assets/sounds/others/menu_click.mp3" id="5_x3wrm"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("Menu", "FakeDesktopButton", "DebugButton", "StuckButton", "GrabFocusButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
-position = Vector2i(0, 24)
-size = Vector2i(300, 300)
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("FakeDesktopButton", "DebugButton", "StuckButton", "GrabFocusButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
+size = Vector2i(300, 380)
 unresizable = true
 always_on_top = true
 popup_window = true
 theme = ExtResource("1_wvpbs")
 script = ExtResource("1_ak1ko")
-Menu = NodePath("Control")
-FakeDesktopButton = NodePath("Control/FakeDesktop")
-DebugButton = NodePath("Control/DebugMode")
-StuckButton = NodePath("Control/Stuck")
-GrabFocusButton = NodePath("Control/Focus")
-MasterVolumeSlider = NodePath("Control/Main/HSlider")
-MusicVolumeSlider = NodePath("Control/Music/HSlider")
-SFXVolumeSlider = NodePath("Control/Sfx/HSlider")
+FakeDesktopButton = NodePath("VBoxContainer/FakeDesktop")
+DebugButton = NodePath("VBoxContainer/DebugMode")
+StuckButton = NodePath("VBoxContainer/Stuck")
+GrabFocusButton = NodePath("VBoxContainer/Reorganize Windows")
+MasterVolumeSlider = NodePath("VBoxContainer/Main/HSlider")
+MusicVolumeSlider = NodePath("VBoxContainer/Music/HSlider")
+SFXVolumeSlider = NodePath("VBoxContainer/Sfx/HSlider")
 MenuEnter = NodePath("Sound/MenuEnter")
 MenuExit = NodePath("Sound/MenuExit")
 MenuClick = NodePath("Sound/MenuClick")
@@ -34,153 +34,122 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.764706, 0.780392, 0.796078, 1)
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
+offset_left = -142.0
+offset_top = -365.0
+offset_right = 142.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme = ExtResource("1_wvpbs")
+alignment = 2
 
-[node name="FakeDesktop" type="CheckButton" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.04
-anchor_top = 0.36
-anchor_right = 0.96
-anchor_bottom = 0.463
-offset_bottom = 0.0999908
+[node name="MenuLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_x3wrm")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[wave amp=15 freq=5]Settings[/wave]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Stuck" type="Button" parent="VBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_x3wrm")
+theme_override_font_sizes/font_size = 30
+text = "I'm Stuck"
+
+[node name="Reorganize Windows" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_x3wrm")
+text = "Reorganize Windows"
+
+[node name="FakeDesktop" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
 text = "Fake Desktop"
 clip_text = true
 
-[node name="DebugMode" type="CheckButton" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.04
-anchor_top = 0.493
-anchor_right = 0.96
-anchor_bottom = 0.597
-offset_top = 0.0999908
-offset_bottom = -0.100006
+[node name="DebugMode" type="CheckButton" parent="VBoxContainer"]
+layout_mode = 2
 text = "Debug Mode"
 clip_text = true
 
-[node name="QuitButton" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.08
-anchor_top = 0.04
-anchor_right = 0.92
-anchor_bottom = 0.187
-offset_bottom = -0.100002
-text = "Quit"
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
 
-[node name="Stuck" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.04
-anchor_top = 0.88
-anchor_right = 0.96
-anchor_bottom = 0.997
-offset_top = -3.05176e-05
-offset_bottom = -0.100006
-text = "I'm Stuck"
+[node name="Audio Settings" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Audio Settings"
+horizontal_alignment = 1
+vertical_alignment = 1
 
-[node name="Main" type="Control" parent="Control"]
-layout_mode = 1
-anchor_top = 0.613
-anchor_right = 1.0
-anchor_bottom = 0.693
-offset_top = 0.0999908
-offset_bottom = 0.0999756
+[node name="Main" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
 
-[node name="HSlider" type="HSlider" parent="Control/Main"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.267
-anchor_right = 0.96
-anchor_bottom = 0.958
-offset_left = -0.100006
-offset_bottom = 0.00799942
-value = 100.0
-
-[node name="Label" type="Label" parent="Control/Main"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.04
-anchor_right = 0.267
-anchor_bottom = 1.0
-offset_right = -0.100006
+[node name="Label" type="Label" parent="VBoxContainer/Main"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
 text = "Main"
+label_settings = ExtResource("4_thh65")
 vertical_alignment = 1
 
-[node name="Music" type="Control" parent="Control"]
-layout_mode = 1
-anchor_top = 0.613
-anchor_right = 1.0
-anchor_bottom = 0.693
-offset_top = 24.1
-offset_bottom = 24.1
-
-[node name="HSlider" type="HSlider" parent="Control/Music"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.267
-anchor_right = 0.96
-anchor_bottom = 0.958
-offset_left = -0.100006
-offset_bottom = 0.00799942
+[node name="HSlider" type="HSlider" parent="VBoxContainer/Main"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 value = 100.0
 
-[node name="Label" type="Label" parent="Control/Music"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.04
-anchor_right = 0.267
-anchor_bottom = 1.0
-offset_right = -0.100006
-text = "Music"
+[node name="Music" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Music"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = ">Music"
+label_settings = ExtResource("4_thh65")
 vertical_alignment = 1
 
-[node name="Sfx" type="Control" parent="Control"]
-layout_mode = 1
-anchor_top = 0.613
-anchor_right = 1.0
-anchor_bottom = 0.693
-offset_top = 48.1
-offset_bottom = 48.1
-
-[node name="HSlider" type="HSlider" parent="Control/Sfx"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.267
-anchor_right = 0.96
-anchor_bottom = 0.958
-offset_left = -0.100006
-offset_bottom = 0.00799942
+[node name="HSlider" type="HSlider" parent="VBoxContainer/Music"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
 value = 100.0
 
-[node name="Label" type="Label" parent="Control/Sfx"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.04
-anchor_right = 0.267
-anchor_bottom = 1.0
-offset_right = -0.100006
-text = "SFX"
+[node name="Sfx" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/Sfx"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = ">SFX"
+label_settings = ExtResource("4_thh65")
 vertical_alignment = 1
 
-[node name="Focus" type="Button" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.08
-anchor_top = 0.213
-anchor_right = 0.907
-anchor_bottom = 0.347
-offset_top = 0.0999947
-offset_right = 3.89999
-offset_bottom = -0.0999985
-text = "Grab Focus"
+[node name="HSlider" type="HSlider" parent="VBoxContainer/Sfx"]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+value = 100.0
+
+[node name="HSeparator2" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_x3wrm")
+theme_override_font_sizes/font_size = 30
+text = "Quit Game"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 5)
+layout_mode = 2
 
 [node name="Sound" type="Node" parent="."]
 
@@ -193,4 +162,4 @@ stream = ExtResource("4_qlxr2")
 [node name="MenuClick" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("5_x3wrm")
 
-[connection signal="pressed" from="Control/QuitButton" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
