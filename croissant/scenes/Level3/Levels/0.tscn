@@ -11,7 +11,7 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkapc"]
 resource_local_to_scene = true
-size = Vector2(1920, 128)
+size = Vector2(1920, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0s36o"]
 resource_local_to_scene = true
@@ -62,7 +62,7 @@ position = Vector2(0, 960)
 visible = false
 
 [node name="CollisionShape2D" parent="StaticPlateform" index="1"]
-position = Vector2(960, 64)
+position = Vector2(960, 60)
 shape = SubResource("RectangleShape2D_fkapc")
 
 [node name="StaticPlateform2" parent="." instance=ExtResource("1_yrjvf")]

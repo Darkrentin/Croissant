@@ -48,7 +48,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4gugs"]
 resource_local_to_scene = true
-size = Vector2(184, 64)
+size = Vector2(184, 56)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pjyep"]
 size = Vector2(424, 352)
@@ -156,7 +156,7 @@ material = SubResource("ShaderMaterial_cgk1t")
 material = SubResource("ShaderMaterial_yfx7m")
 
 [node name="CollisionShape2D" parent="MovePlatform2" index="1"]
-position = Vector2(92, 32)
+position = Vector2(92, 28)
 shape = SubResource("RectangleShape2D_4gugs")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("5_b3861")]
@@ -283,6 +283,11 @@ PortalToSpawn = true
 [node name="ConfigFile" parent="." instance=ExtResource("6_k7jy6")]
 position = Vector2(1720, 72)
 
+[node name="Label" parent="ConfigFile" index="1"]
+offset_left = -32.0
+offset_right = 38.0
+text = "HelPr.cfg"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
 position = Vector2(80, 8)
 shape = SubResource("RectangleShape2D_ut6fl")
@@ -303,3 +308,4 @@ shape = SubResource("RectangleShape2D_ut6fl")
 [editable path="StaticPlateform4"]
 [editable path="StaticPlateform5"]
 [editable path="StaticPlateform6"]
+[editable path="ConfigFile"]

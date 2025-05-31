@@ -529,6 +529,11 @@ shape = SubResource("RectangleShape2D_1mm30")
 [node name="ConfigFile" parent="." instance=ExtResource("7_8rwei")]
 position = Vector2(352, 1000)
 
+[node name="Label" parent="ConfigFile" index="1"]
+offset_left = -31.34
+offset_right = 32.66
+text = "erlra.cfg"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
 position = Vector2(-96, -12)
 shape = SubResource("RectangleShape2D_qycog")
@@ -580,5 +585,6 @@ shape = SubResource("RectangleShape2D_nwsto")
 [editable path="KillingPlatform8"]
 [editable path="KillingPlatform9"]
 [editable path="WindowsOnly5"]
+[editable path="ConfigFile"]
 [editable path="KillingPlatform11"]
 [editable path="KillingPlatform12"]

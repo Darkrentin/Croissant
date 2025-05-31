@@ -774,6 +774,11 @@ shape = SubResource("RectangleShape2D_04sxb")
 [node name="ConfigFile" parent="." instance=ExtResource("10_bmqod")]
 position = Vector2(1720, 128)
 
+[node name="Label" parent="ConfigFile" index="1"]
+offset_left = -27.925
+offset_right = 30.075
+text = "pirg.cfg"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
 position = Vector2(80, -36)
 shape = SubResource("RectangleShape2D_sngcg")
@@ -812,4 +817,5 @@ shape = SubResource("RectangleShape2D_mdqmd")
 [editable path="WindowsOnly6"]
 [editable path="KillingPlatform8"]
 [editable path="WindowsOnly7"]
+[editable path="ConfigFile"]
 [editable path="WindowsOnly8"]

@@ -299,6 +299,11 @@ shape = SubResource("RectangleShape2D_k1v3w")
 [node name="ConfigFile" parent="." instance=ExtResource("8_8vfn1")]
 position = Vector2(384, 128)
 
+[node name="Label" parent="ConfigFile" index="1"]
+offset_left = -37.395
+offset_right = 39.605
+text = "lKeom.cfg"
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
 position = Vector2(-172, 0)
 shape = SubResource("RectangleShape2D_wc1sb")
@@ -321,3 +326,4 @@ shape = SubResource("RectangleShape2D_wc1sb")
 [editable path="KillingPlatform8"]
 [editable path="KillingPlatform9"]
 [editable path="KillingPlatform10"]
+[editable path="ConfigFile"]
