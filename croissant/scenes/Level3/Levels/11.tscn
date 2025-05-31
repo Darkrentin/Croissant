@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="6_jl1bk"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="7_75x13"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="7_n8qik"]
-[ext_resource type="PackedScene" path="res://scenes/Level3/Others/Limit.tscn" id="10_jne2w"]
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="10_jne2w"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88wmo"]
 resource_local_to_scene = true

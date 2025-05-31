@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="6_cmssg"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_viq7f"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="8_xlbl0"]
-[ext_resource type="PackedScene" path="res://scenes/Level3/Others/Limit.tscn" id="9_4vogy"]
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="9_4vogy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psbq6"]
 resource_local_to_scene = true

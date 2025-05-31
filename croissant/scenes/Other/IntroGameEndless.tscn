@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b64jckb33yohk"]
+[gd_scene load_steps=17 format=3 uid="uid://l5aaex7hyyl0"]
 
 [ext_resource type="Script" uid="uid://c7dj2j5v543km" path="res://scripts/Other/IntroGameEndless.cs" id="1_qm56q"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_dbyfh"]

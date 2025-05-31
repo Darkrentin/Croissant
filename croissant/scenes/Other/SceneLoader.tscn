@@ -24,7 +24,7 @@
 [ext_resource type="PackedScene" uid="uid://blu5tcq0yepaj" path="res://scenes/Level2/SpikeWindow.tscn" id="22_2mdes"]
 [ext_resource type="PackedScene" uid="uid://pus1csxsvyfw" path="res://scenes/FinalLevel/FinalLevel.tscn" id="23_ccpnw"]
 [ext_resource type="PackedScene" uid="uid://carai6dnhfx5a" path="res://scenes/Other/ScoreboardWindow.tscn" id="24_1v343"]
-[ext_resource type="PackedScene" path="res://scenes/Other/IntroGameEndless.tscn" id="25_vdxpo"]
+[ext_resource type="PackedScene" uid="uid://l5aaex7hyyl0" path="res://scenes/Other/IntroGameEndless.tscn" id="25_vdxpo"]
 [ext_resource type="PackedScene" uid="uid://d3xlikbll0i4p" path="res://scenes/Level2/ClickParticles.tscn" id="26_hjhek"]
 [ext_resource type="PackedScene" uid="uid://jyrxla8de62h" path="res://scenes/Other/ScreenScaleScreen.tscn" id="27_d3g4q"]
 

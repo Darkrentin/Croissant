@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://b7jkxflmlm4xk"]
+[gd_scene load_steps=2 format=3 uid="uid://cf2p2a77ig65y"]
 
 [ext_resource type="Script" uid="uid://dql4o3qqtitem" path="res://scripts/FinalLevel/SpatialStreamPlayer3D.cs" id="1_rrgkb"]
 
