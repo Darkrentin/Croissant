@@ -1946,4 +1946,5 @@ bus = &"SFX"
 
 [node name="BossHit" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("20_ic8an")
+volume_db = -10.0
 bus = &"SFX"

@@ -66,6 +66,7 @@ public partial class BossLevel : Node3D
 	//Atk: LiftWalls
 	public void LiftWalls()
 	{
+		FinalLevel.Instance.WallSound.Play();
 		FloppyDisk.ResetFloppyDisks();
 		for (int i = 0; i < MapSize; i++)
 		{
@@ -78,6 +79,7 @@ public partial class BossLevel : Node3D
 		GetTree().CreateTimer(3f).Timeout += () =>
 		{
 			IdleMap();
+			FinalLevel.Instance.WallSound.Play();
 		};
 	}
 
@@ -108,7 +110,6 @@ public partial class BossLevel : Node3D
 		GetTree().CreateTimer(10f).Timeout += () =>
 		{
 			IdleMap();
-			FinalLevel.Instance.LavaSound.Stop();
 		};
 	}
 
@@ -121,6 +122,8 @@ public partial class BossLevel : Node3D
 
 	public void ResetMap()
 	{
+		FinalLevel.Instance.LavaSound.Stop();
+		FinalLevel.Instance.WallSound.Stop();
 		for (int i = 0; i < MapSize; i++)
 		{
 			for (int j = 0; j < MapSize; j++)
@@ -132,6 +135,8 @@ public partial class BossLevel : Node3D
 	}
 	public void IdleMap()
 	{
+		FinalLevel.Instance.LavaSound.Stop();
+		FinalLevel.Instance.WallSound.Stop();
 		for (int i = 0; i < MapSize; i++)
 		{
 			for (int j = 0; j < MapSize; j++)

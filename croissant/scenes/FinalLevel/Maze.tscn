@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://dntjiebaav3e5"]
+[gd_scene load_steps=9 format=3 uid="uid://dntjiebaav3e5"]
 
 [ext_resource type="Script" uid="uid://3ybo6oykrlh7" path="res://scripts/FinalLevel/Maze.cs" id="1_1hnml"]
 [ext_resource type="PackedScene" uid="uid://b0rwmg3mas3cc" path="res://scenes/FinalLevel/Wall.tscn" id="2_f2dw1"]
@@ -8,9 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://cwdiwawxk2qht" path="res://scenes/Other/Easter.tscn" id="6_xiqy0"]
 [ext_resource type="PackedScene" uid="uid://dn3l33sgjpqxj" path="res://scenes/FinalLevel/FlashLight.tscn" id="7_bqopv"]
 [ext_resource type="PackedScene" uid="uid://by53uaaufbpyx" path="res://scenes/FinalLevel/HelperBody.tscn" id="8_nrjav"]
-[ext_resource type="AudioStream" uid="uid://oihxvufflkym" path="res://assets/sounds/level_4/boss/stone_wall_slide.mp3" id="9_f5odm"]
 
-[node name="Maze" type="Node3D" node_paths=PackedStringArray("WallSound")]
+[node name="Maze" type="Node3D"]
 script = ExtResource("1_1hnml")
 WallScene = ExtResource("2_f2dw1")
 FloorScene = ExtResource("3_rlbri")
@@ -19,8 +18,3 @@ ObjectiveScene = ExtResource("4_awxkg")
 EasterScene = ExtResource("6_xiqy0")
 FlashLightScene = ExtResource("7_bqopv")
 HelperBodyScene = ExtResource("8_nrjav")
-WallSound = NodePath("WallSound")
-
-[node name="WallSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_f5odm")
-bus = &"SFX"

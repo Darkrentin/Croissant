@@ -444,7 +444,7 @@ spot_angle_attenuation = 0.784583
 
 [node name="Shoot" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMP3_n4wqm")
-volume_db = -20.0
+volume_db = -7.0
 bus = &"SFX"
 
 [node name="Step" type="AudioStreamPlayer" parent="."]

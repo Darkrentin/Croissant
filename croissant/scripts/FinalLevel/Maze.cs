@@ -10,7 +10,7 @@ public partial class Maze : Node3D
     [Export] public PackedScene EasterScene;
     [Export] public PackedScene FlashLightScene;
     [Export] public PackedScene HelperBodyScene;
-    [Export] public AudioStreamPlayer WallSound;
+    
     [Export] public int MazeSize = 31;
 
     public Node3D HelperBody;
@@ -343,6 +343,7 @@ public partial class Maze : Node3D
     public void RemoveAllWall()
     {
         WallRemove = true;
+        FinalLevel.Instance.WallSound.Play();
         for (int i = 1; i < MazeSize - 1; i++)
         {
             for (int j = 1; j < MazeSize - 1; j++)
@@ -350,7 +351,7 @@ public partial class Maze : Node3D
                 if (MazeData[i, j] == Wall)
                 {
                     MazeData[i, j] = Floor;
-                    WallSound.Play();
+
                     var tween = GetTree().CreateTween();
                     tween.TweenProperty(MazeTiles[i, j], "position", MazeTiles[i, j].Position + new Vector3(0, -2, 0), 1.8f);
                     tween.TweenCallback(Callable.From(() => MazeTiles[i, j].QueueFree()));

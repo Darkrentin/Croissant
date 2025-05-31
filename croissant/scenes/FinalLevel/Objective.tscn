@@ -778,6 +778,7 @@ bus = &"SFX"
 
 [node name="Death" type="AudioStreamPlayer3D" parent="Sound"]
 stream = ExtResource("3_mtdh5")
+volume_db = -20.0
 bus = &"SFX"
 
 [node name="AudioStreamPlayer3D" parent="Sound" node_paths=PackedStringArray("Sounds") instance=ExtResource("4_01r7f")]

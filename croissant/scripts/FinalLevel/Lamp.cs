@@ -5,6 +5,7 @@ public partial class Lamp : Node3D
 {
 	[Export] public int RenderDistance = 10;
 	[Export] public OmniLight3D Light;
+	[Export] public AudioStreamPlayer3D LampSound;
 	public Timer timer;
 	public override void _Ready()
 	{
@@ -14,7 +15,22 @@ public partial class Lamp : Node3D
 		timer.Timeout += () =>
 		{
 			timer.WaitTime = Lib.GetRandomNormal(0.05f, 0.1f);
-			Light.LightEnergy = Lib.GetRandomNormal(0.05f, 0.3f);
+			float intensity = Lib.GetRandomNormal(0.05f, 0.3f);
+			Light.LightEnergy = intensity;
+			
+			// Adjust sound volume based on light intensity
+			if (LampSound != null)
+			{
+				// Scale volume between 0.1 and 1.0 based on light intensity
+				LampSound.VolumeDb = Mathf.LinearToDb(Mathf.Remap(intensity, 0.05f, 0.3f, 0.1f, 1.0f));
+				
+				// Make sure sound is playing
+				if (!LampSound.Playing)
+				{
+					LampSound.Play();
+				}
+			}
+			
 			timer.Start();
 		};
 		AddChild(timer);

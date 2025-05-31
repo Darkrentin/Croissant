@@ -20,6 +20,7 @@ public partial class FinalLevel : Node3D
 	[Export] public AudioStreamPlayer TransitionSound;
 	[Export] public AudioStreamPlayer DeathLavaSound;
 	[Export] public AudioStreamPlayer LavaSound;
+	[Export] public AudioStreamPlayer WallSound;
 	public Node3D BossLevel;
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
