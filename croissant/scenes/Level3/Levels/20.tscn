@@ -52,7 +52,7 @@ shader_parameter/mult = 10.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5e8jk"]
 resource_local_to_scene = true
-size = Vector2(680, 192)
+size = Vector2(680, 152)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5e8jk"]
 resource_local_to_scene = true
@@ -225,10 +225,10 @@ resource_local_to_scene = true
 size = Vector2(176, 248)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_srp00"]
-size = Vector2(128, 216)
+size = Vector2(128, 168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_025ye"]
-size = Vector2(128, 216)
+size = Vector2(128, 168)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lnro7"]
 size = Vector2(120, 776)
@@ -275,7 +275,7 @@ shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5wbvh"]
 resource_local_to_scene = true
-size = Vector2(192, 120)
+size = Vector2(240, 120)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rhm8q"]
 size = Vector2(256, 216)
@@ -545,7 +545,7 @@ material = SubResource("ShaderMaterial_q6xmu")
 material = SubResource("ShaderMaterial_euby3")
 
 [node name="CollisionShape2D" parent="MovePlatform2" index="1"]
-position = Vector2(340, 96)
+position = Vector2(340, 76)
 shape = SubResource("RectangleShape2D_5e8jk")
 
 [node name="MovePlatform3" parent="." instance=ExtResource("3_6v3s2")]
@@ -585,7 +585,7 @@ position = Vector2(64, 108)
 shape = SubResource("RectangleShape2D_tf8vp")
 
 [node name="WindowsOnly2" parent="." instance=ExtResource("6_q6xmu")]
-position = Vector2(504, 392)
+position = Vector2(504, 352)
 
 [node name="PlatformTexture" parent="WindowsOnly2/Window" index="0"]
 material = SubResource("ShaderMaterial_cax68")
@@ -615,17 +615,17 @@ position = Vector2(88, 124)
 shape = SubResource("RectangleShape2D_bakur")
 
 [node name="KillingPlatform" parent="." instance=ExtResource("9_lnro7")]
-position = Vector2(1000, 640)
+position = Vector2(992, 656)
 
 [node name="Window" parent="KillingPlatform" index="0"]
 position = Vector2i(0, 36)
 
 [node name="CollisionShape2D" parent="KillingPlatform" index="3"]
-position = Vector2(64, 108)
+position = Vector2(64, 84)
 shape = SubResource("RectangleShape2D_srp00")
 
 [node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
-position = Vector2(64, 108)
+position = Vector2(64, 84)
 shape = SubResource("RectangleShape2D_025ye")
 
 [node name="KillingPlatform2" parent="." instance=ExtResource("9_lnro7")]
@@ -649,7 +649,7 @@ position = Vector2(752, 832)
 material = SubResource("ShaderMaterial_cn3q2")
 
 [node name="CollisionShape2D" parent="WindowsOnly4" index="1"]
-position = Vector2(96, 60)
+position = Vector2(120, 60)
 shape = SubResource("RectangleShape2D_5wbvh")
 
 [node name="KillingPlatform3" parent="." instance=ExtResource("9_lnro7")]
