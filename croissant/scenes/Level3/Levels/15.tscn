@@ -1,15 +1,16 @@
-[gd_scene load_steps=41 format=3 uid="uid://b4e11u540cpvm"]
+[gd_scene load_steps=42 format=3 uid="uid://b4e11u540cpvm"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_tva5v"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="2_lmyvb"]
 [ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="3_lx710"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="4_lx710"]
+[ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="4_xoy43"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="5_vwnpx"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="6_3n8fb"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_hvpnd"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="8_8vfn1"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="8_wc1sb"]
-[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="10_qmbsx"]
+[ext_resource type="PackedScene" path="res://scenes/Level3/Others/Limit.tscn" id="10_qmbsx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwnpx"]
 size = Vector2(1664, 192)
@@ -19,9 +20,9 @@ size = Vector2(1664, 192)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qmbsx"]
 resource_local_to_scene = true
-shader = ExtResource("7_hvpnd")
-shader_parameter/color1 = Color(0, 1, 0, 1)
-shader_parameter/frequency = 15.0
+shader = ExtResource("4_xoy43")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lmyvb"]

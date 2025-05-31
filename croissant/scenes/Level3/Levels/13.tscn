@@ -1,14 +1,15 @@
-[gd_scene load_steps=32 format=3 uid="uid://dffelt7a4am5d"]
+[gd_scene load_steps=33 format=3 uid="uid://dffelt7a4am5d"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_8hfnw"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_psbq6"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_ft5q5"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="4_d4csu"]
 [ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="5_lb8pi"]
+[ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="6_4ryfj"]
 [ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="6_cmssg"]
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="7_viq7f"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="8_xlbl0"]
-[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="9_4vogy"]
+[ext_resource type="PackedScene" path="res://scenes/Level3/Others/Limit.tscn" id="9_4vogy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_psbq6"]
 resource_local_to_scene = true
@@ -22,9 +23,9 @@ size = Vector2(128, 192)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4vogy"]
 resource_local_to_scene = true
-shader = ExtResource("7_viq7f")
-shader_parameter/color1 = Color(0, 1, 0, 1)
-shader_parameter/frequency = 15.0
+shader = ExtResource("6_4ryfj")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cmssg"]
@@ -37,9 +38,9 @@ size = Vector2(128, 320)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4ryfj"]
 resource_local_to_scene = true
-shader = ExtResource("7_viq7f")
-shader_parameter/color1 = Color(0, 1, 0, 1)
-shader_parameter/frequency = 15.0
+shader = ExtResource("6_4ryfj")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pq31m"]
@@ -82,9 +83,9 @@ size = Vector2(296, 64)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_63vcx"]
 resource_local_to_scene = true
-shader = ExtResource("7_viq7f")
-shader_parameter/color1 = Color(0, 1, 0, 1)
-shader_parameter/frequency = 15.0
+shader = ExtResource("6_4ryfj")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
 shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jh265"]

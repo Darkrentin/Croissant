@@ -139,13 +139,13 @@ id = 4
 NextWave = NodePath("../Wave5")
 
 [node name="Wave5" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
-duration = 0.0
+duration = 16.0
 id = 5
 NextWave = NodePath("../WaitWave6")
 
 [node name="WaitWave6" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
 WaitWave = true
-duration = 2.0
+duration = 1.0
 id = 6
 NextWave = NodePath("../Wave7")
 
@@ -168,13 +168,13 @@ id = 10
 NextWave = NodePath("../Wave11")
 
 [node name="Wave11" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
-duration = 0.0
+duration = 16.0
 id = 11
 NextWave = NodePath("../WaitWave12")
 
 [node name="WaitWave12" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
 WaitWave = true
-duration = 2.0
+duration = 1.0
 id = 12
 NextWave = NodePath("../Wave13")
 
@@ -196,13 +196,13 @@ id = 16
 NextWave = NodePath("../Wave17")
 
 [node name="Wave17" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
-duration = 0.0
+duration = 16.0
 id = 17
 NextWave = NodePath("../WaitWave18")
 
 [node name="WaitWave18" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
 WaitWave = true
-duration = 2.0
+duration = 1.0
 id = 18
 NextWave = NodePath("../Wave19")
 
@@ -227,12 +227,12 @@ id = 22
 NextWave = NodePath("../Wave23")
 
 [node name="Wave23" parent="WaveManager" node_paths=PackedStringArray("NextWave") instance=ExtResource("4_8crk8")]
-duration = 0.0
+duration = 16.0
 id = 23
 NextWave = NodePath("../WaitWave24")
 
 [node name="WaitWave24" parent="WaveManager" instance=ExtResource("4_8crk8")]
-duration = 2.0
+duration = 1.0
 id = 24
 
 [node name="SpawnNode" type="Node2D" parent="."]
