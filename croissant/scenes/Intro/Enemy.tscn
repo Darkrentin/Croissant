@@ -112,16 +112,17 @@ shape = SubResource("CircleShape2D_stb6e")
 
 [node name="ShapeColoration" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("6_t3wft")
-volume_db = -10.0
 bus = &"SFX"
 
 [node name="ShapeHit" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_0qvkv")
+volume_db = 3.0
 max_polyphony = 5
 bus = &"SFX"
 
 [node name="ShapeDeath" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_42lid")
+volume_db = 5.0
 bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]

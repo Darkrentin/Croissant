@@ -10,7 +10,10 @@ public partial class GameManager : Node2D
     //Music
     [Export] public AudioStreamPlayer[] Musics;
     public enum Music { Idle, IntroGame, Level1, Level2, Level3, FinalLevel, FinalBoss, Scoreboard, NoMusic, }
+
     [Export] public AudioStreamPlayer BossExplosionSound;
+    [Export] public AudioStreamPlayer PopUpEnterSound;
+    [Export] public AudioStreamPlayer PopUpCloseSound;
     [Export] public bool DebugMode = false;
     public static Music CurrentMusic = Music.NoMusic;
 

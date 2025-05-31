@@ -192,10 +192,11 @@ color = Color(1, 1, 1, 0)
 
 [node name="Pew" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_dxf3v")
-volume_db = -5.0
+volume_db = -3.0
 max_polyphony = 10
 bus = &"SFX"
 
 [node name="GameExplosion" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("20_m8mbq")
+volume_db = 5.0
 bus = &"SFX"
