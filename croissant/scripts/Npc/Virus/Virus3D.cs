@@ -214,7 +214,7 @@ private void TryLaunchLiftWall()
 		Lib.Print($"FloppyDisk timer started with {FloppyDiskTimer.WaitTime}s");
 		
 		// Mouvement fréquent toutes les 2-4 secondes
-		MovementTimer.WaitTime = Lib.GetRandomNormal(2.0f, 4.0f);
+		MovementTimer.WaitTime = Lib.GetRandomNormal(4.0f, 6.0f);
 		MovementTimer.Start();
 		Lib.Print($"Movement timer started with {MovementTimer.WaitTime}s");
 			}
@@ -330,14 +330,13 @@ private void TryLaunchLiftWall()
 
 		// Ensure we return to original position
 		shakeTween.TweenProperty(nodeToShake, "position", originalPosition, 0.01f);
-	}	public void TakeDamage()
+	}
+	public void TakeDamage()
 	{
 		// Handle damage logic here
 		StartGlitch();
 		BossHitSound.Play();
-		
-		// Ne plus lancer LiftWalls automatiquement quand on prend des dégâts
-		// (c'est maintenant géré par le timer aléatoire)
+
 
 		Lib.Print("Virus took damage!");
 		if (Hp > 1)
@@ -350,7 +349,7 @@ private void TryLaunchLiftWall()
 			Hp--;
 			UpdateHealthBar();
 			EndActions();
-			
+
 		}
 	}
 

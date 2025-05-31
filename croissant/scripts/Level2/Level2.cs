@@ -25,6 +25,7 @@ public partial class Level2 : Node2D
 		CursorWindow.GetParent().RemoveChild(CursorWindow);
 		CursorWindow.QueueFree();
 		GetParent().RemoveChild(this);
+		VisualCollision.End = true;
 		QueueFree();
 	}
 
