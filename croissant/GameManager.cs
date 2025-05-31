@@ -30,8 +30,18 @@ public partial class GameManager : Node2D
     public static bool HaveFinishTheGameAtLeastOneTime = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
-    public static float ScreenScale => _cachedScreenScale;
-    private static float _cachedScreenScale;
+    public static float ScreenScale
+    {
+        get
+        {
+            if (_cachedScreenScale == 0f)
+            {
+                _cachedScreenScale = DisplayServer.ScreenGetDpi() / 96f;
+            }
+            return _cachedScreenScale;
+        }
+    }
+    private static float _cachedScreenScale = 0f;
     public static bool ShakeAllWindows = false;
     public static Timer ShakeTimer;
     public static int ShakeIntensity = 0;
@@ -49,6 +59,7 @@ public partial class GameManager : Node2D
         Virus,
         Helper,
         // Game state
+        ScreenScaleScreen,
         IntroGame,
         IntroVirus,
         Dialogue1,
@@ -67,6 +78,7 @@ public partial class GameManager : Node2D
         IntroGame_Process,
         // Buffer state
         Debug,
+        ScreenScaleScreenBuffer,
         IntroVirusBuffer,
         IntroHelperBuffer,
         Dialogue1Buffer,
@@ -77,11 +89,9 @@ public partial class GameManager : Node2D
 
     public static bool IsRefocusingWindows = false;
     private static int RefocusIndex = 0;
-    private static Timer RefocusTimer;
 
     public override void _Ready()
     {
-        _cachedScreenScale = DisplayServer.ScreenGetDpi() / 96f;
         Lib.Print($"ScreenScale: {ScreenScale}");
         GameRoot = this;
         Instance = this;
@@ -180,6 +190,9 @@ public partial class GameManager : Node2D
                 break;
 
             // Game state
+            case GameState.ScreenScaleScreen:
+                States.ScreenScaleScreen();
+                break;
             case GameState.IntroGame:
                 States.IntroGame();
                 break;

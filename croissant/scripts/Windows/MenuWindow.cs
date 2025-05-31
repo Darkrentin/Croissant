@@ -106,6 +106,10 @@ public partial class MenuWindow : FloatWindow
 
 	public void Open()
 	{
+		if (GameManager.State == GameManager.GameState.ScreenScaleScreenBuffer)
+		{
+			return;
+		}
 		MenuEnter.Play();
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Visible = true;

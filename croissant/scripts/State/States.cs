@@ -44,6 +44,21 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
+    public static void ScreenScaleScreen()
+    {
+        if (GameManager.ScreenScale == 1)
+        {
+            GameManager.State = GameManager.GameState.IntroGame;
+            return;
+        }
+        else
+        {
+            ScreenScaleScreen ScreenScaleScreen = SceneLoader.ScreenScaleScreenScene.Instantiate<ScreenScaleScreen>();
+            GameManager.GameRoot.AddChild(ScreenScaleScreen);
+            GameManager.State = GameManager.GameState.ScreenScaleScreenBuffer;
+        }
+    }
+
     public static void IntroGame()
     {
         GameManager.PlayMusic(GameManager.Music.IntroGame);

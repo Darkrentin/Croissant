@@ -29,4 +29,5 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene ScoreboardScene;
 	[Export] public PackedScene IntroGameEndlessScene;
 	[Export] public PackedScene ClickParticlesScene;
+	[Export] public PackedScene ScreenScaleScreenScene;
 }

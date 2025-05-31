@@ -75,7 +75,7 @@ text = "Reorganize Windows"
 
 [node name="FakeDesktop" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
-text = "Fake Desktop"
+text = "Fake Background"
 clip_text = true
 
 [node name="DebugMode" type="CheckButton" parent="VBoxContainer"]

@@ -134,7 +134,7 @@ public partial class PlayerCharacter : CharacterBody2D
             {
                 Velocity = new Vector2(Velocity.X, jumpSpeed);
             }
-            }
+        }
         base._PhysicsProcess(delta);
         if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();
