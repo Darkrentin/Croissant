@@ -12,11 +12,11 @@ public partial class Level1 : Node2D
     [Export] private PackedScene TankWindowScene;
     [Export] private PackedScene BombWindowScene;
 
-    public float StaticWindowMultiplier = 0.7f;
-    public float TimerWindowMultiplier = 1.5f;
+    public float StaticWindowMultiplier = 1f;
+    public float TimerWindowMultiplier = 2f;
     public float MoveWindowMultiplier = 1.5f;
-    public float DodgeWindowMultiplier = 4.1f;
-    public float TankWindowMultiplier = 3.5f;
+    public float DodgeWindowMultiplier = 5f;
+    public float TankWindowMultiplier = 4f;
     public float BombWindowMultiplier = 2.0f;
     public float TimerBasicTime = 0.41f;
     public float TimerMultiplier = 0.85f;
@@ -50,6 +50,7 @@ public partial class Level1 : Node2D
     {
         if (InitialWindowCount < 22) //game start
         {
+            Instance.PopupEnter.Play();
             AddStaticWWindow();
             InitialWindowCount++;
         }
@@ -62,7 +63,6 @@ public partial class Level1 : Node2D
 
     public void EndActions()
     {
-        Lib.Print("No windows left, ending game...");
         GameManager.State = GameManager.GameState.BlueScreen;
         QueueFree();
     }
@@ -73,13 +73,11 @@ public partial class Level1 : Node2D
         Instance.AddChild(window);
         Instance.Windows.Add(window);
         WindowCount++;
-        Lib.Print($"WindowAdd : count: {WindowCount}");
     }
-    
+
     public static void AddMultiplier()
     {
-        Instance.TimerMultiplier += 0.011f;
-        Lib.Print($"TimerMultiplier: {Instance.TimerMultiplier}");
+        Instance.TimerMultiplier += 0.012f;
     }
 
     public static void AddNewWindow()
@@ -134,9 +132,6 @@ public partial class Level1 : Node2D
             }
 
             //Lib.Print($"WindowAdd : count: {WindowCount}");
-
-            Lib.Print($"TimerMultiplier: {Instance.TimerMultiplier}");
-            Lib.Print($"WaitTime: {Instance.spawnTimer.WaitTime}");
         }
     }
 

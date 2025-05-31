@@ -25,11 +25,11 @@ public partial class TimerWindow : PopUpWindow
     private float CalculateTimerDuration()
     {
         if (Level1.WindowCount >= 15)
-            return Lib.rand.Next(7, 9);
+            return Lib.rand.Next(8, 10);
         else if (Level1.WindowCount >= 10)
-            return Lib.rand.Next(5, 7);
+            return Lib.rand.Next(6, 8);
         else
-            return Lib.rand.Next(3, 5);
+            return Lib.rand.Next(4, 6);
     }
 
     public override void OnClose()
@@ -44,7 +44,7 @@ public partial class TimerWindow : PopUpWindow
         base._Process(delta);
         progressBar.Value = time - timer.TimeLeft;
         timeLabel.Text = $"{Mathf.Ceil(timer.TimeLeft * 10) / 10:0.0}s";
-        if (timer.TimeLeft <= 2f && timer.TimeLeft >= 1.9f)
+        if (timer.TimeLeft <= 3f && timer.TimeLeft >= 2.9f)
             GrabFocus();
     }
 

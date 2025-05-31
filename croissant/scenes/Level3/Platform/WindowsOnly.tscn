@@ -105,7 +105,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="Window/Control"]
-scale = Vector2(0.3, 0.3)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_jl265")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

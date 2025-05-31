@@ -203,7 +203,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RigidBody2D:freeze")
+tracks/4/path = NodePath("Head:freeze")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -215,7 +215,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("RigidBody2D:visible")
+tracks/5/path = NodePath("Head:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -227,7 +227,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("RigidBody2D:sleeping")
+tracks/6/path = NodePath("Head:sleeping")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -239,7 +239,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("RigidBody2D:collision_layer")
+tracks/7/path = NodePath("Head:collision_layer")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -251,7 +251,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("RigidBody2D:collision_mask")
+tracks/8/path = NodePath("Head:collision_mask")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -432,7 +432,7 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("RigidBody2D:freeze")
+tracks/4/path = NodePath("Head:freeze")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -444,7 +444,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("RigidBody2D:visible")
+tracks/5/path = NodePath("Head:visible")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -456,7 +456,7 @@ tracks/5/keys = {
 tracks/6/type = "value"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("RigidBody2D:sleeping")
+tracks/6/path = NodePath("Head:sleeping")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -468,7 +468,7 @@ tracks/6/keys = {
 tracks/7/type = "value"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("RigidBody2D:collision_layer")
+tracks/7/path = NodePath("Head:collision_layer")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -480,7 +480,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("RigidBody2D:collision_mask")
+tracks/8/path = NodePath("Head:collision_mask")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -901,7 +901,7 @@ position = Vector2(2, 0)
 collision_layer = 2
 collision_mask = 11
 script = ExtResource("1_45nm6")
-Head = NodePath("RigidBody2D")
+Head = NodePath("Head")
 Sprite = NodePath("Sprite2D")
 Animator = NodePath("AnimationPlayer")
 Animator2 = NodePath("AnimationPlayer2")
@@ -981,17 +981,17 @@ libraries = {
 
 [node name="Jump" type="Timer" parent="Timers"]
 
-[node name="RigidBody2D" type="RigidBody2D" parent="."]
+[node name="Head" type="RigidBody2D" parent="."]
 collision_layer = 0
 collision_mask = 0
 mass = 0.5
 freeze = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Head"]
 position = Vector2(29, -7)
 shape = SubResource("CircleShape2D_vw511")
 
-[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Head"]
 position = Vector2(29, -7)
 rotation = 1.5708
 scale = Vector2(3, 3)
@@ -1018,26 +1018,32 @@ scale_amount_curve = SubResource("Curve_r7lop")
 
 [node name="Punch" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("21_7p5e8")
+volume_db = -5.0
 bus = &"SFX"
 
 [node name="FootStep" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_biumn")
+volume_db = -8.0
 bus = &"SFX"
 
 [node name="Jump" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_nckji")
+volume_db = -15.0
 bus = &"SFX"
 
 [node name="Land" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_8xuck")
+volume_db = -6.0
 bus = &"SFX"
 
 [node name="Death" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("34_p8ipv")
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="BodyFall" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("35_8xuck")
+volume_db = -10.0
 bus = &"SFX"
 
 [editable path="Program"]

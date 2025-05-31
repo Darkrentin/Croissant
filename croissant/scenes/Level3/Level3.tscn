@@ -161,10 +161,12 @@ bus = &"SFX"
 
 [node name="PortalEnter" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("26_3octb")
+volume_db = -7.0
 bus = &"SFX"
 
 [node name="PortalExit" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("27_4kg8h")
+volume_db = -7.0
 bus = &"SFX"
 
 [node name="Portal" type="Node2D" parent="."]

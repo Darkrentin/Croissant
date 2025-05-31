@@ -147,7 +147,7 @@ public static class States
 
     public static void BlueScreen()
     {
-
+        GameManager.StopMusic();
         BlueScreenManager.ManageBlueScreen();
     }
 

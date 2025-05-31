@@ -385,6 +385,7 @@ shape = SubResource("CapsuleShape3D_jwlh4")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+fov = 80.0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.1)
@@ -445,6 +446,7 @@ spot_angle_attenuation = 0.784583
 [node name="Shoot" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamMP3_n4wqm")
 volume_db = -7.0
+max_polyphony = 3
 bus = &"SFX"
 
 [node name="Step" type="AudioStreamPlayer" parent="."]
