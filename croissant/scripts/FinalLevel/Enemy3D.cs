@@ -160,8 +160,10 @@ public partial class Enemy3D : CharacterBody3D
 			CanHarmPlayer = true;
 		if( animationName == "Depop")
 		{
-			FinalLevel.Instance.maze.Enemies.Remove(this);
-			QueueFree();
+			GetTree().CreateTimer(1.5f).Timeout += () => {
+				FinalLevel.Instance.maze.Enemies.Remove(this);
+				QueueFree();
+			};
 			return;
 		}
 	}
