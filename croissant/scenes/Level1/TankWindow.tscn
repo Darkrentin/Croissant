@@ -1,15 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://dsmobrvf3clby"]
+[gd_scene load_steps=4 format=3 uid="uid://dsmobrvf3clby"]
 
 [ext_resource type="Script" uid="uid://mklnil0yygtu" path="res://scripts/Level1/TankWindow.cs" id="1_jrr7c"]
 [ext_resource type="Texture2D" uid="uid://ctvoykm0usyde" path="res://assets/sprites/popups/yaai_3_0.png" id="2_rnu2i"]
+[ext_resource type="AudioStream" uid="uid://bl2c1m7sr748u" path="res://assets/sounds/level_3/move_platform_unselect.mp3" id="3_kdefi"]
 
-[node name="TankWindow" type="Window" node_paths=PackedStringArray("Image")]
+[node name="TankWindow" type="Window" node_paths=PackedStringArray("Image", "ClickSound")]
 position = Vector2i(0, 36)
 size = Vector2i(560, 420)
 unresizable = true
 always_on_top = true
 script = ExtResource("1_jrr7c")
 Image = NodePath("TextureRect")
+ClickSound = NodePath("Click")
 Draggable = false
 Minimizable = false
 
@@ -21,3 +23,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_rnu2i")
 expand_mode = 1
+
+[node name="Click" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_kdefi")
+bus = &"SFX"

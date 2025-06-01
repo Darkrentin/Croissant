@@ -3,6 +3,7 @@ using Godot;
 public partial class TankWindow : PopUpWindow
 {
     [Export] public TextureRect Image;
+    [Export] public AudioStreamPlayer ClickSound;
     public Timer AlternateTimer = new Timer();
     public int state;
     public int HPs = 3;
@@ -30,6 +31,7 @@ public partial class TankWindow : PopUpWindow
         else
         {
             HPs--;
+            ClickSound.Play();
             Title = "";
             for (int i = 0; i < HPs; i++)
                 Title += "☻   ";

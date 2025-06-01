@@ -43,6 +43,7 @@ public static class VirusTuto
             else
             {
                 popup2.HPs--;
+                popup2.ClickSound.Play();
                 popup2.Title = "";
                 for (int i = 0; i < popup2.HPs; i++)
                     popup2.Title += "☻   ";
