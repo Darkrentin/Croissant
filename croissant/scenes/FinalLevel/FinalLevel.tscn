@@ -3,7 +3,7 @@
 [ext_resource type="Shader" uid="uid://ougxnvc2epfd" path="res://assets/shaders/3DDithering.gdshader" id="1_ctihd"]
 [ext_resource type="Script" uid="uid://bh33sr5jvo6xt" path="res://scripts/FinalLevel/FinalLevel.cs" id="1_d5vjr"]
 [ext_resource type="PackedScene" uid="uid://ctiao55yb71jf" path="res://scenes/FinalLevel/Player3D.tscn" id="1_wf7iu"]
-[ext_resource type="Texture2D" uid="uid://d314a13s04tl" path="res://assets/shaders/dependencies/halloween-palette-1x.png" id="2_56we2"]
+[ext_resource type="Texture2D" uid="uid://d314a13s04tl" path="res://assets/shaders/dependencies/palette.png" id="2_56we2"]
 [ext_resource type="Texture2D" uid="uid://d5yhs5xgcpf8" path="res://assets/shaders/dependencies/bayer16tile2.png" id="3_knvm8"]
 [ext_resource type="PackedScene" uid="uid://bsvg7n4ll3xg7" path="res://scenes/FinalLevel/BossLevel.tscn" id="3_ml31f"]
 [ext_resource type="PackedScene" uid="uid://dntjiebaav3e5" path="res://scenes/FinalLevel/Maze.tscn" id="5_56we2"]

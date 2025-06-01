@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d314a13s04tl"
-path="res://.godot/imported/halloween-palette-1x.png-30a14a996b92fa643b9c22b30c64bf47.ctex"
+path="res://.godot/imported/palette.png-a5e1c3528585150ea3406395b126c883.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/shaders/dependencies/halloween-palette-1x.png"
-dest_files=["res://.godot/imported/halloween-palette-1x.png-30a14a996b92fa643b9c22b30c64bf47.ctex"]
+source_file="res://assets/shaders/dependencies/palette.png"
+dest_files=["res://.godot/imported/palette.png-a5e1c3528585150ea3406395b126c883.ctex"]
 
 [params]
 
