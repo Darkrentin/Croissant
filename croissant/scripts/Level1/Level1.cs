@@ -18,7 +18,7 @@ public partial class Level1 : Node2D
     public float DodgeWindowMultiplier = 5f;
     public float TankWindowMultiplier = 4f;
     public float BombWindowMultiplier = 2.0f;
-    public float TimerBasicTime = 0.41f;
+    public float TimerBasicTime = 0.65f;
     public float TimerMultiplier = 0.85f;
     public static bool HasBombWindow = false;
     private Timer spawnTimer;
@@ -77,7 +77,7 @@ public partial class Level1 : Node2D
 
     public static void AddMultiplier()
     {
-        Instance.TimerMultiplier += 0.012f;
+        Instance.TimerMultiplier += 0.020f;
     }
 
     public static void AddNewWindow()

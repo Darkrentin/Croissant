@@ -65,12 +65,7 @@ public partial class DodgeWindow : PopUpWindow
 
     private float CalculateMovementSpeed()
     {
-        if (Level1.WindowCount >= 10)
-            return Lib.rand.Next(50, 80) / 10f;
-        else if (Level1.WindowCount >= 5)
-            return Lib.rand.Next(30, 50) / 10f;
-        else
-            return Lib.rand.Next(15, 30) / 10f;
+        return Lib.rand.Next(80, 100) / 10f;
     }
 
     public void StartNewMovement()
