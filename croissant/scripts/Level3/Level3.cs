@@ -55,7 +55,6 @@ public partial class Level3 : FloatWindow
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
 
-        Position += new Vector2I(1, 1);
     }
 
     public void ShowPlayer()

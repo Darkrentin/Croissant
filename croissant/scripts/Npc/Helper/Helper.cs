@@ -100,6 +100,7 @@ public partial class Helper : Npc
 					GetParent().RemoveChild(this);
 					QueueFree();
 					GameManager.helper = null;
+					Level3.Instance.QueueFree();
 					GameManager.State = GameManager.GameState.FinalLevel;
 				};
 				break;

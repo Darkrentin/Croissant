@@ -124,7 +124,7 @@ _data = {
 [node name="Level3" type="Window" node_paths=PackedStringArray("player", "ConfigFileGatheredSound", "PortalEnterSound", "PortalExitSound", "PortalAnimationPlayer", "PortalSpawn")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
-mode = 4
+mode = 3
 size = Vector2i(1920, 1080)
 borderless = true
 always_on_top = true

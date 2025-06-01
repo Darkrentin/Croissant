@@ -105,7 +105,7 @@ public partial class WaveManager : Node
 	{
 		if (text != "")
 		{
-			ScoreLabel.Text = text;
+			ScoreLabel.Text = text + "/4";
 		}
 		else
 		{
