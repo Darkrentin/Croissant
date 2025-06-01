@@ -1,0 +1,108 @@
+[gd_scene load_steps=5 format=3 uid="uid://dk03on76rvets"]
+
+[ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_c52f8"]
+[ext_resource type="FontFile" uid="uid://c3x2cu2lkt3qo" path="res://assets/texts/fonts/RobotoMono-SemiBold.ttf" id="2_c52f8"]
+[ext_resource type="Script" uid="uid://csmr4ft4rgmf" path="res://scripts/Other/Credits.cs" id="3_3ad6n"]
+
+[sub_resource type="Theme" id="Theme_3ad6n"]
+
+[node name="CreditsWindow" type="Window"]
+transparent_bg = true
+canvas_item_default_texture_filter = 2
+position = Vector2i(0, 24)
+size = Vector2i(300, 380)
+unresizable = true
+transparent = true
+sharp_corners = true
+theme = ExtResource("1_c52f8")
+script = ExtResource("3_3ad6n")
+metadata/_custom_type_script = "uid://kuhg0kaqg182"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.00458, 1)
+color = Color(0.764706, 0.780392, 0.796078, 1)
+
+[node name="Credits" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 15.0
+offset_bottom = 15.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Credits"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Congrats" type="RichTextLabel" parent="Credits/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/normal_font_size = 40
+bbcode_enabled = true
+text = "[wave amp=15 freq=5]Credits[/wave]"
+fit_content = true
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sep1" type="HSeparator" parent="Credits/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Credits/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_3ad6n")
+theme_override_fonts/font = ExtResource("2_c52f8")
+theme_override_font_sizes/font_size = 24
+text = "Programmers"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="Credits/VBoxContainer"]
+layout_mode = 2
+text = "Corentin del Pozo
+Adrien Coureau
+Tristan Mounier"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Sep2" type="HSeparator" parent="Credits/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="Credits/VBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_3ad6n")
+theme_override_fonts/font = ExtResource("2_c52f8")
+theme_override_font_sizes/font_size = 24
+text = "Musics"
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="Credits/VBoxContainer"]
+layout_mode = 2
+text = "Adrien Coureau"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Credits/VBoxContainer"]
+custom_minimum_size = Vector2(0, 23.53)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0.423529, 1, 1)
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[url=\"https://www.youtube.com/watch?v=dQw4w9WgXcQ\"]Tracklist link[/url]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="meta_clicked" from="Credits/VBoxContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

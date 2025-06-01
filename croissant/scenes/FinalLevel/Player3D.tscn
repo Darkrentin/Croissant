@@ -451,3 +451,4 @@ bus = &"SFX"
 
 [node name="Step" type="AudioStreamPlayer" parent="."]
 stream = SubResource("AudioStreamRandomizer_vdv5x")
+max_polyphony = 4

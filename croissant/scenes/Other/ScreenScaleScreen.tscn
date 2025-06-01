@@ -55,14 +55,28 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="WarningLabel" type="RichTextLabel" parent="VBoxContainer"]
-custom_minimum_size = Vector2(500, 200)
+custom_minimum_size = Vector2(500, 100)
 layout_mode = 2
 theme = ExtResource("1_1lo34")
 theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_x55gj")
 theme_override_fonts/bold_font = ExtResource("5_clc2a")
 bbcode_enabled = true
-text = "Lorem ipsumaa aaaaaa a aaaa aa a aaa aaaa aaa a aaaa aaaaa aaa"
+text = "Text text text"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WarningLabel2" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 80)
+layout_mode = 2
+theme = ExtResource("1_1lo34")
+theme_override_colors/default_color = Color(0.133196, 0.133196, 0.133196, 1)
+theme_override_fonts/normal_font = ExtResource("4_x55gj")
+theme_override_fonts/bold_font = ExtResource("5_clc2a")
+theme_override_font_sizes/normal_font_size = 15
+bbcode_enabled = true
+text = "(If your windows seems very small afterwards, consider changing your screen resolution to around 1920x1080)"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1

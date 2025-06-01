@@ -18,7 +18,6 @@ public partial class Helper : Npc
 	{
 		Instance = this;
 		base._Ready();
-		Lib.Print($"Npc : {NpcName} initialized DialogueId :{Size}");
 		//Dialogue.StartDialogue(NpcName, "Restart");
 	}
 
@@ -116,7 +115,6 @@ public partial class Helper : Npc
 			Level3.Instance.ShowPlayer();
 
 			Size = BaseSize;
-			Lib.Print("Size: " + Size);
 			Sprite2D.Scale = BaseScale;
 			Position = -GameManager.ScreenSize / 2;
 		}

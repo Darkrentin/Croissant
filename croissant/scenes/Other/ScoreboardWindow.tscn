@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://carai6dnhfx5a"]
+[gd_scene load_steps=9 format=3 uid="uid://carai6dnhfx5a"]
 
 [ext_resource type="Script" uid="uid://caomhrumivh7u" path="res://scripts/Other/ScoreboardWindow.cs" id="1_gady3"]
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_xk78v"]
+[ext_resource type="PackedScene" uid="uid://dk03on76rvets" path="res://scenes/Other/Credits.tscn" id="3_poncd"]
 [ext_resource type="Texture2D" uid="uid://cwgonk1nbqmj0" path="res://icon.svg" id="3_sgbgo"]
 
 [sub_resource type="Theme" id="Theme_xk78v"]
@@ -43,7 +44,7 @@ _data = {
 &"RESET": SubResource("Animation_poncd")
 }
 
-[node name="ScoreboardWindow" type="Window" node_paths=PackedStringArray("HttpRequest", "TimeLabel", "PersonalBestLabel", "UsernameEntry", "ScoreboardText", "SubmitButton", "ShowScoreboardButton", "EndResultsContainer", "ScoreboardContainer", "WaitingScreenContainer", "SubmitLabel", "EndlessModeButton")]
+[node name="ScoreboardWindow" type="Window" node_paths=PackedStringArray("HttpRequest", "TimeLabel", "PersonalBestLabel", "UsernameEntry", "ScoreboardText", "SubmitButton", "ShowScoreboardButton", "EndResultsContainer", "ScoreboardContainer", "WaitingScreenContainer", "SubmitLabel", "EndlessModeButton", "CreditsButton")]
 canvas_item_default_texture_filter = 0
 position = Vector2i(0, 24)
 size = Vector2i(500, 500)
@@ -60,7 +61,9 @@ EndResultsContainer = NodePath("EndResult")
 ScoreboardContainer = NodePath("Scoreboard")
 WaitingScreenContainer = NodePath("WaitingScreen")
 SubmitLabel = NodePath("EndResult/VBoxContainer/Submit you time!")
-EndlessModeButton = NodePath("Scoreboard/VBoxContainer/Button")
+EndlessModeButton = NodePath("Scoreboard/VBoxContainer/HBoxContainer/EndlessButton")
+CreditsButton = NodePath("Scoreboard/VBoxContainer/HBoxContainer/CreditsButton")
+CreditsScene = ExtResource("3_poncd")
 metadata/_custom_type_script = "uid://kuhg0kaqg182"
 
 [node name="ColorRect" type="ColorRect" parent="."]
@@ -73,6 +76,7 @@ scale = Vector2(1.00458, 1)
 color = Color(0.764706, 0.780392, 0.796078, 1)
 
 [node name="EndResult" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -228,7 +232,6 @@ texture = ExtResource("3_sgbgo")
 offset = Vector2(3, 0)
 
 [node name="Scoreboard" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -294,12 +297,21 @@ bbcode_enabled = true
 [node name="Sep2" type="HSeparator" parent="Scoreboard/VBoxContainer"]
 layout_mode = 2
 
-[node name="Button" type="Button" parent="Scoreboard/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Scoreboard/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="EndlessButton" type="Button" parent="Scoreboard/VBoxContainer/HBoxContainer"]
 custom_minimum_size = Vector2(220, 45)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Play Endless mode"
+
+[node name="CreditsButton" type="Button" parent="Scoreboard/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Credits"
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
 timeout = 10.0

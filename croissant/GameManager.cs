@@ -84,6 +84,7 @@ public partial class GameManager : Node2D
         Dialogue1Buffer,
         TutoBuffer,
         Level3Buffer,
+        FinalLevelBuffer,
         Void
     }
 
@@ -159,7 +160,7 @@ public partial class GameManager : Node2D
 
     public override void _Process(double delta)
     {
-        if (Input.IsActionJustPressed("LeftClick") && State != GameState.FinalLevel)
+        if (Input.IsActionJustPressed("LeftClick") && State != GameState.FinalLevelBuffer)
             ClickSound.Play();
 
         if (DebugMode && Input.IsActionJustPressed("SkipLevel"))

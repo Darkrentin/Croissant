@@ -249,7 +249,7 @@ public static class States
         GameManager.SkipLevel = FinalLevel.TransitionToEnd;
 
         // Change State condition
-        GameManager.State = GameManager.GameState.Void;
+        GameManager.State = GameManager.GameState.FinalLevelBuffer;
     }
 
     public static void Scoreboard()

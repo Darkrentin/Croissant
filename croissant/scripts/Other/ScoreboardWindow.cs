@@ -23,6 +23,9 @@ public partial class ScoreboardWindow : FloatWindow
 	[Export] private Control WaitingScreenContainer;
 	[Export] private Label SubmitLabel;
 	[Export] private Button EndlessModeButton;
+	[Export] private Button CreditsButton;
+	[Export] public PackedScene CreditsScene;
+	private Credits CreditsWindow;
 	private string EntryPlayerName = "";
 	private double RunTime;
 	private string FormattedScoreboard = "";
@@ -31,6 +34,10 @@ public partial class ScoreboardWindow : FloatWindow
 	public override void _Ready()
 	{
 		base._Ready();
+		CreditsButton.Pressed += OnCreditsButtonPressed;
+		CreditsWindow = CreditsScene.Instantiate<Credits>();
+		AddChild(CreditsWindow);
+		CreditsWindow.Visible = false;
 
 		RunTime = SpeedRunTimer.Instance.Time;
 		SpeedRunTimer.Instance.Visible = false;
@@ -59,6 +66,11 @@ public partial class ScoreboardWindow : FloatWindow
 		}
 
 		EndlessModeButton.Pressed += OnEndlessModeButtonPressed;
+	}
+
+	public void OnCreditsButtonPressed()
+	{
+		CreditsWindow.Visible = true;
 	}
 
 	public override void OnClose()
@@ -94,17 +106,17 @@ public partial class ScoreboardWindow : FloatWindow
 		string currentUsername = UsernameEntry.Text;
 		SubmitButton.Disabled = true;
 
-		// Used Regex for the disallowed characters : CJK, Hangul, Cyrillic
-		const string disallowedCharsPattern = @"[\.\$#\[\]\/\u4E00-\u9FFF\u3000-\u303F\uAC00-\uD7AF\uFF00-\uFFEF\u0400-\u04FF\u0500-\u052F]";
+		// Allowed characters: English letters, numbers, accented characters, underscores, and dashes
+		const string allowedCharsPattern = @"^[a-zA-Z0-9\u00C0-\u017F_-]+$";
 
 		if (string.IsNullOrWhiteSpace(currentUsername))
 		{
 			SubmitLabel.Text = "Submit your time to the scoreboard!";
 			SubmitLabel.AddThemeColorOverride("font_color", Colors.Black);
 		}
-		else if (Regex.IsMatch(currentUsername, disallowedCharsPattern))
+		else if (!Regex.IsMatch(currentUsername, allowedCharsPattern))
 		{
-			SubmitLabel.Text = "Please only use letters and numbers.";
+			SubmitLabel.Text = "Please only use letters, numbers and underscores.";
 			SubmitLabel.AddThemeColorOverride("font_color", Colors.Red);
 		}
 		else

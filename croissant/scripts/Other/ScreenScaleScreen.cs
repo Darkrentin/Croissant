@@ -11,17 +11,14 @@ public partial class ScreenScaleScreen : Window
 	{
 		Title = "Warning";
 		ProcessMode = ProcessModeEnum.Always;
-		CloseRequested += () =>
-		{
-			GetTree().Quit();
-		};
+		CloseRequested += () => GetTree().Quit();
 
 		Vector2I windowSize = Lib.GetAspectFactor(Size);
 		Size = windowSize;
 		Position = Lib.GetScreenPosition(0.5f, 0.5f) - windowSize / 2;
 		Visible = true;
 
-		WarningLabel.Text = "Due to windows limitations about window widths, you must play the game at [b]100%[/b] screen scale instead of your actual [b]" + GameManager.ScreenScale * 100 + "%[/b].";
+		WarningLabel.Text = "Due to Windows limitations about window widths, you must play the game at [b]100%[/b] screen scale instead of your actual [b]" + GameManager.ScreenScale * 100 + "%[/b].";
 
 		AcceptButton.Pressed += OnAcceptButtonPressed;
 		RefuseButton.Pressed += OnRefuseButtonPressed;
@@ -37,10 +34,7 @@ public partial class ScreenScaleScreen : Window
 		}
 		else
 		{
-			GetTree().CreateTimer(0.5f).Timeout += () =>
-			{
-				GetTree().Quit();
-			};
+			GetTree().CreateTimer(0.5f).Timeout += () => GetTree().Quit();
 		}
 	}
 
