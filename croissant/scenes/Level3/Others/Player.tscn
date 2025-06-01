@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://yaacwup8xpjj"]
+[gd_scene load_steps=58 format=3 uid="uid://yaacwup8xpjj"]
 
 [ext_resource type="Script" uid="uid://d3ksx4qb0phjv" path="res://scripts/Level3/Character/PlayerCharacter.cs" id="1_45nm6"]
 [ext_resource type="Script" uid="uid://b08swylcghmyx" path="res://scripts/Level3/StateMachine/PlayerStates.cs" id="2_b8m4g"]
@@ -851,18 +851,34 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.166667, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 3), Vector2(0.5, 2), Vector2(0.01, 0.01)]
+}
+
+[sub_resource type="Animation" id="Animation_8xuck"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(3, 3), Vector2(0.01, 0.01)]
+"values": [Vector2(3, 3)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a4o7l"]
 _data = {
-&"Hide": SubResource("Animation_56a7h")
+&"Hide": SubResource("Animation_56a7h"),
+&"RESET": SubResource("Animation_8xuck")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vw511"]

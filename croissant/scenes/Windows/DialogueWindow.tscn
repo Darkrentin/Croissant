@@ -42,6 +42,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="RichTextLabel" parent="Control"]
+texture_filter = 4
 layout_mode = 1
 anchors_preset = -1
 anchor_right = 1.0

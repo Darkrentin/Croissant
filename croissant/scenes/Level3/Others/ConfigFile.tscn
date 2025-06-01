@@ -93,6 +93,7 @@ scale = Vector2(0.365, 0.365)
 texture = ExtResource("2_eb6lh")
 
 [node name="Label" type="Label" parent="."]
+texture_filter = 4
 offset_left = -24.0
 offset_top = 24.0
 offset_right = 23.0

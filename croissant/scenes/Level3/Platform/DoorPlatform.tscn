@@ -60,6 +60,7 @@ grow_vertical = 2
 scale = Vector2(0.04, 0.04)
 
 [node name="Label" type="Label" parent="Window"]
+texture_filter = 4
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
