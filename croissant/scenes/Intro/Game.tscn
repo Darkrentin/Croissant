@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://wm3w6j1qernu"]
+[gd_scene load_steps=21 format=3 uid="uid://wm3w6j1qernu"]
 
 [ext_resource type="Script" uid="uid://qgaqy5xevutn" path="res://scripts/Intro/IntroGameManager.cs" id="1_8rhfo"]
 [ext_resource type="PackedScene" uid="uid://1jqgd3hgljd8" path="res://scenes/Intro/Bullet.tscn" id="2_g36va"]
@@ -10,6 +10,7 @@
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="7_k45nk"]
 [ext_resource type="Texture2D" uid="uid://tr0myr2uos3n" path="res://assets/sprites/intro_tuto.png" id="8_125ny"]
 [ext_resource type="Shader" uid="uid://crrfk46jdk3e3" path="res://assets/shaders/IntroGame.gdshader" id="9_fwmwi"]
+[ext_resource type="LabelSettings" uid="uid://35jcpwoiagww" path="res://assets/texts/ScoreLabelSettings.tres" id="9_p2mor"]
 [ext_resource type="AudioStream" uid="uid://bu6y20obqj0lh" path="res://assets/sounds/level_0/pew.mp3" id="11_r4prw"]
 [ext_resource type="AudioStream" uid="uid://bptivfus3fn63" path="res://assets/sounds/level_0/game_explosion.mp3" id="20_m8mbq"]
 
@@ -141,6 +142,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_k45nk")
 theme_override_font_sizes/font_size = 54
 text = "Score:"
+label_settings = ExtResource("9_p2mor")
 
 [node name="ScoreNum" type="Label" parent="UI"]
 layout_mode = 1
@@ -153,6 +155,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("7_k45nk")
 theme_override_font_sizes/font_size = 54
 text = "0"
+label_settings = ExtResource("9_p2mor")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
 libraries = {

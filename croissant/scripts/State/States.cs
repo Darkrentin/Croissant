@@ -75,7 +75,7 @@ public static class States
 
     public static void IntroVirus()
     {
-        GameManager.StopMusic();
+        GameManager.PlayMusic(GameManager.Music.Idle);
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, -0.5f) - GameManager.virus.Size / 2;
         GameManager.virus.StartInverseExponentialTransition(Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y), 2f);
         GameManager.virus.On = false;

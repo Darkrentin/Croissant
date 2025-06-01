@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://d13xxxigq3m7y"]
+[gd_scene load_steps=16 format=3 uid="uid://d13xxxigq3m7y"]
 
 [ext_resource type="Script" uid="uid://mfeweki7i4e4" path="res://scripts/Level2/Level2.cs" id="1_u87iq"]
 [ext_resource type="PackedScene" uid="uid://b4i4iwr3qk44x" path="res://scenes/WaveManager/WaveManager.tscn" id="2_qsvqe"]
 [ext_resource type="PackedScene" uid="uid://baual4txy33sp" path="res://scenes/Level2/WaveData.tscn" id="3_eyjwi"]
 [ext_resource type="PackedScene" uid="uid://bjgcj0eb3671" path="res://scenes/WaveManager/Wave.tscn" id="4_8crk8"]
+[ext_resource type="LabelSettings" uid="uid://35jcpwoiagww" path="res://assets/texts/ScoreLabelSettings.tres" id="6_4axc7"]
 [ext_resource type="FontFile" uid="uid://c7dtnsayp7uf5" path="res://assets/texts/fonts/NovaSquare-Regular.ttf" id="6_s1ih2"]
 [ext_resource type="Shader" uid="uid://vwfsika88k1v" path="res://assets/shaders/ChromaticAberration.gdshader" id="6_wgxlr"]
 [ext_resource type="AudioStream" uid="uid://c5m26fwo7gxbu" path="res://assets/sounds/level_2/wave_start.mp3" id="7_ldj83"]
@@ -250,6 +251,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_s1ih2")
 theme_override_font_sizes/font_size = 54
 text = "Wave:"
+label_settings = ExtResource("6_4axc7")
 
 [node name="ScoreNum" type="Label" parent="UI"]
 layout_mode = 1
@@ -262,6 +264,7 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_s1ih2")
 theme_override_font_sizes/font_size = 54
 text = "0"
+label_settings = ExtResource("6_4axc7")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="UI"]
 libraries = {

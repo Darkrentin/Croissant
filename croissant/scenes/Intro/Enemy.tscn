@@ -117,7 +117,7 @@ bus = &"SFX"
 
 [node name="ShapeHit" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_0qvkv")
-volume_db = 3.0
+volume_db = -5.0
 max_polyphony = 5
 bus = &"SFX"
 

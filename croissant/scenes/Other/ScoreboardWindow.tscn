@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://caomhrumivh7u" path="res://scripts/Other/ScoreboardWindow.cs" id="1_gady3"]
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_xk78v"]
-[ext_resource type="PackedScene" path="res://scenes/Other/Credits.tscn" id="3_poncd"]
+[ext_resource type="PackedScene" uid="uid://dk03on76rvets" path="res://scenes/Other/Credits.tscn" id="3_poncd"]
 [ext_resource type="Texture2D" uid="uid://cwgonk1nbqmj0" path="res://icon.svg" id="3_sgbgo"]
 
 [sub_resource type="Theme" id="Theme_xk78v"]
@@ -76,7 +76,6 @@ scale = Vector2(1.00458, 1)
 color = Color(0.764706, 0.780392, 0.796078, 1)
 
 [node name="EndResult" type="Control" parent="."]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -232,6 +231,7 @@ texture = ExtResource("3_sgbgo")
 offset = Vector2(3, 0)
 
 [node name="Scoreboard" type="Control" parent="."]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
