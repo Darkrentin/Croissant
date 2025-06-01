@@ -109,7 +109,7 @@ public partial class WaveManager : Node
 		}
 		else
 		{
-			ScoreLabel.Text = WaveNum.ToString();
+			ScoreLabel.Text = WaveNum.ToString() + "/4";
 		}
 		AnimationPlayer.Play("ScoreUp");
 	}

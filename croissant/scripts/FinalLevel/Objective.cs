@@ -79,6 +79,7 @@ public partial class Objective : StaticBody3D
 		Explosion.Timer.Start();
 		AnimationPlayer.Play("Break");
 		FinalLevel.Instance.ObjectiveDestroy();
+		FinalLevel.Instance.ObjectiveFind();
 		timer.Start();
 	}
 

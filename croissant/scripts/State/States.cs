@@ -1,4 +1,5 @@
 using Godot;
+using GodotPlugins.Game;
 
 public static class States
 {
@@ -61,6 +62,7 @@ public static class States
 
     public static void IntroGame()
     {
+        GameManager.StartRefocusAllWindows();
         GameManager.PlayMusic(GameManager.Music.IntroGame);
         IntroLvl = IntroGameScene.Instantiate<Node2D>();
         IntroLvl.Position = new Vector2I(1, 0);
@@ -238,6 +240,8 @@ public static class States
     public static void FinalLevel()
     {
         GameManager.PlayMusic(GameManager.Music.FinalLevel);
+        GameManager.MainWindow.Unfocusable = false;
+        GameManager.MainWindow.AlwaysOnTop = true;
         if (GameManager.virus != null)
         {
             GameManager.GameRoot.RemoveChild(GameManager.virus);

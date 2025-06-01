@@ -21,6 +21,7 @@ public partial class FinalLevel : Node3D
 	[Export] public AudioStreamPlayer DeathLavaSound;
 	[Export] public AudioStreamPlayer LavaSound;
 	[Export] public AudioStreamPlayer WallSound;
+	[Export] public Label ObjectiveLabel;
 	public Node3D BossLevel;
 	public static FinalLevel Instance;
 	public int ObjectiveDestroyed = 0;
@@ -107,7 +108,7 @@ public partial class FinalLevel : Node3D
 	{
 		shaderMaterial.SetShaderParameter("u_color_tex", PaletteDeath);
 		Player3D.Alive = false;
-		
+
 
 		if (enemyPosition == Vector3.Zero)
 		{
@@ -143,7 +144,7 @@ public partial class FinalLevel : Node3D
 	public void EndReach(Node body)
 	{
 		if (body is Player3D player)
-			CallDeferred(nameof(TransitionToBossLevel));
+			CallDeferred(nameof(TransitionToEnd));
 	}
 	public void TransitionToBossLevel()
 	{
@@ -183,9 +184,14 @@ public partial class FinalLevel : Node3D
 		GetParent().RemoveChild(this);
 
 		GameManager.MainWindow.AlwaysOnTop = false;
-		GameManager.FixWindow.GrabFocus();
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 
 		QueueFree();
+	}
+
+	public void ObjectiveFind()
+	{
+		ObjectiveLabel.Text = $"{ObjectiveDestroyed}/{ObjectiveCount}";
+		AnimationPlayer.Play("ObjectiveFind");
 	}
 }

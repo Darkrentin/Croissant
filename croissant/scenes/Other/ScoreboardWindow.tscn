@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://caomhrumivh7u" path="res://scripts/Other/ScoreboardWindow.cs" id="1_gady3"]
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_xk78v"]
-[ext_resource type="PackedScene" uid="uid://dk03on76rvets" path="res://scenes/Other/Credits.tscn" id="3_poncd"]
+[ext_resource type="PackedScene" path="res://scenes/Other/Credits.tscn" id="3_poncd"]
 [ext_resource type="Texture2D" uid="uid://cwgonk1nbqmj0" path="res://icon.svg" id="3_sgbgo"]
 
 [sub_resource type="Theme" id="Theme_xk78v"]
@@ -45,7 +45,7 @@ _data = {
 }
 
 [node name="ScoreboardWindow" type="Window" node_paths=PackedStringArray("HttpRequest", "TimeLabel", "PersonalBestLabel", "UsernameEntry", "ScoreboardText", "SubmitButton", "ShowScoreboardButton", "EndResultsContainer", "ScoreboardContainer", "WaitingScreenContainer", "SubmitLabel", "EndlessModeButton", "CreditsButton")]
-canvas_item_default_texture_filter = 0
+canvas_item_default_texture_filter = 2
 position = Vector2i(0, 24)
 size = Vector2i(500, 500)
 theme = ExtResource("1_xk78v")

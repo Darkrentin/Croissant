@@ -115,6 +115,7 @@ public partial class GameManager : Node2D
         var shaderLoaderScene = GD.Load<PackedScene>("res://scenes/Other/ShaderLoader.tscn");
         var shaderLoader = shaderLoaderScene.Instantiate<ShaderLoader>();
         AddChild(shaderLoader);
+        StartRefocusAllWindows();
     }
 
     private void InitializeNpc()
