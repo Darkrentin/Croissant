@@ -21,6 +21,7 @@ public partial class Level2 : Node2D
 
 	public void EndActions()
 	{
+		CursorWindow.ClearAllDots();
 		GameManager.State = GameManager.GameState.Dialogue2;
 		CursorWindow.GetParent().RemoveChild(CursorWindow);
 		CursorWindow.QueueFree();

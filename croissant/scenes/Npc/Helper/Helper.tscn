@@ -329,6 +329,7 @@ bus = &"SFX"
 
 [node name="DialogueSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("7_7nx6g")
+volume_db = 2.0
 max_polyphony = 8
 bus = &"SFX"
 

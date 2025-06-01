@@ -72,7 +72,7 @@ public partial class CursorWindow : FloatWindow
 		}
 	}
 
-	private void ClearAllDots()
+	public void ClearAllDots()
 	{
 		foreach (Node child in dotContainer.GetChildren())
 		{

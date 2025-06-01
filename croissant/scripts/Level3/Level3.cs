@@ -25,8 +25,8 @@ public partial class Level3 : FloatWindow
     private HashSet<int> requestedLoads;
     public bool End = false;
 
-    public bool MovingHovered {get => NbPressedWindows > 0;}
-    public int NbPressedWindows { get {return _NbPressedWindows; } set {_NbPressedWindows.ToString(); _NbPressedWindows = value; } }
+    public bool MovingHovered { get => NbPressedWindows > 0; }
+    public int NbPressedWindows { get { return _NbPressedWindows; } set { _NbPressedWindows.ToString(); _NbPressedWindows = value; } }
     public int _NbPressedWindows = 0;
 
     public override void _Ready()
@@ -55,6 +55,7 @@ public partial class Level3 : FloatWindow
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
 
+        Position += new Vector2I(1, 1);
     }
 
     public void ShowPlayer()
@@ -422,7 +423,7 @@ public partial class Level3 : FloatWindow
 
     public void EndLevel()
     {
-        if(sceneid!=0)
+        if (sceneid != 0)
             TransitionStuck();
         GameManager.State = GameManager.GameState.Dialogue3;
         GetTree().CreateTimer(0.5f).Timeout += () =>
