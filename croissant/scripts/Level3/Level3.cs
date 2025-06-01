@@ -8,7 +8,6 @@ public partial class Level3 : FloatWindow
     [Export] public PackedScene[] level3Scenes;
     [Export] public PlayerCharacter player;
     [Export] public int MaxFiles = 4;
-
     [Export] public AudioStreamPlayer ConfigFileGatheredSound;
     [Export] public AudioStreamPlayer PortalEnterSound;
     [Export] public AudioStreamPlayer PortalExitSound;
@@ -54,7 +53,6 @@ public partial class Level3 : FloatWindow
         AddChild(invincibleTimer);
         invincibleTimer.Timeout += OnInvincibleTimerTimeout;
         invincibleTimer.Start();
-
     }
 
     public void ShowPlayer()
@@ -329,7 +327,6 @@ public partial class Level3 : FloatWindow
             //CallDeferred(nameof(GrabFocus));
         };
 
-
         if (End)
         {
             EndLevel();
@@ -370,7 +367,6 @@ public partial class Level3 : FloatWindow
         if (portalToRemove != "" && pathToClean != null)
         {
             RemovePortalFromLevel0(portalToRemove);
-
             FreePathLevels(pathToClean);
         }
     }
@@ -402,7 +398,6 @@ public partial class Level3 : FloatWindow
                 loadedScenes[levelIndex] && Level3Nodes[levelIndex] != null)
             {
                 loadedScenes[levelIndex] = false;
-
                 Level3Nodes[levelIndex].GetParent().RemoveChild(Level3Nodes[levelIndex]);
                 Level3Nodes[levelIndex].QueueFree();
                 Level3Nodes[levelIndex] = null;
