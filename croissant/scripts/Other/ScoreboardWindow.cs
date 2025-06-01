@@ -245,6 +245,7 @@ public partial class ScoreboardWindow : FloatWindow
 
 	public void OnEndlessModeButtonPressed()
 	{
+		GameManager.StartRefocusAllWindows();
 		GameManager.State = GameManager.GameState.IntroGameEndless;
 		QueueFree();
 	}

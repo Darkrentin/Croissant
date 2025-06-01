@@ -85,8 +85,6 @@ public partial class MenuWindow : FloatWindow
 		if (Mode is ModeEnum.Minimized)
 		{
 			Mode = ModeEnum.Windowed;
-			////Lib.Print("Close Minimized");
-			Close();
 		}
 
 		if (FakeDesktop && !MainWindow.FakeBackground.Visible)

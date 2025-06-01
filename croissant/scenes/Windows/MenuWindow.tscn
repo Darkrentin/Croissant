@@ -12,7 +12,6 @@
 size = Vector2i(300, 380)
 unresizable = true
 always_on_top = true
-popup_window = true
 theme = ExtResource("1_wvpbs")
 script = ExtResource("1_ak1ko")
 FakeDesktopButton = NodePath("VBoxContainer/FakeDesktop")

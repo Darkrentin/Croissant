@@ -38,7 +38,7 @@ public partial class MainWindow : FloatWindow
 
     public override void OnClose()
     {
-        GameManager.MenuWindow.Open();
+        GetTree().Quit();
     }
 
     void UpdateDebugLabel()
