@@ -251,7 +251,7 @@ public partial class Maze : Node3D
         Vector3 directionToCenter = -position.Normalized();
 
         // Position flashlight one block closer to center
-        Vector3 FlashLightPos = position + (directionToCenter * WallSize * new Vector3(1, 0, 1));
+        Vector3 FlashLightPos = position - (directionToCenter * WallSize * new Vector3(1, 0, 1));
 
         FlashLight = FlashLightScene.Instantiate<FlashLight>();
         FlashLight.Position = FlashLightPos;

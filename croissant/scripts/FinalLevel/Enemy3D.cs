@@ -114,7 +114,7 @@ public partial class Enemy3D : CharacterBody3D
 		DeathSound.Play();
 		
 		// Use fade out instead of immediate stop
-		FadeOutDetectionSound();
+		DeathSound.Stop();
 		
 		HitSound.Stop();
 		Collision.Position = new Vector3(0, 10, 0);
@@ -158,6 +158,12 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		if (animationName == "ShapeChange")
 			CanHarmPlayer = true;
+		if( animationName == "Depop")
+		{
+			FinalLevel.Instance.maze.Enemies.Remove(this);
+			QueueFree();
+			return;
+		}
 	}
 
 	public void _on_navigation_agent_3d_velocity_computed(Vector3 velocity)

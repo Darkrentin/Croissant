@@ -47,7 +47,7 @@ public partial class Player3D : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if(!Alive)
+		if (!Alive)
 			return;
 		float z_movement = Input.GetActionStrength("Backward") - Input.GetActionStrength("Forward");
 		float rotate = Input.GetActionStrength("LeftRot") - Input.GetActionStrength("RightRot");
@@ -98,5 +98,12 @@ public partial class Player3D : CharacterBody3D
 			else if (Body is FloppyDisk floppyDisk)
 				floppyDisk.TakeDamage();
 		}
+	}
+	
+	public void TurnOnFlashlight()
+	{
+		var tween = CreateTween();
+		tween.TweenProperty(Flashlight, "light_energy", 1.0, 0.5);
+		tween.Play();
 	}
 }

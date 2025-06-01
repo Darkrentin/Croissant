@@ -5,6 +5,7 @@ public partial class FlashLight : Node3D
 {
 	[Export] public Area3D Area3D;
 	[Export] public Sprite3D Sprite3D;
+	[Export] public AudioStreamPlayer CollectSound;
 	public override void _Ready()
 	{
 		Area3D.BodyEntered += OnBodyEntered;
@@ -20,8 +21,9 @@ public partial class FlashLight : Node3D
 	{
 		if (body is Player3D player)
 		{
-			player.Flashlight.Visible = true;
-			CallDeferred(nameof(Delete));
+			player.TurnOnFlashlight();
+			CollectSound.Play();
+			CollectSound.Finished += Delete;
 		}
 	}
 	public void Delete()

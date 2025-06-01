@@ -73,7 +73,7 @@ public partial class FinalLevel : Node3D
 	{
 		for (int i = 0; i < maze.MazeSize; i++)
 			for (int j = 0; j < maze.MazeSize; j++)
-				if (maze.MazeData[i, j] == 0 && Lib.rand.Next(0, 11) == 0)
+				if (maze.MazeData[i, j] == 0 && Lib.rand.Next(0, 16) == 0)
 				{
 					Vector3 spawnPosition = ((new Vector3(i, 0, j) - new Vector3(maze.MazeSize / 2, 0, maze.MazeSize / 2)) * maze.WallSize) + new Vector3(maze.WallSize / 2, 0, maze.WallSize / 2);
 					Enemy3D enemy = (Enemy3D)Enemy3DScene.Instantiate();

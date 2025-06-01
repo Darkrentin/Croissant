@@ -1,14 +1,16 @@
-[gd_scene load_steps=4 format=3 uid="uid://dn3l33sgjpqxj"]
+[gd_scene load_steps=5 format=3 uid="uid://dn3l33sgjpqxj"]
 
 [ext_resource type="Script" uid="uid://cvj6qyiab8evc" path="res://scripts/FinalLevel/FlashLight.cs" id="1_7wywh"]
 [ext_resource type="Texture2D" uid="uid://ckv6acd8tx5u5" path="res://assets/sprites/lamp/flashlight.png" id="2_7wywh"]
+[ext_resource type="AudioStream" uid="uid://dvo4qldeach6e" path="res://assets/sounds/level_3/config_file_gather.mp3" id="3_xbvqf"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c6tqg"]
 
-[node name="FlashLight" type="Node3D" node_paths=PackedStringArray("Area3D", "Sprite3D")]
+[node name="FlashLight" type="Node3D" node_paths=PackedStringArray("Area3D", "Sprite3D", "CollectSound")]
 script = ExtResource("1_7wywh")
 Area3D = NodePath("Area3D")
 Sprite3D = NodePath("Area3D/Sprite3D")
+CollectSound = NodePath("Collect")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 1)
@@ -21,3 +23,7 @@ shape = SubResource("CylinderShape3D_c6tqg")
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1, 0)
 pixel_size = 0.002
 texture = ExtResource("2_7wywh")
+
+[node name="Collect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_xbvqf")
+bus = &"SFX"

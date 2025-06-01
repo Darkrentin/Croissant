@@ -27,6 +27,8 @@ public partial class IntroGameManager : Node2D
 	private Timer enemySpawnTimer;
 	private Timer ExplosionTimer;
 	public static int score = 0;
+
+	private bool explosionPreloaded = false;
 	public static IntroGameManager Instance;
 	[Export] public Node2D GameNode;
 
@@ -39,6 +41,8 @@ public partial class IntroGameManager : Node2D
 		Camera = GetNode<Camera2D>("Camera");
 
 		Player.Position = GameManager.ScreenSize / 2;
+
+		PreloadExplosion();
 
 		ShootTimer.Timeout += () => CanShoot = true;
 		ShootTimer.WaitTime = 0.15f;
@@ -56,6 +60,26 @@ public partial class IntroGameManager : Node2D
 
 		SpawnEnemy();
 	}
+
+	private async void PreloadExplosion()
+    {
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        
+        CpuParticles2D preloadExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
+        preloadExplosion.Position = new Vector2(-10000, -10000); // Hors écran
+        preloadExplosion.Visible = false;
+        AddChild(preloadExplosion);
+        
+
+        preloadExplosion.Emitting = true;
+        await ToSignal(GetTree().CreateTimer(0.1f), Timer.SignalName.Timeout);
+        preloadExplosion.Emitting = false;
+
+        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+        preloadExplosion.QueueFree();
+        
+        explosionPreloaded = true;
+    }
 
 	public override void _Process(double delta)
 	{
