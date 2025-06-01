@@ -11,7 +11,6 @@ public partial class ScoreboardWindow : FloatWindow
 {
 	[Export] private string DatabaseLink = "https://shape-glitch-default-rtdb.europe-west1.firebasedatabase.app/scores";
 	[Export] private HttpRequest HttpRequest;
-
 	[Export] private RichTextLabel TimeLabel;
 	[Export] private Label PersonalBestLabel;
 	[Export] private LineEdit UsernameEntry;

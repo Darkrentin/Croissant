@@ -4,7 +4,7 @@
 [ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_6tw0d"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_udtmp"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_6tw0d"]
-[ext_resource type="Texture2D" uid="uid://dv5vcpvln3cak" path="res://assets/sprites/platformer/NoPlayer.png" id="6_jl265"]
+[ext_resource type="Texture2D" uid="uid://dv5vcpvln3cak" path="res://assets/sprites/platformer/no_player.png" id="6_jl265"]
 
 [sub_resource type="Shader" id="Shader_6tw0d"]
 resource_local_to_scene = true

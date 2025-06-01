@@ -1,7 +1,8 @@
 [gd_scene load_steps=4 format=3 uid="uid://dn3l33sgjpqxj"]
 
 [ext_resource type="Script" uid="uid://cvj6qyiab8evc" path="res://scripts/FinalLevel/FlashLight.cs" id="1_7wywh"]
-[ext_resource type="Texture2D" uid="uid://ckv6acd8tx5u5" path="res://assets/sprites/lamp/PixelArtFlashLight.png" id="2_7wywh"]
+[ext_resource type="Texture2D" uid="uid://ckv6acd8tx5u5" path="res://assets/sprites/lamp/flashlight.png" id="2_7wywh"]
+
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_c6tqg"]
 

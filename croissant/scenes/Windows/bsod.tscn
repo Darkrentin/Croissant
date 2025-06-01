@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://b0bbu7vmyekjj" path="res://scripts/Windows/Bsod.cs" id="1_jl6an"]
 [ext_resource type="Texture2D" uid="uid://bfum56urr505j" path="res://assets/sprites/virus/bsod.png" id="2_7i5ps"]
-[ext_resource type="Texture2D" uid="uid://bhiir0j4ddep4" path="res://assets/sprites/virus/BootLogo.jpg" id="3_7i5ps"]
+[ext_resource type="Texture2D" uid="uid://bhiir0j4ddep4" path="res://assets/sprites/virus/boot_logo.jpg" id="3_7i5ps"]
 [ext_resource type="AudioStream" uid="uid://cjlkcouf1i63s" path="res://assets/sounds/level_1/bluescreen.mp3" id="4_j3w4e"]
 [ext_resource type="AudioStream" uid="uid://dlmr75xi71yop" path="res://assets/sounds/level_1/windows_startup.mp3" id="5_v0s4l"]
 

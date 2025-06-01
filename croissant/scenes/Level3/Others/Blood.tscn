@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://djlns0h4knjua"]
 
-[ext_resource type="Texture2D" uid="uid://cgdt3pleiw7p6" path="res://assets/sprites/Player/Death Blood.png" id="1_w4nfw"]
+[ext_resource type="Texture2D" uid="uid://cgdt3pleiw7p6" path="res://assets/sprites/player/death_blood.png" id="1_w4nfw"]
 
 [node name="Blood" type="CPUParticles2D"]
 texture_filter = 1

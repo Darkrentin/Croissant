@@ -27,8 +27,8 @@
 [ext_resource type="AudioStream" uid="uid://dvo4qldeach6e" path="res://assets/sounds/level_3/config_file_gather.mp3" id="25_yi0hh"]
 [ext_resource type="AudioStream" uid="uid://cfoe4pwq8ffx5" path="res://assets/sounds/level_3/portal_enter.mp3" id="26_3octb"]
 [ext_resource type="AudioStream" uid="uid://qakholntwpg3" path="res://assets/sounds/level_3/portal_exit.mp3" id="27_4kg8h"]
-[ext_resource type="Texture2D" uid="uid://bxxsv4s2tyly2" path="res://assets/sprites/platformer/EmptyFolrder.png" id="28_4kg8h"]
-[ext_resource type="Texture2D" uid="uid://b1uqh6kf5rci7" path="res://assets/sprites/platformer/ClosedFolder.png" id="29_ct77d"]
+[ext_resource type="Texture2D" uid="uid://bxxsv4s2tyly2" path="res://assets/sprites/platformer/empty_folder.png" id="28_4kg8h"]
+[ext_resource type="Texture2D" uid="uid://b1uqh6kf5rci7" path="res://assets/sprites/platformer/closed_folder.png" id="29_ct77d"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v1qwp"]
 shader = ExtResource("19_8o4oi")

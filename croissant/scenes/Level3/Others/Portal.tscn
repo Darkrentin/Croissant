@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://cey86jxorl3h7"]
 
 [ext_resource type="Script" uid="uid://d2kblnh4rfhh2" path="res://scripts/Level3/Others/Portal.cs" id="1_tqmcl"]
-[ext_resource type="Texture2D" uid="uid://bxxsv4s2tyly2" path="res://assets/sprites/platformer/EmptyFolrder.png" id="2_2wvcd"]
-[ext_resource type="Texture2D" uid="uid://b1uqh6kf5rci7" path="res://assets/sprites/platformer/ClosedFolder.png" id="3_m7kvx"]
+[ext_resource type="Texture2D" uid="uid://bxxsv4s2tyly2" path="res://assets/sprites/platformer/empty_folder.png" id="2_2wvcd"]
+[ext_resource type="Texture2D" uid="uid://b1uqh6kf5rci7" path="res://assets/sprites/platformer/closed_folder.png" id="3_m7kvx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qlyt2"]
 size = Vector2(64, 96)

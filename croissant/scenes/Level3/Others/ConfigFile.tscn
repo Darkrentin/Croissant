@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://25oxeh4hv2cd"]
 
 [ext_resource type="Script" uid="uid://dwoxfvrhewmea" path="res://scripts/Level3/Others/ConfigFile.cs" id="1_j5ubr"]
-[ext_resource type="Texture2D" uid="uid://cfqvpinpt8grv" path="res://assets/sprites/platformer/ConfigFile.png" id="2_eb6lh"]
+[ext_resource type="Texture2D" uid="uid://cfqvpinpt8grv" path="res://assets/sprites/platformer/config_file.png" id="2_eb6lh"]
 
 [sub_resource type="Animation" id="Animation_e0boy"]
 resource_name = "Collect"

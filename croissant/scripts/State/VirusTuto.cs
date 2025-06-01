@@ -58,7 +58,7 @@ public static class VirusTuto
         GameManager.Instance.PopUpEnterSound.Play();
         TimerWindow popup3 = States.TimerWindowScene.Instantiate<TimerWindow>();
         GameManager.GameRoot.AddChild(popup3);
-        popup3.Position = Lib.GetScreenPosition(0.5f, 0.5f) - popup3.Size / 2;
+        popup3.Position = Lib.GetScreenPosition(0.5f, 0.5f) - popup3.Size / 2 + new Vector2I(0, 30);
         popup3.CloseRequested -= popup3.OnClose;
         popup3.CloseRequested += () =>
         {

@@ -18,7 +18,11 @@ run/delta_smoothing=false
 boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 boot_splash/use_filter=false
-config/icon="res://icon.svg"
+config/icon="uid://cwgonk1nbqmj0"
+
+[audio]
+
+buses/default_bus_layout="res://Bus.tres"
 
 [display]
 

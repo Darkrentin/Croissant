@@ -86,7 +86,8 @@ public static class States
     public static void Dialogue1()
     {
         // Freeze the game
-        IntroGameManager.Instance.GameNode.Visible = false;
+        if (IntroGameManager.Instance != null)
+            IntroGameManager.Instance.GameNode.Visible = false;
 
         GameManager.virus.Position = Lib.GetScreenPosition(0.5f, 1f) - new Vector2I(GameManager.virus.Size.X / 2, GameManager.virus.Size.Y);
 

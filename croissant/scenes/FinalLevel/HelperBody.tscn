@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://by53uaaufbpyx"]
 
-[ext_resource type="Texture2D" uid="uid://da4l57rdlbio5" path="res://assets/sprites/Player/Helper Body.png" id="1_7t3ja"]
+[ext_resource type="Texture2D" uid="uid://da4l57rdlbio5" path="res://assets/sprites/player/helper_body.png" id="1_7t3ja"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_7t3ja"]
 radius = 0.2

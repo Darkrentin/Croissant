@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://bs2soqlm0dbss" path="res://scripts/Level3/Platform/PlayerOnly.cs" id="1_ysnk1"]
 [ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_rwhr5"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_r5qs5"]
-[ext_resource type="Texture2D" uid="uid://c5nxl1hv03hpb" path="res://assets/sprites/platformer/NoWindow.png" id="6_dyb7s"]
+[ext_resource type="Texture2D" uid="uid://c5nxl1hv03hpb" path="res://assets/sprites/platformer/no_window.png" id="6_dyb7s"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="6_rwhr5"]
 
 [sub_resource type="Shader" id="Shader_mehpu"]
