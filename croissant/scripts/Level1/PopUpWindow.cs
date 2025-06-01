@@ -14,7 +14,7 @@ public partial class PopUpWindow : FloatWindow
             TitleTimer = new Timer
             {
                 OneShot = false,
-                WaitTime = Mathf.Max(0.1f, Lib.GetRandomNormal(0f, 0.5f)) // Ensure minimum wait time
+                WaitTime = Mathf.Max(0.1f, Lib.GetRandomNormal(0f, 1f))
             };
             AddChild(TitleTimer);
             TitleTimer.Timeout += ChangeTitle;
