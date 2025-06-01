@@ -3,9 +3,10 @@
 [ext_resource type="Script" uid="uid://5obqqwi6yips" path="res://scripts/Level1/DodgeWindow.cs" id="1_ai85r"]
 
 [node name="DodgeWindow" type="Window"]
-position = Vector2i(0, 36)
+transparent_bg = true
 unresizable = true
 always_on_top = true
+transparent = true
 script = ExtResource("1_ai85r")
 Draggable = false
 Minimizable = false

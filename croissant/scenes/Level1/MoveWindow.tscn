@@ -6,10 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://wxnrs8pye670" path="res://assets/sprites/popups/trail.png" id="4_4tysl"]
 
 [node name="MoveWindow" type="Window" node_paths=PackedStringArray("Jet", "Trail")]
-position = Vector2i(0, 36)
+transparent_bg = true
 size = Vector2i(400, 400)
 unresizable = true
 always_on_top = true
+transparent = true
 script = ExtResource("1_o0mg8")
 Jet = NodePath("Control/Jet")
 Trail = NodePath("Control/Trail")

@@ -464,4 +464,27 @@ public partial class GameManager : Node2D
     {
         StartRefocusAllWindows();
     }
+
+    public void UnfocuseAllWindows()
+    {
+        foreach (FloatWindow window in Windows)
+        {
+            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3))
+            {
+                window.Unfocusable = true;
+            }
+        }
+        FixWindow.Unfocusable = true;
+    }
+    public void FocusAllWindows()
+    {
+        foreach (FloatWindow window in Windows)
+        {
+            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3))
+            {
+                window.Unfocusable = false;
+            }
+        }
+        FixWindow.Unfocusable = false;
+    }
 }

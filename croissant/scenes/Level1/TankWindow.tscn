@@ -5,10 +5,11 @@
 [ext_resource type="AudioStream" uid="uid://bl2c1m7sr748u" path="res://assets/sounds/level_3/move_platform_unselect.mp3" id="3_kdefi"]
 
 [node name="TankWindow" type="Window" node_paths=PackedStringArray("Image", "ClickSound")]
-position = Vector2i(0, 36)
+transparent_bg = true
 size = Vector2i(560, 420)
 unresizable = true
 always_on_top = true
+transparent = true
 script = ExtResource("1_jrr7c")
 Image = NodePath("TextureRect")
 ClickSound = NodePath("Click")

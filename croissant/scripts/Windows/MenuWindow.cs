@@ -95,6 +95,11 @@ public partial class MenuWindow : FloatWindow
 
 	public void Close()
 	{
+		GameManager.Instance.FocusAllWindows();
+		GetTree().CreateTimer(0.01f).Timeout += () =>
+		{
+			GameManager.StartRefocusAllWindows();
+		};
 		MenuExit.Play();
 		Visible = false;
 		if (GameManager.virus != null)
@@ -108,6 +113,8 @@ public partial class MenuWindow : FloatWindow
 		{
 			return;
 		}
+		GameManager.Instance.UnfocuseAllWindows();
+		Unfocusable = false;
 		MenuEnter.Play();
 		Input.MouseMode = Input.MouseModeEnum.Visible;
 		Visible = true;

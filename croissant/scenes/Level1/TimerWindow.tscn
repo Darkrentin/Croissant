@@ -12,10 +12,11 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0, 0, 0, 1)
 
 [node name="TimerWindow" type="Window" node_paths=PackedStringArray("timer", "progressBar", "timeLabel")]
-position = Vector2i(0, 36)
+transparent_bg = true
 size = Vector2i(600, 400)
 unresizable = true
 always_on_top = true
+transparent = true
 script = ExtResource("1_gkcfg")
 timer = NodePath("Timer")
 progressBar = NodePath("ProgressBar")

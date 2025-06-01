@@ -2,7 +2,6 @@ public partial class WindowPlatform : FloatWindow
 {
 	public override void _Ready()
 	{
-		Unfocusable = false;
 		base._Ready();
 	}
 

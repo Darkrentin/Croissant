@@ -248,5 +248,5 @@ environment/glow/upscale_mode=0
 environment/screen_space_reflection/roughness_quality=0
 lightmapping/probe_capture/update_speed=8.0
 global_illumination/sdfgi/frames_to_converge=0
-environment/defaults/default_clear_color=Color(0.301961, 0.301961, 0.301961, 0)
+environment/defaults/default_clear_color=Color(0, 0, 0, 0)
 viewport/transparent_background=true

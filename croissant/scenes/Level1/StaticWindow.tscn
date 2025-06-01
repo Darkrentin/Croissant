@@ -1,8 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dojmcfkfdnwsu"]
+[gd_scene load_steps=6 format=3 uid="uid://dojmcfkfdnwsu"]
 
 [ext_resource type="Script" uid="uid://dg6r4gli8b5nt" path="res://scripts/Level1/StaticWindow.cs" id="1_m77lp"]
-[ext_resource type="Texture2D" uid="uid://de00l0qir2jjj" path="res://assets/sprites/popups/static4_1.png" id="2_rhr6w"]
-[ext_resource type="Texture2D" uid="uid://bm6rdcitjb5c6" path="res://assets/sprites/popups/static4_2.png" id="3_hm8he"]
+[ext_resource type="Texture2D" uid="uid://mj6oatgq6gpd" path="res://assets/sprites/popups/static1_1.png" id="2_n7kot"]
 
 [sub_resource type="Animation" id="Animation_e7e18"]
 length = 0.001
@@ -16,7 +15,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -66,19 +65,19 @@ _data = {
 }
 
 [node name="StaticWindow" type="Window" node_paths=PackedStringArray("textureRect")]
-title = "RėƮKąƑÂȑ ųŽŮ£ºŝȽǹŽƠ»Iƒ"
-position = Vector2i(981, 273)
+transparent_bg = true
+title = "ƹƞŢ¢ñæǫȪǟĭÐǜĔ­"
+position = Vector2i(0, 36)
 size = Vector2i(400, 300)
 unresizable = true
 always_on_top = true
+transparent = true
+sharp_corners = true
 content_scale_size = Vector2i(400, 300)
 content_scale_mode = 2
 script = ExtResource("1_m77lp")
-Texture1 = ExtResource("2_rhr6w")
-Texture2 = ExtResource("3_hm8he")
 textureRect = NodePath("TextureRect")
-Draggable = false
-Minimizable = false
+SetText1 = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -92,5 +91,5 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_rhr6w")
+texture = ExtResource("2_n7kot")
 expand_mode = 1

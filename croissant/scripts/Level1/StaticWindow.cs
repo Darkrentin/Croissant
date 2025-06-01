@@ -1,10 +1,9 @@
 using Godot;
 
-[Tool]
 public partial class StaticWindow : PopUpWindow
 {
-    [Export] public CompressedTexture2D Texture1;
-    [Export] public CompressedTexture2D Texture2;
+    public CompressedTexture2D Texture1;
+    public CompressedTexture2D Texture2;
     [Export] public TextureRect textureRect;
     [Export] public bool SetText1 { get { return false; } set { if (value) SetTexture1(); } }
     [Export] public bool SetText2 { get { return false; } set { if (value) SetTexture2(); } }
