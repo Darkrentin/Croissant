@@ -62,24 +62,24 @@ public partial class IntroGameManager : Node2D
 	}
 
 	private async void PreloadExplosion()
-    {
-        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        
-        CpuParticles2D preloadExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
-        preloadExplosion.Position = new Vector2(-10000, -10000); // Hors écran
-        preloadExplosion.Visible = false;
-        AddChild(preloadExplosion);
-        
+	{
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 
-        preloadExplosion.Emitting = true;
-        await ToSignal(GetTree().CreateTimer(0.1f), Timer.SignalName.Timeout);
-        preloadExplosion.Emitting = false;
+		CpuParticles2D preloadExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
+		preloadExplosion.Position = new Vector2(-10000, -10000);
+		preloadExplosion.Visible = false;
+		AddChild(preloadExplosion);
 
-        await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
-        preloadExplosion.QueueFree();
-        
-        explosionPreloaded = true;
-    }
+
+		preloadExplosion.Emitting = true;
+		await ToSignal(GetTree().CreateTimer(0.1f), Timer.SignalName.Timeout);
+		preloadExplosion.Emitting = false;
+
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
+		preloadExplosion.QueueFree();
+
+		explosionPreloaded = true;
+	}
 
 	public override void _Process(double delta)
 	{

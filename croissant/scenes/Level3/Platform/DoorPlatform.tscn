@@ -78,3 +78,4 @@ theme_override_font_sizes/font_size = 42
 text = "Text"
 horizontal_alignment = 1
 vertical_alignment = 1
+justification_flags = 0

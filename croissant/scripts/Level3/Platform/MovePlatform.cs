@@ -3,8 +3,8 @@ using Godot;
 public partial class MovePlatform : Platform
 {
     [Export] public float MinMult = 1.5f;
-    [Export] public float MaxMult = 3f;
-    [Export] public float OscillationTime = 0.5f;
+    [Export] public float MaxMult = 2.5f;
+    [Export] public float OscillationTime = 0.4f;
     [Export] public ColorRect ShaderRect;
     [Export] public AudioStreamPlayer MoveSound;
     [Export] public AudioStreamPlayer PressedSound;
@@ -18,6 +18,9 @@ public partial class MovePlatform : Platform
     private float CurrentSpeed = 0.5f;
     private const float FastSpeed = 20f;
     private const float SlowSpeed = 0.5f;
+
+    private Shader platformShader;
+    private Shader plainShader;
 
     private Vector2 _lastSoundPosition;
     private float _totalDistanceTraveled = 0f;
@@ -36,6 +39,9 @@ public partial class MovePlatform : Platform
         base._Ready();
         ShaderRectShader = ShaderRect.Material as ShaderMaterial;
         Shader = Texture.Material as ShaderMaterial;
+
+        platformShader = Shader.Shader;
+        plainShader = GD.Load<Shader>("res://assets/shaders/PlainHighlight.gdshader");
 
         Shader.SetShaderParameter("window_size", window.Size);
         ShaderRectShader.SetShaderParameter("mult", MaxMult);
@@ -141,14 +147,14 @@ public partial class MovePlatform : Platform
             if (IsLerping)
             {
                 LerpTimer += (float)delta;
-                float lerpFactor = Mathf.Clamp(LerpTimer / OscillationTime, 0.0f, 0.8f);
+                float lerpFactor = Mathf.Clamp(LerpTimer / OscillationTime, 0.0f, 1f);
 
                 if (LerpDirection)
                 {
                     int currentMult = Mathf.RoundToInt(Mathf.Lerp(MinMult, MaxMult, lerpFactor));
                     ShaderRectShader.SetShaderParameter("mult", currentMult);
 
-                    if (lerpFactor >= 0.8f)
+                    if (lerpFactor >= 1f)
                     {
                         IsLerping = false;
                         ShaderRectShader.SetShaderParameter("mult", MaxMult);
@@ -159,7 +165,7 @@ public partial class MovePlatform : Platform
                     int currentMult = Mathf.RoundToInt(Mathf.Lerp(MaxMult, MinMult, lerpFactor));
                     ShaderRectShader.SetShaderParameter("mult", currentMult);
 
-                    if (lerpFactor >= 0.8f)
+                    if (lerpFactor >= 1f)
                     {
                         IsLerping = false;
                         ShaderRectShader.SetShaderParameter("mult", MinMult);
@@ -190,6 +196,22 @@ public partial class MovePlatform : Platform
         base._PhysicsProcess(delta);
     }
 
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (Pressed)
+        {
+            Shader.Shader = plainShader;
+            Shader.SetShaderParameter("border_color", Colors.Cyan);
+            Shader.SetShaderParameter("border_width", 4f);
+        }
+        else
+        {
+            Shader.Shader = platformShader;
+        }
+    }
+
     public bool MouseOnTitle()
     {
         Vector2I mousePos = Lib.GetCursorPosition();
@@ -217,13 +239,11 @@ public partial class MovePlatform : Platform
                 }
                 Pressed = true;
                 MouseOffset = (((Vector2)Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - GlobalPosition;
-                Shader.SetShaderParameter("frequency", 0.1f);
             }
             else if (!mouseButtonEvent.Pressed && Pressed)
             {
                 JustReleased();
                 Pressed = false;
-                Shader.SetShaderParameter("frequency", 32f);
             }
         }
     }
@@ -257,8 +277,9 @@ public partial class MovePlatform : Platform
         {
             Level3.Instance.NbPressedWindows--;
             Pressed = false;
+            Shader.Shader = platformShader;
         }
-        
+
         ShaderRectShader.SetShaderParameter("mult", MaxMult);
         Shader.SetShaderParameter("frequency", 32f);
     }

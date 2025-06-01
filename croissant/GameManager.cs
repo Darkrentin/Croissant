@@ -421,14 +421,12 @@ public partial class GameManager : Node2D
         if (!IsRefocusingWindows)
             return;
 
-        // Si on a fini toutes les fenêtres
         if (RefocusIndex >= Windows.Count)
         {
             StopRefocusProcess();
             return;
         }
 
-        // Refocus une fenêtre par frame
         if (RefocusIndex < Windows.Count)
         {
             FloatWindow window = Windows[RefocusIndex];
@@ -456,7 +454,6 @@ public partial class GameManager : Node2D
         IsRefocusingWindows = false;
         RefocusIndex = 0;
 
-        // Give focus back to the main window or fix window
         if (IsInstanceValid(FixWindow))
             FixWindow.GrabFocus();
     }
@@ -474,8 +471,10 @@ public partial class GameManager : Node2D
                 window.Unfocusable = true;
             }
         }
-        FixWindow.Unfocusable = true;
+        if (FixWindow != null)
+            FixWindow.Unfocusable = true;
     }
+
     public void FocusAllWindows()
     {
         foreach (FloatWindow window in Windows)
@@ -485,6 +484,7 @@ public partial class GameManager : Node2D
                 window.Unfocusable = false;
             }
         }
-        FixWindow.Unfocusable = false;
+        if (FixWindow != null)
+            FixWindow.Unfocusable = false;
     }
 }

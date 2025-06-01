@@ -3,7 +3,6 @@ using Godot;
 
 public partial class MenuWindow : FloatWindow
 {
-	[Export] private Control Menu;
 	[Export] public CheckButton FakeDesktopButton;
 	[Export] public CheckButton DebugButton;
 	[Export] public Button StuckButton;
