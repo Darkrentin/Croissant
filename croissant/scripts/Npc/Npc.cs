@@ -4,7 +4,6 @@ using System;
 public abstract partial class Npc : FloatWindow
 {
     [Export] public string NpcName;
-
     [Export] public DialogueWindow Dialogue { get; set; }
     [Export] public AnimationTree AnimationTree;
     [Export] public AudioStreamPlayer DialogueSound;
@@ -38,8 +37,6 @@ public abstract partial class Npc : FloatWindow
 
     public virtual void InitNpc()
     {
-        Lib.Print($"Npc : {NpcName} initialized DialogueId :{DialogueWindow.Dialogueid}");
-
         Dialogue.Position = -Dialogue.Size * 2;
         ForceDialoguePlacement = true;
 
@@ -47,7 +44,7 @@ public abstract partial class Npc : FloatWindow
         RightUp = new Vector2I(GameManager.ScreenSize.X - Size.X, 0);
         RightDown = new Vector2I(GameManager.ScreenSize.X - Size.X, GameManager.ScreenSize.Y - Size.Y);
         Title = NpcName;
-        if(AnimationTree != null)
+        if (AnimationTree != null)
             AnimationScreen = (AnimationNodeStateMachinePlayback)(AnimationTree.Get("parameters/playback"));
     }
 

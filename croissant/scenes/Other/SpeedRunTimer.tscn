@@ -5,7 +5,9 @@
 
 [sub_resource type="LabelSettings" id="LabelSettings_qtfmr"]
 font = ExtResource("2_q7w0s")
-font_size = 54
+font_size = 50
+shadow_size = 6
+shadow_color = Color(0, 0, 0, 1)
 
 [sub_resource type="Animation" id="Animation_mfnsf"]
 resource_name = "LevelReach"
@@ -50,15 +52,18 @@ timer = NodePath("Timer")
 animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Timer" type="Label" parent="."]
-anchors_preset = -1
-anchor_left = 0.846
-anchor_right = 0.986
-anchor_bottom = 0.067
-offset_left = -0.32019
-offset_right = 0.879761
-offset_bottom = -0.360001
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -270.0
+offset_bottom = 67.0
+grow_horizontal = 0
+size_flags_horizontal = 8
+size_flags_vertical = 0
 text = "00:00:00"
 label_settings = SubResource("LabelSettings_qtfmr")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
