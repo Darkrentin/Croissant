@@ -112,6 +112,7 @@ shape = SubResource("CircleShape2D_stb6e")
 
 [node name="ShapeColoration" type="AudioStreamPlayer" parent="Sound"]
 stream = ExtResource("6_t3wft")
+volume_db = -10.0
 bus = &"SFX"
 
 [node name="ShapeHit" type="AudioStreamPlayer" parent="Sound"]

@@ -115,7 +115,7 @@ public partial class ScoreboardWindow : FloatWindow
 		}
 		else if (!Regex.IsMatch(currentUsername, allowedCharsPattern))
 		{
-			SubmitLabel.Text = "Please only use letters, numbers and underscores.";
+			SubmitLabel.Text = "Please only use letters and numbers.";
 			SubmitLabel.AddThemeColorOverride("font_color", Colors.Red);
 		}
 		else
