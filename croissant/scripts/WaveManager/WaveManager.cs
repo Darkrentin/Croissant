@@ -47,6 +47,7 @@ public partial class WaveManager : Node
 		{
 			LastWave.StartWave();
 			Level2.CursorWindow.animationPlayer.PlayBackwards("Disolve");
+			Level2.CursorWindow.Freeze = false;
 		}
 	}
 

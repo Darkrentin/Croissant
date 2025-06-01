@@ -422,6 +422,8 @@ public partial class Level3 : FloatWindow
 
     public void EndLevel()
     {
+        if(sceneid!=0)
+            TransitionStuck();
         GameManager.State = GameManager.GameState.Dialogue3;
         GetTree().CreateTimer(0.5f).Timeout += () =>
         {

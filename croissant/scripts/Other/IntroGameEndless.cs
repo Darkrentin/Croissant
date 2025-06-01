@@ -25,10 +25,10 @@ public partial class IntroGameEndless : Node2D
 	
 	// Difficulty progression variables
 	private float baseEnemySpawnTime = 1.0f;  // Initial spawn time
-	private float minEnemySpawnTime = 0.2f;   // Minimum spawn time
+	private float minEnemySpawnTime = 0.01f;   // Minimum spawn time
 	private float baseShootCooldown = 0.15f;  // Initial shoot cooldown
-	private float minShootCooldown = 0.05f;   // Minimum shoot cooldown
-	private int difficultyIncreaseInterval = 20; // Increase difficulty every 5 points
+	private float minShootCooldown = 0.01f;   // Minimum shoot cooldown
+	private int difficultyIncreaseInterval = 20;
 
 	public override void _Ready()
 	{

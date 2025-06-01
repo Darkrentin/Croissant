@@ -114,7 +114,6 @@ public partial class CursorWindow : FloatWindow
 	{
 		ProcessMode = ProcessModeEnum.Pausable;
 		GameManager.MenuWindow.ProcessMode = ProcessModeEnum.Always;
-		Freeze = false;
 		GetTree().Paused = false;
 		Level2.Instance.WaveManager.GoBackToWave();
 		Invisible = false;

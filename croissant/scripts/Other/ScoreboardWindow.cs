@@ -246,7 +246,6 @@ public partial class ScoreboardWindow : FloatWindow
 
 	public void OnEndlessModeButtonPressed()
 	{
-		GetParent().RemoveChild(this);
 		GameManager.State = GameManager.GameState.IntroGameEndless;
 		QueueFree();
 	}

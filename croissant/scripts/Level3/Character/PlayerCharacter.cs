@@ -143,13 +143,20 @@ public partial class PlayerCharacter : CharacterBody2D
         HandleMaxFallVelocity();
         MoveAndSlide();
     }
-
     public override void _Input(InputEvent @event)
     {
         if (@event.IsAction("ui_left"))
+        {
             isLeftPressed = @event.IsPressed();
+            if (isLeftPressed)
+                isRightPressed = false;
+        }
         if (@event.IsAction("ui_right"))
+        {
             isRightPressed = @event.IsPressed();
+            if (isRightPressed)
+                isLeftPressed = false;
+        }
     }
 
     public void OnBodyEntered(Node body) { }

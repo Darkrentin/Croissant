@@ -244,6 +244,9 @@ public static class States
             GameManager.virus = null;
         }
 
+        GameManager.FixWindow.QueueFree();
+        GameManager.FixWindow = null;
+
         FinalLevel FinalLevel = SceneLoader.FinalLevelScene.Instantiate<FinalLevel>();
         GameManager.GameRoot.AddChild(FinalLevel);
         GameManager.SkipLevel = FinalLevel.TransitionToEnd;
