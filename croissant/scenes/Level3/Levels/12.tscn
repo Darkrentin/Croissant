@@ -122,10 +122,10 @@ resource_local_to_scene = true
 size = Vector2(216, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sy2n4"]
-size = Vector2(248, 592)
+size = Vector2(248, 576)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p75mg"]
-size = Vector2(248, 592)
+size = Vector2(248, 576)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dpug1"]
 size = Vector2(248, 272)
@@ -160,7 +160,7 @@ shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_muoes"]
 resource_local_to_scene = true
-size = Vector2(248, 224)
+size = Vector2(248, 240)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kyh1o"]
 size = Vector2(224, 128)
@@ -341,11 +341,11 @@ position = Vector2(1448, 0)
 position = Vector2i(0, 36)
 
 [node name="CollisionShape2D" parent="KillingPlatform6" index="3"]
-position = Vector2(124, 296)
+position = Vector2(124, 288)
 shape = SubResource("RectangleShape2D_sy2n4")
 
 [node name="CollisionShape2D" parent="KillingPlatform6/Area2D" index="0"]
-position = Vector2(124, 296)
+position = Vector2(124, 288)
 shape = SubResource("RectangleShape2D_p75mg")
 
 [node name="KillingPlatform7" parent="." instance=ExtResource("4_lstuu")]
@@ -382,7 +382,7 @@ position = Vector2(1448, 592)
 material = SubResource("ShaderMaterial_mqcea")
 
 [node name="CollisionShape2D" parent="PlayerOnly3" index="1"]
-position = Vector2(124, 112)
+position = Vector2(124, 104)
 shape = SubResource("RectangleShape2D_muoes")
 
 [node name="KillingPlatform8" parent="." instance=ExtResource("4_lstuu")]
