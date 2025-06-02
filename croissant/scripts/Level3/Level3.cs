@@ -249,7 +249,7 @@ public partial class Level3 : FloatWindow
         {
             Vector2 playerTargetPosition = PortalExit.GlobalPosition;
             player.GlobalPosition = playerTargetPosition;
-            
+
             PortalExit.Visible = true;
             PortalExit.AnimationPlayer.Play("Open");
             PortalExitSound.Play();
@@ -260,20 +260,20 @@ public partial class Level3 : FloatWindow
                 player.Animator2.PlayBackwards("Hide");
                 player.isDead = false;
                 player.Visible = true;
-                
+
             };
         };
-    
+
 
         if (End)
         {
             EndLevel();
         }
 
-        if(portal.PortalToSpawn)
+        if (portal.PortalToSpawn)
         {
             Lib.Print("CleanupPathAndPortal");
-            //CleanupPathAndPortal(sceneid);
+            CleanupPathAndPortal(sceneid);
         }
 
         sceneid = nextSceneId;
@@ -284,7 +284,7 @@ public partial class Level3 : FloatWindow
 
     public int PreviousLevel(int id)
     {
-        if(id == 1 || id == 6 || id == 11 || id == 16)
+        if (id == 1 || id == 6 || id == 11 || id == 16)
         {
             return 0; // Level 0
         }
@@ -401,10 +401,5 @@ public partial class Level3 : FloatWindow
     public void EndLevel()
     {
         GameManager.State = GameManager.GameState.Dialogue3;
-        GetTree().CreateTimer(0.5f).Timeout += () =>
-        {
-            player.LevelEnd = true;
-        };
-    
     }
 }

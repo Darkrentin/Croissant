@@ -57,7 +57,6 @@ public partial class AttackWindow : FloatWindow
 
         id = nbOfAttackWindows;
         nbOfAttackWindows++;
-        Title = id.ToString();
 
         const int WindowSizeX = 160;
         int newSize = Lib.GetAspectFactor(new Vector2I(WindowSizeX, WindowSizeX)).X;

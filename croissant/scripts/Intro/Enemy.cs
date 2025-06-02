@@ -75,6 +75,7 @@ public partial class Enemy : StaticBody2D
 					IntroGameManager.CameraShake(8, 0.35f);
 				}
 				bullet.EnemyExplosion.Emitting = true;
+				ShapeHitSound.Play();
 				ShapeDeathSound.Play();
 				Collision.Visible = false;
 				velocity = Vector2.Zero;

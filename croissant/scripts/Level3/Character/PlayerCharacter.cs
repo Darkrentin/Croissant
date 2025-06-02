@@ -121,10 +121,10 @@ public partial class PlayerCharacter : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
-        currentState.Call("Update", delta);
         if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();
         GetInputStates();
+        currentState.Call("Update", delta);
         HandleMaxFallVelocity();
         MoveAndSlide();
     }
@@ -201,11 +201,11 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         // Appliquer la gravité réduite pour le wall slide
         Velocity += new Vector2(0, gravity / 2.0f * (float)delta);
-        
+
         // Limiter la vitesse de chute
         if (Velocity.Y > MaxFallWallVelocity)
             Velocity = new Vector2(Velocity.X, MaxFallWallVelocity);
-        
+
         // Réduire la vitesse de montée pour un wall slide plus réaliste
         if (Velocity.Y < 0) // Si on monte encore
         {
@@ -386,7 +386,7 @@ public partial class PlayerCharacter : CharacterBody2D
         {
             Animator2.Play("Hide");
             Visible = false;
-            
+
             GetTree().CreateTimer(0.3f).Timeout += () =>
             {
                 Lib.Print("PlayerCharacter: Death Animation Finished");
@@ -409,12 +409,12 @@ public partial class PlayerCharacter : CharacterBody2D
                         Animator2.PlayBackwards("Hide");
                         isDead = false;
                         Visible = true;
-                        
+
                     };
                 };
             };
-            
-            
+
+
 
             if (Velocity.Y > 0)
             {

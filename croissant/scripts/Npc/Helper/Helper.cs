@@ -62,6 +62,7 @@ public partial class Helper : Npc
 				GameManager.State = GameManager.GameState.Level3;
 				break;
 			case "EndLvl3":
+				Level3.Instance.player.isDead = true;
 				Level3.Instance.player.Animator.Play("Repair");
 				break;
 			case "HelperDeath":
