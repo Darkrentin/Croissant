@@ -34,4 +34,5 @@ grow_vertical = 2
 
 [node name="LaserSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_78wwr")
+volume_db = -2.0
 bus = &"SFX"

@@ -295,7 +295,6 @@ public partial class WaveData : Node
 		AddWindow(windows, WindowType.Wave, true);
 		AddWindow(windows, WindowType.Follow, true);
 		AddWindow(windows, WindowType.Laser, true);
-		AddWindow(windows, WindowType.Wave, true);
 		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = true;

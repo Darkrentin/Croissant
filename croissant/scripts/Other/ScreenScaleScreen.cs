@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class ScreenScaleScreen : Window
 {
@@ -18,7 +17,7 @@ public partial class ScreenScaleScreen : Window
 		Position = Lib.GetScreenPosition(0.5f, 0.5f) - windowSize / 2;
 		Visible = true;
 
-		WarningLabel.Text = "Due to Windows limitations about window widths, you must play the game at [b]100%[/b] screen scale instead of your actual [b]" + GameManager.ScreenScale * 100 + "%[/b].";
+		WarningLabel.Text = "Due to Windows limitations about window widths, you must play the game at [color=RED][b]100%[/b][/color] screen scale instead of your actual [color=RED][b]" + GameManager.ScreenScale * 100 + "%[/b][/color].";
 
 		AcceptButton.Pressed += OnAcceptButtonPressed;
 		RefuseButton.Pressed += OnRefuseButtonPressed;

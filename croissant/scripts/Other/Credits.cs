@@ -4,6 +4,7 @@ public partial class Credits : FloatWindow
 {
 	public override void _Ready()
 	{
+		base._Ready();
 		Title = "Credits";
 		CloseRequested += () => Visible = false;
 

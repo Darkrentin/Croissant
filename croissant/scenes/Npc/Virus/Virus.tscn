@@ -1816,10 +1816,6 @@ Decrypting data stream... Complete
 [/color]
 "
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="DialogueWindow" parent="." node_paths=PackedStringArray("ParentWindow") instance=ExtResource("10_k1eiq")]
 ParentWindow = NodePath("..")
 CanSkip = true

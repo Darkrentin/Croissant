@@ -5,7 +5,6 @@ public partial class Level2 : Node2D
 	[Export] public WaveManager WaveManager;
 	public static CursorWindow CursorWindow;
 	public static Level2 Instance;
-
 	private bool isFrozen = false;
 
 	public override void _Ready()

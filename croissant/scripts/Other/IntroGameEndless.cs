@@ -22,12 +22,11 @@ public partial class IntroGameEndless : Node2D
 	public static int score = 0;
 	public static IntroGameEndless Instance;
 	[Export] public Node2D GameNode;
-	
-	// Difficulty progression variables
-	private float baseEnemySpawnTime = 1.0f;  // Initial spawn time
-	private float minEnemySpawnTime = 0.01f;   // Minimum spawn time
-	private float baseShootCooldown = 0.15f;  // Initial shoot cooldown
-	private float minShootCooldown = 0.01f;   // Minimum shoot cooldown
+
+	private float baseEnemySpawnTime = 1.0f;
+	private float minEnemySpawnTime = 0.01f;
+	private float baseShootCooldown = 0.15f;
+	private float minShootCooldown = 0.01f;
 	private int difficultyIncreaseInterval = 20;
 
 	public override void _Ready()
@@ -67,7 +66,6 @@ public partial class IntroGameEndless : Node2D
 				ShootTimer.Start();
 			}
 		}
-		// Creates an enemy every 0.8 to 1 seconds
 		if (enemySpawnTimer == null)
 		{
 			enemySpawnTimer = new Timer();
@@ -85,14 +83,12 @@ public partial class IntroGameEndless : Node2D
 		score++;
 		ScoreLabel.Text = score.ToString();
 		AnimationPlayer.Play("ScoreUp");
-		
-		// Update difficulty when score increases
+
 		Instance.UpdateDifficulty();
 	}
 
 	private void SpawnEnemy()
 	{
-		// Initializes the position of the enemies outside of the screen
 		Enemy Enemy = EnemyScene.Instantiate<Enemy>();
 		float randAngle = Mathf.DegToRad(GD.RandRange(0, 360));
 		Enemy.Position = new Vector2(
@@ -101,15 +97,13 @@ public partial class IntroGameEndless : Node2D
 		GameNode.AddChild(Enemy);
 		Enemy.Endless = true;
 
-		// Update spawn timer for next enemy
 		if (enemySpawnTimer != null)
 			enemySpawnTimer.WaitTime = GetCurrentEnemySpawnTime();
-			
+
 	}
 
 	private void Shoot()
 	{
-		// Shoots a bullet in direction of the mouse cursor
 		Bullet Bullet = BulletScene.Instantiate<Bullet>();
 		Node2D BulletPosition = Player.GetNode<Node2D>("BulletPosition");
 		Bullet.Position = BulletPosition.GlobalPosition;
@@ -141,29 +135,24 @@ public partial class IntroGameEndless : Node2D
 
 		tween.TweenProperty(Camera, "offset", startPosition, duration / 10);
 	}
-	
-	// Difficulty progression methods
+
 	private float GetCurrentEnemySpawnTime()
 	{
-		// Reduce spawn time based on score, but not below minimum
 		float difficultyMultiplier = 1.0f - (score / (float)difficultyIncreaseInterval) * 0.1f;
 		float currentSpawnTime = baseEnemySpawnTime * difficultyMultiplier;
 		return Mathf.Max(currentSpawnTime, minEnemySpawnTime);
 	}
-	
+
 	private float GetCurrentShootCooldown()
 	{
-		// Reduce shoot cooldown based on score, but not below minimum
 		float difficultyMultiplier = 1.0f - (score / (float)difficultyIncreaseInterval) * 0.05f;
 		float currentCooldown = baseShootCooldown * difficultyMultiplier;
 		return Mathf.Max(currentCooldown, minShootCooldown);
 	}
-	
+
 	private void UpdateDifficulty()
 	{
-		// Update shoot timer cooldown
 		ShootTimer.WaitTime = GetCurrentShootCooldown();
-		
-		// Enemy spawn timer is updated in SpawnEnemy method
+
 	}
 }
