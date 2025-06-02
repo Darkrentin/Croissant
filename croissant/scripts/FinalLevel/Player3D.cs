@@ -78,7 +78,7 @@ public partial class Player3D : CharacterBody3D
 	private void Shoot()
 	{
 		AnimationPlayer.Start(ShootAnimation, reset: true);
-		ShootSound.PitchScale = Lib.GetRandomNormal(0.8f, 1.1f);
+		ShootSound.PitchScale = Lib.GetRandomNormal(0.9f, 1.1f);
 		ShootSound.Play();
 
 		RayCast3D.ForceRaycastUpdate();
@@ -99,7 +99,7 @@ public partial class Player3D : CharacterBody3D
 				floppyDisk.TakeDamage();
 		}
 	}
-	
+
 	public void TurnOnFlashlight()
 	{
 		var tween = CreateTween();

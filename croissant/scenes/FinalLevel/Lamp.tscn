@@ -75,8 +75,8 @@ omni_attenuation = 2.0
 [node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 1)
 stream = SubResource("AudioStreamMP3_ixama")
-volume_db = 80.0
-unit_size = 7.0
+volume_db = 60.0
+unit_size = 6.0
 autoplay = true
-max_distance = 10.0
+max_distance = 8.0
 max_polyphony = 12

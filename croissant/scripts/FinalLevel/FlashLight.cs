@@ -21,6 +21,7 @@ public partial class FlashLight : Node3D
 	{
 		if (body is Player3D player)
 		{
+			Visible = false;
 			player.TurnOnFlashlight();
 			CollectSound.Play();
 			CollectSound.Finished += Delete;

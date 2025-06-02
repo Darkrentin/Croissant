@@ -37,6 +37,8 @@ public partial class Enemy3D : CharacterBody3D
 
 	public double Agro = 0f;
 
+	private bool wasDetecting = false;
+
 	public override void _Ready()
 	{
 		RotationAxis = new Vector3(Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1), Lib.GetRandomNormal(-1, 1));
@@ -52,11 +54,8 @@ public partial class Enemy3D : CharacterBody3D
 		navigationAgent3D.DebugEnabled = FinalLevel.Instance.Debug;
 		RandomTargetPosition = GlobalPosition;
 
-		// Store original volume
-		if (Detection != null)
-		{
-			OriginalVolume = Detection.VolumeDb;
-		}
+		OriginalVolume = Detection.VolumeDb;
+
 	}
 
 	public override void _PhysicsProcess(double delta)
@@ -68,20 +67,23 @@ public partial class Enemy3D : CharacterBody3D
 			navigationAgent3D.Velocity = Vector3.Zero;
 			return;
 		}
+
+		bool currentlyDetecting = false;
+
 		if (Agro > 0f)
 		{
 			Agro -= delta;
 			if (Agro < 0f) Agro = 0f;
 			navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;
 			rayCast.Visible = true && FinalLevel.Instance.Debug;
+			currentlyDetecting = true;
 		}
 		else
 		{
 			navigationAgent3D.TargetPosition = GlobalPosition;
-			FadeOutDetectionSound();
+			currentlyDetecting = false;
 		}
 
-		//navigationAgent3D.TargetPosition = FinalLevel.Instance.Player3D.GlobalPosition;// ((FinalLevel.Instance.Player3D.GlobalPosition/2)*2) + new Vector3(1,0,1);
 		Vector3 nextPathPosition = navigationAgent3D.GetNextPathPosition();
 		Vector3 IntendedVelocity = GlobalTransform.Origin.DirectionTo(nextPathPosition) * MovementSpeed;
 		navigationAgent3D.Velocity = IntendedVelocity;
@@ -91,18 +93,25 @@ public partial class Enemy3D : CharacterBody3D
 
 		rayCast.ForceRaycastUpdate();
 
-
 		if (rayCast.GetCollider() is Player3D player && rayCast.IsEnabled())
 		{
 			Agro = MaxAgro;
-			if (!Detection.Playing)
-			{
-				StartDetectionSound();
-			}
+			currentlyDetecting = true;
 			if (CanHarmPlayer && player.GlobalPosition.DistanceTo(GlobalPosition) < 1.3f && player.Alive)
 				FinalLevel.Instance.Death(GlobalPosition);
 		}
 
+		if (!wasDetecting && currentlyDetecting)
+		{
+			if (!Detection.Playing)
+				Detection.Play();
+		}
+		else if (wasDetecting && !currentlyDetecting)
+		{
+			Detection.Stop();
+		}
+
+		wasDetecting = currentlyDetecting;
 	}
 	private void UpdateShape()
 	{
@@ -112,15 +121,26 @@ public partial class Enemy3D : CharacterBody3D
 	private void Destroy()
 	{
 		DeathSound.Play();
-		
-		// Use fade out instead of immediate stop
-		DeathSound.Stop();
-		
+		FadeOutAndStopDetection();
 		HitSound.Stop();
 		Collision.Position = new Vector3(0, 10, 0);
 		AnimationPlayer.Play("Depop");
 		FinalLevel.Instance.EnemyCount--;
 		CanHarmPlayer = false;
+	}
+
+	private void FadeOutAndStopDetection()
+	{
+		if (Detection.Playing)
+		{
+			var tween = CreateTween();
+			tween.TweenProperty(Detection, "volume_db", -80.0f, 0.8f);
+			tween.TweenCallback(Callable.From(() => Detection.Stop()));
+		}
+		else
+		{
+			Detection.Stop();
+		}
 	}
 
 	public void OnBulletCollide()
@@ -131,15 +151,7 @@ public partial class Enemy3D : CharacterBody3D
 		{
 			currentShape++;
 			HitSound.Play();
-			
-			// Fade out detection sound temporarily during hit
-			if (Detection.Playing)
-			{
-				var tempTween = CreateTween();
-				tempTween.TweenProperty(Detection, "volume_db", OriginalVolume * 0.3f, 0.2f);
-				tempTween.TweenProperty(Detection, "volume_db", OriginalVolume, 0.3f);
-			}
-			
+
 			AnimationPlayer.Play("ShapeChange");
 			CanHarmPlayer = false;
 			GpuParticles3D enemyHit = EnemyHitScene.Instantiate<GpuParticles3D>();
@@ -158,9 +170,10 @@ public partial class Enemy3D : CharacterBody3D
 	{
 		if (animationName == "ShapeChange")
 			CanHarmPlayer = true;
-		if( animationName == "Depop")
+		if (animationName == "Depop")
 		{
-			GetTree().CreateTimer(1.5f).Timeout += () => {
+			GetTree().CreateTimer(1.5f).Timeout += () =>
+			{
 				FinalLevel.Instance.maze.Enemies.Remove(this);
 				QueueFree();
 			};
@@ -181,65 +194,4 @@ public partial class Enemy3D : CharacterBody3D
 		AddChild(explosion);
 		explosion.GlobalPosition = GlobalPosition + new Vector3(0, 0.6f, 0);
 	}
-
-	private void StartDetectionSound()
-	{
-		if (Detection == null) return;
-		
-		// Cancel any ongoing fade
-		CancelFade();
-		
-		// Start with fade in effect
-		Detection.VolumeDb = -80f; // Start muted
-		Detection.Play();
-		
-		FadeTween = CreateTween();
-		isFading = true;
-		
-		FadeTween.TweenProperty(Detection, "volume_db", OriginalVolume, 1.0f);
-		FadeTween.TweenCallback(Callable.From(() => {
-			isFading = false;
-		}));
-	}
-
-	private void FadeOutDetectionSound()
-	{
-		if (Detection == null || !Detection.Playing || isFading) return;
-		
-		isFading = true;
-		FadeTween = CreateTween();
-		
-		// Fade from current volume to silent
-		FadeTween.TweenProperty(Detection, "volume_db", -80f, 1.5f);
-		FadeTween.TweenCallback(Callable.From(() => {
-			Detection.Stop();
-			Detection.VolumeDb = OriginalVolume; // Reset for next time
-			isFading = false;
-		}));
-	}
-
-	private void CancelFade()
-	{
-		if (FadeTween != null)
-		{
-			FadeTween.Kill();
-			FadeTween = null;
-		}
-		isFading = false;
-	}
-
-	public void StopDetectionSound()
-	{
-		if (Detection == null) return;
-		
-		if (Detection.Playing)
-		{
-			FadeOutDetectionSound();
-		}
-		else
-		{
-			CancelFade();
-		}
-	}
-		
 }

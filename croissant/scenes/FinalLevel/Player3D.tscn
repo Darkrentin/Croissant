@@ -430,7 +430,7 @@ tree_root = SubResource("AnimationNodeStateMachine_ley8d")
 anim_player = NodePath("../ShootAnimation")
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.2, 0)
 enabled = false
 target_position = Vector3(0, 0, -100)
 collision_mask = 11
