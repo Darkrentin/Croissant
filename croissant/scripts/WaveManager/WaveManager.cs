@@ -5,7 +5,6 @@ public partial class WaveManager : Node
 {
 	[Export] public AudioStreamPlayer WaveBeginSound;
 	[Export] public AudioStreamPlayer WavePrevious;
-
 	[Export] public Node SpawnNode;
 	[Export] public Wave FirstWave;
 	[Export] public WaveData WaveData;
@@ -53,7 +52,6 @@ public partial class WaveManager : Node
 
 	public void GoBackToWave()
 	{
-
 		CurrentWaveId = LastWave.id;
 		CurrentWave.WaveTimer.Stop();
 		CleanUpAllWave(CurrentWave);
@@ -108,7 +106,7 @@ public partial class WaveManager : Node
 			ScoreLabel.Text = text;
 			if (text != " ")
 			{
-				ScoreLabel.Text+="/4";
+				ScoreLabel.Text += "/4";
 			}
 		}
 		else

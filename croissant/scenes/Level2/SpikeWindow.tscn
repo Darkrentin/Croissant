@@ -33,5 +33,5 @@ grow_vertical = 2
 
 [node name="SpikeSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_a16pk")
-volume_db = -5.0
+volume_db = -2.0
 bus = &"SFX"

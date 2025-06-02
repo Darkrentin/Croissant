@@ -123,7 +123,6 @@ bus = &"SFX"
 
 [node name="ShapeDeath" type="AudioStreamPlayer" parent="Sound"]
 stream = SubResource("AudioStreamRandomizer_42lid")
-volume_db = 5.0
 bus = &"SFX"
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="OnAnimationFinished"]

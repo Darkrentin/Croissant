@@ -344,4 +344,5 @@ bus = &"SFX"
 
 [node name="PrezSound" type="AudioStreamPlayer" parent="Node"]
 stream = ExtResource("10_1u7gj")
+volume_db = -12.0
 bus = &"SFX"

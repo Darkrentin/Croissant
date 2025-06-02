@@ -48,7 +48,7 @@ public partial class SpikeWindow : AttackWindow
 	{
 		AttackSound.Play();
 		const float ResizeTime = 0.1f;
-		const float AttackDuration = 5f;
+		const float AttackDuration = 4.5f;
 
 		Timer.WaitTime = ResizeTime + AttackDuration + Lib.GetRandomNormal(0.5f, 3.0f); ;
 		base.Attack();

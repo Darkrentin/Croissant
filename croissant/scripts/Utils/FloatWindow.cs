@@ -294,7 +294,8 @@ public partial class FloatWindow : Window
 
 	public virtual void OnClose()
 	{
-		DeleteWindow();
+		if (DeleteWindow != null)
+			DeleteWindow();
 	}
 
 	public virtual void TransitionFinished() { }
