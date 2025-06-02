@@ -262,6 +262,7 @@ public static class States
 
     public static void Scoreboard()
     {
+        GameManager.MainWindow.Unfocusable = true;
         GameManager.PlayMusic(GameManager.Music.Scoreboard);
         Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
         Scoreboard.Position = GameManager.ScreenSize / 2 - Scoreboard.Size / 2;

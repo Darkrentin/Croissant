@@ -120,21 +120,6 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public override void _PhysicsProcess(double delta)
     {
-        // Limit horizontal velocity to movement speed
-        if (Math.Abs(Velocity.X) > moveSpeed)
-        {
-            Velocity = new Vector2(Math.Sign(Velocity.X) * moveSpeed, Velocity.Y);
-        }
-
-
-        if (Velocity.Y < 0)
-        {
-            // Limit upward velocity (jump)
-            if (Velocity.Y < jumpSpeed)
-            {
-                Velocity = new Vector2(Velocity.X, jumpSpeed);
-            }
-        }
         base._PhysicsProcess(delta);
         if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();
@@ -214,9 +199,20 @@ public partial class PlayerCharacter : CharacterBody2D
 
     public void HandleGravityWallFall(double delta, float gravity = GravityJump)
     {
+        // Appliquer la gravité réduite pour le wall slide
+        Velocity += new Vector2(0, gravity / 2.0f * (float)delta);
+        
+        // Limiter la vitesse de chute
         if (Velocity.Y > MaxFallWallVelocity)
             Velocity = new Vector2(Velocity.X, MaxFallWallVelocity);
-        Velocity += new Vector2(0, gravity / 2.0f * (float)delta);
+        
+        // Réduire la vitesse de montée pour un wall slide plus réaliste
+        if (Velocity.Y < 0) // Si on monte encore
+        {
+            // Appliquer une friction pour ralentir la montée
+            float wallSlideFriction = 0.85f; // Facteur de friction (ajustez selon vos besoins)
+            Velocity = new Vector2(Velocity.X, Velocity.Y * wallSlideFriction);
+        }
     }
 
     public void HandleJump()
