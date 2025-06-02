@@ -61,6 +61,7 @@ public partial class FloatWindow : Window
 		KeepTitleVisible = false;
 		GameManager.Windows.Add(this);
 		IsAlwaysOnTop = AlwaysOnTop;
+		Title = "";
 	}
 	public override void _Process(double delta)
 	{

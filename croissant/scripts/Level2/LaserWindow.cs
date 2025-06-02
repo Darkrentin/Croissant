@@ -41,11 +41,10 @@ public partial class LaserWindow : AttackWindow
 				targetPos = new Vector2I(CursorPosition.X, Lib.rand.Next(0, Math.Max(0, CursorPosition.Y - margin)));
 				break;
 			default:
-				GD.PushError("Invalid side");
 				targetPos = new Vector2I(0, 0);
 				break;
 		}
-		
+
 		// Ensure the target position stays within screen bounds
 		return ClampToScreen(targetPos);
 	}
@@ -63,7 +62,6 @@ public partial class LaserWindow : AttackWindow
 			case 3:
 				return StartResizeRight(nsize, time);
 			default:
-				GD.PushError("Invalid side");
 				return (new Vector2I(200, 200), new Vector2I(0, 0));
 		}
 	}
@@ -81,7 +79,6 @@ public partial class LaserWindow : AttackWindow
 			case 3:
 				return CursorPosition.X - targetCenter.X;
 			default:
-				GD.PushError("Invalid side");
 				return 0;
 		}
 	}
@@ -89,7 +86,8 @@ public partial class LaserWindow : AttackWindow
 	public override void Start()
 	{
 		base.Start();
-	}	public override void Move()
+	}
+	public override void Move()
 	{
 		const float MoveTime = 0.5f;
 		const float margin = 0.1f;
@@ -103,12 +101,13 @@ public partial class LaserWindow : AttackWindow
 		if (!RandomPosition)
 		{
 			nsize = (int)(GetDistance() * 1.2f); // distance to the cursor window
-		}		else
+		}
+		else
 		{
 			// For random position, calculate exact distance to screen edge in resize direction
 			Vector2I targetCenter = TargetPosition + Size / 2;
 			Vector2I currentSize = Size;
-			
+
 			switch (side)
 			{
 				case 0: // Resize Up (towards top) - expand upward
@@ -138,7 +137,7 @@ public partial class LaserWindow : AttackWindow
 	{
 		const float ShakeTime = 1f;
 		StartShake(ShakeTime, 5); //FIND WHY THE WINDOWS DISEAPPEAR WHEN I DON'T USE THE SHAKE !
-		
+
 		// nsize is now calculated during Move phase to prevent player from exploiting movement after calculation
 		(Vector2I targetSize, Vector2I targetPosition) = CallResize(nsize, -1f);
 		IsResizing = false;

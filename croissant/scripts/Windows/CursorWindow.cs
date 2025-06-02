@@ -44,7 +44,7 @@ public partial class CursorWindow : FloatWindow
 			clickParticles.GlobalPosition = Lib.GetCursorPosition();
 			GameManager.MainWindow.AddChild(clickParticles);
 			clickParticles.Emitting = true;
-			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 0.9f, reset: true);
+			StartExponentialTransition(Lib.GetCursorPosition() - Size / 2, 0.85f, reset: true);
 
 			var windowCenter = Position + Size / 2;
 			var cursorPos = Lib.GetCursorPosition();
@@ -65,7 +65,7 @@ public partial class CursorWindow : FloatWindow
 				var tween = CreateTween();
 				var distanceFromStart = i * dotSpacing;
 				var progressRatio = distanceFromStart / distance;
-				var timeToReach = progressRatio == 0 ? 0 : (-Mathf.Log(1 - progressRatio) / Mathf.Log(2) / 10) * 0.9f;
+				var timeToReach = progressRatio == 0 ? 0 : (-Mathf.Log(1 - progressRatio) / Mathf.Log(2) / 10) * 0.85f;
 				tween.TweenInterval(timeToReach);
 				tween.TweenCallback(new Callable(dot, "queue_free"));
 			}

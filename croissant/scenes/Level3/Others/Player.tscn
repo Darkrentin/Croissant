@@ -37,8 +37,8 @@
 [ext_resource type="AudioStream" uid="uid://ndop4dyswn0v" path="res://assets/sounds/level_3/body_fall.mp3" id="35_8xuck"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hnbnl"]
-radius = 17.0
-height = 88.0
+radius = 16.0
+height = 86.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xk4oe"]
 size = Vector2(48.875, 8.25)
@@ -934,7 +934,7 @@ LandingSound = NodePath("Sound/Land")
 DeathSound = NodePath("Sound/Death")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -44)
+position = Vector2(-2, -43)
 shape = SubResource("CapsuleShape2D_hnbnl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
