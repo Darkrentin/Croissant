@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dvyj1ybcrhel4"]
+[gd_scene load_steps=27 format=3 uid="uid://dvyj1ybcrhel4"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_q5f1q"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_62ijf"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="7_75x13"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="7_n8qik"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="10_jne2w"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="12_88wmo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_88wmo"]
 resource_local_to_scene = true
@@ -107,13 +108,10 @@ shader_parameter/window_size = Vector2(800, 600)
 resource_local_to_scene = true
 size = Vector2(256, 1008)
 
-[node name="11" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="11" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_q5f1q")
 windows = [NodePath("PlayerOnly/Window"), NodePath("WindowsOnly/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("KillingPlatform/Window"), NodePath("PlayerOnly2/Window")]
-
-[node name="0" parent="." instance=ExtResource("2_62ijf")]
-position = Vector2(40, 904)
-NextSceneId = 0
+portalExit = NodePath("PortalExit")
 
 [node name="12" parent="." instance=ExtResource("2_62ijf")]
 position = Vector2(1720, 64)
@@ -188,6 +186,9 @@ position = Vector2(128, 504)
 shape = SubResource("RectangleShape2D_d1e6k")
 
 [node name="Limit" parent="." instance=ExtResource("10_jne2w")]
+
+[node name="PortalExit" parent="." instance=ExtResource("12_88wmo")]
+position = Vector2(88, 960)
 
 [editable path="PlayerOnly"]
 [editable path="WindowsOnly"]

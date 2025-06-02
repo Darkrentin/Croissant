@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c68p7n5wfded1"]
+[gd_scene load_steps=21 format=3 uid="uid://c68p7n5wfded1"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_la71s"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_qulun"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="5_tlm41"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="6_ts4js"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="8_hunj6"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="9_hunj6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tlm41"]
 resource_local_to_scene = true
@@ -55,13 +56,10 @@ size = Vector2(403, 179)
 resource_local_to_scene = true
 size = Vector2(135, 57)
 
-[node name="3" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="3" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_la71s")
 windows = [NodePath("StaticPlateform/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window")]
-
-[node name="2" parent="." instance=ExtResource("2_qulun")]
-position = Vector2(55, 667)
-NextSceneId = 2
+portalExit = NodePath("PortalExit")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("3_6xv5l")]
 position = Vector2(0, 817)
@@ -143,6 +141,9 @@ position = Vector2(344, 760)
 [node name="CollisionShape2D" parent="StaticPlateform4" index="1"]
 position = Vector2(67.5, 28.5)
 shape = SubResource("RectangleShape2D_ts4js")
+
+[node name="PortalExit" parent="." instance=ExtResource("9_hunj6")]
+position = Vector2(108, 709)
 
 [editable path="StaticPlateform"]
 [editable path="MovePlatform"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://bflx07hg5rj6h"]
+[gd_scene load_steps=19 format=3 uid="uid://bflx07hg5rj6h"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_5q6or"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="1_yrjvf"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_v5qpy"]
 [ext_resource type="PackedScene" uid="uid://dc2htikt7y016" path="res://scenes/Level3/Platform/DoorPlatform.tscn" id="5_yrjvf"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="8_v5qpy"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="10_vf5y6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkapc"]
 resource_local_to_scene = true
@@ -51,9 +52,10 @@ size = Vector2(128, 320)
 resource_local_to_scene = true
 size = Vector2(128, 512)
 
-[node name="0" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="0" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_5q6or")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("MovePlatform/Window"), NodePath("DoorPlateform/Window"), NodePath("DoorPlateform2/Window"), NodePath("DoorPlateform3/Window")]
+portalExit = NodePath("PortalExit")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("1_yrjvf")]
 position = Vector2(0, 960)
@@ -143,6 +145,9 @@ position = Vector2(64, 256)
 shape = SubResource("RectangleShape2D_72i25")
 
 [node name="Limit" parent="." instance=ExtResource("8_v5qpy")]
+
+[node name="PortalExit" parent="." instance=ExtResource("10_vf5y6")]
+position = Vector2(960, 540)
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

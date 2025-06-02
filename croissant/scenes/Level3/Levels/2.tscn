@@ -1,10 +1,11 @@
-[gd_scene load_steps=13 format=3 uid="uid://degf6giq1au2a"]
+[gd_scene load_steps=14 format=3 uid="uid://degf6giq1au2a"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_1d8pj"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="1_2v404"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="2_j3oy1"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="3_pcjdc"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="5_32ltt"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="6_n05uy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcjdc"]
 resource_local_to_scene = true
@@ -32,12 +33,10 @@ size = Vector2(264, 152)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fql7s"]
 size = Vector2(264, 152)
 
-[node name="2" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="2" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_1d8pj")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("StaticPlateform5/Window"), NodePath("KillingPlatform/Window")]
-
-[node name="1" parent="." instance=ExtResource("1_2v404")]
-position = Vector2(17, 870)
+portalExit = NodePath("PortalExit")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("2_j3oy1")]
 position = Vector2(736, 160)
@@ -89,6 +88,9 @@ position = Vector2(132, 76)
 shape = SubResource("RectangleShape2D_fql7s")
 
 [node name="Limit" parent="." instance=ExtResource("5_32ltt")]
+
+[node name="PortalExit" parent="." instance=ExtResource("6_n05uy")]
+position = Vector2(112, 952)
 
 [editable path="StaticPlateform"]
 [editable path="StaticPlateform2"]

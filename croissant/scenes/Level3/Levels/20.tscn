@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dcw0fjn2wtog7"]
+[gd_scene load_steps=72 format=3 uid="uid://dcw0fjn2wtog7"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ebyve"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_2qgff"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="9_lnro7"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="10_bmqod"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="11_tf8vp"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="12_euby3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_murnh"]
 size = Vector2(128, 160)
@@ -496,9 +497,10 @@ shader_parameter/window_size = Vector2(800, 600)
 resource_local_to_scene = true
 size = Vector2(288, 120)
 
-[node name="20" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="20" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_ebyve")
 windows = [NodePath("KillingPlatform7/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("MovePlatform4/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("WindowsOnly3/Window"), NodePath("PlayerOnly/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("WindowsOnly4/Window"), NodePath("KillingPlatform3/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("PlayerOnly2/Window"), NodePath("WindowsOnly5/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform6/Window"), NodePath("WindowsOnly6/Window"), NodePath("KillingPlatform8/Window"), NodePath("WindowsOnly7/Window"), NodePath("WindowsOnly8/Window")]
+portalExit = NodePath("PortalExit")
 
 [node name="KillingPlatform7" parent="." instance=ExtResource("9_lnro7")]
 position = Vector2(376, 312)
@@ -518,10 +520,6 @@ shape = SubResource("RectangleShape2D_w1fyw")
 position = Vector2(1784, 8)
 NextSceneId = 0
 PortalToSpawn = true
-
-[node name="19" parent="." instance=ExtResource("2_2qgff")]
-position = Vector2(536, 576)
-NextSceneId = 19
 
 [node name="MovePlatform" parent="." instance=ExtResource("3_6v3s2")]
 position = Vector2(128, 472)
@@ -797,6 +795,9 @@ position = Vector2(144, 60)
 shape = SubResource("RectangleShape2D_mdqmd")
 
 [node name="Limit" parent="." instance=ExtResource("11_tf8vp")]
+
+[node name="PortalExit" parent="." instance=ExtResource("12_euby3")]
+position = Vector2(600, 600)
 
 [editable path="KillingPlatform7"]
 [editable path="MovePlatform"]

@@ -1,10 +1,11 @@
-[gd_scene load_steps=35 format=3 uid="uid://btj83jbmdhmwf"]
+[gd_scene load_steps=36 format=3 uid="uid://btj83jbmdhmwf"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_dwhl5"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_i8vnu"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="3_e4mtb"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="4_vshls"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="5_vue7d"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="6_dlyl8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iblhu"]
 size = Vector2(128, 608)
@@ -104,9 +105,10 @@ size = Vector2(128, 176)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qiyvy"]
 size = Vector2(128, 176)
 
-[node name="14" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="14" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_dwhl5")
 windows = [NodePath("StaticPlateform/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform5/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("StaticPlateform6/Window"), NodePath("StaticPlateform7/Window"), NodePath("StaticPlateform8/Window"), NodePath("StaticPlateform9/Window"), NodePath("StaticPlateform10/Window"), NodePath("StaticPlateform11/Window"), NodePath("StaticPlateform12/Window"), NodePath("KillingPlatform7/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window")]
+portalExit = NodePath("PortalExit")
 
 [node name="KillingPlatform6" parent="." instance=ExtResource("4_vshls")]
 position = Vector2(128, 0)
@@ -121,10 +123,6 @@ shape = SubResource("RectangleShape2D_iblhu")
 [node name="CollisionShape2D" parent="KillingPlatform6/Area2D" index="0"]
 position = Vector2(64, 304)
 shape = SubResource("RectangleShape2D_wo7j5")
-
-[node name="13" parent="." instance=ExtResource("2_i8vnu")]
-position = Vector2(24, 840)
-NextSceneId = 13
 
 [node name="15" parent="." instance=ExtResource("2_i8vnu")]
 position = Vector2(1752, 208)
@@ -319,6 +317,9 @@ position = Vector2(64, 88)
 shape = SubResource("RectangleShape2D_qiyvy")
 
 [node name="Limit" parent="." instance=ExtResource("5_vue7d")]
+
+[node name="PortalExit" parent="." instance=ExtResource("6_dlyl8")]
+position = Vector2(104, 952)
 
 [editable path="KillingPlatform6"]
 [editable path="StaticPlateform"]

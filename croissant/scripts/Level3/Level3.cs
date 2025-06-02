@@ -11,8 +11,6 @@ public partial class Level3 : FloatWindow
     [Export] public AudioStreamPlayer ConfigFileGatheredSound;
     [Export] public AudioStreamPlayer PortalEnterSound;
     [Export] public AudioStreamPlayer PortalExitSound;
-    [Export] public AnimationPlayer PortalAnimationPlayer;
-    [Export] public Node2D PortalSpawn;
 
     public SubLevel3[] Level3Nodes;
     public int sceneid = 0;
@@ -237,13 +235,9 @@ public partial class Level3 : FloatWindow
     {
         SubLevel3 nextScene = Level3.Instance.Level3Nodes[nextSceneId];
 
-        Portal NextPortal = null;
-        if (!portal.PortalToSpawn)
-        {
-            NextPortal = nextScene.GetNode<Portal>($"{sceneid}");
-            NextPortal.AnimationPlayer.Play("CloseInit");
-            portal.AnimationPlayer.Play("OpenInit");
-        }
+        PortalExit PortalExit = nextScene.portalExit;
+        portal.AnimationPlayer.Play("OpenInit");
+
 
         if (Level3.Instance.actualScene != null)
         {
@@ -251,61 +245,50 @@ public partial class Level3 : FloatWindow
         }
         nextScene.ShowSubLevel();
 
-        Vector2 playerTargetPosition = GameManager.ScreenSize / 2;
-
-        if (!portal.PortalToSpawn)
+        GetTree().CreateTimer(0.1f).Timeout += () =>
         {
-            playerTargetPosition = NextPortal.GlobalPosition + new Vector2(60, 60);
+            Vector2 playerTargetPosition = PortalExit.GlobalPosition;
             player.GlobalPosition = playerTargetPosition;
-            player.Animator2.PlayBackwards("Hide");
-            NextPortal.AnimationPlayer.PlayBackwards("Close");
+            
+            PortalExit.Visible = true;
+            PortalExit.AnimationPlayer.Play("Open");
+            PortalExitSound.Play();
 
 
-            GetTree().CreateTimer(0.3f).Timeout += () =>
+            GetTree().CreateTimer(0.1f).Timeout += () =>
             {
-                player.isDead = false;
-                player.Visible = true;
-                PortalExitSound.Play();
-                //CallDeferred(nameof(GrabFocus));
-            };
-        }
-        else
-        {
-            CleanupPathAndPortal(sceneid);
-            PortalAnimationPlayer.Play("RESET");
-            PortalSpawn.Visible = true;
-            Tween tween = GetTree().CreateTween();
-            float distance = (player.GlobalPosition - playerTargetPosition).Length();
-            float screenWidth = GameManager.ScreenSize.X;
-
-            float duration = Math.Max(distance / (float)screenWidth, 0.1f);
-            tween.SetTrans(Tween.TransitionType.Sine);
-            tween.SetEase(Tween.EaseType.InOut);
-            tween.TweenProperty(player, "global_position", playerTargetPosition, duration);
-            tween.TweenCallback(Callable.From(() =>
-            {
-                player.isDead = false;
-                PortalExitSound.Play();
-                player.Visible = true;
                 player.Animator2.PlayBackwards("Hide");
-                PortalAnimationPlayer.Play("Open");
-                GetTree().CreateTimer(1f).Timeout += () =>
-                {
-                    PortalSpawn.Visible = false;
-                };
-                //CallDeferred(nameof(GrabFocus));
-            }));
-        }
+                player.isDead = false;
+                player.Visible = true;
+                
+            };
+        };
+    
 
         if (End)
         {
             EndLevel();
         }
 
+        if(portal.PortalToSpawn)
+        {
+            Lib.Print("CleanupPathAndPortal");
+            //CleanupPathAndPortal(sceneid);
+        }
+
         sceneid = nextSceneId;
         actualScene = nextScene;
 
         LoadAdjacentScenes(nextSceneId);
+    }
+
+    public int PreviousLevel(int id)
+    {
+        if(id == 1 || id == 6 || id == 11 || id == 16)
+        {
+            return 0; // Level 0
+        }
+        else return id - 1; // Previous level in the sequence
     }
 
     public void TransitionStuck()
@@ -323,7 +306,7 @@ public partial class Level3 : FloatWindow
         {
             player.isDead = false;
             player.Visible = true;
-            player.GlobalPosition = GameManager.ScreenSize / 2;
+            player.GlobalPosition = nextScene.portalExit.GlobalPosition;
             //CallDeferred(nameof(GrabFocus));
         };
 
@@ -417,12 +400,11 @@ public partial class Level3 : FloatWindow
 
     public void EndLevel()
     {
-        if (sceneid != 0)
-            TransitionStuck();
         GameManager.State = GameManager.GameState.Dialogue3;
         GetTree().CreateTimer(0.5f).Timeout += () =>
         {
             player.LevelEnd = true;
         };
+    
     }
 }

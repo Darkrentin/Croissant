@@ -121,10 +121,10 @@ public partial class PlayerCharacter : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         base._PhysicsProcess(delta);
+        currentState.Call("Update", delta);
         if (isDead) return;
         if (Input.IsActionJustPressed("ui_left") || Input.IsActionJustPressed("ui_right")) _lastDirPressMsec = (int)Time.GetTicksMsec();
         GetInputStates();
-        currentState.Call("Update", delta);
         HandleMaxFallVelocity();
         MoveAndSlide();
     }
@@ -384,33 +384,37 @@ public partial class PlayerCharacter : CharacterBody2D
     {
         if (animationName == "Death")
         {
-            Lib.Print("PlayerCharacter: Death Animation Finished");
-            Level3.Instance.actualScene.HideSubLevel();
-            Level3.Instance.sceneid = 0;
-            Level3.Instance.Level3Nodes[0].ShowSubLevel();
-            Level3.Instance.actualScene = Level3.Instance.Level3Nodes[0];
-            Level3.Instance.PortalAnimationPlayer.Play("RESET");
-            Level3.Instance.PortalSpawn.Visible = true;
-
-            Animator.Play("Idle");
-            isDead = false;
-            Vector2 playerTargetPosition = new Vector2(1920 / 2, 1080 / 2);
-
-            Tween tween = GetTree().CreateTween();
-            float distance = (GlobalPosition - playerTargetPosition).Length();
-            float screenWidth = GameManager.ScreenSize.X;
-            float duration = Math.Max(distance / screenWidth, 0.1f);
-            tween.SetTrans(Tween.TransitionType.Sine);
-            tween.SetEase(Tween.EaseType.InOut);
-            tween.TweenProperty(this, "global_position", playerTargetPosition, duration);
-            tween.TweenCallback(Callable.From(() =>
+            Animator2.Play("Hide");
+            Visible = false;
+            
+            GetTree().CreateTimer(0.3f).Timeout += () =>
             {
-                Level3.Instance.PortalAnimationPlayer.Play("Open");
-                GetTree().CreateTimer(1f).Timeout += () =>
+                Lib.Print("PlayerCharacter: Death Animation Finished");
+                int previousSceneId = Level3.Instance.PreviousLevel(Level3.Instance.sceneid);
+                Level3.Instance.actualScene.HideSubLevel();
+                Level3.Instance.sceneid = previousSceneId;
+                Level3.Instance.Level3Nodes[previousSceneId].ShowSubLevel();
+                Level3.Instance.actualScene = Level3.Instance.Level3Nodes[previousSceneId];
+                PortalExit PortalExit = Level3.Instance.actualScene.portalExit;
+
+                GetTree().CreateTimer(0.1f).Timeout += () =>
                 {
-                    Level3.Instance.PortalSpawn.Visible = false;
+                    PortalExit.Visible = true;
+                    PortalExit.AnimationPlayer.Play("Open");
+                    Level3.Instance.PortalExitSound.Play();
+                    GlobalPosition = PortalExit.GlobalPosition;
+
+                    GetTree().CreateTimer(0.1f).Timeout += () =>
+                    {
+                        Animator2.PlayBackwards("Hide");
+                        isDead = false;
+                        Visible = true;
+                        
+                    };
                 };
-            }));
+            };
+            
+            
 
             if (Velocity.Y > 0)
             {

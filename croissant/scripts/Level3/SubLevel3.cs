@@ -4,6 +4,7 @@ using System;
 public partial class SubLevel3 : Node2D
 {
 	[Export] public FloatWindow[] windows;
+	[Export] public PortalExit portalExit;
 	public bool CurrentLevel = false;
 	public void HideSubLevel()
 	{

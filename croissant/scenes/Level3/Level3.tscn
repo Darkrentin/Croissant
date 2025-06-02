@@ -121,7 +121,7 @@ _data = {
 &"RESET": SubResource("Animation_w3tu5")
 }
 
-[node name="Level3" type="Window" node_paths=PackedStringArray("player", "ConfigFileGatheredSound", "PortalEnterSound", "PortalExitSound", "PortalAnimationPlayer", "PortalSpawn")]
+[node name="Level3" type="Window" node_paths=PackedStringArray("player", "ConfigFileGatheredSound", "PortalEnterSound", "PortalExitSound")]
 transparent_bg = true
 canvas_item_default_texture_filter = 0
 mode = 3
@@ -137,8 +137,6 @@ player = NodePath("Player")
 ConfigFileGatheredSound = NodePath("Sound/ConfigFileGather")
 PortalEnterSound = NodePath("Sound/PortalEnter")
 PortalExitSound = NodePath("Sound/PortalExit")
-PortalAnimationPlayer = NodePath("AnimationPlayer")
-PortalSpawn = NodePath("Portal")
 
 [node name="Player" parent="." instance=ExtResource("1_7smpx")]
 position = Vector2(960, 540)

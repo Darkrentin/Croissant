@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://kscnid6txu3f"]
+[gd_scene load_steps=32 format=3 uid="uid://kscnid6txu3f"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_p3eu8"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_nrgi1"]
@@ -9,6 +9,7 @@
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_md5xu"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="6_rq5dm"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="9_7ftwb"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="10_beels"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sx3wf"]
 resource_local_to_scene = true
@@ -243,13 +244,10 @@ size = Vector2(768, 256)
 resource_local_to_scene = true
 size = Vector2(192, 248)
 
-[node name="7" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="7" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_p3eu8")
 windows = [NodePath("MovePlatform3/Window"), NodePath("KillingPlatform/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("WindowsOnly3/Window"), NodePath("WindowsOnly5/Window"), NodePath("StaticPlateform/Window"), NodePath("WindowsOnly4/Window")]
-
-[node name="6" parent="." instance=ExtResource("2_nrgi1")]
-position = Vector2(16, 32)
-NextSceneId = 6
+portalExit = NodePath("PortalExit")
 
 [node name="MovePlatform3" parent="." instance=ExtResource("3_xy65v")]
 position = Vector2(0, 448)
@@ -337,6 +335,9 @@ position = Vector2(96, 124)
 shape = SubResource("RectangleShape2D_dvger")
 
 [node name="Limit" parent="." instance=ExtResource("9_7ftwb")]
+
+[node name="PortalExit" parent="." instance=ExtResource("10_beels")]
+position = Vector2(144, 112)
 
 [editable path="MovePlatform3"]
 [editable path="KillingPlatform"]

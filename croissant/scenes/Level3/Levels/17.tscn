@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://bu5seira0djs4"]
+[gd_scene load_steps=50 format=3 uid="uid://bu5seira0djs4"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ah0vo"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_ah0vo"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="7_yr5fu"]
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="8_xvj50"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="10_lhys1"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="11_7asgn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c7kun"]
 resource_local_to_scene = true
@@ -278,13 +279,10 @@ shader_parameter/window_size = Vector2(800, 600)
 resource_local_to_scene = true
 size = Vector2(168, 128)
 
-[node name="17" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="17" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_ah0vo")
 windows = [NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("PlayerOnly6/Window"), NodePath("PlayerOnly7/Window"), NodePath("MovePlatform3/Window"), NodePath("PlayerOnly2/Window"), NodePath("WindowsOnly/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("WindowsOnly2/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly3/Window"), NodePath("PlayerOnly4/Window"), NodePath("KillingPlatform4/Window"), NodePath("WindowsOnly3/Window")]
-
-[node name="16" parent="." instance=ExtResource("2_ah0vo")]
-position = Vector2(16, 8)
-NextSceneId = 16
+portalExit = NodePath("PortalExit")
 
 [node name="18" parent="." instance=ExtResource("2_ah0vo")]
 position = Vector2(1776, 664)
@@ -476,6 +474,9 @@ position = Vector2(84, 64)
 shape = SubResource("RectangleShape2D_x7e43")
 
 [node name="Limit" parent="." instance=ExtResource("10_lhys1")]
+
+[node name="PortalExit" parent="." instance=ExtResource("11_7asgn")]
+position = Vector2(112, 72)
 
 [editable path="PlayerOnly"]
 [editable path="MovePlatform"]

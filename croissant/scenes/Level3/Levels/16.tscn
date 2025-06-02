@@ -1,4 +1,4 @@
-[gd_scene load_steps=59 format=3 uid="uid://653nx0sdx0ku"]
+[gd_scene load_steps=60 format=3 uid="uid://653nx0sdx0ku"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_p6r5p"]
 [ext_resource type="PackedScene" uid="uid://dyjib31ak5lxc" path="res://scenes/Level3/Platform/StaticPlatform.tscn" id="2_mkg2h"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="6_duwor"]
 [ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="7_43fg2"]
 [ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="8_43fg2"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="9_hmkdc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jr100"]
 size = Vector2(144, 144)
@@ -395,9 +396,10 @@ shader_parameter/window_size = Vector2(800, 600)
 resource_local_to_scene = true
 size = Vector2(192, 128)
 
-[node name="16" type="Node2D" node_paths=PackedStringArray("windows")]
+[node name="16" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_p6r5p")
 windows = [NodePath("KillingPlatform4/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("KillingPlatform/Window"), NodePath("StaticPlateform5/Window"), NodePath("KillingPlatform2/Window"), NodePath("StaticPlateform6/Window"), NodePath("PlayerOnly/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("PlayerOnly2/Window"), NodePath("WindowsOnly3/Window"), NodePath("WindowsOnly4/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly3/Window"), NodePath("PlayerOnly4/Window"), NodePath("WindowsOnly5/Window"), NodePath("WindowsOnly6/Window"), NodePath("PlayerOnly5/Window"), NodePath("PlayerOnly6/Window"), NodePath("PlayerOnly7/Window"), NodePath("KillingPlatform5/Window"), NodePath("KillingPlatform6/Window"), NodePath("PlayerOnly8/Window")]
+portalExit = NodePath("PortalExit")
 
 [node name="KillingPlatform4" parent="." instance=ExtResource("4_vgcwm")]
 position = Vector2(24, 664)
@@ -423,10 +425,6 @@ position = Vector2(192, 192)
 [node name="CollisionShape2D" parent="StaticPlateform4" index="1"]
 position = Vector2(96, 64)
 shape = SubResource("RectangleShape2D_yosy6")
-
-[node name="0" parent="." instance=ExtResource("3_2j0nq")]
-position = Vector2(-16, 128)
-NextSceneId = 0
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_vgcwm")]
 position = Vector2(800, 320)
@@ -642,6 +640,9 @@ material = SubResource("ShaderMaterial_jnxlp")
 [node name="CollisionShape2D" parent="PlayerOnly8" index="1"]
 position = Vector2(96, 64)
 shape = SubResource("RectangleShape2D_6t0mn")
+
+[node name="PortalExit" parent="." instance=ExtResource("9_hmkdc")]
+position = Vector2(96, 96)
 
 [editable path="KillingPlatform4"]
 [editable path="StaticPlateform3"]
