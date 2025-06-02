@@ -63,7 +63,6 @@ public partial class FinalLevel : Node3D
 
 		shaderMaterial = (ShaderMaterial)ShaderViewport.Material;
 		GameManager.MainWindow.GrabFocus();
-		GameManager.MainWindow.AlwaysOnTop = true;
 		GameManager.MainWindow.Show();
 		GameManager.MainWindow.SetProcessInput(true);
 

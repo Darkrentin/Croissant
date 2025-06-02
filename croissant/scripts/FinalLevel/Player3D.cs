@@ -47,7 +47,7 @@ public partial class Player3D : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
-		if (!Alive)
+		if (!Alive || GetTree().Paused)
 			return;
 		float z_movement = Input.GetActionStrength("Backward") - Input.GetActionStrength("Forward");
 		float rotate = Input.GetActionStrength("LeftRot") - Input.GetActionStrength("RightRot");

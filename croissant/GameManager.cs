@@ -469,6 +469,7 @@ public partial class GameManager : Node2D
             if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3))
             {
                 window.Unfocusable = true;
+                window.AlwaysOnTop = false;
             }
         }
         if (FixWindow != null)
@@ -482,6 +483,7 @@ public partial class GameManager : Node2D
             if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3))
             {
                 window.Unfocusable = false;
+                window.AlwaysOnTop = window.IsAlwaysOnTop;
             }
         }
         if (FixWindow != null)

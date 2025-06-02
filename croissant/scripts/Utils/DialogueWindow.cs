@@ -32,6 +32,7 @@ public partial class DialogueWindow : FloatWindow
 
 	public override void _Ready()
 	{
+		base._Ready();
 		const string dialoguePath = "res://assets/texts/dialogues/Dialogue.json";
 		LoadJson(dialoguePath);
 

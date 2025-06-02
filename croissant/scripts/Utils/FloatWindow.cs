@@ -41,6 +41,8 @@ public partial class FloatWindow : Window
 	public Action DeleteWindow;
 	public string TransitionTag = "";
 
+	public bool IsAlwaysOnTop = false;
+
 	public override void _Ready()
 	{
 		if (!Borderless)
@@ -58,6 +60,7 @@ public partial class FloatWindow : Window
 		WindowRect = new Rect2I(Position, Size);
 		KeepTitleVisible = false;
 		GameManager.Windows.Add(this);
+		IsAlwaysOnTop = AlwaysOnTop;
 	}
 	public override void _Process(double delta)
 	{

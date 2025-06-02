@@ -241,7 +241,7 @@ public static class States
     {
         GameManager.PlayMusic(GameManager.Music.FinalLevel);
         GameManager.MainWindow.Unfocusable = false;
-        GameManager.MainWindow.AlwaysOnTop = true;
+        //GameManager.MainWindow.AlwaysOnTop = true;
         if (GameManager.virus != null)
         {
             GameManager.GameRoot.RemoveChild(GameManager.virus);
