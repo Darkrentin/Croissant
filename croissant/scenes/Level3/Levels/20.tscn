@@ -345,7 +345,7 @@ shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4pb67"]
 resource_local_to_scene = true
-size = Vector2(136, 232)
+size = Vector2(136, 312)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5wbvh"]
 resource_local_to_scene = true
@@ -450,7 +450,7 @@ shader_parameter/window_size = Vector2(800, 600)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_04sxb"]
 resource_local_to_scene = true
-size = Vector2(192, 128)
+size = Vector2(176, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sngcg"]
 size = Vector2(240, 184)
@@ -517,9 +517,10 @@ shape = SubResource("RectangleShape2D_w1fyw")
 [node name="0" parent="." instance=ExtResource("2_2qgff")]
 position = Vector2(1784, 8)
 NextSceneId = 0
+PortalToSpawn = true
 
 [node name="19" parent="." instance=ExtResource("2_2qgff")]
-position = Vector2(456, 568)
+position = Vector2(536, 576)
 NextSceneId = 19
 
 [node name="MovePlatform" parent="." instance=ExtResource("3_6v3s2")]
@@ -575,7 +576,7 @@ position = Vector2(420, 60)
 shape = SubResource("RectangleShape2D_hukr0")
 
 [node name="WindowsOnly" parent="." instance=ExtResource("6_q6xmu")]
-position = Vector2(328, 480)
+position = Vector2(360, 480)
 
 [node name="PlatformTexture" parent="WindowsOnly/Window" index="0"]
 material = SubResource("ShaderMaterial_bmqod")
@@ -710,7 +711,7 @@ shape = SubResource("RectangleShape2D_xnq2g")
 material = SubResource("ShaderMaterial_upyee")
 
 [node name="CollisionShape2D" parent="WindowsOnly5" index="1"]
-position = Vector2(68, 116)
+position = Vector2(68, 156)
 shape = SubResource("RectangleShape2D_4pb67")
 
 [node name="PlayerOnly3" parent="." instance=ExtResource("7_xr5wh")]
@@ -762,13 +763,13 @@ position = Vector2(64, 80)
 shape = SubResource("RectangleShape2D_asy7n")
 
 [node name="WindowsOnly7" parent="." instance=ExtResource("6_q6xmu")]
-position = Vector2(1160, 320)
+position = Vector2(1176, 320)
 
 [node name="PlatformTexture" parent="WindowsOnly7/Window" index="0"]
 material = SubResource("ShaderMaterial_5ucjb")
 
 [node name="CollisionShape2D" parent="WindowsOnly7" index="1"]
-position = Vector2(96, 64)
+position = Vector2(88, 64)
 shape = SubResource("RectangleShape2D_04sxb")
 
 [node name="ConfigFile" parent="." instance=ExtResource("10_bmqod")]

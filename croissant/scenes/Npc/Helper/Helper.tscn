@@ -275,6 +275,7 @@ canvas_item_default_texture_filter = 0
 size = Vector2i(300, 300)
 unresizable = true
 borderless = true
+always_on_top = true
 transparent = true
 script = ExtResource("1_8cb3g")
 animationPlayer = NodePath("AnimationPlayer")

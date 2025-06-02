@@ -380,13 +380,13 @@ position = Vector2(108, 32)
 shape = SubResource("RectangleShape2D_yo5b6")
 
 [node name="PlayerOnly3" parent="." instance=ExtResource("5_kyd2w")]
-position = Vector2(1448, 592)
+position = Vector2(1448, 576)
 
 [node name="PlatformTexture" parent="PlayerOnly3/Window" index="0"]
 material = SubResource("ShaderMaterial_mqcea")
 
 [node name="CollisionShape2D" parent="PlayerOnly3" index="1"]
-position = Vector2(124, 104)
+position = Vector2(124, 120)
 shape = SubResource("RectangleShape2D_muoes")
 
 [node name="KillingPlatform8" parent="." instance=ExtResource("4_lstuu")]
