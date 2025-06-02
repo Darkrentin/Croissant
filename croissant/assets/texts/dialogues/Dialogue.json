@@ -210,7 +210,7 @@
                 "anim": "Idle"
             },
             "2": {
-                "text": "You need to help me to get me there, move me with [color=#33FFFF]W A S D[/color] or the [color=#33FFFF]arrow keys[/color]!",
+                "text": "You need to help me to get there, move with [color=#33FFFF]W A S D[/color] or the [color=#33FFFF]arrow keys[/color]!",
                 "anim": "Idle"
             },
             "3": {
