@@ -405,14 +405,12 @@ public partial class PlayerCharacter : CharacterBody2D
             tween.TweenProperty(this, "global_position", playerTargetPosition, duration);
             tween.TweenCallback(Callable.From(() =>
             {
-                ProcessMode = ProcessModeEnum.Pausable;
                 Level3.Instance.PortalAnimationPlayer.Play("Open");
                 GetTree().CreateTimer(1f).Timeout += () =>
                 {
                     Level3.Instance.PortalSpawn.Visible = false;
                 };
             }));
-            ProcessMode = ProcessModeEnum.Disabled;
 
             if (Velocity.Y > 0)
             {

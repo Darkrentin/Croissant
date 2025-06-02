@@ -466,7 +466,7 @@ public partial class GameManager : Node2D
     {
         foreach (FloatWindow window in Windows)
         {
-            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3) && !(window is MainWindow))
+            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3) && !(window is MainWindow) && !(window is Npc) && !(window is DialogueWindow))
             {
                 window.Unfocusable = true;
                 window.AlwaysOnTop = false;
@@ -474,13 +474,14 @@ public partial class GameManager : Node2D
         }
         if (FixWindow != null)
             FixWindow.Unfocusable = true;
+            
     }
 
     public void FocusAllWindows()
     {
         foreach (FloatWindow window in Windows)
         {
-            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3) && !(window is MainWindow))
+            if (IsInstanceValid(window) && !window.IsQueuedForDeletion() && !(window is Level3) && !(window is MainWindow) && !(window is Npc) && !(window is DialogueWindow))
             {
                 window.Unfocusable = false;
                 window.AlwaysOnTop = window.IsAlwaysOnTop;
