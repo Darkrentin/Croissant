@@ -69,11 +69,3 @@ List of known issues that we will fix later.
 - Visual glitches sometimes happen on windows unfocus (ALT + TAB), but a temporary fix is present in the Menu to reorganize the windows.
 
 ---
-
-_Shape Glitch - When your computer becomes a battlefield!_ 🖥️
-
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
