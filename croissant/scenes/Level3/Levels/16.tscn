@@ -411,21 +411,21 @@ position = Vector2(72, 72)
 shape = SubResource("RectangleShape2D_kvfv7")
 
 [node name="StaticPlateform3" parent="." instance=ExtResource("2_mkg2h")]
-position = Vector2(0, 192)
+position = Vector2(0, 232)
 
 [node name="CollisionShape2D" parent="StaticPlateform3" index="1"]
 position = Vector2(96, 64)
 shape = SubResource("RectangleShape2D_ns1my")
 
 [node name="StaticPlateform4" parent="." instance=ExtResource("2_mkg2h")]
-position = Vector2(192, 256)
+position = Vector2(192, 192)
 
 [node name="CollisionShape2D" parent="StaticPlateform4" index="1"]
 position = Vector2(96, 64)
 shape = SubResource("RectangleShape2D_yosy6")
 
 [node name="0" parent="." instance=ExtResource("3_2j0nq")]
-position = Vector2(8, 16)
+position = Vector2(-16, 128)
 NextSceneId = 0
 
 [node name="KillingPlatform" parent="." instance=ExtResource("4_vgcwm")]

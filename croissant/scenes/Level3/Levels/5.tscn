@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bp2do2h10yp3w"]
+[gd_scene load_steps=36 format=3 uid="uid://bp2do2h10yp3w"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_kyu8e"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_g6not"]
@@ -109,9 +109,13 @@ size = Vector2(272, 120)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ut6fl"]
 size = Vector2(240, 160)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5masu"]
+resource_local_to_scene = true
+size = Vector2(128, 56)
+
 [node name="5" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_kyu8e")
-windows = [NodePath("StaticPlateform/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform3/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("KillingPlatform6/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("StaticPlateform5/Window"), NodePath("StaticPlateform6/Window")]
+windows = [NodePath("StaticPlateform/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform3/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("KillingPlatform6/Window"), NodePath("StaticPlateform2/Window"), NodePath("StaticPlateform3/Window"), NodePath("StaticPlateform4/Window"), NodePath("StaticPlateform5/Window"), NodePath("StaticPlateform6/Window"), NodePath("StaticPlateform7/Window")]
 
 [node name="4" parent="." instance=ExtResource("2_g6not")]
 position = Vector2(16, 16)
@@ -296,6 +300,13 @@ shape = SubResource("RectangleShape2D_ut6fl")
 
 [node name="Limit" parent="." instance=ExtResource("9_5masu")]
 
+[node name="StaticPlateform7" parent="." instance=ExtResource("3_o0u3o")]
+position = Vector2(112, 104)
+
+[node name="CollisionShape2D" parent="StaticPlateform7" index="1"]
+position = Vector2(64, 28)
+shape = SubResource("RectangleShape2D_5masu")
+
 [editable path="StaticPlateform"]
 [editable path="MovePlatform"]
 [editable path="MovePlatform2"]
@@ -311,3 +322,4 @@ shape = SubResource("RectangleShape2D_ut6fl")
 [editable path="StaticPlateform5"]
 [editable path="StaticPlateform6"]
 [editable path="ConfigFile"]
+[editable path="StaticPlateform7"]

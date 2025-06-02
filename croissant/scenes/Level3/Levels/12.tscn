@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://bhbpb2xmjfosj"]
+[gd_scene load_steps=53 format=3 uid="uid://bhbpb2xmjfosj"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_khr5f"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_fo6cm"]
@@ -186,9 +186,13 @@ size = Vector2(224, 128)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4lj04"]
 size = Vector2(224, 128)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kv18r"]
+resource_local_to_scene = true
+size = Vector2(128, 56)
+
 [node name="12" type="Node2D" node_paths=PackedStringArray("windows")]
 script = ExtResource("1_khr5f")
-windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window"), NodePath("KillingPlatform11/Window")]
+windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window"), NodePath("KillingPlatform11/Window"), NodePath("StaticPlateform2/Window")]
 
 [node name="11" parent="." instance=ExtResource("2_fo6cm")]
 position = Vector2(16, 16)
@@ -440,6 +444,13 @@ shape = SubResource("RectangleShape2D_4lj04")
 
 [node name="Limit" parent="." instance=ExtResource("10_mqcea")]
 
+[node name="StaticPlateform2" parent="." instance=ExtResource("3_dfmgp")]
+position = Vector2(152, 200)
+
+[node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
+position = Vector2(64, 28)
+shape = SubResource("RectangleShape2D_kv18r")
+
 [editable path="KillingPlatform"]
 [editable path="KillingPlatform3"]
 [editable path="PlayerOnly"]
@@ -459,3 +470,4 @@ shape = SubResource("RectangleShape2D_4lj04")
 [editable path="KillingPlatform9"]
 [editable path="KillingPlatform10"]
 [editable path="KillingPlatform11"]
+[editable path="StaticPlateform2"]

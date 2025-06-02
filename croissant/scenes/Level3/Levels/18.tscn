@@ -231,7 +231,7 @@ position = Vector2(68, 64)
 shape = SubResource("RectangleShape2D_qqi26")
 
 [node name="MovePlatform" parent="." instance=ExtResource("5_bjita")]
-position = Vector2(408, 536)
+position = Vector2(320, 536)
 
 [node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
 material = SubResource("ShaderMaterial_qqi26")
