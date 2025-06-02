@@ -1842,11 +1842,12 @@ anim_player = NodePath("../AnimationScreen")
 
 [node name="Splash" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_l1l4n")
-volume_db = -10.0
+volume_db = -12.0
 bus = &"SFX"
 
 [node name="DialogueSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("16_stpki")
+volume_db = -1.0
 max_polyphony = 8
 bus = &"SFX"
 

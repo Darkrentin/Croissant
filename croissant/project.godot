@@ -19,6 +19,7 @@ boot_splash/bg_color=Color(0, 0, 0, 0)
 boot_splash/show_image=false
 boot_splash/use_filter=false
 config/icon="uid://cwgonk1nbqmj0"
+config/windows_native_icon="res://icon.ico"
 
 [audio]
 
@@ -249,5 +250,5 @@ environment/glow/upscale_mode=0
 environment/screen_space_reflection/roughness_quality=0
 lightmapping/probe_capture/update_speed=8.0
 global_illumination/sdfgi/frames_to_converge=0
-environment/defaults/default_clear_color=Color(0, 0, 0, 0)
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)
 viewport/transparent_background=true

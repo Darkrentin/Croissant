@@ -9,7 +9,7 @@ public partial class FollowWindow : AttackWindow
 	public override void _Ready()
 	{
 		base._Ready();
-		Lives = 10;
+		Lives = 9;
 		VisualCollision.Color = Colors.Green;
 	}
 
