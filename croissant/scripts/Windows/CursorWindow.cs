@@ -11,7 +11,7 @@ public partial class CursorWindow : FloatWindow
 	public Timer FreezeTimer;
 	[Export] public AnimationPlayer animationPlayer;
 	private Node dotContainer;
-	public Vector2I Margin = new Vector2I(10, 10);
+	public Vector2I Margin = new Vector2I(15, 15);
 	public Rect2I CollisionRect;
 
 	public override void _Ready()

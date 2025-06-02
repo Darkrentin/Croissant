@@ -1,16 +1,16 @@
 # Shape Glitch
 
-> An adventure speedrunable game that uses Windows as the primary gameplay mechanic.
+> An adventure speedrunable game that uses windows as the primary gameplay mechanic.
 
 ## Description
 
-Shape Glitch is a video game where you've just installed a new game of the same name. At first, everything seems normal - you're playing a simple 2D shooter. But soon, a program appears to reveal that this game was actually hiding a virus! Navigate through levels using Windows mechanics to save your PC from the virus.
+Shape Glitch is a video game where you've just installed a new game of the same name. At first, everything seems normal, you're playing a simple 2D shooter. But soon, a program appears to reveal that this game was actually hiding a virus and more mysteries! Navigate through levels using Windows mechanics to save your PC from the virus.
 
 ## Game Levels
 
 ### Level 0 - Introduction
 
-A simple 2D shooter that serves as a facade. You suspect nothing...
+A simple 2D shooter, the user suspects nothing...
 
 ### Level 1 - Pop-up Invasion
 
@@ -41,8 +41,7 @@ Beat the virus to unlock the level 0 infinite mode.
 
 - **Mouse Click**: Interact with windows / Shoot / Move (Level 2)
 - **Arrow Keys**: Movement
-- **Space**: Jump (Level 3)
-- **Escape**: Pause menu
+- **Escape**: Pause menu and settings
 
 ## Installation
 
@@ -50,7 +49,7 @@ Install it with the installer provided in the Release GitHub tab.
 
 ## Built With
 
-- **Godot Engine 4.0+** - Game engine
+- **Godot Engine 4.0** - Game engine
 - **C#** - Programming language
 - **Windows API and OS Godot Library** - Window manipulation mechanics
 - **FL Studio** - Musics and sounds
@@ -66,6 +65,6 @@ Install it with the installer provided in the Release GitHub tab.
 List of known issues that we will fix later.
 
 - Due to Windows limitations about window widths, the game is only playable at 100% screen scale in the Windows parameters.
-- Visual glitches sometimes happen on windows unfocus (ALT + TAB), but a temporary fix is present in the Menu to reorganize the windows.
+- Visual glitches and focus bugs sometimes happen on windows unfocus (ALT + TAB), but a temporary fix is present in the Menu to reorganize the windows.
 
 ---
