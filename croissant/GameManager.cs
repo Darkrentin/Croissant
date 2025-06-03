@@ -60,6 +60,7 @@ public partial class GameManager : Node2D
         Helper,
         // Game state
         ScreenScaleScreen,
+        ParticulesPreload,
         IntroGame,
         IntroVirus,
         Dialogue1,
@@ -194,6 +195,9 @@ public partial class GameManager : Node2D
             // Game state
             case GameState.ScreenScaleScreen:
                 States.ScreenScaleScreen();
+                break;
+            case GameState.ParticulesPreload:
+                States.ParticulesPreload();
                 break;
             case GameState.IntroGame:
                 States.IntroGame();

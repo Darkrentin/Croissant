@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://ckx6m1bn0k11e"]
+[gd_scene load_steps=31 format=3 uid="uid://ckx6m1bn0k11e"]
 
 [ext_resource type="Script" uid="uid://djdihij0lchr" path="res://scripts/Other/SceneLoader.cs" id="1_6c1vk"]
 [ext_resource type="PackedScene" uid="uid://wm3w6j1qernu" path="res://scenes/Intro/Game.tscn" id="3_rvotm"]
@@ -27,6 +27,7 @@
 [ext_resource type="PackedScene" uid="uid://l5aaex7hyyl0" path="res://scenes/Other/IntroGameEndless.tscn" id="25_vdxpo"]
 [ext_resource type="PackedScene" uid="uid://d3xlikbll0i4p" path="res://scenes/Level2/ClickParticles.tscn" id="26_hjhek"]
 [ext_resource type="PackedScene" uid="uid://jyrxla8de62h" path="res://scenes/Other/ScreenScaleScreen.tscn" id="27_d3g4q"]
+[ext_resource type="PackedScene" uid="uid://c604aiwnr8hj3" path="res://scenes/ParticulePreLoader.tscn" id="28_hu4ei"]
 
 [sub_resource type="CSharpScript" id="CSharpScript_ccpnw"]
 script/source = "using Godot;
@@ -108,3 +109,4 @@ ScoreboardScene = ExtResource("24_1v343")
 IntroGameEndlessScene = ExtResource("25_vdxpo")
 ClickParticlesScene = ExtResource("26_hjhek")
 ScreenScaleScreenScene = ExtResource("27_d3g4q")
+ParticulePreloadScene = ExtResource("28_hu4ei")

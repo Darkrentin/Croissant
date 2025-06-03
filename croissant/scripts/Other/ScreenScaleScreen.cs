@@ -39,7 +39,7 @@ public partial class ScreenScaleScreen : Window
 
 	public void OnRefuseButtonPressed()
 	{
-		GameManager.State = GameManager.GameState.IntroGame;
+		GameManager.State = GameManager.GameState.ParticulesPreload;
 		QueueFree();
 	}
 }

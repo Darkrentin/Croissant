@@ -49,7 +49,7 @@ public static class States
     {
         if (GameManager.ScreenScale == 1)
         {
-            GameManager.State = GameManager.GameState.IntroGame;
+            GameManager.State = GameManager.GameState.ParticulesPreload;
             return;
         }
         else
@@ -58,6 +58,21 @@ public static class States
             GameManager.GameRoot.AddChild(ScreenScaleScreen);
             GameManager.State = GameManager.GameState.ScreenScaleScreenBuffer;
         }
+    }
+
+    public static void ParticulesPreload()
+    {
+        Node ParticulePreload = SceneLoader.ParticulePreloadScene.Instantiate<Node>();
+        GameManager.GameRoot.AddChild(ParticulePreload);
+        Lib.Print("Preloading Particules...");
+        GameManager.Instance.GetTree().CreateTimer(0.3f).Timeout += () =>
+        {
+            ParticulePreload.QueueFree();
+            Lib.Print("Particules Preloaded");
+            GameManager.State = GameManager.GameState.IntroGame;
+        };
+
+        GameManager.State = GameManager.GameState.Void;
     }
 
     public static void IntroGame()

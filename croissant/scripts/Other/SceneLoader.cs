@@ -30,4 +30,5 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene IntroGameEndlessScene;
 	[Export] public PackedScene ClickParticlesScene;
 	[Export] public PackedScene ScreenScaleScreenScene;
+	[Export] public PackedScene ParticulePreloadScene;
 }
