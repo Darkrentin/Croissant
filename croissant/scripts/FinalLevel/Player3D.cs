@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 public partial class Player3D : CharacterBody3D
@@ -9,6 +10,7 @@ public partial class Player3D : CharacterBody3D
 	[Export] public SpotLight3D Flashlight;
 	[Export] AudioStreamPlayer ShootSound;
 	[Export] AudioStreamPlayer FootstepSound;
+	[Export] public PackedScene FootStepScene;
 	private PackedScene BulletHitScene;
 	private AnimationNodeStateMachinePlayback AnimationPlayer;
 	private Timer ShootTimer;
@@ -17,8 +19,11 @@ public partial class Player3D : CharacterBody3D
 	private float ShootCooldown = 0.9f;
 	[Export] private float Gravity = 9.8f;
 	public bool Alive = true;
+	public MeshInstance3D LastFootstep;
+	public List<MeshInstance3D> Footsteps = new List<MeshInstance3D>();
 
 	public Timer StepTimer;
+	public bool DrawFootsteps = true;
 
 	public override void _Ready()
 	{
@@ -73,6 +78,8 @@ public partial class Player3D : CharacterBody3D
 			ShootTimer.WaitTime = ShootCooldown;
 			ShootTimer.Start();
 		}
+		if(DrawFootsteps)
+			HandleFootStep();
 	}
 
 	private void Shoot()
@@ -105,5 +112,18 @@ public partial class Player3D : CharacterBody3D
 		var tween = CreateTween();
 		tween.TweenProperty(Flashlight, "light_energy", 1.0, 0.5);
 		tween.Play();
+	}
+
+	public void HandleFootStep()
+	{
+		const float footstepDistance = 1.5f;
+		if (LastFootstep == null || LastFootstep.GlobalPosition.DistanceTo(GlobalPosition) > footstepDistance)
+		{
+			MeshInstance3D footstep = FootStepScene.Instantiate<MeshInstance3D>();
+			FinalLevel.Instance.AddChild(footstep);
+			footstep.GlobalPosition = GlobalPosition + new Vector3(Lib.GetRandomNormal(-0.3f,0.3f), 0, Lib.GetRandomNormal(-0.3f,0.3f));
+			Footsteps.Add(footstep);
+			LastFootstep = footstep;
+		}
 	}
 }

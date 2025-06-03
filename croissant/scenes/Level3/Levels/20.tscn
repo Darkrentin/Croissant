@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="9_lnro7"]
 [ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="10_bmqod"]
 [ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="11_tf8vp"]
-[ext_resource type="PackedScene" path="res://scenes/Level3/Others/PortalExit.tscn" id="12_euby3"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="12_euby3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_murnh"]
 size = Vector2(128, 144)

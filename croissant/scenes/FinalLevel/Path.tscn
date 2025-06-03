@@ -19,6 +19,7 @@ size = Vector3(2, 2, 2)
 size = Vector3(2, 2, 2)
 
 [node name="Path" type="StaticBody3D"]
+collision_mask = 3
 
 [node name="Floor" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, -1, 1)

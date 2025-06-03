@@ -121,7 +121,7 @@ length = 3.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("NbOfObjectives:modulate")
+tracks/0/path = NodePath("Control/NbOfObjectives:modulate")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -172,7 +172,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("NbOfObjectives:modulate")
+tracks/3/path = NodePath("Control/NbOfObjectives:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -242,7 +242,7 @@ TransitionSound = NodePath("Sound/Transition")
 DeathLavaSound = NodePath("Sound/Lava")
 LavaSound = NodePath("Sound/DeathLava")
 WallSound = NodePath("Sound/WallSound")
-ObjectiveLabel = NodePath("NbOfObjectives")
+ObjectiveLabel = NodePath("Control/NbOfObjectives")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_56we2")
@@ -331,14 +331,24 @@ bus = &"SFX"
 stream = ExtResource("14_7gndp")
 bus = &"SFX"
 
-[node name="NbOfObjectives" type="Label" parent="."]
-modulate = Color(1, 1, 1, 0)
-texture_filter = 4
-anchors_preset = -1
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
 anchor_right = 0.067
 anchor_bottom = 0.059
-offset_right = -0.639999
-offset_bottom = 0.279995
+offset_left = 896.0
+offset_top = 704.0
+offset_right = 895.36
+offset_bottom = 704.28
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NbOfObjectives" type="Label" parent="Control"]
+modulate = Color(1, 1, 1, 0)
+texture_filter = 4
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("16_dd3a1")
 theme_override_font_sizes/font_size = 54

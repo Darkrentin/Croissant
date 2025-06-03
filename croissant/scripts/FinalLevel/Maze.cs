@@ -379,6 +379,13 @@ public partial class Maze : Node3D
         }
         Enemies.Clear();
 
+        foreach(var footstep in FinalLevel.Instance.Player3D.Footsteps)
+        {
+            if (footstep.IsInsideTree())
+                footstep.QueueFree();
+        }
+        FinalLevel.Instance.Player3D.Footsteps.Clear();
+
         Lamp Lamp = LampScene.Instantiate<Lamp>();
         Lamp.Position = new Vector3(0, 0, 0);
         Lamp.RenderDistance = 100;

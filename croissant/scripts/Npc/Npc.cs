@@ -84,6 +84,7 @@ public abstract partial class Npc : FloatWindow
     {
         ForceDialoguePlacement = false;
         StartLinearTransition(Position, time, reset: true);
+        GameManager.StartRefocusAllWindows();
         GrabFocus();
         Visible = true;
     }

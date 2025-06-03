@@ -93,6 +93,7 @@ public partial class FinalLevel : Node3D
 			Lib.Print("All objectives destroyed");
 			maze.RemoveAllWall();
 			TransitionSound.Play();
+			Player3D.DrawFootsteps = false;
 		}
 		else
 			Lib.Print("Objective destroyed: " + ObjectiveDestroyed);

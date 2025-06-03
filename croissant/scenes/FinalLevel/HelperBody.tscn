@@ -25,6 +25,7 @@ texture = ExtResource("1_7t3ja")
 
 [node name="RigidBody3D" type="RigidBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.06999, 0.5, 0.39233)
+collision_layer = 64
 mass = 0.01
 linear_velocity = Vector3(1, 0, 0)
 

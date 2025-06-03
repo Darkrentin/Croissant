@@ -1,7 +1,8 @@
-[gd_scene load_steps=57 format=4 uid="uid://ctiao55yb71jf"]
+[gd_scene load_steps=58 format=4 uid="uid://ctiao55yb71jf"]
 
 [ext_resource type="Script" uid="uid://08eplvkt7plw" path="res://scripts/FinalLevel/Player3D.cs" id="1_rrt4f"]
 [ext_resource type="Texture2D" uid="uid://b27x3aob6e8bb" path="res://assets/sprites/shotgun/gun3.png" id="2_6l3yh"]
+[ext_resource type="PackedScene" uid="uid://b6st28h0v85qp" path="res://scenes/FinalLevel/FootStep.tscn" id="2_b6u1r"]
 [ext_resource type="Texture2D" uid="uid://ctcw2js43e8ya" path="res://assets/sprites/shotgun/gun0.png" id="2_h2v7r"]
 [ext_resource type="Texture2D" uid="uid://cyul661qhorrb" path="res://assets/sprites/shotgun/gun4.png" id="3_aofux"]
 [ext_resource type="Texture2D" uid="uid://dqh3rygqtihv5" path="res://assets/sprites/shotgun/gun5.png" id="4_4x0oc"]
@@ -378,6 +379,7 @@ AnimationTree = NodePath("AnimationTree")
 Flashlight = NodePath("FlashLamp")
 ShootSound = NodePath("Shoot")
 FootstepSound = NodePath("Step")
+FootStepScene = ExtResource("2_b6u1r")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
