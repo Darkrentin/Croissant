@@ -1,6 +1,4 @@
-# Shape Glitch
-
-![Icon](https://github.com/Darkrentin/Croissant/blob/main/screenshots/icon.png "Icon")
+# ![Icon](https://github.com/Darkrentin/Croissant/blob/main/screenshots/icon.png "Icon") Shape Glitch
 
 > A mysterious adventure speedrunable game that uses windows as the primary gameplay mechanic.
 
@@ -72,6 +70,6 @@ Install it with the installer provided in the Release GitHub tab.
 List of known issues that we will fix later:
 
 - Due to Windows limitations about window widths, the game is only playable at 100% screen scale in the Windows parameters.
-- Visual glitches and focus bugs sometimes happen on windows unfocus (ALT + TAB).
+- Visual glitches and focus bugs sometimes happen on windows unfocus (ALT + TAB), but a temporary fix is present in the Menu to reorganize the windows.
 
 ---

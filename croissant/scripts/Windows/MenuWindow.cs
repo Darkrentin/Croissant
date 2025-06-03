@@ -6,6 +6,7 @@ public partial class MenuWindow : FloatWindow
 	[Export] public CheckButton FakeDesktopButton;
 	[Export] public CheckButton DebugButton;
 	[Export] public Button StuckButton;
+	[Export] public Button GrabFocusButton;
 	[Export] public Slider MasterVolumeSlider;
 	[Export] public Slider MusicVolumeSlider;
 	[Export] public Slider SFXVolumeSlider;
@@ -16,8 +17,8 @@ public partial class MenuWindow : FloatWindow
 	public bool FakeDesktop = false;
 	public bool DebugMode = false;
 
-	public Vector2I SizeWithout = new Vector2I(300, 305);
-	public Vector2I SizeWith = new Vector2I(300, 350);
+	public Vector2I SizeWithout = new Vector2I(300, 335);
+	public Vector2I SizeWith = new Vector2I(300, 380);
 
 	public override void _Ready()
 	{
@@ -33,6 +34,7 @@ public partial class MenuWindow : FloatWindow
 		FakeDesktopButton.Toggled += FakeDesktopButtonToggled;
 		DebugButton.Toggled += DebugButtonToggled;
 		StuckButton.Pressed += StuckButtonPressed;
+		GrabFocusButton.Pressed += OnGrabFocusButtonPressed;
 
 		MasterVolumeSlider.ValueChanged += OnMasterVolumeChanged;
 		MusicVolumeSlider.ValueChanged += OnMusicVolumeChanged;
@@ -44,6 +46,7 @@ public partial class MenuWindow : FloatWindow
 		FakeDesktopButton.ButtonPressed = FakeDesktop;
 		DebugButton.ButtonPressed = DebugMode;
 
+		// Set initial volume slider values
 		MasterVolumeSlider.Value = GameManager.SaveData.MainVolume;
 		MusicVolumeSlider.Value = GameManager.SaveData.MusicVolume;
 		SFXVolumeSlider.Value = GameManager.SaveData.SfxVolume;
@@ -52,6 +55,7 @@ public partial class MenuWindow : FloatWindow
 		OnSFXVolumeChanged(SFXVolumeSlider.Value);
 
 		Minimizable = true;
+
 	}
 
 	public override void _Process(double delta)
@@ -191,5 +195,11 @@ public partial class MenuWindow : FloatWindow
 		{
 			AudioServer.SetBusVolumeDb(busIndex, volumeDb);
 		}
+	}
+
+	private void OnGrabFocusButtonPressed()
+	{
+		MenuClick.Play();
+		Close();
 	}
 }

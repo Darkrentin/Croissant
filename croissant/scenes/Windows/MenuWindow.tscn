@@ -8,10 +8,10 @@
 [ext_resource type="LabelSettings" uid="uid://ck3vmkntl28ed" path="res://assets/texts/MenuLabelSettings.tres" id="4_thh65"]
 [ext_resource type="AudioStream" uid="uid://d4ui6on83baa" path="res://assets/sounds/others/menu_click.mp3" id="5_x3wrm"]
 
-[node name="MenuWindow" type="Window" node_paths=PackedStringArray("FakeDesktopButton", "DebugButton", "StuckButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
+[node name="MenuWindow" type="Window" node_paths=PackedStringArray("FakeDesktopButton", "DebugButton", "StuckButton", "GrabFocusButton", "MasterVolumeSlider", "MusicVolumeSlider", "SFXVolumeSlider", "MenuEnter", "MenuExit", "MenuClick")]
 canvas_item_default_texture_filter = 2
 position = Vector2i(0, 24)
-size = Vector2i(300, 360)
+size = Vector2i(300, 380)
 unresizable = true
 always_on_top = true
 theme = ExtResource("1_wvpbs")
@@ -19,6 +19,7 @@ script = ExtResource("1_ak1ko")
 FakeDesktopButton = NodePath("VBoxContainer/FakeDesktop")
 DebugButton = NodePath("VBoxContainer/DebugMode")
 StuckButton = NodePath("VBoxContainer/Stuck")
+GrabFocusButton = NodePath("VBoxContainer/Reorganize Windows")
 MasterVolumeSlider = NodePath("VBoxContainer/Main/HSlider")
 MusicVolumeSlider = NodePath("VBoxContainer/Music/HSlider")
 SFXVolumeSlider = NodePath("VBoxContainer/Sfx/HSlider")
@@ -68,6 +69,11 @@ layout_mode = 2
 theme_override_fonts/font = ExtResource("3_x3wrm")
 theme_override_font_sizes/font_size = 30
 text = "I'm Stuck"
+
+[node name="Reorganize Windows" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_x3wrm")
+text = "Reorganize Windows"
 
 [node name="FakeDesktop" type="CheckButton" parent="VBoxContainer"]
 layout_mode = 2
