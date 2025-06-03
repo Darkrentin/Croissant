@@ -1,5 +1,7 @@
 # Shape Glitch
 
+![Icon](https://github.com/Darkrentin/Croissant/blob/main/screenshots/icon.png "Icon")
+
 > A mysterious adventure speedrunable game that uses windows as the primary gameplay mechanic.
 
 ## Description
