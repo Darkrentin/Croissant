@@ -12,24 +12,30 @@
 
 [node name="ParticulePreLoader" type="Node"]
 
-[node name="GameExplosion" parent="." instance=ExtResource("1_r6brr")]
+[node name="Node2D" type="Node2D" parent="."]
 
-[node name="VirusSplash" parent="." instance=ExtResource("2_2mcwg")]
+[node name="VirusSplash" parent="Node2D" instance=ExtResource("2_2mcwg")]
 
-[node name="ClickParticles" parent="." instance=ExtResource("4_w3er1")]
+[node name="GameExplosion" parent="Node2D" instance=ExtResource("1_r6brr")]
 
-[node name="JumpBottomParticles" parent="." instance=ExtResource("5_pgtv4")]
+[node name="ClickParticles" parent="Node2D" instance=ExtResource("4_w3er1")]
 
-[node name="BulletHit" parent="." instance=ExtResource("3_ld6yg")]
+[node name="JumpBottomParticles" parent="Node2D" instance=ExtResource("5_pgtv4")]
 
-[node name="EnemyHit" parent="." instance=ExtResource("6_1sx2v")]
+[node name="Camera2D" type="Camera2D" parent="Node2D"]
 
-[node name="EnemyExplosion" parent="." instance=ExtResource("7_mb8qs")]
+[node name="Node3D" type="Node3D" parent="."]
 
-[node name="Path" parent="." instance=ExtResource("9_uo43j")]
+[node name="BulletHit" parent="Node3D" instance=ExtResource("3_ld6yg")]
 
-[node name="ObjectiveExplosion" parent="." instance=ExtResource("9_kejnu")]
+[node name="EnemyHit" parent="Node3D" instance=ExtResource("6_1sx2v")]
+
+[node name="EnemyExplosion" parent="Node3D" instance=ExtResource("7_mb8qs")]
+
+[node name="Path" parent="Node3D" instance=ExtResource("9_uo43j")]
+
+[node name="ObjectiveExplosion" parent="Node3D" instance=ExtResource("9_kejnu")]
 emitting = false
 one_shot = true
 
-[editable path="VirusSplash"]
+[editable path="Node2D/VirusSplash"]
