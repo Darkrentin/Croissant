@@ -1,16 +1,21 @@
-[gd_scene load_steps=10 format=3 uid="uid://c604aiwnr8hj3"]
+[gd_scene load_steps=12 format=3 uid="uid://c604aiwnr8hj3"]
 
 [ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="1_r6brr"]
+[ext_resource type="Script" uid="uid://bhrl0o7r1v2f8" path="res://scripts/ParticulePreLoader.cs" id="1_srsr2"]
 [ext_resource type="PackedScene" uid="uid://b5ce1wjnvbedm" path="res://scenes/Npc/Virus/VirusSplash.tscn" id="2_2mcwg"]
 [ext_resource type="PackedScene" uid="uid://djmj3t20yrg7w" path="res://scenes/FinalLevel/Particles/BulletHit.tscn" id="3_ld6yg"]
 [ext_resource type="PackedScene" uid="uid://d3xlikbll0i4p" path="res://scenes/Level2/ClickParticles.tscn" id="4_w3er1"]
+[ext_resource type="Texture2D" uid="uid://dc255kvmnn62i" path="res://assets/sprites/popups/placeholder.png" id="5_kejnu"]
 [ext_resource type="PackedScene" uid="uid://b1rsnx540vi5f" path="res://scenes/Level3/Others/JumpParticles.tscn" id="5_pgtv4"]
 [ext_resource type="PackedScene" uid="uid://y8t7ulakyqcn" path="res://scenes/FinalLevel/Particles/EnemyHit.tscn" id="6_1sx2v"]
 [ext_resource type="PackedScene" uid="uid://buutrxsk7ssr0" path="res://scenes/FinalLevel/Particles/EnemyExplosion.tscn" id="7_mb8qs"]
 [ext_resource type="PackedScene" uid="uid://bwhskdu522trx" path="res://scenes/FinalLevel/Particles/ObjectiveExplosion.tscn" id="9_kejnu"]
 [ext_resource type="PackedScene" uid="uid://dgq2j8vp8c72q" path="res://scenes/FinalLevel/Path.tscn" id="9_uo43j"]
 
-[node name="ParticulePreLoader" type="Node"]
+[node name="ParticulePreLoader" type="Node" node_paths=PackedStringArray("Particles2D", "Particles3D")]
+script = ExtResource("1_srsr2")
+Particles2D = [NodePath("Node2D/VirusSplash/VirusSplashLeft"), NodePath("Node2D/VirusSplash/VirusSplashRight"), NodePath("Node2D/GameExplosion"), NodePath("Node2D/ClickParticles"), NodePath("Node2D/JumpBottomParticles")]
+Particles3D = [NodePath("Node3D/BulletHit"), NodePath("Node3D/EnemyHit"), NodePath("Node3D/EnemyExplosion"), NodePath("Node3D/ObjectiveExplosion")]
 
 [node name="Node2D" type="Node2D" parent="."]
 
@@ -22,7 +27,9 @@
 
 [node name="JumpBottomParticles" parent="Node2D" instance=ExtResource("5_pgtv4")]
 
-[node name="Camera2D" type="Camera2D" parent="Node2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
+position = Vector2(864, 208)
+texture = ExtResource("5_kejnu")
 
 [node name="Node3D" type="Node3D" parent="."]
 
