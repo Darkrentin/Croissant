@@ -401,5 +401,10 @@ public partial class Level3 : FloatWindow
     public void EndLevel()
     {
         GameManager.State = GameManager.GameState.Dialogue3;
+        GetTree().CreateTimer(1f).Timeout += () =>
+        {
+            player.isDead = true;
+            player.Animator.Play("Idle");
+        };
     }
 }
