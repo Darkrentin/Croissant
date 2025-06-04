@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://bdyk7lc7jde7"]
 
-[ext_resource type="Texture2D" uid="uid://ctcsleqq7biy5" path="res://assets/sprites/platformer/exe.svg" id="1_icm6f"]
+[ext_resource type="Texture2D" uid="uid://ctcsleqq7biy5" path="res://assets/sprites/platformer/Exe.svg" id="1_icm6f"]
 [ext_resource type="Texture2D" uid="uid://cfqvpinpt8grv" path="res://assets/sprites/platformer/config_file.png" id="2_5ruqo"]
 [ext_resource type="FontFile" uid="uid://c3x2cu2lkt3qo" path="res://assets/texts/fonts/RobotoMono-SemiBold.ttf" id="3_5ruqo"]
 
