@@ -65,7 +65,7 @@ public static class States
         Node ParticulePreload = SceneLoader.ParticulePreloadScene.Instantiate<Node>();
         GameManager.GameRoot.AddChild(ParticulePreload);
         Lib.Print("Preloading Particules...");
-        GameManager.Instance.GetTree().CreateTimer(1f).Timeout += () =>
+        GameManager.Instance.GetTree().CreateTimer(0.1f).Timeout += () =>
         {
             ParticulePreload.QueueFree();
             Lib.Print("Particules Preloaded");

@@ -27,10 +27,6 @@ Particles3D = [NodePath("Node3D/BulletHit"), NodePath("Node3D/EnemyHit"), NodePa
 
 [node name="JumpBottomParticles" parent="Node2D" instance=ExtResource("5_pgtv4")]
 
-[node name="Sprite2D" type="Sprite2D" parent="Node2D"]
-position = Vector2(864, 208)
-texture = ExtResource("5_kejnu")
-
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="BulletHit" parent="Node3D" instance=ExtResource("3_ld6yg")]
@@ -44,5 +40,22 @@ texture = ExtResource("5_kejnu")
 [node name="ObjectiveExplosion" parent="Node3D" instance=ExtResource("9_kejnu")]
 emitting = false
 one_shot = true
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource("5_kejnu")
 
 [editable path="Node2D/VirusSplash"]
