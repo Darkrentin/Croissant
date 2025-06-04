@@ -17,16 +17,6 @@ script = ExtResource("1_srsr2")
 Particles2D = [NodePath("Node2D/VirusSplash/VirusSplashLeft"), NodePath("Node2D/VirusSplash/VirusSplashRight"), NodePath("Node2D/GameExplosion"), NodePath("Node2D/ClickParticles"), NodePath("Node2D/JumpBottomParticles")]
 Particles3D = [NodePath("Node3D/BulletHit"), NodePath("Node3D/EnemyHit"), NodePath("Node3D/EnemyExplosion"), NodePath("Node3D/ObjectiveExplosion")]
 
-[node name="Node2D" type="Node2D" parent="."]
-
-[node name="VirusSplash" parent="Node2D" instance=ExtResource("2_2mcwg")]
-
-[node name="GameExplosion" parent="Node2D" instance=ExtResource("1_r6brr")]
-
-[node name="ClickParticles" parent="Node2D" instance=ExtResource("4_w3er1")]
-
-[node name="JumpBottomParticles" parent="Node2D" instance=ExtResource("5_pgtv4")]
-
 [node name="Node3D" type="Node3D" parent="."]
 
 [node name="BulletHit" parent="Node3D" instance=ExtResource("3_ld6yg")]
@@ -42,20 +32,28 @@ emitting = false
 one_shot = true
 
 [node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.99709)
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="VirusSplash" parent="Node2D" instance=ExtResource("2_2mcwg")]
+
+[node name="GameExplosion" parent="Node2D" instance=ExtResource("1_r6brr")]
+
+[node name="ClickParticles" parent="Node2D" instance=ExtResource("4_w3er1")]
+
+[node name="JumpBottomParticles" parent="Node2D" instance=ExtResource("5_pgtv4")]
 
 [node name="Control" type="Control" parent="."]
+texture_filter = 1
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control"]
 layout_mode = 1
 anchors_preset = -1
-anchor_right = 1.0
-anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
 texture = ExtResource("5_kejnu")
 
 [editable path="Node2D/VirusSplash"]
