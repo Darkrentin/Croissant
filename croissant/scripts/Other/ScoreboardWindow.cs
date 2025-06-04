@@ -155,14 +155,10 @@ public partial class ScoreboardWindow : FloatWindow
 		if (AlreadyAsked)
 		{
 			AlreadyAsked = false;
-			if (result == (long)HttpRequest.Result.Success && responseCode >= 200 && responseCode < 300)
-				GetScoreboard();
-			else
+			GetScoreboard();
+			if (result != (long)HttpRequest.Result.Success || responseCode < 200 || responseCode >= 300)
 			{
 				GD.PrintErr($"Failed to add score. Result: {result}, Response Code: {responseCode}");
-				WaitingScreenContainer.Visible = false;
-				EndResultsContainer.Visible = true;
-				AlreadyAsked = false;
 			}
 			return;
 		}
