@@ -7,7 +7,7 @@ public partial class SpeedRunTimer : CanvasLayer
 	[Export] public AnimationPlayer animationPlayer;
 	public int Level = 60;
 	public double Time = 0;
-	public bool RecordTime = true;
+	public bool RecordTime = false;
 	public static SpeedRunTimer Instance;
 	public override void _Ready()
 	{
@@ -42,6 +42,13 @@ public partial class SpeedRunTimer : CanvasLayer
 	public void StopTimer()
 	{
 		RecordTime = false;
+		timer.Text = FormatTime(Time);
+	}
+
+	public void StartTimer()
+	{
+		RecordTime = true;
+		Time = 0;
 		timer.Text = FormatTime(Time);
 	}
 }

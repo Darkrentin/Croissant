@@ -6,6 +6,7 @@ public partial class SaveData : Resource
     [Export] public bool FakeDesktop = false;
     [Export] public bool DebugMode = false;
     [Export] public bool HaveFinishTheGameAtLeastOneTime = false;
+    [Export] public bool HaveLaunchedTheGameAtLeastOneTime = false;
     [Export] public double PersonalBestTime = 21387599f;
     [Export] public double MainVolume = 100;
     [Export] public double MusicVolume = 100;
@@ -21,6 +22,7 @@ public partial class SaveData : Resource
         FakeDesktop = GameManager.MenuWindow.FakeDesktop;
         DebugMode = GameManager.MenuWindow.DebugMode;
         HaveFinishTheGameAtLeastOneTime = GameManager.HaveFinishTheGameAtLeastOneTime;
+        HaveLaunchedTheGameAtLeastOneTime = GameManager.HaveLaunchedTheGameAtLeastOneTime;
         PersonalBestTime = GameManager.PersonalBestTime;
         MainVolume = GameManager.MenuWindow.MasterVolumeSlider.Value;
         MusicVolume = GameManager.MenuWindow.MusicVolumeSlider.Value;
@@ -35,7 +37,11 @@ public partial class SaveData : Resource
         Lib.Print("FakeDesktop: " + FakeDesktop);
         Lib.Print("DebugMode: " + DebugMode);
         Lib.Print("HaveFinishTheGameAtLeastOneTime: " + HaveFinishTheGameAtLeastOneTime);
+        Lib.Print("HaveLaunchedTheGameAtLeastOneTime: " + HaveLaunchedTheGameAtLeastOneTime);
         Lib.Print("PersonalBestTime: " + (PersonalBestTime == double.MaxValue ? "N/A" : PersonalBestTime.ToString(CultureInfo.InvariantCulture)));
+        Lib.Print("MainVolume: " + MainVolume);
+        Lib.Print("MusicVolume: " + MusicVolume);
+        Lib.Print("SfxVolume: " + SfxVolume);
 
         string path = GetSaveFilePath(fileName);
         string dirPath = $"user://{SaveFolderName}/";
@@ -72,7 +78,11 @@ public partial class SaveData : Resource
                 Lib.Print("FakeDesktop: " + loadedResource.FakeDesktop);
                 Lib.Print("DebugMode: " + loadedResource.DebugMode);
                 Lib.Print("HaveFinishTheGameAtLeastOneTime: " + loadedResource.HaveFinishTheGameAtLeastOneTime);
+                Lib.Print("HaveLaunchedTheGameAtLeastOneTime: " + loadedResource.HaveLaunchedTheGameAtLeastOneTime);
                 Lib.Print("PersonalBestTime: " + (loadedResource.PersonalBestTime == double.MaxValue ? "N/A" : loadedResource.PersonalBestTime.ToString(CultureInfo.InvariantCulture)));
+                Lib.Print("MainVolume: " + loadedResource.MainVolume);
+                Lib.Print("MusicVolume: " + loadedResource.MusicVolume);
+                Lib.Print("SfxVolume: " + loadedResource.SfxVolume);
 
                 return loadedResource;
             }

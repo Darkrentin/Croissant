@@ -62,6 +62,11 @@ public static class States
 
     public static void ParticulesPreload()
     {
+        if(GameManager.HaveLaunchedTheGameAtLeastOneTime)
+        {
+            GameManager.State = GameManager.GameState.IntroGame;
+            return;
+        }
         Node ParticulePreload = SceneLoader.ParticulePreloadScene.Instantiate<Node>();
         GameManager.GameRoot.AddChild(ParticulePreload);
         Lib.Print("Preloading Particules...");
@@ -73,6 +78,7 @@ public static class States
             Lib.Print("Particules Preloaded");
             GameManager.State = GameManager.GameState.IntroGame;
             GameManager.virus.Visible = false;
+            GameManager.HaveLaunchedTheGameAtLeastOneTime = true;
         };
 
         // Change State condition
@@ -81,6 +87,7 @@ public static class States
 
     public static void IntroGame()
     {
+        SpeedRunTimer.Instance.StartTimer();
         GameManager.StartRefocusAllWindows();
         GameManager.PlayMusic(GameManager.Music.IntroGame);
         IntroLvl = IntroGameScene.Instantiate<Node2D>();

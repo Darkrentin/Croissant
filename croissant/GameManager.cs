@@ -28,6 +28,7 @@ public partial class GameManager : Node2D
     public static Helper helper;
     public static SaveData SaveData;
     public static bool HaveFinishTheGameAtLeastOneTime = false;
+    public static bool HaveLaunchedTheGameAtLeastOneTime = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
     public static float ScreenScale
@@ -147,6 +148,7 @@ public partial class GameManager : Node2D
         else
         {
             HaveFinishTheGameAtLeastOneTime = SaveData.HaveFinishTheGameAtLeastOneTime;
+            HaveLaunchedTheGameAtLeastOneTime = SaveData.HaveLaunchedTheGameAtLeastOneTime;
             if (HaveFinishTheGameAtLeastOneTime)
             {
                 SpeedRunTimer.Instance.Visible = true;
