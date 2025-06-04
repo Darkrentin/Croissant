@@ -31,6 +31,8 @@ public partial class IntroGameManager : Node2D
 	public static IntroGameManager Instance;
 	[Export] public Node2D GameNode;
 
+	private static CpuParticles2D GameExplosion;
+
 	public override void _Ready()
 	{
 		GetWindow().Size = GameManager.ScreenSize + new Vector2I(1, 1);
@@ -56,6 +58,10 @@ public partial class IntroGameManager : Node2D
 		AddChild(ExplosionTimer);
 
 		SpawnEnemy();
+
+		GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
+		GameExplosion.Position = new Vector2(1920 / 2, 1080 / 2);
+		Instance.AddChild(GameExplosion);
 	}
 
 	public override void _Process(double delta)
@@ -116,9 +122,6 @@ public partial class IntroGameManager : Node2D
 			SM.SetShaderParameter("shake_speed", 5f);
 		}
 		CameraShake(20.0f, 0.5f);
-		CpuParticles2D GameExplosion = GameExplosionScene.Instantiate<CpuParticles2D>();
-		GameExplosion.Position = new Vector2(1920 / 2, 1080 / 2);
-		Instance.AddChild(GameExplosion);
 		GameExplosion.Emitting = true;
 		Instance.ExplosionTimer.Start();
 		StaticGameExplosionSound.Play();

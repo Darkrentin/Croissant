@@ -1,16 +1,27 @@
-[gd_scene load_steps=12 format=3 uid="uid://c604aiwnr8hj3"]
+[gd_scene load_steps=13 format=3 uid="uid://c604aiwnr8hj3"]
 
 [ext_resource type="PackedScene" uid="uid://i15npjpndimd" path="res://scenes/Intro/GameExplosion.tscn" id="1_r6brr"]
 [ext_resource type="Script" uid="uid://bhrl0o7r1v2f8" path="res://scripts/ParticulePreLoader.cs" id="1_srsr2"]
 [ext_resource type="PackedScene" uid="uid://b5ce1wjnvbedm" path="res://scenes/Npc/Virus/VirusSplash.tscn" id="2_2mcwg"]
 [ext_resource type="PackedScene" uid="uid://djmj3t20yrg7w" path="res://scenes/FinalLevel/Particles/BulletHit.tscn" id="3_ld6yg"]
 [ext_resource type="PackedScene" uid="uid://d3xlikbll0i4p" path="res://scenes/Level2/ClickParticles.tscn" id="4_w3er1"]
-[ext_resource type="Texture2D" uid="uid://dc255kvmnn62i" path="res://assets/sprites/popups/placeholder.png" id="5_kejnu"]
 [ext_resource type="PackedScene" uid="uid://b1rsnx540vi5f" path="res://scenes/Level3/Others/JumpParticles.tscn" id="5_pgtv4"]
 [ext_resource type="PackedScene" uid="uid://y8t7ulakyqcn" path="res://scenes/FinalLevel/Particles/EnemyHit.tscn" id="6_1sx2v"]
 [ext_resource type="PackedScene" uid="uid://buutrxsk7ssr0" path="res://scenes/FinalLevel/Particles/EnemyExplosion.tscn" id="7_mb8qs"]
 [ext_resource type="PackedScene" uid="uid://bwhskdu522trx" path="res://scenes/FinalLevel/Particles/ObjectiveExplosion.tscn" id="9_kejnu"]
 [ext_resource type="PackedScene" uid="uid://dgq2j8vp8c72q" path="res://scenes/FinalLevel/Path.tscn" id="9_uo43j"]
+[ext_resource type="Shader" uid="uid://c6qshy7vt5758" path="res://assets/shaders/CombinedGandC.gdshader" id="12_bqeiw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tw33v"]
+shader = ExtResource("12_bqeiw")
+shader_parameter/r_displacement = Vector2(-3, -3)
+shader_parameter/g_displacement = Vector2(0, 0)
+shader_parameter/b_displacement = Vector2(3, 3)
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 0.0
+shader_parameter/shake_block_size = 30.5
+shader_parameter/shake_color_rate = 0.01
 
 [node name="ParticulePreLoader" type="Node" node_paths=PackedStringArray("Particles2D", "Particles3D")]
 script = ExtResource("1_srsr2")
@@ -38,22 +49,37 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 7.99709)
 
 [node name="VirusSplash" parent="Node2D" instance=ExtResource("2_2mcwg")]
 
+[node name="VirusSplashLeft" parent="Node2D/VirusSplash" index="0"]
+position = Vector2(934, 509)
+
+[node name="VirusSplashRight" parent="Node2D/VirusSplash" index="1"]
+position = Vector2(929, 509)
+
 [node name="GameExplosion" parent="Node2D" instance=ExtResource("1_r6brr")]
+position = Vector2(953, 509)
 
 [node name="ClickParticles" parent="Node2D" instance=ExtResource("4_w3er1")]
+position = Vector2(955, 507)
 
 [node name="JumpBottomParticles" parent="Node2D" instance=ExtResource("5_pgtv4")]
+position = Vector2(955, 523)
 
-[node name="Control" type="Control" parent="."]
-texture_filter = 1
-layout_mode = 3
-anchors_preset = 0
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TextureRect" type="TextureRect" parent="Control"]
-layout_mode = 1
-anchors_preset = -1
-offset_right = 1920.0
-offset_bottom = 1080.0
-texture = ExtResource("5_kejnu")
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_tw33v")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect2" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [editable path="Node2D/VirusSplash"]

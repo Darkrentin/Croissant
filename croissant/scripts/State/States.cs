@@ -65,17 +65,17 @@ public static class States
         Node ParticulePreload = SceneLoader.ParticulePreloadScene.Instantiate<Node>();
         GameManager.GameRoot.AddChild(ParticulePreload);
         Lib.Print("Preloading Particules...");
-        
-        void OnProcessFrame()
+        GameManager.virus.Visible = true;
+        GameManager.virus.Position = new Vector2I(-5000, -5000);
+        GameManager.Instance.GetTree().CreateTimer(0.2f).Timeout += () =>
         {
             ParticulePreload.QueueFree();
             Lib.Print("Particules Preloaded");
             GameManager.State = GameManager.GameState.IntroGame;
-            GameManager.Instance.GetTree().ProcessFrame -= OnProcessFrame;
-        }
-        
-        GameManager.Instance.GetTree().ProcessFrame += OnProcessFrame;
+            GameManager.virus.Visible = false;
+        };
 
+        // Change State condition
         GameManager.State = GameManager.GameState.Void;
     }
 
