@@ -228,11 +228,13 @@ public partial class MovePlatform : Platform
     public virtual void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
         if (!WindowValid || !window.Visible) return;
-
+        Lib.Print("MouseEvent:");
         if (!Freeze && mouseButtonEvent.ButtonIndex == MouseButton.Left)
         {
+            Lib.Print("MouseEvent: Left button pressed");
             if (mouseButtonEvent.Pressed && MouseOnTitle())
             {
+                Lib.Print("MouseEvent: Mouse on title, setting Pressed to true");
                 if (!Pressed)
                 {
                     JustPressed();
@@ -242,6 +244,7 @@ public partial class MovePlatform : Platform
             }
             else if (!mouseButtonEvent.Pressed && Pressed)
             {
+                Lib.Print("MouseEvent: Mouse released, setting Pressed to false");
                 JustReleased();
                 Pressed = false;
             }
@@ -262,6 +265,7 @@ public partial class MovePlatform : Platform
         _lastSoundPosition = GlobalPosition;
         _totalDistanceTraveled = 0f;
         Level3.Instance.NbPressedWindows++;
+        Lib.Print($"JustPressed: NbPressedWindows = {Level3.Instance.NbPressedWindows}");
     }
 
     public void JustReleased()
@@ -269,6 +273,7 @@ public partial class MovePlatform : Platform
         ReleaseSound.Play();
         _totalDistanceTraveled = 0f;
         Level3.Instance.NbPressedWindows--;
+        Lib.Print($"JustReleased: NbPressedWindows = {Level3.Instance.NbPressedWindows}");
     }
 
     public void VisibilityChange()

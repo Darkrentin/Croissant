@@ -64,7 +64,7 @@ public static class States
     {
         if(GameManager.HaveLaunchedTheGameAtLeastOneTime)
         {
-            GameManager.State = GameManager.GameState.IntroGame;
+            GameManager.State = GameManager.GameState.SelectLevel;
             return;
         }
         Node ParticulePreload = SceneLoader.ParticulePreloadScene.Instantiate<Node>();
@@ -76,13 +76,29 @@ public static class States
         {
             ParticulePreload.QueueFree();
             Lib.Print("Particules Preloaded");
-            GameManager.State = GameManager.GameState.IntroGame;
+            GameManager.State = GameManager.GameState.SelectLevel;
             GameManager.virus.Visible = false;
             GameManager.HaveLaunchedTheGameAtLeastOneTime = true;
         };
 
         // Change State condition
         GameManager.State = GameManager.GameState.Void;
+    }
+
+    public static void SelectLevel()
+    {
+        if (!GameManager.HaveFinishTheGameAtLeastOneTime)
+        {
+            GameManager.HaveLaunchedTheGameFromTheStart = true;
+            GameManager.State = GameManager.GameState.IntroGame;
+        }
+        else
+        {
+            LevelSelect LevelSelect = SceneLoader.LevelSelectScene.Instantiate<LevelSelect>();
+            LevelSelect.Position = GameManager.ScreenSize / 2 - LevelSelect.Size / 2;
+            GameManager.GameRoot.AddChild(LevelSelect);
+            GameManager.State = GameManager.GameState.Void;
+        }
     }
 
     public static void IntroGame()
@@ -288,6 +304,11 @@ public static class States
 
     public static void Scoreboard()
     {
+        if (!GameManager.HaveLaunchedTheGameFromTheStart)
+        {
+            GameManager.State = GameManager.GameState.IntroGameEndless;
+            return;
+        }
         GameManager.MainWindow.Unfocusable = true;
         GameManager.PlayMusic(GameManager.Music.Scoreboard);
         Window Scoreboard = SceneLoader.ScoreboardScene.Instantiate<Window>();
@@ -301,6 +322,7 @@ public static class States
 
     public static void IntroGameEndless()
     {
+        SpeedRunTimer.Instance.Visible = false;
         GameManager.PlayMusic(GameManager.Music.IntroGame);
         Node2D IntroGameEndless = SceneLoader.IntroGameEndlessScene.Instantiate<Node2D>();
         GameManager.GameRoot.AddChild(IntroGameEndless);

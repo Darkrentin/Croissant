@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=3 uid="uid://biitbgln25y03"]
+
+[ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_lncxn"]
+[ext_resource type="FontFile" uid="uid://dbsqfburxw1vf" path="res://assets/texts/fonts/RobotoMono-Bold.ttf" id="2_m8e6e"]
+[ext_resource type="Script" uid="uid://bn0t5qn6p6qfh" path="res://scripts/Other/LevelSelect.cs" id="2_pthd7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_m8e6e"]
+font = ExtResource("2_m8e6e")
+font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_pthd7"]
+font = ExtResource("2_m8e6e")
+font_size = 15
+font_color = Color(0, 0, 0, 1)
+
+[node name="LevelSelect" type="Window" node_paths=PackedStringArray("Level1Button", "Level2Button", "Level3Button", "Level4Button", "EndlessButton", "StartButton")]
+size = Vector2i(200, 340)
+theme = ExtResource("1_lncxn")
+script = ExtResource("2_pthd7")
+Level1Button = NodePath("VBoxContainer/Level1")
+Level2Button = NodePath("VBoxContainer/Level2")
+Level3Button = NodePath("VBoxContainer/Level3")
+Level4Button = NodePath("VBoxContainer/Level4")
+EndlessButton = NodePath("VBoxContainer/Endless")
+StartButton = NodePath("VBoxContainer/Start")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.764706, 0.780392, 0.796078, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = -1
+anchor_left = 0.025
+anchor_top = 0.017
+anchor_right = 0.975
+anchor_bottom = 0.983
+offset_top = -0.1
+offset_bottom = 0.0999756
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Select Level"
+label_settings = SubResource("LabelSettings_m8e6e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Level1" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 1"
+
+[node name="Level2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 2"
+
+[node name="Level3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 3"
+
+[node name="Level4" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Level 4"
+
+[node name="Endless" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Endless Mode"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Start" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Start Game"
+
+[node name="Warning" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "(you have to play the
+ game form the start 
+to register your time)"
+label_settings = SubResource("LabelSettings_pthd7")

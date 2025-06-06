@@ -31,4 +31,5 @@ public partial class SceneLoader : Node
 	[Export] public PackedScene ClickParticlesScene;
 	[Export] public PackedScene ScreenScaleScreenScene;
 	[Export] public PackedScene ParticulePreloadScene;
+	[Export] public PackedScene LevelSelectScene;
 }

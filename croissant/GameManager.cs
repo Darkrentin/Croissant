@@ -29,6 +29,7 @@ public partial class GameManager : Node2D
     public static SaveData SaveData;
     public static bool HaveFinishTheGameAtLeastOneTime = false;
     public static bool HaveLaunchedTheGameAtLeastOneTime = false;
+    public static bool HaveLaunchedTheGameFromTheStart = false;
     public static List<FloatWindow> Windows = new List<FloatWindow>();
     public static Vector2I ScreenSize => DisplayServer.ScreenGetSize();
     public static float ScreenScale
@@ -62,6 +63,7 @@ public partial class GameManager : Node2D
         // Game state
         ScreenScaleScreen,
         ParticulesPreload,
+        SelectLevel,
         IntroGame,
         IntroVirus,
         Dialogue1,
@@ -200,6 +202,9 @@ public partial class GameManager : Node2D
                 break;
             case GameState.ParticulesPreload:
                 States.ParticulesPreload();
+                break;
+            case GameState.SelectLevel:
+                States.SelectLevel();
                 break;
             case GameState.IntroGame:
                 States.IntroGame();
