@@ -27,6 +27,7 @@ public partial class IntroGameManager : Node2D
 	private Timer enemySpawnTimer;
 	private Timer ExplosionTimer;
 	public static int score = 0;
+	public static bool Shaking = false;
 
 	public static IntroGameManager Instance;
 	[Export] public Node2D GameNode;
@@ -153,6 +154,8 @@ public partial class IntroGameManager : Node2D
 
 	public static void CameraShake(float intensity, float duration)
 	{
+		if (Shaking)
+			return;
 		float screenFactor = GameManager.ScreenSize.Y / 3072f;
 		float scaledIntensity = intensity * screenFactor;
 
@@ -173,5 +176,9 @@ public partial class IntroGameManager : Node2D
 		}
 
 		tween.TweenProperty(Camera, "offset", startPosition, duration / 10);
+		GameManager.GameRoot.GetTree().CreateTimer(duration).Timeout += () =>
+		{
+			Shaking = false;
+		};
 	}
 }

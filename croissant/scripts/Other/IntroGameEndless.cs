@@ -23,10 +23,12 @@ public partial class IntroGameEndless : Node2D
 	public static IntroGameEndless Instance;
 	[Export] public Node2D GameNode;
 
+	public static bool Shaking = false;
+
 	private float baseEnemySpawnTime = 1.0f;
 	private float minEnemySpawnTime = 0.07f;
 	private float baseShootCooldown = 0.15f;
-	private float minShootCooldown = 0.05f;
+	private float minShootCooldown = 0.01f;
 	private int difficultyIncreaseInterval = 20;
 
 	public override void _Ready()
@@ -114,11 +116,14 @@ public partial class IntroGameEndless : Node2D
 
 	public static void CameraShake(float intensity, float duration)
 	{
+		if (Shaking)
+			return;
 		float screenFactor = GameManager.ScreenSize.Y / 3072f;
 		float scaledIntensity = intensity * screenFactor;
 
 		var tween = Camera.CreateTween();
 		Vector2 startPosition = Camera.Offset;
+		Shaking = true;
 
 		for (int i = 0; i < 10; i++)
 		{
@@ -134,6 +139,10 @@ public partial class IntroGameEndless : Node2D
 		}
 
 		tween.TweenProperty(Camera, "offset", startPosition, duration / 10);
+		GameManager.GameRoot.GetTree().CreateTimer(duration).Timeout += () =>
+		{
+			Shaking = false;
+		};
 	}
 
 	private float GetCurrentEnemySpawnTime()
