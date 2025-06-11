@@ -15,6 +15,9 @@ public partial class GameManager : Node2D
     [Export] public AudioStreamPlayer PopUpEnterSound;
     [Export] public AudioStreamPlayer PopUpCloseSound;
     [Export] public bool DebugMode = false;
+
+
+    [Export] public string Version = "1.1";
     public static Music CurrentMusic = Music.NoMusic;
 
     public static AudioStreamPlayer ClickSound;
@@ -61,6 +64,7 @@ public partial class GameManager : Node2D
         Virus,
         Helper,
         // Game state
+        VersionWarning,
         ScreenScaleScreen,
         ParticulesPreload,
         SelectLevel,
@@ -197,6 +201,9 @@ public partial class GameManager : Node2D
                 break;
 
             // Game state
+            case GameState.VersionWarning:
+                States.VersionWarning();
+                break;
             case GameState.ScreenScaleScreen:
                 States.ScreenScaleScreen();
                 break;

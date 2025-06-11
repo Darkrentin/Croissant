@@ -9,7 +9,7 @@
 [ext_resource type="AudioStream" uid="uid://bl2c1m7sr748u" path="res://assets/sounds/level_3/move_platform_unselect.mp3" id="7_6o0bx"]
 [ext_resource type="AudioStream" uid="uid://dqveouaj18rt1" path="res://assets/sounds/level_3/move_platform_move.mp3" id="8_1dogx"]
 
-[sub_resource type="Shader" id="Shader_1ex6h"]
+[sub_resource type="Shader" id="Shader_tir0a"]
 resource_local_to_scene = true
 code = "shader_type canvas_item;
 
@@ -72,9 +72,9 @@ void fragment() {
 }
 "
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tir0a"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6o0bx"]
 resource_local_to_scene = true
-shader = SubResource("Shader_1ex6h")
+shader = SubResource("Shader_tir0a")
 shader_parameter/color1 = Color(0, 1, 1, 1)
 shader_parameter/color2 = Color(0, 0, 1, 0)
 shader_parameter/animate = true
@@ -124,7 +124,7 @@ sharp_corners = true
 script = ExtResource("2_oty2a")
 
 [node name="PlatformTexture" parent="Window" instance=ExtResource("3_xf3iu")]
-material = SubResource("ShaderMaterial_tir0a")
+material = SubResource("ShaderMaterial_6o0bx")
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0

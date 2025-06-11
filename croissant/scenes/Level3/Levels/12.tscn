@@ -171,7 +171,7 @@ size = Vector2(224, 128)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kv18r"]
 resource_local_to_scene = true
-size = Vector2(128, 56)
+size = Vector2(128, 152)
 
 [sub_resource type="Shader" id="Shader_mqcea"]
 resource_local_to_scene = true
@@ -262,7 +262,7 @@ size = Vector2(216, 64)
 
 [node name="12" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_khr5f")
-windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), NodePath(""), NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window"), NodePath("KillingPlatform11/Window"), NodePath("StaticPlateform2/Window")]
+windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), null, NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window"), NodePath("KillingPlatform11/Window"), NodePath("StaticPlateform2/Window")]
 portalExit = NodePath("PortalExit")
 
 [node name="13" parent="." instance=ExtResource("2_fo6cm")]
@@ -499,10 +499,10 @@ shape = SubResource("RectangleShape2D_4lj04")
 [node name="Limit" parent="." instance=ExtResource("10_mqcea")]
 
 [node name="StaticPlateform2" parent="." instance=ExtResource("3_dfmgp")]
-position = Vector2(152, 200)
+position = Vector2(152, 104)
 
 [node name="CollisionShape2D" parent="StaticPlateform2" index="1"]
-position = Vector2(64, 28)
+position = Vector2(64, 76)
 shape = SubResource("RectangleShape2D_kv18r")
 
 [node name="PortalExit" parent="." instance=ExtResource("11_mqcea")]

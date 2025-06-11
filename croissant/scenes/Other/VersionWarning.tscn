@@ -1,0 +1,77 @@
+[gd_scene load_steps=6 format=3 uid="uid://ic6b8h50bk8g"]
+
+[ext_resource type="Script" uid="uid://b0ar5kyhm87aj" path="res://scripts/Other/VersionWarning.cs" id="1_7t8wb"]
+[ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="2_11t58"]
+[ext_resource type="FontFile" uid="uid://obbkukv56e3r" path="res://assets/texts/fonts/CourierPrime-Regular.ttf" id="3_jkvra"]
+[ext_resource type="FontFile" uid="uid://c3x2cu2lkt3qo" path="res://assets/texts/fonts/RobotoMono-SemiBold.ttf" id="4_xhyhv"]
+[ext_resource type="FontFile" uid="uid://dbsqfburxw1vf" path="res://assets/texts/fonts/RobotoMono-Bold.ttf" id="5_llm56"]
+
+[node name="VersionWarning" type="Window" node_paths=PackedStringArray("HttpRequest", "InfoLabel", "Link")]
+position = Vector2i(0, 36)
+size = Vector2i(600, 400)
+visible = false
+script = ExtResource("1_7t8wb")
+HttpRequest = NodePath("HTTPRequest")
+InfoLabel = NodePath("VBoxContainer/WarningLabel")
+Link = NodePath("VBoxContainer/RichTextLabel")
+
+[node name="HTTPRequest" type="HTTPRequest" parent="."]
+timeout = 5.0
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.764706, 0.780392, 0.796078, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("2_11t58")
+alignment = 1
+
+[node name="WarningTitleLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 38)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("3_jkvra")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[shake rate=20 level=1]Warning![/shake]"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="WarningLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(500, 100)
+layout_mode = 2
+theme = ExtResource("2_11t58")
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_xhyhv")
+theme_override_fonts/bold_font = ExtResource("5_llm56")
+bbcode_enabled = true
+text = "Text text text"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 23.53)
+layout_mode = 2
+theme_override_colors/default_color = Color(0, 0.423529, 1, 1)
+theme_override_font_sizes/normal_font_size = 18
+bbcode_enabled = true
+text = "[url=\"https://github.com/Darkrentin/Croissant/releases/latest\"]Latest Vesion[/url]"
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="meta_clicked" from="VBoxContainer/RichTextLabel" to="." method="_on_rich_text_label_meta_clicked"]

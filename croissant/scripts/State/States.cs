@@ -45,6 +45,14 @@ public static class States
         GameManager.State = GameManager.GameState.Void;
     }
 
+    public static void VersionWarning()
+    {
+        VersionWarning VersionWarning = SceneLoader.VersionWarningScene.Instantiate<VersionWarning>();
+        VersionWarning.Position = GameManager.ScreenSize / 2 - VersionWarning.Size / 2;
+        GameManager.GameRoot.AddChild(VersionWarning);
+
+        GameManager.State = GameManager.GameState.Void;
+    }
     public static void ScreenScaleScreen()
     {
         if (GameManager.ScreenScale == 1)

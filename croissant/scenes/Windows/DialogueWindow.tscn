@@ -23,6 +23,7 @@ unresizable = true
 borderless = true
 always_on_top = true
 transparent = true
+mouse_passthrough = true
 content_scale_mode = 1
 content_scale_aspect = 1
 script = ExtResource("1_o82ew")
