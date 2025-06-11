@@ -105,8 +105,8 @@ public partial class ScoreboardWindow : FloatWindow
 		string currentUsername = UsernameEntry.Text;
 		SubmitButton.Disabled = true;
 
-		// Allowed characters: English letters, numbers, accented characters, underscores, and dashes
-		const string allowedCharsPattern = @"^[a-zA-Z0-9\u00C0-\u017F_-]+$";
+		// Allowed characters: English letters, numbers, accented characters, underscores, dashes, and spaces
+		const string allowedCharsPattern = @"^[a-zA-Z0-9\u00C0-\u017F_\- ]+$";
 
 		if (string.IsNullOrWhiteSpace(currentUsername))
 		{
