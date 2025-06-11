@@ -9,6 +9,8 @@ public partial class MovePlatform : Platform
     [Export] public AudioStreamPlayer MoveSound;
     [Export] public AudioStreamPlayer PressedSound;
     [Export] public AudioStreamPlayer ReleaseSound;
+
+    [Export] public Label DebugLabel;
     public ShaderMaterial ShaderRectShader;
     private float LerpTimer = 0.0f;
     private bool IsLerping = false;
@@ -51,12 +53,15 @@ public partial class MovePlatform : Platform
         MoveSound.MaxPolyphony = 8;
         CurrentAppliedSpeeds = BaseSpeeds;
         VisibilityChanged += VisibilityChange;
+
+        Level3.Instance.JustPressed += JustPressed;
+        Level3.Instance.JustReleased += JustReleased;
     }
 
     public override void _PhysicsProcess(double delta)
     {
         if (!Visible) return;
-
+        //DebugLabel.Text = Pressed ? "Pressed" : "Not Pressed";
         if (Pressed)
         {
             Vector2 targetGlobalPosition = ((Vector2)(Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - MouseOffset;
@@ -222,58 +227,46 @@ public partial class MovePlatform : Platform
         return mousePos.X >= windowPos.X &&
                mousePos.X <= windowPos.X + windowSize.X &&
                mousePos.Y >= windowPos.Y - titleBarHeight &&
-               mousePos.Y <= windowPos.Y;
+               mousePos.Y <= windowPos.Y + windowSize.Y;
+    }
+    
+    public override void _ExitTree()
+    {
+        if (Level3.Instance != null)
+        {
+            Level3.Instance.JustPressed -= JustPressed;
+            Level3.Instance.JustReleased -= JustReleased;
+        }
+        
+        base._ExitTree();
     }
 
-    public virtual void MouseEvent(InputEventMouseButton mouseButtonEvent)
-    {
-        if (!WindowValid || !window.Visible) return;
-        Lib.Print("MouseEvent:");
-        if (!Freeze && mouseButtonEvent.ButtonIndex == MouseButton.Left)
-        {
-            Lib.Print("MouseEvent: Left button pressed");
-            if (mouseButtonEvent.Pressed && MouseOnTitle())
-            {
-                Lib.Print("MouseEvent: Mouse on title, setting Pressed to true");
-                if (!Pressed)
-                {
-                    JustPressed();
-                }
-                Pressed = true;
-                MouseOffset = (((Vector2)Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - GlobalPosition;
-            }
-            else if (!mouseButtonEvent.Pressed && Pressed)
-            {
-                Lib.Print("MouseEvent: Mouse released, setting Pressed to false");
-                JustReleased();
-                Pressed = false;
-            }
-        }
-    }
-
-    public override void _Input(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton mouseButtonEvent)
-        {
-            MouseEvent(mouseButtonEvent);
-        }
-    }
+    
 
     public void JustPressed()
     {
+        if (Pressed || !WindowValid || !window.Visible || Freeze || !MouseOnTitle())
+            return;
         PressedSound.Play();
         _lastSoundPosition = GlobalPosition;
         _totalDistanceTraveled = 0f;
         Level3.Instance.NbPressedWindows++;
         Lib.Print($"JustPressed: NbPressedWindows = {Level3.Instance.NbPressedWindows}");
+        Pressed = true;
+        MouseOffset = (((Vector2)Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - GlobalPosition;
     }
 
     public void JustReleased()
     {
+
+        if (!Pressed)
+            return;
         ReleaseSound.Play();
         _totalDistanceTraveled = 0f;
         Level3.Instance.NbPressedWindows--;
         Lib.Print($"JustReleased: NbPressedWindows = {Level3.Instance.NbPressedWindows}");
+        Pressed = false;
+        
     }
 
     public void VisibilityChange()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://bhbpb2xmjfosj"]
+[gd_scene load_steps=55 format=3 uid="uid://bhbpb2xmjfosj"]
 
 [ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_khr5f"]
 [ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_fo6cm"]
@@ -34,24 +34,6 @@ shader_parameter/window_size = Vector2(800, 600)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5led2"]
 resource_local_to_scene = true
 size = Vector2(248, 320)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_opkvv"]
-resource_local_to_scene = true
-shader = ExtResource("7_ud8yk")
-shader_parameter/color1 = Color(0, 1, 1, 1)
-shader_parameter/frequency = 32.0
-shader_parameter/window_size = Vector2(800, 600)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7eejg"]
-resource_local_to_scene = true
-shader = ExtResource("8_v2fax")
-shader_parameter/scale = 4.0
-shader_parameter/col = Color(0, 1, 1, 1)
-shader_parameter/mult = 10.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_u3vw5"]
-resource_local_to_scene = true
-size = Vector2(216, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lqxel"]
 resource_local_to_scene = true
@@ -191,9 +173,96 @@ size = Vector2(224, 128)
 resource_local_to_scene = true
 size = Vector2(128, 56)
 
+[sub_resource type="Shader" id="Shader_mqcea"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 color1: source_color = vec4(1.0, 0.0, 0.0, 1.0);  // First color
+uniform vec4 color2: source_color = vec4(0.0, 0.0, 1.0, 1.0);  // Second color
+uniform bool animate = true;  // Whether to animate the outline
+uniform float direction: hint_range(-1.0, 1.0, 1.0) = -1.0;
+uniform float frequency: hint_range(0.1, 100.0, 0.1) = 15.0;
+uniform float speed: hint_range(0.1, 10, 0.1) = 3.0;
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+uniform float Time = 0.0;
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Calculate parameterized position along the perimeter (0.0 to 1.0)
+    float perimeter = 2.0 * (window_size.x + window_size.y);
+    float position_on_perimeter = 0.0;
+
+    if (distance_from_top < border_width) {
+        // Top border
+        position_on_perimeter = pixel_position.x / perimeter;
+    } else if (distance_from_right < border_width) {
+        // Right border
+        position_on_perimeter = (window_size.x + pixel_position.y) / perimeter;
+    } else if (distance_from_bottom < border_width) {
+        // Bottom border
+        position_on_perimeter = (window_size.x + window_size.y + (window_size.x - pixel_position.x)) / perimeter;
+    } else if (distance_from_left < border_width) {
+        // Left border
+        position_on_perimeter = (2.0 * window_size.x + window_size.y + (window_size.y - pixel_position.y)) / perimeter;
+    }
+
+    // Use Time directly - the speed is integrated in Platform.cs
+    float time_offset = Time;
+
+    // Create sharp transitions between colors using position along perimeter
+    float pattern = step(0.5, fract((position_on_perimeter * frequency + time_offset * direction)));
+
+    // Select color based on pattern
+    vec4 outline_color = mix(color1, color2, pattern);
+
+    // Apply color only to border
+    COLOR = is_border ? outline_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7eejg"]
+resource_local_to_scene = true
+shader = SubResource("Shader_mqcea")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/color2 = Color(0, 0, 1, 0)
+shader_parameter/animate = true
+shader_parameter/direction = -1.0
+shader_parameter/frequency = 32.0
+shader_parameter/speed = 0.3
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+shader_parameter/Time = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kv18r"]
+resource_local_to_scene = true
+shader = ExtResource("8_v2fax")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0ylpg"]
+resource_local_to_scene = true
+size = Vector2(216, 64)
+
 [node name="12" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
 script = ExtResource("1_khr5f")
-windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), NodePath("MovePlatform/Window"), NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window"), NodePath("KillingPlatform11/Window"), NodePath("StaticPlateform2/Window")]
+windows = [NodePath("KillingPlatform/Window"), NodePath("KillingPlatform3/Window"), NodePath("PlayerOnly/Window"), NodePath(""), NodePath("StaticPlateform/Window"), NodePath("PlayerOnly2/Window"), NodePath("KillingPlatform2/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("KillingPlatform6/Window"), NodePath("KillingPlatform7/Window"), NodePath("MovePlatform4/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform8/Window"), NodePath("KillingPlatform9/Window"), NodePath("KillingPlatform10/Window"), NodePath("KillingPlatform11/Window"), NodePath("StaticPlateform2/Window")]
 portalExit = NodePath("PortalExit")
 
 [node name="13" parent="." instance=ExtResource("2_fo6cm")]
@@ -237,19 +306,6 @@ material = SubResource("ShaderMaterial_ju80w")
 [node name="CollisionShape2D" parent="PlayerOnly" index="1"]
 position = Vector2(124, 160)
 shape = SubResource("RectangleShape2D_5led2")
-
-[node name="MovePlatform" parent="." instance=ExtResource("6_wjp8c")]
-position = Vector2(288, 448)
-
-[node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
-material = SubResource("ShaderMaterial_opkvv")
-
-[node name="ShaderRect" parent="MovePlatform/Window" index="1"]
-material = SubResource("ShaderMaterial_7eejg")
-
-[node name="CollisionShape2D" parent="MovePlatform" index="1"]
-position = Vector2(108, 32)
-shape = SubResource("RectangleShape2D_u3vw5")
 
 [node name="StaticPlateform" parent="." instance=ExtResource("3_dfmgp")]
 position = Vector2(0, 256)
@@ -452,10 +508,22 @@ shape = SubResource("RectangleShape2D_kv18r")
 [node name="PortalExit" parent="." instance=ExtResource("11_mqcea")]
 position = Vector2(72, 120)
 
+[node name="MovePlatform" parent="." instance=ExtResource("6_wjp8c")]
+position = Vector2(288, 448)
+
+[node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
+material = SubResource("ShaderMaterial_7eejg")
+
+[node name="ShaderRect" parent="MovePlatform/Window" index="1"]
+material = SubResource("ShaderMaterial_kv18r")
+
+[node name="CollisionShape2D" parent="MovePlatform" index="1"]
+position = Vector2(108, 32)
+shape = SubResource("RectangleShape2D_0ylpg")
+
 [editable path="KillingPlatform"]
 [editable path="KillingPlatform3"]
 [editable path="PlayerOnly"]
-[editable path="MovePlatform"]
 [editable path="StaticPlateform"]
 [editable path="PlayerOnly2"]
 [editable path="KillingPlatform2"]
@@ -472,3 +540,4 @@ position = Vector2(72, 120)
 [editable path="KillingPlatform10"]
 [editable path="KillingPlatform11"]
 [editable path="StaticPlateform2"]
+[editable path="MovePlatform"]

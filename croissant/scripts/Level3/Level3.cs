@@ -16,7 +16,7 @@ public partial class Level3 : FloatWindow
     public int sceneid = 0;
     public static Level3 Instance;
     public SubLevel3 actualScene;
-    public Action<InputEventMouseButton> MouseEvent; public int FilesCollected = 0;
+    public int FilesCollected = 0;
     private Timer invincibleTimer; private bool[] loadedScenes;
     private Dictionary<int, ResourceLoader.ThreadLoadStatus> loadingStatus;
     private HashSet<int> requestedLoads;
@@ -25,6 +25,9 @@ public partial class Level3 : FloatWindow
     public bool MovingHovered { get => NbPressedWindows > 0; }
     public int NbPressedWindows { get { return _NbPressedWindows; } set { _NbPressedWindows.ToString(); _NbPressedWindows = value; } }
     public int _NbPressedWindows = 0;
+
+    public Action JustPressed = () => { };
+    public Action JustReleased = () => { };
 
     public override void _Ready()
     {
@@ -59,6 +62,8 @@ public partial class Level3 : FloatWindow
         player.Visible = true;
         player.ProcessMode = ProcessModeEnum.Pausable;
         GrabFocus();
+        GameManager.helper.Visible = false;
+        GameManager.helper.HideNpc(3);
     }
 
     private void OnInvincibleTimerTimeout()
@@ -66,25 +71,10 @@ public partial class Level3 : FloatWindow
         player.isInvincible = false;
     }
 
-    public override void _Input(InputEvent @event)
-    {
-        if (@event is InputEventMouseButton mouseButtonEvent && MouseEvent != null)
-        {
-            try
-            {
-                MouseEvent?.Invoke(mouseButtonEvent);
-            }
-            catch (ObjectDisposedException)
-            {
-                MouseEvent = null;
-            }
-        }
-    }
 
     public override void _ExitTree()
     {
         base._ExitTree();
-        MouseEvent = null;
     }
 
     private void LoadScene(int sceneIndex)
@@ -406,5 +396,33 @@ public partial class Level3 : FloatWindow
             player.isDead = true;
             player.Animator.Play("Idle");
         };
+    }
+
+
+    public void MouseEvent(InputEventMouseButton mouseButtonEvent)
+    {
+        //if (!WindowValid || !window.Visible) return;
+        Lib.Print("MouseEvent:");
+        if (mouseButtonEvent.ButtonIndex == MouseButton.Left)
+        {
+            Lib.Print("MouseEvent: Left button pressed");
+            if (mouseButtonEvent.Pressed)
+            {
+                JustPressed();
+            }
+            else if (!mouseButtonEvent.Pressed)
+            {
+                JustReleased();
+                
+            }
+        }
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event is InputEventMouseButton mouseButtonEvent)
+        {
+            MouseEvent(mouseButtonEvent);
+        }
     }
 }

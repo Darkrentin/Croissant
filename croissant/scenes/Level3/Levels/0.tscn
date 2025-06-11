@@ -119,7 +119,7 @@ position = Vector2(1736, 136)
 NextSceneId = 16
 
 [node name="DoorPlateform" parent="." instance=ExtResource("5_yrjvf")]
-position = Vector2(1472, -326)
+position = Vector2(1472, 0)
 nbOfFilesToOpen = 3
 
 [node name="CollisionShape2D" parent="DoorPlateform" index="0"]
@@ -130,7 +130,7 @@ shape = SubResource("RectangleShape2D_5q6or")
 visible = false
 
 [node name="DoorPlateform2" parent="." instance=ExtResource("5_yrjvf")]
-position = Vector2(320, -317)
+position = Vector2(320, 0)
 nbOfFilesToOpen = 2
 
 [node name="CollisionShape2D" parent="DoorPlateform2" index="0"]

@@ -24,9 +24,9 @@ public partial class IntroGameEndless : Node2D
 	[Export] public Node2D GameNode;
 
 	private float baseEnemySpawnTime = 1.0f;
-	private float minEnemySpawnTime = 0.01f;
+	private float minEnemySpawnTime = 0.07f;
 	private float baseShootCooldown = 0.15f;
-	private float minShootCooldown = 0.01f;
+	private float minShootCooldown = 0.05f;
 	private int difficultyIncreaseInterval = 20;
 
 	public override void _Ready()

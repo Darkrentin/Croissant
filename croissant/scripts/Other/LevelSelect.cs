@@ -59,7 +59,6 @@ public partial class LevelSelect : FloatWindow
 	}
 	public void OnEndlessButtonPressed()
 	{
-		SpeedRunTimer.Instance.Visible = false;
 		GameManager.State = GameManager.GameState.IntroGameEndless;
 		Quit();
 	}

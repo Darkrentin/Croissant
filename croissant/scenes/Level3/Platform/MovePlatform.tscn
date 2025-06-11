@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://uhnhsc4jvdgm"]
+[gd_scene load_steps=14 format=3 uid="uid://uhnhsc4jvdgm"]
 
 [ext_resource type="Script" uid="uid://ug8rmjlf4rth" path="res://scripts/Level3/Platform/MovePlatform.cs" id="1_xf3iu"]
 [ext_resource type="Script" uid="uid://c3w2gq5l0udid" path="res://scripts/Level3/Platform/WindowPlatform.cs" id="2_oty2a"]
 [ext_resource type="PackedScene" uid="uid://c86vhmqirheox" path="res://scenes/Level3/PlatformTexture.tscn" id="3_xf3iu"]
 [ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_oty2a"]
+[ext_resource type="FontFile" uid="uid://dbsqfburxw1vf" path="res://assets/texts/fonts/RobotoMono-Bold.ttf" id="5_tir0a"]
 [ext_resource type="AudioStream" uid="uid://bpl3lcwupi47m" path="res://assets/sounds/level_3/move_platform_select.mp3" id="6_tir0a"]
 [ext_resource type="AudioStream" uid="uid://bl2c1m7sr748u" path="res://assets/sounds/level_3/move_platform_unselect.mp3" id="7_6o0bx"]
 [ext_resource type="AudioStream" uid="uid://dqveouaj18rt1" path="res://assets/sounds/level_3/move_platform_move.mp3" id="8_1dogx"]
@@ -91,11 +92,15 @@ shader_parameter/scale = 4.0
 shader_parameter/col = Color(0, 1, 1, 1)
 shader_parameter/mult = 10.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_6o0bx"]
+font = ExtResource("5_tir0a")
+font_size = 40
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p3h6d"]
 resource_local_to_scene = true
 size = Vector2(120, 120)
 
-[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("ShaderRect", "MoveSound", "PressedSound", "ReleaseSound", "window", "collisionShape", "Texture")]
+[node name="MovePlatform" type="CharacterBody2D" node_paths=PackedStringArray("ShaderRect", "MoveSound", "PressedSound", "ReleaseSound", "DebugLabel", "window", "collisionShape", "Texture")]
 collision_mask = 5
 script = ExtResource("1_xf3iu")
 MinMult = 10.0
@@ -104,6 +109,7 @@ ShaderRect = NodePath("Window/ShaderRect")
 MoveSound = NodePath("Sound/Move")
 PressedSound = NodePath("Sound/Select")
 ReleaseSound = NodePath("Sound/UnSelect")
+DebugLabel = NodePath("Window/Label")
 window = NodePath("Window")
 collisionShape = NodePath("CollisionShape2D")
 Texture = NodePath("Window/PlatformTexture")
@@ -139,22 +145,23 @@ offset_bottom = -1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Control" type="Control" parent="Window"]
-layout_mode = 3
+[node name="Label" type="Label" parent="Window"]
+visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -0.5
-offset_top = -0.5
-offset_right = 0.5
-offset_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
-
-[node name="Sprite2D" type="Sprite2D" parent="Window/Control"]
-scale = Vector2(0.04, 0.04)
+text = "test"
+label_settings = SubResource("LabelSettings_6o0bx")
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(60, 60)
