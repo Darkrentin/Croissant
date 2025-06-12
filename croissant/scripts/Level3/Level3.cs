@@ -58,7 +58,7 @@ public partial class Level3 : FloatWindow
 
     public void ShowPlayer()
     {
-        player.Position = GameManager.ScreenSize / 2;
+        player.Position = Level3Nodes[0].portalExit.GlobalPosition;
         player.Visible = true;
         player.ProcessMode = ProcessModeEnum.Pausable;
         GrabFocus();
@@ -402,10 +402,9 @@ public partial class Level3 : FloatWindow
     public void MouseEvent(InputEventMouseButton mouseButtonEvent)
     {
         //if (!WindowValid || !window.Visible) return;
-        Lib.Print("MouseEvent:");
+
         if (mouseButtonEvent.ButtonIndex == MouseButton.Left)
         {
-            Lib.Print("MouseEvent: Left button pressed");
             if (mouseButtonEvent.Pressed)
             {
                 JustPressed();
@@ -413,7 +412,7 @@ public partial class Level3 : FloatWindow
             else if (!mouseButtonEvent.Pressed)
             {
                 JustReleased();
-                
+
             }
         }
     }

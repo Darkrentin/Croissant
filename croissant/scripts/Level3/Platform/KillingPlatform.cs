@@ -15,11 +15,16 @@ public partial class KillingPlatform : Platform
         area2D.BodyEntered += OnBodyEntered;
         VisibilityChanged += VisibiltyChanged;
 
-        ParticlePosition = (window.Size / 2) + CachedTitleBarSize;
-        ParticleExtents = (window.Size / 2) - CachedTitleBarSize;
+        ParticlePosition = (Shape.Size / 2) + CachedTitleBarSize;
+        ParticleExtents = (Shape.Size / 2) - CachedTitleBarSize;
 
         SetupParticles(cpuParticles2D_Black);
         SetupParticles(cpuParticles2D_R);
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
     }
 
     private void SetupParticles(CpuParticles2D particles)
