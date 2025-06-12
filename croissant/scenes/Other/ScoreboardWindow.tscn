@@ -67,6 +67,7 @@ CreditsScene = ExtResource("3_poncd")
 metadata/_custom_type_script = "uid://kuhg0kaqg182"
 
 [node name="ColorRect" type="ColorRect" parent="."]
+texture_filter = 4
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -76,6 +77,7 @@ scale = Vector2(1.00458, 1)
 color = Color(0.764706, 0.780392, 0.796078, 1)
 
 [node name="EndResult" type="Control" parent="."]
+texture_filter = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -84,6 +86,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="EndResult"]
+texture_filter = 4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -183,6 +186,7 @@ text = "SHOW SCOREBOARD"
 
 [node name="WaitingScreen" type="Control" parent="."]
 visible = false
+texture_filter = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -197,6 +201,7 @@ libraries = {
 autoplay = "Loading"
 
 [node name="RichTextLabel" type="RichTextLabel" parent="WaitingScreen"]
+texture_filter = 4
 layout_mode = 1
 anchors_preset = -1
 anchor_left = -0.022
@@ -232,6 +237,7 @@ offset = Vector2(3, 0)
 
 [node name="Scoreboard" type="Control" parent="."]
 visible = false
+texture_filter = 4
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -240,6 +246,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Scoreboard"]
+texture_filter = 4
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

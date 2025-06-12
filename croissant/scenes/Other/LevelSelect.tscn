@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://biitbgln25y03"]
+[gd_scene load_steps=6 format=3 uid="uid://biitbgln25y03"]
 
 [ext_resource type="Theme" uid="uid://sx8r7eylidoh" path="res://assets/themes/Classic311/Classic311.tres" id="1_lncxn"]
 [ext_resource type="FontFile" uid="uid://dbsqfburxw1vf" path="res://assets/texts/fonts/RobotoMono-Bold.ttf" id="2_m8e6e"]
 [ext_resource type="Script" uid="uid://bn0t5qn6p6qfh" path="res://scripts/Other/LevelSelect.cs" id="2_pthd7"]
+[ext_resource type="FontFile" uid="uid://obbkukv56e3r" path="res://assets/texts/fonts/CourierPrime-Regular.ttf" id="3_fnoeh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pthd7"]
 font = ExtResource("2_m8e6e")
@@ -11,7 +12,9 @@ font_color = Color(1, 0, 0, 1)
 
 [node name="LevelSelect" type="Window" node_paths=PackedStringArray("Level1Button", "Level2Button", "Level3Button", "Level4Button", "EndlessButton", "StartButton")]
 position = Vector2i(0, 24)
-size = Vector2i(280, 350)
+size = Vector2i(260, 350)
+unresizable = true
+always_on_top = true
 theme = ExtResource("1_lncxn")
 script = ExtResource("2_pthd7")
 Level1Button = NodePath("ColorRect/VBoxContainer/Level1")
@@ -30,6 +33,7 @@ grow_vertical = 2
 color = Color(0.764706, 0.780392, 0.796078, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect"]
+texture_filter = 4
 clip_contents = true
 layout_mode = 1
 anchors_preset = 8
@@ -48,7 +52,8 @@ grow_vertical = 2
 custom_minimum_size = Vector2(0, 36)
 layout_mode = 2
 theme_override_colors/default_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/normal_font_size = 24
+theme_override_fonts/normal_font = ExtResource("3_fnoeh")
+theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
 text = "[wave amp=15 freq=5]Select level[/wave]"
 horizontal_alignment = 1
@@ -56,30 +61,42 @@ vertical_alignment = 1
 
 [node name="Level1" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fnoeh")
+theme_override_font_sizes/font_size = 21
 text = "Popups Madness"
 
 [node name="Level2" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fnoeh")
+theme_override_font_sizes/font_size = 21
 text = "Protect System32"
 
 [node name="Level3" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fnoeh")
+theme_override_font_sizes/font_size = 21
 text = "Find The Files"
 
 [node name="Level4" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fnoeh")
+theme_override_font_sizes/font_size = 21
 text = "The Doom Maze"
 
 [node name="Endless" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("3_fnoeh")
+theme_override_font_sizes/font_size = 21
 text = "Endless Mode"
 
 [node name="HSeparator" type="HSeparator" parent="ColorRect/VBoxContainer"]
+custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 
 [node name="Start" type="Button" parent="ColorRect/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 28
+theme_override_fonts/font = ExtResource("3_fnoeh")
+theme_override_font_sizes/font_size = 32
 text = "Start Game"
 
 [node name="Warning" type="Label" parent="ColorRect/VBoxContainer"]

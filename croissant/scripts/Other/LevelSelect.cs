@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public partial class LevelSelect : Window
+public partial class LevelSelect : FloatWindow
 {
 	[Export] public Button Level1Button;
 	[Export] public Button Level2Button;
@@ -11,7 +11,6 @@ public partial class LevelSelect : Window
 	[Export] public Button StartButton;
 	public override void _Ready()
 	{
-		// Connect button signals to their respective methods
 		Level1Button.Pressed += OnLevel1ButtonPressed;
 		Level2Button.Pressed += OnLevel2ButtonPressed;
 		Level3Button.Pressed += OnLevel3ButtonPressed;
@@ -21,9 +20,7 @@ public partial class LevelSelect : Window
 		CloseRequested += () => { GetTree().Quit(); };
 		base._Ready();
 
-		Unresizable = true;
-		SharpCorners = true;
-		Title = "Level Selection";
+		Title = "Levels";
 	}
 
 	public override void _Process(double delta)

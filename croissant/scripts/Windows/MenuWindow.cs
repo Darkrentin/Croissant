@@ -1,4 +1,3 @@
-using System.Numerics;
 using Godot;
 
 public partial class MenuWindow : FloatWindow
@@ -55,7 +54,6 @@ public partial class MenuWindow : FloatWindow
 		OnSFXVolumeChanged(SFXVolumeSlider.Value);
 
 		Minimizable = true;
-
 	}
 
 	public override void _Process(double delta)
