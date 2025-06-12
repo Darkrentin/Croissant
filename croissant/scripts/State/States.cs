@@ -70,7 +70,7 @@ public static class States
 
     public static void ParticulesPreload()
     {
-        if(GameManager.HaveLaunchedTheGameAtLeastOneTime)
+        if (GameManager.HaveLaunchedTheGameAtLeastOneTime)
         {
             GameManager.State = GameManager.GameState.SelectLevel;
             return;
@@ -112,6 +112,10 @@ public static class States
     public static void IntroGame()
     {
         SpeedRunTimer.Instance.StartTimer();
+        if (GameManager.HaveFinishTheGameAtLeastOneTime && GameManager.HaveLaunchedTheGameFromTheStart)
+        {
+            SpeedRunTimer.Instance.Visible = true;
+        }
         GameManager.StartRefocusAllWindows();
         GameManager.PlayMusic(GameManager.Music.IntroGame);
         IntroLvl = IntroGameScene.Instantiate<Node2D>();

@@ -52,6 +52,7 @@ timer = NodePath("Timer")
 animationPlayer = NodePath("AnimationPlayer")
 
 [node name="Timer" type="Label" parent="."]
+texture_filter = 4
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0

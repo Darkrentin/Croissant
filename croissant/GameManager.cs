@@ -155,10 +155,6 @@ public partial class GameManager : Node2D
         {
             HaveFinishTheGameAtLeastOneTime = SaveData.HaveFinishTheGameAtLeastOneTime;
             HaveLaunchedTheGameAtLeastOneTime = SaveData.HaveLaunchedTheGameAtLeastOneTime;
-            if (HaveFinishTheGameAtLeastOneTime)
-            {
-                SpeedRunTimer.Instance.Visible = true;
-            }
             PersonalBestTime = SaveData.PersonalBestTime;
         }
     }
