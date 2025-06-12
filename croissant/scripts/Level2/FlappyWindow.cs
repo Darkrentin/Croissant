@@ -73,8 +73,8 @@ public partial class FlappyWindow : AttackWindow
 
 	public override void Prevent()
 	{
-		const int Margin = 150;
-		const float SizeMargin = 1.5f;
+		const int Margin = 180;
+		const float SizeMargin = 1.8f;
 
 		Vector2I targetSize;
 		Vector2I targetPosition;

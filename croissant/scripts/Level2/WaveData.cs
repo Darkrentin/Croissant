@@ -238,7 +238,6 @@ public partial class WaveData : Node
 	public List<FloatWindow> StartWave16()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, true);
 		AddWindow(windows, WindowType.Spike, false);
 		AddWindow(windows, WindowType.Wave, true);
 		AddWindow(windows, WindowType.Extend, false);
@@ -327,7 +326,6 @@ public partial class WaveData : Node
 	public List<FloatWindow> StartWave22()
 	{
 		List<FloatWindow> windows = new List<FloatWindow>();
-		AddWindow(windows, WindowType.Spike, false);
 		AddWindow(windows, WindowType.Extend, false);
 		AddWindow(windows, WindowType.Wave, false);
 		AddWindow(windows, WindowType.Follow, false);
@@ -336,6 +334,10 @@ public partial class WaveData : Node
 		C._Mode = 0;
 		C.RandomPosition = false;
 		windows.Add(C);
+		CompressWindow C2 = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
+		C2._Mode = 0;
+		C2.RandomPosition = false;
+		windows.Add(C2);
 		return windows;
 	}
 
@@ -346,7 +348,6 @@ public partial class WaveData : Node
 		AddWindow(windows, WindowType.Wave, false);
 		AddWindow(windows, WindowType.Follow, false);
 		AddWindow(windows, WindowType.Laser, true);
-		AddWindow(windows, WindowType.Wave, true);
 		CompressWindow C = States.SceneLoader.CompressWindowScene.Instantiate<CompressWindow>();
 		C._Mode = 0;
 		C.RandomPosition = false;
