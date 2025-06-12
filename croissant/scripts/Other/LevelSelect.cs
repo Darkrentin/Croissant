@@ -1,9 +1,8 @@
 using Godot;
 using System;
 
-public partial class LevelSelect : FloatWindow
+public partial class LevelSelect : Window
 {
-	// Called when the node enters the scene tree for the first time.
 	[Export] public Button Level1Button;
 	[Export] public Button Level2Button;
 	[Export] public Button Level3Button;
@@ -19,18 +18,17 @@ public partial class LevelSelect : FloatWindow
 		Level4Button.Pressed += OnLevel4ButtonPressed;
 		EndlessButton.Pressed += OnEndlessButtonPressed;
 		StartButton.Pressed += OnStartButtonPressed;
+		CloseRequested += () => { GetTree().Quit(); };
 		base._Ready();
 
-		Minimizable = false;
 		Unresizable = true;
-		Size = Lib.GetAspectFactor(Size);
+		SharpCorners = true;
+		Title = "Level Selection";
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
 		base._Process(delta);
-		// Additional processing can be done here if needed
 	}
 
 	public void OnLevel1ButtonPressed()

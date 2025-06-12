@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="Shape Glitch"
-config/description="An mysterious adventure speedrunable game that uses windows as the primary gameplay mechanic."
-config/version="1.0"
+config/description="An mysterious adventure arcade game that uses windows as the primary gameplay mechanic."
+config/version="1.1"
 run/main_scene="uid://c2f4mqkrcs2ea"
 config/features=PackedStringArray("4.4", "C#", "Forward Plus")
 run/delta_smoothing=false
@@ -253,5 +253,5 @@ environment/glow/upscale_mode=0
 environment/screen_space_reflection/roughness_quality=0
 lightmapping/probe_capture/update_speed=8.0
 global_illumination/sdfgi/frames_to_converge=0
-environment/defaults/default_clear_color=Color(0, 0, 0, 1)
+environment/defaults/default_clear_color=Color(0.00392157, 0.00392157, 0.00392157, 1)
 viewport/transparent_background=true

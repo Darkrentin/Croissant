@@ -22,9 +22,9 @@ public partial class MenuWindow : FloatWindow
 
 	public override void _Ready()
 	{
-		Title = "Menu";
 		ProcessMode = ProcessModeEnum.Always;
 		base._Ready();
+		Title = "Menu";
 
 		Vector2I windowSize = Lib.GetAspectFactor(SizeWithout);
 		Size = windowSize;

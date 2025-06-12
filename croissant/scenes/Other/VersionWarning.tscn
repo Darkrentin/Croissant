@@ -16,7 +16,7 @@ InfoLabel = NodePath("VBoxContainer/WarningLabel")
 Link = NodePath("VBoxContainer/RichTextLabel")
 
 [node name="HTTPRequest" type="HTTPRequest" parent="."]
-timeout = 5.0
+timeout = 3.0
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15
@@ -58,7 +58,7 @@ theme_override_colors/default_color = Color(0, 0, 0, 1)
 theme_override_fonts/normal_font = ExtResource("4_xhyhv")
 theme_override_fonts/bold_font = ExtResource("5_llm56")
 bbcode_enabled = true
-text = "Text text text"
+text = "Text Text Text"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -69,7 +69,7 @@ layout_mode = 2
 theme_override_colors/default_color = Color(0, 0.423529, 1, 1)
 theme_override_font_sizes/normal_font_size = 18
 bbcode_enabled = true
-text = "[url=\"https://github.com/Darkrentin/Croissant/releases/latest\"]Latest Vesion[/url]"
+text = "[url=\"https://github.com/Darkrentin/Croissant/releases/latest\"]Latest Version Link[/url]"
 scroll_active = false
 horizontal_alignment = 1
 vertical_alignment = 1

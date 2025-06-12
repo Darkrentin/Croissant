@@ -492,7 +492,7 @@ public partial class GameManager : Node2D
         }
         if (FixWindow != null)
             FixWindow.Unfocusable = true;
-            
+
     }
 
     public void FocusAllWindows()

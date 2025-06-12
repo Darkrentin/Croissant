@@ -19,11 +19,6 @@ public partial class VersionWarning : Window
 
     public override void _Ready()
     {
-        if (HttpRequest == null)
-        {
-            GD.PrintErr("HttpRequest is not assigned in VersionWarning.");
-            return;
-        }
         HttpRequest.RequestCompleted += OnVersionRequestCompleted;
 
         VersionRetrieved += HandleRetrievedVersion;
@@ -33,13 +28,6 @@ public partial class VersionWarning : Window
 
     public void FetchVersion()
     {
-        if (HttpRequest == null)
-        {
-            GD.PrintErr("HttpRequest is not configured for FetchVersion.");
-            EmitSignal(SignalName.VersionRetrievalFailed);
-            return;
-        }
-
         string versionUrl = $"{DatabaseLink}/version.json";
         Error error = HttpRequest.Request(versionUrl);
 
@@ -111,7 +99,7 @@ public partial class VersionWarning : Window
         else
         {
             Visible = true;
-            InfoLabel.Text = $"[center]Your game version ({GameManager.Instance.Version}) is outdated. Please update to the latest version ({version}).[/center]";
+            InfoLabel.Text = $"[center]Your current game version [color=RED][b]({GameManager.Instance.Version})[/b][/color] is outdated and may contain bugs or missing features. Please update to the latest version [color=RED][b]({version})[/b][/color].[/center]";
         }
     }
 
@@ -137,5 +125,5 @@ public partial class VersionWarning : Window
     {
         OS.ShellOpen(meta);
         GetTree().Quit();
-	}
+    }
 }
