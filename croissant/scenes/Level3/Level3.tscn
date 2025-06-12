@@ -23,7 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://bu5seira0djs4" path="res://scenes/Level3/Levels/17.tscn" id="19_kebxc"]
 [ext_resource type="PackedScene" uid="uid://cjhxp6chvkb8y" path="res://scenes/Level3/Levels/18.tscn" id="20_shehq"]
 [ext_resource type="PackedScene" uid="uid://bw30pg1fbbvb2" path="res://scenes/Level3/Levels/19.tscn" id="21_yi0hh"]
-[ext_resource type="PackedScene" uid="uid://dcw0fjn2wtog7" path="res://scenes/Level3/Levels/20.tscn" id="22_6oc02"]
+[ext_resource type="PackedScene" uid="uid://dbr44txo2edrl" path="res://scenes/Level3/Levels/20.tscn" id="22_ct77d"]
 [ext_resource type="AudioStream" uid="uid://dvo4qldeach6e" path="res://assets/sounds/level_3/config_file_gather.mp3" id="25_yi0hh"]
 [ext_resource type="AudioStream" uid="uid://cfoe4pwq8ffx5" path="res://assets/sounds/level_3/portal_enter.mp3" id="26_3octb"]
 [ext_resource type="AudioStream" uid="uid://qakholntwpg3" path="res://assets/sounds/level_3/portal_exit.mp3" id="27_4kg8h"]
@@ -132,7 +132,7 @@ transparent = true
 content_scale_size = Vector2i(1920, 1080)
 content_scale_mode = 2
 script = ExtResource("1_pl275")
-level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg"), ExtResource("11_ufbxd"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("14_fa7ff"), ExtResource("15_6hjit"), ExtResource("16_scmle"), ExtResource("17_8o4oi"), ExtResource("18_v1qwp"), ExtResource("19_kebxc"), ExtResource("20_shehq"), ExtResource("21_yi0hh"), ExtResource("22_6oc02")])
+level3Scenes = Array[PackedScene]([ExtResource("2_apgcq"), ExtResource("3_pl275"), ExtResource("4_k31tl"), ExtResource("5_k0j7d"), ExtResource("6_5olmw"), ExtResource("7_tnjh3"), ExtResource("8_vvvan"), ExtResource("9_nhwkx"), ExtResource("10_d33vg"), ExtResource("11_ufbxd"), ExtResource("12_f03sd"), ExtResource("13_6g7ie"), ExtResource("14_fa7ff"), ExtResource("15_6hjit"), ExtResource("16_scmle"), ExtResource("17_8o4oi"), ExtResource("18_v1qwp"), ExtResource("19_kebxc"), ExtResource("20_shehq"), ExtResource("21_yi0hh"), ExtResource("22_ct77d")])
 player = NodePath("Player")
 ConfigFileGatheredSound = NodePath("Sound/ConfigFileGather")
 PortalEnterSound = NodePath("Sound/PortalEnter")

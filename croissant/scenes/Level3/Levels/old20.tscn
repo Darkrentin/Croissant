@@ -1,0 +1,825 @@
+[gd_scene load_steps=72 format=3 uid="uid://dcw0fjn2wtog7"]
+
+[ext_resource type="Script" uid="uid://c8bi8844w5a5j" path="res://scripts/Level3/SubLevel3.cs" id="1_ebyve"]
+[ext_resource type="PackedScene" uid="uid://cey86jxorl3h7" path="res://scenes/Level3/Others/Portal.tscn" id="2_2qgff"]
+[ext_resource type="PackedScene" uid="uid://uhnhsc4jvdgm" path="res://scenes/Level3/Platform/MovePlatform.tscn" id="3_6v3s2"]
+[ext_resource type="Shader" uid="uid://13flput6c2f0" path="res://assets/shaders/PlatformHighlight.gdshader" id="4_q6xmu"]
+[ext_resource type="Shader" uid="uid://dykfihxbavdca" path="res://assets/shaders/Dithering.gdshader" id="5_cax68"]
+[ext_resource type="PackedScene" uid="uid://bq4mxmqbe2wau" path="res://scenes/Level3/Platform/WindowsOnly.tscn" id="6_q6xmu"]
+[ext_resource type="PackedScene" uid="uid://b6ci8vrbwflc5" path="res://scenes/Level3/Platform/PlayerOnly.tscn" id="7_xr5wh"]
+[ext_resource type="Shader" uid="uid://dros5mtqte2mk" path="res://assets/shaders/PlainHighlight.gdshader" id="8_lnro7"]
+[ext_resource type="PackedScene" uid="uid://bch7nv4v14u6c" path="res://scenes/Level3/Platform/KillingPlatform.tscn" id="9_lnro7"]
+[ext_resource type="PackedScene" uid="uid://25oxeh4hv2cd" path="res://scenes/Level3/Others/ConfigFile.tscn" id="10_bmqod"]
+[ext_resource type="PackedScene" uid="uid://bgvvfr8k3svbw" path="res://scenes/Level3/Others/Limit.tscn" id="11_tf8vp"]
+[ext_resource type="PackedScene" uid="uid://nhsrs6iu1f6q" path="res://scenes/Level3/Others/PortalExit.tscn" id="12_euby3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_murnh"]
+size = Vector2(128, 144)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1fyw"]
+size = Vector2(128, 144)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xr5wh"]
+resource_local_to_scene = true
+shader = ExtResource("4_q6xmu")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/frequency = 32.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lnro7"]
+resource_local_to_scene = true
+shader = ExtResource("5_cax68")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bmqod"]
+resource_local_to_scene = true
+size = Vector2(128, 368)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q6xmu"]
+resource_local_to_scene = true
+shader = ExtResource("4_q6xmu")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/frequency = 32.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_euby3"]
+resource_local_to_scene = true
+shader = ExtResource("5_cax68")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5e8jk"]
+resource_local_to_scene = true
+size = Vector2(680, 152)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5e8jk"]
+resource_local_to_scene = true
+shader = ExtResource("4_q6xmu")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/frequency = 32.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_srp00"]
+resource_local_to_scene = true
+shader = ExtResource("5_cax68")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhlrt"]
+resource_local_to_scene = true
+size = Vector2(280, 576)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qhlrt"]
+resource_local_to_scene = true
+shader = ExtResource("4_q6xmu")
+shader_parameter/color1 = Color(0, 1, 1, 1)
+shader_parameter/frequency = 32.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_025ye"]
+resource_local_to_scene = true
+shader = ExtResource("5_cax68")
+shader_parameter/scale = 4.0
+shader_parameter/col = Color(0, 1, 1, 1)
+shader_parameter/mult = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hukr0"]
+resource_local_to_scene = true
+size = Vector2(840, 120)
+
+[sub_resource type="Shader" id="Shader_cax68"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmqod"]
+resource_local_to_scene = true
+shader = SubResource("Shader_cax68")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tf8vp"]
+resource_local_to_scene = true
+size = Vector2(128, 216)
+
+[sub_resource type="Shader" id="Shader_q6xmu"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cax68"]
+resource_local_to_scene = true
+shader = SubResource("Shader_q6xmu")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xr5wh"]
+resource_local_to_scene = true
+size = Vector2(472, 128)
+
+[sub_resource type="Shader" id="Shader_xr5wh"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf8vp"]
+resource_local_to_scene = true
+shader = SubResource("Shader_xr5wh")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_euby3"]
+resource_local_to_scene = true
+size = Vector2(472, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_hukr0"]
+resource_local_to_scene = true
+shader = ExtResource("8_lnro7")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bakur"]
+resource_local_to_scene = true
+size = Vector2(176, 248)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_srp00"]
+size = Vector2(128, 168)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_025ye"]
+size = Vector2(128, 168)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnro7"]
+size = Vector2(120, 776)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_upyee"]
+size = Vector2(120, 776)
+
+[sub_resource type="Shader" id="Shader_lnro7"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cn3q2"]
+resource_local_to_scene = true
+shader = SubResource("Shader_lnro7")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5wbvh"]
+resource_local_to_scene = true
+size = Vector2(240, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rhm8q"]
+size = Vector2(256, 216)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5ucjb"]
+size = Vector2(256, 216)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cn3q2"]
+size = Vector2(128, 368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ixwxu"]
+size = Vector2(128, 368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xpue5"]
+size = Vector2(232, 120)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g370l"]
+size = Vector2(232, 120)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bakur"]
+resource_local_to_scene = true
+shader = ExtResource("8_lnro7")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xnq2g"]
+resource_local_to_scene = true
+size = Vector2(248, 144)
+
+[sub_resource type="Shader" id="Shader_bmqod"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upyee"]
+resource_local_to_scene = true
+shader = SubResource("Shader_bmqod")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4pb67"]
+resource_local_to_scene = true
+size = Vector2(128, 336)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5wbvh"]
+resource_local_to_scene = true
+shader = ExtResource("8_lnro7")
+shader_parameter/border_color = Color(0, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gj1ux"]
+resource_local_to_scene = true
+size = Vector2(392, 192)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6so1i"]
+size = Vector2(160, 152)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ysnod"]
+size = Vector2(160, 152)
+
+[sub_resource type="Shader" id="Shader_tf8vp"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rhm8q"]
+resource_local_to_scene = true
+shader = SubResource("Shader_tf8vp")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s8sqy"]
+resource_local_to_scene = true
+size = Vector2(128, 200)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j1uvc"]
+size = Vector2(128, 160)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_asy7n"]
+size = Vector2(128, 160)
+
+[sub_resource type="Shader" id="Shader_euby3"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5ucjb"]
+resource_local_to_scene = true
+shader = SubResource("Shader_euby3")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_04sxb"]
+resource_local_to_scene = true
+size = Vector2(176, 128)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sngcg"]
+size = Vector2(240, 184)
+
+[sub_resource type="Shader" id="Shader_5e8jk"]
+resource_local_to_scene = true
+code = "shader_type canvas_item;
+
+uniform vec4 border_color: source_color = vec4(1.0, 1.0, 1.0, 1.0);  // Border color
+uniform float border_width = 10.0; // Border width in pixels
+uniform vec2 window_size = vec2(800.0, 600.0); // Window size in pixels
+
+void fragment() {
+    // Get UV-based position in pixels
+    vec2 pixel_position = UV * window_size;
+
+    // Calculate distance from each edge in pixels
+    float distance_from_left = pixel_position.x;
+    float distance_from_right = window_size.x - pixel_position.x;
+    float distance_from_top = pixel_position.y;
+    float distance_from_bottom = window_size.y - pixel_position.y;
+
+    // Check if we're in the border area
+    bool is_border =
+        distance_from_left < border_width ||
+        distance_from_right < border_width ||
+        distance_from_top < border_width ||
+        distance_from_bottom < border_width;
+
+    // Apply border color or transparent
+    COLOR = is_border ? border_color : vec4(0.0, 0.0, 0.0, 0.0);
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ixwxu"]
+resource_local_to_scene = true
+shader = SubResource("Shader_5e8jk")
+shader_parameter/border_color = Color(1, 1, 0, 1)
+shader_parameter/border_width = 4.0
+shader_parameter/window_size = Vector2(800, 600)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mdqmd"]
+resource_local_to_scene = true
+size = Vector2(288, 120)
+
+[node name="20" type="Node2D" node_paths=PackedStringArray("windows", "portalExit")]
+script = ExtResource("1_ebyve")
+windows = [NodePath("KillingPlatform7/Window"), NodePath("MovePlatform/Window"), NodePath("MovePlatform2/Window"), NodePath("MovePlatform3/Window"), NodePath("MovePlatform4/Window"), NodePath("WindowsOnly/Window"), NodePath("WindowsOnly2/Window"), NodePath("WindowsOnly3/Window"), NodePath("PlayerOnly/Window"), NodePath("KillingPlatform/Window"), NodePath("KillingPlatform2/Window"), NodePath("WindowsOnly4/Window"), NodePath("KillingPlatform3/Window"), NodePath("KillingPlatform4/Window"), NodePath("KillingPlatform5/Window"), NodePath("PlayerOnly2/Window"), NodePath("WindowsOnly5/Window"), NodePath("PlayerOnly3/Window"), NodePath("KillingPlatform6/Window"), NodePath("WindowsOnly6/Window"), NodePath("KillingPlatform8/Window"), NodePath("WindowsOnly7/Window"), NodePath("WindowsOnly8/Window")]
+portalExit = NodePath("PortalExit")
+
+[node name="KillingPlatform7" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(376, 336)
+
+[node name="Window" parent="KillingPlatform7" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform7" index="3"]
+position = Vector2(64, 72)
+shape = SubResource("RectangleShape2D_murnh")
+
+[node name="CollisionShape2D" parent="KillingPlatform7/Area2D" index="0"]
+position = Vector2(64, 72)
+shape = SubResource("RectangleShape2D_w1fyw")
+
+[node name="0" parent="." instance=ExtResource("2_2qgff")]
+position = Vector2(1784, 8)
+NextSceneId = 0
+PortalToSpawn = true
+
+[node name="MovePlatform" parent="." instance=ExtResource("3_6v3s2")]
+position = Vector2(128, 504)
+
+[node name="PlatformTexture" parent="MovePlatform/Window" index="0"]
+material = SubResource("ShaderMaterial_xr5wh")
+
+[node name="ShaderRect" parent="MovePlatform/Window" index="1"]
+material = SubResource("ShaderMaterial_lnro7")
+
+[node name="CollisionShape2D" parent="MovePlatform" index="1"]
+position = Vector2(64, 184)
+shape = SubResource("RectangleShape2D_bmqod")
+
+[node name="MovePlatform2" parent="." instance=ExtResource("3_6v3s2")]
+position = Vector2(504, 200)
+
+[node name="PlatformTexture" parent="MovePlatform2/Window" index="0"]
+material = SubResource("ShaderMaterial_q6xmu")
+
+[node name="ShaderRect" parent="MovePlatform2/Window" index="1"]
+material = SubResource("ShaderMaterial_euby3")
+
+[node name="CollisionShape2D" parent="MovePlatform2" index="1"]
+position = Vector2(340, 76)
+shape = SubResource("RectangleShape2D_5e8jk")
+
+[node name="MovePlatform3" parent="." instance=ExtResource("3_6v3s2")]
+position = Vector2(1512, 504)
+
+[node name="PlatformTexture" parent="MovePlatform3/Window" index="0"]
+material = SubResource("ShaderMaterial_5e8jk")
+
+[node name="ShaderRect" parent="MovePlatform3/Window" index="1"]
+material = SubResource("ShaderMaterial_srp00")
+
+[node name="CollisionShape2D" parent="MovePlatform3" index="1"]
+position = Vector2(140, 288)
+shape = SubResource("RectangleShape2D_qhlrt")
+
+[node name="MovePlatform4" parent="." instance=ExtResource("3_6v3s2")]
+position = Vector2(440, 952)
+
+[node name="PlatformTexture" parent="MovePlatform4/Window" index="0"]
+material = SubResource("ShaderMaterial_qhlrt")
+
+[node name="ShaderRect" parent="MovePlatform4/Window" index="1"]
+material = SubResource("ShaderMaterial_025ye")
+
+[node name="CollisionShape2D" parent="MovePlatform4" index="1"]
+position = Vector2(420, 60)
+shape = SubResource("RectangleShape2D_hukr0")
+
+[node name="WindowsOnly" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(368, 480)
+
+[node name="PlatformTexture" parent="WindowsOnly/Window" index="0"]
+material = SubResource("ShaderMaterial_bmqod")
+
+[node name="CollisionShape2D" parent="WindowsOnly" index="1"]
+position = Vector2(64, 108)
+shape = SubResource("RectangleShape2D_tf8vp")
+
+[node name="WindowsOnly2" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(504, 352)
+
+[node name="PlatformTexture" parent="WindowsOnly2/Window" index="0"]
+material = SubResource("ShaderMaterial_cax68")
+
+[node name="CollisionShape2D" parent="WindowsOnly2" index="1"]
+position = Vector2(236, 64)
+shape = SubResource("RectangleShape2D_xr5wh")
+
+[node name="WindowsOnly3" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(360, 704)
+
+[node name="PlatformTexture" parent="WindowsOnly3/Window" index="0"]
+material = SubResource("ShaderMaterial_tf8vp")
+
+[node name="CollisionShape2D" parent="WindowsOnly3" index="1"]
+position = Vector2(236, 64)
+shape = SubResource("RectangleShape2D_euby3")
+
+[node name="PlayerOnly" parent="." instance=ExtResource("7_xr5wh")]
+position = Vector2(976, 392)
+
+[node name="PlatformTexture" parent="PlayerOnly/Window" index="0"]
+material = SubResource("ShaderMaterial_hukr0")
+
+[node name="CollisionShape2D" parent="PlayerOnly" index="1"]
+position = Vector2(88, 124)
+shape = SubResource("RectangleShape2D_bakur")
+
+[node name="KillingPlatform" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(992, 656)
+
+[node name="Window" parent="KillingPlatform" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform" index="3"]
+position = Vector2(64, 84)
+shape = SubResource("RectangleShape2D_srp00")
+
+[node name="CollisionShape2D" parent="KillingPlatform/Area2D" index="0"]
+position = Vector2(64, 84)
+shape = SubResource("RectangleShape2D_025ye")
+
+[node name="KillingPlatform2" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(1800, 312)
+
+[node name="Window" parent="KillingPlatform2" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform2" index="3"]
+position = Vector2(60, 388)
+shape = SubResource("RectangleShape2D_lnro7")
+
+[node name="CollisionShape2D" parent="KillingPlatform2/Area2D" index="0"]
+position = Vector2(60, 388)
+shape = SubResource("RectangleShape2D_upyee")
+
+[node name="WindowsOnly4" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(752, 832)
+
+[node name="PlatformTexture" parent="WindowsOnly4/Window" index="0"]
+material = SubResource("ShaderMaterial_cn3q2")
+
+[node name="CollisionShape2D" parent="WindowsOnly4" index="1"]
+position = Vector2(120, 60)
+shape = SubResource("RectangleShape2D_5wbvh")
+
+[node name="KillingPlatform3" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(0, 872)
+
+[node name="Window" parent="KillingPlatform3" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform3" index="3"]
+position = Vector2(128, 108)
+shape = SubResource("RectangleShape2D_rhm8q")
+
+[node name="CollisionShape2D" parent="KillingPlatform3/Area2D" index="0"]
+position = Vector2(128, 108)
+shape = SubResource("RectangleShape2D_5ucjb")
+
+[node name="KillingPlatform4" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(0, 504)
+
+[node name="Window" parent="KillingPlatform4" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform4" index="3"]
+position = Vector2(64, 184)
+shape = SubResource("RectangleShape2D_cn3q2")
+
+[node name="CollisionShape2D" parent="KillingPlatform4/Area2D" index="0"]
+position = Vector2(64, 184)
+shape = SubResource("RectangleShape2D_ixwxu")
+
+[node name="KillingPlatform5" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(1280, 736)
+
+[node name="Window" parent="KillingPlatform5" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform5" index="3"]
+position = Vector2(116, 60)
+shape = SubResource("RectangleShape2D_xpue5")
+
+[node name="CollisionShape2D" parent="KillingPlatform5/Area2D" index="0"]
+position = Vector2(116, 60)
+shape = SubResource("RectangleShape2D_g370l")
+
+[node name="PlayerOnly2" parent="." instance=ExtResource("7_xr5wh")]
+position = Vector2(136, 336)
+
+[node name="PlatformTexture" parent="PlayerOnly2/Window" index="0"]
+material = SubResource("ShaderMaterial_bakur")
+
+[node name="CollisionShape2D" parent="PlayerOnly2" index="1"]
+position = Vector2(116, 72)
+shape = SubResource("RectangleShape2D_xnq2g")
+
+[node name="WindowsOnly5" parent="." instance=ExtResource("6_q6xmu")]
+
+[node name="PlatformTexture" parent="WindowsOnly5/Window" index="0"]
+material = SubResource("ShaderMaterial_upyee")
+
+[node name="CollisionShape2D" parent="WindowsOnly5" index="1"]
+position = Vector2(64, 168)
+shape = SubResource("RectangleShape2D_4pb67")
+
+[node name="PlayerOnly3" parent="." instance=ExtResource("7_xr5wh")]
+position = Vector2(888, 0)
+
+[node name="PlatformTexture" parent="PlayerOnly3/Window" index="0"]
+material = SubResource("ShaderMaterial_5wbvh")
+
+[node name="CollisionShape2D" parent="PlayerOnly3" index="1"]
+position = Vector2(196, 96)
+shape = SubResource("RectangleShape2D_gj1ux")
+
+[node name="KillingPlatform6" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(600, 0)
+
+[node name="Window" parent="KillingPlatform6" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform6" index="3"]
+position = Vector2(80, 76)
+shape = SubResource("RectangleShape2D_6so1i")
+
+[node name="CollisionShape2D" parent="KillingPlatform6/Area2D" index="0"]
+position = Vector2(80, 76)
+shape = SubResource("RectangleShape2D_ysnod")
+
+[node name="WindowsOnly6" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(760, 0)
+
+[node name="PlatformTexture" parent="WindowsOnly6/Window" index="0"]
+material = SubResource("ShaderMaterial_rhm8q")
+
+[node name="CollisionShape2D" parent="WindowsOnly6" index="1"]
+position = Vector2(64, 100)
+shape = SubResource("RectangleShape2D_s8sqy")
+
+[node name="KillingPlatform8" parent="." instance=ExtResource("9_lnro7")]
+position = Vector2(1280, 0)
+
+[node name="Window" parent="KillingPlatform8" index="0"]
+position = Vector2i(0, 36)
+
+[node name="CollisionShape2D" parent="KillingPlatform8" index="3"]
+position = Vector2(64, 80)
+shape = SubResource("RectangleShape2D_j1uvc")
+
+[node name="CollisionShape2D" parent="KillingPlatform8/Area2D" index="0"]
+position = Vector2(64, 80)
+shape = SubResource("RectangleShape2D_asy7n")
+
+[node name="WindowsOnly7" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(1176, 320)
+
+[node name="PlatformTexture" parent="WindowsOnly7/Window" index="0"]
+material = SubResource("ShaderMaterial_5ucjb")
+
+[node name="CollisionShape2D" parent="WindowsOnly7" index="1"]
+position = Vector2(88, 64)
+shape = SubResource("RectangleShape2D_04sxb")
+
+[node name="ConfigFile" parent="." instance=ExtResource("10_bmqod")]
+position = Vector2(1720, 128)
+
+[node name="Label" parent="ConfigFile" index="1"]
+offset_left = -32.0
+offset_top = 40.0
+offset_right = 26.0
+offset_bottom = 63.0
+text = "pirg.cfg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ConfigFile"]
+position = Vector2(80, -36)
+shape = SubResource("RectangleShape2D_sngcg")
+
+[node name="WindowsOnly8" parent="." instance=ExtResource("6_q6xmu")]
+position = Vector2(1512, 736)
+
+[node name="PlatformTexture" parent="WindowsOnly8/Window" index="0"]
+material = SubResource("ShaderMaterial_ixwxu")
+
+[node name="CollisionShape2D" parent="WindowsOnly8" index="1"]
+position = Vector2(144, 60)
+shape = SubResource("RectangleShape2D_mdqmd")
+
+[node name="Limit" parent="." instance=ExtResource("11_tf8vp")]
+
+[node name="PortalExit" parent="." instance=ExtResource("12_euby3")]
+position = Vector2(600, 600)
+
+[editable path="KillingPlatform7"]
+[editable path="MovePlatform"]
+[editable path="MovePlatform2"]
+[editable path="MovePlatform3"]
+[editable path="MovePlatform4"]
+[editable path="WindowsOnly"]
+[editable path="WindowsOnly2"]
+[editable path="WindowsOnly3"]
+[editable path="PlayerOnly"]
+[editable path="KillingPlatform"]
+[editable path="KillingPlatform2"]
+[editable path="WindowsOnly4"]
+[editable path="KillingPlatform3"]
+[editable path="KillingPlatform4"]
+[editable path="KillingPlatform5"]
+[editable path="PlayerOnly2"]
+[editable path="WindowsOnly5"]
+[editable path="PlayerOnly3"]
+[editable path="KillingPlatform6"]
+[editable path="WindowsOnly6"]
+[editable path="KillingPlatform8"]
+[editable path="WindowsOnly7"]
+[editable path="ConfigFile"]
+[editable path="WindowsOnly8"]

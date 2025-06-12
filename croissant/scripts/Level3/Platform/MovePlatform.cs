@@ -229,7 +229,7 @@ public partial class MovePlatform : Platform
                mousePos.Y >= windowPos.Y - titleBarHeight &&
                mousePos.Y <= windowPos.Y + windowSize.Y;
     }
-    
+
     public override void _ExitTree()
     {
         if (Level3.Instance != null)
@@ -237,11 +237,11 @@ public partial class MovePlatform : Platform
             Level3.Instance.JustPressed -= JustPressed;
             Level3.Instance.JustReleased -= JustReleased;
         }
-        
+
         base._ExitTree();
     }
 
-    
+
 
     public void JustPressed()
     {
@@ -251,7 +251,6 @@ public partial class MovePlatform : Platform
         _lastSoundPosition = GlobalPosition;
         _totalDistanceTraveled = 0f;
         Level3.Instance.NbPressedWindows++;
-        Lib.Print($"JustPressed: NbPressedWindows = {Level3.Instance.NbPressedWindows}");
         Pressed = true;
         MouseOffset = (((Vector2)Lib.GetCursorPosition()) / Lib.GetScreenRatio()) - GlobalPosition;
     }
@@ -264,9 +263,8 @@ public partial class MovePlatform : Platform
         ReleaseSound.Play();
         _totalDistanceTraveled = 0f;
         Level3.Instance.NbPressedWindows--;
-        Lib.Print($"JustReleased: NbPressedWindows = {Level3.Instance.NbPressedWindows}");
         Pressed = false;
-        
+
     }
 
     public void VisibilityChange()
